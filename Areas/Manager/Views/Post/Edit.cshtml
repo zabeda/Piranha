@@ -4,7 +4,22 @@
 }
 @section Head {
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
-    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.post.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#PostCategories").chosen().change(function () {
+                console.log("change");
+                var container = $(this).siblings(".chzn-container");
+
+                $.each($(this).find("option"), function (n, opt) {
+                    $(opt).removeAttr("selected");
+                    $.each(container.find(".result-selected"), function (i, e) {
+                        if ($(e).html() == $(opt).html())
+                            $(opt).attr("selected", "selected");
+                    });
+                });
+            });
+        });
+    </script>
 }
 
 @section Toolbar {
@@ -88,10 +103,14 @@
     </div>
 </div>
 <div class="grid_3">
-    <div class="box pagetemplate">
+    <div class="box pagetemplate overflow">
         <div class="title"><h2>Kategorier</h2></div>
         <div class="inner">
-            <p>Inget mer här</p>
+            <select name="PostCategories" class="chzn-select" style="width:190px" multiple="multiple">
+                @foreach (var opt in Model.Categories) {
+                <option@(opt.Selected ? " selected=selected" : "") value="@opt.Value">@opt.Text</option>
+                }
+            </select>
         </div>
     </div>
 </div>

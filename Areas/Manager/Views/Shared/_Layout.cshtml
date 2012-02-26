@@ -5,9 +5,11 @@
     <title>@ViewBag.Title</title>
 	<link rel="shortcut icon" href="@Url.Content("~/Areas/Manager/Content/Img/favicon.ico")">
     <link rel="apple-touch-icon" href="@Url.Content("~/Areas/Manager/Content/Img/apple-touch-icon.png")"/>
+    <link href="@Url.Content("~/Areas/Manager/Content/Css/Ext/chosen.min.css")" rel="stylesheet" type="text/css"/>
     <link href="@Url.Content("~/Areas/Manager/Content/Css/Style.ashx")" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Script.ashx")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Ext/chosen.jquery.min.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(".message").click(function () { $(this).fadeOut("medium"); });
@@ -15,6 +17,8 @@
             if ($("#sysMsg").text() != "") {
                 floatBox.show("boxMessage");
             }
+
+            $(".chzn-select").chosen().trigger("liszt:updated");
         });
     </script>
     @RenderSection("Head", false)

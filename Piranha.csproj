@@ -293,6 +293,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\1.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\chosen.jquery.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen-sprite.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

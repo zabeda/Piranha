@@ -69,7 +69,12 @@ namespace Piranha.Models.Manager.ContentModels
 
 			if (Content.Save()) {
 				string path = context.Server.MapPath("~/App_Data/content") ;
-				UploadedFile.SaveAs(path + "/" + Content.Id) ;
+				if (File.Exists(Content.PhysicalPath)) {
+					File.Delete(Content.PhysicalPath) ;
+					Content.DeleteCache() ;
+				}
+				UploadedFile.SaveAs(Content.PhysicalPath) ;
+				//UploadedFile.SaveAs(path + "/" + Content.Id) ;
 				return true ;
 			}
 			return false ;

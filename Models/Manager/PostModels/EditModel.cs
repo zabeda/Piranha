@@ -56,7 +56,13 @@ namespace Piranha.Models.Manager.PostModels
 		/// <summary>
 		/// Gets/sets the categories associated with the post.
 		/// </summary>
-		public List<Category> PostCategories { get ; set ; }
+		public List<Guid> PostCategories { get ; set ; }
+		//public List<Category> PostCategories { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available categories.
+		/// </summary>
+		public MultiSelectList Categories { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -64,6 +70,7 @@ namespace Piranha.Models.Manager.PostModels
 		/// </summary>
 		public EditModel() {
 			Post = new Post() ;
+			PostCategories = new List<Guid>() ;
 		}
 
 		/// <summary>
@@ -82,7 +89,8 @@ namespace Piranha.Models.Manager.PostModels
 			m.Template = PostTemplate.GetSingle(templateId) ;
 			m.Permalink = new Permalink() { 
 				ParentId = m.Post.Id, Type = Permalink.PermalinkType.POST } ;
-			m.PostCategories = new List<Category>() ;
+			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
+				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
 
 			return m ;
 		}
@@ -100,7 +108,9 @@ namespace Piranha.Models.Manager.PostModels
 			if (m.Permalink == null)
 				m.Permalink = new Permalink() { 
 					ParentId = m.Post.Id, Type = Permalink.PermalinkType.POST } ;
-			m.PostCategories = Category.GetByPostId(m.Post.Id) ;
+			Category.GetByPostId(m.Post.Id).ForEach(c => m.PostCategories.Add(c.Id)) ;
+			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
+				new Params() { OrderBy = "category_name" }), "Id", "Name", m.PostCategories) ;
 
 			return m ;
 		}
@@ -118,6 +128,13 @@ namespace Piranha.Models.Manager.PostModels
 					if (Permalink.IsNew)
 						Permalink.Name = Permalink.Generate(Post.Title) ;
 					Permalink.Save(tx) ;
+					// Update categories
+					Relation.DeleteByDataId(Post.Id) ;
+					List<Relation> relations = new List<Relation>() ;
+					PostCategories.ForEach(pc => relations.Add(new Relation() { 
+						DataId = Post.Id, RelatedId = pc, Type = Relation.RelationType.POSTCATEGORY })
+						) ;
+					relations.ForEach(r => r.Save(tx)) ;
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -147,6 +164,9 @@ namespace Piranha.Models.Manager.PostModels
 				if (!Post.IsNew) {
 					Post = Piranha.Models.Post.GetSingle(Post.Id) ;
 					Permalink = Permalink.GetSingle("permalink_parent_id = @0", Post.Id) ;
+					Category.GetByPostId(Post.Id).ForEach(c => PostCategories.Add(c.Id)) ;
+					Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
+						new Params() { OrderBy = "category_name" }), "Id", "Name", PostCategories) ;
 				}
 				Template = PostTemplate.GetSingle(Post.TemplateId) ;
 			}

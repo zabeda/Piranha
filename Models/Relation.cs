@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -66,6 +67,16 @@ namespace Piranha.Models
 		/// <returns>The relations</returns>
 		public static List<Relation> GetByTypeAndRelatedId(RelationType type, Guid id) {
 			return Relation.Get("relation_type = @0 AND relation_related_id = @1", type, id) ;
+		}
+
+		/// <summary>
+		/// Deletes all of the relations for the given object id.
+		/// </summary>
+		/// <param name="id">The main object id</param>
+		/// <param name="tx">Optional data transaction</param>
+		public static  void DeleteByDataId(Guid id, IDbTransaction tx = null) {
+			List<Relation> rel = GetByDataId(id) ;
+			rel.ForEach(r => r.Delete(tx)) ;
 		}
 	}
 }

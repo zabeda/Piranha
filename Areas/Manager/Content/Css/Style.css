@@ -533,7 +533,7 @@ table.template td.locked {
     }
     
 /**
- * Floats
+ * Floats & overrides
  */
 .half         { width: 50%; }
 .left         { float: left; }
@@ -541,6 +541,7 @@ table.template td.locked {
 .marg         { margin-right: 10px; }
 .contentleft  { text-align: left; }
 .contentright { text-align: right; }
+.overflow     { overflow: visible; }
     
 /**
  * Editor
@@ -596,4 +597,13 @@ div.login {
     border: dashed 1px #999;
     border-radius: 4px;
     cursor: pointer;
+    }
+    
+/**
+ * Responsive
+ */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    .toolbar li:hover .tooltip {
+        display: none;
+        } 
     }

@@ -37,6 +37,8 @@ namespace Piranha.Web
 						context.Response.ContentType = "text/javascript" ;
 					} else if (file.Name.EndsWith(".css")) {
 						context.Response.ContentType = "text/css" ;
+					} else if (file.Name.EndsWith(".png")) {
+						context.Response.ContentType = "image/png" ;
 					}
 					var stream = file.Open() ;
 					byte[] bytes = new byte[stream.Length] ;
