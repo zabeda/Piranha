@@ -20,7 +20,7 @@ namespace Piranha.Models
 		/// Defines the different types of relations.
 		/// </summary>
 		public enum RelationType {
-			POSTCATEGORY
+			POSTCATEGORY, CONTENTCATEGORY
 		}
 		#endregion
 
@@ -56,7 +56,17 @@ namespace Piranha.Models
 		/// <param name="id">The main object id</param>
 		/// <returns>A list of relations</returns>
 		public static List<Relation> GetByDataId(Guid id) {
-			return Get("relation_data_id = @0", id) ;
+			return GetFieldsByDataId("*", id) ;
+		}
+
+		/// <summary>
+		/// Gets the selected fields for the matching relations.
+		/// </summary>
+		/// <param name="fields">The fields</param>
+		/// <param name="id">The main object id.</param>
+		/// <returns>A list of relations</returns>
+		public static List<Relation> GetFieldsByDataId(string fields, Guid id) {
+			return GetFields(fields, "relation_data_id = @0", id) ;
 		}
 
 		/// <summary>

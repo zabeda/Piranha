@@ -71,7 +71,7 @@ namespace Piranha.Data
 		public static IDbCommand CreateCommand(IDbConnection conn, string sql, object[] args = null) {
 			// Convert all enum arguments to string
 			for (int n = 0; n < args.Length; n++)
-				if (typeof(Enum).IsAssignableFrom(args[n].GetType())) 
+				if (args[n] != null && typeof(Enum).IsAssignableFrom(args[n].GetType())) 
 					args[n] = args[n].ToString() ;
 
 			// Create command

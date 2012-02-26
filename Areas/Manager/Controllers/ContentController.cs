@@ -50,6 +50,7 @@ namespace Piranha.Areas.Manager.Controllers
 					ViewBag.Title = "Ändra dokument" ;
 					ViewBag.Message = "Ditt dokument har sparats." ;
 				}
+				m.Refresh() ;
 				return View("Edit", m) ;
 			} else {
 				ViewBag.Title = "Lägg till bild eller dokument" ;

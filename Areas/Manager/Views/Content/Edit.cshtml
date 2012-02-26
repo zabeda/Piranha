@@ -29,10 +29,13 @@
 @{ Html.BeginForm("Edit", "Content", FormMethod.Post, new { enctype = "multipart/form-data" }) ; }
 @Html.HiddenFor(m => m.Content.Id)
 @Html.HiddenFor(m => m.Content.IsNew)
+@Html.HiddenFor(m => m.Content.IsImage)
 @Html.HiddenFor(m => m.Content.Created)
 @Html.HiddenFor(m => m.Content.CreatedBy)
 @Html.HiddenFor(m => m.Content.Filename)
 @Html.HiddenFor(m => m.Content.Type)
+@Html.HiddenFor(m => m.Content.Width)
+@Html.HiddenFor(m => m.Content.Height)
 <div class="grid_9">
     <div class="box">
         <div class="title"><h2>Information</h2></div>
@@ -96,6 +99,16 @@
             } else {
                 <p><em>Eftersom ditt innehåll är helt nytt finns det inga detaljer om filen än.</em></p>
             }
+        </div>
+    </div>
+    <div class="box pagetemplate overflow">
+        <div class="title"><h2>Kategorier</h2></div>
+        <div class="inner">
+            <select name="ContentCategories" class="chzn-select" style="width:190px" multiple="multiple">
+                @foreach (var opt in Model.Categories) {
+                <option@(opt.Selected ? " selected=selected" : "") value="@opt.Value">@opt.Text</option>
+                }
+            </select>
         </div>
     </div>
 </div>
