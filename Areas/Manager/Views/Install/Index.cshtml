@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Installera";
+    ViewBag.Title = Piranha.Resources.Account.InstallTitle ;
     Layout = "" ;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Installera</title>
+    <title>@Piranha.Resources.Account.InstallTitle</title>
 	<link rel="shortcut icon" href="@Url.Content("~/Areas/Manager/Content/Img/favicon.ico")">
     <link rel="apple-touch-icon" href="@Url.Content("~/Areas/Manager/Content/Img/apple-touch-icon.png")"/>
     <link href="@Url.Content("~/Areas/Manager/Content/Css/Style.ashx")" rel="stylesheet" type="text/css"/>
@@ -28,21 +28,21 @@
 <body>
     <div class="container_12">
         <div class="grid_4 box login">
-            <div class="title"><h2>Ny webbplats</h2></div>
+            <div class="title"><h2>@Piranha.Resources.Account.InstallTitle</h2></div>
             <div class="inner">
                 @{ Html.BeginForm("Create", "Install") ; }
                 <ul class="form">
-                    <li><label>Inloggning:</label>
+                    <li><label>@Piranha.Resources.Global.Username</label>
                         <div class="input"><input name="UserLogin" type="text" /></div></li>
-                    <li><label>Lösenord:</label>
+                    <li><label>@Piranha.Resources.Global.Password</label>
                         <div class="input"><input name="Password" type="password" /></div></li>
-                    <li><label>Bekräfta lösenord:</label>
+                    <li><label>@Piranha.Resources.Global.Confirm</label>
                         <div class="input"><input name="PasswordConfirm" type="password" /></div></li>
-                    <li><label>E-post:</label>
+                    <li><label>@Piranha.Resources.Settings.Email</label>
                         <div class="input"><input name="UserEmail" type="text" /></div></li>
                     <input type="hidden" id="InstallType" name="InstallType" value="FULL" />
-                    <button id="schema" class="btn orange right">Bara tabeller</button>
-                    <button id="full" class="btn blue">Installera webbplats</button>
+                    <button id="schema" class="btn orange right">@Piranha.Resources.Account.InstallSchema</button>
+                    <button id="full" class="btn blue">@Piranha.Resources.Account.InstallSite</button>
                 </ul>
                 @{ Html.EndForm() ; }
                 <div class="clear"></div>

@@ -61,6 +61,33 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only schema.
+        /// </summary>
+        public static string InstallSchema {
+            get {
+                return ResourceManager.GetString("InstallSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install website.
+        /// </summary>
+        public static string InstallSite {
+            get {
+                return ResourceManager.GetString("InstallSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install new website.
+        /// </summary>
+        public static string InstallTitle {
+            get {
+                return ResourceManager.GetString("InstallTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
