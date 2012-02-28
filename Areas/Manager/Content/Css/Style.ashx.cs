@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,6 +18,7 @@ namespace Piranha.Areas.Manager.Content.Css
 	{
 		#region Members
 		private const string resource = "Piranha.Areas.Manager.Content.Css.Style.css" ;
+		private const string theme    = "Piranha.Areas.Manager.Content.Css.Theme.css" ;
 		#endregion
 
 		#region Properties
@@ -44,6 +46,17 @@ namespace Piranha.Areas.Manager.Content.Css
 				context.Response.Write(CssCompressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
 #endif
 				io.Close() ;
+
+				// Now apply standard theme
+				if (ConfigurationManager.AppSettings["disable_manager_theme"] != "1") {
+					io = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(theme)) ;
+#if DEBUG
+					context.Response.Write(io.ReadToEnd()) ;
+#else
+					context.Response.Write(CssCompressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
+#endif
+					io.Close() ;
+				}
 
 				// Now check for application specific styles
 				if (File.Exists(context.Server.MapPath("~/Areas/Manager/Content/Css/Style.css"))) {

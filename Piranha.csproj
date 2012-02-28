@@ -372,7 +372,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen-sprite.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Theme.css" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
