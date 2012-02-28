@@ -26,12 +26,12 @@ namespace Piranha.Areas.Manager.Controllers
 			if (!String.IsNullOrEmpty(id)) {
 				EditModel m = EditModel.GetById(new Guid(id)) ;
 				if (m.Content.IsImage)
-					ViewBag.Title = "Ändra bild" ;
-				else ViewBag.Title = "Ändra dokument" ;
+					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
+				else ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
 
 				return View("Edit", m) ;
 			} else {
-				ViewBag.Title = "Lägg till ny bild eller dokument" ;
+				ViewBag.Title = Piranha.Resources.Content.EditTitleNew ;
 				return View("Edit", new EditModel()) ;
 			}
 		}
@@ -44,17 +44,17 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(EditModel m) {
 			if (m.SaveAll()) {
 				if (m.Content.IsImage) {
-					ViewBag.Title = "Ändra bild" ;
-					ViewBag.Message = "Din bild har sparats." ;
+					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
+					ViewBag.Message = Piranha.Resources.Content.MessageImageSaved ;
 				} else {
-					ViewBag.Title = "Ändra dokument" ;
-					ViewBag.Message = "Ditt dokument har sparats." ;
+					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
+					ViewBag.Message = Piranha.Resources.Content.MessageDocumentSaved ;
 				}
 				m.Refresh() ;
 				return View("Edit", m) ;
 			} else {
-				ViewBag.Title = "Lägg till bild eller dokument" ;
-				ViewBag.Message = "Din bild eller ditt dokument kunde inte sparas." ;
+				ViewBag.Title = Piranha.Resources.Content.EditTitleNew ;
+				ViewBag.Message = Piranha.Resources.Content.MessageNotSaved ;
 				return View("Edit", m) ;
 			}
 		}
@@ -67,9 +67,13 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel m = EditModel.GetById(new Guid(id)) ;
 
 			if (m.DeleteAll()) {
-				ViewBag.Message = "Din bild eller ditt dokument har raderats." ;
+				if (m.Content.IsImage)
+					ViewBag.Message = Piranha.Resources.Content.MessageImageDeleted ;
+				else ViewBag.Message = Piranha.Resources.Content.MessageDocumentDeleted ;
 			} else {
-				ViewBag.Message = "Din bild eller ditt dokument kunde inte raderas." ;
+				if (m.Content.IsImage)
+					ViewBag.Message = Piranha.Resources.Content.MessageImageNotDeleted ;
+				else ViewBag.Message = Piranha.Resources.Content.MessageDocumentDeleted ;
 			} 
 			return Index() ;
 		}

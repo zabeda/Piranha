@@ -24,7 +24,7 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
-			ViewBag.Title = "Ändra sida" ;
+			ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
 
 			return View("Edit", pm) ;
 		}
@@ -40,9 +40,9 @@ namespace Piranha.Areas.Manager.Controllers
 					if (pm.SaveAll(draft)) {
 						ModelState.Clear() ;
 						if (!draft)
-							ViewBag.Message ="Din sida har publicerats" ;
-						else ViewBag.Message = "Din sida har sparats" ;
-					} else ViewBag.Message = "Det gick inte att spara sidan" ;
+							ViewBag.Message = Piranha.Resources.Page.MessagePublished ;
+						else ViewBag.Message = Piranha.Resources.Page.MessageSaved ;
+					} else ViewBag.Message = Piranha.Resources.Page.MessageNotSaved ;
 				} catch (Exception e) {
 					ViewBag.Message = e.ToString() ;
 				}
@@ -50,8 +50,8 @@ namespace Piranha.Areas.Manager.Controllers
 			pm.Refresh();
 
 			if (pm.Page.IsNew)
-				ViewBag.Title = "Lägg till " + pm.Template.Name.Singular.ToLower() ;
-			else ViewBag.Title = "Ändra sida" ;
+				ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
+			else ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
 
 			return View("Edit", pm) ;
 		}
@@ -67,7 +67,7 @@ namespace Piranha.Areas.Manager.Controllers
 			pm.Page.ParentId = im.ParentId ;
 			pm.Page.Seqno = im.Seqno ;
 
-			ViewBag.Title = "Lägg till " + pm.Template.Name.Singular.ToLower() ;
+			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
 
 			return View("Edit", pm) ;
 		}
@@ -81,8 +81,8 @@ namespace Piranha.Areas.Manager.Controllers
 
 			try {
 				if (pm.DeleteAll())
-					ViewBag.Message = "Din sida har raderats." ;
-				else ViewBag.Message = "Ett internt fel har uppstått och sidan kunde inte raderas." ;
+					ViewBag.Message = Piranha.Resources.Page.MessageDeleted ;
+				else ViewBag.Message = Piranha.Resources.Page.MessageNotDeleted ;
 			} catch (Exception e) {
 				ViewBag.Message = e.ToString() ;
 			}
@@ -97,7 +97,7 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Revert(string id) {
 			EditModel.Revert(new Guid(id)) ;
 
-			ViewBag.Message = "Den senast publicerade versionen har nu återställts" ;
+			ViewBag.Message = Piranha.Resources.Page.MessageReverted ;
 
 			return Edit(id) ;
 		}

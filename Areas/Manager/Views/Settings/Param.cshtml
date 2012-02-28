@@ -6,13 +6,18 @@
 <div class="grid_12 toolbar">
     <div class="inner">
         <ul>
-            <li><a class="save submit" title="Spara parametern"></a></li>
+            <li><a class="save submit"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             @if (!Model.Param.IsLocked) {
-            <li><a href="@Url.Action("DeleteParam", new { id = Model.Param.Id })" class="delete" title="Ta bort parametern"></a></li>
+            <li><a href="@Url.Action("DeleteParam", new { id = Model.Param.Id })" class="delete"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
             }
-            <li><a href="@Url.Action("Index")#params" class="back" title="Backa"></a></li>
-            <li><a href="" class="refresh" title="Ladda om parametern"></a></li>
-            <li><a href="" class="info" title="Visa information & hjälptext"></a></li>
+            <li><a href="@Url.Action("Index")#params" class="back"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
+            <li><a href="" class="refresh"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
+            <li><a href="" class="info"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         <div class="clear"></div>
     </div>
@@ -56,9 +61,11 @@
                     @Html.LabelFor(m => m.Param.Description)
                     <div class="input">
                         @if (!Model.Param.IsLocked) {
-                            @Html.TextAreaFor(m => m.Param.Description, new { @rows = 3, @placeholder = "Ej obligatoriskt" })
+                            @Html.TextAreaFor(m => m.Param.Description, 
+                                new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })
                         } else {
-                            @Html.TextAreaFor(m => m.Param.Description, new { @rows = 3, @disabled = "disabled", @placeholder = "Ej obligatoriskt" })
+                            @Html.TextAreaFor(m => m.Param.Description, 
+                                new { @rows = 3, @disabled = "disabled", @placeholder = Piranha.Resources.Global.Optional })
                             @Html.HiddenFor(m => m.Param.Description)
                         }
                     </div>

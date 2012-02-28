@@ -22,9 +22,9 @@ namespace Piranha.Areas.Manager.Controllers
 
 			if (id != "") {
 				m = EditModel.GetById(new Guid(id)) ;
-				ViewBag.Title = "Ändra kategori" ;
+				ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
 			} else {
-				ViewBag.Title = "Lägg till ny kategori" ;
+				ViewBag.Title = Piranha.Resources.Category.EditTitleNew ;
 			}
 			return View("Edit", m) ;
 		}
@@ -38,12 +38,12 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(EditModel m) {
 			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
-					ViewBag.Title = "Ändra kategori" ;
-					ViewBag.Message = "Din kategori har sparats." ;
+					ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
+					ViewBag.Message = Piranha.Resources.Category.MessageSaved ;
 					ModelState.Clear() ;
 				} else {
-					ViewBag.Title = "Lägg till kategori" ;
-					ViewBag.Message = "Din kategori kunde inte sparas." ;
+					ViewBag.Title = Piranha.Resources.Category.EditTitleNew ;
+					ViewBag.Message = Piranha.Resources.Category.MessageNotSaved ;
 				}
 			}
 			return View("Edit", m) ;
@@ -57,8 +57,8 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel m = EditModel.GetById(new Guid(id)) ;
 
 			if (m.DeleteAll())
-				ViewBag.Message = "Kategorin har raderats." ;
-			else ViewBag.Message = "Ett internt fel har uppstått och kategorin kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Category.MessageDeleted ;
+			else ViewBag.Message = Piranha.Resources.Category.MessageNotDeleted ;
 			return  RedirectToAction("Index", "Post") ;
 		}
 	}

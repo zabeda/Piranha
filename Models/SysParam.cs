@@ -19,29 +19,32 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the id.
 		/// </summary>
-		[Column(Name="sysparam_id"), Required()]
+		[Column(Name="sysparam_id")]
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the param name.
 		/// </summary>
-		[Column(Name="sysparam_name"), Display(Name="Namn")]
-		[Required(ErrorMessage="Du måste ange ett namn.")]
-		[StringLength(64, ErrorMessage="Namnet får inte vara längre än 64 tecken.")]
+		[Column(Name="sysparam_name")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="ParamName")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="ParamNameRequired")]
+		[StringLength(64, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="ParamNameLength")]
 		public string Name { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the param value.
 		/// </summary>
-		[Column(Name="sysparam_value"), Display(Name="Värde")]
-		[StringLength(128, ErrorMessage="Värdet får inte vara längre än 128 tecken.")]
+		[Column(Name="sysparam_value")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="ParamValue")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="ParamValueLength")]
 		public string Value { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the param description.
 		/// </summary>
-		[Column(Name="sysparam_description"), Display(Name="Beskrivning")]
-		[StringLength(255, ErrorMessage="Beskrivningen får inte vara längre än 255 tecken.")]
+		[Column(Name="sysparam_description")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="ParamDescription")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="ParamDescriptionLength")]
 		public string Description { get ; set ; }
 
 		/// <summary>

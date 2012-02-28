@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.PostModels.ListModel
 @{
-    ViewBag.Title = "Artiklar";
+    ViewBag.Title = @Piranha.Resources.Post.ListTitle;
     ViewBag.Selected = "Post" ;
 }
 @section Head {
@@ -16,7 +16,7 @@
             return false;
         }
 
-        var deletemsg = "Är du säker på att du vill ta bort artikeln?" ;
+        var deletemsg = "@Piranha.Resources.Post.MessageDeleteConfirm" ;
 
         //
         // Set the selected template id
@@ -29,22 +29,23 @@
                     case "#posts":
                         $(".toolbar .add").removeAttr("href");
                         $(".toolbar .add").attr("onclick", "floatBox.show('boxTemplates', 200, 240)") ;
-                        $("#tt-add p").text("Lägg till ny artikel");
-                        deletemsg = "Är du säker på att du vill ta bort artikeln?" ;
+                        $("#tt-add p").text("@Piranha.Resources.Post.ToolbarAdd");
+                        deletemsg = "@Piranha.Resources.Post.MessageDeleteConfirm" ;
                         break;
                     case "#templates":
                         $(".toolbar .add").removeAttr("onclick");
                         $(".toolbar .add").attr("href", "@Url.Action("Post", "Template")");
-                        $("#tt-add p").text("Lägg till ny typ");
-                        deletemsg = "Är du säker på att du vill ta bort typen?" ;
+                        $("#tt-add p").text("@Piranha.Resources.Post.ToolbarAddType");
+                        deletemsg = "@Piranha.Resources.Post.MessageDeleteTypeConfirm" ;
                         break;
                     case "#categories":
                         $(".toolbar .add").removeAttr("onclick");
                         $(".toolbar .add").attr("href", "@Url.Action("Edit", "Category")");
-                        $("#tt-add p").text("Lägg till ny kategori");
-                        deletemsg = "Är du säker på att du vill ta bort kategorin?" ;
+                        $("#tt-add p").text("@Piranha.Resources.Post.ToolbarAddCategory");
+                        deletemsg = "@Piranha.Resources.Post.MessageDeleteCategoryConfirm" ;
                         break;
                 }
+                positionTooltips();
             });
 
             //
@@ -85,16 +86,32 @@
     </script>
 }
 @section Toolbar { 
-    @Html.Partial("Partial/PostToolbar") 
+<div class="grid_12 toolbar">
+    <div class="inner">
+        <ul>
+            <li id="tt-add"><a onclick="floatBox.show('boxTemplates', 200, 240)" class="add"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Post.ToolbarAdd</p></div></li>
+            <li id="tt-refresh"><a href="" class="refresh"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
+            <li></li>
+            <li id="tt-info"><a href="" class="info"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
+        </ul>
+        @using (Html.BeginForm("Search", "Post")) {
+            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search", "", new { @class = "filter" })
+        }
+        <div class="clear"></div>
+    </div>
+</div>
 }
 <div class="grid_12">
     <ul class="tabs">
-        <li><a class="selected" href="#posts">Artiklar</a></li>
+        <li><a class="selected" href="#posts">@Piranha.Resources.Post.ListTabPosts</a></li>
         @if (User.HasAccess("ADMIN_POST_TEMPLATE")) {
-        <li><a href="#templates">Typer</a></li>
+        <li><a href="#templates">@Piranha.Resources.Post.ListTabTypes</a></li>
         }
         @if (User.HasAccess("ADMIN_CATEGORY")) {
-        <li><a href="#categories">Kategorier</a></li>
+        <li><a href="#categories">@Piranha.Resources.Post.ListTabCategories</a></li>
         }
     </ul>
     <a id="post-list" name="posts">
@@ -105,10 +122,10 @@
     <table class="list tabbed">
         <thead>
             <tr>
-                <th><span class="sort asc" data-sort="title">Titel</span></th>
-                <th><span class="sort" data-sort="template">Typ</span></th>
-                <th class="date"><span class="sort" data-sort="updated">Ändrad</span></th>
-                <th class="date"><span class="sort" data-sort="created">Skapad</span></th>
+                <th><span class="sort asc" data-sort="title">@Piranha.Resources.Global.Title</span></th>
+                <th><span class="sort" data-sort="template">@Piranha.Resources.Global.Type</span></th>
+                <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
+                <th class="date"><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
                 <th class="one"></th>
             </tr>
         </thead>
@@ -137,9 +154,9 @@
     <table class="list tabbed">
         <thead>
             <tr>
-                <th><span class="sort asc" data-sort="name">Namn</span></th>
-                <th class="date"><span class="sort" data-sort="updated">Ändrad</span></th>
-                <th class="date"><span class="sort" data-sort="created">Skapad</span></th>
+                <th><span class="sort asc" data-sort="name">@Piranha.Resources.Global.Name</span></th>
+                <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
+                <th class="date"><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
                 <th class="one"></th>
             </tr>
         </thead>
@@ -167,9 +184,9 @@
     <table class="list tabbed">
         <thead>
             <tr>
-                <th>Namn</th>
-                <th class="date">Ändrad</th>
-                <th class="date">Skapad</th>
+                <th>@Piranha.Resources.Global.Name</th>
+                <th class="date">@Piranha.Resources.Global.Updated</th>
+                <th class="date">@Piranha.Resources.Global.Created</th>
                 <th class="one"></th>
             </tr>
         </thead>
@@ -201,8 +218,8 @@
 <div id="boxTemplates" class="floatbox">
     <div class="bg"></div>
     <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Post.PopupTypeTitle</h2></div>
         <div class="inner">
-            <h2>Välj artikeltyp</h2>
         @foreach (var template in Model.Templates) {
             <div class="templates left" data-templateid="@template.Id">
                 <h3>@template.Name.Singular</h3>

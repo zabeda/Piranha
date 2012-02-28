@@ -1,8 +1,10 @@
 ﻿Welcome to Piranha 
 ==================
-Piranha is the fun, fast and lightweight framework for developing cms-based 
-web applications with an extra bite. For more information and documentation
-on the project, please visit our main site:
+This is the core library for the Piranha CMS framework. If your primary interest
+is developing end-user applications and not poking around in the core classes, 
+consider forking or downoading one of the template repositories instead.
+
+Documentation and information about the project can be found on our main site:
 
 <a href="http://www.piranhacms.org">piranhacms.org</a>
 

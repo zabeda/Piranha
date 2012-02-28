@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.PageModels.ListModel
 @{
-    ViewBag.Title = "Sidor";
+    ViewBag.Title = @Piranha.Resources.Page.ListTitle;
     ViewBag.Selected = "Page" ;
 }
 @section Head {
@@ -16,7 +16,7 @@
             return false;
         }
 
-        var deletemsg = "Är du säker på att du vill ta bort sidan?";
+        var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
         //
         // Set the selected template id
@@ -29,16 +29,17 @@
                     case "#pages":
                         $(".toolbar .add").removeAttr("href");
                         $(".toolbar .add").attr("onclick", "floatBox.show('boxTemplates', 200, 240)") ;
-                        $("#tt-add p").text("Lägg till ny startsida");
-                        deletemsg = "Är du säker på att du vill ta bort sidan?";
+                        $("#tt-add p").text("@Piranha.Resources.Page.ToolbarAdd");
+                        deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
                         break;
                     case "#templates":
                         $(".toolbar .add").removeAttr("onclick");
                         $(".toolbar .add").attr("href", "@Url.Action("Page", "Template")");
-                        $("#tt-add p").text("Lägg till ny mall");
-                        deletemsg = "Är du säker på att du vill ta bort mallen?";
+                        $("#tt-add p").text("@Piranha.Resources.Page.ToolbarAddType");
+                        deletemsg = "@Piranha.Resources.Page.MessageDeleteTypeConfirm";
                         break;
                 }
+                positionTooltips();
             });
 
             //
@@ -76,15 +77,15 @@
     <div class="inner">
         <ul>
             <li id="tt-add"><a onclick="floatBox.show('boxTemplates', 200, 240)" class="add"></a>
-                <div class="tooltip"><p>Lägg till ny startsida</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Page.ToolbarAdd</p></div></li>
             <li id="tt-refresh"><a href="" class="refresh"></a>
-                <div class="tooltip"><p>Ladda om listan</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
             <li></li>
             <li id="tt-info"><a href="" class="info"></a>
-                <div class="tooltip"><p>Visa information & hjälptext</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         @using (Html.BeginForm("Search", "Page")) {
-            <button class="search" title="Sök bland alla användare"></button>@Html.TextBox("search")
+            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         }
         <div class="clear"></div>
     </div>
@@ -99,9 +100,9 @@
 }
 <div class="grid_12">
     <ul class="tabs">
-        <li><a class="selected" href="#pages">Sidor</a></li>
+        <li><a class="selected" href="#pages">@Piranha.Resources.Page.ListTabPages</a></li>
         @if (User.HasAccess("ADMIN_PAGE_TEMPLATE")) {
-        <li><a href="#templates">Typer</a></li>
+        <li><a href="#templates">@Piranha.Resources.Page.ListTabTypes</a></li>
         }
     </ul>
     <a name="pages">
@@ -112,10 +113,10 @@
     <table class="list tabbed">
         <thead>
             <tr>
-                <th>Titel</th>
-                <th>Typ</th>
-                <th>Skapad</th>
-                <th>Ändrad</th>
+                <th>@Piranha.Resources.Global.Title</th>
+                <th>@Piranha.Resources.Global.Type</th>
+                <th>@Piranha.Resources.Global.Created</th>
+                <th>@Piranha.Resources.Global.Updated</th>
                 <th></th>
             </tr>
         </thead>
@@ -127,10 +128,10 @@
                 <td class="date">@page.Created.ToString("yyyy-MM-dd")</td>
                 <td class="date">@page.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="buttons three">
-                    <button class="icon arrow-down marg" title="Lägg till sida efter" onclick="return preSubmit('@page.ParentId', @page.Seqno + 1)" type="submit"></button>
-                    <button class="icon arrow-right marg" title="Lägg till sida under" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
+                    <button class="icon arrow-down marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @page.Seqno + 1)" type="submit"></button>
+                    <button class="icon arrow-right marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
                     @if (page.Pages.Count == 0) {
-                    <a href="@Url.Action("Delete", new { id = page.Id })" title="Ta bort sida" class="icon delete"></a>
+                    <a href="@Url.Action("Delete", new { id = page.Id })" title="@Piranha.Resources.Page.ListDelete" class="icon delete"></a>
                     }
                 </td>
             </tr>
@@ -149,9 +150,9 @@
     <table id="template-list" class="list tabbed">
         <thead>
             <tr>
-                <th><span class="sort asc" data-sort="name">Titel</span></th>
-                <th><span class="sort" data-sort="created">Skapad</span></th>
-                <th><span class="sort" data-sort="updated">Ändrad</span></th>
+                <th><span class="sort asc" data-sort="name">@Piranha.Resources.Global.Name</span></th>
+                <th><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
+                <th><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
                 <th></th>
             </tr>
         </thead>
@@ -162,7 +163,7 @@
                 <td class="created date">@pt.Created.ToString("yyyy-MM-dd")</td>
                 <td class="updated date">@pt.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="buttons one">
-                    <a class="icon delete" href="@Url.Action("DeletePage", "Template", new { id = pt.Id })"></a></td>
+                    <a class="icon delete" title="@Piranha.Resources.Page.ListDeleteType" href="@Url.Action("DeletePage", "Template", new { id = pt.Id })"></a></td>
             </tr>
             }
         </tbody>
@@ -180,7 +181,7 @@
 <div id="boxTemplates" class="floatbox">
     <div class="bg"></div>
     <div class="box">
-        <div class="title"><h2>Välj mall</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Page.PopupTypeTitle</h2></div>
         <div class="inner">
         @foreach (var template in Model.Templates) {
             <div class="templates left" data-templateid="@template.Id">

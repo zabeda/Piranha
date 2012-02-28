@@ -26,6 +26,7 @@ namespace Piranha.Models
 		/// Gets/sets the password.
 		/// </summary>
 		[Column(Name="sysuser_password", OnLoad="OnPasswordLoad", OnSave="OnPasswordSave")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="Password")]
 		public string Password { get ; set ; }
 		#endregion
 
@@ -34,6 +35,7 @@ namespace Piranha.Models
 		/// Gets/sets the confirmation password.
 		/// </summary>
 		[Compare("Password", ErrorMessage="Lösenorden matchar inte.")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="Confirm")]
 		public string PasswordConfirm { get ; set ; }
 
 		/// <summary>

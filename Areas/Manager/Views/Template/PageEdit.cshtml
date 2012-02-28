@@ -2,24 +2,20 @@
 @{
     ViewBag.Selected = "Page" ;
 }
-@section Head {
-    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.template.js")"></script>
- }
-
 @section Toolbar {
 <div class="grid_12 toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>
-                <div class="tooltip"><p>Spara mallen</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             <li><a href="@Url.Action("DeletePage", new { id = Model.Template.Id })" class="delete" title=""></a>
-                <div class="tooltip"><p>Ta bort mallen</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
             <li><a href="@Url.Action("Index", "Page")#templates" class="back"></a>
-                <div class="tooltip"><p>Backa</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
-                <div class="tooltip"><p>Ladda om mallen</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
             <li><a href="" class="info"></a>
-                <div class="tooltip"><p>Visa information & hjälptext</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         <div class="clear"></div>
     </div>
@@ -37,7 +33,7 @@
 </div>
 <div class="grid_9">
     <div class="box expandable">
-        <div class="title"><h2>Information</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.Template.Name.Singular)
@@ -52,7 +48,8 @@
                 </li>
                 <li>@Html.LabelFor(m => m.Template.Description)
                     <div class="input">
-                        @Html.TextAreaFor(m => m.Template.Description, new { @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextAreaFor(m => m.Template.Description, 
+                            new { @placeholder = Piranha.Resources.Global.Optional })</div>
                 </li>
             </ul>
             <ul class="form optional">               
@@ -64,20 +61,22 @@
         </div>
     </div>
     <div class="box">
-        <div class="title"><h2>Avancerat</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Advanced</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.Template.Controller)
                     <div class="right">
                         @Html.CheckBoxFor(m => m.Template.ShowController)</div>
                     <div class="input short">
-                        @Html.TextBoxFor(m => m.Template.Controller, new { @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextBoxFor(m => m.Template.Controller, 
+                            new { @placeholder = Piranha.Resources.Global.Optional })</div>
                 </li>
                 <li>@Html.LabelFor(m => m.Template.Redirect)
                     <div class="right">
                         @Html.CheckBoxFor(m => m.Template.ShowRedirect)</div>
                     <div class="input short">
-                        @Html.TextBoxFor(m => m.Template.Redirect, new { @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextBoxFor(m => m.Template.Redirect, 
+                            new { @placeholder = Piranha.Resources.Global.Optional })</div>
                 </li>
             </ul>
         </div>
@@ -85,7 +84,7 @@
 </div>
 <div class="grid_3">
     <div class="box">
-        <div class="title"><h2>Regioner</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Regions</h2></div>
         <div class="inner">
             <div id="region_data"></div>
             <ul id="pageregions" class="list buttons">
@@ -93,24 +92,24 @@
                 <li><span>@region</span><button class="btn delete right remove-region"></button></li>
                 }
             </ul>
-            <hr />
-            <button id="pr_add" class="btn blue right">Lägg till</button>
-            <div class="input" style="width: 88px">
-                <input id="pr_name" type="text" placeholder="Ny region" /></div>
+            <div class="input">
+                <input id="pr_name" type="text" placeholder="@Piranha.Resources.Page.RegionPlaceholder" /></div>
+            <button id="pr_add" class="btn right">@Piranha.Resources.Global.Add</button>
+            <div class="clear"></div>
         </div>
     </div>
     <div class="box">
-        <div class="title"><h2>Egenskaper</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
         <div class="inner">
             <ul id="properties" class="list buttons">
                 @foreach (var property in Model.Template.Properties) {
                 <li><span>@property</span><button class="btn delete right remove-region"></button></li>
                 }
             </ul>
-            <hr />
-            <button id="po_add" class="btn blue right">Lägg till</button>
-            <div class="input" style="width: 88px">
-                <input id="po_name" type="text" placeholder="Ny egenskap" /></div>
+            <div class="input">
+                <input id="po_name" type="text" placeholder="@Piranha.Resources.Page.PropertyPlaceholder" /></div>
+            <button id="po_add" class="btn right">@Piranha.Resources.Global.Add</button>
+            <div class="clear"></div>
          </div>
     </div>
 </div>

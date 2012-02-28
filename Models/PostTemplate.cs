@@ -33,12 +33,6 @@ namespace Piranha.Models
 		public string Description { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the optional view name for the template.
-		/// </summary>
-		[Column(Name="posttemplate_view")]
-		public string View { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the optional controller for the template.
 		/// </summary>
 		[Column(Name="posttemplate_controller")]

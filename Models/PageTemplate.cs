@@ -32,14 +32,14 @@ namespace Piranha.Models
 		/// Gets/sets the template's description.
 		/// </summary>
 		[Column(Name="pagetemplate_description")]
-		[Display(Name="Beskrivning")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Description")]
 		public string Description { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the template's html preview.
 		/// </summary>
 		[Column(Name="pagetemplate_preview")]
-		[Display(Name="Html-tumnagel")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="HtmlPreview")]
 		public HtmlString Preview { get ; set ; }
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Piranha.Models
 		/// Gets/sets the optional view name for the template.
 		/// </summary>
 		[Column(Name="pagetemplate_controller")]
-		[Display(Name="Webbmall")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Template")]
 		public string Controller { get ; set ; }
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Piranha.Models
 		/// Gets/sets the optional permalink of a page this sould redirect to.
 		/// </summary>
 		[Column(Name="pagetemplate_redirect")]
-		[Display(Name="Omdirigering")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Redirect")]
 		public string Redirect { get ; set ; }
 
 		/// <summary>

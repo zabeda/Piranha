@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.SettingModels.ListModel
 @{
-    ViewBag.Title = "Inställningar";
+    ViewBag.Title = @Piranha.Resources.Settings.ListTitle ;
     ViewBag.Selected = "Settings" ;
 }
 @section Head {
@@ -14,24 +14,25 @@
                     case "#users":
                         $(".toolbar .add").attr("href", "@Url.Action("User")");
                         $(".toolbar form").attr("action", "@Url.Action("SearchUser")");
-                        $("#add p").text("Lägg till ny användare");
+                        $("#add p").text("@Piranha.Resources.Settings.ToolbarAddUser");
                         break;
                     case "#groups":
                         $(".toolbar .add").attr("href", "@Url.Action("Group")");
                         $(".toolbar form").attr("action", "@Url.Action("SearchGroup")");
-                        $("#add p").text("Lägg till ny grupp");
+                        $("#add p").text("@Piranha.Resources.Settings.ToolbarAddGroup");
                         break;
                     case "#params":
                         $(".toolbar .add").attr("href", "@Url.Action("Param")");
                         $(".toolbar form").attr("action", "@Url.Action("SearchParam")");
-                        $("#add p").text("Lägg till ny parameter");
+                        $("#add p").text("@Piranha.Resources.Settings.ToolbarAddParam");
                         break;
                     case "#access":
                         $(".toolbar .add").attr("href", "@Url.Action("Access")");
                         $(".toolbar form").attr("action", "@Url.Action("SearchAccess")");
-                        $("#add p").text("Lägg till ny behörighet");
+                        $("#add p").text("@Piranha.Resources.Settings.ToolbarAddAccess");
                         break;
                 }
+                positionTooltips();
             });
 
             //
@@ -69,12 +70,12 @@
     <div class="inner">
         <ul>
             <li id="add"><a href="@Url.Action("User")" class="add"></a>
-                <div class="tooltip"><p>Lägg till ny användare</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Settings.ToolbarAddUser</p></div></li>
             <li><a href="@Url.Action("Index")" class="refresh"></a>
-                <div class="tooltip"><p>Ladda om listan</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
             <li></li>
             <li><a href="" class="info"></a>
-                <div class="tooltip"><p>Visa information & hjälptext</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         @using (Html.BeginForm("SearchUser", "Settings")) {
             <button class="search"></button>@Html.TextBox("filter", "", new { @class = "filter" })
@@ -82,28 +83,21 @@
         <div class="clear"></div>
     </div>
 </div>
-<div class="grid_12 help">
-    <div class="inner">
-        Här kan du se de användare, grupper, behörigheter och inställningar som finns tillgängliga i systemet.
-        Du kan söka bland dem, skapa nya och administrera befintliga. Notera, att om du raderar behörigheter och 
-        dylikt så kommer dessa förändringar att slå igenom i webben på en gång, även för redan inloggade användare.
-    </div>
-</div>
 }
 
 <div class="grid_12">
     <ul class="tabs">
         @if (User.HasAccess("ADMIN_USER")) {
-        <li><a class="selected" href="#users">Användare</a></li>
+        <li><a class="selected" href="#users">@Piranha.Resources.Settings.ListTabUsers</a></li>
         }
         @if (User.HasAccess("ADMIN_GROUP")) {
-        <li><a href="#groups">Grupper</a></li>
+        <li><a href="#groups">@Piranha.Resources.Settings.ListTabGroups</a></li>
         }
         @if (User.HasAccess("ADMIN_ACCESS")) {
-        <li><a href="#access">Behörigheter</a></li>
+        <li><a href="#access">@Piranha.Resources.Settings.ListTabAccess</a></li>
         }
         @if (User.HasAccess("ADMIN_PARAM")) {
-        <li><a href="#params">Parametrar</a></li>
+        <li><a href="#params">@Piranha.Resources.Settings.ListTabParams</a></li>
         }
     </ul>
     @if (User.HasAccess("ADMIN_USER")) {
@@ -111,11 +105,11 @@
         <table class="list tabbed">
             <thead>
                 <tr>
-                    <th><span class="sort asc" data-sort="login">Inloggningsnamn</span></th>
-                    <th><span class="sort" data-sort="name">Namn</span></th>
-                    <th><span class="sort" data-sort="group">Grupp</span></th>
-                    <th class="date"><span class="sort" data-sort="updated">Ändrad</span></th>
-                    <th class="date"><span class="sort" data-sort="created">Skapad</span></th>
+                    <th><span class="sort asc" data-sort="login">@Piranha.Resources.Global.Username</span></th>
+                    <th><span class="sort" data-sort="name">@Piranha.Resources.Global.Name</span></th>
+                    <th><span class="sort" data-sort="group">@Piranha.Resources.Global.Group</span></th>
+                    <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
+                    <th class="date"><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
                     <th class="one"></th>
                 </tr>
             </thead>
@@ -154,9 +148,9 @@
         <table class="list tabbed">
             <thead>
                 <tr>
-                    <th>Gruppnamn</th>
-                    <th class="date">Ändrad</th>
-                    <th class="date">Skapad</th>
+                    <th>@Piranha.Resources.Global.Name</th>
+                    <th class="date">@Piranha.Resources.Global.Updated</th>
+                    <th class="date">@Piranha.Resources.Global.Created</th>
                     <th class="one"></th>
                 </tr>
             </thead>
@@ -193,10 +187,10 @@
         <table class="list tabbed">
             <thead>
                 <tr>
-                    <th>Namn</th>
-                    <th>Behörighet</th>
-                    <th class="date">Ändrad</th>
-                    <th class="date">Skapad</th>
+                    <th>@Piranha.Resources.Global.Name</th>
+                    <th>@Piranha.Resources.Global.Group</th>
+                    <th class="date">@Piranha.Resources.Global.Updated</th>
+                    <th class="date">@Piranha.Resources.Global.Created</th>
                     <th class="one"></th>
                 </tr>
             </thead>
@@ -228,9 +222,9 @@
         <table class="list tabbed">
             <thead>
                 <tr>
-                    <th>Namn</th>
-                    <th class="date">Ändrad</th>
-                    <th class="date">Skapad</th>
+                    <th>@Piranha.Resources.Global.Name</th>
+                    <th class="date">@Piranha.Resources.Global.Updated</th>
+                    <th class="date">@Piranha.Resources.Global.Created</th>
                     <th class="one"></th>
                 </tr>
             </thead>

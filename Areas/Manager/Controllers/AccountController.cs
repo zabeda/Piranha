@@ -23,7 +23,7 @@ namespace Piranha.Areas.Manager.Controllers
 			try {
 				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
 					return RedirectToAction("Update", "Install") ;
-	            return View() ;
+	            return View("Index") ;
 			} catch {}
 			return RedirectToAction("Index", "Install") ;
         }
@@ -40,14 +40,16 @@ namespace Piranha.Areas.Manager.Controllers
 				if (user != null) {
 					FormsAuthentication.SetAuthCookie(user.Id.ToString(), m.RememberMe) ;
 					HttpContext.Session[PiranhaApp.USER] = user ;
+
+					// Redirect after logon
+					return RedirectToAction("Index", "Page") ;
 				} else {
-					ViewBag.Message = "Inloggningen misslyckades" ;
+					ViewBag.Message = @Piranha.Resources.Account.MessageLoginFailed ;
 				}
 			} else {
-				ViewBag.Message = "Du måste fylla i alla fält" ;
+				ViewBag.Message = @Piranha.Resources.Account.MessageLoginEmptyFields ;
 			}
-			// Redirect after logon
-			return RedirectToAction("Index", "Page") ;
+			return Index() ;
 		}
 
 		/// <summary>

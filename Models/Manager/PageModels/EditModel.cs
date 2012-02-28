@@ -89,7 +89,7 @@ namespace Piranha.Models.Manager.PageModels
 			Content = Piranha.Models.Content.Get() ;
 
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
-			groups.Insert(0, new SysGroup() { Name = "Alla" }) ;
+			groups.Insert(0, new SysGroup() { Name = Piranha.Resources.Global.Everyone }) ;
 			Groups = new SelectList(groups, "Id", "Name") ;
 		}
 

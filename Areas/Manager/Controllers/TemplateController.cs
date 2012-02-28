@@ -20,9 +20,9 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			if (id != "") {
 				m = PageEditModel.GetById(new Guid(id)) ;
-				ViewBag.Title = "Ändra sidmall" ;
+				ViewBag.Title = Piranha.Resources.Page.EditTypeTitleExisting ;
 			} else {
-				ViewBag.Title = "Lägg till ny sidmall" ;
+				ViewBag.Title = Piranha.Resources.Page.EditTypeTitleNew ;
 			}
 			return View("PageEdit", m) ;
 		}
@@ -33,12 +33,17 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="m">The model</param>
 		[HttpPost(), ValidateInput(false)]
 		public ActionResult Page(PageEditModel m) {
-			//if (ModelState.IsValid) {
+			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
 					ModelState.Clear() ;
-					ViewBag.Message = "Mallen har sparats" ;
-				}
-			//}
+					ViewBag.Title = Piranha.Resources.Page.EditTypeTitleExisting ;
+					ViewBag.Message = Piranha.Resources.Page.MessageTypeSaved ;
+				} else ViewBag.Message = Piranha.Resources.Page.MessageTypeNotSaved ;
+			} else {
+				if (m.Template.IsNew)
+					ViewBag.Title = Piranha.Resources.Page.EditTypeTitleNew ;
+				else ViewBag.Title = Piranha.Resources.Page.EditTypeTitleExisting ;
+			} 
 			return View("PageEdit", m) ;
 		}
 
@@ -52,9 +57,9 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			if (id != "") {
 				m = PostEditModel.GetById(new Guid(id)) ;
-				ViewBag.Title = "Ändra artikeltyp" ;
+				ViewBag.Title = Piranha.Resources.Post.EditTypeTitleExisting ;
 			} else {
-				ViewBag.Title = "Lägg till ny artikeltyp" ;
+				ViewBag.Title = Piranha.Resources.Post.EditTypeTitleNew ;
 			}
 			return View("PostEdit", m) ;
 		}
@@ -65,14 +70,14 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="m">The model</param>
 		[HttpPost(), ValidateInput(false)]
 		public ActionResult Post(PostEditModel m) {
-			ViewBag.Title = "Lägg till ny artikeltyp" ;
+			ViewBag.Title = Piranha.Resources.Post.EditTypeTitleNew ;
 
 			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
 					ModelState.Clear() ;
-					ViewBag.Title = "Ändra artikeltyp" ;
-					ViewBag.Message = "Artikeltypen har sparats" ;
-				} else ViewBag.Message = "Det gick inte att spara artikeltypen" ;
+					ViewBag.Title = Piranha.Resources.Post.EditTypeTitleExisting ;
+					ViewBag.Message = Piranha.Resources.Post.MessageTypeSaved ;
+				} else ViewBag.Message = Piranha.Resources.Post.MessageTypeNotSaved ;
 			}
 			return View("PostEdit", m) ;
 		}
@@ -85,8 +90,8 @@ namespace Piranha.Areas.Manager.Controllers
 			PageEditModel pm = PageEditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = "Din sidmall har raderats." ;
-			else ViewBag.Message = "Ett internt fel har uppstått och din sidmall kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Page.MessageTypeDeleted ;
+			else ViewBag.Message = Piranha.Resources.Page.MessageTypeNotDeleted ;
 			return RedirectToAction("Index", "Page") ;
 		}
 
@@ -98,8 +103,8 @@ namespace Piranha.Areas.Manager.Controllers
 			PostEditModel pm = PostEditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = "Din artikeltyp har raderats." ;
-			else ViewBag.Message = "Ett internt fel har uppstått och din artikeltyp kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Post.MessageTypeDeleted ;
+			else ViewBag.Message = Piranha.Resources.Post.MessageTypeNotDeleted ;
 			return RedirectToAction("Index", "Post") ;
 		}
     }

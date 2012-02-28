@@ -25,43 +25,43 @@ namespace Piranha.Models
 		/// Gets/sets the login name.
 		/// </summary>
 		[Column(Name="sysuser_login")]
-		[Required(ErrorMessage="Du måste ange ett användarnamn.")]
-		[StringLength(64, ErrorMessage="Användarnamnet får inte vara längre än 64 tecken.")]
-		[Display(Name="Användarnamn")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="Login")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="LoginRequired")]
+		[StringLength(64, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="LoginLength")]
 		public string Login { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the firstname.
 		/// </summary>
 		[Column(Name="sysuser_firstname")]
-		[Required(ErrorMessage="Du måste ange användarens förnamn.")]
-		[StringLength(64, ErrorMessage="Förnamnet får inte vara längre än 64 tecken.")]
-		[Display(Name="Förnamn")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="Firstname")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="FirstnameRequired")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="FirstnameLength")]
 		public string Firstname { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the surname.
 		/// </summary>
 		[Column(Name="sysuser_surname")]
-		[Required(ErrorMessage="Du måste ange användarens efternamn.")]
-		[StringLength(64, ErrorMessage="Efternamnet får inte vara längre än 128 tecken.")]
-		[Display(Name="Efternamn")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="Surname")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="SurnameRequired")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="SurnameLength")]
 		public string Surname { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the email address.
 		/// </summary>
 		[Column(Name="sysuser_email")]
-		[Required(ErrorMessage="Du måste ange en e-post adress.")]
-		[StringLength(64, ErrorMessage="E-post adressen får inte vara längre än 128 tecken.")]
-		[Display(Name="E-post")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="Email")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="EmailRequired")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="EmailLength")]
 		public string Email { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the users current group.
 		/// </summary>
 		[Column(Name="sysuser_group_id")]
-		[Display(Name="Grupp")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="Group")]
 		public Guid GroupId { get ; set ; }
 
 		/// <summary>

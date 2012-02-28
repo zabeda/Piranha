@@ -25,27 +25,32 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the optional parent id.
 		/// </summary>
-		[Column(Name="category_parent_id"), Display(Name="Överordnad")]
+		[Column(Name="category_parent_id")]
+		[Display(ResourceType=typeof(Piranha.Resources.Category), Name="Parent")]
 		public Guid ParentId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
-		[Column(Name="category_name"), Required(ErrorMessage="Du måste ange ett namn för kategorin.")]
-		[Display(Name="Namn"), StringLength(64, ErrorMessage="Namnet får max innehålla 64 tecken.")]
+		[Column(Name="category_name")]
+		[Display(ResourceType=typeof(Piranha.Resources.Category), Name="Name")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Category), ErrorMessageResourceName="NameRequired")]
+		[StringLength(64, ErrorMessageResourceType=typeof(Piranha.Resources.Category), ErrorMessageResourceName="NameLength")]
 		public string Name { get ; set ; }
 
 		/// <summary>
 		/// Gets the permalink.
 		/// </summary>
-		[Column(Name="permalink_name", ReadOnly=true, Table="permalink"), Display(Name="Permalänk")]
+		[Column(Name="permalink_name", ReadOnly=true, Table="permalink")]
+		[Display(ResourceType=typeof(Piranha.Resources.Category), Name="Permalink")]
 		public string Permalink { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the description.
 		/// </summary>
-		[Column(Name="category_description"), Display(Name="Beskrivning")]
-		[StringLength(255, ErrorMessage="Beskrivningen får max innehålla 255 tecken.")]
+		[Column(Name="category_description")]
+		[Display(ResourceType=typeof(Piranha.Resources.Category), Name="Description")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Category), ErrorMessageResourceName="DescriptionLength")]
 		public string Description { get ; set ; }
 		/// <summary>
 		/// Gets/sets the created date.

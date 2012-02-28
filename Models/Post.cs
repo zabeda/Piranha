@@ -41,36 +41,31 @@ namespace Piranha.Models
 		/// Gets/sets the title.
 		/// </summary>
 		[Column(Name="post_title")]
-		[Required(ErrorMessage="Du måste ange en titel."), Display(Name="Titel")]
-		[StringLength(128, ErrorMessage="Titeln får max innehålla 128 tecken.")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Title")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="TitleRequired")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="TitleLength")]
 		public string Title { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the permalink.
 		/// </summary>
 		[Column(Name="permalink_name", ReadOnly=true, Table="permalink")]
-		[Display(Name="Permalänk")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Permalink")]
 		public string Permalink { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the excerpt.
 		/// </summary>
 		[Column(Name="post_excerpt")]
-		[Display(Name="Sammanfattning"), StringLength(255, ErrorMessage="Sammanfattningen får max innehålla 255 tecken.")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Excerpt")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="ExcerptLength")]
 		public string Excerpt { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the body.
 		/// </summary>
 		[Column(Name="post_body")]
-		[Display(Name="Innehåll")]
 		public HtmlString Body { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the custom view
-		/// </summary>
-		[Column(Name="posttemplate_view", ReadOnly=true, Table="posttemplate")]
-		public string View { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the template name.

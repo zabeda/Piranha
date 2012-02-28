@@ -16,20 +16,20 @@
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>
-                <div class="tooltip"><p>Spara sidan</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             <li><a class="publish"></a>
-                <div class="tooltip"><p>Publicera sidan</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarPublish</p></div></li>
             <li><a href="@Url.Action("Delete", new { id = Model.Page.Id })" class="delete"></a>
-                <div class="tooltip"><p>Ta bort sidan</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
             <li><a href="@Url.Action("Index", "Page")" class="back"></a>
-                <div class="tooltip"><p>Backa</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
-                <div class="tooltip"><p>Ladda om sidan</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
             <li><a href="" class="info"></a>
-                <div class="tooltip"><p>Visa information & hjälptext</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
             @if (!Model.Page.IsNew) {
             <li><a href="http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Page.Permalink, true).ToLower()" target="preview" class="preview"></a>
-                <div class="tooltip"><p>Förhandsgranska sidan</p><!-- img class="page-preview" src="" alt="Förhandsgranskning" /--></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarPreview</p><!-- img class="page-preview" src="" alt="Förhandsgranskning" /--></div></li>
             }
         </ul>
         <div class="clear"></div>
@@ -63,7 +63,7 @@
 </div>
 <div class="grid_9">
     <div class="box expandable">
-        <div class="title"><h2>Information</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.Page.Title)
@@ -75,7 +75,7 @@
                 	@if (!Model.Page.IsNew) {
                     <p>http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Page.Permalink).ToLower()</p>
                     } else {
-                    <p><i>Din permalänk skapas automatiskt när du sparar sidan första gången</i></p>
+                    <p><i>@Piranha.Resources.Page.PermalinkDescription</i></p>
                     }
                     <div class="input">
                         @Html.TextBoxFor(m => m.Permalink.Name)</div>
@@ -84,14 +84,14 @@
                 @if (Model.Template.ShowController) {
                 <li>@Html.LabelFor(m => m.Page.PageController)
                     <div class="input">
-                        @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Ej obligatorisk" })</div>
+                        @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional })</div>
                     @Html.ValidationMessageFor(m => m.Page.PageController)
                 </li>
                 }
                 @if (Model.Template.ShowRedirect) {
                 <li>@Html.LabelFor(m => m.Page.PageRedirect)
                     <div class="input">
-                        @Html.TextBoxFor(m => m.Page.PageRedirect, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Redirect) ? Model.Template.Redirect : "Ej obligatorisk" })</div>
+                        @Html.TextBoxFor(m => m.Page.PageRedirect, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Redirect) ? Model.Template.Redirect : Piranha.Resources.Global.Optional })</div>
                     @Html.ValidationMessageFor(m => m.Page.PageRedirect)
                 </li>
                 }
@@ -99,7 +99,7 @@
             <ul class="form optional">
                 <li>@Html.LabelFor(m => m.Page.NavigationTitle)
                     <div class="input">
-                        @Html.TextBoxFor(m => m.Page.NavigationTitle, new { @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextBoxFor(m => m.Page.NavigationTitle, new { @placeholder = Piranha.Resources.Global.Optional })</div>
                     @Html.ValidationMessageFor(m => m.Page.NavigationTitle)
                 </li>
                 <li>
@@ -109,16 +109,16 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Page.IsHidden)
-                    <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (Sidan kommer fortfarande vara åtkomlig med inte synas i menyn)</p>
+                    <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (@Piranha.Resources.Page.HiddenDescription)</p>
                 </li>
                 <li>@Html.LabelFor(m => m.Page.Keywords)
                     <div class="input"> 
-                        @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })</div>
                     @Html.ValidationMessageFor(m => m.Page.Keywords)
                 </li>
                 <li>@Html.LabelFor(m => m.Page.Description)
                     <div class="input">
-                        @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
                     @Html.ValidationMessageFor(m => m.Page.Description)
                 </li>
             </ul>
@@ -128,12 +128,12 @@
     @if (Model.PageRegions.Count > 0) {
     <div class="box">
         <div class="title">
-            <h2>Innehåll</h2>
+            <h2>@Piranha.Resources.Global.Content</h2>
             <div id="regionbuttons" class="buttons">
                 @for (int n = 0; n < Model.PageRegions.Count; n++) {
                 <button id="@Html.Raw("btn_" + Model.PageRegions[n].Name)" class="btn@(n > 0 ? "" : " active") pageregion">@Model.PageRegions[n].Name</button>
                 }
-                <button id="btn_attachments" class="btn">Bifogade filer</button>
+                <button id="btn_attachments" class="btn">@Piranha.Resources.Page.Attachments</button>
             </div>
         </div>
         <div class="inner">
@@ -160,7 +160,7 @@
     </div>
     @if (Model.Properties.Count > 0) {
     <div class="box">
-        <div class="title"><h2>Egenskaper</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
         <div class="inner">
             <ul class="form">
             @for (int n = 0; n < Model.Properties.Count; n++) {

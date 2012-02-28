@@ -27,8 +27,8 @@ namespace Piranha.Models
 		/// Gets/sets the group id.
 		/// </summary>
 		[Column(Name="sysaccess_group_id")]
-		[Required(ErrorMessage="Du måste välja en grupp.")]
-		[Display(Name="Grupp")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="AccessGroup")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="AccessGroupRequired")]
 		public Guid GroupId { get ; set ; }
 
 		/// <summary>
@@ -41,16 +41,17 @@ namespace Piranha.Models
 		/// Gets/sets the function name.
 		/// </summary>
 		[Column(Name="sysaccess_function")]
-		[Required(ErrorMessage="Du måste namnge en funktion.")]
-		[StringLength(64, ErrorMessage="Funktionsnamnet får max innehåll 64 tecken.")]
-		[Display(Name="Namn")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="AccessName")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="AccessNameRequired")]
+		[StringLength(64, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="AccessNameLength")]
 		public string Function { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the description.
 		/// </summary>
 		[Column(Name="sysaccess_description")]
-		[StringLength(255), Display(Name="Beskrivning")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="AccessDescription")]
+		[StringLength(64, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="AccessDescriptionLength")]
 		public string Description { get ; set ; }
 
 		/// <summary>

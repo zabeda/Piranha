@@ -16,13 +16,6 @@ namespace Piranha.Areas.Manager.Controllers
 	/// </summary>
     public class SettingsController : ManagerController
     {
-		#region Members
-		private const string TITLE_USERINSERT = "Lägg till användare" ;
-		private const string TITLE_USEREDIT   = "Ändra användare" ; 
-		private const string SUBTITLE_USERINSERT = "Ange lösenord" ;
-		private const string SUBTITLE_USEREDIT = "Ändra lösenord" ;
-		#endregion
-
 		/// <summary>
 		/// List action.
 		/// </summary>
@@ -38,12 +31,10 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_USER")]
 		public new ActionResult User(string id) {
 			if (!String.IsNullOrEmpty(id)) {
-				ViewBag.Title = TITLE_USEREDIT ;
-				ViewBag.SubTitle = SUBTITLE_USEREDIT ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 				return View("User", UserEditModel.GetById(new Guid(id))) ;
 			} else {
-				ViewBag.Title = TITLE_USERINSERT ;
-				ViewBag.SubTitle = SUBTITLE_USERINSERT ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
 				return View("User", new UserEditModel()) ;
 			}
 		}
@@ -80,20 +71,17 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost()]
 		[Access(Function="ADMIN_USER")]
 		public new ActionResult User(UserEditModel um) {
-			if (um.User.IsNew) {
-				ViewBag.Title = TITLE_USERINSERT ;
-				ViewBag.SubTitle = SUBTITLE_USERINSERT ;
-			} else {
-				ViewBag.Title = TITLE_USEREDIT ;
-				ViewBag.SubTitle = SUBTITLE_USEREDIT ;
-			}
+			if (um.User.IsNew)
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
+			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 
 			if (ModelState.IsValid) {
 				try {
 					if (um.SaveAll()) {
 						ModelState.Clear() ;
-						ViewBag.Message = "Användaren har sparats" ;
-					} else ViewBag.Message = "Det gick inte att spara användaren" ;
+						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
+						ViewBag.Message = Piranha.Resources.Settings.MessageUserSaved ;
+					} else ViewBag.Message = Piranha.Resources.Settings.MessageUserNotSaved ;
 				} catch (Exception e) {
 					ViewBag.Message = e.ToString() ;
 				}
@@ -111,8 +99,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "users" ;
 			if (um.DeleteAll())
-				ViewBag.Message = "Användaren har raderats." ;
-			else ViewBag.Message = "Ett fel har inträffat och användaren kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Settings.MessageUserDeleted ;
+			else ViewBag.Message = Piranha.Resources.Settings.MessageUserNotDeleted ;
 			
 			return Index() ;
 		}
@@ -128,7 +116,7 @@ namespace Piranha.Areas.Manager.Controllers
 
 			password.Password = password.PasswordConfirm = newpwd ;
 			password.Save() ;
-			ViewBag.Message = "Ditt nya lösenord är " + newpwd ;
+			ViewBag.Message = Piranha.Resources.Settings.MessageNewPassword + newpwd ;
 
 			return User(id) ;
 		}
@@ -142,10 +130,10 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_GROUP")]
 		public ActionResult Group(string id) {
 			if (!String.IsNullOrEmpty(id)) {
-				ViewBag.Title = "Ändra grupp" ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingGroup ;
 				return View("Group", GroupEditModel.GetById(new Guid(id))) ;
 			} else {
-				ViewBag.Title = "Lägg till grupp" ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewGroup ;
 				return View("Group", new GroupEditModel()) ;
 			}
 		}
@@ -180,13 +168,17 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost()]
 		[Access(Function="ADMIN_GROUP")]
 		public ActionResult Group(GroupEditModel gm) {
-			ViewBag.Title = "Ändra grupp" ;
+			if (gm.Group.IsNew)
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewGroup ;
+			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingGroup ;
+
 			if (ModelState.IsValid) {
 				try {
 					if (gm.SaveAll()) {
 						ModelState.Clear() ;
-						ViewBag.Message = "Gruppen har sparats" ;
-					} else ViewBag.Message = "Det gick inte att spara gruppen" ;
+						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingGroup ;
+						ViewBag.Message = Piranha.Resources.Settings.MessageGroupSaved ;
+					} else ViewBag.Message =Piranha.Resources.Settings.MessageGroupNotSaved ;
 				} catch (Exception e) {
 					ViewBag.Message = e.ToString() ;
 				}
@@ -205,8 +197,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "groups" ;
 			if (gm.DeleteAll())
-				ViewBag.Message = "Gruppen har raderats." ;
-			else ViewBag.Message = "Ett fel har inträffat och gruppen kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Settings.MessageGroupDeleted ;
+			else ViewBag.Message = Piranha.Resources.Settings.MessageGroupNotDeleted ;
 			
 			return Index() ;
 		}
@@ -220,10 +212,10 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_ACCESS")]
 		public ActionResult Access(string id) {
 			if (!String.IsNullOrEmpty(id)) {
-				ViewBag.Title = "Ändra behörighet" ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingAccess ;
 				return View("Access", AccessEditModel.GetById(new Guid(id))) ;
 			} else {
-				ViewBag.Title = "Lägg till behörighet" ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewAccess ;
 				return View("Access", new AccessEditModel()) ;
 			}
 		}
@@ -259,13 +251,17 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost()]
 		[Access(Function="ADMIN_ACCESS")]
 		public ActionResult Access(AccessEditModel am) {
-			ViewBag.Title = "Ändra behörighet" ;
+			if (am.Access.IsNew)
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewAccess ;
+			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingAccess ;
+
 			if (ModelState.IsValid) {
 				try {
 					if (am.SaveAll()) {
 						ModelState.Clear() ;
-						ViewBag.Message = "Behörigheten har sparats" ;
-					} else ViewBag.Message = "Det gick inte att spara behörigheten" ;
+						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingAccess ;
+						ViewBag.Message = Piranha.Resources.Settings.MessageAccessSaved ;
+					} else ViewBag.Message = Piranha.Resources.Settings.MessageAccessNotSaved ;
 				} catch (Exception e) {
 					ViewBag.Message = e.ToString() ;
 				}
@@ -283,8 +279,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "access" ;
 			if (am.DeleteAll())
-				ViewBag.Message = "Behörigheten har raderats." ;
-			else ViewBag.Message = "Ett fel har inträffat och behörigheten kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Settings.MessageAccessDeleted ;
+			else ViewBag.Message = Piranha.Resources.Settings.MessageAccessNotDeleted ;
 
 			return Index() ;
 		}
@@ -298,10 +294,10 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_PARAM")]
 		public ActionResult Param(string id) {
 			if (!String.IsNullOrEmpty(id)) {
-				ViewBag.Title = "Ändra parameter" ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingParam ;
 				return View("Param", ParamEditModel.GetById(new Guid(id))) ;
 			} else {
-				ViewBag.Title = "Lägg till parameter" ;
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewParam ;
 				return View("Param", new ParamEditModel()) ;
 			}
 		}
@@ -337,13 +333,17 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost()]
 		[Access(Function="ADMIN_PARAM")]
 		public ActionResult Param(ParamEditModel pm) {
-			ViewBag.Title = "Ändra parameter" ;
+			if (pm.Param.IsNew)
+				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewParam ;
+			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingParam ;
+
 			if (ModelState.IsValid) {
 				try {
 					if (pm.SaveAll()) {
 						ModelState.Clear() ;
-						ViewBag.Message = "Parametern har sparats" ;
-					} else ViewBag.Message = "Det gick inte att spara parametern" ;
+						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingParam ;
+						ViewBag.Message = Piranha.Resources.Settings.MessageParamSaved ;
+					} else ViewBag.Message = Piranha.Resources.Settings.MessageParamNotSaved ;
 				} catch (Exception e) {
 					ViewBag.Message = e.ToString() ;
 				}
@@ -361,8 +361,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "params" ;
 			if (pm.DeleteAll())
-				ViewBag.Message = "Parametern har raderats." ;
-			else ViewBag.Message = "Ett fel har inträffat och parametern kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Settings.MessageParamDeleted ;
+			else ViewBag.Message = Piranha.Resources.Settings.MessageParamNotDeleted ;
 
 			return Index() ;
 		}

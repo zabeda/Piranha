@@ -7,15 +7,15 @@
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>
-                <div class="tooltip"><p>Spara kategorin</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             <li><a href="@Url.Action("Delete", new { id = Model.Category.Id })" class="delete"></a>
-                <div class="tooltip"><p>Ta bort kategorin</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
             <li><a href="@Url.Action("Index", "Post")#categories" class="back"></a>
-                <div class="tooltip"><p>Backa</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
-                <div class="tooltip"><p>Ladda om innehållet</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
             <li><a href="" class="info"></a>
-                <div class="tooltip"><p>Visa information & hjälptext</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         <div class="clear"></div>
     </div>
@@ -46,7 +46,7 @@
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Category.Permalink)
-                    <p><i>Din permalänk skapas automatiskt när du sparar kategorin första gången</i></p>
+                    <p><i>@Piranha.Resources.Category.PermalinkDescription</i></p>
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Category.Description)

@@ -749,9 +749,7 @@ $(document).ready(function () {
 
     //
     // Position tooltips
-    $.each($(".toolbar .tooltip"), function (i, e) {
-        $(this).css({ left: -(($(this).outerWidth() - $(this).parent("li").width()) / 2) });
-    });
+    positionTooltips();
 
     //
     // Tabs
@@ -820,8 +818,17 @@ $(document).ready(function () {
 });
 
 /**
- * JQuery code for the floatbox control.
+ * Positions the tooltips
  */
+function positionTooltips() {
+    $.each($(".toolbar .tooltip"), function (i, e) {
+        $(this).css({ left: -(($(this).outerWidth() - $(this).parent("li").width()) / 2) });
+    });
+}
+
+/**
+* JQuery code for the floatbox control.
+*/
 
 //
 // Floatbox object definition.

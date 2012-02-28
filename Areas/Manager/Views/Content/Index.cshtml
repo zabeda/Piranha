@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.ContentModels.ListModel
 @{
-    ViewBag.Title = "Bilder & Dokument";
+    ViewBag.Title = @Piranha.Resources.Content.ListTitle ;
     ViewBag.Selected = "Content" ;
 }
 @section Head {
@@ -19,13 +19,15 @@
 <div class="grid_12 toolbar">
     <div class="inner">
         <ul>
-            <li><a href="@Url.Action("Edit")" class="add" title="Ladda upp nytt innehåll"></a></li>
-            <li><a href="" class="refresh" title="Ladda om listan"></a></li>
-            <li></li>
-            <li><a href="" class="info" title="Visa information & hjälptext"></a></li>
+            <li><a href="@Url.Action("Edit")" class="add""></a>
+                <div class="tooltip"><p>@Piranha.Resources.Content.ToolbarAdd</p></div></li>
+            <li><a href="@Url.Action("Index")" class="refresh"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
+            <li><a class="info"></a>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         @using (Html.BeginForm("Search", "Page")) {
-            <button class="search" title="Sök bland allt innehåll"></button>@Html.TextBox("search")
+            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         }
         <div class="clear"></div>
     </div>
@@ -36,10 +38,10 @@
         <thead>
             <tr>
                 <th class="thumb"></th>
-                <th>Filnamn</th>
-                <th>Typ</th>
-                <th>Skapad</th>
-                <th>Ändrad</th>
+                <th>@Piranha.Resources.Content.Filename</th>
+                <th>@Piranha.Resources.Global.Type</th>
+                <th>@Piranha.Resources.Global.Created</th>
+                <th>@Piranha.Resources.Global.Updated</th>
                 <th></th>
             </tr>
         </thead>
@@ -53,7 +55,7 @@
                 <td class="date">@content.Created.ToString("yyyy-MM-dd")</td>
                 <td class="date">@content.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="buttons one">
-                    <a href="@Url.Action("Delete", new { id = content.Id })" title="Ta bort innehåll" class="icon delete"></a></td>
+                    <a href="@Url.Action("Delete", new { id = content.Id })" title="@Piranha.Resources.Content.ListDelete" class="icon delete"></a></td>
             </tr>
             odd = !odd;
             }

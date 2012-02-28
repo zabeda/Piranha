@@ -26,7 +26,7 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplate(im.TemplateId) ;
 
-			ViewBag.Title = "Lägg till " + pm.Template.Name.Singular.ToLower() ;
+			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
 
 			return View("Edit", pm) ;
 		}
@@ -37,7 +37,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="id">The post id</param>
 		public ActionResult Edit(string id) {
 			EditModel m = EditModel.GetById(new Guid(id)) ;
-			ViewBag.Title = "Ändra " + m.Template.Name.Singular.ToLower() ;
+			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
 			return View(m) ;
 		}
@@ -52,15 +52,15 @@ namespace Piranha.Areas.Manager.Controllers
 				if (m.SaveAll(draft)) {
 					ModelState.Clear() ;
 					if (!draft)
-						ViewBag.Message = "Din artikel har publicerats." ;
-					else ViewBag.Message = "Din artikel har sparats." ;
-				} else ViewBag.Message = "Artikeln kunde inte sparas." ;
+						ViewBag.Message = Piranha.Resources.Post.MessagePublished ;
+					else ViewBag.Message = Piranha.Resources.Post.MessageSaved ;
+				} else ViewBag.Message = Piranha.Resources.Post.MessageNotSaved ;
 			}
 			m.Refresh() ;
 
 			if (m.Post.IsNew)
-				ViewBag.Title = "Lägg till " + m.Template.Name.Singular.ToLower() ;
-			else ViewBag.Title = "Ändra " + m.Template.Name.Singular.ToLower() ;
+				ViewBag.Title = Piranha.Resources.Post.EditTitleNew + m.Template.Name.Singular.ToLower() ;
+			else ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
 			return View("Edit", m) ;
 		}
@@ -73,8 +73,8 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = "Din artikel har raderats." ;
-			else ViewBag.Message = "Ett internt fel har uppstått och artikeln kunde inte raderas." ;
+				ViewBag.Message = Piranha.Resources.Post.MessageDeleted ;
+			else ViewBag.Message = Piranha.Resources.Post.MessageNotDeleted ;
 
 			return Index() ;
 		}

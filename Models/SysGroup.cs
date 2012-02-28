@@ -18,21 +18,21 @@ namespace Piranha.Models
 	{
 		#region Fields
 		[Column(Name="sysgroup_id")]
-		[Required()]
 		public override Guid Id { get ; set ; }
 
 		[Column(Name="sysgroup_parent_id")]
-		[Display(Name="Överordnad")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="ParentGroup")]
 		public Guid ParentId { get ; set ; }
 
 		[Column(Name="sysgroup_name")]
-		[Required(ErrorMessage="Du måste ange ett namn för gruppen.")]
-		[StringLength(64, ErrorMessage="Namnet får inte vara längre än 64 tecken.")]
-		[Display(Name="Namn")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="GroupName")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="GroupNameRequired")]
+		[StringLength(64, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="GroupNameLength")]
 		public string Name { get ; set ; }
 
 		[Column(Name="sysgroup_description")]
-		[StringLength(255), Display(Name="Beskrivning")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="GroupDescription")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="GroupDescriptionLength")]
 		public string Description { get ; set ; }
 
 		[Column(Name="sysgroup_created")]

@@ -26,28 +26,27 @@ namespace Piranha.Models
 		/// Gets/sets the id.
 		/// </summary>
 		[Column(Name="content_id")]
-		[Required()]
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the filename.
 		/// </summary>
 		[Column(Name="content_filename")]
-		[Display(Name="Filnamn")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="Filename")]
 		public string Filename { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the type
 		/// </summary>
 		[Column(Name="content_type")]
-		[Display(Name="Typ")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="ContentType")]
 		public string Type { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the content size.
 		/// </summary>
 		[Column(Name="content_size")]
-		[Display(Name="Filstorlek")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="ContentSize")]
 		public int Size { get ; set ; }
 
 		/// <summary>
@@ -72,14 +71,14 @@ namespace Piranha.Models
 		/// Gets/sets the alternate text.
 		/// </summary>
 		[Column(Name="content_alt")]
-		[Display(Name="Alt. text")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="AlternateText")]
 		public string AlternateText { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the decription.
 		/// </summary>
 		[Column(Name="content_description")]
-		[Display(Name="Beskrivning")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="Description")]
 		public string Description { get ; set ; }
 
 		/// <summary>

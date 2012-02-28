@@ -13,15 +13,15 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the name in its singular form.
 		/// </summary>
-		[Display(Name="Namn i singular")]
-		[Required(ErrorMessage="Du måste ange ett namn.")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="NameInSingular")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Global), ErrorMessageResourceName="NameRequired")]
 		public string Singular { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the name in its plural form.
 		/// </summary>
-		[Display(Name="Namn i plural")]
-		[Required(ErrorMessage="Du måste ange ett namn.")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="NameInPlural")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Global), ErrorMessageResourceName="NameRequired")]
 		public string Plural { get ; set ; }
 	}
 }

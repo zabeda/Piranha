@@ -42,7 +42,7 @@ namespace Piranha.Models
 		/// Gets/sets the group needed to view the page.
 		/// </summary>
 		[Column(Name="page_group_id")]
-		[Display(Name="Behörighet")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Visibility")]
 		public Guid GroupId { get ; set ; }
 
 		/// <summary>
@@ -61,57 +61,63 @@ namespace Piranha.Models
 		/// Gets/sets the title.
 		/// </summary>
 		[Column(Name="page_title")]
-		[Required(ErrorMessage="Du måste ange en title."), Display(Name="Titel")]
-		[StringLength(128, ErrorMessage="Titeln får max innehålla 128 tecken.")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Title")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="TitleRequired")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="TitleLength")]
 		public string Title { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the optional navigation title.
 		/// </summary>
 		[Column(Name="page_navigation_title")]
-		[StringLength(128, ErrorMessage="Titeln får max innehålla 128 tecken."), Display(Name="Navigeringstitel")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="NavigationTitle")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="NavigationTitleLength")]
 		public string NavigationTitle { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the permalink.
 		/// </summary>
 		[Column(Name="permalink_name", ReadOnly=true, Table="permalink")]
-		[Display(Name="Permalänk")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Permalink")]
 		public string Permalink { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets weather the page should be visible in menus or not.
 		/// </summary>
 		[Column(Name="page_is_hidden")]
-		[Display(Name="Dölj sidan")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Hidden")]
 		public bool IsHidden { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the meta keywords.
 		/// </summary>
 		[Column(Name="page_keywords")]
-		[StringLength(255, ErrorMessage="Nyckelorden får max innehålla 255 tecken."), Display(Name="Nyckelord")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Keywords")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="KeywordsLength")]
 		public string Keywords { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the meta description.
 		/// </summary>
 		[Column(Name="page_description")]
-		[StringLength(255, ErrorMessage="Beskrivningen får max innehålla 255 tecken."), Display(Name="Beskrivning")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Description")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="DescriptionLength")]
 		public string Description { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the custom controller.
 		/// </summary>
 		[Column(Name="page_controller")]
-		[StringLength(128, ErrorMessage="Mallens namn får max innehålla 128 tecken."), Display(Name="Webbmall")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Template")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="TemplateLength")]
 		public string PageController { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the custom redirect.
 		/// </summary>
 		[Column(Name="page_redirect")]
-		[StringLength(128, ErrorMessage="Omdirigeringen får max innehålla 128 tecken."), Display(Name="Omdirigering")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Redirect")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="RedirectLength")]
 		public string PageRedirect { get ; set ; }
 
 		/// <summary>

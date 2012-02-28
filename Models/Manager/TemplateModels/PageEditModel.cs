@@ -27,6 +27,7 @@ namespace Piranha.Models.Manager.TemplateModels
 			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
 				PageEditModel model = (PageEditModel)base.BindModel(controllerContext, bindingContext) ;
 
+				bindingContext.ModelState.Remove("Template.Preview") ;
 				model.Template.Preview =
 					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Template.Preview").AttemptedValue) ;
 				return model ;

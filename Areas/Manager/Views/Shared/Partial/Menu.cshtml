@@ -1,9 +1,9 @@
 ﻿<ul class="menu">
-    <li@(ViewBag.Selected == "Page" ? " class=selected" : "")><a href="@Url.Action("Index", "Page")">Sidor</a></li>
-    <li@(ViewBag.Selected == "Post" ? " class=selected" : "")><a href="@Url.Action("Index", "Post")">Artiklar</a></li>
+    <li@(ViewBag.Selected == "Page" ? " class=selected" : "")><a href="@Url.Action("Index", "Page")">@Piranha.Resources.Global.MenuPages</a></li>
+    <li@(ViewBag.Selected == "Post" ? " class=selected" : "")><a href="@Url.Action("Index", "Post")">@Piranha.Resources.Global.MenuPosts</a></li>
     @if (User.HasAccess("ADMIN_CONTENT")) {
-    <li@(ViewBag.Selected == "Content" ? " class=selected" : "")><a href="@Url.Action("Index", "Content")">Bilder & Dokument</a></li>
+    <li@(ViewBag.Selected == "Content" ? " class=selected" : "")><a href="@Url.Action("Index", "Content")">@Piranha.Resources.Global.MenuContent</a></li>
     }
-    <li@(ViewBag.Selected == "Settings" ? " class=selected" : "")><a href="@Url.Action("Index", "Settings")">Inställningar</a></li>
-    <li><a href="@Url.Action("Logout", "Account")">Logga ut</a></li>
+    <li@(ViewBag.Selected == "Settings" ? " class=selected" : "")><a href="@Url.Action("Index", "Settings")">@Piranha.Resources.Global.MenuSettings</a></li>
+    <li><a href="@Url.Action("Logout", "Account")">@Piranha.Resources.Global.MenuLogout</a></li>
 </ul>

@@ -2,23 +2,20 @@
 @{
     ViewBag.Selected = "Post" ;
 }
-@section Head {
-    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.template.js")"></script>    
-}
 @section Toolbar {
 <div class="grid_12 toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>
-                <div class="tooltip"><p>Spara mallen</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             <li><a href="@Url.Action("Delete", new { id = Model.Template.Id })" class="delete"></a>
-                <div class="tooltip"><p>Ta bort mallen</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
             <li><a href="@Url.Action("Index", "Post")#templates" class="back"></a>
-                <div class="tooltip"><p>Backa</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
-                <div class="tooltip"><p>Ladda om mallen</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
             <li><a href="" class="info"></a>
-                <div class="tooltip"><p>Visa information & hjälptext</p></div></li>
+                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         <div class="clear"></div>
     </div>
@@ -53,7 +50,8 @@
                 <li>
                     @Html.LabelFor(m => m.Template.Description)
                     <div class="input">
-                        @Html.TextAreaFor(m => m.Template.Description, new { @rows = 3, @placeholder = "Ej obligatorisk" })</div>
+                        @Html.TextAreaFor(m => m.Template.Description, 
+                            new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
                 </li>
             </ul>
         </div>
@@ -63,8 +61,6 @@
     <div class="box">
         <div class="title"><h2>Avancerat</h2></div>
         <div class="inner">
-            <div class="input">
-                @Html.TextBoxFor(m => m.Template.View, new { @placeholder = "Vy (Ej obligatorisk)"})</div>
             <div class="input">
                 @Html.TextBoxFor(m => m.Template.Controller, new { @placeholder = "Kontroller (Ej obligatorisk)" })</div>
         </div>
