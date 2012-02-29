@@ -66,9 +66,25 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		/// <returns>Weather the operation succeeded</returns>
 		public bool SaveAll() {
-			try {
-				return Template.Save() ;
-			} catch { return false ; }
+			using (IDbTransaction tx = Database.OpenTransaction()) {
+				List<object> args = new List<object>() ;
+				string sql = "" ;
+
+				// Delete all unattached properties
+				args.Add(Template.Id) ;
+				Template.Properties.Each((n, p) => {
+					sql += (sql != "" ? "," : "") + "@" + (n + 1).ToString() ;
+					args.Add(p) ;
+				});
+				Property.Execute("DELETE FROM property WHERE property_page_id IN (" +
+					"SELECT page_id FROM page WHERE page_template_id = @0) " +
+					(sql != "" ? "AND property_name NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
+
+				// Save the template
+				Template.Save(tx) ;
+				tx.Commit() ;
+			}
+			return true ;
 		}
 
 		/// <summary>
