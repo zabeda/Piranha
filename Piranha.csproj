@@ -40,6 +40,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -163,6 +167,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rest\DataContracts\Category.cs" />
+    <Compile Include="Rest\DataContracts\Page.cs" />
+    <Compile Include="Rest\DataContracts\Region.cs" />
+    <Compile Include="Rest\RestService.cs" />
     <Compile Include="WebPages\BasePage.cs" />
     <Compile Include="WebPages\ContentPage.cs" />
     <Compile Include="WebPages\PiranhaFacade.cs" />
@@ -211,6 +219,7 @@
     <EmbeddedResource Include="Resources\Page.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Page.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Data\Scripts\Create.sql" />
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />

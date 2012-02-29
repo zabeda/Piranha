@@ -52,6 +52,7 @@ namespace Piranha.Models
 		[Display(ResourceType=typeof(Piranha.Resources.Category), Name="Description")]
 		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Category), ErrorMessageResourceName="DescriptionLength")]
 		public string Description { get ; set ; }
+
 		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>

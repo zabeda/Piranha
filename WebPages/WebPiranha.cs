@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.ServiceModel.Activation;
 using System.Text;
 using System.Web;
 using System.Web.Hosting;
@@ -97,6 +98,9 @@ namespace Piranha.WebPages
 
 			// Register handlers
 			RegisterDefaultHandlers() ;
+
+			// Register rest API route handler
+			RouteTable.Routes.Add(new ServiceRoute("rest", new WebServiceHostFactory(), typeof(Rest.RestService))) ;
 		}
 
 		/// <summary>
