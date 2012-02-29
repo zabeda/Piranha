@@ -138,6 +138,27 @@ namespace Piranha.Models
 		public static Post GetByPermalink(string permalink, bool draft = false) {
 			return Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ;
 		}
+
+		/// <summary>
+		/// Gets the posts for the given category id.
+		/// </summary>
+		/// <param name="id">The category id</param>
+		/// <returns>A list of posts</returns>
+		public static List<Post> GetByCategoryId(Guid id) {
+			return GetFieldsByCategoryId("*", id) ;
+		}
+
+		/// <summary>
+		/// Gets the posts for the given category id.
+		/// </summary>
+		/// <param name="fields">The fields</param>
+		/// <param name="id">The category id</param>
+		/// <returns>A list of posts</returns>
+		public static List<Post> GetFieldsByCategoryId(string fields, Guid id) {
+			return Post.GetFields(fields, "post_draft = 0 AND post_id IN (" +
+				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = @1)",
+				Relation.RelationType.POSTCATEGORY, id, new Params() { OrderBy = "post_published DESC" }) ;
+		}
 		#endregion
 	}
 }

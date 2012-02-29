@@ -19,9 +19,14 @@ namespace Piranha.Models
 		public List<Post> Archive { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the template for the current archive.
+		/// Gets/sets the content in the current archive.
 		/// </summary>
-		public PostTemplate Template { get ; set ; }
+		public List<Content> Content { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the archive category.
+		/// </summary>
+		public Category Category { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -29,20 +34,45 @@ namespace Piranha.Models
 		/// </summary>
 		public ArchiveModel() {
 			Archive = new List<Post>() ;
+			Content = new List<Content>() ;
 		}
 
 		/// <summary>
-		/// Gets the archive model for the given name.
+		/// Gets the archive model for the given permalink.
 		/// </summary>
-		/// <param name="archivename">The template archive name</param>
-		/// <returns>The model.</returns>
-		public static ArchiveModel GetByArchiveName(string archivename) {
-			ArchiveModel am = new ArchiveModel() ;
+		/// <param name="permalink">The permalink</param>
+		/// <returns>The model</returns>
+		public static ArchiveModel GetByPermalink(string permalink) {
+			ArchiveModel m = new ArchiveModel() ;
 
-			am.Template = PostTemplate.GetSingle("posttemplate_archive_name = @0", archivename) ;
-			if (am.Template != null)
-				am.Archive = Post.Get("post_template_id = @0", am.Template.Id, new Params() { OrderBy = "post_created DESC" }) ;
-			return am ;
+			m.Category = Category.GetByPermalink(permalink) ;
+			m.GetRelated() ;
+			return m ;
+		}
+
+		/// <summary>
+		/// Gets the archive model for the given permalink.
+		/// </summary>
+		/// <param name="permalink">The permalink</param>
+		/// <typeparam name="T">The model type</typeparam>
+		/// <returns>The model</returns>
+		public static T GetByPermalink<T>(string permalink) where T : ArchiveModel {
+			T m = Activator.CreateInstance<T>() ;
+
+			m.Category = Category.GetByPermalink(permalink) ;
+			m.GetRelated() ;
+			return m ;
+		}
+
+		/// <summary>
+		/// Gets the related information for the archive.
+		/// </summary>
+		private void GetRelated() {
+			// Get posts
+			Archive = Models.Post.GetByCategoryId(Category.Id) ;
+
+			// Get content
+			Content = Models.Content.GetByCategoryId(Category.Id) ;
 		}
 	}
 }

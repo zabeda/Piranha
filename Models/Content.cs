@@ -156,6 +156,17 @@ namespace Piranha.Models
 				"(SELECT attachment_content_id FROM attachment WHERE attachment_parent_id = @0 AND attachment_draft = @1)", 
 				id, draft) ;
 		}
+
+		/// <summary>
+		/// Gets the content for the given category id.
+		/// </summary>
+		/// <param name="id">The category id</param>
+		/// <returns>A list of content</returns>
+		public static List<Content> GetByCategoryId(Guid id) {
+			return Content.Get("content_id IN (" +
+				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = @1)",
+				Relation.RelationType.CONTENTCATEGORY, id) ;
+		}
 		#endregion
 
 		/// <summary>

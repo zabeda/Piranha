@@ -42,8 +42,10 @@ namespace Piranha.WebPages.RequestHandlers
 						} else {
 							context.RewritePath("~/page/" + perm.Name + (draft ? "?draft=true" : "")) ;
 						}
-					} else {
+					} else if (perm.Type == Permalink.PermalinkType.POST) {
 						context.RewritePath("~/post/" + perm.Name + (draft ? "?draft=true" : "")) ;
+					} else if (perm.Type == Permalink.PermalinkType.CATEGORY) {
+						context.RewritePath("~/archive/" + perm.Name) ;
 					}
 				}
 			} else {

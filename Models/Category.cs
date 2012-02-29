@@ -117,6 +117,15 @@ namespace Piranha.Models
 				"SELECT relation_related_id FROM relation WHERE relation_type = @0 AND relation_data_id = @1)",
 				Relation.RelationType.POSTCATEGORY, id) ;
 		}
+
+		/// <summary>
+		/// Gets the category for the given permalink.
+		/// </summary>
+		/// <param name="permalink">The permalink</param>
+		/// <returns>The category</returns>
+		public static Category GetByPermalink(string permalink) {
+			return Category.GetSingle("permalink_name = @0", permalink) ;
+		}
 		#endregion
 
 		#region Private methods

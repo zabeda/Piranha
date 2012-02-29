@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditTitleExisting" xml:space="preserve">
-    <value>Lägg till </value>
+    <value>Ändra artikel</value>
   </data>
   <data name="EditTitleNew" xml:space="preserve">
-    <value>Ändra artikel</value>
+    <value>Lägg till </value>
   </data>
   <data name="Excerpt" xml:space="preserve">
     <value>Sammanfattning</value>

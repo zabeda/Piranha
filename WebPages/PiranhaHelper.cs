@@ -151,6 +151,15 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Gets the URL to the given permalink.
+		/// </summary>
+		/// <param name="permalink">The permalink</param>
+		/// <returns>The URL</returns>
+		public IHtmlString Href(string permalink) {
+			return new HtmlString(Parent.Href("~/" + WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + permalink)) ;
+		}
+
+		/// <summary>
 		/// Gets the URL to the content with the given id.
 		/// </summary>
 		/// <param name="id">The content id</param>
@@ -336,7 +345,6 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Generate the correct URL for the given sitemap node
 		/// </summary>
-		/// <param name="helper">The url helper</param>
 		/// <param name="page">The sitemap</param>
 		/// <returns>An action url</returns>
 		private string GenerateUrl(ISitemap page) {
