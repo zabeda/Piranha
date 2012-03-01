@@ -123,7 +123,7 @@ namespace Piranha.Data
 		private static Dictionary<string, ColumnAttribute> _attributes ;
 
 		// SQL statements 
-		private const string SqlSelect = "SELECT * FROM (SELECT row_number() OVER(ORDER BY {5}) AS rownum, {3} {0} FROM {1} {2} {4}) AS Result {6}" ;
+		private const string SqlSelect = "SELECT {3} {0} FROM {1} {2} {4} {5}" ;
 		private const string SqlInsert = "INSERT INTO {0} ({1}) VALUES({2})" ;
 		private const string SqlUpdate = "UPDATE {0} SET {1} WHERE {2}" ;
 		private const string SqlDelete = "DELETE FROM {0} WHERE {1}" ;
@@ -339,18 +339,14 @@ namespace Piranha.Data
 		/// <param name="args">Optional where parameters</param>
 		/// <returns>A list of records</returns>
 		public static List<T> GetFields(string fields, string where = "", params object[] args) {
-			// Check fields
 			if (fields == "*")
 				fields = AllFields ;
-
-			// Check params
 			Params gp = args.Length > 0 && args[args.Length - 1] is Params ? (Params)args[args.Length - 1] : null ;
 
-			return Query(String.Format(SqlSelect, fields, TableName + TableJoins, where != "" ? "WHERE " + where : "", 
-				gp != null && gp.Distinct ? "DISTINCT" : "", 
+			return Query(String.Format(SqlSelect, fields, TableName + TableJoins, 
+				where != "" ? "WHERE " + where : "", gp != null && gp.Distinct ? "DISTINCT" : "", 
 				gp != null && !String.IsNullOrEmpty(gp.GroupBy) ? "GROUP BY " + gp.GroupBy : "",
-				gp != null && !String.IsNullOrEmpty(gp.OrderBy) ? gp.OrderBy : PrimaryKeys[0],
-				gp != null && (gp.Limit > 0 || gp.Offset > 0) ? "WHERE " + GenerateLimit(gp) : ""), args) ;
+				gp != null && !String.IsNullOrEmpty(gp.OrderBy) ? "ORDER BY " + gp.OrderBy : ""), args) ;
 		}
 
 		/// <summary>
@@ -379,7 +375,7 @@ namespace Piranha.Data
 		/// <returns>A list of records</returns>
 		public static List<T> Query(string query, params object[] args) {
 			List<T> result = new List<T>() ;
-			try {
+
 			using (IDbConnection conn = Database.OpenConnection()) {
 				using (IDbCommand cmd = Database.CreateCommand(conn, query, args)) {
 					using (IDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)) { 
@@ -414,7 +410,6 @@ namespace Piranha.Data
 					}
 				}
 			}
-			} catch { throw new Exception(query) ; }
 			return result ;
 		}
 
@@ -493,23 +488,6 @@ namespace Piranha.Data
 				} else ret += (ret != "" ? "," : "") + key ;
 			}
 			return ret ;
-		}
-
-		/// <summary>
-		/// Generates the limit where clause
-		/// </summary>
-		/// <param name="p">The query params</param>
-		/// <returns>The where statement</returns>
-		private static string GenerateLimit(Params p) {
-			string where = "" ;
-
-			if (p != null) {
-				if (p.Offset > 0)
-					where += "rownum >= " + p.Offset ;
-				if (p.Limit > 0)
-					where += (where != "" ? " AND " : "") + "rownum <= " + ((p.Offset - 1) + p.Limit) ;
-			}
-			return where ;
 		}
 
 		/// <summary>
@@ -665,16 +643,6 @@ namespace Piranha.Data
 		/// Gets/sets grouping statement
 		/// </summary>
 		public string GroupBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the limit offset
-		/// </summary>
-		public int Offset { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets
-		/// </summary>
-		public int Limit { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -682,8 +650,6 @@ namespace Piranha.Data
 		/// </summary>
 		public Params() {
 			Distinct = false ;
-			Offset = 0 ;
-			Limit = 0 ;
 		}
 	}
 }
