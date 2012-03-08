@@ -36,16 +36,20 @@ namespace Piranha.WebPages.RequestHandlers
 					if (perm.Type == Permalink.PermalinkType.PAGE) {
 						Page page = Page.GetSingle(perm.ParentId, draft) ;
 
-						if (!String.IsNullOrEmpty(page.Controller)) {
-							context.RewritePath("~/templates/" + page.Controller + "/" + perm.Name + 
+						if (!String.IsNullOrEmpty(page.Redirect)) {
+							if (page.Redirect.StartsWith("http://"))
+								context.Response.Redirect(page.Redirect) ;
+							else context.Response.Redirect(page.Redirect) ;
+						} else if (!String.IsNullOrEmpty(page.Controller)) {
+							context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + 
 								(draft ? "?draft=true" : ""), false) ;
 						} else {
-							context.RewritePath("~/page/" + perm.Name + (draft ? "?draft=true" : "")) ;
+							context.RewritePath("~/page/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
 						}
 					} else if (perm.Type == Permalink.PermalinkType.POST) {
-						context.RewritePath("~/post/" + perm.Name + (draft ? "?draft=true" : "")) ;
+						context.RewritePath("~/post/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
 					} else if (perm.Type == Permalink.PermalinkType.CATEGORY) {
-						context.RewritePath("~/archive/" + perm.Name) ;
+						context.RewritePath("~/archive/" + args.Implode("/"), false) ;
 					}
 				}
 			} else {
@@ -56,7 +60,7 @@ namespace Piranha.WebPages.RequestHandlers
 
 				if (!String.IsNullOrEmpty(page.Controller))
 					context.RewritePath("~/templates/" + page.Controller, false) ;
-				else context.RewritePath("~/page") ;
+				else context.RewritePath("~/page", false) ;
 			}
 		}
 	}

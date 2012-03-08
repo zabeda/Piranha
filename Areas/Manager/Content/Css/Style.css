@@ -432,9 +432,16 @@ table.list .level5 {
 table.list .thumb {
     width: 70px;
     }
+table.list .gravatar {
+    width: 50px;
+    }
 table.list .thumb img {
     width: 50px;
     height: 50px;
+    }
+table.list .gravatar img {
+    width: 30px;
+    height: 30px;
     }
 .box table.list {
     border: solid 1px #999;
@@ -583,8 +590,14 @@ div.login {
     border-radius: 10px;
     margin: 0 auto;
     }
+.floatbox .list-box .inner {
+    padding: 0;
+    }
 .floatbox h2 {
     text-align: center;
+    }
+.floatbox .content {
+    margin: 0;
     }
 
 /**

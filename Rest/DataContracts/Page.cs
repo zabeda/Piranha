@@ -17,12 +17,15 @@ namespace Piranha.Rest.DataContracts
 		public string Permalink { get ; set ; }
 		[DataMember()]
 		public List<Region> Regions { get ; set ; }
+		[DataMember()]
+		public List<Property> Properties { get ; set ; }
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public Page() {
 			Regions = new List<Region>() ;
+			Properties = new List<Property>() ;
 		}
 	}
 }

@@ -9,7 +9,15 @@ using Piranha.Models.Manager.TemplateModels;
 namespace Piranha.Areas.Manager.Controllers
 {
     public class TemplateController : ManagerController
-    {
+	{
+		#region Page templates
+		/// <summary>
+		/// Gets the list of all page templates.
+		/// </summary>
+		public ActionResult PageList() {
+			return View("PageList", PageListModel.Get()) ;
+		}
+
 		/// <summary>
 		/// Opens the insert or edit view for the template depending on
 		/// weather a template id was passed to the action.
@@ -20,9 +28,9 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			if (id != "") {
 				m = PageEditModel.GetById(new Guid(id)) ;
-				ViewBag.Title = Piranha.Resources.Page.EditTypeTitleExisting ;
+				ViewBag.Title = Piranha.Resources.Template.EditPageTitleExisting ;
 			} else {
-				ViewBag.Title = Piranha.Resources.Page.EditTypeTitleNew ;
+				ViewBag.Title = Piranha.Resources.Template.EditPageTitleNew ;
 			}
 			return View("PageEdit", m) ;
 		}
@@ -36,15 +44,37 @@ namespace Piranha.Areas.Manager.Controllers
 			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
 					ModelState.Clear() ;
-					ViewBag.Title = Piranha.Resources.Page.EditTypeTitleExisting ;
-					ViewBag.Message = Piranha.Resources.Page.MessageTypeSaved ;
-				} else ViewBag.Message = Piranha.Resources.Page.MessageTypeNotSaved ;
+					ViewBag.Title = Piranha.Resources.Template.EditPageTitleExisting ;
+					ViewBag.Message = Piranha.Resources.Template.MessagePageSaved ;
+				} else ViewBag.Message = Piranha.Resources.Template.MessagePageNotSaved ;
 			} else {
 				if (m.Template.IsNew)
-					ViewBag.Title = Piranha.Resources.Page.EditTypeTitleNew ;
-				else ViewBag.Title = Piranha.Resources.Page.EditTypeTitleExisting ;
+					ViewBag.Title = Piranha.Resources.Template.EditPageTitleNew ;
+				else ViewBag.Title = Piranha.Resources.Template.EditPageTitleExisting ;
 			} 
 			return View("PageEdit", m) ;
+		}
+
+		/// <summary>
+		/// Deletes the specified page template.
+		/// </summary>
+		/// <param name="id">The template id</param>
+		public ActionResult DeletePage(string id) {
+			PageEditModel pm = PageEditModel.GetById(new Guid(id)) ;
+
+			if (pm.DeleteAll())
+				ViewBag.Message = Piranha.Resources.Template.MessagePageDeleted ;
+			else ViewBag.Message = Piranha.Resources.Template.MessagePageNotDeleted ;
+			return RedirectToAction("pagelist") ;
+		}
+		#endregion
+
+		#region Post templates
+		/// <summary>
+		/// Gets the list of post templates.
+		/// </summary>
+		public ActionResult PostList() {
+			return View("PostList", PostListModel.Get()) ;
 		}
 
 		/// <summary>
@@ -57,9 +87,9 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			if (id != "") {
 				m = PostEditModel.GetById(new Guid(id)) ;
-				ViewBag.Title = Piranha.Resources.Post.EditTypeTitleExisting ;
+				ViewBag.Title = Piranha.Resources.Template.EditPostTitleExisting ;
 			} else {
-				ViewBag.Title = Piranha.Resources.Post.EditTypeTitleNew ;
+				ViewBag.Title = Piranha.Resources.Template.EditPostTitleNew ;
 			}
 			return View("PostEdit", m) ;
 		}
@@ -70,29 +100,16 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="m">The model</param>
 		[HttpPost(), ValidateInput(false)]
 		public ActionResult Post(PostEditModel m) {
-			ViewBag.Title = Piranha.Resources.Post.EditTypeTitleNew ;
+			ViewBag.Title = Piranha.Resources.Template.EditPostTitleNew ;
 
 			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
 					ModelState.Clear() ;
-					ViewBag.Title = Piranha.Resources.Post.EditTypeTitleExisting ;
-					ViewBag.Message = Piranha.Resources.Post.MessageTypeSaved ;
-				} else ViewBag.Message = Piranha.Resources.Post.MessageTypeNotSaved ;
+					ViewBag.Title = Piranha.Resources.Template.EditPostTitleExisting ;
+					ViewBag.Message = Piranha.Resources.Template.MessagePostSaved ;
+				} else ViewBag.Message = Piranha.Resources.Template.MessagePostNotSaved ;
 			}
 			return View("PostEdit", m) ;
-		}
-
-		/// <summary>
-		/// Deletes the specified page template.
-		/// </summary>
-		/// <param name="id">The template id</param>
-		public ActionResult DeletePage(string id) {
-			PageEditModel pm = PageEditModel.GetById(new Guid(id)) ;
-
-			if (pm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Page.MessageTypeDeleted ;
-			else ViewBag.Message = Piranha.Resources.Page.MessageTypeNotDeleted ;
-			return RedirectToAction("Index", "Page") ;
 		}
 
 		/// <summary>
@@ -103,9 +120,10 @@ namespace Piranha.Areas.Manager.Controllers
 			PostEditModel pm = PostEditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Post.MessageTypeDeleted ;
-			else ViewBag.Message = Piranha.Resources.Post.MessageTypeNotDeleted ;
-			return RedirectToAction("Index", "Post") ;
+				ViewBag.Message = Piranha.Resources.Template.MessagePostDeleted ;
+			else ViewBag.Message = Piranha.Resources.Template.MessagePostNotDeleted ;
+			return RedirectToAction("postlist") ;
 		}
-    }
+		#endregion
+	}
 }

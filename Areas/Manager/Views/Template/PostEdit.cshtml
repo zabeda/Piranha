@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.TemplateModels.PostEditModel
 @{
-    ViewBag.Selected = "Post" ;
+    ViewBag.Selected = "Settings" ;
 }
 @section Toolbar {
 <div class="grid_12 toolbar">
@@ -8,9 +8,9 @@
         <ul>
             <li><a class="save submit"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
-            <li><a href="@Url.Action("Delete", new { id = Model.Template.Id })" class="delete"></a>
+            <li><a href="@Url.Action("deletepost", new { id = Model.Template.Id })" class="delete"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
-            <li><a href="@Url.Action("Index", "Post")#templates" class="back"></a>
+            <li><a href="@Url.Action("postlist")" class="back"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
@@ -32,7 +32,7 @@
 </div>
 <div class="grid_9">
     <div class="box">
-        <div class="title"><h2>Information</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>
@@ -62,7 +62,7 @@
         <div class="title"><h2>Avancerat</h2></div>
         <div class="inner">
             <div class="input">
-                @Html.TextBoxFor(m => m.Template.Controller, new { @placeholder = "Kontroller (Ej obligatorisk)" })</div>
+                @Html.TextBoxFor(m => m.Template.Controller, new { @placeholder = Piranha.Resources.Global.Optional })</div>
         </div>
     </div>
 </div>

@@ -755,15 +755,17 @@ $(document).ready(function () {
     // Tabs
     //
     $(".tabs a").click(function () {
-        // First hide all tab data and remove the selected class
-        $.each($(this).parent().siblings("li"), function (i, e) {
-            $("a[name=" + $(e).children("a").attr("href").substring(1) + "]").addClass("hidden");
-            $(this).children("a").removeClass("selected");
-        });
-        // Show current tab and set selected class
-        $("a[name=" + $(this).attr("href").substring(1) + "]").removeClass("hidden");
-        $(this).addClass("selected");
-        return false;
+        if ($(this).attr("href").substring(0, 1) == "#") {
+            // First hide all tab data and remove the selected class
+            $.each($(this).parent().siblings("li"), function (i, e) {
+                $("a[name=" + $(e).children("a").attr("href").substring(1) + "]").addClass("hidden");
+                $(this).children("a").removeClass("selected");
+            });
+            // Show current tab and set selected class
+            $("a[name=" + $(this).attr("href").substring(1) + "]").removeClass("hidden");
+            $(this).addClass("selected");
+            return false;
+        }
     });
 
     //
@@ -823,6 +825,12 @@ $(document).ready(function () {
 function positionTooltips() {
     $.each($(".toolbar .tooltip"), function (i, e) {
         $(this).css({ left: -(($(this).outerWidth() - $(this).parent("li").width()) / 2) });
+    });
+}
+
+function bindAjaxBoxEvents() {
+    $(".floatbox .close-btn").click(function () {
+        floatBox.close($(this).attr("data-id"));
     });
 }
 

@@ -10,7 +10,7 @@ namespace Piranha.Models.Manager.TemplateModels
 	/// <summary>
 	/// Template list model for the manager area.
 	/// </summary>
-	public class ListModel
+	public class PageListModel
 	{
 		#region Properties
 		/// <summary>
@@ -22,7 +22,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Default constructor, creates a new model.
 		/// </summary>
-		public ListModel() {
+		public PageListModel() {
 			Templates = new List<PageTemplate>() ;
 		}
 
@@ -30,10 +30,10 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// Gets the list model for all available templates.
 		/// </summary>
 		/// <returns>The model.</returns>
-		public static ListModel Get() {
-			ListModel m = new ListModel() ;
-			m.Templates = PageTemplate.Get(new Params() { OrderBy = "pagetemplate_name ASC" }) ;
-
+		public static PageListModel Get() {
+			PageListModel m = new PageListModel() ;
+			m.Templates = PageTemplate.GetFields("pagetemplate_id,pagetemplate_name,pagetemplate_created,pagetemplate_updated",
+				new Params() { OrderBy = "pagetemplate_name ASC" }) ;
 			return m ;
 		}
 	}

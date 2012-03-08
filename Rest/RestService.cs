@@ -62,6 +62,11 @@ namespace Piranha.Rest
 					page.Regions.Add(new Region() { Name = key, Body = 
 						((HtmlString)((IDictionary<string, object>)pm.Regions)[key]).ToString() }) ;
 
+				// Properties
+				foreach (var key in ((IDictionary<string, object>)pm.Properties).Keys)
+					page.Properties.Add(new Property() { Name = key, Value = 
+						((string)((IDictionary<string, object>)pm.Properties)[key]).ToString() }) ;
+
 				return page ;
 			}
 			return null ;

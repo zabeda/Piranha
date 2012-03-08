@@ -153,15 +153,6 @@
   <data name="ListDelete" xml:space="preserve">
     <value>Delete page</value>
   </data>
-  <data name="ListDeleteType" xml:space="preserve">
-    <value>Delete page type</value>
-  </data>
-  <data name="ListTabPages" xml:space="preserve">
-    <value>Pages</value>
-  </data>
-  <data name="ListTabTypes" xml:space="preserve">
-    <value>Types</value>
-  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Pages</value>
   </data>
@@ -170,9 +161,6 @@
   </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>The page has been deleted.</value>
-  </data>
-  <data name="MessageDeleteTypeConfirm" xml:space="preserve">
-    <value>Are you sure you want to delete the selected page type?</value>
   </data>
   <data name="MessageNotDeleted" xml:space="preserve">
     <value>An error occurred while deleting the page.</value>
@@ -228,37 +216,10 @@
   <data name="ToolbarAdd" xml:space="preserve">
     <value>Add new startpage</value>
   </data>
-  <data name="ToolbarAddType" xml:space="preserve">
-    <value>Add new page type</value>
-  </data>
   <data name="Visibility" xml:space="preserve">
     <value>Visibility</value>
   </data>
-  <data name="EditTypeTitleExisting" xml:space="preserve">
-    <value>Edit page type</value>
-  </data>
-  <data name="EditTypeTitleNew" xml:space="preserve">
-    <value>Add new page type</value>
-  </data>
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html preview</value>
-  </data>
-  <data name="MessageTypeNotSaved" xml:space="preserve">
-    <value>An error occurred while saving the page type.</value>
-  </data>
-  <data name="MessageTypeSaved" xml:space="preserve">
-    <value>The page type has been saved.</value>
-  </data>
-  <data name="PropertyPlaceholder" xml:space="preserve">
-    <value>New property</value>
-  </data>
-  <data name="RegionPlaceholder" xml:space="preserve">
-    <value>New region</value>
-  </data>
-  <data name="MessageTypeDeleted" xml:space="preserve">
-    <value>The page type has been deleted.</value>
-  </data>
-  <data name="MessageTypeNotDeleted" xml:space="preserve">
-    <value>An error occurred while deleting the page type.</value>
   </data>
 </root>

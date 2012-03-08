@@ -30,7 +30,8 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		public ListModel() {
 			Pages = new List<Sitemap>() ;
-			Templates = PageTemplate.Get(new Params() { OrderBy = "pagetemplate_name ASC" }) ;
+			Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_preview, pagetemplate_description",
+				new Params() { OrderBy = "pagetemplate_name ASC" }) ;
 		}
 
 		/// <summary>

@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.SettingModels.ParamEditModel
 @{
-    ViewBag.Selected = "Settings" ;
+    ViewBag.Selected = "System" ;
 }
 @section Toolbar {
 <div class="grid_12 toolbar">
@@ -9,10 +9,10 @@
             <li><a class="save submit"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             @if (!Model.Param.IsLocked) {
-            <li><a href="@Url.Action("DeleteParam", new { id = Model.Param.Id })" class="delete"></a>
+            <li><a href="@Url.Action("deleteparam", new { id = Model.Param.Id })" class="delete"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
             }
-            <li><a href="@Url.Action("Index")#params" class="back"></a>
+            <li><a href="@Url.Action("index")#params" class="back"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>

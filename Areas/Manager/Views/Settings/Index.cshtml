@@ -1,7 +1,7 @@
 ﻿@model Piranha.Models.Manager.SettingModels.ListModel
 @{
     ViewBag.Title = @Piranha.Resources.Settings.ListTitle ;
-    ViewBag.Selected = "Settings" ;
+    ViewBag.Selected = "System" ;
 }
 @section Head {
     <script type="text/javascript">
@@ -12,23 +12,23 @@
             $(".tabs a").click(function () {
                 switch ($(this).attr("href")) {
                     case "#users":
-                        $(".toolbar .add").attr("href", "@Url.Action("User")");
-                        $(".toolbar form").attr("action", "@Url.Action("SearchUser")");
+                        $(".toolbar .add").attr("href", "@Url.Action("user")");
+                        $(".toolbar form").attr("action", "@Url.Action("searchuser")");
                         $("#add p").text("@Piranha.Resources.Settings.ToolbarAddUser");
                         break;
                     case "#groups":
-                        $(".toolbar .add").attr("href", "@Url.Action("Group")");
-                        $(".toolbar form").attr("action", "@Url.Action("SearchGroup")");
+                        $(".toolbar .add").attr("href", "@Url.Action("group")");
+                        $(".toolbar form").attr("action", "@Url.Action("searchgroup")");
                         $("#add p").text("@Piranha.Resources.Settings.ToolbarAddGroup");
                         break;
                     case "#params":
-                        $(".toolbar .add").attr("href", "@Url.Action("Param")");
-                        $(".toolbar form").attr("action", "@Url.Action("SearchParam")");
+                        $(".toolbar .add").attr("href", "@Url.Action("param")");
+                        $(".toolbar form").attr("action", "@Url.Action("searchparam")");
                         $("#add p").text("@Piranha.Resources.Settings.ToolbarAddParam");
                         break;
                     case "#access":
-                        $(".toolbar .add").attr("href", "@Url.Action("Access")");
-                        $(".toolbar form").attr("action", "@Url.Action("SearchAccess")");
+                        $(".toolbar .add").attr("href", "@Url.Action("access")");
+                        $(".toolbar form").attr("action", "@Url.Action("searchaccess")");
                         $("#add p").text("@Piranha.Resources.Settings.ToolbarAddAccess");
                         break;
                 }
@@ -69,11 +69,10 @@
 <div class="grid_12 toolbar">
     <div class="inner">
         <ul>
-            <li id="add"><a href="@Url.Action("User")" class="add"></a>
+            <li id="add"><a href="@Url.Action("user")" class="add"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Settings.ToolbarAddUser</p></div></li>
-            <li><a href="@Url.Action("Index")" class="refresh"></a>
+            <li><a href="@Url.Action("index")" class="refresh"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
-            <li></li>
             <li><a href="" class="info"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
@@ -105,6 +104,7 @@
         <table class="list tabbed">
             <thead>
                 <tr>
+                    <th></th>
                     <th><span class="sort asc" data-sort="login">@Piranha.Resources.Global.Username</span></th>
                     <th><span class="sort" data-sort="name">@Piranha.Resources.Global.Name</span></th>
                     <th><span class="sort" data-sort="group">@Piranha.Resources.Global.Group</span></th>
@@ -116,9 +116,14 @@
             <tbody class="list-js">
                 @foreach (var user in Model.Users) {
                 <tr>
+                    <td class="gravatar">
+                        @if (!String.IsNullOrEmpty(user.Email)) {
+                            <img src="@UI.Gravatar.Image(user.Email, 30)" alt="Gravatar for @user.Email" />
+                        }
+                    </td>
                     <td class="login">
                         @if (User.IsMember(user.GroupId)) {
-                        <a href="@Url.Action("User/" + user.Id.ToString())">@user.Login</a>
+                        <a href="@Url.Action("user", new { id = user.Id })">@user.Login</a>
                         } else {
                         @user.Login
                         }
@@ -129,7 +134,7 @@
                     <td class="created">@user.Created.ToString("yyyy-MM-dd")</td>
                     <td class="buttons">
                         @if (User.IsMember(user.GroupId)) {
-                        <a class="icon delete" href="@Url.Action("DeleteUser", new { id = user.Id })"></a>
+                        <a class="icon delete" href="@Url.Action("deleteuser", new { id = user.Id })"></a>
                         }
                     </td>
                 </tr>
@@ -159,7 +164,7 @@
                 <tr>
                     <td@(group.Level > 1 ? " class=level" + group.Level : "")>
                         @if (User.IsMember(group.Id)) {
-                        <a href="@Url.Action("Group/" + group.Id.ToString())">@group.Name</a>
+                        <a href="@Url.Action("group", new { id = group.Id})">@group.Name</a>
                         } else {
                         @group.Name
                         }
@@ -168,7 +173,7 @@
                     <td>@group.Created.ToString("yyyy-MM-dd")</td>
                     <td class="buttons">
                         @if (User.IsMember(group.Id)) {
-                        <a class="icon delete" href="@Url.Action("DeleteGroup", new { id = group.Id })"></a>
+                        <a class="icon delete" href="@Url.Action("deletegroup", new { id = group.Id })"></a>
                         }
                     </td>
                 </tr>
@@ -197,13 +202,13 @@
             <tbody>
                 @foreach (var access in Model.Access) {
                 <tr>
-                    <td><a href="@Url.Action("Access/" + access.Id.ToString())">@access.Function</a></td>
+                    <td><a href="@Url.Action("access", new { id = access.Id })">@access.Function</a></td>
                     <td>@access.GroupName</td>
                     <td>@access.Updated.ToString("yyyy-MM-dd")</td>
                     <td>@access.Created.ToString("yyyy-MM-dd")</td>
                     <td class="buttons">
                         @if (!access.IsLocked) {
-                        <a class="icon delete" href="@Url.Action("DeleteAccess", new { id = access.Id })"></a>
+                        <a class="icon delete" href="@Url.Action("deleteaccess", new { id = access.Id })"></a>
                         }
                     </td>
                 </tr>
@@ -231,12 +236,12 @@
             <tbody>
                 @foreach (var param in Model.Params) {
                 <tr>
-                    <td><a href="@Url.Action("Param/" + param.Id.ToString())">@param.Name</a></td>
+                    <td><a href="@Url.Action("param", new { id = param.Id })">@param.Name</a></td>
                     <td>@param.Updated.ToString("yyyy-MM-dd")</td>
                     <td>@param.Created.ToString("yyyy-MM-dd")</td>
                     <td class="buttons">
                         @if (!param.IsLocked) {
-                        <a class="icon delete" href="@Url.Action("DeleteParam", new { id = param.Id })"></a>
+                        <a class="icon delete" href="@Url.Action("deleteparam", new { id = param.Id })"></a>
                         }
                     </td>
                 </tr>

@@ -129,6 +129,12 @@
   <data name="EditTitleNew" xml:space="preserve">
     <value>Lägg till kategori</value>
   </data>
+  <data name="ListTitle" xml:space="preserve">
+    <value>Kategorier</value>
+  </data>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort kategorin?</value>
+  </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>Kategorin har raderats.</value>
   </data>
@@ -158,5 +164,8 @@
   </data>
   <data name="PermalinkDescription" xml:space="preserve">
     <value>Din permalänk skapas automatiskt när du sparar kategorin första gången</value>
+  </data>
+  <data name="ToolbarAdd" xml:space="preserve">
+    <value>Lägg till ny kategori</value>
   </data>
 </root>

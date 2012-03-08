@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.PostModels.EditModel
 @{
-    ViewBag.Selected = "Post" ;   
+    ViewBag.Selected = "Cms" ;   
 }
 @section Head {
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
@@ -30,9 +30,9 @@
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
             <li><a class="publish"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarPublish</p></div></li>
-            <li><a href="@Url.Action("Delete", new { id = Model.Post.Id })" class="delete"></a>
+            <li><a href="@Url.Action("delete", new { id = Model.Post.Id })" class="delete"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
-            <li><a href="@Url.Action("Index", "Post")" class="back"></a>
+            <li><a href="@Url.Action("index")" class="back"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>

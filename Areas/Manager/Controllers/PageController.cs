@@ -14,7 +14,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Default controller. Gets the page list.
 		/// </summary>
         public ActionResult Index() {
-			return View("Index", ListModel.Get());
+			return View("Index", ListModel.Get()) ;
         }
 
 		/// <summary>

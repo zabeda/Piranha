@@ -7,7 +7,8 @@ using System.Text;
 namespace Piranha.Rest.DataContracts
 {
 	[DataContract()]
-	public class Region {
+	public class Region 
+	{
 		[DataMember()]
 		public string Name { get ; set ; }
 		[DataMember()]

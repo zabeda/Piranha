@@ -1,0 +1,35 @@
+﻿@model Piranha.Models.Manager.ContentModels.ListModel
+@{
+    Layout = "";
+}
+<div class="content">
+    <table class="list">
+        <thead>
+            <tr>
+                <th class="thumb"></th>
+                <th>@Piranha.Resources.Content.Filename</th>
+                <th>@Piranha.Resources.Global.Type</th>
+                <th>@Piranha.Resources.Global.Updated</th>
+                <th class="close"><a class="close-btn" data-id="boxContent"></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var odd = true ;}
+            @foreach (var content in Model.Content) {
+            <tr class="@(odd ? "odd" : "even")">
+                <td class="thumb"><img src="@Url.Content("~/thumb/" + content.Id + "/50")" alt="@content.AlternateText" /></td>
+                <td><a href="@Url.Action("edit", new { id = content.Id })">@content.Filename</a></td>
+                <td>@content.Type</td>
+                <td class="date">@content.Updated.ToString("yyyy-MM-dd")</td>
+                <td></td>
+            </tr>
+            odd = !odd;
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

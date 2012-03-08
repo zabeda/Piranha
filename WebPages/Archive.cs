@@ -22,15 +22,18 @@ namespace Piranha.WebPages
 		/// Initializes the web page
 		/// </summary>
 		protected override void InitializePage() {
-			string permalink = UrlData.Count > 0 ? UrlData[UrlData.Count - 1] : "" ;
+			string permalink = UrlData.Count > 0 ? UrlData[0] : "" ;
+
 
 			// Load the current page model
 			if (!String.IsNullOrEmpty(permalink))
-				InitModel(ArchiveModel.GetByPermalink<T>(permalink)) ;
+				InitModel(ArchiveModel.GetByCategoryName<T>(permalink)) ;
+			else InitModel(ArchiveModel.Get<T>()) ;
 
 			// Cache management
 			DateTime mod = GetLastModified() ;
-			WebPiranha.HandleClientCache(HttpContext.Current, Model.Category.Id.ToString(), mod) ;
+			WebPiranha.HandleClientCache(HttpContext.Current, Model.Category != null ? 
+				Model.Category.Id.ToString() : Guid.Empty.ToString(), mod) ;
 
 			base.InitializePage() ;
 		}

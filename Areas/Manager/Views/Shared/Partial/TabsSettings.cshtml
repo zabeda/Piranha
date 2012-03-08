@@ -1,0 +1,5 @@
+﻿<ul class="tabs">
+    <li><a@(ViewBag.SelectedTab == "PageType" ? " class=selected" : "") href="@Url.Action("pagelist", "template")">@Piranha.Resources.Tabs.SettingsPageTypes</a></li>
+    <li><a@(ViewBag.SelectedTab == "PostType" ? " class=selected" : "") href="@Url.Action("postlist", "template")">@Piranha.Resources.Tabs.SettingsPostTypes</a></li>
+    <li><a@(ViewBag.SelectedTab == "Category" ? " class=selected" : "") href="@Url.Action("index", "category")">@Piranha.Resources.Tabs.SettingsCategories</a></li>
+</ul>

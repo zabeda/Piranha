@@ -22,10 +22,10 @@ namespace Piranha.Areas.Manager.Controllers
 			// Check for existing installation.
 			try {
 				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
-					return RedirectToAction("Update", "Install") ;
+					return RedirectToAction("update", "install") ;
 	            return View("Index") ;
 			} catch {}
-			return RedirectToAction("Index", "Install") ;
+			return RedirectToAction("index", "install") ;
         }
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace Piranha.Areas.Manager.Controllers
 					HttpContext.Session[PiranhaApp.USER] = user ;
 
 					// Redirect after logon
-					return RedirectToAction("Index", "Page") ;
+					return RedirectToAction("index", "page") ;
 				} else {
 					ViewBag.Message = @Piranha.Resources.Account.MessageLoginFailed ;
 				}
@@ -60,7 +60,7 @@ namespace Piranha.Areas.Manager.Controllers
 			Session.Clear() ;
 			Session.Abandon() ;
 
-			return RedirectToAction("Index") ;
+			return RedirectToAction("index") ;
 		}
     }
 }

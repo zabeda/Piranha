@@ -1,87 +1,30 @@
 ﻿@model Piranha.Models.Manager.PostModels.ListModel
 @{
-    ViewBag.Title = @Piranha.Resources.Post.ListTitle;
-    ViewBag.Selected = "Post" ;
+    ViewBag.Title = "Content" ;
+    ViewBag.Selected = "Cms" ;
+    ViewBag.SelectedTab = "Post" ;
 }
 @section Head {
     <script type="text/javascript">
-        //
-        // Sets all hidden fields before submit
-        function preSubmit(parentid, seqno) {
-            $("#ParentId").val(parentid);
-            $("#Seqno").val(seqno);
-
-            floatBox.show('boxTemplates');
-
-            return false;
-        }
-
-        var deletemsg = "@Piranha.Resources.Post.MessageDeleteConfirm" ;
-
-        //
-        // Set the selected template id
         $(document).ready(function () {
-            //
-            // Change toolbar action according to selected tab.
-            //
-            $(".tabs a").click(function () {
-                switch ($(this).attr("href")) {
-                    case "#posts":
-                        $(".toolbar .add").removeAttr("href");
-                        $(".toolbar .add").attr("onclick", "floatBox.show('boxTemplates', 200, 240)") ;
-                        $("#tt-add p").text("@Piranha.Resources.Post.ToolbarAdd");
-                        deletemsg = "@Piranha.Resources.Post.MessageDeleteConfirm" ;
-                        break;
-                    case "#templates":
-                        $(".toolbar .add").removeAttr("onclick");
-                        $(".toolbar .add").attr("href", "@Url.Action("Post", "Template")");
-                        $("#tt-add p").text("@Piranha.Resources.Post.ToolbarAddType");
-                        deletemsg = "@Piranha.Resources.Post.MessageDeleteTypeConfirm" ;
-                        break;
-                    case "#categories":
-                        $(".toolbar .add").removeAttr("onclick");
-                        $(".toolbar .add").attr("href", "@Url.Action("Edit", "Category")");
-                        $("#tt-add p").text("@Piranha.Resources.Post.ToolbarAddCategory");
-                        deletemsg = "@Piranha.Resources.Post.MessageDeleteCategoryConfirm" ;
-                        break;
-                }
-                positionTooltips();
-            });
-
-            //
-            // Check what tab should be initially selected
-            //
-            if (window.location.hash) {
-                var hash = window.location.hash ;
-
-                $.each($(".tabs a"), function(i, e) {
-                    if ($(e).attr("href") == hash)
-                        $(e).click();
-                });
-            }
-
+            // Set the selected template id
             $(".templates").click(function () {
                 $("#TemplateId").val($(this).attr("data-templateid"));
                 $("form").submit();
             });
 
+            // Notification before delete
             $(".delete").click(function() {
-                return confirm(deletemsg) ;
+                return confirm("@Piranha.Resources.Post.MessageDeleteConfirm") ;
             });
 
             // Setup post list
-            var postOptions = {
+            var options = {
                 listClass:  'list-js',
+                searchId: 'search',
                 valueNames: ['title', 'template', 'updated', 'created']
             };
-            var postList = new List('post-list', postOptions);
-
-            // Setup template list
-            var templateOptions = {
-                listClass:  'list-js',
-                valueNames: ['name', 'updated', 'created']
-            };
-            var templateList = new List('template-list', templateOptions);
+            var postList = new List('list', options);
         });
     </script>
 }
@@ -93,33 +36,23 @@
                 <div class="tooltip"><p>@Piranha.Resources.Post.ToolbarAdd</p></div></li>
             <li id="tt-refresh"><a href="" class="refresh"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
-            <li></li>
             <li id="tt-info"><a href="" class="info"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
         </ul>
         @using (Html.BeginForm("Search", "Post")) {
-            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search", "", new { @class = "filter" })
+            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         }
         <div class="clear"></div>
     </div>
 </div>
 }
 <div class="grid_12">
-    <ul class="tabs">
-        <li><a class="selected" href="#posts">@Piranha.Resources.Post.ListTabPosts</a></li>
-        @if (User.HasAccess("ADMIN_POST_TEMPLATE")) {
-        <li><a href="#templates">@Piranha.Resources.Post.ListTabTypes</a></li>
-        }
-        @if (User.HasAccess("ADMIN_CATEGORY")) {
-        <li><a href="#categories">@Piranha.Resources.Post.ListTabCategories</a></li>
-        }
-    </ul>
-    <a id="post-list" name="posts">
+    @Html.Partial("Partial/TabsContent")
 @using (Html.BeginForm("Insert", "Post")) {
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
-    <table class="list tabbed">
+    <table id="list" class="list tabbed">
         <thead>
             <tr>
                 <th><span class="sort asc" data-sort="title">@Piranha.Resources.Global.Title</span></th>
@@ -132,12 +65,12 @@
         <tbody class="list-js">
             @foreach (var post in Model.Posts) {
             <tr@(post.Updated > post.LastPublished ? " class=draft" : "")>
-                <td class="title"><a href="@Url.Action("Edit", new { id = post.Id })">@post.Title</a></td>
+                <td class="title"><a href="@Url.Action("edit", new { id = post.Id })">@post.Title</a></td>
                 <td class="template">@post.TemplateName.Singular</td>
                 <td class="updated">@post.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@post.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
-                    <a href="@Url.Action("Delete", new { id = post.Id })" title="Ta bort artikel" class="icon delete"></a></td>
+                    <a href="@Url.Action("delete", new { id = post.Id })" title="Ta bort artikel" class="icon delete"></a></td>
             </tr>
             }
         </tbody>
@@ -148,70 +81,6 @@
         </tfoot>
     </table>
 }
-    </a>
-    @if (User.HasAccess("ADMIN_POST_TEMPLATE")) {
-    <a id="template-list" name="templates" class="hidden">
-    <table class="list tabbed">
-        <thead>
-            <tr>
-                <th><span class="sort asc" data-sort="name">@Piranha.Resources.Global.Name</span></th>
-                <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
-                <th class="date"><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
-                <th class="one"></th>
-            </tr>
-        </thead>
-        <tbody class="list-js">
-            @foreach (var pt in Model.Templates) {
-            <tr>
-                <td class="name"><a href="@Url.Action("Post/" + pt.Id.ToString(), "Template")">@pt.Name.Singular</a></td>
-                <td class="updated">@pt.Updated.ToString("yyyy-MM-dd")</td>
-                <td class="created">@pt.Created.ToString("yyyy-MM-dd")</td>
-                <td class="buttons">
-                    <a class="icon delete" href="@Url.Action("DeletePost", "Template", new { id = pt.Id })"></a></td>
-            </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5"></td>
-            </tr>
-        </tfoot>
-    </table>
-    </a>
-    }
-    @if (User.HasAccess("ADMIN_CATEGORY")) {
-    <a name="categories" class="hidden">
-    <table class="list tabbed">
-        <thead>
-            <tr>
-                <th>@Piranha.Resources.Global.Name</th>
-                <th class="date">@Piranha.Resources.Global.Updated</th>
-                <th class="date">@Piranha.Resources.Global.Created</th>
-                <th class="one"></th>
-            </tr>
-        </thead>
-        <tbody class="list-js">
-            @foreach (var pc in Model.Categories) {
-            <tr>
-                <td@(pc.Level > 1 ? " class=level" + pc.Level : "")><a href="@Url.Action("Edit", "Category", new { id = pc.Id})">@pc.Name</a></td>
-                <td>@pc.Updated.ToString("yyyy-MM-dd")</td>
-                <td>@pc.Created.ToString("yyyy-MM-dd")</td>
-                <td class="buttons">
-                    @if (pc.Categories.Count == 0) {
-                    <a class="icon delete" href="@Url.Action("Delete", "Category", new { id = pc.Id })"></a>
-                    }
-                </td>
-            </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5"></td>
-            </tr>
-        </tfoot>
-    </table>
-    </a>
-    }
 </div>
 
 @section Foot {

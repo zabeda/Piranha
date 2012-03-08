@@ -14,6 +14,13 @@ namespace Piranha.Areas.Manager.Controllers
 	public class CategoryController : ManagerController
 	{
 		/// <summary>
+		/// Gets the list view for the categories.
+		/// </summary>
+		public ActionResult Index() {
+			return View("Index", ListModel.Get()) ;
+		}
+
+		/// <summary>
 		/// Edits or inserts a new category.
 		/// </summary>
 		/// <param name="id">The category id</param>
@@ -59,7 +66,7 @@ namespace Piranha.Areas.Manager.Controllers
 			if (m.DeleteAll())
 				ViewBag.Message = Piranha.Resources.Category.MessageDeleted ;
 			else ViewBag.Message = Piranha.Resources.Category.MessageNotDeleted ;
-			return  RedirectToAction("Index", "Post") ;
+			return  RedirectToAction("index") ;
 		}
 	}
 }

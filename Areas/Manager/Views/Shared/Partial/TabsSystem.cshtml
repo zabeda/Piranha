@@ -1,0 +1,6 @@
+﻿<ul class="tabs">
+    <li><a@(ViewBag.SelectedTab == "User" ? " class=selected" : "") href="@Url.Action("userlist", "settings")">@Piranha.Resources.Tabs.SystemUsers</a></li>
+    <li><a@(ViewBag.SelectedTab == "Group" ? " class=selected" : "") href="@Url.Action("grouplist", "settings")">@Piranha.Resources.Tabs.SystemGroups</a></li>
+    <li><a@(ViewBag.SelectedTab == "Access" ? " class=selected" : "") href="@Url.Action("accesslist", "settings")">@Piranha.Resources.Tabs.SystemAccess</a></li>
+    <li><a@(ViewBag.SelectedTab == "Params" ? " class=selected" : "") href="@Url.Action("paramlist", "settings")">@Piranha.Resources.Tabs.SystemParams</a></li>
+</ul>

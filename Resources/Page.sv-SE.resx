@@ -153,15 +153,6 @@
   <data name="ListDelete" xml:space="preserve">
     <value>Ta bort sida</value>
   </data>
-  <data name="ListDeleteType" xml:space="preserve">
-    <value>Ta bort sidtyp</value>
-  </data>
-  <data name="ListTabPages" xml:space="preserve">
-    <value>Sidor</value>
-  </data>
-  <data name="ListTabTypes" xml:space="preserve">
-    <value>Typer</value>
-  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Sidor</value>
   </data>
@@ -170,9 +161,6 @@
   </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>Sidan har raderats.</value>
-  </data>
-  <data name="MessageDeleteTypeConfirm" xml:space="preserve">
-    <value>Är du säker på att du vill ta bort sidtypen?</value>
   </data>
   <data name="MessageNotDeleted" xml:space="preserve">
     <value>Ett fel har inträffat. Sidan kunde inte raderas.</value>
@@ -228,40 +216,13 @@
   <data name="ToolbarAdd" xml:space="preserve">
     <value>Lägg till ny startsida</value>
   </data>
-  <data name="ToolbarAddType" xml:space="preserve">
-    <value>Lägg till ny sidtyp</value>
-  </data>
   <data name="Visibility" xml:space="preserve">
     <value>Behörighet</value>
-  </data>
-  <data name="EditTypeTitleExisting" xml:space="preserve">
-    <value>Ändra sidtyp</value>
-  </data>
-  <data name="EditTypeTitleNew" xml:space="preserve">
-    <value>Lägg till ny sidtyp</value>
   </data>
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html-tumnagel</value>
   </data>
-  <data name="MessageTypeNotSaved" xml:space="preserve">
-    <value>Ett fel har inträffat. Sidtypen kunde inte sparas.</value>
-  </data>
-  <data name="MessageTypeSaved" xml:space="preserve">
-    <value>Sidtypen har sparats.</value>
-  </data>
   <data name="Optional" xml:space="preserve">
     <value>Ej obligatoriskt</value>
-  </data>
-  <data name="PropertyPlaceholder" xml:space="preserve">
-    <value>Ny egenskap</value>
-  </data>
-  <data name="RegionPlaceholder" xml:space="preserve">
-    <value>Ny region</value>
-  </data>
-  <data name="MessageTypeDeleted" xml:space="preserve">
-    <value>Sidtypen har raderats.</value>
-  </data>
-  <data name="MessageTypeNotDeleted" xml:space="preserve">
-    <value>Ett fel har inträffat. Sidtypen kunde inte raderas.</value>
   </data>
 </root>

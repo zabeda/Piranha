@@ -42,8 +42,8 @@ namespace Piranha.Areas.Manager.Controllers
 			// Check for existing installation.
 			try {
 				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
-					return RedirectToAction("Update", "Install") ;
-				return RedirectToAction("Index", "Account") ;
+					return RedirectToAction("update", "install") ;
+				return RedirectToAction("index", "account") ;
 			} catch {}
 			return View("Index");
         }
@@ -55,7 +55,7 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Update() {
 			if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
 				return View("Update") ;
-			return RedirectToAction("Index", "Account") ;
+			return RedirectToAction("index", "account") ;
 		}
 
 		/// <summary>
@@ -86,7 +86,7 @@ namespace Piranha.Areas.Manager.Controllers
 				p.InvalidateRecord(p) ;
 				tx.Commit() ;
 			}
-			return RedirectToAction("Index", "Account") ;
+			return RedirectToAction("index", "account") ;
 		}
 
 		/// <summary>
@@ -150,7 +150,7 @@ namespace Piranha.Areas.Manager.Controllers
 						tx.Commit() ;
 					}	
 				}
-				return RedirectToAction("Index", "Account") ;
+				return RedirectToAction("index", "account") ;
 			}
 			return Index() ;
 		}

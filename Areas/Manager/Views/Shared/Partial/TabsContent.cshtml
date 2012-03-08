@@ -1,0 +1,7 @@
+﻿<ul class="tabs">
+    <li><a@(ViewBag.SelectedTab == "Page" ? " class=selected" : "") href="@Url.Action("index", "page")">@Piranha.Resources.Tabs.ContentPages</a></li>
+    <li><a@(ViewBag.SelectedTab == "Post" ? " class=selected" : "") href="@Url.Action("index", "post")">@Piranha.Resources.Tabs.ContentPosts</a></li>
+    <li><a@(ViewBag.SelectedTab == "Content" ? " class=selected" : "") href="@Url.Action("index", "content")">@Piranha.Resources.Tabs.ContentMedia</a></li>
+    <li><a@(ViewBag.SelectedTab == "Tag" ? " class=selected" : "") href="@Url.Action("index", "tag")">@Piranha.Resources.Tabs.ContentTags</a></li>
+    <li><a@(ViewBag.SelectedTab == "Alias" ? " class=selected" : "") href="@Url.Action("index", "alias")">@Piranha.Resources.Tabs.ContentAliases</a></li>
+</ul>

@@ -81,9 +81,9 @@ namespace Piranha.WebPages
 			RegisterHandler("draft", "DRAFT", new DraftHandler()) ;
 			RegisterHandler("media", "CONTENT", new ContentHandler()) ;
 			RegisterHandler("thumb", "THUMBNAIL", new ThumbnailHandler()) ;
-			RegisterHandler("preview", "PREVIEW", new PreviewHandler()) ;
 			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;
 			RegisterHandler("account", "ACCOUNT", new AccountHandler()) ;
+			RegisterHandler("archive", "ARCHIVE", new ArchiveHandler()) ;
 		}
 
 		/// <summary>

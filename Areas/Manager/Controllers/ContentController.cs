@@ -19,6 +19,13 @@ namespace Piranha.Areas.Manager.Controllers
         }
 
 		/// <summary>
+		/// Gets the popup list.
+		/// </summary>
+		public ActionResult Popup() {
+			return View("Popup", ListModel.Get()) ;
+		}
+
+		/// <summary>
 		/// Edits or inserts a new content model.
 		/// </summary>
 		/// <param name="id">The id of the content</param>

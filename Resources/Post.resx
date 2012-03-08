@@ -129,29 +129,14 @@
   <data name="ExcerptLength" xml:space="preserve">
     <value>The excerpt has a maximum length of 255 characters.</value>
   </data>
-  <data name="ListTabCategories" xml:space="preserve">
-    <value>Categories</value>
-  </data>
-  <data name="ListTabPosts" xml:space="preserve">
-    <value>Posts</value>
-  </data>
-  <data name="ListTabTypes" xml:space="preserve">
-    <value>Types</value>
-  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Posts</value>
-  </data>
-  <data name="MessageDeleteCategoryConfirm" xml:space="preserve">
-    <value>Are you sure you want to delete the selected category?</value>
   </data>
   <data name="MessageDeleteConfirm" xml:space="preserve">
     <value>Are you sure you want to delete the selected post?</value>
   </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>The post has been deleted.</value>
-  </data>
-  <data name="MessageDeleteTypeConfirm" xml:space="preserve">
-    <value>Are you sure you want to delete the selected post type?</value>
   </data>
   <data name="MessageNotDeleted" xml:space="preserve">
     <value>An error occurred while deleting the post.</value>
@@ -185,29 +170,5 @@
   </data>
   <data name="ToolbarAdd" xml:space="preserve">
     <value>Add new post</value>
-  </data>
-  <data name="ToolbarAddCategory" xml:space="preserve">
-    <value>Add new category</value>
-  </data>
-  <data name="ToolbarAddType" xml:space="preserve">
-    <value>Add new post type</value>
-  </data>
-  <data name="EditTypeTitleExisting" xml:space="preserve">
-    <value>Edit post type</value>
-  </data>
-  <data name="EditTypeTitleNew" xml:space="preserve">
-    <value>Add new post type</value>
-  </data>
-  <data name="MessageTypeDeleted" xml:space="preserve">
-    <value>The post type has been deleted.</value>
-  </data>
-  <data name="MessageTypeNotDeleted" xml:space="preserve">
-    <value>An error occurred while deleting the post type.</value>
-  </data>
-  <data name="MessageTypeNotSaved" xml:space="preserve">
-    <value>An error occurred while saving the post type.</value>
-  </data>
-  <data name="MessageTypeSaved" xml:space="preserve">
-    <value>The post type has been saved.</value>
   </data>
 </root>

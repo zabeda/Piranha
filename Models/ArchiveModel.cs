@@ -14,6 +14,11 @@ namespace Piranha.Models
 	{
 		#region Properties
 		/// <summary>
+		/// Gets/sets the post archive.
+		/// </summary>
+		public List<PostArchive> PostArchive { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the posts in the current archive.
 		/// </summary>
 		public List<Post> Archive { get ; set ; }
@@ -35,17 +40,24 @@ namespace Piranha.Models
 		public ArchiveModel() {
 			Archive = new List<Post>() ;
 			Content = new List<Content>() ;
+			PostArchive = new List<PostArchive>() ;
 		}
 
 		/// <summary>
-		/// Gets the archive model for the given permalink.
+		/// Gets the archive model for the entire site.
 		/// </summary>
-		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
-		public static ArchiveModel GetByPermalink(string permalink) {
-			ArchiveModel m = new ArchiveModel() ;
+		public static ArchiveModel Get() {
+			return Get<ArchiveModel>() ;
+		}
 
-			m.Category = Category.GetByPermalink(permalink) ;
+		/// <summary>
+		/// Gets the archive model for the entire site.
+		/// </summary>
+		/// <typeparam name="T">The model type</typeparam>
+		/// <returns>The model</returns>
+		public static T Get<T>() where T : ArchiveModel {
+			T m = Activator.CreateInstance<T>() ;
 			m.GetRelated() ;
 			return m ;
 		}
@@ -53,13 +65,22 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the archive model for the given permalink.
 		/// </summary>
-		/// <param name="permalink">The permalink</param>
+		/// <param name="category">The category name</param>
+		/// <returns>The model</returns>
+		public static ArchiveModel GetByCategoryName(string category) {
+			return GetByCategoryName<ArchiveModel>(category) ;
+		}
+
+		/// <summary>
+		/// Gets the archive model for the given permalink.
+		/// </summary>
+		/// <param name="category">The category name</param>
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
-		public static T GetByPermalink<T>(string permalink) where T : ArchiveModel {
+		public static T GetByCategoryName<T>(string category) where T : ArchiveModel {
 			T m = Activator.CreateInstance<T>() ;
 
-			m.Category = Category.GetByPermalink(permalink) ;
+			m.Category = Category.GetByPermalink(category) ;
 			m.GetRelated() ;
 			return m ;
 		}
@@ -69,10 +90,18 @@ namespace Piranha.Models
 		/// </summary>
 		private void GetRelated() {
 			// Get posts
-			Archive = Models.Post.GetByCategoryId(Category.Id) ;
+			if (Category != null)
+				Archive = Models.Post.GetByCategoryId(Category.Id) ;
+			else Archive = Models.Post.Get(new Params() { OrderBy = "post_published DESC" }) ;
 
 			// Get content
-			Content = Models.Content.GetByCategoryId(Category.Id) ;
+			if (Category != null)
+				Content = Models.Content.GetByCategoryId(Category.Id) ;
+
+			// Gets the archive
+			if (Category != null)
+				PostArchive = Models.PostArchive.Get(Category.Id) ;
+			else PostArchive = Models.PostArchive.Get() ;
 		}
 	}
 }

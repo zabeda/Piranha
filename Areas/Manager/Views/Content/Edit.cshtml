@@ -1,16 +1,6 @@
 ﻿@model Piranha.Models.Manager.ContentModels.EditModel
 @{
-    ViewBag.Selected = "Content" ;
-}
-@section Head {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#upload_file").change(function () {
-                //$("#Content_Filename").val($(this).val());
-                $("#Content_Filename").val("Filen.jpg");
-            });
-        });
-    </script>
+    ViewBag.Selected = "Cms" ;
 }
 @section Toolbar {
 <div class="grid_12 toolbar">
@@ -18,9 +8,9 @@
         <ul>
             <li><a class="save submit"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
-            <li><a href="@Url.Action("Delete", new { id = Model.Content.Id })" class="delete"></a>
+            <li><a href="@Url.Action("delete", new { id = Model.Content.Id })" class="delete"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
-            <li><a href="@Url.Action("Index")" class="back"></a>
+            <li><a href="@Url.Action("index")" class="back"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
             <li><a href="" class="refresh"></a>
                 <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
@@ -31,7 +21,7 @@
     </div>
 </div>
 }
-@{ Html.BeginForm("Edit", "Content", FormMethod.Post, new { enctype = "multipart/form-data" }) ; }
+@{ Html.BeginForm("edit", "content", FormMethod.Post, new { enctype = "multipart/form-data" }) ; }
 @Html.HiddenFor(m => m.Content.Id)
 @Html.HiddenFor(m => m.Content.IsNew)
 @Html.HiddenFor(m => m.Content.IsImage)

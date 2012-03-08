@@ -148,7 +148,7 @@
     <value>Information</value>
   </data>
   <data name="MenuContent" xml:space="preserve">
-    <value>Bilder &amp; dokument</value>
+    <value>Innehåll</value>
   </data>
   <data name="MenuLogout" xml:space="preserve">
     <value>Logga ut</value>
@@ -161,6 +161,9 @@
   </data>
   <data name="MenuSettings" xml:space="preserve">
     <value>Inställningar</value>
+  </data>
+  <data name="MenuSystem" xml:space="preserve">
+    <value>System</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Namn</value>

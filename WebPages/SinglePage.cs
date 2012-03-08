@@ -27,7 +27,7 @@ namespace Piranha.WebPages
 		/// Initializes the web page
 		/// </summary>
 		protected override void InitializePage() {
-			string permalink = UrlData.Count > 0 ? UrlData[UrlData.Count - 1] : "" ;
+			string permalink = UrlData.Count > 0 ? UrlData[0] : "" ;
 			bool   draft = false ;
 			bool   cached = false ;
 

@@ -10,8 +10,11 @@
     </thead>
     <tbody>
         <tr>
-            <td><div class="dropbox"></div></td>
-            <td colspan="4"><i>Dra en bild eller ett dokument hit för att bifoga den till sidan.</i></td>
+            <td></td>
+            <td colspan="4" style="text-align: right">
+                <a id="pattach" class="btn">Bifoga uppladdat innehåll</a>
+                <a id="pupload" class="btn">Ladda upp nytt</a>
+            </td>
         </tr>
         @foreach (var c in Model.Attachments) {
         <tr>

@@ -50,12 +50,12 @@ namespace Piranha.Areas.Manager.Controllers
 					AccessAttribute attr = m.GetCustomAttribute<AccessAttribute>(true) ;
 					if (attr != null) {
 						if (!User.HasAccess(attr.Function))
-							filterContext.Result = RedirectToAction("Index", "Account") ;
+							filterContext.Result = RedirectToAction("index", "account") ;
 					}
 				}
 				base.OnActionExecuting(filterContext) ;
 			} else {
-				filterContext.Result = RedirectToAction("Index", "Account") ;
+				filterContext.Result = RedirectToAction("index", "account") ;
 			}
 		}
 	}

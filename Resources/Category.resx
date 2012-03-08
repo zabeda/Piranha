@@ -129,6 +129,12 @@
   <data name="EditTitleNew" xml:space="preserve">
     <value>Add new category</value>
   </data>
+  <data name="ListTitle" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete the selected category?</value>
+  </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>The category has been deleted.</value>
   </data>
@@ -158,5 +164,8 @@
   </data>
   <data name="PermalinkDescription" xml:space="preserve">
     <value>The permalink will be created automatically when the category is created</value>
+  </data>
+  <data name="ToolbarAdd" xml:space="preserve">
+    <value>Add new category</value>
   </data>
 </root>
