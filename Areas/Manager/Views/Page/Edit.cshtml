@@ -197,6 +197,7 @@
         </div>
     </div>
     }
+    @if (!Model.Page.IsNew) {
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
         <div class="inner">
@@ -207,6 +208,7 @@
             </ul>
         </div>
     </div>
+    }
 </div>
 @{ Html.EndForm() ; }
 @section Foot {

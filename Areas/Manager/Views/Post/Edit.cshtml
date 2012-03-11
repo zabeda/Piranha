@@ -115,6 +115,7 @@
             </select>
         </div>
     </div>
+    @if (!Model.Post.IsNew) {
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
         <div class="inner">
@@ -125,5 +126,6 @@
             </ul>
         </div>
     </div>
+    }
 </div>
 @{ Html.EndForm() ; }
