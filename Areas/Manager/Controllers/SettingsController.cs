@@ -16,14 +16,16 @@ namespace Piranha.Areas.Manager.Controllers
 	/// </summary>
     public class SettingsController : ManagerController
     {
-		/// <summary>
-		/// List action.
-		/// </summary>
-        public ActionResult Index() {
-            return View("Index", ListModel.Get());
-        }
-
 		#region User actions
+		/// <summary>
+		/// Gets the list of all users.
+		/// </summary>
+		/// <returns></returns>
+		[Access(Function="ADMIN_USER")]
+		public ActionResult UserList() {
+            return View("UserList", UserListModel.Get());
+		}
+
 		/// <summary>
 		/// Edits or creates a new user.
 		/// </summary>
@@ -37,31 +39,6 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
 				return View("User", new UserEditModel()) ;
 			}
-		}
-
-		/// <summary>
-		/// Searches the users by the given filter.
-		/// </summary>
-		/// <param name="filter">The search filter.</param>
-		public ActionResult SearchUser(string filter) {
-			string[] strings = filter.Split(new char[] { ' ' }) ;
-			string where = "" ;
-			List<object> args = new List<object>() ;
-
-			ViewBag.SelectedTab = "users" ;
-
-			foreach (string str in strings) {
-				where += (where != "" ? " OR " : "") +
-					"(sysuser_login LIKE @0 OR " +
-					"sysuser_firstname LIKE @0 OR " +
-					"sysuser_surname LIKE @0 OR " +
-					"sysuser_email LIKE @0 OR " +
-					"sysuser_created LIKE @0 OR " +
-					"sysuser_updated LIKE @0)" ;
-				args.Add("%" + str + "%") ;
-			}
-			args.Add(new Params() { OrderBy = "sysuser_login ASC" }) ;
-			return View("Index", ListModel.GetByUserFilter(where, args.ToArray())) ;
 		}
 
 		/// <summary>
@@ -102,7 +79,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Message = Piranha.Resources.Settings.MessageUserDeleted ;
 			else ViewBag.Message = Piranha.Resources.Settings.MessageUserNotDeleted ;
 			
-			return Index() ;
+			return UserList() ;
 		}
 
 		/// <summary>
@@ -124,6 +101,14 @@ namespace Piranha.Areas.Manager.Controllers
 
 		#region Group actions
 		/// <summary>
+		/// Gets the group list.
+		/// </summary>
+		[Access(Function="ADMIN_GROUP")]
+        public ActionResult GroupList() {
+            return View("GroupList", GroupListModel.Get());
+        }
+
+		/// <summary>
 		/// Edits or creates a new group
 		/// </summary>
 		/// <param name="id">The group id</param>
@@ -136,29 +121,6 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewGroup ;
 				return View("Group", new GroupEditModel()) ;
 			}
-		}
-
-		/// <summary>
-		/// Searches the groups for the given search filter
-		/// </summary>
-		/// <param name="filter">The search string</param>
-		public ActionResult SearchGroup(string filter) {
-			string[] strings = filter.Split(new char[] { ' ' }) ;
-			string where = "" ;
-			List<object> args = new List<object>() ;
-
-			ViewBag.SelectedTab = "groups" ;
-
-			foreach (string str in strings) {
-				where += (where != "" ? " OR " : "") +
-					"(sysgroup_name LIKE @0 OR " +
-					"sysgroup_description LIKE @0 OR " +
-					"sysgroup_created LIKE @0 OR " +
-					"sysgroup_updated LIKE @0)" ;
-				args.Add("%" + str + "%") ;
-			}
-			args.Add(new Params() { OrderBy = "sysgroup_name ASC" }) ;
-			return View("Index", ListModel.GetByGroupFilter(where, args.ToArray())) ;
 		}
 
 		/// <summary>
@@ -200,11 +162,19 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Message = Piranha.Resources.Settings.MessageGroupDeleted ;
 			else ViewBag.Message = Piranha.Resources.Settings.MessageGroupNotDeleted ;
 			
-			return Index() ;
+			return GroupList() ;
 		}
 		#endregion
 
 		#region Access actions
+		/// <summary>
+		/// Gets the access list.
+		/// </summary>
+		[Access(Function="ADMIN_ACCESS")]
+        public ActionResult AccessList() {
+            return View("AccessList", AccessListModel.Get());
+        }
+
 		/// <summary>
 		/// Edits or creates a new group
 		/// </summary>
@@ -218,30 +188,6 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewAccess ;
 				return View("Access", new AccessEditModel()) ;
 			}
-		}
-
-		/// <summary>
-		/// Searches the access roles by the given filter.
-		/// </summary>
-		/// <param name="filter">The search filter.</param>
-		public ActionResult SearchAccess(string filter) {
-			string[] strings = filter.Split(new char[] { ' ' }) ;
-			string where = "" ;
-			List<object> args = new List<object>() ;
-
-			ViewBag.SelectedTab = "access" ;
-
-			foreach (string str in strings) {
-				where += (where != "" ? " OR " : "") +
-					"(sysaccess_function LIKE @0 OR " +
-					"sysaccess_description LIKE @0 OR " +
-					"sysgroup_name LIKE @0 OR " +
-					"sysaccess_created LIKE @0 OR " +
-					"sysaccess_updated LIKE @0)" ;
-				args.Add("%" + str + "%") ;
-			}
-			args.Add(new Params() { OrderBy = "sysaccess_function ASC" }) ;
-			return View("Index", ListModel.GetByAccessFilter(where, args.ToArray())) ;
 		}
 
 		/// <summary>
@@ -282,11 +228,19 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Message = Piranha.Resources.Settings.MessageAccessDeleted ;
 			else ViewBag.Message = Piranha.Resources.Settings.MessageAccessNotDeleted ;
 
-			return Index() ;
+			return AccessList() ;
 		}
 		#endregion
 
 		#region Param actions
+		/// <summary>
+		/// Gets the param list.
+		/// </summary>
+		[Access(Function="ADMIN_PARAM")]
+        public ActionResult ParamList() {
+            return View("ParamList", ParamListModel.Get());
+        }
+
 		/// <summary>
 		/// Edits or creates a new parameter
 		/// </summary>
@@ -300,30 +254,6 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewParam ;
 				return View("Param", new ParamEditModel()) ;
 			}
-		}
-
-		/// <summary>
-		/// Searches the params by the given filter.
-		/// </summary>
-		/// <param name="filter">The search filter.</param>
-		public ActionResult SearchParam(string filter) {
-			string[] strings = filter.Split(new char[] { ' ' }) ;
-			string where = "" ;
-			List<object> args = new List<object>() ;
-
-			ViewBag.SelectedTab = "params" ;
-
-			foreach (string str in strings) {
-				where += (where != "" ? " OR " : "") +
-					"(sysparam_name LIKE @0 OR " +
-					"sysparam_description LIKE @0 OR " +
-					"sysparam_value LIKE @0 OR " +
-					"sysparam_created LIKE @0 OR " +
-					"sysparam_updated LIKE @0)" ;
-				args.Add("%" + str + "%") ;
-			}
-			args.Add(new Params() { OrderBy = "sysparam_name ASC" }) ;
-			return View("Index", ListModel.GetByParamFilter(where, args.ToArray())) ;
 		}
 
 		/// <summary>
@@ -364,7 +294,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Message = Piranha.Resources.Settings.MessageParamDeleted ;
 			else ViewBag.Message = Piranha.Resources.Settings.MessageParamNotDeleted ;
 
-			return Index() ;
+			return ParamList() ;
 		}
 		#endregion
 	}

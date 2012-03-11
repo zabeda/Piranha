@@ -186,6 +186,9 @@
   <data name="Properties" xml:space="preserve">
     <value>Egenskaper</value>
   </data>
+  <data name="Published" xml:space="preserve">
+    <value>Publicerad</value>
+  </data>
   <data name="Regions" xml:space="preserve">
     <value>Regioner</value>
   </data>
@@ -227,5 +230,8 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Användarnamn</value>
+  </data>
+  <data name="Versioning" xml:space="preserve">
+    <value>Versionshantering</value>
   </data>
 </root>

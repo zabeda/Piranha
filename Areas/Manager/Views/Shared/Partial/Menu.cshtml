@@ -1,6 +1,6 @@
 ﻿<ul class="menu">
     <li@(ViewBag.Selected == "Cms" ? " class=selected" : "")><a href="@Url.Action("index", "page")">@Piranha.Resources.Global.MenuContent</a></li>
     <li@(ViewBag.Selected == "Settings" ? " class=selected" : "")><a href="@Url.Action("pagelist", "template")">@Piranha.Resources.Global.MenuSettings</a></li>
-    <li@(ViewBag.Selected == "System" ? " class=selected" : "")><a href="@Url.Action("index", "settings")">@Piranha.Resources.Global.MenuSystem</a></li>
+    <li@(ViewBag.Selected == "System" ? " class=selected" : "")><a href="@Url.Action("userlist", "settings")">@Piranha.Resources.Global.MenuSystem</a></li>
     <li><a href="@Url.Action("logout", "account")">@Piranha.Resources.Global.MenuLogout</a></li>
 </ul>

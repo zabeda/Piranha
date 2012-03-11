@@ -1,6 +1,7 @@
 ﻿@model Piranha.Models.Manager.PageModels.EditModel
 @{
-    ViewBag.Selected = "Cms" ;   
+    ViewBag.Selected = "Cms" ;
+    ViewBag.SelectedTab = "Page" ;
 }
 @section Head {
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
@@ -26,7 +27,8 @@
 }
 
 @section Toolbar {
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsContent")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>
@@ -195,6 +197,16 @@
         </div>
     </div>
     }
+    <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
+        <div class="inner">
+            <ul class="list">
+                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Page.Created.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Page.Updated.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Published <small class="right">@Model.Page.Published.ToShortDateString()</small></li>
+            </ul>
+        </div>
+    </div>
 </div>
 @{ Html.EndForm() ; }
 @section Foot {

@@ -1,6 +1,6 @@
 ﻿@model Piranha.Models.Manager.PostModels.ListModel
 @{
-    ViewBag.Title = "Content" ;
+    ViewBag.Title = @Piranha.Resources.Post.ListTitle ;
     ViewBag.Selected = "Cms" ;
     ViewBag.SelectedTab = "Post" ;
 }
@@ -29,7 +29,8 @@
     </script>
 }
 @section Toolbar { 
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsContent")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li id="tt-add"><a onclick="floatBox.show('boxTemplates', 200, 240)" class="add"></a>
@@ -47,7 +48,6 @@
 </div>
 }
 <div class="grid_12">
-    @Html.Partial("Partial/TabsContent")
 @using (Html.BeginForm("Insert", "Post")) {
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")

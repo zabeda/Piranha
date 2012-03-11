@@ -23,7 +23,8 @@
     </script>
 }
 @section Toolbar { 
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsSettings")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li id="tt-add"><a href="@Url.Action("edit", "category")" class="add"></a>
@@ -43,7 +44,7 @@
     <table id="list" class="list tabbed">
         <thead>
             <tr>
-                <th><span class="sort" data-sort="name">@Piranha.Resources.Global.Name</span></th>
+                <th><span class="sort asc" data-sort="name">@Piranha.Resources.Global.Name</span></th>
                 <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
                 <th class="date"><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
                 <th class="one"></th>

@@ -1,9 +1,11 @@
 ﻿@model Piranha.Models.Manager.ContentModels.EditModel
 @{
     ViewBag.Selected = "Cms" ;
+    ViewBag.SelectedTab = "Content" ;
 }
 @section Toolbar {
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsContent")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>

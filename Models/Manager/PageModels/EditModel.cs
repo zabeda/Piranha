@@ -61,7 +61,12 @@ namespace Piranha.Models.Manager.PageModels
 		/// <summary>
 		/// Gets/sets the attachments.
 		/// </summary>
-		public virtual List<Content> Attachments { get ; set ; }
+		public virtual List<Attachment> Attachments { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the attached content.
+		/// </summary>
+		public virtual List<Content> AttachedContent { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available content.
@@ -85,7 +90,8 @@ namespace Piranha.Models.Manager.PageModels
 		public EditModel() {
 			PageRegions = new List<Region>() ;
 			Properties = new List<Property>() ;
-			Attachments = new List<Piranha.Models.Content>() ;
+			Attachments = new List<Attachment>() ;
+			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
 
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
@@ -240,6 +246,7 @@ namespace Piranha.Models.Manager.PageModels
 			PageRegions.Clear() ;
 			Properties.Clear() ;
 			Attachments.Clear() ;
+			AttachedContent.Clear() ;
 
 			// Get template & permalink
 			Template  = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
@@ -267,8 +274,10 @@ namespace Piranha.Models.Manager.PageModels
 				}
 			} else throw new ArgumentException("Could not find page template for page {" + Page.Id.ToString() + "}") ;
 
-			// Get attachments
-			Attachments = Piranha.Models.Content.GetByParentId(Page.Id, true) ;
+			// Get attachments TODO!!!
+
+			// Get attached content
+			AttachedContent = Piranha.Models.Content.GetByParentId(Page.Id, true) ;
 		}
 		#endregion
 	}

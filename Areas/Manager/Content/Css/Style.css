@@ -181,7 +181,7 @@ button.full {
 body {
     font: normal 15px Arial;
     }
-.content, .toolbar {
+.content {
     margin-top: 30px;
     }
 .menu    { float: right; margin-top: 10px; }
@@ -367,6 +367,10 @@ ul.list li {
     padding: 4px 0;
     font-size: 14px;
     overflow: hidden;
+    border-bottom: solid 1px #e2e2e2;
+    }
+ul.list li:last-child {
+    border-bottom: none;
     }
 ul.list span {
     line-height: 30px;

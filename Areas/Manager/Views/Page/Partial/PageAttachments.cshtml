@@ -1,4 +1,6 @@
-﻿<table class="list">
+﻿<div id="attachments">
+</div>
+<table class="list">
     <thead>
         <tr>
             <th></th>
@@ -16,7 +18,7 @@
                 <a id="pupload" class="btn">Ladda upp nytt</a>
             </td>
         </tr>
-        @foreach (var c in Model.Attachments) {
+        @foreach (var c in Model.AttachedContent) {
         <tr>
             <td><img src="@Url.Content("~/thumb/" + c.Id + "/50")" /></td>
             <td>@c.Filename</td>

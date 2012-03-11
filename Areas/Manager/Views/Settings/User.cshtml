@@ -1,9 +1,11 @@
 ﻿@model Piranha.Models.Manager.SettingModels.UserEditModel
 @{
     ViewBag.Selected = "System" ;
+    ViewBag.SelectedTab = "User" ;
 }
 @section Toolbar {
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsSystem")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>

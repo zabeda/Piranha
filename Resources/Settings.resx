@@ -151,7 +151,7 @@
     <value>Set password</value>
   </data>
   <data name="EditTitleExistingAccess" xml:space="preserve">
-    <value>Edit access</value>
+    <value>Edit permission</value>
   </data>
   <data name="EditTitleExistingGroup" xml:space="preserve">
     <value>Edit group</value>
@@ -163,7 +163,7 @@
     <value>Edit user</value>
   </data>
   <data name="EditTitleNewAccess" xml:space="preserve">
-    <value>Add new access</value>
+    <value>Add permission</value>
   </data>
   <data name="EditTitleNewGroup" xml:space="preserve">
     <value>Add new group</value>
@@ -228,6 +228,18 @@
   <data name="ListTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="ListTitleAccess" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="ListTitleGroups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="ListTitleParams" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="ListTitleUsers" xml:space="preserve">
+    <value>Users</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Username</value>
   </data>
@@ -238,16 +250,16 @@
     <value>The username is required.</value>
   </data>
   <data name="MessageAccessDeleted" xml:space="preserve">
-    <value>The access rule has been deleted.</value>
+    <value>The permission has been deleted.</value>
   </data>
   <data name="MessageAccessNotDeleted" xml:space="preserve">
-    <value>An error occurred while deleting the access rule.</value>
+    <value>An error occurred while deleting the permission.</value>
   </data>
   <data name="MessageAccessNotSaved" xml:space="preserve">
-    <value>An error occurred while saving the access rule.</value>
+    <value>An error occurred while saving the permission.</value>
   </data>
   <data name="MessageAccessSaved" xml:space="preserve">
-    <value>The access rule has been saved.</value>
+    <value>The permission has been saved.</value>
   </data>
   <data name="MessageGroupDeleted" xml:space="preserve">
     <value>The group has been deleted.</value>
@@ -322,7 +334,7 @@
     <value>The surname is required.</value>
   </data>
   <data name="ToolbarAddAccess" xml:space="preserve">
-    <value>Add new access rule</value>
+    <value>Add new permission</value>
   </data>
   <data name="ToolbarAddGroup" xml:space="preserve">
     <value>Add new group</value>

@@ -1,6 +1,15 @@
 ﻿<ul class="tabs">
+    @if (User.HasAccess("ADMIN_USER")) {
     <li><a@(ViewBag.SelectedTab == "User" ? " class=selected" : "") href="@Url.Action("userlist", "settings")">@Piranha.Resources.Tabs.SystemUsers</a></li>
+    }
+    @if (User.HasAccess("ADMIN_GROUP")) {
     <li><a@(ViewBag.SelectedTab == "Group" ? " class=selected" : "") href="@Url.Action("grouplist", "settings")">@Piranha.Resources.Tabs.SystemGroups</a></li>
+    }
+    @if (User.HasAccess("ADMIN_ACCESS")) {
     <li><a@(ViewBag.SelectedTab == "Access" ? " class=selected" : "") href="@Url.Action("accesslist", "settings")">@Piranha.Resources.Tabs.SystemAccess</a></li>
-    <li><a@(ViewBag.SelectedTab == "Params" ? " class=selected" : "") href="@Url.Action("paramlist", "settings")">@Piranha.Resources.Tabs.SystemParams</a></li>
+    }
+    @if (User.HasAccess("ADMIN_PARAM")) {
+    <li><a@(ViewBag.SelectedTab == "Param" ? " class=selected" : "") href="@Url.Action("paramlist", "settings")">@Piranha.Resources.Tabs.SystemParams</a></li>
+    }
 </ul>
+<div class="clear"></div>

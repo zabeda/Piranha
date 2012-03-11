@@ -189,6 +189,9 @@
   <data name="Properties" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="Published" xml:space="preserve">
+    <value>Published</value>
+  </data>
   <data name="Regions" xml:space="preserve">
     <value>Regions</value>
   </data>
@@ -230,5 +233,8 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="Versioning" xml:space="preserve">
+    <value>Versioning</value>
   </data>
 </root>

@@ -21,7 +21,8 @@
     </script>
 }
 @section Toolbar { 
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsSettings")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li id="tt-add"><a href="@Url.Action("page")" class="add"></a>
@@ -37,7 +38,6 @@
 </div>
 }
 <div class="grid_12">
-    @Html.Partial("Partial/TabsSettings")
     <table id="list" class="list tabbed">
         <thead>
             <tr>

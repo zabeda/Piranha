@@ -1,9 +1,11 @@
 ﻿@model Piranha.Models.Manager.TemplateModels.PageEditModel
 @{
     ViewBag.Selected = "Settings" ;
+    ViewBag.SelectedTab = "PageType" ;
 }
 @section Toolbar {
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsSettings")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>

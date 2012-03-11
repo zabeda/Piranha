@@ -1,6 +1,7 @@
 ﻿@model Piranha.Models.Manager.PostModels.EditModel
 @{
-    ViewBag.Selected = "Cms" ;   
+    ViewBag.Selected = "Cms" ; 
+    ViewBag.SelectedTab = "Post" ;  
 }
 @section Head {
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
@@ -23,7 +24,8 @@
 }
 
 @section Toolbar {
-<div class="grid_12 toolbar">
+@Html.Partial("Partial/TabsContent")
+<div class="toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit"></a>
@@ -103,7 +105,7 @@
     </div>
 </div>
 <div class="grid_3">
-    <div class="box pagetemplate overflow">
+    <div class="box overflow">
         <div class="title"><h2>@Piranha.Resources.Global.Categories</h2></div>
         <div class="inner">
             <select name="PostCategories" class="chzn-select" style="width:190px" multiple="multiple">
@@ -111,6 +113,16 @@
                 <option@(opt.Selected ? " selected=selected" : "") value="@opt.Value">@opt.Text</option>
                 }
             </select>
+        </div>
+    </div>
+    <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
+        <div class="inner">
+            <ul class="list">
+                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Post.Created.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Post.Updated.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Published <small class="right">@Model.Post.Published.ToShortDateString()</small></li>
+            </ul>
         </div>
     </div>
 </div>

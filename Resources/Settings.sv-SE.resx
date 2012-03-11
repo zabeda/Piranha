@@ -228,6 +228,18 @@
   <data name="ListTitle" xml:space="preserve">
     <value>Inställningar</value>
   </data>
+  <data name="ListTitleAccess" xml:space="preserve">
+    <value>Behörigheter</value>
+  </data>
+  <data name="ListTitleGroups" xml:space="preserve">
+    <value>Grupper</value>
+  </data>
+  <data name="ListTitleParams" xml:space="preserve">
+    <value>Parametrar</value>
+  </data>
+  <data name="ListTitleUsers" xml:space="preserve">
+    <value>Användare</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Användarnamn</value>
   </data>

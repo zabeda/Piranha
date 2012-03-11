@@ -99,8 +99,11 @@
     <Compile Include="Models\Manager\PostModels\InsertModel.cs" />
     <Compile Include="Models\Manager\PostModels\ListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\AccessEditModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\AccessListModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\ParamListModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\GroupListModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\UserListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\GroupEditModel.cs" />
-    <Compile Include="Models\Manager\SettingModels\ListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\ParamEditModel.cs" />
     <Compile Include="Models\Manager\SettingModels\UserEditModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\PageListModel.cs" />
@@ -284,7 +287,6 @@
     <EmbeddedResource Include="Areas\Manager\Views\Post\Partial\PostToolbar.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\Access.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\Group.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\Param.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\User.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
@@ -305,6 +307,10 @@
     <EmbeddedResource Include="Areas\Manager\Views\Template\PageList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Template\PostList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Category\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Settings\UserList.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Settings\GroupList.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Settings\AccessList.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Settings\ParamList.cshtml" />
     <None Include="packages.config" />
     <None Include="README.markdown" />
   </ItemGroup>
