@@ -19,6 +19,16 @@ namespace Piranha.Rest.DataContracts
 		public List<Region> Regions { get ; set ; }
 		[DataMember()]
 		public List<Property> Properties { get ; set ; }
+		[DataMember()]
+		public List<Guid> Attachments { get ; set ; }
+		[DataMember()]
+		public string Created { get ; set ; }
+		[DataMember()]
+		public string Updated { get ; set ; }
+		[DataMember()]
+		public string Published { get ; set ; }
+		[DataMember()]
+		public string LastPublished { get ; set ; }
 
 		/// <summary>
 		/// Default constructor.

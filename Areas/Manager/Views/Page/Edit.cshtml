@@ -4,25 +4,83 @@
     ViewBag.SelectedTab = "Page" ;
 }
 @section Head {
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.page.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
+ 
         $(document).ready(function () {
             $("#Page_Title").focus();
+            
+            bindEvents();
+        });
 
-
-            $("#pattach").click(function () {
-                $("#boxContent .inner div").remove();
+        function bindEvents() {
+            //
+            // Opens the content popup in a floatbox with ajax.
+            //
+            $("#btn_attach").unbind();
+            $("#btn_attach").click(function () {
+                $("#boxContent .box > div").remove();
                 floatBox.show("boxContent");
                 $.ajax({
                     url: "@Url.Action("popup", "content")",
                     success: function(data) {
-                        $("#boxContent .inner").append(data) ;
+                        $("#boxContent .box").append(data) ;
                         floatBox.position($("#boxContent .box"));
                         bindAjaxBoxEvents();
+                        bindEvents();
                     }
                 });
             });
-        });
+
+            $(".gallery-item img").unbind();
+            $(".gallery-item img").click(function() {
+                $.ajax({
+                    url: "@Url.Content("~/rest/content")/" + $(this).attr("data-id"),
+                    dataType: "json",
+                    success: function(data) {
+                        addAttachment(data) ;
+                        floatBox.close("boxContent");
+                    }
+                });
+            });
+
+            //
+            // Deletes a row from the attachment list.
+            //
+            $("#attachments .delete").unbind();
+            $("#attachments .delete").click(function() {
+                console.log("deleting");
+                var row = $(this).parent().parent();
+                $('#attachments input[value="' + row.attr("data-id") + '"]').remove();
+                row.remove();
+            });
+
+            $("form").unbind();
+            $("form").submit(function () {
+                // Build Attachments
+                $.each($("#attachments tr"), function (index, val) {
+                    if (index > 0) {
+                        $("#attachment_data").append(
+                            '<input id="Page_Attachments_' + (index - 1) +
+                            '_" name="Page.Attachments[' + (index - 1) +
+                            ']" type="hidden" value="' + $(val).attr("data-id") + '" />');
+                    }
+                });
+            });
+        }
+
+        function addAttachment(a) {
+            $(".attachments").append(
+                '<tr data-id="' + a.Id + '">' +
+                    '<td><img src="' + a.Url + '/50")" /></td>' +
+                    '<td>' + a.Filename + '</td>' +
+                    '<td>' + a.Type + '</td>' +
+                    '<td class="buttons one">' +
+                        '<a class="icon delete"></a></td>' +
+                '</tr>') ;
+        }
     </script>
 }
 
@@ -31,21 +89,13 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a class="save submit"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
-            <li><a class="publish"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarPublish</p></div></li>
-            <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
-            <li><a href="@Url.Action("index")" class="back"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
-            <li><a href="" class="refresh"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
-            <li><a href="" class="info"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
+            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
+            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
+            <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @if (!Model.Page.IsNew) {
-            <li><a href="http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Page.Permalink, true).ToLower()" target="preview" class="preview"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarPreview</p><!-- img class="page-preview" src="" alt="Förhandsgranskning" /--></div></li>
+            <li><a href="http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Page.Permalink, true).ToLower()" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
         </ul>
         <div class="clear"></div>
@@ -157,7 +207,7 @@
                 @Html.EditorFor(m => m.PageRegions)
             </div>
             <div id="attachments" style="display:none">
-                @Html.Partial("Partial/PageAttachments")
+                @Html.Partial("Partial/Attachments")
             </div>
         </div>
     </div>
@@ -198,13 +248,14 @@
     </div>
     }
     @if (!Model.Page.IsNew) {
-    <div class="box">
+    <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
-        <div class="inner">
+        <div class="inner optional">
             <ul class="list">
-                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Page.Created.ToShortDateString()</small></li>
-                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Page.Updated.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.LastPublished <small class="right">@Model.Page.LastPublished.ToShortDateString()</small></li>
                 <li>@Piranha.Resources.Global.Published <small class="right">@Model.Page.Published.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Page.Updated.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Page.Created.ToShortDateString()</small></li>
             </ul>
         </div>
     </div>
@@ -214,9 +265,7 @@
 @section Foot {
  <div id="boxContent" class="floatbox">
     <div class="bg"></div>
-    <div class="box list-box">
-        <div class="inner" style="width: 600px;min-height:100px;">
-        </div>
+    <div class="box" style="min-width: 510px;min-height:260px;">
     </div>
 </div>
    @if (false) { // (!Model.Page.IsNew) {

@@ -68,5 +68,10 @@ namespace Piranha.Models
 		/// Gets/sets the published date.
 		/// </summary>
 		DateTime Published { get ; }
+
+		/// <summary>
+		/// Gets/sets the published date.
+		/// </summary>
+		DateTime LastPublished { get ; }
 	}
 }

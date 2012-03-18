@@ -151,6 +151,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last published.
+        /// </summary>
+        public static string LastPublished {
+            get {
+                return ResourceManager.GetString("LastPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content.
         /// </summary>
         public static string MenuContent {
@@ -309,6 +318,15 @@ namespace Piranha.Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new.
+        /// </summary>
+        public static string ToolbarAdd {
+            get {
+                return ResourceManager.GetString("ToolbarAdd", resourceCulture);
             }
         }
         

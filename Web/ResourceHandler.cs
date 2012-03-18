@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 
 using Piranha.WebPages;
+using Yahoo.Yui.Compressor;
 
 namespace Piranha.Web
 {
@@ -39,12 +40,24 @@ namespace Piranha.Web
 						context.Response.ContentType = "text/css" ;
 					} else if (file.Name.EndsWith(".png")) {
 						context.Response.ContentType = "image/png" ;
+					} else if (file.Name.EndsWith(".eot")) {
+						context.Response.ContentType = "application/vnd.ms-fontobject" ;
+					} else if (file.Name.EndsWith(".ttf")) {
+						context.Response.ContentType = "application/octet-stream" ;
+					} else if (file.Name.EndsWith(".svg")) {
+						context.Response.ContentType = "image/svg+xml" ;
+					} else if (file.Name.EndsWith(".woff")) {
+						context.Response.ContentType = "application/x-woff" ;
 					}
 					var stream = file.Open() ;
 					byte[] bytes = new byte[stream.Length] ;
 
 					stream.Read(bytes, 0, Convert.ToInt32(stream.Length)) ;
+#if DEBUG
 					context.Response.BinaryWrite(bytes) ;
+#else
+					context.Response.BinaryWrite(bytes) ;
+#endif
 					stream.Close() ;
 				}
 			}

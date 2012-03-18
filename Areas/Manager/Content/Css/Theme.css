@@ -35,7 +35,7 @@ a {
     color: #6acaf2;
     text-decoration: none;
     font-size: 13px;
-    margin: 16px 0 0 10px;
+    margin: 16px 0 0;
     }
 .top .public-site:hover {
     text-decoration: underline;
@@ -54,8 +54,36 @@ a {
     border: solid 1px #282828;
     background: #444;
     color: #ccc;
-    border-radius: 4px;
+    border-radius: 3px;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    }
+
+/**
+ * Primary border color (Boxes, containers & lists)
+ */
+.toolbar,
+.box,
+.box .title,
+.box .inner,
+table.list tr,
+.tabs li a.selected,
+.edit, 
+.templates .preview {
+    border-color: #ddd;
+    }
+    
+/**
+ * Secondary border color (Input & form elements)
+ */
+.toolbar input,
+.toolbar .search,
+.form li,
+.input,
+.chzn-container-multi .chzn-choices,
+.chzn-container-active .chzn-choices,
+.chzn-container-multi .chzn-choices .search-choice,
+.chzn-container .chzn-drop {
+    border-color: #e2e2e2;
     }
 
 /**
@@ -63,27 +91,33 @@ a {
  */
 .toolbar {
     background: #eee;
-    border: solid 1px #e2e2e2;
-    border-radius: 7px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
     margin-top: -1px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.04);
     z-index: 100;
     }
 .toolbar input {
-    border: solid 1px #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     border-right: none;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     margin-right: -1px; /* Fix for iPad */
     }
 .toolbar .search {
-    border: solid 1px #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     border-left: 0px none;
     height: 42px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    }
+.toolbar a {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
          
 /**
@@ -91,15 +125,21 @@ a {
  */
 .box {
     background: #fff;
-    border: solid 1px #e2e2e2;
-    border-radius: 7px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.04);
     }
 .box .title {
     background: #eee;
     padding: 10px 14px;
-    border-bottom: solid 1px #e2e2e2;
+    border-bottom-width: 1px;
+    border-bottom-style: none;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+.box .inner {
+    border-top-width: 1px;
+    border-top-style: solid;
     }
 .expandable .title {
     background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAfElEQVR42qWT0QlAIQhFG6Vl3KZJaoqGcZygAYKegkEUPoj7cT5K7yVNQ0rphIQisNAMtjs68/dDFLLQheHQLScu3S6ul8CnqmY3yBp4JC8D8p495wzKTzkUrDnj1cAoGmTAgDXYbtGNY9ZgA7gEuInwN4KDhI8yvkzwOn/srR2fTcXVhQAAAABJRU5ErkJggg==) 98% 50% no-repeat;
@@ -118,6 +158,7 @@ a {
     display: block;
     width: 16px;
     height: 16px;
+    margin: 4px 9px;
     cursor: pointer;
     }
 .box .title h2 {
@@ -128,13 +169,23 @@ a {
 .box .title .buttons {
     float: right;
     }
+.sys-message .box {
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0 0;
+    }
+.sys-message .box .inner {
+    border: none;
+    }
 
 /**
  * Forms
  */    
 .form li {
     background: #eee;
-    border: solid 1px #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     margin-bottom: 10px;
     border-radius: 2px;
     box-shadow: 0 0 4px rgba(0,0,0,0.02);
@@ -151,9 +202,9 @@ a {
 input[type=checkbox] {
     -webkit-appearance: checkbox;
     }
-.input,
-.box table.list {
-    border: solid 1px #e2e2e2;
+.input {
+    border-width: 1px;
+    border-style: solid;
     border-radius: 2px;
     box-shadow: 0 0 4px #ececec;
     }
@@ -181,7 +232,7 @@ input[type=checkbox] {
     margin: 0 0 0 4px;
     background: #666;
     color: #eee;
-    border-radius: 4px;
+    border-radius: 3px;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     }
 .btn.active,
@@ -203,14 +254,15 @@ li.selected a,
  * Lists
  */
 table.list {
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     }
 table.list.tabbed {
     border-top-left-radius: 0;
     }
 table.list tr {
-    border-bottom: solid 1px #e2e2e2;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
     }
 table.list tbody tr:nth-child(2n+1) {
     background: #f8f8f8;
@@ -230,7 +282,12 @@ table.list tfoot {
     display: none;
     }
 table.list thead tr {
-    border-bottom: solid 4px #e2e2e2;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+    }
+.box table.list {
+    background: #fff;
+    border-style: none;
     }
     
 /**
@@ -245,16 +302,17 @@ table.list thead tr {
     }
 .tabs li a {
     background: #ddd;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     border-bottom: none;
     padding: 8px 20px 6px;
-    margin-top: 4px;
+    margin-top: 2px;
     }    
 .tabs li a.selected {
-    padding: 11px 20px 6px;
+    padding: 9px 20px 6px;
     margin-top: 0;
-    border: solid 1px #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     border-bottom: none;
     }
 
@@ -262,7 +320,8 @@ table.list thead tr {
  * Templates
  */
 .edit, .templates .preview {
-    border: solid 1px #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     }
 .templates .preview {
     width: 120px;
@@ -284,12 +343,14 @@ table.template td.locked {
  * Harvest chosen.
  */
 .chzn-container-multi .chzn-choices {
-    border-color: #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     background: #fff;
     border-radius: 2px;
     }
 .chzn-container-active .chzn-choices {
-    border: 1px solid #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -301,7 +362,8 @@ table.template td.locked {
     margin: 3px 0 1px;
     }
 .chzn-container .chzn-drop {
-    border-color: #e2e2e2;
+    border-width: 1px;
+    border-style: solid;
     box-shadow: none;
     margin-top: -1px;
     -webkit-box-shadow: none;

@@ -22,7 +22,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Gets the popup list.
 		/// </summary>
 		public ActionResult Popup() {
-			return View("Popup", ListModel.Get()) ;
+			return View("Popup", PopupModel.Get()) ;
 		}
 
 		/// <summary>

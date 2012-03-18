@@ -731,6 +731,9 @@ $(document).ready(function () {
         $("#draft").attr("value", "false");
         $("form").submit();
     });
+    $("button.search").click(function () {
+        return false;
+    });
 
     $(".info").click(function () {
         $(".help").slideToggle("medium");
@@ -742,7 +745,7 @@ $(document).ready(function () {
     //
     $(".expandable .title").click(function () {
         var title = $(this);
-        title.siblings(".inner").find(".optional").slideToggle("fast", function () {
+        title.parent().find(".optional").slideToggle("fast", function () {
             title.toggleClass("expanded");
         });
     });
@@ -832,6 +835,17 @@ function bindAjaxBoxEvents() {
     $(".floatbox .close-btn").click(function () {
         floatBox.close($(this).attr("data-id"));
     });
+    $(".box-tabs a").click(function () {
+        var id = $(this).attr("href").substring(1);
+        var pr = $(this).parent().parent().parent();
+
+        pr.siblings(".inner").addClass("hidden");
+        pr.siblings("#" + id).removeClass("hidden");
+
+        $(this).parent().siblings("li").removeClass("selected");
+        $(this).parent().addClass("selected");
+        floatBox.position($(".floatbox .box"));
+    });
 }
 
 /**
@@ -885,127 +899,3 @@ var floatBox = new floatBoxDef();
 $(window).resize(function () {
     floatBox.position($(".floatbox .box"));
 });
-
-/**
- * JQuery code for the page views.
- */
-
-$(document).ready(function () {
-    // Show the first page region. TODO. WHAT IF THERE ARE NO PAGE REGIONS
-    $("#pageregions .input:first").show();
-    var firstid = $("#pageregions .input:first").attr("id");
-    $("#" + firstid).addClass("active");
-    $(".edit td").removeClass("active");
-    $(".edit #" + firstid).addClass("active");
-
-    // 
-    // Event handler for page regions.
-    //
-    $(".pageregion").click(function () {
-        var id = $(this).attr("id").substring(4);
-
-        hideEditors();
-        $("#pageregions #" + id).show();
-        $(this).addClass("active");
-        $(".edit td").removeClass("active");
-        $(".edit #" + id).addClass("active");
-
-        return false;
-    });
-
-    $(".edit td").click(function () {
-        if (!$(this).hasClass("locked")) {
-            var id = $(this).attr("id");
-
-            hideEditors();
-            $("#pageregions #" + id).show();
-            $(".edit td").removeClass("active");
-            $(this).addClass("active");
-            $("#btn_" + id).addClass("active");
-        }
-    });
-
-    //
-    // Event hander for attachments.
-    $("#btn_attachments").click(function () {
-        hideEditors();
-        $(this).addClass("active");
-        $("#attachments").show();
-        return false;
-    });
-
-    //
-    // Hides all editors on the page.
-    function hideEditors() {
-        $("#pageregions .input, #globalregions .input").hide();
-        $("#regionbuttons button").removeClass("active");
-        $("#attachments").hide();
-    }
-});
-
-/**
- * JQuery code for the template views.
- */
-
-$(document).ready(function () {
-    bindEvents();
-
-    //
-    // Process the form data some before sending it back to the server
-    //
-    $("form").submit(function () {
-        // Build page regions
-        $.each($("#pageregions").children(), function (index, val) {
-            $("#region_data").append(
-                '<input id="Template_PageRegions_' + index +
-                '_" name="Template.PageRegions[' + index +
-                ']" type="hidden" value="' + $(val).children("span:first").text() + '" />');
-        });
-        // Build Properties
-        $.each($("#properties").children(), function (index, val) {
-            $("#region_data").append(
-                '<input id="Template_Properties_' + index +
-                '_" name="Template.Properties[' + index +
-                ']" type="hidden" value="' + $(val).children("span:first").text() + '" />');
-        });
-    });
-});
-
-//
-// Binds the events associated with the region lists. This method is executed
-// every time an item is added or removed as this updates the DOM.
-//
-function bindEvents() {
-    $("#pr_add").unbind();
-    $("#gr_add").unbind();
-    $("#po_add").unbind();
-    $(".remove-region").unbind();
-
-    $("#pr_add").click(function () {
-        var name = $("#pr_name").val();
-
-        if (name != null && name != "") {
-            $("#pageregions").append(
-                '<li><span>' + name + '</span><button class="btn delete right remove-region"></button></li>');
-            $("#pr_name").val("");
-            bindEvents();
-        } else alert("Du måste ange ett namn för regionen.");
-        return false;
-    });
-
-    $("#po_add").click(function () {
-        var name = $("#po_name").val();
-
-        if (name != null && name != "") {
-            $("#properties").append(
-                '<li><span>' + name + '</span><button class="btn delete right remove-region"></button></li>');
-            $("#po_name").val("");
-            bindEvents();
-        } else alert("Du måste ange ett namn för egenskapen.");
-        return false;
-    });
-
-    $(".remove-region").click(function () {
-        $(this).parent().remove();
-    });
-}

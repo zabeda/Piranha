@@ -7,16 +7,18 @@ using System.Text;
 namespace Piranha.Rest.DataContracts
 {
 	[DataContract()]
-	public class Category
+	public class Content
 	{
 		[DataMember()]
 		public Guid Id { get ; set ; }
 		[DataMember()]
-		public string Name { get ; set ; }
+		public string Filename { get ; set ; }
 		[DataMember()]
-		public string Permalink { get ; set ; }
+		public string Type { get ; set ; }
 		[DataMember()]
-		public string Description { get ; set ; }
+		public string ThumbnailUrl { get ; set ; }
+		[DataMember()]
+		public string ContentUrl { get ; set ; }
 		[DataMember()]
 		public string Created { get ; set ; }
 		[DataMember()]

@@ -7,19 +7,17 @@ using System.Text;
 namespace Piranha.Rest.DataContracts
 {
 	[DataContract()]
-	public class Category
+	public class Sitemap
 	{
 		[DataMember()]
 		public Guid Id { get ; set ; }
 		[DataMember()]
-		public string Name { get ; set ; }
+		public string Title { get ; set ; }
 		[DataMember()]
 		public string Permalink { get ; set ; }
 		[DataMember()]
-		public string Description { get ; set ; }
+		public bool HasChildren { get ; set ; }
 		[DataMember()]
-		public string Created { get ; set ; }
-		[DataMember()]
-		public string Updated { get ; set ; }
+		public List<Sitemap> ChildNodes { get ; set ; }
 	}
 }

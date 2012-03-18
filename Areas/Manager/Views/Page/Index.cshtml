@@ -38,17 +38,10 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li id="tt-add"><a onclick="floatBox.show('boxTemplates', 200, 240)" class="add"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Page.ToolbarAdd</p></div></li>
-            <li id="tt-refresh"><a href="" class="refresh"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
-            <li></li>
-            <li id="tt-info"><a href="" class="info"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
+            <li><a onclick="floatBox.show('boxTemplates', 200, 240)" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
-        @using (Html.BeginForm("Search", "Page")) {
-            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
-        }
+        <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         <div class="clear"></div>
     </div>
 </div>
@@ -58,7 +51,7 @@
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
-    <table class="list tabbed">
+    <table class="list">
         <thead>
             <tr>
                 <th>@Piranha.Resources.Global.Title</th>

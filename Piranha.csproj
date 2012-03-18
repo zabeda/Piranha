@@ -45,6 +45,7 @@
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Forms" />
@@ -90,6 +91,7 @@
     <Compile Include="Models\ISitemap.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\ListModel.cs" />
+    <Compile Include="Models\Manager\ContentModels\PopupModel.cs" />
     <Compile Include="Models\Manager\ContentModels\EditModel.cs" />
     <Compile Include="Models\Manager\ContentModels\ListModel.cs" />
     <Compile Include="Models\Manager\PageModels\EditModel.cs" />
@@ -186,9 +188,11 @@
       <DependentUpon>Template.resx</DependentUpon>
     </Compile>
     <Compile Include="Rest\DataContracts\Category.cs" />
+    <Compile Include="Rest\DataContracts\Content.cs" />
     <Compile Include="Rest\DataContracts\Page.cs" />
     <Compile Include="Rest\DataContracts\Property.cs" />
     <Compile Include="Rest\DataContracts\Region.cs" />
+    <Compile Include="Rest\DataContracts\Sitemap.cs" />
     <Compile Include="Rest\RestService.cs" />
     <Compile Include="WebPages\BasePage.cs" />
     <Compile Include="WebPages\ContentPage.cs" />
@@ -281,7 +285,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Page\Edit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\EditorTemplates\Region.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\Partial\PageAttachments.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Attachments.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Post\Edit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Post\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Post\Partial\PostToolbar.cshtml" />
@@ -311,6 +315,9 @@
     <EmbeddedResource Include="Areas\Manager\Views\Settings\GroupList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\AccessList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ParamList.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.eot" />
+    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.ttf" />
+    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.woff" />
     <None Include="packages.config" />
     <None Include="README.markdown" />
   </ItemGroup>
@@ -427,6 +434,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Css\Theme.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.attachment.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.page.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.svg" />
+    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo.css" />
+    <Content Include="Data\Scripts\Updates\2.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

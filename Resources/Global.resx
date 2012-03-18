@@ -147,6 +147,9 @@
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="LastPublished" xml:space="preserve">
+    <value>Last published</value>
+  </data>
   <data name="MenuContent" xml:space="preserve">
     <value>Content</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="ToolbarAdd" xml:space="preserve">
+    <value>Add new</value>
   </data>
   <data name="ToolbarBack" xml:space="preserve">
     <value>Back</value>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Script.Serialization;
 
 using Piranha.Data;
 
@@ -50,6 +51,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the permalink cache object.
 		/// </summary>
+		[ScriptIgnore()]
 		private static Dictionary<string, Permalink> Cache {
 			get {
 				if (HttpContext.Current.Cache[typeof(Permalink).Name] == null)

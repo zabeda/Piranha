@@ -181,7 +181,7 @@ namespace Piranha.Models
 				});
 			}
 			// Attachments
-			Attachments = Content.GetByParentId(Page.Id) ;
+			((Models.Page)Page).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
 		}
 	}
 }

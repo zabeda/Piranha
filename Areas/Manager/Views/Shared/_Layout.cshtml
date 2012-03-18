@@ -7,20 +7,24 @@
     <link rel="apple-touch-icon" href="@Url.Content("~/Areas/Manager/Content/Img/apple-touch-icon.png")"/>
     <link href="@Url.Content("~/Areas/Manager/Content/Css/Ext/chosen.min.css")" rel="stylesheet" type="text/css"/>
     <link href="@Url.Content("~/Areas/Manager/Content/Css/Style.ashx")" rel="stylesheet" type="text/css"/>
+    <link href="@Url.Content("~/Areas/Manager/Content/Fonts/entypo.css")" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Script.ashx")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.manager.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Ext/chosen.jquery.min.js")"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $(".message").click(function () { $(this).fadeOut("medium"); });
 
-            if ($("#sysMsg").text() != "") {
-                floatBox.show("boxMessage");
-            }
-
             $(".chzn-select").chosen().trigger("liszt:updated");
         });
     </script>
+    @if (!String.IsNullOrEmpty(ViewBag.Message)) {
+    <script type="text/javascript">
+        setTimeout(function () {
+            $(".sys-message").slideUp();
+        }, 2000);
+    </script>
+    }
     @RenderSection("Head", false)
 </head>
 <body>
@@ -44,20 +48,20 @@
             <div class="grid_12">
                 @RenderSection("Toolbar", false)
             </div>
+            @if (!String.IsNullOrEmpty(ViewBag.Message)) {
+            <div class="grid_12 sys-message">
+                <div class="box">
+                    <div class="inner">
+                        <div class="ico"></div><p>@ViewBag.Message</p>
+                    </div>
+                </div>
+            </div>
+            }
             <div class="content left">
                 @RenderBody()
             </div>
         </div>
     </div>
     @RenderSection("Foot", false)
-    <div id="boxMessage" class="floatbox">
-        <div class="bg"></div>
-        <div class="box">
-            <div class="title"><h2>@Piranha.Resources.Global.PopupMessageTitle</h2></div>
-            <div class="inner" style="width: 360px;min-height:60px;text-align:center">
-                <p id="sysMsg">@ViewBag.Message</p>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

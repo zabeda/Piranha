@@ -146,6 +146,30 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Gets the content for the matching id
+		/// </summary>
+		/// <param name="id">An array of id keys</param>
+		/// <returns>A list of content records</returns>
+		public static List<Content> GetIn(Guid[] id) {
+			if (id.Length > 0) {
+				string fmtWhere = PrimaryKeys[0] + " IN ({0})" ;
+				string sqlIn = "" ;
+
+				// Build where clause
+				for (int n = 0; n < id.Length; n++)
+					sqlIn += (sqlIn != "" ? "," : "") + "@" + n ;
+
+				// Format arguments
+				object[] args = new object[id.Length] ;
+				id.Each((i,e) => args[i] = e);
+	
+				// Get the records
+				return Get(String.Format(fmtWhere, sqlIn), args) ;
+			}
+			return new List<Content>() ;
+		}
+
+		/// <summary>
 		/// Gets all content attached to the given parent.
 		/// </summary>
 		/// <param name="id">The parent id</param>

@@ -28,18 +28,11 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a class="save submit"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarSave</p></div></li>
-            <li><a class="publish"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarPublish</p></div></li>
-            <li><a href="@Url.Action("delete", new { id = Model.Post.Id })" class="delete"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarDelete</p></div></li>
-            <li><a href="@Url.Action("index")" class="back"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarBack</p></div></li>
-            <li><a href="" class="refresh"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
-            <li><a href="" class="info"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
+            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
+            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
+            <li><a href="@Url.Action("delete", new { id = Model.Post.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>
     </div>
@@ -116,13 +109,14 @@
         </div>
     </div>
     @if (!Model.Post.IsNew) {
-    <div class="box">
+    <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
-        <div class="inner">
+        <div class="inner optional">
             <ul class="list">
-                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Post.Created.ToShortDateString()</small></li>
-                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Post.Updated.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.LastPublished <small class="right">@Model.Post.LastPublished.ToShortDateString()</small></li>
                 <li>@Piranha.Resources.Global.Published <small class="right">@Model.Post.Published.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Post.Updated.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Post.Created.ToShortDateString()</small></li>
             </ul>
         </div>
     </div>

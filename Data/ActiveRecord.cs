@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace Piranha.Data
 {
@@ -58,6 +59,11 @@ namespace Piranha.Data
 		/// Gets/sets method to invoke on save.
 		/// </summary>
 		public string OnSave { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather the property should be persisted as json.
+		/// </summary>
+		public bool Json { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -387,6 +393,11 @@ namespace Piranha.Data
 									object val  = rdr[n] != DBNull.Value ? rdr[n] : null ;
 									string name = rdr.GetName(n) ;
 
+									// If this is JSON, deserialize before possible OnLoad method
+									if (Attributes[name].Json) {
+										JavaScriptSerializer json = new JavaScriptSerializer() ;
+										val = json.Deserialize(Convert.ToString(val), Columns[name].PropertyType) ;
+									}
 									// Check if the property is marked with the "OnLoad" property
 									if (!String.IsNullOrEmpty(Attributes[name].OnLoad)) {
 										MethodInfo m = o.GetType().GetMethod(Attributes[name].OnLoad, 
@@ -518,7 +529,10 @@ namespace Piranha.Data
 							args.Add(((HtmlString)Columns[key].GetValue(this, null)).ToHtmlString()) ;
 						else if (typeof(Enum).IsAssignableFrom(Columns[key].PropertyType))
 							args.Add(Columns[key].GetValue(this, null).ToString()) ;
-						else args.Add(Columns[key].GetValue(this, null)) ;
+						else if (Attributes[key].Json) {
+							JavaScriptSerializer json = new JavaScriptSerializer() ;
+							args.Add(json.Serialize(Columns[key].GetValue(this, null))) ;
+						} else args.Add(Columns[key].GetValue(this, null)) ;
 					}
 				}
 			}
@@ -558,7 +572,10 @@ namespace Piranha.Data
 							args.Add(((HtmlString)Columns[key].GetValue(this, null)).ToHtmlString()) ;
 						else if (typeof(Enum).IsAssignableFrom(Columns[key].PropertyType))
 							args.Add(Columns[key].GetValue(this, null).ToString()) ;
-						else args.Add(Columns[key].GetValue(this, null)) ;
+						else if (Attributes[key].Json) {
+							JavaScriptSerializer json = new JavaScriptSerializer() ;
+							args.Add(json.Serialize(Columns[key].GetValue(this, null))) ;
+						} else args.Add(Columns[key].GetValue(this, null)) ;
 					}
 				}
 			}

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 using Piranha.Data;
 
@@ -59,28 +60,27 @@ namespace Piranha.Models.Manager.PageModels
 		public virtual List<Property> Properties { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the attachments.
-		/// </summary>
-		public virtual List<Attachment> Attachments { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the attached content.
 		/// </summary>
+		[ScriptIgnore()]
 		public virtual List<Content> AttachedContent { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available content.
 		/// </summary>
+		[ScriptIgnore()]
 		public List<Content> Content { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the current template.
 		/// </summary>
+		[ScriptIgnore()]
 		public virtual PageTemplate Template { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the groups.
 		/// </summary>
+		[ScriptIgnore()]
 		public virtual SelectList Groups { get ; set ; }
 		#endregion
 
@@ -90,7 +90,6 @@ namespace Piranha.Models.Manager.PageModels
 		public EditModel() {
 			PageRegions = new List<Region>() ;
 			Properties = new List<Property>() ;
-			Attachments = new List<Attachment>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
 
@@ -245,7 +244,6 @@ namespace Piranha.Models.Manager.PageModels
 			// Clear related
 			PageRegions.Clear() ;
 			Properties.Clear() ;
-			Attachments.Clear() ;
 			AttachedContent.Clear() ;
 
 			// Get template & permalink
@@ -274,10 +272,15 @@ namespace Piranha.Models.Manager.PageModels
 				}
 			} else throw new ArgumentException("Could not find page template for page {" + Page.Id.ToString() + "}") ;
 
-			// Get attachments TODO!!!
-
 			// Get attached content
-			AttachedContent = Piranha.Models.Content.GetByParentId(Page.Id, true) ;
+			if (Page.Attachments.Count > 0) {
+				// Content meta data is actually memcached, so this won't result in multiple queries
+				Page.Attachments.ForEach(a => {
+					Models.Content c = Models.Content.GetSingle(a) ;
+					if (c != null)
+						AttachedContent.Add(c) ;
+				}) ;
+			}
 		}
 		#endregion
 	}

@@ -42,6 +42,18 @@ namespace Piranha.WebPages
 					p.InvalidateRecord(p) ;
 			}
 		}
+
+		/// <summary>
+		/// Gets the current application root.
+		/// </summary>
+		public static string ApplicationPath {
+			get {
+				string root = HttpContext.Current.Request.ApplicationPath ;
+				if (!root.EndsWith("/"))
+					root += "/" ;
+				return root ;
+			}
+		}
 		#endregion
 
 		/// <summary>

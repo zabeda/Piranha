@@ -22,22 +22,16 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a href="@Url.Action("edit")" class="add""></a>
-                <div class="tooltip"><p>@Piranha.Resources.Content.ToolbarAdd</p></div></li>
-            <li><a href="@Url.Action("index")" class="refresh"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarReload</p></div></li>
-            <li><a class="info"></a>
-                <div class="tooltip"><p>@Piranha.Resources.Global.ToolbarHelp</p></div></li>
+            <li><a href="@Url.Action("edit")" class="add"">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a href="@Url.Action("index")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
-        @using (Html.BeginForm("Search", "Page")) {
-            <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
-        }
+        <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         <div class="clear"></div>
     </div>
 </div>
 }
 <div class="grid_12">
-    <table id="list" class="list tabbed">
+    <table id="list" class="list">
         <thead>
             <tr>
                 <th class="thumb"></th>

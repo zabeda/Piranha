@@ -1,35 +1,59 @@
-﻿@model Piranha.Models.Manager.ContentModels.ListModel
+﻿@model Piranha.Models.Manager.ContentModels.PopupModel
 @{
     Layout = "";
 }
-<div class="content">
-    <table class="list">
-        <thead>
-            <tr>
-                <th class="thumb"></th>
-                <th>@Piranha.Resources.Content.Filename</th>
-                <th>@Piranha.Resources.Global.Type</th>
-                <th>@Piranha.Resources.Global.Updated</th>
-                <th class="close"><a class="close-btn" data-id="boxContent"></a></th>
-            </tr>
-        </thead>
-        <tbody>
-            @{var odd = true ;}
-            @foreach (var content in Model.Content) {
-            <tr class="@(odd ? "odd" : "even")">
-                <td class="thumb"><img src="@Url.Content("~/thumb/" + content.Id + "/50")" alt="@content.AlternateText" /></td>
-                <td><a href="@Url.Action("edit", new { id = content.Id })">@content.Filename</a></td>
-                <td>@content.Type</td>
-                <td class="date">@content.Updated.ToString("yyyy-MM-dd")</td>
-                <td></td>
-            </tr>
-            odd = !odd;
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6"></td>
-            </tr>
-        </tfoot>
-    </table>
+<div class="title">
+    <ul class="box-tabs">
+        <li class="selected"><a href="#attach-existing">Choose existing</a></li>
+        <li><a href="#attach-new">Upload new</a></li>
+    </ul>
+    <a class="close-btn right" data-id="boxContent"></a>
+    <div class="clear"></div>
+</div>
+<div id="attach-existing" class="inner gallery">
+    @foreach (var content in Model.Content) {
+        <div class="gallery-item">
+            <img data-id="@content.Id" src="@Url.Content("~/thumb/" + content.Id + "/100")" title="@content.AlternateText" alt="@content.AlternateText" />
+            <p><small>@content.Filename</small></p>
+        </div>
+    }
+</div>
+<div id="attach-new" class="inner hidden">
+    @Html.HiddenFor(m => m.NewContent.Id)
+    @Html.HiddenFor(m => m.NewContent.IsNew)
+    @Html.HiddenFor(m => m.NewContent.IsImage)
+    @Html.HiddenFor(m => m.NewContent.Created)
+    @Html.HiddenFor(m => m.NewContent.CreatedBy)
+    @Html.HiddenFor(m => m.NewContent.Filename)
+    @Html.HiddenFor(m => m.NewContent.Type)
+    @Html.HiddenFor(m => m.NewContent.Width)
+    @Html.HiddenFor(m => m.NewContent.Height)
+    @Html.HiddenFor(m => m.NewContent.Size)
+    <ul class="form">
+        <li>
+            <label>@Piranha.Resources.Content.Upload</label>
+            <div class="hidden">
+                <input type="file" id="UploadedFile" name="UploadedFile" data-id="upload_name" />
+            </div>
+            <div class="upload">
+                <button class="btn blue file" data-id="UploadedFile">@Piranha.Resources.Global.ChooseFile</button>
+                <div class="input">
+                    <input id="upload_name" type="text" />
+                </div>
+            </div>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.NewContent.AlternateText)
+            <div class="input">
+                @Html.TextBoxFor(m => m.NewContent.AlternateText, 
+                    new { @placeholder = @Piranha.Resources.Global.Optional })</div>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.NewContent.Description)
+            <div class="input">
+                @Html.TextAreaFor(m => m.NewContent.Description, 
+                    new { @rows = 3, @placeholder = @Piranha.Resources.Global.Optional })</div>
+        </li>
+    </ul>
+    <button class="btn right">Upload</button>
 </div>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Script.Serialization;
 
 using Piranha.Data;
 using Piranha.WebPages;
@@ -104,6 +105,9 @@ namespace Piranha.Models
 		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="DescriptionLength")]
 		public string Description { get ; set ; }
 
+		[Column(Name="page_attachments", Json = true, OnLoad="OnAttachmentsLoad")]
+		public List<Guid> Attachments { get ; set ; }
+
 		/// <summary>
 		/// Gets/sets the custom controller.
 		/// </summary>
@@ -179,6 +183,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the controller for the page.
 		/// </summary>
+		[ScriptIgnore()]
 		public string Controller { 
 			get { return !String.IsNullOrEmpty(PageController) ? PageController : TemplateController ; }
 		}
@@ -186,6 +191,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the redirect for the page.
 		/// </summary>
+		[ScriptIgnore()]
 		public string Redirect {
 			get { return !String.IsNullOrEmpty(PageRedirect) ? PageRedirect : TemplateRedirect ; }
 		}
@@ -193,6 +199,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets weather the page is published or not.
 		/// </summary>
+		[ScriptIgnore()]
 		public bool IsPublished {
 			get { return Published != DateTime.MinValue && Published < DateTime.Now ; }
 		}
@@ -200,6 +207,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets weather the page is the site startpage.
 		/// </summary>
+		[ScriptIgnore()]
 		public bool IsStartpage {
 			get { return ParentId == Guid.Empty && Seqno == 1 ; }
 		}
@@ -207,6 +215,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the page cache object.
 		/// </summary>
+		[ScriptIgnore()]
 		private static Dictionary<Guid, Page> Cache {
 			get {
 				if (HttpContext.Current.Cache[typeof(Page).Name] == null)
@@ -218,6 +227,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the page cache object by permalink.
 		/// </summary>
+		[ScriptIgnore()]
 		private static Dictionary<string, Page> PermalinkCache {
 			get {
 				if (HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] == null)
@@ -233,6 +243,7 @@ namespace Piranha.Models
 		public Page() : base() {
 			IsDraft = true ;
 			Seqno   = 1 ;
+			Attachments = new List<Guid>() ;
 		}
 
 		#region Static accessors
@@ -384,5 +395,18 @@ namespace Piranha.Models
 			if (!record.IsDraft)
 				Sitemap.InvalidateCache() ;
 		}
+
+		#region Handlers
+		/// <summary>
+		/// Create an empty attachment list if it is null in the database.
+		/// </summary>
+		/// <param name="lst">The attachments</param>
+		/// <returns>The attachments, or a default list</returns>
+		protected List<Guid> OnAttachmentsLoad(List<Guid> lst) {
+			if (lst != null)
+				return lst ;
+			return new List<Guid>() ;
+		}
+		#endregion
 	}
 }
