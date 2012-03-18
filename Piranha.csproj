@@ -315,9 +315,6 @@
     <EmbeddedResource Include="Areas\Manager\Views\Settings\GroupList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\AccessList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ParamList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.eot" />
-    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.ttf" />
-    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.woff" />
     <None Include="packages.config" />
     <None Include="README.markdown" />
   </ItemGroup>
@@ -439,8 +436,6 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.attachment.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.page.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo-webfont.svg" />
-    <EmbeddedResource Include="Areas\Manager\Content\Fonts\entypo.css" />
     <Content Include="Data\Scripts\Updates\2.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
