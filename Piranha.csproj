@@ -82,7 +82,6 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ComplexName.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
-    <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\DraftRecord.cs" />
     <Compile Include="Models\GuidRecord.cs" />
@@ -436,7 +435,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.attachment.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.page.js" />
-    <Content Include="Data\Scripts\Updates\2.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\2.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

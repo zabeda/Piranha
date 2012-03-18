@@ -1,4 +1,9 @@
-﻿-- User
+﻿--
+-- Database version 2 Update script
+--
+-- 2012-03-17
+
+-- User
 ALTER TABLE sysuser ADD sysuser_culture NVARCHAR(5) NULL;
 
 -- Page template

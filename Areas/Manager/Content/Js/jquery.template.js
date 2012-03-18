@@ -34,10 +34,6 @@ $(document).ready(function () {
 //
 function bindEvents() {
     $("#pr_add").unbind();
-    $("#gr_add").unbind();
-    $("#po_add").unbind();
-    $(".remove-region").unbind();
-
     $("#pr_add").click(function () {
         var name = $("#pr_name").val();
 
@@ -50,6 +46,7 @@ function bindEvents() {
         return false;
     });
 
+    $("#po_add").unbind();
     $("#po_add").click(function () {
         var name = $("#po_name").val();
 
@@ -62,6 +59,7 @@ function bindEvents() {
         return false;
     });
 
+    $(".remove-region").unbind();
     $(".remove-region").click(function () {
         $(this).parent().remove();
     });

@@ -719,21 +719,29 @@ OTHER DEALINGS IN THE SOFTWARE.
 // Keep track of the currently active tooltip
 var active_tooltip = "";
 
-$(document).ready(function () {
+// Binds the basic form events.
+function bindFormEvents() {
     //
     // Submit the form
     //
+    //$(".submit").unbind();
     $(".submit").click(function () {
         $("#draft").attr("value", "true");
         $("form").submit();
     });
+    //$(".publish").unbind();
     $(".publish").click(function () {
         $("#draft").attr("value", "false");
         $("form").submit();
     });
+    //$("button.search").unbind();
     $("button.search").click(function () {
         return false;
     });
+}
+
+$(document).ready(function () {
+    bindFormEvents();
 
     $(".info").click(function () {
         $(".help").slideToggle("medium");

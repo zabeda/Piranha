@@ -61,6 +61,24 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Archive template.
+        /// </summary>
+        public static string ArchiveTemplate {
+            get {
+                return ResourceManager.GetString("ArchiveTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit post.
         /// </summary>
         public static string EditTitleExisting {
@@ -93,6 +111,15 @@ namespace Piranha.Resources {
         public static string ExcerptLength {
             get {
                 return ResourceManager.GetString("ExcerptLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Html preview.
+        /// </summary>
+        public static string HtmlPreview {
+            get {
+                return ResourceManager.GetString("HtmlPreview", resourceCulture);
             }
         }
         
@@ -183,6 +210,15 @@ namespace Piranha.Resources {
         public static string PopupTypeTitle {
             get {
                 return ResourceManager.GetString("PopupTypeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template.
+        /// </summary>
+        public static string Template {
+            get {
+                return ResourceManager.GetString("Template", resourceCulture);
             }
         }
         

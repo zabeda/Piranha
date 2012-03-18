@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Web;
+using System.Web.Mvc;
 
 using Piranha.Data;
 
@@ -13,6 +15,26 @@ namespace Piranha.Models.Manager.TemplateModels
 	/// </summary>
 	public class PostEditModel
 	{
+		#region Binder
+		public class Binder : DefaultModelBinder
+		{
+			/// <summary>
+			/// Extend the default binder so that html strings can be fetched from the post.
+			/// </summary>
+			/// <param name="controllerContext">Controller context</param>
+			/// <param name="bindingContext">Binding context</param>
+			/// <returns>The post edit model</returns>
+			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
+				PostEditModel model = (PostEditModel)base.BindModel(controllerContext, bindingContext) ;
+
+				bindingContext.ModelState.Remove("Template.Preview") ;
+				model.Template.Preview =
+					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Template.Preview").AttemptedValue) ;
+				return model ;
+			}
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets/sets the post template.
@@ -35,6 +57,8 @@ namespace Piranha.Models.Manager.TemplateModels
 		public static PostEditModel GetById(Guid id) {
 			PostEditModel m = new PostEditModel() ;
 			m.Template = PostTemplate.GetSingle(id) ;
+			if (m.Template.Properties == null)
+				m.Template.Properties = new List<string>() ;
 
 			return m ;
 		}

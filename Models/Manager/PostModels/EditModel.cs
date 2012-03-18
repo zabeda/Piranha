@@ -49,6 +49,11 @@ namespace Piranha.Models.Manager.PostModels
 		public Permalink Permalink { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the Properties.
+		/// </summary>
+		public virtual List<Property> Properties { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the post template.
 		/// </summary>
 		public PostTemplate Template { get ; set ; }
@@ -71,6 +76,7 @@ namespace Piranha.Models.Manager.PostModels
 		public EditModel() {
 			Post = new Post() ;
 			PostCategories = new List<Guid>() ;
+			Properties = new List<Property>() ;
 		}
 
 		/// <summary>
@@ -171,5 +177,23 @@ namespace Piranha.Models.Manager.PostModels
 				Template = PostTemplate.GetSingle(Post.TemplateId) ;
 			}
 		}
+
+		#region Private methods
+		private void GetRelated() {
+			// Clear related
+			Properties.Clear() ;
+
+			if (Template != null) {
+				// Get Properties
+				foreach (string name in Template.Properties) {
+					Property prp = Property.GetSingle("property_name = @0 AND property_page_id = @1 AND property_draft = @2", 
+						name, Post.Id, Post.IsDraft) ;
+					if (prp != null)
+						Properties.Add(prp) ;
+					else Properties.Add(new Property() { Name = name, PageId = Post.Id, IsDraft = Post.IsDraft, IsPageDraft = Post.IsDraft }) ;
+				}
+			}
+		}
+		#endregion
 	}
 }

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ArchiveTemplate" xml:space="preserve">
+    <value>Arkivmall</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beskrivning</value>
+  </data>
   <data name="EditTitleExisting" xml:space="preserve">
     <value>Ändra artikel</value>
   </data>
@@ -128,6 +134,9 @@
   </data>
   <data name="ExcerptLength" xml:space="preserve">
     <value>Sammanfattningen får max innehålla 255 tecken.</value>
+  </data>
+  <data name="HtmlPreview" xml:space="preserve">
+    <value>Html-tumnagel</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Artiklar</value>
@@ -158,6 +167,9 @@
   </data>
   <data name="PopupTypeTitle" xml:space="preserve">
     <value>Välj artikeltyp</value>
+  </data>
+  <data name="Template" xml:space="preserve">
+    <value>Sidmall</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Titel</value>

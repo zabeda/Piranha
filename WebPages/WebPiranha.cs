@@ -275,6 +275,8 @@ namespace Piranha.WebPages
 				new Piranha.Models.Manager.PostModels.EditModel.Binder()) ;
 			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PageEditModel),
 				new Piranha.Models.Manager.TemplateModels.PageEditModel.Binder()) ;
+			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PostEditModel),
+				new Piranha.Models.Manager.TemplateModels.PostEditModel.Binder()) ;
 		}
 		#endregion
 	}
