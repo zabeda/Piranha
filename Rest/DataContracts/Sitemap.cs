@@ -19,5 +19,7 @@ namespace Piranha.Rest.DataContracts
 		public bool HasChildren { get ; set ; }
 		[DataMember()]
 		public List<Sitemap> ChildNodes { get ; set ; }
+		[DataMember()]
+		public string LastPublished { get ; set ; }
 	}
 }

@@ -108,6 +108,28 @@
             </select>
         </div>
     </div>
+    @if (Model.Properties.Count > 0) {
+    <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
+        <div class="inner">
+            <ul class="form">
+            @for (int n = 0; n < Model.Properties.Count; n++) {
+                <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
+                    @Html.HiddenFor(m => m.Properties[n].Id)
+                    @Html.HiddenFor(m => m.Properties[n].IsDraft)
+                    @Html.HiddenFor(m => m.Properties[n].ParentId)
+                    @Html.HiddenFor(m => m.Properties[n].Name)
+                    @Html.HiddenFor(m => m.Properties[n].Created)
+                    @Html.HiddenFor(m => m.Properties[n].CreatedBy)
+                    @Html.HiddenFor(m => m.Properties[n].IsNew)
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Properties[n].Value)</div>
+                </li>
+            }
+            </ul>
+        </div>
+    </div>
+    }
     @if (!Model.Post.IsNew) {
     <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>

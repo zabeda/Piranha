@@ -76,7 +76,7 @@ namespace Piranha.Models.Manager.TemplateModels
 					sql += (sql != "" ? "," : "") + "@" + (n + 1).ToString() ;
 					args.Add(p) ;
 				});
-				Property.Execute("DELETE FROM property WHERE property_page_id IN (" +
+				Property.Execute("DELETE FROM property WHERE property_parent_id IN (" +
 					"SELECT page_id FROM page WHERE page_template_id = @0) " +
 					(sql != "" ? "AND property_name NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
 

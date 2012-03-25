@@ -183,6 +183,21 @@
   <data name="Password" xml:space="preserve">
     <value>Lösenord</value>
   </data>
+  <data name="Placement" xml:space="preserve">
+    <value>Placering</value>
+  </data>
+  <data name="PlacementAfter" xml:space="preserve">
+    <value>efter</value>
+  </data>
+  <data name="PlacementBelow" xml:space="preserve">
+    <value>under</value>
+  </data>
+  <data name="PlacementPage" xml:space="preserve">
+    <value>Sidan är placerad</value>
+  </data>
+  <data name="PlacementStart" xml:space="preserve">
+    <value>Det här är webbplatsens startsida.</value>
+  </data>
   <data name="PopupMessageTitle" xml:space="preserve">
     <value>Information</value>
   </data>

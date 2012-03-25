@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 
@@ -21,6 +22,11 @@ namespace Piranha.Models
 		public List<Category> Categories { get ; set ; }
 
 		/// <summary>
+		/// Gets the available Properties.
+		/// </summary>
+		public dynamic Properties { get ; private set ; }
+
+		/// <summary>
 		/// Gets/sets the archive.
 		/// </summary>
 		public List<Post> Archive { get ; set ; }
@@ -30,6 +36,13 @@ namespace Piranha.Models
 		/// </summary>
 		public Page Page { get { return null ; } }
 		#endregion
+
+		/// <summary>
+		/// Default constructor. Creates an empty model.
+		/// </summary>
+		public PostModel() {
+			Properties = new ExpandoObject() ;
+		}
 
 		/// <summary>
 		/// Gets the post model for the given id.
@@ -71,12 +84,24 @@ namespace Piranha.Models
 		/// Gets the related information for the post.
 		/// </summary>
 		private void GetRelated() {
+			PostTemplate pt = PostTemplate.GetSingle(((Post)Post).TemplateId) ;
+
 			// Get categories
 			Categories = Category.GetByPostId(Post.Id) ;
 
 			// Get archive
 			Archive = Models.Post.Get("post_template_id = @0", ((Post)Post).TemplateId,
 				new Params() { OrderBy = "post_created DESC" }) ;
+
+			// Properties
+			if (pt.Properties.Count > 0) {
+				foreach (string str in pt.Properties)
+					((IDictionary<string, object>)Properties).Add(str, "") ;
+				Property.GetContentByParentId(Post.Id, ((Post)Post).IsDraft).ForEach(pr => {
+					if (((IDictionary<string, object>)Properties).ContainsKey(pr.Name))
+						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value ;
+				});
+			}
 		}
 	}
 }

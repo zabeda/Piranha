@@ -1,0 +1,21 @@
+﻿@model List<Piranha.Models.Sitemap>
+@foreach (var page in Model) {
+    <li class="@(page.Pages.Count > 0 ? "collapsed" : "") @(page.Updated > page.LastPublished ? "draft" : "")">
+        <span class="buttons">
+            <button class="icon arrow-down marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @page.Seqno + 1)" type="submit"></button>
+            <button class="icon arrow-right marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
+            @if (page.Pages.Count == 0) {
+            <a href="@Url.Action("delete", "page", new { id = page.Id })" title="@Piranha.Resources.Page.ListDelete" class="icon delete"></a>
+            }
+        </span>
+        <span class="date">@page.Created.ToShortDateString()</span>
+        <span class="date">@page.Updated.ToShortDateString()</span>
+        <span class="type">@page.TemplateName.Singular</span>
+        <span class="title"><a href="@Url.Action("edit", "page", new { id = page.Id })">@page.Title</a></span>
+        @if (page.Pages.Count > 0) {
+        <ul>
+            @Html.Partial("Partial/SiteTree", page.Pages)
+        </ul>
+        }
+    </li>
+}

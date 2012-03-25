@@ -42,6 +42,7 @@
                     success: function(data) {
                         addAttachment(data) ;
                         floatBox.close("boxContent");
+                        bindAttachmentEvents();
                     }
                 });
             });
@@ -74,10 +75,12 @@
         function addAttachment(a) {
             $(".attachments").append(
                 '<tr data-id="' + a.Id + '">' +
-                    '<td><img src="' + a.Url + '/50")" /></td>' +
+                    '<td><img src="' + a.ThumbnailUrl + '/50")" /></td>' +
                     '<td>' + a.Filename + '</td>' +
                     '<td>' + a.Type + '</td>' +
-                    '<td class="buttons one">' +
+                    '<td class="buttons three">' +
+                        '<a class="icon up marg"></a>' +
+                        '<a class="icon down marg"></a>' +
                         '<a class="icon delete"></a></td>' +
                 '</tr>') ;
         }
@@ -146,6 +149,14 @@
                     <div class="input">
                         @Html.TextBoxFor(m => m.Permalink.Name)</div>
                     <a class="locked"></a>
+                </li>
+                <li>
+                    <label>@Piranha.Resources.Global.Placement</label>
+                    @if (!Model.Page.IsStartpage) {
+                    <p>@Piranha.Resources.Global.PlacementPage <strong>@(Model.Page.Seqno > 1 ? @Piranha.Resources.Global.PlacementAfter : @Piranha.Resources.Global.PlacementBelow)</strong> &quot;@Model.PlaceRef&quot;</p>
+                    } else {
+                    <p>@Piranha.Resources.Global.PlacementStart</p>
+                    }
                 </li>
                 @if (Model.Template.ShowController) {
                 <li>@Html.LabelFor(m => m.Page.PageController)
@@ -233,8 +244,7 @@
                 <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
                     @Html.HiddenFor(m => m.Properties[n].Id)
                     @Html.HiddenFor(m => m.Properties[n].IsDraft)
-                    @Html.HiddenFor(m => m.Properties[n].PageId)
-                    @Html.HiddenFor(m => m.Properties[n].IsPageDraft)
+                    @Html.HiddenFor(m => m.Properties[n].ParentId)
                     @Html.HiddenFor(m => m.Properties[n].Name)
                     @Html.HiddenFor(m => m.Properties[n].Created)
                     @Html.HiddenFor(m => m.Properties[n].CreatedBy)

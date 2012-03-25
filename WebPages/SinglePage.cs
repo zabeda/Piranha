@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 
 using Piranha.Models;
+using Piranha.Web;
 
 namespace Piranha.WebPages
 {
@@ -57,7 +58,7 @@ namespace Piranha.WebPages
 			} else {
 				// Only cache public pages
 				DateTime mod = GetLastModified() ;
-				cached = WebPiranha.HandleClientCache(HttpContext.Current, page.Id.ToString(), mod) ;
+				cached = ClientCache.HandleClientCache(HttpContext.Current, page.Id.ToString(), mod) ;
 			}
 			// Load the model if the page wasn't cached
 			if (!cached)

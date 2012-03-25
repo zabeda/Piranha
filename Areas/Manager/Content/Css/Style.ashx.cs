@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 
-using Piranha.WebPages;
+using Piranha.Web;
 using Yahoo.Yui.Compressor;
 
 namespace Piranha.Areas.Manager.Content.Css
@@ -37,7 +37,7 @@ namespace Piranha.Areas.Manager.Content.Css
 				mod = file.LastWriteTime > mod ? file.LastWriteTime : mod ;
 			}
 
-			if (!WebPiranha.HandleClientCache(context, resource, mod)) {
+			if (!ClientCache.HandleClientCache(context, resource, mod)) {
 				StreamReader io = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resource)) ;
 				context.Response.ContentType = "text/css" ;
 #if DEBUG

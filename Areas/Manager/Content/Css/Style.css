@@ -396,7 +396,66 @@ em     { font-style: italic; }
     color: #000;
     border-bottom: solid 2px #eee;
     }
-    
+
+/**
+ * Sitemap
+ */
+ul.sitemap {
+    background: #eee;
+    clear: both;
+    }
+ul.sitemap li {
+    overflow: hidden;
+    }
+ul.sitemap li.header {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    }
+ul.sitemap li span {
+    display: block;
+    float: right;
+    padding: 10px 20px;
+    }
+ul.sitemap li.header span {
+    padding: 12px 20px;
+    font-weight: bold;
+    }
+ul.sitemap li.draft > span {
+    font-style: italic;
+    color: #a2a2a2;
+    }
+ul.sitemap li:nth-child(2n+0) {
+    background: #f8f8f8;
+    }
+ul.sitemap .buttons {
+    width: 70px;
+    }
+ul.sitemap .date {
+    width: 80px;
+    }
+ul.sitemap .type {
+    width: 200px;
+    }
+ul.sitemap .title {
+    float: none;
+    border-bottom: solid 1px #ddd;
+    }
+ul.sitemap .header .title {
+    border-bottom: solid 4px #ddd;
+    }
+ul.sitemap ul .title {
+    padding-left: 40px;
+    }
+ul.sitemap ul ul .title {
+    padding-left: 60px;
+    }
+ul.sitemap ul ul ul .title {
+    padding-left: 80px;
+    }
+ul.sitemap ul {
+    display: none;
+    }
+
 /**
  * Lists
  */

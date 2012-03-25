@@ -268,6 +268,51 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Placement.
+        /// </summary>
+        public static string Placement {
+            get {
+                return ResourceManager.GetString("Placement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to after.
+        /// </summary>
+        public static string PlacementAfter {
+            get {
+                return ResourceManager.GetString("PlacementAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to below.
+        /// </summary>
+        public static string PlacementBelow {
+            get {
+                return ResourceManager.GetString("PlacementBelow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The page is located.
+        /// </summary>
+        public static string PlacementPage {
+            get {
+                return ResourceManager.GetString("PlacementPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is the startpage of the site..
+        /// </summary>
+        public static string PlacementStart {
+            get {
+                return ResourceManager.GetString("PlacementStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string PopupMessageTitle {

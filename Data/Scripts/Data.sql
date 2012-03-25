@@ -74,7 +74,7 @@ VALUES ('8a4ca0f3-261b-4689-8c1f-98065b65f9ee', '8940b41a-e3a9-44f3-b564-bfd2814
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '2', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '3', 'The currently installed version of Piranha.', 1,
 	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
@@ -107,9 +107,10 @@ INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_descr
 VALUES ('906761ea-6c04-4f4b-9365-f2c350ff4372', 'Standard page,Standard pages', 'Standard page type.',
 	'Content', '<table class="template"><tr><td id="Content"></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
-INSERT INTO posttemplate (posttemplate_id, posttemplate_name, posttemplate_description,
+INSERT INTO posttemplate (posttemplate_id, posttemplate_name, posttemplate_description, posttemplate_preview,
 	posttemplate_created, posttemplate_updated, posttemplate_created_by, posttemplate_updated_by)
-VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', 'Standard post,Standard posts', 'Standard post type.', GETDATE(), GETDATE(), 
+VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', 'Standard post,Standard posts', 'Standard post type.', 
+	'<table class="template"><tr><td></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default page

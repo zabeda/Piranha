@@ -19,9 +19,16 @@
 
         var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
-        //
-        // Set the selected template id
         $(document).ready(function () {
+            // Handle the site tree
+            $(".collapsed > .title, .expanded > .title").click(function () {
+                var li = $(this).parent();
+                li.children("ul").toggle();
+                li.toggleClass("collapsed");
+                li.toggleClass("expanded");
+            });
+
+            // Set the selected template id
             $(".templates").click(function () {
                 $("#TemplateId").val($(this).attr("data-templateid"));
                 $("form").submit();
@@ -51,39 +58,17 @@
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
-    <table class="list">
-        <thead>
-            <tr>
-                <th>@Piranha.Resources.Global.Title</th>
-                <th>@Piranha.Resources.Global.Type</th>
-                <th>@Piranha.Resources.Global.Created</th>
-                <th>@Piranha.Resources.Global.Updated</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var page in Model.Pages) {
-            <tr@(page.Updated > page.LastPublished ? " class=draft" : "")>
-                <td@(page.Level > 1 ? " class=level" + page.Level : "")><a href="@Url.Action("edit", "page", new { id = page.Id })">@page.Title</a></td>
-                <td>@page.TemplateName.Singular</td>
-                <td class="date">@page.Created.ToString("yyyy-MM-dd")</td>
-                <td class="date">@page.Updated.ToString("yyyy-MM-dd")</td>
-                <td class="buttons three">
-                    <button class="icon arrow-down marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @page.Seqno + 1)" type="submit"></button>
-                    <button class="icon arrow-right marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
-                    @if (page.Pages.Count == 0) {
-                    <a href="@Url.Action("delete", "page", new { id = page.Id })" title="@Piranha.Resources.Page.ListDelete" class="icon delete"></a>
-                    }
-                </td>
-            </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="5"></td>
-            </tr>
-        </tfoot>
-    </table>
+
+    <ul class="sitemap">
+        <li class="header">
+            <span class="buttons"></span>
+            <span class="date">@Piranha.Resources.Global.Created</span>
+            <span class="date">@Piranha.Resources.Global.Updated</span>
+            <span class="type">@Piranha.Resources.Global.Type</span>
+            <span class="title">@Piranha.Resources.Global.Title</span>
+        </li>
+        @Html.Partial("Partial/SiteTree", Model.SiteMap)
+    </ul>
 }
 </div>
 

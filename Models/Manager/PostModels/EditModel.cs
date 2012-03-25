@@ -97,6 +97,7 @@ namespace Piranha.Models.Manager.PostModels
 				ParentId = m.Post.Id, Type = Permalink.PermalinkType.POST } ;
 			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
+			m.GetRelated() ;
 
 			return m ;
 		}
@@ -117,6 +118,7 @@ namespace Piranha.Models.Manager.PostModels
 			Category.GetByPostId(m.Post.Id).ForEach(c => m.PostCategories.Add(c.Id)) ;
 			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", m.PostCategories) ;
+			m.GetRelated() ;
 
 			return m ;
 		}
@@ -131,9 +133,24 @@ namespace Piranha.Models.Manager.PostModels
 					if (draft)
 						Post.Save(tx) ;
 					else Post.SaveAndPublish(tx) ;
+
+					// Properties
+					Properties.ForEach(p => { 
+						p.IsDraft = true ; 
+						p.Save(tx) ;
+						if (!draft) {
+							if (Property.GetScalar("SELECT COUNT(property_id) FROM property WHERE property_id=@0 AND property_draft=0", p.Id) == 0)
+								p.IsNew = true ;
+							p.IsDraft = false ; 
+							p.Save(tx) ;
+						}
+					}) ;
+
+					// Permalink
 					if (Permalink.IsNew)
 						Permalink.Name = Permalink.Generate(Post.Title) ;
 					Permalink.Save(tx) ;
+
 					// Update categories
 					Relation.DeleteByDataId(Post.Id) ;
 					List<Relation> relations = new List<Relation>() ;
@@ -186,11 +203,11 @@ namespace Piranha.Models.Manager.PostModels
 			if (Template != null) {
 				// Get Properties
 				foreach (string name in Template.Properties) {
-					Property prp = Property.GetSingle("property_name = @0 AND property_page_id = @1 AND property_draft = @2", 
+					Property prp = Property.GetSingle("property_name = @0 AND property_parent_id = @1 AND property_draft = @2", 
 						name, Post.Id, Post.IsDraft) ;
 					if (prp != null)
 						Properties.Add(prp) ;
-					else Properties.Add(new Property() { Name = name, PageId = Post.Id, IsDraft = Post.IsDraft, IsPageDraft = Post.IsDraft }) ;
+					else Properties.Add(new Property() { Name = name, ParentId = Post.Id, IsDraft = Post.IsDraft }) ;
 				}
 			}
 		}

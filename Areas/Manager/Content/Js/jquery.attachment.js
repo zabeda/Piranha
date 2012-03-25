@@ -4,7 +4,7 @@
 * 2012-03-13   @tidyui
 */
 
-$(document).ready(function () {
+function bindAttachmentEvents() {
     //
     // Deletes a row from the attachment list.
     //
@@ -23,4 +23,8 @@ $(document).ready(function () {
         if (row.next())
             row.insertAfter(row.next());
     });
+}
+
+$(document).ready(function () {
+    bindAttachmentEvents();
 });

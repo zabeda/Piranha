@@ -179,8 +179,7 @@ CREATE TABLE region (
 CREATE TABLE property (
 	property_id UNIQUEIDENTIFIER NOT NULL,
 	property_draft BIT NOT NULL default(1),
-	property_page_id UNIQUEIDENTIFIER NOT NULL,
-	property_page_draft BIT NOT NULL default(1),
+	property_parent_id UNIQUEIDENTIFIER NOT NULL,
 	property_name NVARCHAR(64) NOT NULL,
 	property_value NTEXT NULL,
 	property_created DATETIME NOT NULL,
@@ -188,7 +187,6 @@ CREATE TABLE property (
 	property_created_by UNIQUEIDENTIFIER NOT NULL,
 	property_updated_by UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_property_id PRIMARY KEY (property_id, property_draft),
-	CONSTRAINT fk_property_page_id FOREIGN KEY (property_page_id, property_page_draft) REFERENCES page (page_id, page_draft),
 	CONSTRAINT fk_property_created_by FOREIGN KEY (property_created_by) REFERENCES sysuser (sysuser_id),
 	CONSTRAINT fk_property_updated_by FOREIGN KEY (property_updated_by) REFERENCES sysuser (sysuser_id)
 );

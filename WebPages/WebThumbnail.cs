@@ -7,6 +7,7 @@ using System.Web;
 using System.Windows.Forms;
 
 using Piranha.Models;
+using Piranha.Web;
 
 namespace Piranha.WebPages
 {
@@ -97,7 +98,7 @@ namespace Piranha.WebPages
 				FileInfo file = new FileInfo(GetPagePreviewPath(id)) ;
 				DateTime mod = file.LastWriteTime ;
 				
-				if (!WebPiranha.HandleClientCache(HttpContext.Current, id.ToString(), mod, true)) {
+				if (!ClientCache.HandleClientCache(HttpContext.Current, id.ToString(), mod, true)) {
 					bmp = (Bitmap)Bitmap.FromFile(GetPagePreviewPath(id)) ;
 				} else cached = true ;
 			} else {

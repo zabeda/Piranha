@@ -19,6 +19,8 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		public List<Sitemap> Pages { get ; set ; }
 
+		public List<Sitemap> SiteMap { get ; set ; }
+
 		/// <summary>
 		/// Gets/sets the page templates.
 		/// </summary>
@@ -40,6 +42,7 @@ namespace Piranha.Models.Manager.PageModels
 		/// <returns>The model.</returns>
 		public static ListModel Get() {
 			ListModel m = new ListModel() ;
+			m.SiteMap = Sitemap.GetStructure(false) ;
 			m.Pages = Sitemap.GetStructure(false).Flatten() ;
 
 			return m ;

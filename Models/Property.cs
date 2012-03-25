@@ -31,14 +31,8 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the parent id.
 		/// </summary>
-		[Column(Name="property_page_id")]
-		public Guid PageId { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets weather this is page a draft.
-		/// </summary>
-		[Column(Name="property_page_draft")]
-		public bool IsPageDraft { get ; set ; }
+		[Column(Name="property_parent_id")]
+		public Guid ParentId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the name.
@@ -84,7 +78,7 @@ namespace Piranha.Models
 		/// <param name="draft">Weather to get the draft version.</param>
 		/// <returns>The properties</returns>
 		public static List<Property> GetByParentId(Guid id, bool draft = false) {
-			return Get("property_page_id = @0 AND property_draft = @1", id, draft) ;
+			return Get("property_parent_id = @0 AND property_draft = @1", id, draft) ;
 		}
 
 		/// <summary>
@@ -93,7 +87,7 @@ namespace Piranha.Models
 		/// <param name="id">The parent id</param>
 		/// <returns>The properties</returns>
 		internal static List<Property> GetAllByParentId(Guid id) {
-			return Get("property_page_id = @0", id) ;
+			return Get("property_parent_id = @0", id) ;
 		}
 
 		/// <summary>
@@ -104,7 +98,7 @@ namespace Piranha.Models
 		/// <param name="draft">Weather to get the draft version.</param>
 		/// <returns>The properties</returns>
 		public static List<Property> GetContentByParentId(Guid id, bool draft = false) {
-			return GetFields("property_name, property_value", "property_page_id = @0 AND property_draft = @1", id, draft) ;
+			return GetFields("property_name, property_value", "property_parent_id = @0 AND property_draft = @1", id, draft) ;
 		}
 	}
 }

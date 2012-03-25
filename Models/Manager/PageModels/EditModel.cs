@@ -45,6 +45,11 @@ namespace Piranha.Models.Manager.PageModels
 		public virtual Page Page { get ; set ; }
 
 		/// <summary>
+		/// Related page title used as reference when describing the page placement.
+		/// </summary>
+		public string PlaceRef { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the permalink.
 		/// </summary>
 		public Permalink Permalink { get ; set ; }
@@ -158,8 +163,6 @@ namespace Piranha.Models.Manager.PageModels
 		public virtual bool SaveAll(bool draft = true) {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					bool firstpublish = Page.IsNew || Page.Published == DateTime.MinValue ;
-
 					// Save page
 					if (draft)
 						Page.Save(tx) ;
@@ -170,19 +173,19 @@ namespace Piranha.Models.Manager.PageModels
 						r.IsDraft = r.IsPageDraft = true ; 
 						r.Save(tx) ;
 						if (!draft) {
-							if (firstpublish)
+							if (Region.GetScalar("SELECT COUNT(region_id) FROM region WHERE region_id=@0 AND region_draft=0", r.Id) == 0)
 								r.IsNew = true ;
 							r.IsDraft = r.IsPageDraft = false ; 
 							r.Save(tx) ;
 						}
 					}) ;
 					Properties.ForEach(p => { 
-						p.IsDraft = p.IsPageDraft = true ; 
+						p.IsDraft = true ; 
 						p.Save(tx) ;
 						if (!draft) {
-							if (firstpublish)
+							if (Property.GetScalar("SELECT COUNT(property_id) FROM property WHERE property_id=@0 AND property_draft=0", p.Id) == 0)
 								p.IsNew = true ;
-							p.IsDraft = p.IsPageDraft = false ; 
+							p.IsDraft = false ; 
 							p.Save(tx) ;
 						}
 					}) ;
@@ -246,6 +249,19 @@ namespace Piranha.Models.Manager.PageModels
 			Properties.Clear() ;
 			AttachedContent.Clear() ;
 
+			// Get placement ref title
+			if (Page.ParentId != Guid.Empty || Page.Seqno > 1) {
+				Page refpage = null ;
+				if (Page.Seqno > 1) {
+					if (Page.ParentId != Guid.Empty)
+						refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1) ;
+					else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1) ;
+				} else {
+					refpage = Page.GetSingle(Page.ParentId) ;
+				}
+				PlaceRef = refpage.Title ;
+			}
+
 			// Get template & permalink
 			Template  = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
 			Permalink = Permalink.GetByParentId(Page.Id) ;
@@ -264,11 +280,11 @@ namespace Piranha.Models.Manager.PageModels
 
 				// Get Properties
 				foreach (string name in Template.Properties) {
-					Property prp = Property.GetSingle("property_name = @0 AND property_page_id = @1 AND property_draft = @2", 
+					Property prp = Property.GetSingle("property_name = @0 AND property_parent_id = @1 AND property_draft = @2", 
 						name, Page.Id, Page.IsDraft) ;
 					if (prp != null)
 						Properties.Add(prp) ;
-					else Properties.Add(new Property() { Name = name, PageId = Page.Id, IsDraft = Page.IsDraft, IsPageDraft = Page.IsDraft }) ;
+					else Properties.Add(new Property() { Name = name, ParentId = Page.Id, IsDraft = Page.IsDraft }) ;
 				}
 			} else throw new ArgumentException("Could not find page template for page {" + Page.Id.ToString() + "}") ;
 

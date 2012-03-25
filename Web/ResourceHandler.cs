@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-using Piranha.WebPages;
+using Piranha.Web;
 using Yahoo.Yui.Compressor;
 
 namespace Piranha.Web
@@ -33,7 +33,7 @@ namespace Piranha.Web
 
 				DateTime mod = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime ;
 
-				if (!WebPiranha.HandleClientCache(context, file.VirtualPath, mod)) {
+				if (!ClientCache.HandleClientCache(context, file.VirtualPath, mod)) {
 					if (file.Name.EndsWith(".js")) {
 						context.Response.ContentType = "text/javascript" ;
 					} else if (file.Name.EndsWith(".css")) {

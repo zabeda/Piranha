@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 
 using Piranha.Models;
+using Piranha.Web;
 
 namespace Piranha.WebPages
 {
@@ -32,7 +33,7 @@ namespace Piranha.WebPages
 
 			// Cache management
 			DateTime mod = GetLastModified() ;
-			WebPiranha.HandleClientCache(HttpContext.Current, Model.Category != null ? 
+			ClientCache.HandleClientCache(HttpContext.Current, Model.Category != null ? 
 				Model.Category.Id.ToString() : Guid.Empty.ToString(), mod) ;
 
 			base.InitializePage() ;

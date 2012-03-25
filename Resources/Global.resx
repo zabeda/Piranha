@@ -186,6 +186,21 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Placement" xml:space="preserve">
+    <value>Placement</value>
+  </data>
+  <data name="PlacementAfter" xml:space="preserve">
+    <value>after</value>
+  </data>
+  <data name="PlacementBelow" xml:space="preserve">
+    <value>below</value>
+  </data>
+  <data name="PlacementPage" xml:space="preserve">
+    <value>The page is located</value>
+  </data>
+  <data name="PlacementStart" xml:space="preserve">
+    <value>This is the startpage of the site.</value>
+  </data>
   <data name="PopupMessageTitle" xml:space="preserve">
     <value>Information</value>
   </data>

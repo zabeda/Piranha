@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 
-using Piranha.WebPages;
+using Piranha.Web;
 using Yahoo.Yui.Compressor;
 
 namespace Piranha.Areas.Manager.Content.Js
@@ -31,7 +31,7 @@ namespace Piranha.Areas.Manager.Content.Js
 		public void ProcessRequest(HttpContext context) {
 			DateTime mod = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime ;
 
-			if (!WebPiranha.HandleClientCache(context, resource, mod)) {
+			if (!ClientCache.HandleClientCache(context, resource, mod)) {
 				StreamReader io = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resource)) ;
 				context.Response.ContentType = "text/javascript" ;
 #if DEBUG

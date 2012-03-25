@@ -9,7 +9,7 @@ using System.Text;
 using System.Web;
 
 using Piranha.Data;
-using Piranha.WebPages;
+using Piranha.Web;
 
 namespace Piranha.Models
 {
@@ -199,7 +199,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="response">The http response</param>
 		public void GetMedia(HttpContext context, int? width = null) {
-			if (!WebPiranha.HandleClientCache(context, Id.ToString(), Updated)) {
+			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
 				if (IsImage && width != null) {
 					width = width < Width ? width : Width ;
 					int height = Convert.ToInt32(((double)width / Width) * Height) ;
@@ -235,7 +235,7 @@ namespace Piranha.Models
 		/// <param name="response">The http response</param>
 		/// <param name="size">The desired size</param>
 		public void GetThumbnail(HttpContext context, int size = 60) {
-			if (!WebPiranha.HandleClientCache(context, Id.ToString(), Updated)) {
+			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
 				if (File.Exists(CachedThumbnailPath(size))) {
 					// Return generated & cached thumbnail
 					WriteFile(context.Response, CachedThumbnailPath(size)) ;
