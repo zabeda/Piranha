@@ -124,8 +124,8 @@ namespace Piranha.Models.Manager.PageModels
 		}
 
 		/// <summary>
-		/// Creates a new page from the given template and return it 
-		/// as a edit model.
+		/// Creates a new page from the given template and returns it 
+		/// as an edit model.
 		/// </summary>
 		/// <param name="templateId">The template id</param>
 		/// <returns>The edit model</returns>
@@ -135,6 +135,28 @@ namespace Piranha.Models.Manager.PageModels
 			m.Page = new Piranha.Models.Page() {
 				Id = Guid.NewGuid(),
 				TemplateId = templateId 
+			} ;
+			m.GetRelated() ;
+
+			return m ;
+		}
+
+		/// <summary>
+		/// Creates a new page from the given template and position and returns it
+		/// as an edit model.
+		/// </summary>
+		/// <param name="templateId">The template id</param>
+		/// <param name="parentId">The parent id</param>
+		/// <param name="seqno">The position sequence number</param>
+		/// <returns>The edit model</returns>
+		public static EditModel CreateByTemplateAndPosition(Guid templateId, Guid parentId, int seqno) {
+			EditModel m = new EditModel() ;
+
+			m.Page = new Piranha.Models.Page() {
+				Id = Guid.NewGuid(),
+				TemplateId = templateId, 
+				ParentId = parentId,
+				Seqno = seqno
 			} ;
 			m.GetRelated() ;
 

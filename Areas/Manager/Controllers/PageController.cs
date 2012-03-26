@@ -62,11 +62,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="im">The insert model</param>
 		[HttpPost()]
 		public ActionResult Insert(InsertModel im) {
-			EditModel pm = EditModel.CreateByTemplate(im.TemplateId) ;
-			pm.Page.TemplateId = im.TemplateId ;
-			pm.Page.ParentId = im.ParentId ;
-			pm.Page.Seqno = im.Seqno ;
-
+			EditModel pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno) ;
 			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
 
 			return View("Edit", pm) ;

@@ -34,7 +34,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Weather the operation succeeded or not</returns>
-		public bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
+		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
 			var user = HttpContext.Current.User ;
 
 			if (user.Identity.IsAuthenticated) {

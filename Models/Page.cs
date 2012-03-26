@@ -316,12 +316,6 @@ namespace Piranha.Models
 			// Move seqno & save, we need a transaction for this
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
 
-			// Generate permalink
-			if (IsNew && String.IsNullOrEmpty(Permalink))
-				Permalink = Title.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o") ;
-			if (!String.IsNullOrEmpty(PageController))
-				Permalink = PageController.ToLower() ;
-
 			// We only move pages around as drafts. When we publish we
 			// simply change states.
 			if (IsDraft) {
@@ -339,6 +333,27 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Saves and publishes the current record.
+		/// </summary>
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Weather the operation was successful</returns>
+		public override bool SaveAndPublish(IDbTransaction tx = null) {
+			// Move seqno & save, we need a transaction for this
+			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
+
+			if (IsNew) {
+				MoveSeqno(ParentId, Seqno, true, t) ;
+			} else {
+				Page old = GetSingle(Id, true) ;
+				if (old.ParentId != ParentId || old.Seqno != Seqno) {
+					MoveSeqno(old.ParentId, old.Seqno + 1, false, t) ;
+					MoveSeqno(ParentId, Seqno, true, t) ;
+				}
+			}
+			return base.SaveAndPublish(tx);
+		}
+
+		/// <summary>
 		/// Deletes the current page.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
@@ -348,7 +363,10 @@ namespace Piranha.Models
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
 
 			try {
-				MoveSeqno(ParentId, Seqno + 1, false, t) ;
+				// Only move pages around when we're deleting the draft so we don't get
+				// multiple move operations in the site tree.
+				if (IsDraft)
+					MoveSeqno(ParentId, Seqno + 1, false, t) ;
 				if (base.Delete(t)) {
 					if (tx == null) 
 						t.Commit() ;
