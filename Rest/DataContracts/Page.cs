@@ -16,6 +16,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string Permalink { get ; set ; }
 		[DataMember()]
+		public bool IsHidden { get ; set ; }
+		[DataMember()]
 		public List<Region> Regions { get ; set ; }
 		[DataMember()]
 		public List<Property> Properties { get ; set ; }
