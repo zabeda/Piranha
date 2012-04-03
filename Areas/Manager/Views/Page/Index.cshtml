@@ -19,13 +19,24 @@
 
         var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
+        function formatSitemap() {
+            $.each($(".sitemap li:visible"), function (i, e) {
+                if (i % 2 == 1)
+                    $(this).addClass("odd");
+                else $(this).removeClass("odd");
+            });
+        }
+
         $(document).ready(function () {
+            formatSitemap();
+
             // Handle the site tree
-            $(".collapsed > .title, .expanded > .title").click(function () {
-                var li = $(this).parent();
+            $(".sitemap .action").click(function () {
+                var li = $(this).parent().parent();
                 li.children("ul").toggle();
                 li.toggleClass("collapsed");
                 li.toggleClass("expanded");
+                formatSitemap();
             });
 
             // Set the selected template id
@@ -34,8 +45,8 @@
                 $("form").submit();
             });
 
-            $(".delete").click(function() {
-                return confirm(deletemsg) ;
+            $(".delete").click(function () {
+                return confirm(deletemsg);
             });
         });
     </script>
