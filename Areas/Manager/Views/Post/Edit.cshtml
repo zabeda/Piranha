@@ -4,6 +4,7 @@
     ViewBag.SelectedTab = "Post" ;  
 }
 @section Head {
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
         $(document).ready(function () {
@@ -19,7 +20,53 @@
                     });
                 });
             });
+
+            //
+            // Hides the attachment editor and shows the content body.
+            //
+            $("#btn_content").click(function () {
+                $("#btn_attachments").removeClass("active");
+                $("#btn_content").addClass("active");
+                $("#attachments").hide();
+                $("#body").show();
+                return false;
+            });
         });
+
+        //
+        // Hides all editors on the page. This callback is called from jquery.attachments.js
+        //
+        function hideEditors() {
+            $("#btn_content").removeClass("active");
+            $("#body").hide();
+        }
+
+        //
+        // This callback is called from jquery.attachments.js
+        //
+        function addAttachment(a) {
+            $(".attachments").append(
+                '<tr data-id="' + a.Id + '">' +
+                    '<td><img src="' + a.ThumbnailUrl + '/50")" /></td>' +
+                    '<td>' + a.Filename + '</td>' +
+                    '<td>' + a.Type + '</td>' +
+                    '<td class="buttons three">' +
+                        '<a class="icon up marg"></a>' +
+                        '<a class="icon down marg"></a>' +
+                        '<a class="icon delete"></a></td>' +
+                '</tr>');
+        }
+
+
+        //
+        // This callback is called from jquery.attachments.js before form submit.
+        //
+        function addAttachmentData(index, val) {
+            $("#attachment_data").append(
+                    '<input id="Post_Attachments_' + index +
+                    '_" name="Post.Attachments[' + index +
+                    ']" type="hidden" value="' + $(val).attr("data-id") + '" />');
+        }
     </script>
 }
 
@@ -89,10 +136,19 @@
     </div>
 
     <div class="box">
-        <div class="title"><h2>@Piranha.Resources.Global.Content</h2></div>
+        <div class="title">
+            <h2>@Piranha.Resources.Global.Content</h2>
+            <div id="regionbuttons" class="buttons">
+                <button id="btn_content" class="btn active">@Piranha.Resources.Global.Content</button>
+                <button id="btn_attachments" class="btn">@Piranha.Resources.Page.Attachments</button>
+            </div>
+       </div>
         <div class="inner">
-            <div class="input">
+            <div id="body" class="input">
                 @Html.TextAreaFor(m => m.Post.Body, new { @class ="editor", @rows = 10 })
+            </div>
+            <div id="attachments" style="display:none">
+                @Html.Partial("Partial/Attachments")
             </div>
         </div>
     </div>
@@ -145,3 +201,10 @@
     }
 </div>
 @{ Html.EndForm() ; }
+@section Foot {
+ <div id="boxContent" class="floatbox">
+    <div class="bg"></div>
+    <div class="box" style="min-width: 510px;min-height:260px;">
+    </div>
+</div>
+}

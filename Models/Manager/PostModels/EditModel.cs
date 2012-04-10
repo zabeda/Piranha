@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 using Piranha.Data;
 
@@ -68,6 +69,18 @@ namespace Piranha.Models.Manager.PostModels
 		/// Gets/sets the available categories.
 		/// </summary>
 		public MultiSelectList Categories { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the attached content.
+		/// </summary>
+		[ScriptIgnore()]
+		public virtual List<Content> AttachedContent { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available content.
+		/// </summary>
+		[ScriptIgnore()]
+		public List<Content> Content { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -77,6 +90,8 @@ namespace Piranha.Models.Manager.PostModels
 			Post = new Post() ;
 			PostCategories = new List<Guid>() ;
 			Properties = new List<Property>() ;
+			AttachedContent = new List<Piranha.Models.Content>() ;
+			Content = Piranha.Models.Content.Get() ;
 		}
 
 		/// <summary>
@@ -185,13 +200,14 @@ namespace Piranha.Models.Manager.PostModels
 		public void Refresh() {
 			if (Post != null) {
 				if (!Post.IsNew) {
-					Post = Piranha.Models.Post.GetSingle(Post.Id) ;
+					Post = Piranha.Models.Post.GetSingle(Post.Id, true) ;
 					Permalink = Permalink.GetSingle("permalink_parent_id = @0", Post.Id) ;
 					Category.GetByPostId(Post.Id).ForEach(c => PostCategories.Add(c.Id)) ;
 					Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 						new Params() { OrderBy = "category_name" }), "Id", "Name", PostCategories) ;
 				}
 				Template = PostTemplate.GetSingle(Post.TemplateId) ;
+				GetRelated() ;
 			}
 		}
 
@@ -209,6 +225,16 @@ namespace Piranha.Models.Manager.PostModels
 						Properties.Add(prp) ;
 					else Properties.Add(new Property() { Name = name, ParentId = Post.Id, IsDraft = Post.IsDraft }) ;
 				}
+			}
+
+			// Get attached content
+			if (Post.Attachments.Count > 0) {
+				// Content meta data is actually memcached, so this won't result in multiple queries
+				Post.Attachments.ForEach(a => {
+					Models.Content c = Models.Content.GetSingle(a) ;
+					if (c != null)
+						AttachedContent.Add(c) ;
+				}) ;
 			}
 		}
 		#endregion

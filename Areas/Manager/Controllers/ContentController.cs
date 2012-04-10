@@ -26,6 +26,14 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
+		/// Gets the files list.
+		/// </summary>
+		/// <returns></returns>
+		public ActionResult Uploads() {
+			return View("Uploads", UploadModel.Get()) ;
+		}
+
+		/// <summary>
 		/// Edits or inserts a new content model.
 		/// </summary>
 		/// <param name="id">The id of the content</param>

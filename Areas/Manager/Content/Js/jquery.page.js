@@ -44,24 +44,4 @@ $(document).ready(function () {
             $("#btn_" + id).addClass("active");
         }
     });
-
-    //
-    // Event hander for switching to the attachment view.
-    //
-    $("#btn_attachments").click(function () {
-        hideEditors();
-        $(this).addClass("active");
-        $(".edit td").removeClass("active");
-        $("#attachments").show();
-        return false;
-    });
-
-    //
-    // Hides all editors on the page.
-    //
-    function hideEditors() {
-        $("#pageregions .input, #globalregions .input").hide();
-        $("#regionbuttons button").removeClass("active");
-        $("#attachments").hide();
-    }
 });

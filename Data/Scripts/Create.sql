@@ -242,19 +242,3 @@ CREATE TABLE upload (
 	CONSTRAINT pk_upload_id PRIMARY KEY (upload_id),
 	CONSTRAINT fk_upload_created_by FOREIGN KEY (upload_created_by) REFERENCES sysuser (sysuser_id)
 );
-
-CREATE TABLE attachment (
-	attachment_id UNIQUEIDENTIFIER NOT NULL,
-	attachment_draft BIT NOT NULL default(1),
-	attachment_content_id UNIQUEIDENTIFIER NOT NULL,
-	attachment_parent_id UNIQUEIDENTIFIER NOT NULL,
-	attachment_primary BIT NOT NULL default(0),
-	attachment_created DATETIME NOT NULL,
-	attachment_updated DATETIME NOT NULL,
-	attachment_created_by UNIQUEIDENTIFIER NOT NULL,
-	attachment_updated_by UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT pk_attachment_id PRIMARY KEY (attachment_id, attachment_draft),
-	CONSTRAINT fk_attachment_content_id FOREIGN KEY (attachment_content_id) REFERENCES content (content_id),
-	CONSTRAINT fk_attachment_created_by FOREIGN KEY (attachment_created_by) REFERENCES sysuser (sysuser_id),
-	CONSTRAINT fk_attachment_updated_by FOREIGN KEY (attachment_updated_by) REFERENCES sysuser (sysuser_id)
-);

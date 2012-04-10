@@ -279,7 +279,7 @@ namespace Piranha.Models.Manager.PageModels
 						refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1) ;
 					else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1) ;
 				} else {
-					refpage = Page.GetSingle(Page.ParentId) ;
+					refpage = Page.GetSingle(Page.ParentId, true) ;
 				}
 				PlaceRef = refpage.Title ;
 			}

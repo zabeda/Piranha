@@ -74,6 +74,12 @@ namespace Piranha.Models
 		public ComplexName TemplateName { get ; private set ; }
 
 		/// <summary>
+		/// Gets/sets the attachments.
+		/// </summary>
+		[Column(Name="post_attachments", Json = true, OnLoad="OnAttachmentsLoad")]
+		public List<Guid> Attachments { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name="post_created")]
@@ -158,6 +164,19 @@ namespace Piranha.Models
 			return Post.GetFields(fields, "post_draft = 0 AND post_id IN (" +
 				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = @1)",
 				Relation.RelationType.POSTCATEGORY, id, new Params() { OrderBy = "post_published DESC" }) ;
+		}
+		#endregion
+
+		#region Handlers
+		/// <summary>
+		/// Create an empty attachment list if it is null in the database.
+		/// </summary>
+		/// <param name="lst">The attachments</param>
+		/// <returns>The attachments, or a default list</returns>
+		protected List<Guid> OnAttachmentsLoad(List<Guid> lst) {
+			if (lst != null)
+				return lst ;
+			return new List<Guid>() ;
 		}
 		#endregion
 	}

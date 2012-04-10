@@ -90,6 +90,7 @@
     <Compile Include="Models\ISitemap.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\ListModel.cs" />
+    <Compile Include="Models\Manager\ContentModels\FileModel.cs" />
     <Compile Include="Models\Manager\ContentModels\PopupModel.cs" />
     <Compile Include="Models\Manager\ContentModels\EditModel.cs" />
     <Compile Include="Models\Manager\ContentModels\ListModel.cs" />
@@ -317,6 +318,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Settings\AccessList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ParamList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Partial\SiteTree.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Content\Uploads.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
@@ -440,6 +442,9 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.page.js" />
     <EmbeddedResource Include="Data\Scripts\Updates\2.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\4.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

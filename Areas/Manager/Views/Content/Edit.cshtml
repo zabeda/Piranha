@@ -3,6 +3,28 @@
     ViewBag.Selected = "Cms" ;
     ViewBag.SelectedTab = "Content" ;
 }
+@section Head {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /**
+             * Uncomment this to open the uploads popup on load for
+             * test purposes.
+             *
+            $("#boxUploads .inner > table").remove();
+            floatBox.show("boxUploads");
+            $.ajax({
+            url: "@Url.Action("uploads", "content")",
+            success: function(data) {
+            $("#boxUploads .inner").append(data) ;
+            floatBox.position($("#boxUploads .box"));
+            bindAjaxBoxEvents();
+            bindEvents();
+            }
+            });
+            */
+        });
+    </script>
+}
 @section Toolbar {
 @Html.Partial("Partial/TabsContent")
 <div class="toolbar">
@@ -107,3 +129,13 @@
     </div>
 </div>
 @{ Html.EndForm() ; }
+@section Foot {
+ <div id="boxUploads" class="floatbox">
+    <div class="bg"></div>
+    <div class="box" style="min-width: 510px;min-height:260px;">
+        <div class="title"><h2>Uploaded files</h2></div>
+        <div class="inner">
+        </div>
+    </div>
+</div>
+}

@@ -11,67 +11,20 @@
  
         $(document).ready(function () {
             $("#Page_Title").focus();
-            
-            bindEvents();
         });
 
-        function bindEvents() {
-            //
-            // Opens the content popup in a floatbox with ajax.
-            //
-            $("#btn_attach").unbind();
-            $("#btn_attach").click(function () {
-                $("#boxContent .box > div").remove();
-                floatBox.show("boxContent");
-                $.ajax({
-                    url: "@Url.Action("popup", "content")",
-                    success: function(data) {
-                        $("#boxContent .box").append(data) ;
-                        floatBox.position($("#boxContent .box"));
-                        bindAjaxBoxEvents();
-                        bindEvents();
-                    }
-                });
-            });
-
-            $(".gallery-item img").unbind();
-            $(".gallery-item img").click(function() {
-                $.ajax({
-                    url: "@Url.Content("~/rest/content")/" + $(this).attr("data-id"),
-                    dataType: "json",
-                    success: function(data) {
-                        addAttachment(data) ;
-                        floatBox.close("boxContent");
-                        bindAttachmentEvents();
-                    }
-                });
-            });
-
-            //
-            // Deletes a row from the attachment list.
-            //
-            $("#attachments .delete").unbind();
-            $("#attachments .delete").click(function() {
-                console.log("deleting");
-                var row = $(this).parent().parent();
-                $('#attachments input[value="' + row.attr("data-id") + '"]').remove();
-                row.remove();
-            });
-
-            $("form").unbind();
-            $("form").submit(function () {
-                // Build Attachments
-                $.each($("#attachments tr"), function (index, val) {
-                    if (index > 0) {
-                        $("#attachment_data").append(
-                            '<input id="Page_Attachments_' + (index - 1) +
-                            '_" name="Page.Attachments[' + (index - 1) +
-                            ']" type="hidden" value="' + $(val).attr("data-id") + '" />');
-                    }
-                });
-            });
+        //
+        // Hides all editors on the page. This callback is called from jquery.attachments.js
+        //
+        function hideEditors() {
+            $("#pageregions .input, #globalregions .input").hide();
+            $("#regionbuttons button").removeClass("active");
+            $("#attachments").hide();
         }
 
+        //
+        // This callback is called from jquery.attachments.js
+        //
         function addAttachment(a) {
             $(".attachments").append(
                 '<tr data-id="' + a.Id + '">' +
@@ -83,6 +36,16 @@
                         '<a class="icon down marg"></a>' +
                         '<a class="icon delete"></a></td>' +
                 '</tr>') ;
+        }
+
+        //
+        // This callback is called from jquery.attachments.js before form submit.
+        //
+        function addAttachmentData(index, val) {
+            $("#attachment_data").append(
+                    '<input id="Page_Attachments_' + index +
+                    '_" name="Page.Attachments[' + index +
+                    ']" type="hidden" value="' + $(val).attr("data-id") + '" />');
         }
     </script>
 }

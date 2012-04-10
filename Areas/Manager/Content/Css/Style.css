@@ -462,6 +462,12 @@ ul.sitemap ul ul ul .title {
 ul.sitemap ul {
     display: none;
     }
+ul.sitemap .expanded ul {
+    display: block;
+    }
+ul.sitemap .collapsed ul {
+    display: none;
+    }
 ul.sitemap .action {
     display: block;
     float: left;

@@ -33,7 +33,6 @@
             // Handle the site tree
             $(".sitemap .action").click(function () {
                 var li = $(this).parent().parent();
-                li.children("ul").toggle();
                 li.toggleClass("collapsed");
                 li.toggleClass("expanded");
                 formatSitemap();
