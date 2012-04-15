@@ -121,6 +121,7 @@ namespace Piranha.Models
 		/// </summary>
 		public Post() {
 			IsDraft = true ;
+			Attachments = new List<Guid>() ;
 		}
 
 		#region Static accessors
@@ -164,6 +165,24 @@ namespace Piranha.Models
 			return Post.GetFields(fields, "post_draft = 0 AND post_id IN (" +
 				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = @1)",
 				Relation.RelationType.POSTCATEGORY, id, new Params() { OrderBy = "post_published DESC" }) ;
+		}
+
+		/// <summary>
+		/// Gets the posts for the given category name.
+		/// </summary>
+		/// <param name="name">The category name</param>
+		/// <returns>A list of posts</returns>
+		public static List<Post> GetByCategoryName(string name) {
+			return Post.Get("post_draft = 0 AND post_id IN (" +
+				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = (" +
+				"SELECT category_id FROM category WHERE category_name = @1))", Relation.RelationType.POSTCATEGORY, name) ;
+		}
+
+		public static List<Post> GetByTemplateId(Guid id) {
+			return Post.Get("post_draft = 0 AND post_template_id = @0", id) ;
+		}
+
+		public static List<Post> GetByTemplateName(string name) {
 		}
 		#endregion
 

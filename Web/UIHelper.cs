@@ -58,6 +58,7 @@ namespace Piranha.Web
 			StringBuilder str = new StringBuilder() ;
 
 			str.AppendLine("<meta name=\"generator\" content=\"Piranha\" />") ;
+	        str.AppendLine("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />") ;
 			if (CurrentPage != null) {
 				/**
 				 * Basic meta tags
