@@ -343,13 +343,11 @@ namespace Piranha.Models
 
 			if (IsNew) {
 				MoveSeqno(ParentId, Seqno, true, t) ;
-				Web.ClientCache.SetSiteLastModified(tx) ;
 			} else {
 				Page old = GetSingle(Id, true) ;
 				if (old.ParentId != ParentId || old.Seqno != Seqno) {
 					MoveSeqno(old.ParentId, old.Seqno + 1, false, t) ;
 					MoveSeqno(ParentId, Seqno, true, t) ;
-					Web.ClientCache.SetSiteLastModified(tx) ;
 				}
 			}
 			return base.SaveAndPublish(tx);

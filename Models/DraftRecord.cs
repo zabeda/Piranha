@@ -55,10 +55,8 @@ namespace Piranha.Models
 
 				// Now save a published version
 				IsDraft = false ;
-				if (self == null) {
+				if (self == null)
 					IsNew = true ;
-					Web.ClientCache.SetSiteLastModified(tx) ;
-				}
 				Save(tx, false) ;
 
 				return true ;
