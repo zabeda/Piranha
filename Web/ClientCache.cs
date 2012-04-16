@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,22 +19,27 @@ namespace Piranha.Web
 		/// <summary>
 		/// Gets/sets the global last modification date.
 		/// </summary>
-		public static DateTime SiteLastModifed {
+		public static DateTime SiteLastModified {
 			get {
 				try {
 					return DateTime.Parse(SysParam.GetByName("SITE_LAST_MODIFIED").Value) ;
 				} catch {}
 				return DateTime.MinValue ;
 			}
-			set {
-				SysParam.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = @1", null,
-					value, "SITE_LAST_MODIFIED") ;
-				SysParam p = SysParam.GetByName("SITE_LAST_MODIFIED") ;
-				if (p != null)
-					p.InvalidateRecord(p) ;
-			}
 		}
 		#endregion
+
+		/// <summary>
+		/// Updates the global last modified date for the site.
+		/// </summary>
+		/// <param name="tx">Optional transaction</param>
+		public static void SetSiteLastModified(IDbTransaction tx = null) {
+			SysParam.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = @1", tx,
+				DateTime.Now, "SITE_LAST_MODIFIED") ;
+			SysParam p = SysParam.GetByName("SITE_LAST_MODIFIED") ;
+			if (p != null)
+				p.InvalidateRecord(p) ;
+		}
 
 		/// <summary>
 		/// Checks request headers against the given etag and last modification data and
@@ -48,7 +54,7 @@ namespace Piranha.Web
 #if !DEBUG
 			if (!context.Request.IsLocal) {
 				try {
-					modified = modified > SiteLastModifed ? modified : SiteLastModifed ;
+					modified = modified > SiteLastModified ? modified : SiteLastModified ;
 				} catch {}
 				string etag = GenerateETag(id, modified) ;
 

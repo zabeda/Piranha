@@ -181,9 +181,6 @@ namespace Piranha.Models
 		public static List<Post> GetByTemplateId(Guid id) {
 			return Post.Get("post_draft = 0 AND post_template_id = @0", id) ;
 		}
-
-		public static List<Post> GetByTemplateName(string name) {
-		}
 		#endregion
 
 		#region Handlers

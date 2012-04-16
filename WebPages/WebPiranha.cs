@@ -25,25 +25,6 @@ namespace Piranha.WebPages
 
 		#region Properties
 		/// <summary>
-		/// Gets/sets the global last modification date.
-		/// </summary>
-		public static DateTime SiteLastModifed {
-			get {
-				try {
-					return DateTime.Parse(SysParam.GetByName("SITE_LAST_MODIFIED").Value) ;
-				} catch {}
-				return DateTime.MinValue ;
-			}
-			set {
-				SysParam.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = @1", null,
-					value, "SITE_LAST_MODIFIED") ;
-				SysParam p = SysParam.GetByName("SITE_LAST_MODIFIED") ;
-				if (p != null)
-					p.InvalidateRecord(p) ;
-			}
-		}
-
-		/// <summary>
 		/// Gets the current application root.
 		/// </summary>
 		public static string ApplicationPath {
