@@ -52,7 +52,15 @@ namespace Piranha.Web
 		/// <returns>If the file is cached</returns>
 		public static bool HandleClientCache(HttpContext context, string id, DateTime modified, bool noexpire = false) {
 #if !DEBUG
-			if (!context.Request.IsLocal) {
+			// Get expire & maxage
+			int expires = 30, maxage = 30 ;
+			try {
+				expires = Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_EXPIRES").Value) ;
+				maxage = Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_MAXAGE").Value) ;
+			} catch {}
+
+			// Handle cache
+			if (!context.Request.IsLocal && expires > 0) {
 				try {
 					modified = modified > SiteLastModified ? modified : SiteLastModified ;
 				} catch {}
@@ -62,11 +70,6 @@ namespace Piranha.Web
 				context.Response.Cache.SetLastModified(modified <= DateTime.Now ? modified : DateTime.Now) ;	
 				context.Response.Cache.SetCacheability(System.Web.HttpCacheability.ServerAndPrivate) ;
 				if (!noexpire) {
-					int expires = 30, maxage = 30 ;
-					try {
-						expires = Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_EXPIRES").Value) ;
-						maxage = Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_MAXAGE").Value) ;
-					} catch {}
 					context.Response.Cache.SetExpires(DateTime.Now.AddMinutes(expires)) ;
 					context.Response.Cache.SetMaxAge(new TimeSpan(0, maxage, 0)) ;
 				} else {
