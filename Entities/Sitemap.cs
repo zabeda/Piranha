@@ -63,13 +63,13 @@ namespace Piranha.Models
 		/// Gets/sets the permalink.
 		/// </summary>
 		//[Column(Name="page_permalink")]
-		[Column(Name="permalink_name", ReadOnly=true, Table="permalink")]
+		[Column(Name="permalink_name", Table="permalink")]
 		public string Permalink { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		[Column(Name="pagetemplate_name", ReadOnly=true, Table="pagetemplate", OnLoad="OnNameLoad", OnSave="OnNameSave")]
+		[Column(Name="pagetemplate_name", Table="pagetemplate", Json=true)]
 		public ComplexName TemplateName { get ; private set ; }
 
 		/// <summary>
@@ -81,7 +81,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template controller.
 		/// </summary>
-		[Column(Name="pagetemplate_controller", ReadOnly=true, Table="pagetemplate")]
+		[Column(Name="pagetemplate_controller", Table="pagetemplate")]
 		private string TemplateController { get ; set ; }
 
 		/// <summary>
@@ -93,7 +93,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the custom controller.
 		/// </summary>
-		[Column(Name="pagetemplate_redirect", ReadOnly=true, Table="pagetemplate")]
+		[Column(Name="pagetemplate_redirect", Table="pagetemplate")]
 		private string TemplateRedirect { get ; set ; }
 
 		/// <summary>

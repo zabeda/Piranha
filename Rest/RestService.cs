@@ -73,6 +73,29 @@ namespace Piranha.Rest
 		}
 
 		/// <summary>
+		/// Gets the partial sitemap as xml.
+		/// </summary>
+		/// <param name="root">The root node id</param>
+		/// <returns>The sitemap</returns>
+		[OperationContract()]
+		[WebGet(UriTemplate="partialsitemap/{id}", ResponseFormat=WebMessageFormat.Json)]
+		public List<Sitemap> GetPartialSitemap(string id) {
+			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(true).GetRootNode(new Guid(id)).Pages ;
+			return BuildMap(sm) ;
+		}
+
+		/// <summary>
+		/// Gets the partial sitemap.
+		/// </summary>
+		/// <param name="root">The root node id</param>
+		/// <returns>The sitemap</returns>
+		[OperationContract()]
+		[WebGet(UriTemplate="partialsitemap/xml/{id}", ResponseFormat=WebMessageFormat.Xml)]
+		public List<Sitemap> GetPartialSitemapXml(string id) {
+			return GetPartialSitemap(id) ;
+		}
+
+		/// <summary>
 		/// Gets the page specified by the given id.
 		/// </summary>
 		/// <param name="id">The page id</param>

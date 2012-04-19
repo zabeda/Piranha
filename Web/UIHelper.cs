@@ -175,7 +175,7 @@ namespace Piranha.Web
 				if (RootNode != "") {
 					Permalink pr = Models.Permalink.GetSingle("permalink_name = @0", RootNode) ;
 					if (pr != null) {
-						Sitemap page = GetRootNode(Sitemap.GetStructure(true), pr.ParentId) ;
+						Sitemap page = Sitemap.GetStructure(true).GetRootNode(pr.ParentId) ;
 						if (page != null)
 							sm = page.Pages ;
 					}
@@ -185,6 +185,37 @@ namespace Piranha.Web
 				}
 				if (sm != null) {
 					RenderUL(Current, sm, str, StopLevel, CssClass) ;
+				}
+			}
+			return new HtmlString(str.ToString()) ;
+		}
+
+		/// <summary>
+		/// Renders the current breadcrumb.
+		/// </summary>
+		/// <param name="StartLevel">Optional start level</param>
+		/// <param name="RootNode">Optional root node</param>
+		/// <returns>The breadcrumb</returns>
+		public IHtmlString Breadcrumb(int StartLevel = 1, string RootNode = "") {
+			StringBuilder str = new StringBuilder() ;
+			List<Sitemap> sm = null ;
+
+			Page Current = CurrentPage ;
+
+			if (Current != null) {
+				if (RootNode != "") {
+					Permalink pr = Models.Permalink.GetSingle("permalink_name = @0", RootNode) ;
+					if (pr != null) {
+						Sitemap page = Sitemap.GetStructure(true).GetRootNode(pr.ParentId) ;
+						if (page != null)
+							sm = page.Pages ;
+					}
+				} else {
+					sm =sm = GetStartLevel(Sitemap.GetStructure(true), 
+						Current.Id, StartLevel) ;
+				}
+				if (sm != null) {
+					RenderBreadcrumb(Current, sm, str) ;
 				}
 			}
 			return new HtmlString(str.ToString()) ;
@@ -224,6 +255,7 @@ namespace Piranha.Web
 		/// <param name="sm">The sitemap</param>
 		/// <param name="id">The id</param>
 		/// <returns>The record</returns>
+		/*
 		private Sitemap GetRootNode(List<Sitemap> sm, Guid id) {
 			if (sm != null) {
 				foreach (Sitemap page in sm) {
@@ -235,7 +267,7 @@ namespace Piranha.Web
 				}
 			}
 			return null ;
-		}
+		}*/
 
 		/// <summary>
 		/// Renders an UL list for the given sitemap elements
@@ -269,6 +301,27 @@ namespace Piranha.Web
 				if (page.Pages.Count > 0)
 					RenderUL(curr, page.Pages, str, stoplevel) ;
 				str.AppendLine("</li>") ;
+			}
+		}
+
+		/// <summary>
+		/// Renders the breadcrumb from the given sitemap.
+		/// </summary>
+		/// <param name="curr">The current page</param>
+		/// <param name="sm">The sitemap element</param>
+		/// <param name="str">The string builder</param>
+		private void RenderBreadcrumb(Page curr, List<Sitemap> sm, StringBuilder str) {
+			if (sm != null && sm.CountVisible() > 0) {
+				foreach (Sitemap page in sm) {
+					if (page.Id == curr.Id) {
+						str.Append("<span>" + page.Title + "</span>") ;
+						return ;
+					} else if (ChildActive(page, curr.Id)) {
+						str.Append("<span><a href=\"" + Permalink(page.Permalink).ToString() + "\">" + page.Title + "</a></span> / ") ;
+						RenderBreadcrumb(curr, page.Pages, str) ;
+						return ;
+					}
+				}
 			}
 		}
 

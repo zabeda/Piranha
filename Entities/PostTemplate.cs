@@ -25,7 +25,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
-		[Column(Name="posttemplate_name", OnLoad="OnNameLoad", OnSave="OnNameSave")]
+		[Column(Name="posttemplate_name", Json=true)]
 		public ComplexName Name { get ; set ; }
 
 		/// <summary>

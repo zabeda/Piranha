@@ -139,7 +139,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		[Column(Name="pagetemplate_name", ReadOnly=true, Table="pagetemplate", OnLoad="OnNameLoad", OnSave="OnNameSave")]
+		[Column(Name="pagetemplate_name", Table="pagetemplate", Json=true)]
 		public ComplexName TemplateName { get ; private set ; }
 
 		/// <summary>

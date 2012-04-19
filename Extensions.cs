@@ -180,4 +180,25 @@ public static class PiranhaApp
 		return false ;
 	}
 	#endregion
+
+	#region Entity extensions
+	/// <summary>
+	/// Gets the sitemap with the given id from the structure
+	/// </summary>
+	/// <param name="sm">The sitemap</param>
+	/// <param name="id">The id</param>
+	/// <returns>The partial sitemap</returns>
+	public static Sitemap GetRootNode(this List<Sitemap> sm, Guid id) {
+		if (sm != null) {
+			foreach (Sitemap page in sm) {
+				if (page.Id == id)
+					return page ;
+				Sitemap subpage = GetRootNode(page.Pages, id) ;
+				if (subpage != null)
+					return subpage ;
+			}
+		}
+		return null ;
+	}
+	#endregion
 }

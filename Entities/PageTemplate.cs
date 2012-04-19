@@ -25,7 +25,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
-		[Column(Name="pagetemplate_name", OnLoad="OnNameLoad", OnSave="OnNameSave")]
+		[Column(Name="pagetemplate_name", Json=true)]
 		public ComplexName Name { get ; set ; }
 
 		/// <summary>
@@ -45,13 +45,13 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the regions associated with this page.
 		/// </summary>
-		[Column(Name="pagetemplate_page_regions", OnLoad="OnListLoad", OnSave="OnListSave")]
+		[Column(Name="pagetemplate_page_regions", Json=true)]
 		public List<string> PageRegions { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the associated properties.
 		/// </summary>
-		[Column(Name="pagetemplate_properties", OnLoad="OnListLoad", OnSave="OnListSave")]
+		[Column(Name="pagetemplate_properties", Json=true)]
 		public List<string> Properties { get ; set ; }
 
 		/// <summary>

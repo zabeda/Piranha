@@ -70,13 +70,13 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		[Column(Name="posttemplate_name", ReadOnly=true, Table="posttemplate", OnLoad="OnNameLoad", OnSave="OnNameSave")]
+		[Column(Name="posttemplate_name", Table="posttemplate", Json=true)]
 		public ComplexName TemplateName { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the attachments.
 		/// </summary>
-		[Column(Name="post_attachments", Json = true, OnLoad="OnAttachmentsLoad")]
+		[Column(Name="post_attachments", Json = true)]
 		public List<Guid> Attachments { get ; set ; }
 
 		/// <summary>

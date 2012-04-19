@@ -23,50 +23,6 @@ namespace Piranha.Models
 
 		#region Handlers
 		/// <summary>
-		/// Used to format a string list when binding the active record.
-		/// </summary>
-		/// <param name="val">The database value</param>
-		/// <returns>The record value</returns>
-		public List<string> OnListLoad(string val) {
-			if (!String.IsNullOrEmpty(val))
-				return val.Split(new char[] {','}).ToList<string>() ;
-			return new List<string>() ;
-		}
-
-		/// <summary>
-		/// Used to format a string list when saving the active record.
-		/// </summary>
-		/// <param name="val">The record value</param>
-		/// <returns>The database value</returns>
-		public string OnListSave(List<string> val) {
-			return val.ToArray().Implode(",") ;
-		}
-
-		/// <summary>
-		/// Used to format a name when binding the active record.
-		/// </summary>
-		/// <param name="val">The database value</param>
-		/// <returns>The record value</returns>
-		protected ComplexName OnNameLoad(string val) {
-			ComplexName name = new ComplexName() ;
-			string[]     vals = val.Split(new char[] {','}) ;
-
-			name.Singular = vals[0] ;
-			name.Plural   = vals.Length > 1 ? vals[1] : null ;
-
-			return name ;
-		}
-
-		/// <summary>
-		/// Used to format a name when saving the active record.
-		/// </summary>
-		/// <param name="val">The record value</param>
-		/// <returns>The database value</returns>
-		protected string OnNameSave(ComplexName val) {
-			return val.Singular + (val.Plural != null ? "," + val.Plural : "") ;
-		}
-
-		/// <summary>
 		/// NEVER load passwords from the database ever.
 		/// </summary>
 		/// <param name="pwd">The password</param>
