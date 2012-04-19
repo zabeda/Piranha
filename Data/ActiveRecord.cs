@@ -395,8 +395,14 @@ namespace Piranha.Data
 
 									// If this is JSON, deserialize before possible OnLoad method
 									if (Attributes[name].Json) {
-										JavaScriptSerializer json = new JavaScriptSerializer() ;
-										val = json.Deserialize(Convert.ToString(val), Columns[name].PropertyType) ;
+										try {
+											JavaScriptSerializer json = new JavaScriptSerializer() ;
+											val = json.Deserialize(Convert.ToString(val), Columns[name].PropertyType) ;
+										} catch {
+											val = null ;
+										}
+										if (val == null)
+											val = Activator.CreateInstance(Columns[name].PropertyType) ;
 									}
 									// Check if the property is marked with the "OnLoad" property
 									if (!String.IsNullOrEmpty(Attributes[name].OnLoad)) {
@@ -513,8 +519,8 @@ namespace Piranha.Data
 			// Build strings
 			string fields = "", values = "" ;
 			foreach (string key in Columns.Keys) {
-				// Exclude joined members
-				if (!Attributes[key].ReadOnly) {
+				// Exclude joined & read only members
+				if (!Attributes[key].ReadOnly && String.IsNullOrEmpty(Attributes[key].Table)) {
 					fields += (fields != "" ? "," : "") + "[" + key + "]" ;
 					values += (values != "" ? "," : "") + "@" + args.Count ;
 
@@ -558,8 +564,8 @@ namespace Piranha.Data
 			// Build set statement
 			string values = "" ;
 			foreach (string key in Columns.Keys) {
-				// Exclude joined members
-				if (!Attributes[key].ReadOnly) {
+				// Exclude joined & read only members
+				if (!Attributes[key].ReadOnly && String.IsNullOrEmpty(Attributes[key].Table)) {
 					values += (values != "" ? "," : "") + "[" + key + "] = @" + args.Count.ToString() ;
 
 					// Check if the ActiveField is marked with the OnSave property.
