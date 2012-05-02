@@ -103,7 +103,6 @@
     @Html.HiddenFor(m => m.Permalink.Id)
     @Html.HiddenFor(m => m.Permalink.ParentId)
     @Html.HiddenFor(m => m.Permalink.Type)
-    @Html.HiddenFor(m => m.Permalink.Name)
     @Html.HiddenFor(m => m.Permalink.Created)
     @Html.HiddenFor(m => m.Permalink.CreatedBy)
     <input type="hidden" id="draft" name="draft" value="true" />
@@ -118,12 +117,15 @@
                         @Html.TextBoxFor(m => m.Post.Title)</div>
                     @Html.ValidationMessageFor(m => m.Post.Title)
                 </li>
-                <li>@Html.LabelFor(m => m.Post.Permalink)
+                <li class="protected">@Html.LabelFor(m => m.Post.Permalink)
                 	@if (!Model.Post.IsNew) {
                     <p>http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Post.Permalink).ToLower()</p>
                     } else {
                     <p><i>@Piranha.Resources.Post.PermalinkDescription</i></p>
                     }
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Permalink.Name)</div>
+                    <a class="locked"></a>
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Post.Excerpt)

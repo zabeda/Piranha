@@ -108,12 +108,12 @@ VALUES ('095502DD-D655-4001-86F9-97D18222A548', 'SITEMAP_EXPANDED_LEVELS', '0', 
 -- Default templates
 INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_description, pagetemplate_page_regions,
 	pagetemplate_preview, pagetemplate_created, pagetemplate_updated, pagetemplate_created_by, pagetemplate_updated_by)
-VALUES ('906761ea-6c04-4f4b-9365-f2c350ff4372', 'Standard page,Standard pages', 'Standard page type.',
-	'Content', '<table class="template"><tr><td id="Content"></td></tr></table>', GETDATE(), GETDATE(), 
+VALUES ('906761ea-6c04-4f4b-9365-f2c350ff4372', '{"Singular":"Standard page","Plural":"Standard pages"}', 'Standard page type.',
+	'["Content"]', '<table class="template"><tr><td id="Content"></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO posttemplate (posttemplate_id, posttemplate_name, posttemplate_description, posttemplate_preview,
 	posttemplate_created, posttemplate_updated, posttemplate_created_by, posttemplate_updated_by)
-VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', 'Standard post,Standard posts', 'Standard post type.', 
+VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', '{"Singular":"Standard post","Plural":"Standard posts"}', 'Standard post type.', 
 	'<table class="template"><tr><td></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 

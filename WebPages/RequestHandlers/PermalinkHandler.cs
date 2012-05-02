@@ -47,7 +47,14 @@ namespace Piranha.WebPages.RequestHandlers
 							context.RewritePath("~/page/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
 						}
 					} else if (perm.Type == Permalink.PermalinkType.POST) {
-						context.RewritePath("~/post/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+						Post post = Post.GetSingle(perm.ParentId, draft) ;
+
+						if (!String.IsNullOrEmpty(post.Controller)) {
+							context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + 
+								(draft ? "?draft=true" : ""), false) ;
+						} else {
+							context.RewritePath("~/post/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+						}
 					} else if (perm.Type == Permalink.PermalinkType.CATEGORY) {
 						context.RewritePath("~/archive/" + args.Implode("/"), false) ;
 					}

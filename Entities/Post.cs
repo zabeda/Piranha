@@ -80,6 +80,12 @@ namespace Piranha.Models
 		public List<Guid> Attachments { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the custom controller.
+		/// </summary>
+		[Column(Name="posttemplate_controller", ReadOnly=true, Table="posttemplate")]
+		public string Controller { get ; private set ; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name="post_created")]

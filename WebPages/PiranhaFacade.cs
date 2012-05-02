@@ -19,7 +19,7 @@ namespace Piranha.WebPages
 		/// <param name="name">The post type name.</param>
 		/// <returns>A list of posts</returns>
 		public List<Post> GetPostsByType(string name) {
-			return Post.Get("post_draft = 0 AND posttemplate_name LIKE @0", "%," + name, new Params() { OrderBy = "post_created DESC" }) ;
+			return Post.Get("post_draft = 0 AND posttemplate_name LIKE @0", "%" + name + "%", new Params() { OrderBy = "post_published DESC" }) ;
 		}
 
 		/// <summary>
