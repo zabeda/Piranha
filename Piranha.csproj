@@ -316,6 +316,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ParamList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Partial\SiteTree.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Uploads.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Settings\ExternalList.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
@@ -443,7 +444,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\4.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\5.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

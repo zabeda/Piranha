@@ -142,6 +142,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External systems.
+        /// </summary>
+        public static string SystemExternals {
+            get {
+                return ResourceManager.GetString("SystemExternals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Groups.
         /// </summary>
         public static string SystemGroups {

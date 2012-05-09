@@ -87,6 +87,8 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		[ScriptIgnore()]
 		public virtual SelectList Groups { get ; set ; }
+
+		public SelectList Pages { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -101,6 +103,8 @@ namespace Piranha.Models.Manager.PageModels
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
 			groups.Insert(0, new SysGroup() { Name = Piranha.Resources.Global.Everyone }) ;
 			Groups = new SelectList(groups, "Id", "Name") ;
+
+			Pages = new SelectList(BuildParentPages(Sitemap.GetStructure()), "Id", "Title") ;
 		}
 
 		/// <summary>
@@ -118,6 +122,7 @@ namespace Piranha.Models.Manager.PageModels
 
 			if (m.Page != null) {
 				m.GetRelated() ;
+				m.Pages = new SelectList(BuildParentPages(Sitemap.GetStructure(), m.Page), "Id", "Title") ;
 			} else throw new ArgumentException("Could not find page with id {" + id.ToString() + "}") ;
 
 			return m ;
@@ -229,12 +234,12 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		/// <returns></returns>
 		public virtual bool DeleteAll() {
-			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
-				// Since we can have multiple rows for all id's, get everything.
-				List<Region> regions = Region.GetAllByPageId(Page.Id) ;
-				List<Property> properties = Property.GetAllByParentId(Page.Id) ;
-				List<Page> pages = Page.Get("page_id=@0", Page.Id) ;
+			// Since we can have multiple rows for all id's, get everything.
+			List<Region> regions = Region.GetAllByPageId(Page.Id) ;
+			List<Property> properties = Property.GetAllByParentId(Page.Id) ;
+			List<Page> pages = Page.Get("page_id=@0", Page.Id) ;
 
+			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				regions.ForEach(r => r.Delete(tx)) ;
 				properties.ForEach(p => p.Delete(tx)) ;
 				Permalink.Delete(tx) ;
@@ -319,6 +324,27 @@ namespace Piranha.Models.Manager.PageModels
 						AttachedContent.Add(c) ;
 				}) ;
 			}
+		}
+
+		private static List<dynamic> BuildParentPages(List<Sitemap> sm, Page p = null) {
+			var ret = new List<dynamic>() ;
+
+			foreach (Sitemap s in sm) {
+				if (p == null || s.Id != p.Id) {
+					ret.Add(new { Title = FormatTitle(s), Id = s.Id });
+					if (s.Pages.Count > 0)
+						ret.AddRange(BuildParentPages(s.Pages, p)) ;
+				}
+			}
+			return ret ;
+		}
+
+		private static string FormatTitle(Sitemap s) {
+			string prefix = "" ;
+
+			for (int n = 0; n < s.Level - 1; n++)
+				prefix += "-" ;
+			return prefix + s.Title ;
 		}
 		#endregion
 	}

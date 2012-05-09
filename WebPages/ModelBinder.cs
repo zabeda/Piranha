@@ -17,20 +17,22 @@ namespace Piranha.WebPages
 		/// Binds the model from the current form data.
 		/// </summary>
 		/// <typeparam name="T">The model type</typeparam>
+		/// <param name="name">The model name</param>
 		/// <param name="prefix">Optional name prefix</param>
 		/// <returns>The model</returns>
-		public static T BindModel<T>(string prefix = "") {
-			return (T)BindModel(typeof(T), prefix) ;
+		public static T BindModel<T>(string name, string prefix = "") {
+			return (T)BindModel(typeof(T), name, prefix) ;
 		}
 
 		/// <summary>
-		/// Binds the model of the given type from the current form data.
+		/// Binds the model of the given type and name from the current form data.
 		/// </summary>
 		/// <param name="type">The model type</param>
-		/// <param name="prefix">Optional name prefix</param>
+		/// <param name="name">The model name</param>
+		/// <param name="prefix">Optional form prefix</param>
 		/// <returns>The model</returns>
-		public static object BindModel(Type type, string prefix = "") {
-			return BindModel(HttpContext.Current.Request.Form, type, prefix) ;
+		public static object BindModel(Type type, string name, string prefix = "") {
+			return BindModel(HttpContext.Current.Request.Form, type, name, prefix) ;
 		}
 
 		#region Private members
@@ -39,29 +41,34 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <param name="form">The form data</param>
 		/// <param name="type">The model type</param>
+		/// <param name="name">The model name</param>
 		/// <param name="prefix">Optional name prefix</param>
 		/// <returns>The model</returns>
-		private static object BindModel(NameValueCollection form, Type type, string prefix = "") {
-			object ret = Activator.CreateInstance(type) ;
+		private static object BindModel(NameValueCollection form, Type type, string name, string prefix = "") {
+			if (form.AllKeys.Contains(prefix + name)) {
+				if (type == typeof(HtmlString))
+					return new HtmlString(form[prefix + name]) ;
+				else if (typeof(Enum).IsAssignableFrom(type))
+					return Enum.Parse(type, form[prefix + name]) ;
+				return Convert.ChangeType(form[prefix + name], type) ;
+			} else {
+				var subform = new NameValueCollection() ;
 
-			foreach (PropertyInfo p in ret.GetType().GetProperties()) {
-				if (form.AllKeys.Contains(prefix + p.Name)) {
-					if (p.PropertyType == typeof(HtmlString))
-						p.SetValue(ret, new HtmlString(form[prefix + p.Name]), null) ;
-					else if (typeof(Enum).IsAssignableFrom(p.PropertyType))
-						p.SetValue(ret, Enum.Parse(p.PropertyType, form[prefix + p.Name]), null) ;
-					else p.SetValue(ret, Convert.ChangeType(form[prefix + p.Name], p.PropertyType), null) ;
-				} else {
-					var subform = new NameValueCollection() ;
-					form.AllKeys.Each((i, e) => {
-						if (e.StartsWith(prefix + p.Name))
-							subform.Add(e, form[e]) ;
-					});
-					if (subform.Count > 0)
-						p.SetValue(ret, BindModel(subform, p.PropertyType, prefix + p.Name + "."), null) ;
+				form.AllKeys.Each((i, e) => {
+					if (e.StartsWith(prefix + name))
+						subform.Add(e, form[e]) ;
+				});
+				if (subform.Count > 0) {
+					object ret = Activator.CreateInstance(type) ;
+					foreach (PropertyInfo p in ret.GetType().GetProperties()) {
+						p.SetValue(ret, BindModel(form, p.PropertyType, p.Name, prefix + name + "."), null) ;
+					}
+					return ret ;
+				} else if (prefix == "") {
+					return Activator.CreateInstance(type) ;
 				}
+				return null ;
 			}
-			return ret ;
 		}
 		#endregion
 	}

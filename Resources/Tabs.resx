@@ -144,6 +144,9 @@
   <data name="SystemAccess" xml:space="preserve">
     <value>Permissions</value>
   </data>
+  <data name="SystemExternals" xml:space="preserve">
+    <value>External systems</value>
+  </data>
   <data name="SystemGroups" xml:space="preserve">
     <value>Groups</value>
   </data>

@@ -349,42 +349,6 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access rules.
-        /// </summary>
-        public static string ListTabAccess {
-            get {
-                return ResourceManager.GetString("ListTabAccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Groups.
-        /// </summary>
-        public static string ListTabGroups {
-            get {
-                return ResourceManager.GetString("ListTabGroups", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parameters.
-        /// </summary>
-        public static string ListTabParams {
-            get {
-                return ResourceManager.GetString("ListTabParams", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Users.
-        /// </summary>
-        public static string ListTabUsers {
-            get {
-                return ResourceManager.GetString("ListTabUsers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string ListTitle {
@@ -399,6 +363,15 @@ namespace Piranha.Resources {
         public static string ListTitleAccess {
             get {
                 return ResourceManager.GetString("ListTitleAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External systems.
+        /// </summary>
+        public static string ListTitleExternal {
+            get {
+                return ResourceManager.GetString("ListTitleExternal", resourceCulture);
             }
         }
         

@@ -62,7 +62,7 @@ namespace Piranha.WebPages
 						// Bind model
 						List<object> args = new List<object>() ;
 						foreach (var param in m.GetParameters())
-							args.Add(ModelBinder.BindModel(param.ParameterType)) ;
+							args.Add(ModelBinder.BindModel(param.ParameterType, param.Name)) ;
 						m.Invoke(this, args.ToArray()) ;
 					}
 				}

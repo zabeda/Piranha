@@ -213,23 +213,14 @@
   <data name="GroupNameRequired" xml:space="preserve">
     <value>The name is required.</value>
   </data>
-  <data name="ListTabAccess" xml:space="preserve">
-    <value>Access rules</value>
-  </data>
-  <data name="ListTabGroups" xml:space="preserve">
-    <value>Groups</value>
-  </data>
-  <data name="ListTabParams" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="ListTabUsers" xml:space="preserve">
-    <value>Users</value>
-  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="ListTitleAccess" xml:space="preserve">
     <value>Permissions</value>
+  </data>
+  <data name="ListTitleExternal" xml:space="preserve">
+    <value>External systems</value>
   </data>
   <data name="ListTitleGroups" xml:space="preserve">
     <value>Groups</value>

@@ -297,5 +297,12 @@ namespace Piranha.Areas.Manager.Controllers
 			return ParamList() ;
 		}
 		#endregion
+
+		#region External actions
+		[Access(Function="ADMIN_EXTERNAL")]
+		public ActionResult ExternalList() {
+			return View() ;
+		}
+		#endregion
 	}
 }

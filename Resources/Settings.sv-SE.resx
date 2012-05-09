@@ -213,23 +213,14 @@
   <data name="GroupNameRequired" xml:space="preserve">
     <value>Du måste ange ett gruppnamn.</value>
   </data>
-  <data name="ListTabAccess" xml:space="preserve">
-    <value>Behörigheter</value>
-  </data>
-  <data name="ListTabGroups" xml:space="preserve">
-    <value>Grupper</value>
-  </data>
-  <data name="ListTabParams" xml:space="preserve">
-    <value>Parametrar</value>
-  </data>
-  <data name="ListTabUsers" xml:space="preserve">
-    <value>Användare</value>
-  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Inställningar</value>
   </data>
   <data name="ListTitleAccess" xml:space="preserve">
     <value>Behörigheter</value>
+  </data>
+  <data name="ListTitleExternal" xml:space="preserve">
+    <value>Externa system</value>
   </data>
   <data name="ListTitleGroups" xml:space="preserve">
     <value>Grupper</value>
