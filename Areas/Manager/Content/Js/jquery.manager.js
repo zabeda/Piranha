@@ -716,6 +716,25 @@ OTHER DEALINGS IN THE SOFTWARE.
 * Common JQuery code for the manager area.
 */
 
+// Create a String.endsWith function.
+String.prototype.endsWith = function (suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
+// Fix even/odd table rows for old browsers
+$(document).ready(function () {
+    if ($.browser.msie && $.browser.version.slice(0, 1) < 9) {
+        $.each($("table.list"), function (i, tbl) {
+            var odd = false;
+            $.each($(tbl).find("tr"), function (i, e) {
+                if (odd)
+                    $(this).addClass("odd");
+                odd = !odd;
+            });
+        });
+    }
+});
+
 // Keep track of the currently active tooltip
 var active_tooltip = "";
 

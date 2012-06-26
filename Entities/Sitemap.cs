@@ -13,7 +13,7 @@ namespace Piranha.Models
 	/// </summary>
 	[Table(Name="page")]
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
-	[Join(TableName="permalink", ForeignKey="page_id", PrimaryKey="permalink_parent_id")]
+	[Join(TableName="permalink", ForeignKey="page_permalink_id", PrimaryKey="permalink_id")]
 	public class Sitemap : PiranhaRecord<Sitemap>, ISitemap
 	{
 		#region Fields
@@ -69,8 +69,8 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		[Column(Name="pagetemplate_name", Table="pagetemplate", Json=true)]
-		public ComplexName TemplateName { get ; private set ; }
+		[Column(Name="pagetemplate_name", Table="pagetemplate")]
+		public string TemplateName { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the page controller.

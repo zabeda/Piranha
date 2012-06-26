@@ -26,7 +26,7 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplate(im.TemplateId) ;
 
-			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
+			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			return View("Edit", pm) ;
 		}
@@ -39,7 +39,7 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel m = EditModel.GetById(new Guid(id)) ;
 			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
-			return View(m) ;
+			return View("Edit", m) ;
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace Piranha.Areas.Manager.Controllers
 			m.Refresh() ;
 
 			if (m.Post.IsNew)
-				ViewBag.Title = Piranha.Resources.Post.EditTitleNew + m.Template.Name.Singular.ToLower() ;
+				ViewBag.Title = Piranha.Resources.Post.EditTitleNew + m.Template.Name.ToLower() ;
 			else ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
 			return View("Edit", m) ;
@@ -77,6 +77,30 @@ namespace Piranha.Areas.Manager.Controllers
 			else ViewBag.Message = Piranha.Resources.Post.MessageNotDeleted ;
 
 			return Index() ;
+		}
+
+		/// <summary>
+		/// Reverts to latest published verison.
+		/// </summary>
+		/// <param name="id">The post id.</param>
+		public ActionResult Revert(string id) {
+			EditModel.Revert(new Guid(id)) ;
+
+			ViewBag.Message = Piranha.Resources.Post.MessageReverted ;
+
+			return Edit(id) ;
+		}
+
+		/// <summary>
+		/// Unpublishes the specified page.
+		/// </summary>
+		/// <param name="id">The post id</param>
+		public ActionResult Unpublish(string id) {
+			EditModel.Unpublish(new Guid(id)) ;
+
+			ViewBag.Message = Piranha.Resources.Post.MessageUnpublished ;
+
+			return Edit(id) ;
 		}
     }
 }

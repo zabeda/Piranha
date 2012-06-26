@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.ServiceModel.Activation;
 using System.Text;
 using System.Web;
+using System.Web.Compilation;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -83,17 +85,33 @@ namespace Piranha.WebPages
 		/// Initializes the webb app.
 		/// </summary>
 		public static void Init() {
-			// Register virtual path provider for the manager area
-			HostingEnvironment.RegisterVirtualPathProvider(new Piranha.Web.ResourcePathProvider()) ;
+			// Register virtual path provider for the manager area. This part includes a nasty hack for 
+			// precompiled sites due to Microsofts implementation in the .NET framework. See
+			//
+			// http://sunali.com/2008/01/09/virtualpathprovider-in-precompiled-web-sites/
+			//
+			// for more information on the issue
+			//
+			PropertyInfo pc = typeof(BuildManager).GetProperty("IsPrecompiledApp", BindingFlags.NonPublic | BindingFlags.Static) ;
+			if (pc != null && (bool)pc.GetValue(null, null)) {
+				// This is a precompiled application, bend the framework a bit.
+				HostingEnvironment instance = (HostingEnvironment)typeof(HostingEnvironment).InvokeMember("_theHostingEnvironment", 
+					BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetField, null, null, null) ;
+				if (instance == null)
+					throw new NullReferenceException("Can't get the current hosting environment") ;
+				MethodInfo m = typeof(HostingEnvironment).GetMethod("RegisterVirtualPathProviderInternal", BindingFlags.NonPublic | BindingFlags.Static) ;
+				if (m == null)
+					throw new NullReferenceException("Can't get the RegisterVirtualPathProviderInternal method") ;
+				m.Invoke(instance, new object[] { (VirtualPathProvider)new Piranha.Web.ResourcePathProvider() });
+			} else {
+				HostingEnvironment.RegisterVirtualPathProvider(new Piranha.Web.ResourcePathProvider()) ;
+			}
 
 			// This will trigger the manager area registration
 			AreaRegistration.RegisterAllAreas() ;
 
 			// Register handlers
 			RegisterDefaultHandlers() ;
-
-			// Register rest API route handler
-			RouteTable.Routes.Add(new ServiceRoute("rest", new WebServiceHostFactory(), typeof(Rest.RestService))) ;
 		}
 
 		/// <summary>
@@ -111,6 +129,17 @@ namespace Piranha.WebPages
 			// Register filters & binders
 			RegisterGlobalFilters(GlobalFilters.Filters) ;
 			RegisterBinders() ;
+		}
+
+		/// <summary>
+		/// Registers all of the default rest wcf services.
+		/// </summary>
+		public static void InitServices() {
+			RouteTable.Routes.Add("REST_CATEGORY", new ServiceRoute("rest/category", new WebServiceHostFactory(), typeof(Rest.CategoryService))) ;
+			RouteTable.Routes.Add("REST_SITEMAP", new ServiceRoute("rest/sitemap", new WebServiceHostFactory(), typeof(Rest.SitemapServices))) ;
+			RouteTable.Routes.Add("REST_PAGE", new ServiceRoute("rest/page", new WebServiceHostFactory(), typeof(Rest.PageService))) ;
+			RouteTable.Routes.Add("REST_CONTENT", new ServiceRoute("rest/content", new WebServiceHostFactory(), typeof(Rest.ContentService))) ;
+			RouteTable.Routes.Add("REST_CHANGES", new ServiceRoute("rest/changes", new WebServiceHostFactory(), typeof(Rest.ChangeService))) ;
 		}
 
 		/// <summary>

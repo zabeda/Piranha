@@ -200,5 +200,51 @@ public static class PiranhaApp
 		}
 		return null ;
 	}
+
+	/// <summary>
+	/// Gets the number of images in the content list.
+	/// </summary>
+	/// <param name="self">The content list</param>
+	/// <returns>The image count</returns>
+	public static int CountImages(this List<Content> self) {
+		int images = 0 ;
+		self.ForEach((c) => { 
+			if (c.IsImage) 
+				images++ ;
+		}) ;
+		return images ;
+	}
+
+	/// <summary>
+	/// Gets the number of documents in the content list.
+	/// </summary>
+	/// <param name="self">The content list</param>
+	/// <returns>The document count</returns>
+	public static int CountDocuments(this List<Content> self) {
+		int documents = 0 ;
+		self.ForEach((c) => { 
+			if (!c.IsImage) 
+				documents++ ;
+		}) ;
+		return documents ;
+	}
+
+	/// <summary>
+	/// Gets the available images from the content list.
+	/// </summary>
+	/// <param name="self">The content list</param>
+	/// <returns>The images</returns>
+	public static List<Content> Images(this List<Content> self) {
+		return self.Where(c => c.IsImage).ToList() ;
+	}
+
+	/// <summary>
+	/// Gets the available documents from the content list.
+	/// </summary>
+	/// <param name="self">The content list</param>
+	/// <returns>The documents</returns>
+	public static List<Content> Documents(this List<Content> self) {
+		return self.Where(c => !c.IsImage).ToList() ;
+	}
 	#endregion
 }

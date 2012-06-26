@@ -100,7 +100,7 @@ namespace Piranha.Models
 
 			// Gets the archive
 			if (Category != null)
-				PostArchive = Models.PostArchive.Get(Category.Id) ;
+				PostArchive = Models.PostArchive.Get() ;
 			else PostArchive = Models.PostArchive.Get() ;
 		}
 	}

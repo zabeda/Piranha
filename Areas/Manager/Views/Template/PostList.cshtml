@@ -47,7 +47,7 @@
         <tbody class="list-js">
             @foreach (var pt in Model.Templates) {
             <tr>
-                <td class="name"><a href="@Url.Action("post", new { id = pt.Id })">@pt.Name.Singular</a></td>
+                <td class="name"><a href="@Url.Action("post", new { id = pt.Id })">@pt.Name</a></td>
                 <td class="updated">@pt.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@pt.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">

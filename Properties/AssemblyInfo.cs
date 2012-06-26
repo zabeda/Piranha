@@ -11,7 +11,7 @@ using System.Web.UI;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("piranhacms.org")]
 [assembly: AssemblyProduct("Piranha")]
-[assembly: AssemblyCopyright("Copyright © piranhacms.org")]
+[assembly: AssemblyCopyright("Copyright © piranhacms.org 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

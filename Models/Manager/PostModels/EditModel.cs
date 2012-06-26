@@ -103,13 +103,16 @@ namespace Piranha.Models.Manager.PostModels
 		public static EditModel CreateByTemplate(Guid templateId) {
 			EditModel m = new EditModel() ;
 
+			m.Permalink = new Permalink() {
+				Id = Guid.NewGuid(),
+				Type = Permalink.PermalinkType.POST
+			} ;
 			m.Post = new Piranha.Models.Post() {
 				Id = Guid.NewGuid(),
-				TemplateId = templateId 
+				TemplateId = templateId,
+				PermalinkId = m.Permalink.Id
 			} ;
 			m.Template = PostTemplate.GetSingle(templateId) ;
-			m.Permalink = new Permalink() { 
-				ParentId = m.Post.Id, Type = Permalink.PermalinkType.POST } ;
 			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
 			m.GetRelated() ;
@@ -122,20 +125,50 @@ namespace Piranha.Models.Manager.PostModels
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		public static EditModel GetById(Guid id) {
+		public static EditModel GetById(Guid id, bool draft = true) {
 			EditModel m = new EditModel() ;
-			m.Post = Piranha.Models.Post.GetSingle(id, true) ;
+			m.Post = Piranha.Models.Post.GetSingle(id, draft) ;
 			m.Template = PostTemplate.GetSingle(m.Post.TemplateId) ;
-			m.Permalink = Permalink.GetSingle("permalink_parent_id = @0", m.Post.Id) ;
-			if (m.Permalink == null)
-				m.Permalink = new Permalink() { 
-					ParentId = m.Post.Id, Type = Permalink.PermalinkType.POST } ;
-			Category.GetByPostId(m.Post.Id).ForEach(c => m.PostCategories.Add(c.Id)) ;
+			m.Permalink = Permalink.GetSingle(m.Post.PermalinkId) ;
+			Category.GetByPostId(m.Post.Id, draft).ForEach(c => m.PostCategories.Add(c.Id)) ;
 			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", m.PostCategories) ;
 			m.GetRelated() ;
 
 			return m ;
+		}
+
+		/// <summary>
+		/// Reverts to the latest published version.
+		/// </summary>
+		/// <param name="id">The post id</param>
+		public static void Revert(Guid id) {
+			EditModel m = EditModel.GetById(id, false) ;
+			m.Post.IsDraft = true ;
+
+			// Saving this baby will overwrite the current draft
+			m.SaveAll() ;
+
+			// Now we just have to "turn back time"
+			Post.Execute("UPDATE post SET post_updated = post_last_published WHERE post_id = @0 AND post_draft = 1", null, id) ;
+		}
+
+		/// <summary>
+		/// Unpublishes the page with the given id.
+		/// </summary>
+		/// <param name="id">The page id.</param>
+		public static void Unpublish(Guid id) {
+			using (IDbTransaction tx = Database.OpenTransaction()) {
+				// Delete all published content
+				Relation.Execute("DELETE FROM relation WHERE relation_draft = 0 AND relation_data_id = @0", tx, id) ;
+				Post.Execute("DELETE FROM post WHERE post_draft = 0 AND post_id = @0", tx, id) ;
+
+				// Remove published dates
+				Post.Execute("UPDATE post SET post_published = NULL, post_last_published = NULL WHERE post_id = @0", tx, id) ;
+
+				// Commit transaction
+				tx.Commit() ;
+			}
 		}
 
 		/// <summary>
@@ -145,10 +178,25 @@ namespace Piranha.Models.Manager.PostModels
 		public bool SaveAll(bool draft = true) {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
+					bool permalinkfirst = Post.IsNew ;
+
+					// Save permalink before the post if this is an insert
+					if (permalinkfirst) {
+						// Permalink
+						if (Permalink.IsNew)
+							Permalink.Name = Permalink.Generate(Post.Title) ;
+						Permalink.Save(tx) ;
+					}
+
+					// Post
 					if (draft)
 						Post.Save(tx) ;
 					else Post.SaveAndPublish(tx) ;
 
+					// Save permalink after the post if this is an update
+					if (!permalinkfirst) {
+						Permalink.Save(tx) ;
+					}
 					// Properties
 					Properties.ForEach(p => { 
 						p.IsDraft = true ; 
@@ -161,18 +209,22 @@ namespace Piranha.Models.Manager.PostModels
 						}
 					}) ;
 
-					// Permalink
-					if (Permalink.IsNew)
-						Permalink.Name = Permalink.Generate(Post.Title) ;
-					Permalink.Save(tx) ;
-
 					// Update categories
-					Relation.DeleteByDataId(Post.Id) ;
+					Relation.DeleteByDataId(Post.Id, tx, true) ;
 					List<Relation> relations = new List<Relation>() ;
 					PostCategories.ForEach(pc => relations.Add(new Relation() { 
 						DataId = Post.Id, RelatedId = pc, Type = Relation.RelationType.POSTCATEGORY })
 						) ;
 					relations.ForEach(r => r.Save(tx)) ;
+
+					// Publish categories
+					if (!draft) {
+						Relation.DeleteByDataId(Post.Id, tx, false) ;
+						relations.ForEach(r => { 
+							r.IsDraft = false ;
+							r.IsNew = true ; }) ;
+						relations.ForEach(r => r.Save(tx)) ;
+					}
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -185,11 +237,14 @@ namespace Piranha.Models.Manager.PostModels
 		/// <returns></returns>
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
-				try {
-					Permalink.Delete(tx) ;
-					Post.Delete(tx) ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+				List<Relation> rel = Relation.Get("relation_data_id = @0", Post.Id) ;
+				List<Post> posts = Post.Get("post_id = @0", Post.Id) ;
+					
+				rel.ForEach(r => r.Delete(tx)) ;
+				posts.ForEach(p => p.Delete(tx)) ;
+				Permalink.Delete(tx) ;
+
+				tx.Commit() ;
 			}
 			return true ;
 		}
@@ -201,7 +256,7 @@ namespace Piranha.Models.Manager.PostModels
 			if (Post != null) {
 				if (!Post.IsNew) {
 					Post = Piranha.Models.Post.GetSingle(Post.Id, true) ;
-					Permalink = Permalink.GetSingle("permalink_parent_id = @0", Post.Id) ;
+					Permalink = Permalink.GetSingle(Post.PermalinkId) ;
 					Category.GetByPostId(Post.Id).ForEach(c => PostCategories.Add(c.Id)) ;
 					Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 						new Params() { OrderBy = "category_name" }), "Id", "Name", PostCategories) ;

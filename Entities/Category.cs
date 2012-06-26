@@ -12,7 +12,7 @@ namespace Piranha.Models
 	/// A category is used to classify content in the database.
 	/// </summary>
 	[PrimaryKey(Column="category_id")]
-	[Join(TableName="permalink", ForeignKey="category_id", PrimaryKey="permalink_parent_id")]
+	[Join(TableName="permalink", ForeignKey="category_permalink_id", PrimaryKey="permalink_id")]
 	public class Category : PiranhaRecord<Category>
 	{
 		#region Fields
@@ -28,6 +28,12 @@ namespace Piranha.Models
 		[Column(Name="category_parent_id")]
 		[Display(ResourceType=typeof(Piranha.Resources.Category), Name="Parent")]
 		public Guid ParentId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		[Column(Name="category_permalink_id")]
+		public Guid PermalinkId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the name.
@@ -112,10 +118,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="id">The post id</param>
 		/// <returns>The categories</returns>
-		public static List<Category> GetByPostId(Guid id) {
+		public static List<Category> GetByPostId(Guid id, bool draft = true) {
 			return Category.Get("category_id IN (" +
-				"SELECT relation_related_id FROM relation WHERE relation_type = @0 AND relation_data_id = @1)",
-				Relation.RelationType.POSTCATEGORY, id) ;
+				"SELECT relation_related_id FROM relation WHERE relation_type = @0 AND relation_data_id = @1 AND relation_draft = @2)",
+				Relation.RelationType.POSTCATEGORY, id, draft) ;
 		}
 
 		/// <summary>
@@ -124,7 +130,7 @@ namespace Piranha.Models
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The category</returns>
 		public static Category GetByPermalink(string permalink) {
-			return Category.GetSingle("permalink_name = @0", permalink) ;
+			return Category.GetSingle("permalink_name = @0 AND", permalink) ;
 		}
 		#endregion
 

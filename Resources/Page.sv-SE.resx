@@ -225,4 +225,16 @@
   <data name="Optional" xml:space="preserve">
     <value>Ej obligatoriskt</value>
   </data>
+  <data name="ParentId" xml:space="preserve">
+    <value>Överordnad sida</value>
+  </data>
+  <data name="Placement" xml:space="preserve">
+    <value>Placering</value>
+  </data>
+  <data name="Seqno" xml:space="preserve">
+    <value>Placera efter</value>
+  </data>
+  <data name="MessageUnpublished" xml:space="preserve">
+    <value>Sidan har avpublicerats.</value>
+  </data>
 </root>

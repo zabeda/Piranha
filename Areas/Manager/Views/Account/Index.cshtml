@@ -29,7 +29,7 @@
         <div class="grid_4 box login">
             <div class="title"><h2>@Piranha.Resources.Account.Title</h2></div>
             <div class="inner">
-                @{ Html.BeginForm("Login", "Account") ; }
+                @{ Html.BeginForm("login", "account") ; }
                 @Html.Hidden("returnaction", "index")
                 @Html.Hidden("returncontroller", "page")
                 <ul class="form">
@@ -38,7 +38,7 @@
                     <li><label>@Piranha.Resources.Account.Password</label>
                         <div class="input"><input name="password" type="password" /></div></li>
                 </ul>
-                <button class="btn right">@Piranha.Resources.Account.Login</button>
+                <button type="submit" class="btn right">@Piranha.Resources.Account.Login</button>
                 @{ Html.EndForm() ; }
                 <div class="clear"></div>
             </div>

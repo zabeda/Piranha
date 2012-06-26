@@ -52,7 +52,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		ComplexName TemplateName { get ; }
+		string TemplateName { get ; }
 
 		/// <summary>
 		/// Gets/sets the created date.

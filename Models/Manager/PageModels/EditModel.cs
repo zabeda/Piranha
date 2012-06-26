@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 
 using Piranha.Data;
 
@@ -67,28 +66,42 @@ namespace Piranha.Models.Manager.PageModels
 		/// <summary>
 		/// Gets/sets the attached content.
 		/// </summary>
-		[ScriptIgnore()]
 		public virtual List<Content> AttachedContent { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available content.
 		/// </summary>
-		[ScriptIgnore()]
 		public List<Content> Content { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the current template.
 		/// </summary>
-		[ScriptIgnore()]
 		public virtual PageTemplate Template { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the groups.
 		/// </summary>
-		[ScriptIgnore()]
 		public virtual SelectList Groups { get ; set ; }
 
-		public SelectList Pages { get ; set ; }
+		/// <summary>
+		/// Gets/sets the available parent pages.
+		/// </summary>
+		public List<PagePlacement> Parents { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available siblings.
+		/// </summary>
+		public List<PagePlacement> Siblings { get ; set ; }
+		#endregion
+
+		#region Inner classes
+		public class PagePlacement {
+			public Guid Id { get ; set ; }
+			public string Title { get ; set ; }
+			public int Level { get ; set ; }
+			public bool IsSelected { get ; set ; }
+			public int Seqno { get ; set ; }
+		}
 		#endregion
 
 		/// <summary>
@@ -103,8 +116,9 @@ namespace Piranha.Models.Manager.PageModels
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
 			groups.Insert(0, new SysGroup() { Name = Piranha.Resources.Global.Everyone }) ;
 			Groups = new SelectList(groups, "Id", "Name") ;
-
-			Pages = new SelectList(BuildParentPages(Sitemap.GetStructure()), "Id", "Title") ;
+			/*
+			Parents = BuildParentPages(Sitemap.GetStructure()) ;
+			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = false }) ;*/
 		}
 
 		/// <summary>
@@ -122,7 +136,6 @@ namespace Piranha.Models.Manager.PageModels
 
 			if (m.Page != null) {
 				m.GetRelated() ;
-				m.Pages = new SelectList(BuildParentPages(Sitemap.GetStructure(), m.Page), "Id", "Title") ;
 			} else throw new ArgumentException("Could not find page with id {" + id.ToString() + "}") ;
 
 			return m ;
@@ -164,7 +177,10 @@ namespace Piranha.Models.Manager.PageModels
 				Seqno = seqno
 			} ;
 			m.GetRelated() ;
-
+			/*
+			m.Parents = BuildParentPages(Sitemap.GetStructure(), m.Page) ;
+			m.Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = m.Page.ParentId == Guid.Empty }) ;
+			*/
 			return m ;
 		}
 
@@ -174,12 +190,34 @@ namespace Piranha.Models.Manager.PageModels
 		/// <param name="id">The page id</param>
 		public static void Revert(Guid id) {
 			EditModel m = EditModel.GetById(id, false) ;
+			m.Page.IsDraft = true ;
 
 			// Saving this baby will overwrite the current draft
 			m.SaveAll() ;
 
 			// Now we just have to "turn back time"
 			Page.Execute("UPDATE page SET page_updated = page_last_published WHERE page_id = @0 AND page_draft = 1", null, id) ;
+		}
+
+		/// <summary>
+		/// Unpublishes the page with the given id.
+		/// </summary>
+		/// <param name="id">The page id.</param>
+		public static void Unpublish(Guid id) {
+			using (IDbTransaction tx = Database.OpenTransaction()) {
+				// Delete all published content
+				Property.Execute("DELETE FROM property WHERE property_draft = 0 AND property_parent_id = @0", tx, id) ;
+				Region.Execute("DELETE FROM region WHERE region_page_draft = 0 AND region_page_id = @0", tx, id) ;
+				Page.Execute("DELETE FROM page WHERE page_draft = 0 AND page_id = @0", tx, id) ;
+
+				// Remove published dates
+				Page.Execute("UPDATE page SET page_published = NULL, page_last_published = NULL WHERE page_id = @0", tx, id) ;
+
+				// Commit transaction
+				tx.Commit() ;
+			}
+			var page = Page.GetSingle(id, true) ;
+			page.InvalidateRecord(page) ;
 		}
 
 		/// <summary>
@@ -190,6 +228,16 @@ namespace Piranha.Models.Manager.PageModels
 		public virtual bool SaveAll(bool draft = true) {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
+					bool permalinkfirst = Page.IsNew ;
+
+					// Save permalink first if the page is new
+					if (permalinkfirst) {
+						if (Permalink.IsNew)
+							Permalink.Name = Permalink.Generate(!String.IsNullOrEmpty(Page.NavigationTitle) ?
+								Page.NavigationTitle : Page.Title) ;
+						Permalink.Save(tx) ;
+					}
+
 					// Save page
 					if (draft)
 						Page.Save(tx) ;
@@ -217,12 +265,9 @@ namespace Piranha.Models.Manager.PageModels
 						}
 					}) ;
 
-					// Save permalink
-					if (Permalink.IsNew)
-						Permalink.Name = Permalink.Generate(!String.IsNullOrEmpty(Page.NavigationTitle) ?
-							Page.NavigationTitle : Page.Title) ;
-					Permalink.Save(tx) ;
-
+					// Save permalink last if the page isn't new
+					if (!permalinkfirst)
+						Permalink.Save(tx) ;
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -242,8 +287,8 @@ namespace Piranha.Models.Manager.PageModels
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				regions.ForEach(r => r.Delete(tx)) ;
 				properties.ForEach(p => p.Delete(tx)) ;
-				Permalink.Delete(tx) ;
 				pages.ForEach(p => p.Delete(tx)) ;
+				Permalink.Delete(tx) ;
 
 				tx.Commit() ;
 
@@ -291,9 +336,11 @@ namespace Piranha.Models.Manager.PageModels
 
 			// Get template & permalink
 			Template  = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
-			Permalink = Permalink.GetByParentId(Page.Id) ;
-			if (Permalink == null)
-				Permalink = new Permalink() { ParentId = Page.Id, Type = Permalink.PermalinkType.PAGE } ;
+			Permalink = Permalink.GetSingle(Page.PermalinkId) ; 
+			if (Permalink == null) {
+				Permalink = new Permalink() { Id = Guid.NewGuid(), Type = Permalink.PermalinkType.PAGE } ;
+				Page.PermalinkId = Permalink.Id ;
+			}
 
 			if (Template != null) {
 				// Get page regions
@@ -324,18 +371,52 @@ namespace Piranha.Models.Manager.PageModels
 						AttachedContent.Add(c) ;
 				}) ;
 			}
+
+			// Get page position
+			Parents = BuildParentPages(Sitemap.GetStructure(), Page) ;
+			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
+			Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
 		}
 
-		private static List<dynamic> BuildParentPages(List<Sitemap> sm, Page p = null) {
-			var ret = new List<dynamic>() ;
+		private static List<PagePlacement> BuildParentPages(List<Sitemap> sm, Page p = null) {
+			var ret = new List<PagePlacement>() ;
 
 			foreach (Sitemap s in sm) {
 				if (p == null || s.Id != p.Id) {
-					ret.Add(new { Title = FormatTitle(s), Id = s.Id });
+					ret.Add(new PagePlacement() {
+						Id = s.Id, 
+						Level = s.Level, 
+						Title = s.Title, 
+						IsSelected = (p != null && s.Id == p.ParentId)
+					}) ;
 					if (s.Pages.Count > 0)
 						ret.AddRange(BuildParentPages(s.Pages, p)) ;
 				}
 			}
+			return ret ;
+		}
+
+		internal static List<PagePlacement> BuildSiblingPages(Guid page_id, Guid page_parentid, int page_seqno, Guid parentid) {
+			List<Page> sib = null ;
+			if (parentid != Guid.Empty)
+				sib = Page.Get("page_parent_id = @0 AND page_id != @1 AND page_draft = 1", parentid, page_id, new Params() { OrderBy = "page_seqno" }) ;
+			else sib = Page.Get("page_parent_id IS NULL AND page_id != @0 AND page_draft = 1", page_id, new Params() { OrderBy = "page_seqno" }) ;
+
+			var ret = new List<PagePlacement>() ;
+			ret.Add(new PagePlacement() { Seqno = 1, IsSelected = page_parentid == parentid && page_seqno == 1 }) ;
+			var selected = page_parentid == parentid && page_seqno == 1 ;
+
+			foreach (var page in sib) {
+				ret.Add(new PagePlacement() {
+					Id = page.Id,
+					Title = page.Title,
+					Seqno = page_parentid == parentid && page.Seqno > page_seqno ? page.Seqno : page.Seqno + 1,
+					IsSelected = page_parentid == parentid && (page.Seqno + 1) == page_seqno
+				}) ;
+				selected = selected || ret[ret.Count - 1].IsSelected ;
+			}
+			if (!selected)
+				ret[ret.Count -1].IsSelected = true ;
 			return ret ;
 		}
 

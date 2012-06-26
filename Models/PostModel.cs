@@ -27,9 +27,9 @@ namespace Piranha.Models
 		public dynamic Properties { get ; private set ; }
 
 		/// <summary>
-		/// Gets/sets the archive.
+		/// Gets the available attachments.
 		/// </summary>
-		public List<Post> Archive { get ; set ; }
+		public List<Content> Attachments { get ; set ; }
 
 		/// <summary>
 		/// Gets the current page.
@@ -42,6 +42,7 @@ namespace Piranha.Models
 		/// </summary>
 		public PostModel() {
 			Properties = new ExpandoObject() ;
+			Attachments   = new List<Content>() ;
 		}
 
 		/// <summary>
@@ -83,6 +84,19 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Gets the page model for the given page.
+		/// </summary>
+		/// <param name="p">The page record</param>
+		/// <returns>The model</returns>
+		public static T Get<T>(Post p) where T : PostModel {
+			T m = Activator.CreateInstance<T>() ;
+
+			m.Post = p ;
+			m.GetRelated() ;
+			return m ;
+		}
+
+		/// <summary>
 		/// Gets the related information for the post.
 		/// </summary>
 		private void GetRelated() {
@@ -90,10 +104,6 @@ namespace Piranha.Models
 
 			// Get categories
 			Categories = Category.GetByPostId(Post.Id) ;
-
-			// Get archive
-			Archive = Models.Post.Get("post_template_id = @0", ((Post)Post).TemplateId,
-				new Params() { OrderBy = "post_created DESC" }) ;
 
 			// Properties
 			if (pt.Properties.Count > 0) {
@@ -104,6 +114,9 @@ namespace Piranha.Models
 						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value ;
 				});
 			}
+			// Attachments
+			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
+
 		}
 	}
 }

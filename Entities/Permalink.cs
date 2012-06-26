@@ -25,9 +25,6 @@ namespace Piranha.Models
 		[Required()]
 		public override Guid Id { get ; set ; }
 
-		[Column(Name="permalink_parent_id")]
-		public Guid ParentId { get ; set ; }
-
 		[Column(Name="permalink_type")]
 		public PermalinkType Type { get ; set ; }
 
@@ -72,16 +69,19 @@ namespace Piranha.Models
 				Cache[name] = GetSingle("permalink_name = @0", name) ;
 			return Cache[name] ;
 		}
+		#endregion
 
 		/// <summary>
-		/// Gets the permalink associated with the given parent id.
+		/// Saves the current entity.
 		/// </summary>
-		/// <param name="id">The id</param>
-		/// <returns>The permalink</returns>
-		public static Permalink GetByParentId(Guid id) {
-			return Permalink.GetSingle("permalink_parent_id = @0", id) ;
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Weather the operation succeeded</returns>
+		public override bool Save(System.Data.IDbTransaction tx = null) {
+			// Check for duplicates 
+			if (Permalink.GetSingle("permalink_name = @0" + (!IsNew ? " AND permalink_id != @1" : ""), Name, Id) != null)
+ 				throw new DuplicatePermalinkException() ;
+			return base.Save(tx);
 		}
-		#endregion
 
 		/// <summary>
 		/// Converts the given string to a web safe permalink.

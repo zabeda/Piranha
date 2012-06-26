@@ -25,8 +25,10 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
-		[Column(Name="pagetemplate_name", Json=true)]
-		public ComplexName Name { get ; set ; }
+		[Column(Name="pagetemplate_name")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="Name")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Global), ErrorMessageResourceName="NameRequired")]
+		public string Name { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the template's description.
@@ -124,7 +126,6 @@ namespace Piranha.Models
 		public PageTemplate() : base() {
 			PageRegions = new List<string>() ;
 			Properties = new List<string>() ;
-			Name = new ComplexName() ;
 		}
 
 		/// <summary>

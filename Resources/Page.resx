@@ -222,4 +222,16 @@
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html preview</value>
   </data>
+  <data name="ParentId" xml:space="preserve">
+    <value>Parent page</value>
+  </data>
+  <data name="Placement" xml:space="preserve">
+    <value>Placement</value>
+  </data>
+  <data name="Seqno" xml:space="preserve">
+    <value>Position after</value>
+  </data>
+  <data name="MessageUnpublished" xml:space="preserve">
+    <value>The page has been unpublished.</value>
+  </data>
 </root>

@@ -30,7 +30,14 @@ namespace Piranha.WebPages.RequestHandlers
 					SysUser.LoginUser(login, passwd, persist) ;
 					if (!String.IsNullOrEmpty(returl))
 						context.Response.Redirect(returl) ;
-					context.Response.Redirect("~/") ;
+					else context.Response.Redirect("~/") ;
+				} else if (args[0].ToLower() == "logout") {
+					string returl = context.Request["returnurl"] ;
+
+					FormsAuthentication.SignOut() ;
+					if (!String.IsNullOrEmpty(returl))
+						context.Response.Redirect(returl) ;
+					else context.Response.Redirect("~/") ;
 				}
 			}
 		}

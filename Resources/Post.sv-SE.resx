@@ -156,8 +156,14 @@
   <data name="MessagePublished" xml:space="preserve">
     <value>Artikeln har publicerats.</value>
   </data>
+  <data name="MessageReverted" xml:space="preserve">
+    <value>Den senast publicerade versionen har nu återställts.</value>
+  </data>
   <data name="MessageSaved" xml:space="preserve">
     <value>Artikeln har sparats.</value>
+  </data>
+  <data name="MessageUnpublished" xml:space="preserve">
+    <value>Artikeln har nu avpublicerats.</value>
   </data>
   <data name="Permalink" xml:space="preserve">
     <value>Permalänk</value>

@@ -156,8 +156,14 @@
   <data name="MessagePublished" xml:space="preserve">
     <value>The post has been published.</value>
   </data>
+  <data name="MessageReverted" xml:space="preserve">
+    <value>The latest published version has now been restored.</value>
+  </data>
   <data name="MessageSaved" xml:space="preserve">
     <value>The post has been saved.</value>
+  </data>
+  <data name="MessageUnpublished" xml:space="preserve">
+    <value>The post has been unpublished.</value>
   </data>
   <data name="Permalink" xml:space="preserve">
     <value>Permalink</value>

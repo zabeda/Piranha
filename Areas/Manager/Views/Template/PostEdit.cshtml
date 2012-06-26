@@ -20,7 +20,7 @@
     </div>
 </div>
 }
-@{ Html.BeginForm("Page") ; }
+@{ Html.BeginForm("page") ; }
 <div>
     @Html.HiddenFor(m => m.Template.Id)
     @Html.HiddenFor(m => m.Template.IsNew)
@@ -35,16 +35,10 @@
         <div class="inner">
             <ul class="form">
                 <li>
-                    @Html.LabelFor(m => m.Template.Name.Singular)
+                    @Html.LabelFor(m => m.Template.Name)
                     <div class="input">
-                        @Html.TextBoxFor(m => m.Template.Name.Singular)</div>
-                    @Html.ValidationMessageFor(m => m.Template.Name.Singular)
-                </li>
-                <li>
-                    @Html.LabelFor(m => m.Template.Name.Plural)
-                    <div class="input">
-                        @Html.TextBoxFor(m => m.Template.Name.Plural)</div>
-                    @Html.ValidationMessageFor(m => m.Template.Name.Singular)
+                        @Html.TextBoxFor(m => m.Template.Name)</div>
+                    @Html.ValidationMessageFor(m => m.Template.Name)
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Template.Description)

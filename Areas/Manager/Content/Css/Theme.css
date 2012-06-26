@@ -239,6 +239,7 @@ input[type=checkbox] {
 li.selected a,
 .edit table.template td.active {
     color: #fff;
+    background: #54bd00;
     background-image: linear-gradient(bottom, #439700 25%, #54bd00 65%);
     background-image: -o-linear-gradient(bottom, #439700 25%, #54bd00 65%);
     background-image: -moz-linear-gradient(bottom, #439700 25%, #54bd00 65%);
@@ -264,6 +265,9 @@ table.list tr {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     }
+table.list tbody tr.odd {
+    background: #f8f8f8;
+    }    
 table.list tbody tr:nth-child(2n+1) {
     background: #f8f8f8;
     }

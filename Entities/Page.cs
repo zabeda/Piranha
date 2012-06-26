@@ -17,7 +17,7 @@ namespace Piranha.Models
 	/// </summary>
 	[PrimaryKey(Column="page_id,page_draft")]
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
-	[Join(TableName="permalink", ForeignKey="page_id", PrimaryKey="permalink_parent_id")]
+	[Join(TableName="permalink", ForeignKey="page_permalink_id", PrimaryKey="permalink_id")]
 	public class Page : DraftRecord<Page>, IPage, ISitemap, ICacheRecord<Page>
 	{
 		#region Fields
@@ -50,12 +50,20 @@ namespace Piranha.Models
 		/// Gets/sets the parent id.
 		/// </summary>
 		[Column(Name="page_parent_id")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="ParentId")]
 		public Guid ParentId { get ; set ; }
+		
+		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		[Column(Name="page_permalink_id")]
+		public Guid PermalinkId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the seqno specifying the structural position.
 		/// </summary>
 		[Column(Name="page_seqno")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Seqno")]
 		public int Seqno { get ; set ; }
 
 		/// <summary>
@@ -139,8 +147,8 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		[Column(Name="pagetemplate_name", Table="pagetemplate", Json=true)]
-		public ComplexName TemplateName { get ; private set ; }
+		[Column(Name="pagetemplate_name", Table="pagetemplate")]
+		public string TemplateName { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the created date.
@@ -235,6 +243,18 @@ namespace Piranha.Models
 				return (Dictionary<string, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] ;
 			}
 		}
+
+		/// <summary>
+		/// Gets the page cache object by permalink id.
+		/// </summary>
+		[ScriptIgnore()]
+		private static Dictionary<Guid, Page> PermalinkIdCache {
+			get {
+				if (HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] == null)
+					HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] = new Dictionary<Guid, Page>() ;
+				return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] ;
+			}
+		}
 		#endregion
 
 		/// <summary>
@@ -259,6 +279,7 @@ namespace Piranha.Models
 				if (p != null) {
 					Cache[p.Id] = p ;
 					PermalinkCache[p.Permalink] = p ;
+					PermalinkIdCache[p.PermalinkId] = p ;
 				} else return null ;
 			}
 			return Cache[id] ;
@@ -298,12 +319,37 @@ namespace Piranha.Models
 				if (!PermalinkCache.ContainsKey(permalink.ToLower())) {
 					Page p = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
 
-					Cache[p.Id] = p ;
-					PermalinkCache[p.Permalink] = p ;
+					if (p != null) {
+						Cache[p.Id] = p ;
+						PermalinkCache[p.Permalink] = p ;
+						PermalinkIdCache[p.PermalinkId] = p ;
+					}
 				}
-				return PermalinkCache[permalink.ToLower()] ;
+				return PermalinkCache.ContainsKey(permalink) ? PermalinkCache[permalink.ToLower()] : null ;
 			}
 			return Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
+		}
+
+		/// <summary>
+		/// Gets the page specified by the given permalink.
+		/// </summary>
+		/// <param name="permalink">The permalink</param>
+		/// <param name="draft">Weather to get the current draft</param>
+		/// <returns>The page</returns>
+		public static Page GetByPermalinkId(Guid permalinkid, bool draft = false) {
+			if (!draft) {
+				if (!PermalinkIdCache.ContainsKey(permalinkid)) {
+					Page p = Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
+
+					if (p != null) {
+						Cache[p.Id] = p ;
+						PermalinkCache[p.Permalink] = p ;
+						PermalinkIdCache[p.PermalinkId] = p ;
+					}
+				}
+				return PermalinkIdCache.ContainsKey(permalinkid) ? PermalinkIdCache[permalinkid] : null ;
+			}
+			return Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
 		}
 		#endregion
 
@@ -320,12 +366,19 @@ namespace Piranha.Models
 			// simply change states.
 			if (IsDraft) {
 				if (IsNew) {
-					MoveSeqno(ParentId, Seqno, true, t) ;
+					MoveSeqno(Id, ParentId, Seqno, true, t) ;
 				} else {
 					Page old = GetSingle(Id, true) ;
+					Page pub = GetSingle(Id, false) ;
+
 					if (old.ParentId != ParentId || old.Seqno != Seqno) {
-						MoveSeqno(old.ParentId, old.Seqno + 1, false, t) ;
-						MoveSeqno(ParentId, Seqno, true, t) ;
+						MoveSeqno(Id, old.ParentId, old.Seqno + 1, false, t) ;
+						MoveSeqno(Id, ParentId, Seqno, true, t) ;
+						if (pub != null) {
+							pub.ParentId = ParentId ;
+							pub.Seqno = Seqno ;
+							pub.Save(t) ;
+						}
 					}
 				}
 			}
@@ -342,12 +395,15 @@ namespace Piranha.Models
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
 
 			if (IsNew) {
-				MoveSeqno(ParentId, Seqno, true, t) ;
+				MoveSeqno(Id, ParentId, Seqno, true) ;
 			} else {
-				Page old = GetSingle(Id, true) ;
-				if (old.ParentId != ParentId || old.Seqno != Seqno) {
-					MoveSeqno(old.ParentId, old.Seqno + 1, false, t) ;
-					MoveSeqno(ParentId, Seqno, true, t) ;
+				using (IDbTransaction itx = Database.OpenTransaction()) {
+					Page old = GetSingle(Id, true) ;
+					if (old.ParentId != ParentId || old.Seqno != Seqno) {
+						MoveSeqno(Id, old.ParentId, old.Seqno + 1, false, itx) ;
+						MoveSeqno(Id, ParentId, Seqno, true, itx) ;
+						itx.Commit() ;
+					}
 				}
 			}
 			return base.SaveAndPublish(tx);
@@ -366,7 +422,7 @@ namespace Piranha.Models
 				// Only move pages around when we're deleting the draft so we don't get
 				// multiple move operations in the site tree.
 				if (IsDraft)
-					MoveSeqno(ParentId, Seqno + 1, false, t) ;
+					MoveSeqno(Id, ParentId, Seqno + 1, false, t) ;
 				Web.ClientCache.SetSiteLastModified(t) ;
 				if (base.Delete(t)) {
 					if (tx == null) 
@@ -389,7 +445,7 @@ namespace Piranha.Models
 		/// <param name="parentid">The parent id</param>
 		/// <param name="seqno">The seqno</param>
 		/// <param name="inc">Weather to increase or decrease</param>
-		internal static void MoveSeqno(Guid parentid, int seqno, bool inc, IDbTransaction tx = null) {
+		internal static void MoveSeqno(Guid pageid, Guid parentid, int seqno, bool inc, IDbTransaction tx = null) {
 			if (parentid != Guid.Empty)
 				Execute("UPDATE page SET page_seqno = page_seqno " + (inc ? "+ 1" : "- 1") +
 					" WHERE page_parent_id = @0 AND page_seqno >= @1", tx, parentid, seqno) ;
@@ -407,6 +463,8 @@ namespace Piranha.Models
 			// If we click save & publish right away the permalink is not created yet.
 			if (record.Permalink != null && PermalinkCache.ContainsKey(record.Permalink))
 				PermalinkCache.Remove(record.Permalink) ;
+			if (record.Permalink != null && PermalinkIdCache.ContainsKey(record.PermalinkId))
+				PermalinkIdCache.Remove(record.PermalinkId) ;
 			if (record.IsStartpage && Cache.ContainsKey(Guid.Empty))
 				Cache.Remove(Guid.Empty) ;
 

@@ -36,7 +36,6 @@
             <tr>
                 <th class="thumb"></th>
                 <th><span class="sort asc" data-sort="filename">@Piranha.Resources.Content.Filename</span></th>
-                <th class="date"><span class="sort" data-sort="type">@Piranha.Resources.Global.Type</span></th>
                 <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
                 <th class="one"><span class="one sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
                 <th></th>
@@ -47,9 +46,8 @@
             <tr>
                 <td><img src="@Url.Content("~/thumb/" + content.Id + "/50")" alt="@content.AlternateText" /></td>
                 <td class="filename"><a href="@Url.Action("edit", new { id = content.Id })">@content.Filename</a></td>
-                <td class="type">@content.Type</td>
-                <td class="updated">@content.Updated.ToString("yyyy-MM-dd")</td>
-                <td class="created">@content.Created.ToString("yyyy-MM-dd")</td>
+                <td class="date updated">@content.Updated.ToString("yyyy-MM-dd")</td>
+                <td class="date created">@content.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     <a href="@Url.Action("delete", new { id = content.Id })" title="@Piranha.Resources.Content.ListDelete" class="icon delete"></a></td>
             </tr>

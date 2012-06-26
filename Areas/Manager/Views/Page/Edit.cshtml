@@ -8,9 +8,20 @@
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
- 
+
         $(document).ready(function () {
             $("#Page_Title").focus();
+
+            $("#Page_ParentId").change(function () {
+                var page_id = $("#Page_Id").val();
+                var page_parentid = $("#org_parentid").val();
+                var page_seqno = $("#Page_Seqno").val();
+                var parentid = $("#Page_ParentId").val();
+
+                $.get("@Url.Action("siblings")?page_id=" + page_id + "&page_parentid=" + page_parentid + "&page_seqno=" + page_seqno + "&parentid=" + parentid, function(data) {
+                    $("#div-seqno").html(data);
+                });
+            });
         });
 
         //
@@ -56,28 +67,33 @@
     <div class="inner">
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
-            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
-            <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
-            <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
-            <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @if (!Model.Page.IsNew) {
             <li><a href="http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Page.Permalink, true).ToLower()" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
+            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
+            @if (Model.Page.Published > DateTime.MinValue) {
+            <li><a href="@Url.Action("unpublish", new { id = Model.Page.Id })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>
+            }
+            @if (Model.Page.Published > DateTime.MinValue && Model.Page.Updated > Model.Page.LastPublished) {
+            <li><a href="@Url.Action("revert", new { id = Model.Page.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
+            }
+            <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>
     </div>
 </div>
 }
 
-@{ Html.BeginForm("Edit", "Page") ; }
+@{ Html.BeginForm("edit", "page") ; }
 <div>
     @Html.HiddenFor(m => m.Page.IsNew)
     @Html.HiddenFor(m => m.Page.Id)
     @Html.HiddenFor(m => m.Page.IsDraft)
     @Html.HiddenFor(m => m.Page.Permalink)
     @Html.HiddenFor(m => m.Page.TemplateId)
-    @Html.HiddenFor(m => m.Page.ParentId)
-    @Html.HiddenFor(m => m.Page.Seqno)
+    @Html.HiddenFor(m => m.Page.PermalinkId)
     @Html.HiddenFor(m => m.Page.Permalink)
     @Html.HiddenFor(m => m.Page.Created)
     @Html.HiddenFor(m => m.Page.Updated)
@@ -87,11 +103,11 @@
     @Html.HiddenFor(m => m.Page.UpdatedBy)
     @Html.HiddenFor(m => m.Permalink.IsNew)
     @Html.HiddenFor(m => m.Permalink.Id)
-    @Html.HiddenFor(m => m.Permalink.ParentId)
     @Html.HiddenFor(m => m.Permalink.Type)
     @Html.HiddenFor(m => m.Permalink.Created)
     @Html.HiddenFor(m => m.Permalink.CreatedBy)
     <input type="hidden" id="draft" name="draft" value="true" />
+    <input type="hidden" id="org_parentid" value="@Model.Page.ParentId" />
 </div>
 <div class="grid_9">
     <div class="box expandable">
@@ -165,32 +181,31 @@
         </div>
     </div>
 
-    @if (Model.PageRegions.Count > 0) {
     <div class="box content-editor">
         <div class="title">
-            <h2>@Piranha.Resources.Global.Content</h2>
             <div id="regionbuttons" class="buttons">
                 @for (int n = 0; n < Model.PageRegions.Count; n++) {
                 <button id="@Html.Raw("btn_" + Model.PageRegions[n].Name)" class="btn@(n > 0 ? "" : " active") pageregion">@Model.PageRegions[n].Name</button>
                 }
-                <button id="btn_attachments" class="btn">@Piranha.Resources.Page.Attachments</button>
+                <button id="btn_attachments" class="btn@(Model.PageRegions.Count == 0 ? " active" : "")">@Piranha.Resources.Page.Attachments</button>
             </div>
+            <h2>@Piranha.Resources.Global.Content</h2>
         </div>
         <div class="inner">
+            @if (Model.PageRegions.Count > 0) {
             <div id="pageregions">
                 @Html.EditorFor(m => m.PageRegions)
             </div>
-            <div id="attachments" style="display:none">
+            }
+            <div id="attachments" @(Model.PageRegions.Count > 0 ? "style=display:none" : "")>
                 @Html.Partial("Partial/Attachments")
             </div>
         </div>
-    </div>
-    }
-    
+    </div>    
 </div>
 <div class="grid_3">
     <div class="box pagetemplate">
-        <div class="title"><h2>@Model.Template.Name.Singular</h2></div>
+        <div class="title"><h2>@Model.Template.Name</h2></div>
         <div class="inner">
             <div class="edit">
                 @Model.Template.Preview
@@ -198,10 +213,36 @@
             <p><small>@Model.Template.Description</small></p>
         </div>
     </div>
+    <div class="box expandable">
+        <div class="title"><h2>@Piranha.Resources.Page.Placement</h2></div>
+        <div class="inner optional">
+            <ul class="form">
+                <li>@Html.LabelFor(m => m.Page.ParentId)
+                    <div class="input">
+                        <select id="Page_ParentId" name="Page.ParentId">
+                            @foreach (var p in Model.Parents) {
+                            <option@(p.Level > 1 ? " style=padding-left:" + (p.Level - 1) * 14 + "px" : "") value="@p.Id"@(p.IsSelected ? " selected=selected" : "")>
+                                @p.Title</option>
+                            }
+                        </select>
+                    </div>
+                </li>
+                <li>@Html.LabelFor(m => m.Page.Seqno)
+                    <div class="input" id="div-seqno">
+                        <select id="Page_Seqno" name="Page.Seqno">
+                        @foreach (var s in Model.Siblings) {
+                        <option value="@s.Seqno"@(s.IsSelected ? " selected=selected" : "")>@s.Title</option>
+                        }
+                        </select>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
     @if (Model.Properties.Count > 0) {
-    <div class="box">
+    <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
-        <div class="inner">
+        <div class="inner optional">
             <ul class="form">
             @for (int n = 0; n < Model.Properties.Count; n++) {
                 <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
@@ -225,8 +266,10 @@
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
         <div class="inner optional">
             <ul class="list">
-                <li>@Piranha.Resources.Global.LastPublished <small class="right">@Model.Page.LastPublished.ToShortDateString()</small></li>
-                <li>@Piranha.Resources.Global.Published <small class="right">@Model.Page.Published.ToShortDateString()</small></li>
+                <li>@Piranha.Resources.Global.LastPublished <small class="right">
+                    @(Model.Page.LastPublished > DateTime.MinValue ? Model.Page.LastPublished.ToShortDateString() : "")</small></li>
+                <li>@Piranha.Resources.Global.Published <small class="right">
+                    @(Model.Page.Published > DateTime.MinValue ? Model.Page.Published.ToShortDateString() : "")</small></li>
                 <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Page.Updated.ToShortDateString()</small></li>
                 <li>@Piranha.Resources.Global.Created <small class="right">@Model.Page.Created.ToShortDateString()</small></li>
             </ul>

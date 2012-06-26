@@ -18,21 +18,40 @@ namespace Piranha.WebPages
 	/// Page class for a single page where the model is of the generic type T.
 	/// </summary>
 	/// <typeparam name="T">The model type</typeparam>
-	public abstract class SinglePost<T> : ContentPage<T> where T : PostModel {
+	public abstract class SinglePost<T> : ContentPage<T> where T : PostModel
+	{
+		#region Members
+		private Piranha.Models.Post post ;
+		#endregion
+
 		/// <summary>
 		/// Initializes the web page
 		/// </summary>
 		protected override void InitializePage() {
-			string permalink = UrlData.Count > 0 ? UrlData[UrlData.Count - 1] : "" ;
+			string permalink = UrlData.Count > 0 ? UrlData[0] : "" ;
+			bool   draft = false ;
+			bool   cached = false ;
 
-			// Load the current page model
+			// Check if we want to see the draft
+			if (User.HasAccess("ADMIN_PAGE")) {
+				if (!String.IsNullOrEmpty(Request["draft"])) {
+					try {
+						draft = Convert.ToBoolean(Request["draft"]) ;
+					} catch {}
+				}
+			}
+
+			// Load the current post
 			if (!String.IsNullOrEmpty(permalink))
-				InitModel(PostModel.GetByPermalink<T>(permalink)) ;
+				post = Post.GetByPermalink(permalink, draft) ;
 
 			// Cache management
 			DateTime mod = GetLastModified() ;
-			ClientCache.HandleClientCache(HttpContext.Current, Model.Post.Id.ToString(), mod) ;
+			ClientCache.HandleClientCache(HttpContext.Current, post.Id.ToString(), mod) ;
 
+			// Load the model if the post wasn't cached
+			if (!cached)
+				InitModel(PostModel.Get<T>(post)) ;
 			base.InitializePage() ;
 		}
 
@@ -41,7 +60,9 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <returns></returns>
 		protected virtual DateTime GetLastModified() {
-			return Model.Post.Updated ;
+			if (post == null)
+				throw new ArgumentNullException();
+			return post.Updated ;
 		}
 
 		#region Private methods

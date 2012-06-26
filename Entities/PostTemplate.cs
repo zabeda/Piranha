@@ -25,8 +25,10 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
-		[Column(Name="posttemplate_name", Json=true)]
-		public ComplexName Name { get ; set ; }
+		[Column(Name="posttemplate_name")]
+		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="Name")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Global), ErrorMessageResourceName="NameRequired")]
+		public string Name { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the description.
@@ -104,7 +106,6 @@ namespace Piranha.Models
 		/// </summary>
 		public PostTemplate() : base() {
 			Properties = new List<string>() ;
-			Name = new ComplexName() ;
 		}
 	}
 }

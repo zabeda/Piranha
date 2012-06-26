@@ -12,6 +12,10 @@
     <AssemblyName>Piranha</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EcmaScript.NET.modified">
-      <HintPath>..\..\Mark\Projects\Mark\packages\YUICompressor.NET.1.6.0.2\lib\net35\EcmaScript.NET.modified.dll</HintPath>
+      <HintPath>..\packages\YUICompressor.NET.1.7.1.0\lib\net35\EcmaScript.NET.modified.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -55,7 +59,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Yahoo.Yui.Compressor">
-      <HintPath>..\..\Mark\Projects\Mark\packages\YUICompressor.NET.1.6.0.2\lib\net35\Yahoo.Yui.Compressor.dll</HintPath>
+      <HintPath>..\packages\YUICompressor.NET.1.7.1.0\lib\net35\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -69,12 +73,14 @@
     <Compile Include="Areas\Manager\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Manager\Controllers\ContentController.cs" />
     <Compile Include="Areas\Manager\Controllers\InstallController.cs" />
-    <Compile Include="Areas\Manager\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Manager\Controllers\PageController.cs" />
     <Compile Include="Areas\Manager\Controllers\PostController.cs" />
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
     <Compile Include="Data\ActiveMap.cs" />
+    <Compile Include="Drawing\ImageUtils.cs" />
+    <Compile Include="Entities\DuplicateLoginException.cs" />
+    <Compile Include="Entities\DuplicatePermalinkException.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\ComplexName.cs" />
@@ -139,6 +145,8 @@
     <Compile Include="AccessAttribute.cs" />
     <Compile Include="Mvc\BaseViewPage.cs" />
     <Compile Include="Mvc\PiranhaHelper.cs" />
+    <Compile Include="Mvc\SinglePage.cs" />
+    <Compile Include="Mvc\SinglePageController.cs" />
     <Compile Include="Resources\Account.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -184,6 +192,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rest\CategoryService.cs" />
+    <Compile Include="Rest\ChangeService.cs" />
+    <Compile Include="Rest\ContentService.cs" />
     <Compile Include="Rest\DataContracts\Category.cs" />
     <Compile Include="Rest\DataContracts\Changes.cs" />
     <Compile Include="Rest\DataContracts\Content.cs" />
@@ -191,7 +202,8 @@
     <Compile Include="Rest\DataContracts\Property.cs" />
     <Compile Include="Rest\DataContracts\Region.cs" />
     <Compile Include="Rest\DataContracts\Sitemap.cs" />
-    <Compile Include="Rest\RestService.cs" />
+    <Compile Include="Rest\PageService.cs" />
+    <Compile Include="Rest\SitemapServices.cs" />
     <Compile Include="WebPages\BasePage.cs" />
     <Compile Include="WebPages\ContentPage.cs" />
     <Compile Include="WebPages\Archive.cs" />
@@ -223,6 +235,7 @@
     <Compile Include="Web\ClientCache.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-pdf.png" />
     <EmbeddedResource Include="Data\Scripts\Updates\3.sql" />
     <EmbeddedResource Include="Resources\Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -280,8 +293,6 @@
     <EmbeddedResource Include="Areas\Manager\Views\Account\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Edit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Dashboard\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Dashboard\Test.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Edit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\EditorTemplates\Region.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Index.cshtml" />
@@ -317,9 +328,8 @@
     <EmbeddedResource Include="Areas\Manager\Views\Page\Partial\SiteTree.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Uploads.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ExternalList.cshtml" />
-    <None Include="LICENSE.md" />
+    <EmbeddedResource Include="Areas\Manager\Views\Page\Siblings.cshtml" />
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Css\Style.css" />
@@ -414,10 +424,6 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\utils\validate.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-ui-1.8.16.custom.min.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery.equalheights.js" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Data.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -446,6 +452,47 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\5.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-publish-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-save-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-delete-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-back-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-reload-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-preview-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\6.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\7.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-revert-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unpublish-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-music.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-ppt.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-video.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-xls.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-zip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

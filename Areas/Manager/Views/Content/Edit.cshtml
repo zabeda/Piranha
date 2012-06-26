@@ -57,10 +57,8 @@
             <ul class="form">
                 <li>
                     <label>@Piranha.Resources.Content.Upload</label>
-                    <div class="hidden">
-                        <input type="file" id="UploadedFile" name="UploadedFile" data-id="upload_name" />
-                    </div>
                     <div class="upload">
+                        <input type="file" id="UploadedFile" name="UploadedFile" data-id="upload_name" />
                         <button class="btn blue file" data-id="UploadedFile">@Piranha.Resources.Global.ChooseFile</button>
                         <div class="input">
                             <input id="upload_name" type="text" />
@@ -101,6 +99,9 @@
                     <p>@(Model.Content.Width)x@(Model.Content.Height) px</p>
                 </li>
                 }
+                <li><label>@Piranha.Resources.Global.PublicLink</label>
+                    <p>@UI.Content(Model.Content.Id)</p>
+                </li>
             </ul>
         </div>
     </div>

@@ -50,7 +50,7 @@ function bindAttachmentEvents() {
         $("#boxContent .box > div").remove();
         floatBox.show("boxContent");
         $.ajax({
-            url: siteroot + "/manager/content/popup",
+            url: siteroot + "manager/content/popup",
             success: function(data) {
                 $("#boxContent .box").append(data) ;
                 floatBox.position($("#boxContent .box"));
@@ -66,7 +66,7 @@ function bindAttachmentEvents() {
     $(".gallery-item img").unbind();
     $(".gallery-item img").click(function() {
         $.ajax({
-            url: siteroot + "/rest/content/" + $(this).attr("data-id"),
+            url: siteroot + "rest/content/get/" + $(this).attr("data-id"),
             dataType: "json",
             success: function(data) {
                 addAttachment(data) ;

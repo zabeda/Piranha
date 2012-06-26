@@ -1,6 +1,5 @@
 ﻿DROP TABLE relation;
 DROP TABLE upload;
-DROP TABLE attachment;
 DROP TABLE content;
 DROP TABLE region;
 DROP TABLE property;

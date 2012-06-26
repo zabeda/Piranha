@@ -19,12 +19,12 @@
 }
 @{ Html.BeginForm() ; }
 @Html.HiddenFor(m => m.Category.Id)
+@Html.HiddenFor(m => m.Category.PermalinkId)
 @Html.HiddenFor(m => m.Category.IsNew)
 @Html.HiddenFor(m => m.Category.Created)
 @Html.HiddenFor(m => m.Category.CreatedBy)
 @Html.HiddenFor(m => m.Permalink.IsNew)
 @Html.HiddenFor(m => m.Permalink.Id)
-@Html.HiddenFor(m => m.Permalink.ParentId)
 @Html.HiddenFor(m => m.Permalink.Type)
 @Html.HiddenFor(m => m.Permalink.Name)
 @Html.HiddenFor(m => m.Permalink.Created)

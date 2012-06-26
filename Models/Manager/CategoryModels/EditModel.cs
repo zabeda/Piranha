@@ -36,12 +36,13 @@ namespace Piranha.Models.Manager.CategoryModels
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		public EditModel() {
-			Category   = new Category() {
-				Id = Guid.NewGuid()
-			} ;
 			Permalink  = new Permalink() {
-				ParentId = Category.Id,
+				Id = Guid.NewGuid(),
 				Type = Models.Permalink.PermalinkType.CATEGORY
+			} ;
+			Category   = new Category() {
+				Id = Guid.NewGuid(),
+				PermalinkId = Permalink.Id
 			} ;
 
 			List<Category> cats = Piranha.Models.Category.Get(new Params() { OrderBy = "category_name ASC" }) ;
@@ -56,9 +57,9 @@ namespace Piranha.Models.Manager.CategoryModels
 		/// <returns>The model</returns>
 		public static EditModel GetById(Guid id) {
 			EditModel m = new EditModel() {
-				Category = Category.GetSingle(id),
-				Permalink = Permalink.GetByParentId(id)
+				Category = Category.GetSingle(id)
 			} ;
+			m.Permalink = Permalink.GetSingle(m.Category.PermalinkId) ;
 
 			List<Category> cats = Piranha.Models.Category.Get("category_id != @0", id, 
 				new Params() { OrderBy = "category_name ASC" }) ;
@@ -74,10 +75,10 @@ namespace Piranha.Models.Manager.CategoryModels
 		public bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Category.Save(tx) ;
 					if (Permalink.IsNew)
 						Permalink.Name = Permalink.Generate(Category.Name) ;
 					Permalink.Save(tx) ;
+					Category.Save(tx) ;
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -94,11 +95,11 @@ namespace Piranha.Models.Manager.CategoryModels
 					List<Relation> pc = Relation.GetByTypeAndRelatedId(Relation.RelationType.POSTCATEGORY, Category.Id) ;
 					pc.ForEach((r) => r.Delete(tx)) ;
 
-					// Delete permalink
-					Permalink.Delete(tx) ;
-
 					// Delete category
 					Category.Delete(tx) ;
+
+					// Delete permalink
+					Permalink.Delete(tx) ;
 					tx.Commit() ;
 				} catch { tx.Rollback() ; return false ; }
 			}

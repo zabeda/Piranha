@@ -33,34 +33,50 @@ namespace Piranha.Web
 
 				DateTime mod = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime ;
 
-				if (!ClientCache.HandleClientCache(context, file.VirtualPath, mod)) {
-					if (file.Name.EndsWith(".js")) {
-						context.Response.ContentType = "text/javascript" ;
-					} else if (file.Name.EndsWith(".css")) {
-						context.Response.ContentType = "text/css" ;
-					} else if (file.Name.EndsWith(".png")) {
-						context.Response.ContentType = "image/png" ;
-					} else if (file.Name.EndsWith(".eot")) {
-						context.Response.ContentType = "application/vnd.ms-fontobject" ;
-					} else if (file.Name.EndsWith(".ttf")) {
-						context.Response.ContentType = "application/octet-stream" ;
-					} else if (file.Name.EndsWith(".svg")) {
-						context.Response.ContentType = "image/svg+xml" ;
-					} else if (file.Name.EndsWith(".woff")) {
-						context.Response.ContentType = "application/x-woff" ;
-					}
-					var stream = file.Open() ;
-					byte[] bytes = new byte[stream.Length] ;
+				WriteFile(context, file.VirtualPath, file.Name, mod, file.Open()) ;
+			} else if (File.Exists(context.Server.MapPath(context.Request.Path))) {
+				FileInfo file = new FileInfo(context.Server.MapPath(context.Request.Path)) ;
 
-					stream.Read(bytes, 0, Convert.ToInt32(stream.Length)) ;
-#if DEBUG
-					context.Response.BinaryWrite(bytes) ;
-#else
-					context.Response.BinaryWrite(bytes) ;
-#endif
-					stream.Close() ;
-				}
+				WriteFile(context, context.Request.Path, file.Name, file.LastWriteTime, file.Open(FileMode.Open)) ;
+			} else {
+				context.Response.StatusCode = 404 ;
 			}
+		}
+
+		/// <summary>
+		/// Writes to the output stream.
+		/// </summary>
+		/// <param name="context">The current http context</param>
+		/// <param name="path">The virtual path</param>
+		/// <param name="name">The filename</param>
+		/// <param name="mod">The latest modification date</param>
+		/// <param name="stream">The file stream</param>
+		public void WriteFile(HttpContext context, string path, string name, DateTime mod, Stream stream) {
+			if (!ClientCache.HandleClientCache(context, path, mod)) {
+				if (name.EndsWith(".js")) {
+					context.Response.ContentType = "text/javascript" ;
+				} else if (name.EndsWith(".css")) {
+					context.Response.ContentType = "text/css" ;
+				} else if (name.EndsWith(".png")) {
+					context.Response.ContentType = "image/png" ;
+				} else if (name.EndsWith(".eot")) {
+					context.Response.ContentType = "application/vnd.ms-fontobject" ;
+				} else if (name.EndsWith(".ttf")) {
+					context.Response.ContentType = "application/octet-stream" ;
+				} else if (name.EndsWith(".svg")) {
+					context.Response.ContentType = "image/svg+xml" ;
+				} else if (name.EndsWith(".woff")) {
+					context.Response.ContentType = "application/x-woff" ;
+				}
+				byte[] bytes = new byte[stream.Length] ;
+				stream.Read(bytes, 0, Convert.ToInt32(stream.Length)) ;
+#if DEBUG
+				context.Response.BinaryWrite(bytes) ;
+#else
+				context.Response.BinaryWrite(bytes) ;
+#endif
+			}
+			stream.Close() ;
 		}
 	}
 }

@@ -16,6 +16,11 @@ namespace Piranha.Models
 		Guid Id { get ; }
 
 		/// <summary>
+		/// Gets/sets the template id.
+		/// </summary>
+		Guid TemplateId { get ; }
+
+		/// <summary>
 		/// Gets/sets the title.
 		/// </summary>
 		string Title { get ; }

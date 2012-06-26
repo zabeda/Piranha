@@ -1,6 +1,6 @@
 ﻿@model List<Piranha.Models.Sitemap>
 @foreach (var page in Model) {
-    <li class="@(page.Pages.Count > 0 ? (page.Level <= ViewBag.Levels ? "expanded" : "collapsed") : "") @(page.Updated > page.LastPublished ? "draft" : "")">
+    <li id="@page.Id" class="@(page.Pages.Count > 0 ? (page.Level <= ViewBag.Levels ? "expanded" : "collapsed") : "") @(page.Updated > page.LastPublished ? "draft" : "")">
         <span class="buttons">
             <button class="icon arrow-down marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @(page.Seqno + 1))" type="submit"></button>
             <button class="icon arrow-right marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
@@ -10,7 +10,7 @@
         </span>
         <span class="date">@page.Created.ToShortDateString()</span>
         <span class="date">@page.Updated.ToShortDateString()</span>
-        <span class="type">@page.TemplateName.Singular</span>
+        <span class="type">@page.TemplateName</span>
         <span class="title">@if (page.Pages.Count > 0) {<span class="action"></span>}<a href="@Url.Action("edit", "page", new { id = page.Id })">@page.Title</a></span>
         @if (page.Pages.Count > 0) {
         <ul>

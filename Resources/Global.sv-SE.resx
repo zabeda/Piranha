@@ -207,6 +207,9 @@
   <data name="Properties" xml:space="preserve">
     <value>Egenskaper</value>
   </data>
+  <data name="PublicLink" xml:space="preserve">
+    <value>Publik länk</value>
+  </data>
   <data name="Published" xml:space="preserve">
     <value>Publicerad</value>
   </data>
@@ -240,11 +243,17 @@
   <data name="ToolbarReload" xml:space="preserve">
     <value>Ladda om</value>
   </data>
+  <data name="ToolbarRevert" xml:space="preserve">
+    <value>Återställ</value>
+  </data>
   <data name="ToolbarSave" xml:space="preserve">
     <value>Spara</value>
   </data>
   <data name="ToolbarSearch" xml:space="preserve">
     <value>Sök</value>
+  </data>
+  <data name="ToolbarUnpublish" xml:space="preserve">
+    <value>Avpublicera</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Typ</value>

@@ -30,34 +30,54 @@ namespace Piranha.WebPages.RequestHandlers
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		protected virtual void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length > 0) {
-				Permalink perm = Permalink.GetByName(args[0]) ;
+				Permalink perm = null ;
+                int segments = 0;
+				// Accept permalinks with '/' in them
+				for (int n = 0; n < args.Length; n++) {
+					perm = Permalink.GetByName(args.Subset(0, args.Length - n).Implode("/")) ;
+                    segments = args.Length - n;
+					if (perm != null)
+						break ;
+				}
 
 				if (perm != null) {
 					if (perm.Type == Permalink.PermalinkType.PAGE) {
-						Page page = Page.GetSingle(perm.ParentId, draft) ;
+						Page page = Page.GetByPermalinkId(perm.Id, draft) ;
 
-						if (!String.IsNullOrEmpty(page.Redirect)) {
-							if (page.Redirect.StartsWith("http://"))
-								context.Response.Redirect(page.Redirect) ;
-							else context.Response.Redirect(page.Redirect) ;
-						} else if (!String.IsNullOrEmpty(page.Controller)) {
-							context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + 
-								(draft ? "?draft=true" : ""), false) ;
+						if (page != null) {
+							if (!String.IsNullOrEmpty(page.Redirect)) {
+								if (page.Redirect.StartsWith("http://"))
+									context.Response.Redirect(page.Redirect) ;
+								else context.Response.Redirect(page.Redirect) ;
+							} else if (!String.IsNullOrEmpty(page.Controller)) {
+								if (page.Controller.StartsWith("~/")) {
+									context.RewritePath(page.Controller + "/" + args.Subset(segments).Implode("/") + "?permalink=" + perm.Name, false);
+								} else context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + 
+									(draft ? "?draft=true" : ""), false) ;
+							} else {
+								context.RewritePath("~/page/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+							}
 						} else {
-							context.RewritePath("~/page/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+							context.Response.StatusCode = 404 ;
 						}
 					} else if (perm.Type == Permalink.PermalinkType.POST) {
-						Post post = Post.GetSingle(perm.ParentId, draft) ;
+						Post post = Post.GetByPermalinkId(perm.Id, draft) ;
 
-						if (!String.IsNullOrEmpty(post.Controller)) {
-							context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + 
-								(draft ? "?draft=true" : ""), false) ;
+						if (post != null) {
+							if (!String.IsNullOrEmpty(post.Controller)) {
+								context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + 
+									(draft ? "?draft=true" : ""), false) ;
+							} else {
+								context.RewritePath("~/post/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+							}
 						} else {
-							context.RewritePath("~/post/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+							context.Response.StatusCode = 404 ;
 						}
 					} else if (perm.Type == Permalink.PermalinkType.CATEGORY) {
 						context.RewritePath("~/archive/" + args.Implode("/"), false) ;
 					}
+				} else {
+					context.Response.StatusCode = 404 ;
 				}
 			} else {
 				//

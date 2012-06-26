@@ -96,12 +96,23 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
+		/// Generates a full site url from the virtual path.
+		/// </summary>
+		/// <param name="virtualpath">The virtual path.</param>
+		/// <returns>The full site url</returns>
+		public IHtmlString SiteUrl(string virtualpath) {
+			var request = HttpContext.Current.Request ;
+
+			return new HtmlString(virtualpath.Replace("~/", request.ApplicationPath + (request.ApplicationPath != "/" ? "/" : ""))) ;
+		}
+
+		/// <summary>
 		/// Generates the url to the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The url</returns>
 		public IHtmlString Permalink(string permalink) {
-			return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + permalink)) ;
+			return SiteUrl("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + permalink) ;
 		}
 
 		/// <summary>
@@ -175,7 +186,8 @@ namespace Piranha.Web
 				if (RootNode != "") {
 					Permalink pr = Models.Permalink.GetSingle("permalink_name = @0", RootNode) ;
 					if (pr != null) {
-						Sitemap page = Sitemap.GetStructure(true).GetRootNode(pr.ParentId) ;
+						Page p = Page.GetByPermalinkId(pr.Id) ;
+						Sitemap page = Sitemap.GetStructure(true).GetRootNode(p.Id) ;
 						if (page != null)
 							sm = page.Pages ;
 					}
@@ -206,7 +218,8 @@ namespace Piranha.Web
 				if (RootNode != "") {
 					Permalink pr = Models.Permalink.GetSingle("permalink_name = @0", RootNode) ;
 					if (pr != null) {
-						Sitemap page = Sitemap.GetStructure(true).GetRootNode(pr.ParentId) ;
+						Page p = Page.GetByPermalinkId(pr.Id) ;
+						Sitemap page = Sitemap.GetStructure(true).GetRootNode(p.Id) ;
 						if (page != null)
 							sm = page.Pages ;
 					}
@@ -227,7 +240,7 @@ namespace Piranha.Web
 		/// </summary>
 		/// <param name="action">The form action</param>
 		/// <returns>A html string</returns>
-		public IHtmlString FormAction(string action) {
+		public virtual IHtmlString FormAction(string action) {
 			return new HtmlString(String.Format("<input type=\"hidden\" name=\"piranha_form_action\" value=\"{0}\" />",
 				action)) ;
 		}

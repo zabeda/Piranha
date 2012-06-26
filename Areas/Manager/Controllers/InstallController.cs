@@ -121,12 +121,6 @@ namespace Piranha.Areas.Manager.Controllers
 					// Split statements and execute
 					stmts = data.Split(new char[] { ';' }) ;
 					using (IDbTransaction tx = Database.OpenTransaction()) {
-						// Create database from script
-						foreach (string stmt in stmts) {
-							if (!String.IsNullOrEmpty(stmt.Trim()))
-								SysUser.Execute(stmt, tx) ;
-						}
-
 						// Create user
 						SysUser usr = new SysUser() {
 							Login = m.UserLogin,
@@ -146,7 +140,12 @@ namespace Piranha.Areas.Manager.Controllers
 							IsNew = false
 						} ;
 						pwd.Save(tx) ;
-		
+
+						// Create default data
+						foreach (string stmt in stmts) {
+							if (!String.IsNullOrEmpty(stmt.Trim()))
+								SysUser.Execute(stmt, tx) ;
+						}		
 						tx.Commit() ;
 					}	
 				}

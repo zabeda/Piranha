@@ -27,6 +27,8 @@
             });
         }
 
+        var currmove;
+
         $(document).ready(function () {
             formatSitemap();
 
@@ -45,9 +47,24 @@
             });
 
             $(".delete").click(function () {
+                /*currmove = $(this).parent().parent().attr("id");
+                $(this).parent().parent().addClass("move-active");
+                $("ul.sitemap").addClass("move");
+                bindMove();
+                return false;*/
                 return confirm(deletemsg);
             });
         });
+
+        function bindMove() {
+            $(".move .title a").click(function () {
+                if ($(this).parent().parent().hasClass("expanded"))
+                    alert("move: " + currmove + " below: " + $(this).parent().parent().attr("id"));
+                else alert("move: " + currmove + " after: " + $(this).parent().parent().attr("id"));
+
+                return false;
+            });
+        }
     </script>
 }
 @section Toolbar { 
@@ -64,7 +81,7 @@
 </div>
 }
 <div class="grid_12">
-@using (Html.BeginForm("Insert", "Page")) {
+@using (Html.BeginForm("insert", "page")) {
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
@@ -90,7 +107,7 @@
         <div class="inner">
         @foreach (var template in Model.Templates) {
             <div class="templates left" data-templateid="@template.Id">
-                <h3>@template.Name.Singular</h3>
+                <h3>@template.Name</h3>
                 <div class="preview" style="width:120px;height:120px;margin:0 auto;">
                     @template.Preview
                 </div>

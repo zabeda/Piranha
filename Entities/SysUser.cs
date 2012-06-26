@@ -147,12 +147,21 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Wether the operation was successful</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
+			// Check for login name duplicates 
+			if (SysUser.GetSingle("sysuser_login = @0" + (!IsNew ? " AND sysuser_id != @1" : ""), Login, Id) != null)
+ 				throw new DuplicateLoginException() ;
+
 			if (IsNew) {
-				Id      = Guid.NewGuid() ;
+				if (Id == Guid.Empty)
+					Id = Guid.NewGuid() ;
 				Updated = Created = DateTime.Now ;
-				UpdatedBy = CreatedBy = Id ;
+				if (HttpContext.Current.User.Identity.IsAuthenticated)
+					UpdatedBy = CreatedBy = new Guid(HttpContext.Current.User.Identity.Name) ;
+				else UpdatedBy = CreatedBy = Id ;
 			} else {
 				Updated = DateTime.Now ;
+				if (HttpContext.Current.User.Identity.IsAuthenticated)
+					UpdatedBy = new Guid(HttpContext.Current.User.Identity.Name) ;
 			}
 			return base.Save(tx);
 		}

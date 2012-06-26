@@ -74,7 +74,7 @@ VALUES ('8a4ca0f3-261b-4689-8c1f-98065b65f9ee', '8940b41a-e3a9-44f3-b564-bfd2814
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '4', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '7', 'The currently installed version of Piranha.', 1,
 	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
@@ -108,32 +108,32 @@ VALUES ('095502DD-D655-4001-86F9-97D18222A548', 'SITEMAP_EXPANDED_LEVELS', '0', 
 -- Default templates
 INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_description, pagetemplate_page_regions,
 	pagetemplate_preview, pagetemplate_created, pagetemplate_updated, pagetemplate_created_by, pagetemplate_updated_by)
-VALUES ('906761ea-6c04-4f4b-9365-f2c350ff4372', '{"Singular":"Standard page","Plural":"Standard pages"}', 'Standard page type.',
+VALUES ('906761ea-6c04-4f4b-9365-f2c350ff4372', 'Standard page', 'Standard page type.',
 	'["Content"]', '<table class="template"><tr><td id="Content"></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO posttemplate (posttemplate_id, posttemplate_name, posttemplate_description, posttemplate_preview,
 	posttemplate_created, posttemplate_updated, posttemplate_created_by, posttemplate_updated_by)
-VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', '{"Singular":"Standard post","Plural":"Standard posts"}', 'Standard post type.', 
+VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', 'Standard post', 'Standard post type.', 
 	'<table class="template"><tr><td></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
--- Default page
-INSERT INTO page (page_id, page_draft, page_template_id, page_seqno, page_title, page_keywords, page_description,
-	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
-VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 1, '906761ea-6c04-4f4b-9365-f2c350ff4372', 1, 'Start', 
-	'Piranha, Welcome', 'Welcome to Piranha', GETDATE(), GETDATE(), GETDATE(), GETDATE(),
-	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
-INSERT INTO page (page_id, page_draft, page_template_id, page_seqno, page_title, page_keywords, page_description,
-	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
-VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 0, '906761ea-6c04-4f4b-9365-f2c350ff4372', 1, 'Start', 
-	'Piranha, Welcome', 'Welcome to Piranha', GETDATE(), GETDATE(), GETDATE(), GETDATE(),
+-- Permalink
+INSERT INTO permalink (permalink_id, permalink_type, permalink_name, permalink_created,
+	permalink_updated, permalink_created_by, permalink_updated_by)
+VALUES ('1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 'PAGE', 'start', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
--- Permalink
-INSERT INTO permalink (permalink_id, permalink_parent_id, permalink_type, permalink_name, permalink_created,
-	permalink_updated, permalink_created_by, permalink_updated_by)
-VALUES ('1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', '7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 'PAGE', 'start',
-	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+-- Default page
+INSERT INTO page (page_id, page_draft, page_template_id, page_permalink_id, page_seqno, page_title, page_keywords, page_description,
+	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
+VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 1, '906761ea-6c04-4f4b-9365-f2c350ff4372', '1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 
+	1, 'Start', 'Piranha, Welcome', 'Welcome to Piranha', GETDATE(), GETDATE(), GETDATE(), GETDATE(),
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO page (page_id, page_draft, page_template_id, page_permalink_id, page_seqno, page_title, page_keywords, page_description,
+	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
+VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 0, '906761ea-6c04-4f4b-9365-f2c350ff4372', '1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 
+	1, 'Start', 'Piranha, Welcome', 'Welcome to Piranha', GETDATE(), GETDATE(), GETDATE(), GETDATE(),
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Region
 INSERT INTO region (region_id, region_draft, region_page_id, region_page_draft, region_name, region_body, 

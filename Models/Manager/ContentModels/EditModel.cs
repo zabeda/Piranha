@@ -57,7 +57,7 @@ namespace Piranha.Models.Manager.ContentModels
 		public static EditModel GetById(Guid id) {
 			EditModel em = new EditModel() ;
 			em.Content = Piranha.Models.Content.GetSingle(id) ;
-			Relation.GetFieldsByDataId("relation_related_id", id).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
+			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
 			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
 
@@ -75,6 +75,12 @@ namespace Piranha.Models.Manager.ContentModels
 				// Check if this is an image
 				try {
 					Image img = Image.FromStream(UploadedFile.InputStream) ;
+					try {
+						// Resize the image according to image max width
+						int max = Convert.ToInt32(SysParam.GetByName("IMAGE_MAX_WIDTH").Value) ;
+						if (max > 0)
+							img = Drawing.ImageUtils.Resize(img, max) ;
+					} catch {}
 					Content.IsImage = true ;
 					Content.Width = img.Width ;
 					Content.Height = img.Height ;
@@ -90,7 +96,7 @@ namespace Piranha.Models.Manager.ContentModels
 				Relation.DeleteByDataId(Content.Id) ;
 				List<Relation> relations = new List<Relation>() ;
 				ContentCategories.ForEach(c => relations.Add(new Relation() { 
-					DataId = Content.Id, RelatedId = c, Type = Relation.RelationType.CONTENTCATEGORY })
+					DataId = Content.Id, RelatedId = c, IsDraft = false, Type = Relation.RelationType.CONTENTCATEGORY })
 					) ;
 				relations.ForEach(r => r.Save()) ;
 

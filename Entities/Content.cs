@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 
@@ -21,6 +22,79 @@ namespace Piranha.Models
 	[PrimaryKey(Column="content_id")]
 	public class Content : PiranhaRecord<Content>, ICacheRecord<Content>
 	{
+		#region Members
+		private Dictionary<string, string> thumbs = new Dictionary<string, string>() {
+			// Pdf 
+			{ "application/pdf", "Piranha.Areas.Manager.Content.Img.thumb-pdf.png" },
+			// Excel
+			{ "application/vnd.ms-excel", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/msexcel", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/x-msexcel", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/x-ms-excel", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/x-excel", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/x-dos_ms_excel", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/xls", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/x-xls", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			{ "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Piranha.Areas.Manager.Content.Img.thumb-xls.png" },
+			// Mp3
+			{ "audio/mpeg", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/x-mpeg", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/mp3", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/x-mp3", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/mpeg3", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/x-mpeg3", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/mpg", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/x-mpg", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/x-mpegaudio", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			// Wma
+			{ "audio/x-ms-wma", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			// Flac
+			{ "audio/flac", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			// Ogg
+			{ "audio/ogg", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			// M4a
+			{ "audio/mp4a-latm", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			{ "audio/mp4", "Piranha.Areas.Manager.Content.Img.thumb-music.png" },
+			// Avi
+			{ "video/avi", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "video/msvideo", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "video/x-msvideo", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "image/avi", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "video/xmpg2", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/x-troff-msvideo", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "audio/aiff", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "audio/avi", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			// Mpeg
+			{ "video/mpeg", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			// Mov
+			{ "video/quicktime", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "video/x-quicktime", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "image/mov", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "audio/x-midi", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "audio/x-wav", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			// Ppt
+			{ "application/vnd.ms-powerpoint", "Piranha.Areas.Manager.Content.Img.thumb-ppt.png" },
+			{ "application/mspowerpoint", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/ms-powerpoint", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/mspowerpnt", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/vnd-mspowerpoint", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/powerpoint", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/x-powerpoint", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			{ "application/x-m", "Piranha.Areas.Manager.Content.Img.thumb-video.png" },
+			// Zip
+			{ "application/zip", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			{ "application/x-zip", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			{ "application/x-zip-compressed", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			{ "application/octet-stream", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			{ "application/x-compress", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			{ "application/x-compressed", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			{ "multipart/x-zip", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" },
+			// Rar
+			{ "application/x-rar-compressed", "Piranha.Areas.Manager.Content.Img.thumb-zip.png" }
+		};
+		private string defaultThumb = "Piranha.Areas.Manager.Content.Img.thumb-default.png" ;
+		#endregion
+
 		#region Fields
 		/// <summary>
 		/// Gets/sets the id.
@@ -208,20 +282,9 @@ namespace Piranha.Models
 						// Return generated & cached resized image
 						WriteFile(context.Response, CachedImagePath(width.Value, height)) ;
 					} else if (File.Exists(PhysicalPath)) {
-						using (Bitmap bmp = new Bitmap(width.Value, height)) {
-							Graphics grp = Graphics.FromImage(bmp) ;
-							Image img = Image.FromFile(PhysicalPath) ;
+						Image img = Drawing.ImageUtils.Resize(Image.FromFile(PhysicalPath), width.Value) ;
+						img.Save(CachedImagePath(width.Value, height), img.RawFormat) ;
 
-							grp.SmoothingMode = SmoothingMode.HighQuality ;
-							grp.CompositingQuality = CompositingQuality.HighQuality ;
-							grp.InterpolationMode = InterpolationMode.High ;
-
-							// Resize and crop image
-							Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
-							grp.DrawImage(img, dst, 0, 0, Width, Height, GraphicsUnit.Pixel) ;
-
-							bmp.Save(CachedImagePath(width.Value, height), img.RawFormat) ;
-						}
 						WriteFile(context.Response, CachedImagePath(width.Value, height)) ;
 					}
 				}
@@ -240,9 +303,22 @@ namespace Piranha.Models
 					// Return generated & cached thumbnail
 					WriteFile(context.Response, CachedThumbnailPath(size)) ;
 				} else if (File.Exists(PhysicalPath)) {
-					if (IsImage) {
-						Image img = Image.FromFile(PhysicalPath) ; 
+					Image img = null ;
 
+					if (IsImage) {
+						img = Image.FromFile(PhysicalPath) ; 
+					} else {
+						if (thumbs.ContainsKey(Type)) {
+							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(thumbs[Type]) ;
+							img = Image.FromStream(strm) ;
+							strm.Close() ;
+						} else {
+							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(defaultThumb) ;
+							img = Image.FromStream(strm) ;
+							strm.Close() ;
+						}
+					}
+					if (img != null) {
 						// Generate thumbnail from image
 						using (Bitmap bmp = new Bitmap(size, size)) {
 							Graphics grp = Graphics.FromImage(bmp) ;
@@ -260,10 +336,11 @@ namespace Piranha.Models
 							bmp.Save(CachedThumbnailPath(size), img.RawFormat) ;
 						}
 						WriteFile(context.Response, CachedThumbnailPath(size)) ;
-					} else {
-						// TODO: Generate thumbnail for non-images, this should be done by resizing 
-						// standard icons for different file-types 
-					}
+					} /* else {
+						if (thumbs.ContainsKey(Type)) {
+							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(thumbs[Type]) ;
+						}
+					} */
 				}
 			}
 		}
@@ -356,39 +433,6 @@ namespace Piranha.Models
 		public void InvalidateRecord(Content record) {
 			if (Cache.ContainsKey(record.Id))
 				Cache.Remove(record.Id) ;
-		}
-	}
-
-	/// <summary>
-	/// Content list extensions.
-	/// </summary>
-	public static class ContentExtensions {
-		/// <summary>
-		/// Gets the number of images in the content list.
-		/// </summary>
-		/// <param name="self">The content list</param>
-		/// <returns>The image count</returns>
-		public static int CountImages(this List<Content> self) {
-			int images = 0 ;
-			self.ForEach((c) => { 
-				if (c.IsImage) 
-					images++ ;
-			}) ;
-			return images ;
-		}
-
-		/// <summary>
-		/// Gets the number of documents in the content list.
-		/// </summary>
-		/// <param name="self">The content list</param>
-		/// <returns>The document count</returns>
-		public static int CountDocuments(this List<Content> self) {
-			int documents = 0 ;
-			self.ForEach((c) => { 
-				if (!c.IsImage) 
-					documents++ ;
-			}) ;
-			return documents ;
 		}
 	}
 }

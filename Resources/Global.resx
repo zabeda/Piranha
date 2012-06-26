@@ -210,6 +210,9 @@
   <data name="Properties" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="PublicLink" xml:space="preserve">
+    <value>Public link</value>
+  </data>
   <data name="Published" xml:space="preserve">
     <value>Published</value>
   </data>
@@ -243,11 +246,17 @@
   <data name="ToolbarReload" xml:space="preserve">
     <value>Reload</value>
   </data>
+  <data name="ToolbarRevert" xml:space="preserve">
+    <value>Revert</value>
+  </data>
   <data name="ToolbarSave" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="ToolbarSearch" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="ToolbarUnpublish" xml:space="preserve">
+    <value>Unpublish</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>

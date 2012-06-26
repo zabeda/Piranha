@@ -23,12 +23,12 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the available html regions for the page.
 		/// </summary>
-		public dynamic Regions { get ; private set ; }
+		public dynamic Regions { get ; set ; }
 
 		/// <summary>
 		/// Gets the available Properties.
 		/// </summary>
-		public dynamic Properties { get ; private set ; }
+		public dynamic Properties { get ; set ; }
 
 		/// <summary>
 		/// Gets the available attachments.

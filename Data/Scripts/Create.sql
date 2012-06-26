@@ -97,31 +97,8 @@ CREATE TABLE posttemplate (
 	CONSTRAINT fk_posttemplate_updated_by FOREIGN KEY (posttemplate_updated_by) REFERENCES sysuser (sysuser_id)
 );
 
-CREATE TABLE category (
-	category_id UNIQUEIDENTIFIER NOT NULL,
-	category_parent_id UNIQUEIDENTIFIER NULL,
-	category_name NVARCHAR(64) NOT NULL,
-	category_description NVARCHAR(255) NULL,
-	category_created DATETIME NOT NULL,
-	category_updated DATETIME NOT NULL,
-	category_created_by UNIQUEIDENTIFIER NOT NULL,
-	category_updated_by UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT pk_category_id PRIMARY KEY (category_id),
-	CONSTRAINT fk_category_created_by FOREIGN KEY (category_created_by) REFERENCES sysuser (sysuser_id),
-	CONSTRAINT fk_category_updated_by FOREIGN KEY (category_updated_by) REFERENCES sysuser (sysuser_id)
-);
-
-CREATE TABLE relation (
-	relation_id UNIQUEIDENTIFIER NOT NULL,
-	relation_type NVARCHAR(16) NOT NULL,
-	relation_data_id UNIQUEIDENTIFIER NOT NULL,
-	relation_related_id UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT pk_relation_id PRIMARY KEY (relation_id)
-);
-
 CREATE TABLE permalink (
 	permalink_id UNIQUEIDENTIFIER NOT NULL,
-	permalink_parent_id UNIQUEIDENTIFIER NOT NULL,
 	permalink_type NVARCHAR(16) NOT NULL,
 	permalink_name NVARCHAR(128) NOT NULL,
 	permalink_created DATETIME NOT NULL,
@@ -132,12 +109,38 @@ CREATE TABLE permalink (
 );
 CREATE UNIQUE INDEX index_permalink_name ON permalink (permalink_name);
 
+CREATE TABLE category (
+	category_id UNIQUEIDENTIFIER NOT NULL,
+	category_parent_id UNIQUEIDENTIFIER NULL,
+	category_permalink_id UNIQUEIDENTIFIER NOT NULL,
+	category_name NVARCHAR(64) NOT NULL,
+	category_description NVARCHAR(255) NULL,
+	category_created DATETIME NOT NULL,
+	category_updated DATETIME NOT NULL,
+	category_created_by UNIQUEIDENTIFIER NOT NULL,
+	category_updated_by UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT pk_category_id PRIMARY KEY (category_id),
+	CONSTRAINT fk_category_permalink_id FOREIGN KEY (category_permalink_id) REFERENCES permalink (permalink_id),
+	CONSTRAINT fk_category_created_by FOREIGN KEY (category_created_by) REFERENCES sysuser (sysuser_id),
+	CONSTRAINT fk_category_updated_by FOREIGN KEY (category_updated_by) REFERENCES sysuser (sysuser_id)
+);
+
+CREATE TABLE relation (
+	relation_id UNIQUEIDENTIFIER NOT NULL,
+	relation_draft BIT NOT NULL default(1),
+	relation_type NVARCHAR(16) NOT NULL,
+	relation_data_id UNIQUEIDENTIFIER NOT NULL,
+	relation_related_id UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT pk_relation_id PRIMARY KEY (relation_id, relation_draft)
+);
+
 CREATE TABLE page (
 	page_id UNIQUEIDENTIFIER NOT NULL,
 	page_draft BIT NOT NULL default(1),
 	page_template_id UNIQUEIDENTIFIER NOT NULL,
 	page_group_id UNIQUEIDENTIFIER NULL,
 	page_parent_id UNIQUEIDENTIFIER NULL,
+	page_permalink_id UNIQUEIDENTIFIER NOT NULL,
 	page_seqno INT NOT NULL DEFAULT(1),
 	page_title NVARCHAR(128) NOT NULL,
 	page_navigation_title NVARCHAR(128) NULL,
@@ -155,6 +158,7 @@ CREATE TABLE page (
 	page_updated_by UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_page_id PRIMARY KEY (page_id, page_draft),
 	CONSTRAINT fk_page_template_id FOREIGN KEY (page_template_id) REFERENCES pagetemplate (pagetemplate_id),
+	CONSTRAINT fk_page_permalink_id FOREIGN KEY (page_permalink_id) REFERENCES permalink (permalink_id),
 	CONSTRAINT fk_page_created_by FOREIGN KEY (page_created_by) REFERENCES sysuser (sysuser_id),
 	CONSTRAINT fk_page_updated_by FOREIGN KEY (page_updated_by) REFERENCES sysuser (sysuser_id)
 );
@@ -195,6 +199,7 @@ CREATE TABLE post (
 	post_id UNIQUEIDENTIFIER NOT NULL,
 	post_draft BIT NOT NULL default(1),
 	post_template_id UNIQUEIDENTIFIER NOT NULL,
+	post_permalink_id UNIQUEIDENTIFIER NOT NULL,
 	post_title NVARCHAR(128) NOT NULL,
 	post_excerpt NVARCHAR(255) NULL,
 	post_body NTEXT NULL,
@@ -209,6 +214,7 @@ CREATE TABLE post (
 	post_updated_by UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_post_id PRIMARY KEY (post_id, post_draft),
 	CONSTRAINT fk_post_template_id FOREIGN KEY (post_template_id) REFERENCES posttemplate (posttemplate_id),
+	CONSTRAINT fk_post_permalink_id FOREIGN KEY (post_permalink_id) REFERENCES permalink (permalink_id),
 	CONSTRAINT fk_post_created_by FOREIGN KEY (post_created_by) REFERENCES sysuser (sysuser_id),
 	CONSTRAINT fk_post_updated_by FOREIGN KEY (post_updated_by) REFERENCES sysuser (sysuser_id)
 );
@@ -216,7 +222,7 @@ CREATE TABLE post (
 CREATE TABLE content (
 	content_id UNIQUEIDENTIFIER NOT NULL,
 	content_filename NVARCHAR(128) NOT NULL,
-	content_type NVARCHAR(64) NOT NULL,
+	content_type NVARCHAR(255) NOT NULL,
 	content_size INT NOT NULL default(0),
 	content_image BIT NOT NULL default(0),
 	content_width INT NULL,

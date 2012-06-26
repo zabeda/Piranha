@@ -56,7 +56,7 @@ namespace Piranha.Areas.Manager.Controllers
 			pm.Refresh();
 
 			if (pm.Page.IsNew)
-				ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
+				ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
 			else ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
 
 			return View("Edit", pm) ;
@@ -69,7 +69,7 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost()]
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno) ;
-			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.Singular.ToLower() ;
+			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			return View("Edit", pm) ;
 		}
@@ -102,6 +102,25 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Message = Piranha.Resources.Page.MessageReverted ;
 
 			return Edit(id) ;
+		}
+
+		/// <summary>
+		/// Unpublishes the specified page.
+		/// </summary>
+		/// <param name="id">The page id</param>
+		public ActionResult Unpublish(string id) {
+			EditModel.Unpublish(new Guid(id)) ;
+
+			ViewBag.Message = Piranha.Resources.Page.MessageUnpublished ;
+
+			return Edit(id) ;
+		}
+
+		/// <summary>
+		/// Renders the sibling select list from the given input parameters.
+		/// </summary>
+		public ActionResult Siblings(string page_id, string page_parentid, string page_seqno, string parentid) {
+			return View(EditModel.BuildSiblingPages(new Guid(page_id), new Guid(page_parentid), Convert.ToInt32(page_seqno), new Guid(parentid))) ;
 		}
     }
 }

@@ -32,6 +32,12 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets weather this is a draft or not.
+		/// </summary>
+		[Column(Name="relation_draft")]
+		public bool IsDraft { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the type.
 		/// </summary>
 		[Column(Name="relation_type")]
@@ -51,12 +57,19 @@ namespace Piranha.Models
 		#endregion
 
 		/// <summary>
+		/// Default constructor. Creates a new relation.
+		/// </summary>
+		public Relation() {
+			IsDraft = true ;
+		}
+
+		/// <summary>
 		/// Gets all relations for the given data id.
 		/// </summary>
 		/// <param name="id">The main object id</param>
 		/// <returns>A list of relations</returns>
-		public static List<Relation> GetByDataId(Guid id) {
-			return GetFieldsByDataId("*", id) ;
+		public static List<Relation> GetByDataId(Guid id, bool draft = true) {
+			return GetFieldsByDataId("*", id, draft) ;
 		}
 
 		/// <summary>
@@ -65,8 +78,8 @@ namespace Piranha.Models
 		/// <param name="fields">The fields</param>
 		/// <param name="id">The main object id.</param>
 		/// <returns>A list of relations</returns>
-		public static List<Relation> GetFieldsByDataId(string fields, Guid id) {
-			return GetFields(fields, "relation_data_id = @0", id) ;
+		public static List<Relation> GetFieldsByDataId(string fields, Guid id, bool draft = true) {
+			return GetFields(fields, "relation_data_id = @0 AND relation_draft = @1", id, draft) ;
 		}
 
 		/// <summary>
@@ -75,8 +88,8 @@ namespace Piranha.Models
 		/// <param name="type">The relation type</param>
 		/// <param name="id">The relation data</param>
 		/// <returns>The relations</returns>
-		public static List<Relation> GetByTypeAndRelatedId(RelationType type, Guid id) {
-			return Relation.Get("relation_type = @0 AND relation_related_id = @1", type, id) ;
+		public static List<Relation> GetByTypeAndRelatedId(RelationType type, Guid id, bool draft = true) {
+			return Relation.Get("relation_type = @0 AND relation_related_id = @1 AND relation_draft = @2", type, id, draft) ;
 		}
 
 		/// <summary>
@@ -84,9 +97,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="id">The main object id</param>
 		/// <param name="tx">Optional data transaction</param>
-		public static  void DeleteByDataId(Guid id, IDbTransaction tx = null) {
-			List<Relation> rel = GetByDataId(id) ;
-			rel.ForEach(r => r.Delete(tx)) ;
+		public static  void DeleteByDataId(Guid id, IDbTransaction tx = null, bool? draft = null) {
+			if (!draft.HasValue)
+				Relation.Execute("DELETE FROM relation WHERE relation_data_id = @0", tx, id) ;
+			else Relation.Execute("DELETE FROM relation WHERE relation_data_id = @0 AND relation_draft = @1", tx, id, draft.Value) ;
 		}
 	}
 }

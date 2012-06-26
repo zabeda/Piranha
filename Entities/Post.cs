@@ -15,7 +15,7 @@ namespace Piranha.Models
 	/// </summary>
 	[PrimaryKey(Column="post_id,post_draft")]
 	[Join(TableName="posttemplate", ForeignKey="post_template_id", PrimaryKey="posttemplate_id")]
-	[Join(TableName="permalink", ForeignKey="post_id", PrimaryKey="permalink_parent_id")]
+	[Join(TableName="permalink", ForeignKey="post_permalink_id", PrimaryKey="permalink_id")]
 	public class Post : DraftRecord<Post>, IPost
 	{
 		#region Fields
@@ -38,6 +38,12 @@ namespace Piranha.Models
 		public Guid TemplateId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		[Column(Name="post_permalink_id")]
+		public Guid PermalinkId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the title.
 		/// </summary>
 		[Column(Name="post_title")]
@@ -58,7 +64,7 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="post_excerpt")]
 		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Excerpt")]
-		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="ExcerptLength")]
+		[StringLength(512, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="ExcerptLength")]
 		public string Excerpt { get ; set ; }
 
 		/// <summary>
@@ -70,8 +76,8 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
-		[Column(Name="posttemplate_name", Table="posttemplate", Json=true)]
-		public ComplexName TemplateName { get ; private set ; }
+		[Column(Name="posttemplate_name", Table="posttemplate")]
+		public string TemplateName { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the attachments.
@@ -150,6 +156,16 @@ namespace Piranha.Models
 		/// <returns>The post</returns>
 		public static Post GetByPermalink(string permalink, bool draft = false) {
 			return Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ;
+		}
+
+		/// <summary>
+		/// Gets the post specified by the given permalink id.
+		/// </summary>
+		/// <param name="permalinkid">The permalink id</param>
+		/// <param name="draft">Weather to get the draft or not</param>
+		/// <returns>The post</returns>
+		public static Post GetByPermalinkId(Guid permalinkid, bool draft = false) {
+			return Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
 		}
 
 		/// <summary>

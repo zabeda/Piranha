@@ -61,11 +61,18 @@ namespace Piranha.WebPages
 				if (subform.Count > 0) {
 					object ret = Activator.CreateInstance(type) ;
 					foreach (PropertyInfo p in ret.GetType().GetProperties()) {
-						p.SetValue(ret, BindModel(form, p.PropertyType, p.Name, prefix + name + "."), null) ;
+						if (p.CanWrite)
+							p.SetValue(ret, BindModel(form, p.PropertyType, p.Name, prefix + name + "."), null) ; 
 					}
 					return ret ;
 				} else if (prefix == "") {
-					return Activator.CreateInstance(type) ;
+					// There field is missing in the form collection. Let's try to create a
+					// default value.
+					try {
+						return Activator.CreateInstance(type) ;
+					} catch {
+						return null ;
+					}
 				}
 				return null ;
 			}

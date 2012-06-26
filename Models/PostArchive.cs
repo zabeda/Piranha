@@ -22,8 +22,6 @@ namespace Piranha.Models
 			"CONVERT(INT, SUBSTRING(CONVERT(NCHAR(10), post_published, 120), 6, 2)) AS [Month]," +
 			"COUNT(*) AS [Count] " +
 			"FROM post " +
-			"INNER JOIN relation ON relation_data_id = post_id " +
-			"INNER JOIN category ON relation_related_id = category_id " +
 			"WHERE post_draft = 0 {0} " +
 			"GROUP BY SUBSTRING(CONVERT(NCHAR(10), post_published, 120), 1, 4)," +
 			"SUBSTRING(CONVERT(NCHAR(10), post_published, 120), 6, 2)" ;
@@ -69,20 +67,23 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The archive</returns>
 		public static List<PostArchive> Get() {
-			return Get(Guid.Empty) ;
+			return GetByTemplateId(Guid.Empty) ;
 		}
 
 		/// <summary>
-		/// Gets the current post archive for the given category.
+		/// Gets the current post archive for the given post type.
 		/// </summary>
-		/// <param name="categoryid">The category id</param>
+		/// <param name="id">The template id</param>
 		/// <returns>The archive</returns>
-		public static List<PostArchive> Get(Guid categoryid) {
-			string where = categoryid != Guid.Empty ?
-				"AND category_id=@0 " : "" ;
-			if (categoryid != Guid.Empty)
-				return Query(String.Format(Select, where), categoryid) ;
-			List<PostArchive> archive = Query(String.Format(Select, "")) ;
+		public static List<PostArchive> GetByTemplateId(Guid id) {
+			List<PostArchive> archive = null ;
+
+			string where = id != Guid.Empty ?
+				"AND post_template_id = @0 " : "" ;
+			if (id != Guid.Empty)
+				archive = Query(String.Format(Select, where), id) ;
+			archive = Query(String.Format(Select, "")) ;
+
 			archive.ForEach(a => a.Date = new DateTime(a.Year, a.Month, 1)) ;
 
 			return archive ;

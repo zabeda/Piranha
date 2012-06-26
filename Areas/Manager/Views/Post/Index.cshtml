@@ -42,7 +42,7 @@
 </div>
 }
 <div class="grid_12">
-@using (Html.BeginForm("Insert", "Post")) {
+@using (Html.BeginForm("insert", "post")) {
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
@@ -60,7 +60,7 @@
             @foreach (var post in Model.Posts) {
             <tr@(post.Updated > post.LastPublished ? " class=draft" : "")>
                 <td class="title"><a href="@Url.Action("edit", new { id = post.Id })">@post.Title</a></td>
-                <td class="template">@post.TemplateName.Singular</td>
+                <td class="template">@post.TemplateName</td>
                 <td class="updated">@post.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@post.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
@@ -85,7 +85,7 @@
         <div class="inner">
         @foreach (var template in Model.Templates) {
             <div class="templates left" data-templateid="@template.Id">
-                <h3>@template.Name.Singular</h3>
+                <h3>@template.Name</h3>
                 <div class="preview" style="width:120px;height:120px;margin:0 auto;">
                     @template.Preview
                 </div>
