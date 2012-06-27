@@ -373,7 +373,7 @@ namespace Piranha.Models.Manager.PageModels
 			}
 
 			// Get page position
-			Parents = BuildParentPages(Sitemap.GetStructure(), Page) ;
+			Parents = BuildParentPages(Sitemap.GetStructure(false), Page) ;
 			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
 			Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
 		}
