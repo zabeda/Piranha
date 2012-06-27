@@ -329,7 +329,9 @@
     <EmbeddedResource Include="Areas\Manager\Views\Content\Uploads.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ExternalList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Siblings.cshtml" />
+    <None Include="LICENSE.md" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Css\Style.css" />
