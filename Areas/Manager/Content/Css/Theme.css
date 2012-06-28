@@ -141,6 +141,13 @@ table.list tr,
     border-top-width: 1px;
     border-top-style: solid;
     }
+.box .separator {
+    background: #ddd;
+    height: 1px;
+    width: 100%;
+    padding: 0 15px;
+    margin-left: -15px;
+    }
 .expandable .title {
     background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAfElEQVR42qWT0QlAIQhFG6Vl3KZJaoqGcZygAYKegkEUPoj7cT5K7yVNQ0rphIQisNAMtjs68/dDFLLQheHQLScu3S6ul8CnqmY3yBp4JC8D8p495wzKTzkUrDnj1cAoGmTAgDXYbtGNY9ZgA7gEuInwN4KDhI8yvkzwOn/srR2fTcXVhQAAAABJRU5ErkJggg==) 98% 50% no-repeat;
     }

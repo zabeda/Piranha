@@ -80,6 +80,10 @@ p input[type="radio"] {
     border-radius: 4px;
     margin-right: 10px;
     }
+.btn.big {
+    font-size: 16px;
+    height: 40px;
+    }
 .btn.active {
     background: #f68030;
     color: #fff;
