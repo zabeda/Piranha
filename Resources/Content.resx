@@ -144,6 +144,9 @@
   <data name="Filename" xml:space="preserve">
     <value>Filename</value>
   </data>
+  <data name="FromUrl" xml:space="preserve">
+    <value>From URL</value>
+  </data>
   <data name="ImageSize" xml:space="preserve">
     <value>Image size</value>
   </data>

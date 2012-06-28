@@ -25,6 +25,9 @@ namespace Piranha.Models
 		[Required()]
 		public override Guid Id { get ; set ; }
 
+		[Column(Name="permalink_namespace_id")]
+		public Guid NamespaceId { get ; set ; }
+
 		[Column(Name="permalink_type")]
 		public PermalinkType Type { get ; set ; }
 
@@ -48,12 +51,15 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the permalink cache object.
 		/// </summary>
-		[ScriptIgnore()]
-		private static Dictionary<string, Permalink> Cache {
+		private static Dictionary<Guid, Dictionary<string, Permalink>> Cache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Permalink).Name] == null)
-					HttpContext.Current.Cache[typeof(Permalink).Name] = new Dictionary<string, Permalink>() ;
-				return (Dictionary<string, Permalink>)HttpContext.Current.Cache[typeof(Permalink).Name] ;
+				if (HttpContext.Current.Cache[typeof(Permalink).Name] == null) {
+					var cache = new Dictionary<Guid, Dictionary<string, Permalink>>() ;
+					cache.Add(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), new Dictionary<string,Permalink>()) ;
+					cache.Add(new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067"), new Dictionary<string,Permalink>()) ;
+					HttpContext.Current.Cache[typeof(Permalink).Name] = cache ;
+				}
+				return (Dictionary<Guid, Dictionary<string, Permalink>>)HttpContext.Current.Cache[typeof(Permalink).Name] ;
 			}
 		}
 		#endregion
@@ -62,12 +68,16 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the permalink with the given name.
 		/// </summary>
+		/// <param name="namespaceid">The namespace id</param>
 		/// <param name="name">The permalink name</param>
 		/// <returns>The permalink</returns>
-		public static Permalink GetByName(string name) {
-			if (!Cache.ContainsKey(name))
-				Cache[name] = GetSingle("permalink_name = @0", name) ;
-			return Cache[name] ;
+		public static Permalink GetByName(Guid namespaceid, string name) {
+			if (Cache.ContainsKey(namespaceid)) {
+				if (!Cache[namespaceid].ContainsKey(name))
+					Cache[namespaceid][name] = GetSingle("permalink_name = @0", name) ;
+				return Cache[namespaceid][name] ;
+			}
+			return null ;
 		}
 		#endregion
 
@@ -78,7 +88,7 @@ namespace Piranha.Models
 		/// <returns>Weather the operation succeeded</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			// Check for duplicates 
-			if (Permalink.GetSingle("permalink_name = @0" + (!IsNew ? " AND permalink_id != @1" : ""), Name, Id) != null)
+			if (Permalink.GetSingle("permalink_name = @0 AND permalink_namespace_id = @2" + (!IsNew ? " AND permalink_id != @1" : ""), Name, Id, NamespaceId) != null)
  				throw new DuplicatePermalinkException() ;
 			return base.Save(tx);
 		}
@@ -98,8 +108,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Permalink record) {
-			if (Cache.ContainsKey(record.Name))
-				Cache.Remove(record.Name) ;
+			if (Cache.ContainsKey(NamespaceId)) {
+				if (Cache[NamespaceId].ContainsKey(record.Name))
+					Cache[NamespaceId].Remove(record.Name) ;
+			}
 		}
 	}
 }

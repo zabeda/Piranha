@@ -108,6 +108,7 @@
     }
 </div>
 <div class="grid_3">
+    @if (Model.Content.IsImage) {
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Thumbnail</h2></div>
         <div class="inner">
@@ -118,6 +119,7 @@
             }
         </div>
     </div>
+    }
     <div class="box pagetemplate overflow">
         <div class="title"><h2>@Piranha.Resources.Global.Categories</h2></div>
         <div class="inner">

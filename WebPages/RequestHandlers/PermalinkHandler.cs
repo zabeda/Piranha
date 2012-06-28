@@ -34,7 +34,7 @@ namespace Piranha.WebPages.RequestHandlers
                 int segments = 0;
 				// Accept permalinks with '/' in them
 				for (int n = 0; n < args.Length; n++) {
-					perm = Permalink.GetByName(args.Subset(0, args.Length - n).Implode("/")) ;
+					perm = Permalink.GetByName(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), args.Subset(0, args.Length - n).Implode("/")) ;
                     segments = args.Length - n;
 					if (perm != null)
 						break ;
@@ -73,8 +73,6 @@ namespace Piranha.WebPages.RequestHandlers
 						} else {
 							context.Response.StatusCode = 404 ;
 						}
-					} else if (perm.Type == Permalink.PermalinkType.CATEGORY) {
-						context.RewritePath("~/archive/" + args.Implode("/"), false) ;
 					}
 				} else {
 					context.Response.StatusCode = 404 ;

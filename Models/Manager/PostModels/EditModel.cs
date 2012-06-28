@@ -63,7 +63,6 @@ namespace Piranha.Models.Manager.PostModels
 		/// Gets/sets the categories associated with the post.
 		/// </summary>
 		public List<Guid> PostCategories { get ; set ; }
-		//public List<Category> PostCategories { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available categories.
@@ -73,13 +72,11 @@ namespace Piranha.Models.Manager.PostModels
 		/// <summary>
 		/// Gets/sets the attached content.
 		/// </summary>
-		[ScriptIgnore()]
 		public virtual List<Content> AttachedContent { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available content.
 		/// </summary>
-		[ScriptIgnore()]
 		public List<Content> Content { get ; set ; }
 		#endregion
 
@@ -105,7 +102,8 @@ namespace Piranha.Models.Manager.PostModels
 
 			m.Permalink = new Permalink() {
 				Id = Guid.NewGuid(),
-				Type = Permalink.PermalinkType.POST
+				Type = Permalink.PermalinkType.POST,
+				NamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03")
 			} ;
 			m.Post = new Piranha.Models.Post() {
 				Id = Guid.NewGuid(),

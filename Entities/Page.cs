@@ -191,7 +191,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the controller for the page.
 		/// </summary>
-		[ScriptIgnore()]
 		public string Controller { 
 			get { return !String.IsNullOrEmpty(PageController) ? PageController : TemplateController ; }
 		}
@@ -199,7 +198,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the redirect for the page.
 		/// </summary>
-		[ScriptIgnore()]
 		public string Redirect {
 			get { return !String.IsNullOrEmpty(PageRedirect) ? PageRedirect : TemplateRedirect ; }
 		}
@@ -207,7 +205,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets weather the page is published or not.
 		/// </summary>
-		[ScriptIgnore()]
 		public bool IsPublished {
 			get { return Published != DateTime.MinValue && Published < DateTime.Now ; }
 		}
@@ -215,7 +212,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets weather the page is the site startpage.
 		/// </summary>
-		[ScriptIgnore()]
 		public bool IsStartpage {
 			get { return ParentId == Guid.Empty && Seqno == 1 ; }
 		}
@@ -223,7 +219,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the page cache object.
 		/// </summary>
-		[ScriptIgnore()]
 		private static Dictionary<Guid, Page> Cache {
 			get {
 				if (HttpContext.Current.Cache[typeof(Page).Name] == null)
@@ -235,7 +230,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the page cache object by permalink.
 		/// </summary>
-		[ScriptIgnore()]
 		private static Dictionary<string, Page> PermalinkCache {
 			get {
 				if (HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] == null)
@@ -247,7 +241,6 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the page cache object by permalink id.
 		/// </summary>
-		[ScriptIgnore()]
 		private static Dictionary<Guid, Page> PermalinkIdCache {
 			get {
 				if (HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] == null)

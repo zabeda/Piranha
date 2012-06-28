@@ -8,8 +8,8 @@
             <a href="@Url.Action("delete", "page", new { id = page.Id })" title="@Piranha.Resources.Page.ListDelete" class="icon delete"></a>
             }
         </span>
-        <span class="date">@page.Created.ToShortDateString()</span>
-        <span class="date">@page.Updated.ToShortDateString()</span>
+        <span class="date">@page.Created.ToString("yyyy-MM-dd")</span>
+        <span class="date">@page.Updated.ToString("yyyy-MM-dd")</span>
         <span class="type">@page.TemplateName</span>
         <span class="title">@if (page.Pages.Count > 0) {<span class="action"></span>}<a href="@Url.Action("edit", "page", new { id = page.Id })">@page.Title</a></span>
         @if (page.Pages.Count > 0) {

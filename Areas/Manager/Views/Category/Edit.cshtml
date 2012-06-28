@@ -26,7 +26,6 @@
 @Html.HiddenFor(m => m.Permalink.IsNew)
 @Html.HiddenFor(m => m.Permalink.Id)
 @Html.HiddenFor(m => m.Permalink.Type)
-@Html.HiddenFor(m => m.Permalink.Name)
 @Html.HiddenFor(m => m.Permalink.Created)
 @Html.HiddenFor(m => m.Permalink.CreatedBy)
 <div class="grid_12">
@@ -40,9 +39,16 @@
                         @Html.TextBoxFor(m => m.Category.Name)</div>
                     @Html.ValidationMessageFor(m => m.Category.Name)
                 </li>
-                <li>
+                <li class="protected">
                     @Html.LabelFor(m => m.Category.Permalink)
+                	@if (!Model.Category.IsNew) {
+                    <p>http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Category.Permalink).ToLower()</p>
+                    } else {
                     <p><i>@Piranha.Resources.Category.PermalinkDescription</i></p>
+                    }
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Permalink.Name)</div>
+                    <a class="locked"></a>
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Category.Description)

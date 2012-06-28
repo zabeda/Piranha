@@ -36,18 +36,10 @@ namespace Piranha.Models.Manager.CategoryModels
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		public EditModel() {
-			Permalink  = new Permalink() {
-				Id = Guid.NewGuid(),
-				Type = Models.Permalink.PermalinkType.CATEGORY
-			} ;
 			Category   = new Category() {
-				Id = Guid.NewGuid(),
-				PermalinkId = Permalink.Id
+				Id = Guid.NewGuid()
 			} ;
-
-			List<Category> cats = Piranha.Models.Category.Get(new Params() { OrderBy = "category_name ASC" }) ;
-			cats.Insert(0, new Category()) ;
-			Categories = new SelectList(cats, "Id", "Name") ;
+			GetRelated() ;
 		}
 
 		/// <summary>
@@ -59,12 +51,7 @@ namespace Piranha.Models.Manager.CategoryModels
 			EditModel m = new EditModel() {
 				Category = Category.GetSingle(id)
 			} ;
-			m.Permalink = Permalink.GetSingle(m.Category.PermalinkId) ;
-
-			List<Category> cats = Piranha.Models.Category.Get("category_id != @0", id, 
-				new Params() { OrderBy = "category_name ASC" }) ;
-			cats.Insert(0, new Category()) ;
-			m.Categories = new SelectList(cats, "Id", "Name") ;
+			m.GetRelated() ;
 
 			return m ;
 		}
@@ -82,6 +69,8 @@ namespace Piranha.Models.Manager.CategoryModels
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
+			Refresh() ;
+
 			return true ;
 		}
 
@@ -104,6 +93,40 @@ namespace Piranha.Models.Manager.CategoryModels
 				} catch { tx.Rollback() ; return false ; }
 			}
 			return true ;
+		}
+
+		/// <summary>
+		/// Refreshes the model from the database.
+		/// </summary>
+		public void Refresh() {
+			if (Category != null) {
+				if (!Category.IsNew) {
+					Category = Category.GetSingle(Category.Id) ;
+				}
+				GetRelated() ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the related information
+		/// </summary>
+		private void GetRelated() {
+			// Get Permalink
+			Permalink = Permalink.GetSingle(Category.PermalinkId) ;
+			if (Permalink == null) {
+				Permalink  = new Permalink() {
+					Id = Guid.NewGuid(),
+					Type = Models.Permalink.PermalinkType.CATEGORY,
+					NamespaceId = new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067")
+				} ;
+				Category.PermalinkId = Permalink.Id ;
+			}
+
+			// Get categories
+			List<Category> cats = Piranha.Models.Category.Get("category_id != @0", Category.Id, 
+				new Params() { OrderBy = "category_name ASC" }) ;
+			cats.Insert(0, new Category()) ;
+			Categories = new SelectList(cats, "Id", "Name") ;
 		}
 	}
 }

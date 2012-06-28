@@ -117,10 +117,21 @@ VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', 'Standard post', 'Standard post 
 	'<table class="template"><tr><td></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
+-- Default namespaces
+INSERT INTO [namespace] ([namespace_id], [namespace_internal_id], [namespace_name], [namespace_description], [namespace_created], [namespace_updated],
+	[namespace_created_by], [namespace_updated_by])
+	VALUES ('8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'DEFAULT', 'Default namespace', 'This is the default namespace for all pages and posts.',
+		GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO [namespace] ([namespace_id], [namespace_internal_id], [namespace_name], [namespace_description], [namespace_created], [namespace_updated],
+	[namespace_created_by], [namespace_updated_by])
+	VALUES ('AE46C4C4-20F7-4582-888D-DFC148FE9067', 'CATEGORY', 'Category namespace', 'This is the namespace for all categories.',
+		GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+
+
 -- Permalink
-INSERT INTO permalink (permalink_id, permalink_type, permalink_name, permalink_created,
+INSERT INTO permalink (permalink_id, permalink_namespace_id, permalink_type, permalink_name, permalink_created,
 	permalink_updated, permalink_created_by, permalink_updated_by)
-VALUES ('1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 'PAGE', 'start', GETDATE(), GETDATE(), 
+VALUES ('1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', '8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'PAGE', 'start', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default page

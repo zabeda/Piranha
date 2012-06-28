@@ -97,8 +97,23 @@ CREATE TABLE posttemplate (
 	CONSTRAINT fk_posttemplate_updated_by FOREIGN KEY (posttemplate_updated_by) REFERENCES sysuser (sysuser_id)
 );
 
+CREATE TABLE [namespace] (
+	[namespace_id] UNIQUEIDENTIFIER NOT NULL,
+	[namespace_internal_id] NVARCHAR(32) NOT NULL,
+	[namespace_name] NVARCHAR(64) NOT NULL,
+	[namespace_description] NVARCHAR(255) NULL,
+	[namespace_created] DATETIME NOT NULL,
+	[namespace_updated] DATETIME NOT NULL,
+	[namespace_created_by] UNIQUEIDENTIFIER NOT NULL,
+	[namespace_updated_by] UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT pk_namespace_id PRIMARY KEY ([namespace_id]),
+	CONSTRAINT fk_namespace_created_by FOREIGN KEY ([namespace_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_namespace_updated_by FOREIGN KEY ([namespace_updated_by]) REFERENCES [sysuser] ([sysuser_id])
+);
+
 CREATE TABLE permalink (
 	permalink_id UNIQUEIDENTIFIER NOT NULL,
+	permalink_namespace_id UNIQUEIDENTIFIER NOT NULL,
 	permalink_type NVARCHAR(16) NOT NULL,
 	permalink_name NVARCHAR(128) NOT NULL,
 	permalink_created DATETIME NOT NULL,
@@ -107,7 +122,7 @@ CREATE TABLE permalink (
 	permalink_updated_by UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_permalink_id PRIMARY KEY (permalink_id)
 );
-CREATE UNIQUE INDEX index_permalink_name ON permalink (permalink_name);
+CREATE UNIQUE INDEX index_permalink_name ON permalink (permalink_namespace_id, permalink_name);
 
 CREATE TABLE category (
 	category_id UNIQUEIDENTIFIER NOT NULL,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -37,6 +38,12 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Gets/sets the optional file.
 		/// </summary>
 		public HttpPostedFileBase UploadedFile { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the url to get the file from.
+		/// </summary>
+		[Display(Name="FromUrl", ResourceType=typeof(Piranha.Resources.Content))]
+		public string FileUrl { get ; set ; }
 		#endregion
 
 		/// <summary>

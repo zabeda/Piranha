@@ -116,9 +116,6 @@ namespace Piranha.Models.Manager.PageModels
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
 			groups.Insert(0, new SysGroup() { Name = Piranha.Resources.Global.Everyone }) ;
 			Groups = new SelectList(groups, "Id", "Name") ;
-			/*
-			Parents = BuildParentPages(Sitemap.GetStructure()) ;
-			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = false }) ;*/
 		}
 
 		/// <summary>
@@ -177,10 +174,7 @@ namespace Piranha.Models.Manager.PageModels
 				Seqno = seqno
 			} ;
 			m.GetRelated() ;
-			/*
-			m.Parents = BuildParentPages(Sitemap.GetStructure(), m.Page) ;
-			m.Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = m.Page.ParentId == Guid.Empty }) ;
-			*/
+
 			return m ;
 		}
 
@@ -338,7 +332,7 @@ namespace Piranha.Models.Manager.PageModels
 			Template  = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
 			Permalink = Permalink.GetSingle(Page.PermalinkId) ; 
 			if (Permalink == null) {
-				Permalink = new Permalink() { Id = Guid.NewGuid(), Type = Permalink.PermalinkType.PAGE } ;
+				Permalink = new Permalink() { Id = Guid.NewGuid(), Type = Permalink.PermalinkType.PAGE, NamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") } ;
 				Page.PermalinkId = Permalink.Id ;
 			}
 

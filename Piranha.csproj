@@ -496,6 +496,9 @@
     <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-xls.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-zip.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
