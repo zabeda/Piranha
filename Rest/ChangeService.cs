@@ -43,7 +43,6 @@ namespace Piranha.Rest
 				changes.Content.Add(new ContentService().Get(c.Id.ToString()))) ;
 
 			return changes ;
-			return null;
 		}
 
 		[OperationContract()]
