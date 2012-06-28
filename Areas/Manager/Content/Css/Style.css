@@ -507,16 +507,23 @@ ul.sitemap .collapsed .action {
 ul.sitemap .title a {
     display: block;
     margin-left: 20px;
+    position: relative;
     }
-    
-ul.sitemap.move .title:hover {
-    border-color: Green;
+ul.sitemap li .info-unpublished, ul.sitemap li .info-draft {
+    height: 16px;
+    padding: 0;
+    margin: 2px 0 0 10px;
+    position: absolute;
+    display: inline-block;
+    float: none;
     }
-ul.sitemap.move .title:hover {
-    cursor: move;
+ul.sitemap li .info-unpublished {
+    background: url('../img/info-unpublished.png') 0 0 no-repeat;
+    width: 75px;
     }
-ul.sitemap.move li.move-active {
-    background: pink;
+ul.sitemap li .info-draft {
+    background: url('../img/info-draft.png') 0 0 no-repeat;
+    width: 42px;
     }
 
 /**
@@ -774,9 +781,8 @@ table.template td.locked {
 .content-editor .input .defaultSkin table.mceLayout { border-width: 0px }
 .content-editor .input .defaultSkin table.mceLayout tr.mceFirst td { border-width: 0px; padding-bottom: 1px; }
 .content-editor .input .defaultSkin table.mceLayout tr.mceLast td { border-width: 0px }
-.content-editor table.list tbody tr:first-child {
-    background: #eee;
-    }
+.content-editor table.list tbody tr:first-child { background: #eee; }
+.content-editor .defaultSkin table.mceToolbar { padding-bottom: 6px; }
     
 /**
  * Login splash

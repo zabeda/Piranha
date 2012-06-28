@@ -721,6 +721,11 @@ String.prototype.endsWith = function (suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
+// Remove whitespaces
+String.prototype.removeSpaces = function () {
+    return this.replace(/\s/g, "");
+};
+
 // Fix even/odd table rows for old browsers
 $(document).ready(function () {
     if ($.browser.msie && $.browser.version.slice(0, 1) < 9) {

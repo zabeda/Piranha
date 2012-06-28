@@ -499,6 +499,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\icons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\info-draft.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\info-unpublished.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

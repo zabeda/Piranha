@@ -33,34 +33,30 @@ $(document).ready(function () {
 // every time an item is added or removed as this updates the DOM.
 //
 function bindEvents() {
-    $("#pr_add").unbind();
     $("#pr_add").click(function () {
         var name = $("#pr_name").val();
 
         if (name != null && name != "") {
             $("#pageregions").append(
-                '<li><span>' + name + '</span><button class="btn delete right remove-region"></button></li>');
+                '<li><span>' + name.removeSpaces() + '</span><button class="btn delete right remove-region"></button></li>');
             $("#pr_name").val("");
-            bindEvents();
         } else alert("Du måste ange ett namn för regionen.");
         return false;
     });
 
-    $("#po_add").unbind();
     $("#po_add").click(function () {
         var name = $("#po_name").val();
 
         if (name != null && name != "") {
             $("#properties").append(
-                '<li><span>' + name + '</span><button class="btn delete right remove-region"></button></li>');
+                '<li><span>' + name.removeSpaces() + '</span><button class="btn delete right remove-region"></button></li>');
             $("#po_name").val("");
-            bindEvents();
         } else alert("Du måste ange ett namn för egenskapen.");
         return false;
     });
 
-    $(".remove-region").unbind();
-    $(".remove-region").click(function () {
+    $(".remove-region").live("click", function () {
         $(this).parent().remove();
+        return false;
     });
 }
