@@ -25,6 +25,11 @@ namespace Piranha.Web
 		protected abstract Page CurrentPage { get ; }
 
 		/// <summary>
+		/// Gets the current post.
+		/// </summary>
+		protected abstract Post CurrentPost { get ; }
+
+		/// <summary>
 		/// Gets the gravatar helper.
 		/// </summary>
 		public GravatarHelper Gravatar { get ; protected set ; }
@@ -59,38 +64,43 @@ namespace Piranha.Web
 
 			str.AppendLine("<meta name=\"generator\" content=\"Piranha\" />") ;
 	        str.AppendLine("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />") ;
-			if (CurrentPage != null) {
-				/**
-				 * Basic meta tags
-				 */
-				if (!String.IsNullOrEmpty(CurrentPage.Description))
-					str.AppendLine("<meta name=\"description\" content=\"" + CurrentPage.Description + "\" />") ;
-				if (!String.IsNullOrEmpty(CurrentPage.Keywords))
-					str.AppendLine("<meta name=\"keywords\" content=\"" + CurrentPage.Keywords + "\" />") ;
 
-				/**
-				 * Open graph meta tags
-				 */
-				str.AppendLine("<meta property=\"og:site_name\" content=\"" + 
-					SysParam.GetByName("SITE_TITLE").Value + "\" />") ;
-				str.AppendLine("<meta property=\"og:url\" content=\"" + 
-					"http://" + Context.Request.Url.DnsSafeHost + Context.Request.RawUrl + "\" />") ;
-				if (CurrentPage.IsStartpage) {
-					str.AppendLine("<meta property=\"og:type\" content=\"website\" />") ;
-					str.AppendLine("<meta property=\"og:description\" content=\"" + 
-						SysParam.GetByName("SITE_DESCRIPTION").Value + "\" />") ;
-				} else {
-					str.AppendLine("<meta property=\"og:type\" content=\"article\" />") ;
-					if (!String.IsNullOrEmpty(CurrentPage.Description)) {
-						str.AppendLine("<meta property=\"og:description\" content=\"" + CurrentPage.Description + "\" />") ;
-					}
-				}
-				str.AppendLine("<meta property=\"og:title\" content=\"" + CurrentPage.Title + "\" />") ;
-			} else {
-				/**
-				 * Open graph meta tags
-				 */
+			/**
+			 * Basic meta tags
+			 */
+			if (CurrentPage != null || CurrentPost != null) {
+				var keywords = CurrentPage != null ? CurrentPage.Keywords : CurrentPost.Keywords ;
+				var description = CurrentPage != null ? CurrentPage.Description : 
+					(!String.IsNullOrEmpty(CurrentPost.Description) ? CurrentPost.Description : CurrentPost.Excerpt) ;
+
+				if (!String.IsNullOrEmpty(description))
+					str.AppendLine("<meta name=\"description\" content=\"" + description + "\" />") ;
+				if (!String.IsNullOrEmpty(keywords))
+					str.AppendLine("<meta name=\"keywords\" content=\"" + keywords + "\" />") ;
+			}
+
+			/**
+			 * Open graph meta tags
+			 */
+			str.AppendLine("<meta property=\"og:site_name\" content=\"" + 
+				SysParam.GetByName("SITE_TITLE").Value + "\" />") ;
+			str.AppendLine("<meta property=\"og:url\" content=\"" + 
+				"http://" + Context.Request.Url.DnsSafeHost + Context.Request.RawUrl + "\" />") ;
+
+			if (CurrentPage != null && CurrentPage.IsStartpage) {
+				str.AppendLine("<meta property=\"og:type\" content=\"website\" />") ;
+				str.AppendLine("<meta property=\"og:description\" content=\"" + 
+					SysParam.GetByName("SITE_DESCRIPTION").Value + "\" />") ;
+			} else if (CurrentPage != null || CurrentPost != null) {
+				var title = CurrentPage != null ? CurrentPage.Title : CurrentPost.Title ;
+				var description = CurrentPage != null ? CurrentPage.Description : 
+					(!String.IsNullOrEmpty(CurrentPost.Description) ? CurrentPost.Description : CurrentPost.Excerpt) ;
+
 				str.AppendLine("<meta property=\"og:type\" content=\"article\" />") ;
+				if (!String.IsNullOrEmpty(description)) {
+					str.AppendLine("<meta property=\"og:description\" content=\"" + description + "\" />") ;
+				}
+				str.AppendLine("<meta property=\"og:title\" content=\"" + title + "\" />") ;
 			}
 			return new HtmlString(str.ToString()) ;
 		}

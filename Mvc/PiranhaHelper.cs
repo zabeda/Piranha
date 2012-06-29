@@ -33,6 +33,13 @@ namespace Piranha.Mvc
 		protected override Page CurrentPage {
 			get { return (Page)Parent.ViewBag.Page ; }
 		}
+
+		/// <summary>
+		/// Gets the current post.
+		/// </summary>
+		protected override Post CurrentPost {
+			get { return (Post)Parent.ViewBag.Post ; }
+		}
 		#endregion
 
 		/// <summary>

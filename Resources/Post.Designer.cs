@@ -79,6 +79,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The description has a maximum length of 255 characters..
+        /// </summary>
+        public static string DescriptionLength {
+            get {
+                return ResourceManager.GetString("DescriptionLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit post.
         /// </summary>
         public static string EditTitleExisting {
@@ -120,6 +129,24 @@ namespace Piranha.Resources {
         public static string HtmlPreview {
             get {
                 return ResourceManager.GetString("HtmlPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keywords.
+        /// </summary>
+        public static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The keywords has a maximum length of 255 characters..
+        /// </summary>
+        public static string KeywordsLength {
+            get {
+                return ResourceManager.GetString("KeywordsLength", resourceCulture);
             }
         }
         

@@ -123,6 +123,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="DescriptionLength" xml:space="preserve">
+    <value>The description has a maximum length of 255 characters.</value>
+  </data>
   <data name="EditTitleExisting" xml:space="preserve">
     <value>Edit post</value>
   </data>
@@ -137,6 +140,12 @@
   </data>
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html preview</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="KeywordsLength" xml:space="preserve">
+    <value>The keywords has a maximum length of 255 characters.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Posts</value>

@@ -123,6 +123,9 @@
   <data name="Description" xml:space="preserve">
     <value>Beskrivning</value>
   </data>
+  <data name="DescriptionLength" xml:space="preserve">
+    <value>Beskrivningen får max innehålla 255 tecken.</value>
+  </data>
   <data name="EditTitleExisting" xml:space="preserve">
     <value>Ändra artikel</value>
   </data>
@@ -137,6 +140,12 @@
   </data>
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html-tumnagel</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Nyckelord</value>
+  </data>
+  <data name="KeywordsLength" xml:space="preserve">
+    <value>Nyckelorden får max innehålla 255 tecken.</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Artiklar</value>

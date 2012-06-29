@@ -60,6 +60,22 @@ namespace Piranha.Models
 		public string Permalink { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the meta keywords.
+		/// </summary>
+		[Column(Name="post_keywords")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Keywords")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="KeywordsLength")]
+		public string Keywords { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the meta description.
+		/// </summary>
+		[Column(Name="post_description")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Description")]
+		[StringLength(255, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="DescriptionLength")]
+		public string Description { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the excerpt.
 		/// </summary>
 		[Column(Name="post_excerpt")]

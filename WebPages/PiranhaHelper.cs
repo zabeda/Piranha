@@ -34,6 +34,13 @@ namespace Piranha.WebPages
 		protected override Page CurrentPage {
 			get { return (Page)Parent.Page.Current ; }
 		}
+
+		/// <summary>
+		/// Gets the current post.
+		/// </summary>
+		protected override Post CurrentPost {
+			get { return (Post)Parent.Page.CurrentPost ; }
+		}
 		#endregion
 
 		/// <summary>

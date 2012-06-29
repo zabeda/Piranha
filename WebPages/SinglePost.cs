@@ -74,6 +74,7 @@ namespace Piranha.WebPages
 			Model = pm ;
 
 			Page.Current = null ;
+			Page.CurrentPost = Model.Post ;
 		}
 		#endregion
 	}

@@ -15,6 +15,8 @@ namespace Piranha.Mvc
 		protected override void InitializePage() {
 			ViewBag.Page = Model.Page ;
 			Page.Current = Model.Page ;
+			ViewBag.Post = null ;
+			Page.CurrentPost = null ;
 
 			base.InitializePage();
 		}

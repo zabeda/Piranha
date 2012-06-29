@@ -59,7 +59,9 @@
         <tbody class="list-js">
             @foreach (var post in Model.Posts) {
             <tr@(post.Updated > post.LastPublished ? " class=draft" : "")>
-                <td class="title"><a href="@Url.Action("edit", new { id = post.Id })">@post.Title</a></td>
+                <td class="title"><a href="@Url.Action("edit", new { id = post.Id })">
+                    @post.Title@Html.Raw(post.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (post.Updated > post.LastPublished ? "<span class=info-draft></span>" : ""))
+                </a></td>
                 <td class="template">@post.TemplateName</td>
                 <td class="updated">@post.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@post.Created.ToString("yyyy-MM-dd")</td>

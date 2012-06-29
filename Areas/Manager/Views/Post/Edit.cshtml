@@ -118,7 +118,7 @@
     <input type="hidden" id="draft" name="draft" value="true" />
 </div>
 <div class="grid_9">
-    <div class="box">
+    <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
@@ -142,6 +142,18 @@
                     <div class="input">
                         @Html.TextAreaFor(m => m.Post.Excerpt, new { @placeholder = Piranha.Resources.Global.Optional, @rows = 3 })</div>
                     @Html.ValidationMessageFor(m => m.Post.Excerpt)
+                </li>
+            </ul>
+            <ul class="form optional">
+                <li>@Html.LabelFor(m => m.Post.Keywords)
+                    <div class="input"> 
+                        @Html.TextBoxFor(m => m.Post.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                    @Html.ValidationMessageFor(m => m.Post.Keywords)
+                </li>
+                <li>@Html.LabelFor(m => m.Post.Description)
+                    <div class="input">
+                        @Html.TextAreaFor(m => m.Post.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
+                    @Html.ValidationMessageFor(m => m.Post.Description)
                 </li>
             </ul>
         </div>
@@ -177,9 +189,9 @@
         </div>
     </div>
     @if (Model.Properties.Count > 0) {
-    <div class="box">
+    <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
-        <div class="inner">
+        <div class="inner optional">
             <ul class="form">
             @for (int n = 0; n < Model.Properties.Count; n++) {
                 <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)

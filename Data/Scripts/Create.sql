@@ -216,6 +216,8 @@ CREATE TABLE [post] (
 	[post_template_id] UNIQUEIDENTIFIER NOT NULL,
 	[post_permalink_id] UNIQUEIDENTIFIER NOT NULL,
 	[post_title] NVARCHAR(128) NOT NULL,
+	[post_keywords] NVARCHAR(128) NULL,
+	[post_description] NVARCHAR(255) NULL,
 	[post_excerpt] NVARCHAR(255) NULL,
 	[post_body] NTEXT NULL,
 	[post_attachments] NTEXT NULL,

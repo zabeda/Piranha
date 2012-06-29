@@ -506,6 +506,16 @@
     <EmbeddedResource Include="Areas\Manager\Content\Img\info-draft.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\info-unpublished.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-locked-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unlocked-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-search-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
