@@ -516,6 +516,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
