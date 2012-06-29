@@ -1,6 +1,7 @@
 bin/*
 obj/*
 *.user
-._.*
+._*
+
 *.suo
 *.vspscc
