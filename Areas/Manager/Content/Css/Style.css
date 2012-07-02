@@ -507,7 +507,6 @@ ul.sitemap .collapsed .action {
 ul.sitemap .title a {
     display: block;
     margin-left: 20px;
-    position: relative;
     }
 ul.sitemap li .info-unpublished, ul.sitemap li .info-draft, .info-unpublished, .info-draft {
     height: 16px;
@@ -787,7 +786,9 @@ table.template td.locked {
 .content-editor .input .defaultSkin table.mceLayout tr.mceLast td { border-width: 0px }
 .content-editor table.list tbody tr:first-child { background: #eee; }
 .content-editor .defaultSkin table.mceToolbar { padding-bottom: 6px; }
-    
+.content-editor .defaultSkin .mceListBox .mceText { font-family: "Helvetica Neue",Helvetica,Arial; font-size: 12px; line-height: 25px; height: 24px; margin-top: 1px; }
+.content-editor .defaultSkin .mceListBox .mceOpen { height: 24px; background-position: -741px 3px; margin-top: 1px; }
+
 /**
  * Login splash
  */
