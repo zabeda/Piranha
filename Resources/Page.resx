@@ -148,7 +148,7 @@
     <value>Add after</value>
   </data>
   <data name="ListAddBelow" xml:space="preserve">
-    <value>Add child</value>
+    <value>Add below</value>
   </data>
   <data name="ListDelete" xml:space="preserve">
     <value>Delete page</value>

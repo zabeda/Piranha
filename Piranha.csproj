@@ -235,7 +235,8 @@
     <Compile Include="Web\ClientCache.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-pdf.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-arrow-down-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-arrow-up-16.png" />
     <EmbeddedResource Include="Data\Scripts\Updates\3.sql" />
     <EmbeddedResource Include="Resources\Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -487,16 +488,6 @@
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unpublish-24.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-default.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-music.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-ppt.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-video.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-xls.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\thumb-zip.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -520,7 +511,20 @@
     <EmbeddedResource Include="Areas\Manager\Content\Img\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-remove-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-after-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-below-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-delete-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-doc-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-excel-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-movie-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-pdf-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-ppt-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-sound-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-zip-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

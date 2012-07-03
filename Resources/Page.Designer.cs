@@ -160,7 +160,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add child.
+        ///   Looks up a localized string similar to Add below.
         /// </summary>
         public static string ListAddBelow {
             get {
