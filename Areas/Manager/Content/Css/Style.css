@@ -99,6 +99,9 @@ button.full {
 .box .optional {
     display: none;
     }
+.box .expanded + .optional {
+    display: block;
+    }
 .form label {
     float: left;
     margin-top: 8px;
