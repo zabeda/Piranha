@@ -519,6 +519,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Img\icon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-remove-16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
