@@ -120,7 +120,8 @@ CREATE TABLE [permalink] (
 	[permalink_updated] DATETIME NOT NULL,
 	[permalink_created_by] UNIQUEIDENTIFIER NOT NULL,
 	[permalink_updated_by] UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT pk_permalink_id PRIMARY KEY ([permalink_id])
+	CONSTRAINT pk_permalink_id PRIMARY KEY ([permalink_id]),
+	CONSTRAINT fk_permalink_namespace_id FOREIGN KEY ([permalink_namespace_id]) REFERENCES [namespace] ([namespace_id])
 );
 CREATE UNIQUE INDEX index_permalink_name ON [permalink] ([permalink_namespace_id], [permalink_name]);
 

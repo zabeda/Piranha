@@ -41,4 +41,5 @@ UPDATE permalink SET permalink_namespace_id = 'AE46C4C4-20F7-4582-888D-DFC148FE9
 
 -- Set namespace_id to NOT NULL and create the index.
 ALTER TABLE [permalink] ALTER COLUMN permalink_namespace_id UNIQUEIDENTIFIER NOT NULL;
+ALTER TABLE [permalink] ADD CONSTRAINT fk_permalink_namespace_id FOREIGN KEY ([permalink_namespace_id]) REFERENCES [namespace] ([namespace_id]);
 CREATE UNIQUE INDEX index_permalink_name ON permalink (permalink_namespace_id, permalink_name);
