@@ -57,7 +57,7 @@ namespace Piranha.WebPages
 				Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
 			} else {
 				// Only cache public pages
-				DateTime mod = GetLastModified() ;
+				DateTime mod = GetLastModified(page) ;
 				cached = ClientCache.HandleClientCache(HttpContext.Current, page.Id.ToString(), mod) ;
 			}
 			// Load the model if the page wasn't cached
@@ -70,7 +70,7 @@ namespace Piranha.WebPages
 		/// Gets the lastest modification date for caching.
 		/// </summary>
 		/// <returns></returns>
-		protected virtual DateTime GetLastModified() {
+		protected virtual DateTime GetLastModified(Models.Page page) {
 			return page.Updated ;
 		}
 
