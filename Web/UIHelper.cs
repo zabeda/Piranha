@@ -126,6 +126,18 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
+		/// Generates the url to the given permalink.
+		/// </summary>
+		/// <param name="permalinkid">The id of the permalink</param>
+		/// <returns></returns>
+		public IHtmlString Permalink(Guid permalinkid) {
+			var perm = Models.Permalink.GetSingle(permalinkid) ;
+			if (perm != null)
+				return SiteUrl("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + perm.Name) ;
+			return SiteUrl("~/") ;
+		}
+
+		/// <summary>
 		/// Gets the URL to the content with the given id.
 		/// </summary>
 		/// <param name="id">The content id</param>

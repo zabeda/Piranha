@@ -62,9 +62,31 @@ namespace Piranha.Models
 				return (Dictionary<Guid, Dictionary<string, Permalink>>)HttpContext.Current.Cache[typeof(Permalink).Name] ;
 			}
 		}
+
+		/// <summary>
+		/// Gets the permalink id cache object.
+		/// </summary>
+		private static Dictionary<Guid, Permalink> IdCache {
+			get {
+				if (HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] == null)
+					HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] = new Dictionary<Guid, Permalink>() ;
+				return (Dictionary<Guid, Permalink>)HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] ;
+			}
+		} 
 		#endregion
 
 		#region Static accessors
+		/// <summary>
+		/// Gets the permalink with the given id.
+		/// </summary>
+		/// <param name="id">The id</param>
+		/// <returns>The permalink</returns>
+		public static Permalink GetSingle(Guid id) {
+			if (!IdCache.ContainsKey(id))
+				IdCache[id] = GetSingle((object)id) ;
+			return IdCache[id] ;
+		}
+
 		/// <summary>
 		/// Gets the permalink with the given name.
 		/// </summary>
@@ -73,8 +95,11 @@ namespace Piranha.Models
 		/// <returns>The permalink</returns>
 		public static Permalink GetByName(Guid namespaceid, string name) {
 			if (Cache.ContainsKey(namespaceid)) {
-				if (!Cache[namespaceid].ContainsKey(name))
+				if (!Cache[namespaceid].ContainsKey(name)) {
 					Cache[namespaceid][name] = GetSingle("permalink_name = @0", name) ;
+					if (Cache[namespaceid][name] != null)
+						IdCache[Cache[namespaceid][name].Id] = Cache[namespaceid][name] ;
+				}
 				return Cache[namespaceid][name] ;
 			}
 			return null ;
@@ -112,6 +137,8 @@ namespace Piranha.Models
 				if (Cache[NamespaceId].ContainsKey(record.Name))
 					Cache[NamespaceId].Remove(record.Name) ;
 			}
+			if (IdCache.ContainsKey(Id))
+				IdCache.Remove(Id) ;
 		}
 	}
 }
