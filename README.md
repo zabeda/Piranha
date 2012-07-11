@@ -10,6 +10,6 @@ Documentation and information about the project can be found on our main site:
 
 <a href="http://www.piranhacms.org">piranhacms.org</a>
 
-We're currently working hard to get to initial version and this of course means
-that there's a LOT of commits to the master branch at this stage. Any issues or
-requests on are welcome in the issue list!
+The current version of Piranha is 1.0 and the application template can be
+downloaded using NuGet. For more information, please refer to the documentation
+on our official site.
