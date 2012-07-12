@@ -124,5 +124,14 @@ namespace Piranha.Models
 			if (Cache.ContainsKey(record.Name.ToUpper()))
 				Cache.Remove(record.Name.ToUpper()) ;
 		}
+
+		/// <summary>
+		/// Invalidates the sysparam with the given name.
+		/// </summary>
+		/// <param name="name">The param name.</param>
+		public static void InvalidateParam(string name) {
+			if (Cache.ContainsKey(name.ToUpper()))
+				Cache.Remove(name.ToUpper()) ;
+		}
 	}
 }

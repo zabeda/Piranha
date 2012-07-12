@@ -207,6 +207,9 @@ namespace Piranha.Models.Manager.PageModels
 				// Remove published dates
 				Page.Execute("UPDATE page SET page_published = NULL, page_last_published = NULL WHERE page_id = @0", tx, id) ;
 
+				// Change global last modified
+				Web.ClientCache.SetSiteLastModified(tx) ;
+
 				// Commit transaction
 				tx.Commit() ;
 			}
@@ -262,6 +265,11 @@ namespace Piranha.Models.Manager.PageModels
 					// Save permalink last if the page isn't new
 					if (!permalinkfirst)
 						Permalink.Save(tx) ;
+
+					// Change global last modified
+					if (!draft)
+						Web.ClientCache.SetSiteLastModified(tx) ;
+
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -283,6 +291,9 @@ namespace Piranha.Models.Manager.PageModels
 				properties.ForEach(p => p.Delete(tx)) ;
 				pages.ForEach(p => p.Delete(tx)) ;
 				Permalink.Delete(tx) ;
+
+				// Change global last modified
+				Web.ClientCache.SetSiteLastModified(tx) ;
 
 				tx.Commit() ;
 

@@ -36,9 +36,7 @@ namespace Piranha.Web
 		public static void SetSiteLastModified(IDbTransaction tx = null) {
 			SysParam.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = @1", tx,
 				DateTime.Now, "SITE_LAST_MODIFIED") ;
-			//SysParam p = SysParam.GetByName("SITE_LAST_MODIFIED") ;
-			//if (p != null)
-			//	p.InvalidateRecord(p) ;
+			SysParam.InvalidateParam("SITE_LAST_MODIFIED") ;
 		}
 
 		/// <summary>
