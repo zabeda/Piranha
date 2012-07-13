@@ -14,6 +14,7 @@ namespace Piranha.Models
 	/// and inherit permissions from child groups.
 	/// </summary>
 	[PrimaryKey(Column="sysgroup_id")]
+	[Serializable]
 	public class SysGroup : PiranhaRecord<SysGroup>, ICacheRecord<SysGroup>
 	{
 		#region Fields

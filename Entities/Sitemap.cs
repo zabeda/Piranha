@@ -14,6 +14,7 @@ namespace Piranha.Models
 	[Table(Name="page")]
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
 	[Join(TableName="permalink", ForeignKey="page_permalink_id", PrimaryKey="permalink_id")]
+	[Serializable]
 	public class Sitemap : PiranhaRecord<Sitemap>, ISitemap
 	{
 		#region Fields

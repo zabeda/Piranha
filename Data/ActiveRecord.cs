@@ -117,6 +117,7 @@ namespace Piranha.Data
 	/// for communication with the database.
 	/// </summary>
 	/// <typeparam name="T">The record type</typeparam>
+	[Serializable]
 	public abstract class ActiveRecord<T> : IDisposable
 	{
 		#region Members

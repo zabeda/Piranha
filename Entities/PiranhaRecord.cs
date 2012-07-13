@@ -12,6 +12,7 @@ namespace Piranha.Models
 	/// Base class for all active records in the Piranha framework.
 	/// </summary>
 	/// <typeparam name="T">The record type</typeparam>
+	[Serializable]
 	public abstract class PiranhaRecord<T> : GuidRecord<T>
 	{
 		#region Properties

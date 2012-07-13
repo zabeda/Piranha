@@ -14,6 +14,7 @@ namespace Piranha.Models
 	/// </summary>
 	[PrimaryKey(Column="sysaccess_id")] 
 	[Join(TableName="sysgroup", ForeignKey="sysaccess_group_id", PrimaryKey="sysgroup_id")]
+	[Serializable]
 	public class SysAccess : PiranhaRecord<SysAccess>, ICacheRecord<SysAccess>
 	{
 		#region Fields

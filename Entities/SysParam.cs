@@ -13,6 +13,7 @@ namespace Piranha.Models
 	/// Active record for the system parameters.
 	/// </summary>
 	[PrimaryKey(Column="sysparam_id")] 
+	[Serializable]
 	public class SysParam : PiranhaRecord<SysParam>, ICacheRecord<SysParam>
 	{
 		#region Fields

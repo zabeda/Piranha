@@ -12,6 +12,7 @@ namespace Piranha.Models
 {
 	[PrimaryKey(Column="sysuser_id")]
 	[Join(TableName="SysGroup", ForeignKey="sysuser_group_id", PrimaryKey="sysgroup_id")]
+	[Serializable]
 	public class SysUser : GuidRecord<SysUser>
 	{
 		#region Fields

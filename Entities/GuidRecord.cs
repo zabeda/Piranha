@@ -12,6 +12,7 @@ namespace Piranha.Models
 	/// Base class for all records that uses a guid as their primary key column.
 	/// </summary>
 	/// <typeparam name="T">The type of the record</typeparam>
+	[Serializable]
 	public abstract class GuidRecord<T> : ActiveRecord<T>
 	{
 		#region Fields
