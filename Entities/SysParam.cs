@@ -100,9 +100,12 @@ namespace Piranha.Models
 		/// <param name="name">The param name</param>
 		/// <returns>The param</returns>
 		public static SysParam GetByName(string name) {
-			if (!Cache.ContainsKey(name.ToUpper()))
-				Cache[name.ToUpper()] = SysParam.GetSingle("sysparam_name = @0", name) ;
-			return Cache[name.ToUpper()] ;
+			try {
+				if (!Cache.ContainsKey(name.ToUpper()))
+					Cache[name.ToUpper()] = SysParam.GetSingle("sysparam_name = @0", name) ;
+				return Cache[name.ToUpper()] ;
+			} catch {}
+			return null ;
 		}
 		#endregion
 

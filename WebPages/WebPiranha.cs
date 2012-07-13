@@ -153,8 +153,14 @@ namespace Piranha.WebPages
 			string[] args = path.Split(new char[] {'/'}).Subset(1) ;
 				
 			if (args.Length > 0) {
+				// Ensure database
+				if (args[0] == "" && SysParam.GetByName("SITE_VERSION") == null)
+					context.Response.Redirect("~/manager") ;
+
+				// Find the correct request handler
 				foreach (RequestHandlerRegistration hr in Handlers.Values) {
 					if (hr.UrlPrefix.ToLower() == args[0].ToLower()) {
+						// Execute the handler
 						hr.Handler.HandleRequest(context, args.Subset(1)) ;
 						break ;
 					}
