@@ -12,7 +12,7 @@
 </div>
 <div id="attach-existing" class="inner gallery">
     @foreach (var content in Model.Content) {
-        <div class="gallery-item">
+        <div class="gallery-item @(Model.Content.Count > 12 ? "compressed" : "")">
             <img@(!content.IsImage ? " class=document" : "") data-id="@content.Id" src="@Url.Content("~/thumb/" + content.Id + "/100")" title="@content.AlternateText" alt="@content.AlternateText" />
             <p><small>@content.Filename</small></p>
         </div>

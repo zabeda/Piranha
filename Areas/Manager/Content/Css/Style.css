@@ -696,16 +696,36 @@ ul.list .delete, ul.list .arrow-right, ul.list arrow-down {
 .templates {
     padding: 10px;
     width: 200px;
+    height: 190px;
     margin-bottom: 20px;
+    }
+.templates.compressed {
+    width: 145px;
+    height: 160px;
+    }
+.templates .preview {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    }
+.templates.compressed .preview {
+    width: 100px;
+    height: 100px;
     }
 .templates h3 {
     display: block;
     text-align: center;
     }
+.templates.compressed h3 {
+    font-size: 14px;
+    }
 .templates p {
     margin-top: 10px;
     font-size: 12px;
     text-align: center;
+    }
+.templates.compressed p {
+    font-size: 11px;
     }
 .edit, .templates .preview {
     margin: 0 auto 10px;
@@ -749,9 +769,14 @@ table.template td.locked {
 .gallery-item {
     float: left;
     width: 140px;
+    height: 140px;
     text-align: center;
     margin-bottom: 20px;
     padding: 0 10px;
+    }
+.gallery-item.compressed {
+    width: 105px;
+    height: 130px;
     }
 .gallery-item img {
     border: solid 1px #e2e2e2;
@@ -760,12 +785,19 @@ table.template td.locked {
     padding: 4px;
     cursor: pointer;
     }
+.gallery-item.compressed img {
+    width: 70px;
+    height: 70px;
+    }
 .gallery-item img.document {
     border: 0px none;
     padding: 5px;
     }
 .gallery-item p {
     word-wrap: break-word;
+    }
+.gallery-item.compressed small {
+    font-size: 11px;
     }
 
     
