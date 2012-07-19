@@ -231,6 +231,7 @@
     <Compile Include="Web\PiranhaHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebPages\WebPiranha.cs" />
+    <Compile Include="Web\TemplateCache.cs" />
     <Compile Include="Web\UIHelper.cs" />
     <Compile Include="Web\ClientCache.cs" />
   </ItemGroup>

@@ -58,6 +58,9 @@ namespace Piranha.WebPages
 			} else {
 				// Only cache public pages
 				DateTime mod = GetLastModified(page) ;
+				DateTime tmod = TemplateCache.GetLastModified(!String.IsNullOrEmpty(page.Controller) ?
+					page.Controller : "~/page.cshtml") ;
+				mod = tmod > mod ? tmod : mod ;
 				cached = ClientCache.HandleClientCache(HttpContext.Current, page.Id.ToString(), mod) ;
 			}
 			// Load the model if the page wasn't cached

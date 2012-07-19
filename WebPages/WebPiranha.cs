@@ -112,6 +112,9 @@ namespace Piranha.WebPages
 
 			// Register handlers
 			RegisterDefaultHandlers() ;
+
+			// Reset template cache
+			Web.TemplateCache.Clear() ;
 		}
 
 		/// <summary>

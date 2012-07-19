@@ -82,8 +82,7 @@ namespace Piranha.Areas.Manager.Controllers
 				// Now lets update the database version.
 				SysUser.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = 'SITE_VERSION'", 
 					null, Data.Database.CurrentVersion) ;
-				SysParam p = SysParam.GetByName("SITE_VERSION") ;
-				p.InvalidateRecord(p) ;
+				SysParam.InvalidateParam("SITE_VERSION") ;
 				tx.Commit() ;
 			}
 			return RedirectToAction("index", "account") ;
