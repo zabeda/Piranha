@@ -43,6 +43,7 @@
 @Html.HiddenFor(m => m.Content.Id)
 @Html.HiddenFor(m => m.Content.IsNew)
 @Html.HiddenFor(m => m.Content.IsImage)
+@Html.HiddenFor(m => m.Content.IsFolder)
 @Html.HiddenFor(m => m.Content.Created)
 @Html.HiddenFor(m => m.Content.CreatedBy)
 @Html.HiddenFor(m => m.Content.Filename)
@@ -51,8 +52,9 @@
 @Html.HiddenFor(m => m.Content.Height)
 @Html.HiddenFor(m => m.Content.Size)
 <div class="grid_9">
+    @if (!ViewBag.Folder) {
     <div class="box">
-        <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
+        <div class="title"><h2>@Piranha.Resources.Content.ChooseFile</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>
@@ -66,6 +68,32 @@
                     </div>
                 </li>
                 <li>
+                    @Html.LabelFor(m => m.FileUrl)
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.FileUrl, 
+                            new { @placeholder = @Piranha.Resources.Global.FileUrl })</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    }
+    <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
+        <div class="inner">
+            <ul class="form">
+                <li>
+                    @Html.LabelFor(m => m.Content.Name)
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Content.Name, 
+                            new { @placeholder = @Piranha.Resources.Global.Optional })</div>
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Content.ParentId)
+                    <div class="input">
+                        @Html.DropDownListFor(m => m.Content.ParentId, Model.Folders)</div>
+                </li>
+                @if (!ViewBag.Folder) {
+                <li>
                     @Html.LabelFor(m => m.Content.AlternateText)
                     <div class="input">
                         @Html.TextBoxFor(m => m.Content.AlternateText, 
@@ -77,10 +105,11 @@
                         @Html.TextAreaFor(m => m.Content.Description, 
                             new { @rows = 3, @placeholder = @Piranha.Resources.Global.Optional })</div>
                 </li>
+                }
             </ul>
         </div>
     </div>
-    @if (!Model.Content.IsNew) {    
+    @if (!Model.Content.IsNew && !Model.Content.IsFolder) {    
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Content.FileInformation</h2></div>
         <div class="inner">

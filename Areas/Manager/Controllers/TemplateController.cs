@@ -14,6 +14,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Gets the list of all page templates.
 		/// </summary>
+		[Access(Function="ADMIN_PAGE_TEMPLATE")]
 		public ActionResult PageList() {
 			return View("PageList", PageListModel.Get()) ;
 		}
@@ -23,6 +24,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// weather a template id was passed to the action.
 		/// </summary>
 		/// <param name="id">The template id</param>
+		[Access(Function="ADMIN_PAGE_TEMPLATE")]
 		public ActionResult Page(string id = "") {
 			PageEditModel m = new PageEditModel() ; 
 			
@@ -40,13 +42,14 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="m">The model</param>
 		[HttpPost(), ValidateInput(false)]
+		[Access(Function="ADMIN_PAGE_TEMPLATE")]
 		public ActionResult Page(PageEditModel m) {
 			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
 					ModelState.Clear() ;
 					ViewBag.Title = Piranha.Resources.Template.EditPageTitleExisting ;
-					ViewBag.Message = Piranha.Resources.Template.MessagePageSaved ;
-				} else ViewBag.Message = Piranha.Resources.Template.MessagePageNotSaved ;
+					SuccessMessage(Piranha.Resources.Template.MessagePageSaved) ;
+				} else ErrorMessage(Piranha.Resources.Template.MessagePageNotSaved) ;
 			} else {
 				if (m.Template.IsNew)
 					ViewBag.Title = Piranha.Resources.Template.EditPageTitleNew ;
@@ -59,12 +62,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Deletes the specified page template.
 		/// </summary>
 		/// <param name="id">The template id</param>
+		[Access(Function="ADMIN_PAGE_TEMPLATE")]
 		public ActionResult DeletePage(string id) {
 			PageEditModel pm = PageEditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Template.MessagePageDeleted ;
-			else ViewBag.Message = Piranha.Resources.Template.MessagePageNotDeleted ;
+				SuccessMessage(Piranha.Resources.Template.MessagePageDeleted) ;
+			else ErrorMessage(Piranha.Resources.Template.MessagePageNotDeleted) ;
 			return RedirectToAction("pagelist") ;
 		}
 		#endregion
@@ -73,6 +77,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Gets the list of post templates.
 		/// </summary>
+		[Access(Function="ADMIN_POST_TEMPLATE")]
 		public ActionResult PostList() {
 			return View("PostList", PostListModel.Get()) ;
 		}
@@ -82,6 +87,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// weather a template id was passed to the action.
 		/// </summary>
 		/// <param name="id">The template id</param>
+		[Access(Function="ADMIN_POST_TEMPLATE")]
 		public ActionResult Post(string id = "") {
 			PostEditModel m = new PostEditModel() ; 
 			
@@ -99,6 +105,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="m">The model</param>
 		[HttpPost(), ValidateInput(false)]
+		[Access(Function="ADMIN_POST_TEMPLATE")]
 		public ActionResult Post(PostEditModel m) {
 			ViewBag.Title = Piranha.Resources.Template.EditPostTitleNew ;
 
@@ -106,8 +113,8 @@ namespace Piranha.Areas.Manager.Controllers
 				if (m.SaveAll()) {
 					ModelState.Clear() ;
 					ViewBag.Title = Piranha.Resources.Template.EditPostTitleExisting ;
-					ViewBag.Message = Piranha.Resources.Template.MessagePostSaved ;
-				} else ViewBag.Message = Piranha.Resources.Template.MessagePostNotSaved ;
+					SuccessMessage(Piranha.Resources.Template.MessagePostSaved) ;
+				} else ErrorMessage(Piranha.Resources.Template.MessagePostNotSaved) ;
 			}
 			return View("PostEdit", m) ;
 		}
@@ -116,12 +123,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Deletes the specified post template.
 		/// </summary>
 		/// <param name="id">The template id</param>
+		[Access(Function="ADMIN_POST_TEMPLATE")]
 		public ActionResult DeletePost(string id) {
 			PostEditModel pm = PostEditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Template.MessagePostDeleted ;
-			else ViewBag.Message = Piranha.Resources.Template.MessagePostNotDeleted ;
+				SuccessMessage(Piranha.Resources.Template.MessagePostDeleted) ;
+			else ErrorMessage(Piranha.Resources.Template.MessagePostNotDeleted) ;
 			return RedirectToAction("postlist") ;
 		}
 		#endregion

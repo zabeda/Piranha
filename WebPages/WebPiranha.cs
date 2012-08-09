@@ -61,6 +61,21 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Gets the public site url.
+		/// </summary>
+		/// <returns>The url</returns>
+		public static string GetSiteUrl() {
+			var context = HttpContext.Current ;
+			var url = "http://" + context.Request.Url.DnsSafeHost + 
+				(!context.Request.Url.IsDefaultPort ? ":" + context.Request.Url.Port : "") +
+				context.Request.ApplicationPath ;
+
+			if (url.EndsWith("/"))
+				return url.Substring(0, url.Length - 1) ;
+			return url ;
+		}
+
+		/// <summary>
 		/// Clears all of the currently registered handlers.
 		/// </summary>
 		public static void ResetHandlers() {
@@ -79,6 +94,7 @@ namespace Piranha.WebPages
 			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;
 			RegisterHandler("account", "ACCOUNT", new AccountHandler()) ;
 			RegisterHandler("archive", "ARCHIVE", new ArchiveHandler()) ;
+			RegisterHandler("rss", "RSS", new RssHandler()) ;
 		}
 
 		/// <summary>

@@ -76,12 +76,12 @@ namespace Piranha.Areas.Manager.Controllers
 					string[] stmts = sql.Split(new char[] { ';' }) ;
 					foreach (string stmt in stmts) {
 						if (!String.IsNullOrEmpty(stmt.Trim()))
-							SysUser.Execute(stmt, tx) ;
+							SysUser.Execute(stmt.Trim(), tx) ;
 					}
 				}
 				// Now lets update the database version.
 				SysUser.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = 'SITE_VERSION'", 
-					null, Data.Database.CurrentVersion) ;
+					tx, Data.Database.CurrentVersion) ;
 				SysParam.InvalidateParam("SITE_VERSION") ;
 				tx.Commit() ;
 			}

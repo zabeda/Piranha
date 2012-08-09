@@ -120,6 +120,9 @@
   <data name="AlternateText" xml:space="preserve">
     <value>Alt. text</value>
   </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Ladda upp fil</value>
+  </data>
   <data name="ContentSize" xml:space="preserve">
     <value>Filstorlek</value>
   </data>
@@ -132,11 +135,17 @@
   <data name="EditTitleExistingDocument" xml:space="preserve">
     <value>Ändra dokument</value>
   </data>
+  <data name="EditTitleExistingFolder" xml:space="preserve">
+    <value>Ändra mapp</value>
+  </data>
   <data name="EditTitleExistingImage" xml:space="preserve">
     <value>Ändra bild</value>
   </data>
   <data name="EditTitleNew" xml:space="preserve">
     <value>Lägg till nytt innehåll</value>
+  </data>
+  <data name="EditTitleNewFolder" xml:space="preserve">
+    <value>Lägg till mapp</value>
   </data>
   <data name="FileInformation" xml:space="preserve">
     <value>Filinformation</value>
@@ -168,6 +177,15 @@
   <data name="MessageDocumentSaved" xml:space="preserve">
     <value>Dokumentet har sparats.</value>
   </data>
+  <data name="MessageFolderDeleted" xml:space="preserve">
+    <value>Mappen har raderats.</value>
+  </data>
+  <data name="MessageFolderNotDeleted" xml:space="preserve">
+    <value>Ett fel har inträffat. Mappen kunde inte raderas.</value>
+  </data>
+  <data name="MessageFolderSaved" xml:space="preserve">
+    <value>Mappen har sparats.</value>
+  </data>
   <data name="MessageImageDeleted" xml:space="preserve">
     <value>Bilden har raderats.</value>
   </data>
@@ -180,13 +198,22 @@
   <data name="MessageNotSaved" xml:space="preserve">
     <value>Ett fel har inträffat. Innehållet kunde inte raderas.</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Namn</value>
+  </data>
+  <data name="ParentId" xml:space="preserve">
+    <value>Mapp</value>
+  </data>
   <data name="ThumbnailNewDescription" xml:space="preserve">
     <value>Eftersom du ännu inte laddat upp något kan det inte visas någon tumnagel.</value>
   </data>
   <data name="ToolbarAdd" xml:space="preserve">
     <value>Ladda upp nytt innehåll</value>
   </data>
+  <data name="ToolbarAddFolder" xml:space="preserve">
+    <value>Ny mapp</value>
+  </data>
   <data name="Upload" xml:space="preserve">
-    <value>Ladda upp</value>
+    <value>Från disk</value>
   </data>
 </root>

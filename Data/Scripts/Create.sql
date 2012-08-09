@@ -88,6 +88,7 @@ CREATE TABLE [posttemplate] (
 	[posttemplate_controller_show] BIT NOT NULL default(0),
 	[posttemplate_archive_controller] NVARCHAR(128) NULL,	
 	[posttemplate_archive_controller_show] BIT NOT NULL default(0),
+	[posttemplate_rss] BIT NOT NULL DEFAULT(1),
 	[posttemplate_created] DATETIME NOT NULL,
 	[posttemplate_updated] DATETIME NOT NULL,
 	[posttemplate_created_by] UNIQUEIDENTIFIER NOT NULL,
@@ -239,10 +240,13 @@ CREATE TABLE [post] (
 
 CREATE TABLE [content] (
 	[content_id] UNIQUEIDENTIFIER NOT NULL,
-	[content_filename] NVARCHAR(128) NOT NULL,
-	[content_type] NVARCHAR(255) NOT NULL,
+	[content_parent_id] UNIQUEIDENTIFIER NULL,
+	[content_filename] NVARCHAR(128) NULL,
+	[content_name] NVARCHAR(128) NULL,
+	[content_type] NVARCHAR(255) NULL,
 	[content_size] INT NOT NULL default(0),
 	[content_image] BIT NOT NULL default(0),
+	[content_folder] BIT NOT NULL default(0),
 	[content_width] INT NULL,
 	[content_height] INT NULL,
 	[content_alt] NVARCHAR(128) NULL,
@@ -265,4 +269,21 @@ CREATE TABLE [upload] (
 	[upload_created_by] UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_upload_id PRIMARY KEY ([upload_id]),
 	CONSTRAINT fk_upload_created_by FOREIGN KEY ([upload_created_by]) REFERENCES [sysuser] ([sysuser_id])
+);
+
+CREATE TABLE [comment] (
+	[comment_id] UNIQUEIDENTIFIER NOT NULL,
+	[comment_parent_id] UNIQUEIDENTIFIER NULL,
+	[comment_is_approved] BIT NOT NULL default(0),
+	[comment_title] NVARCHAR(128) NULL,
+	[comment_body] NEXT NULL,
+	[comment_created] DATETIME NOT NULL,
+	[comment_approved] DATETIME NULL,
+	[comment_created_by] UNIQUEIDENTIFIER NULL,
+	[comment_created_by_name] NVARCHAR(64) NULL,
+	[comment_created_by_email] NVARCHAR(128) NULL,
+	[comment_approved_by] UNIQUEIDENTIFIER NULL,
+	CONSTRAINT pk_comment_id PRIMARY KEY ([comment_id]),
+	CONSTRAINT fk_comment_created_by FOREIGN KEY ([comment_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_comment_approved_by FOREIGN KEY ([comment_approved_by]) REFERENCES [sysuser] ([sysuser_id])
 );

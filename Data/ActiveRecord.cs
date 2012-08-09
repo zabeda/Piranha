@@ -130,7 +130,7 @@ namespace Piranha.Data
 		private static Dictionary<string, ColumnAttribute> _attributes ;
 
 		// SQL statements 
-		private const string SqlSelect = "SELECT {3} {0} FROM {1} {2} {4} {5}" ;
+		private const string SqlSelect = "SELECT {3} {6} {0} FROM {1} {2} {4} {5}" ;
 		private const string SqlInsert = "INSERT INTO {0} ({1}) VALUES({2})" ;
 		private const string SqlUpdate = "UPDATE {0} SET {1} WHERE {2}" ;
 		private const string SqlDelete = "DELETE FROM {0} WHERE {1}" ;
@@ -353,7 +353,8 @@ namespace Piranha.Data
 			return Query(String.Format(SqlSelect, fields, TableName + TableJoins, 
 				where != "" ? "WHERE " + where : "", gp != null && gp.Distinct ? "DISTINCT" : "", 
 				gp != null && !String.IsNullOrEmpty(gp.GroupBy) ? "GROUP BY " + gp.GroupBy : "",
-				gp != null && !String.IsNullOrEmpty(gp.OrderBy) ? "ORDER BY " + gp.OrderBy : ""), args) ;
+				gp != null && !String.IsNullOrEmpty(gp.OrderBy) ? "ORDER BY " + gp.OrderBy : "",
+				gp != null && gp.Top > 0 ? "TOP " + gp.Top.ToString() : ""), args) ;
 		}
 
 		/// <summary>
@@ -667,6 +668,11 @@ namespace Piranha.Data
 		/// Gets/sets grouping statement
 		/// </summary>
 		public string GroupBy { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the number of records to get.
+		/// </summary>
+		public int Top { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -674,6 +680,7 @@ namespace Piranha.Data
 		/// </summary>
 		public Params() {
 			Distinct = false ;
+			Top = 0 ;
 		}
 	}
 }

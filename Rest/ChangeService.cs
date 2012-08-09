@@ -31,7 +31,7 @@ namespace Piranha.Rest
 				changes.Sitemap = new SitemapServices().Get() ;
 
 			// Get all pages last published after the given date.
-			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_is_hidden = 0", latest).ForEach(p => 
+			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_is_hidden = 0 AND page_draft = 0", latest).ForEach(p => 
 				changes.Pages.Add(new PageService().Get(p.Id.ToString()))) ;
 
 			// Get all categories updated after the given date.

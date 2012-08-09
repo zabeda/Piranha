@@ -93,6 +93,8 @@ namespace Piranha.Models
 			{ "application/x-rar-compressed", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" }
 		};
 		private string defaultThumb = "Piranha.Areas.Manager.Content.Img.ico-doc-64.png" ;
+		private string folderThumb = "Piranha.Areas.Manager.Content.Img.ico-folder-96.png" ;
+		private string folderThumbSmall = "Piranha.Areas.Manager.Content.Img.ico-folder-32.png" ;
 		#endregion
 
 		#region Fields
@@ -101,6 +103,13 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="content_id")]
 		public override Guid Id { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the optional parent id.
+		/// </summary>
+		[Column(Name="content_parent_id")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="ParentId")]
+		public Guid ParentId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the filename.
@@ -130,16 +139,29 @@ namespace Piranha.Models
 		public bool IsImage { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets weather this is a content folder or not.
+		/// </summary>
+		[Column(Name="content_folder")]
+		public bool IsFolder { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the possible width of the content.
 		/// </summary>
 		[Column(Name="content_width")]
 		public int Width { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the possible height of th econtent.
+		/// Gets/sets the possible height of the content.
 		/// </summary>
 		[Column(Name="content_height")]
 		public int Height { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the name of the content.
+		/// </summary>
+		[Column(Name="content_name")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="Name")]
+		public string Name { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the alternate text.
@@ -182,6 +204,20 @@ namespace Piranha.Models
 
 		#region Properties
 		/// <summary>
+		/// Gets the current display name for the content object.
+		/// </summary>
+		public string DisplayName { 
+			get {
+				return !String.IsNullOrEmpty(Name) ? Name : Filename ;
+			}
+		}
+
+		/// <summary>
+		/// Gets/sets the possible child content if this is a folder.
+		/// </summary>
+		public List<Content> ChildContent { get ; set ; }
+
+		/// <summary>
 		/// Gets the virtual path for the content media file.
 		/// </summary>
 		public string VirtualPath { 
@@ -206,6 +242,13 @@ namespace Piranha.Models
 			}
 		}
 		#endregion
+
+		/// <summary>
+		/// Default constructor. Creates a new content object.
+		/// </summary>
+		public Content() {
+			ChildContent = new List<Content>() ;
+		}
 
 		#region Static accessors
 		/// <summary>
@@ -256,6 +299,50 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Gets the folder structure for the first level.
+		/// </summary>
+		/// <returns>The content</returns>
+		public static List<Content> GetStructure() {
+			return GetStructure(Guid.Empty) ;
+		}
+
+		/// <summary>
+		/// Gets the folder structure for the given folder id.
+		/// </summary>
+		/// <param name="folderid">The folder id</param>
+		/// <returns>The content</returns>
+		public static List<Content> GetStructure(Guid folderid, bool includeparent = false) {
+			List<Content> ret = new List<Content>() ;
+
+			// Add parent
+			if (folderid != Guid.Empty && includeparent) {
+				var self = Content.GetSingle(folderid) ;
+				ret.Add(new Content() {
+					Id = self.ParentId,
+					ParentId = folderid,
+					IsFolder = true,
+					Name = ".."
+				}) ;
+			}
+
+			// Get the folders
+			if (folderid == Guid.Empty)
+				ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id IS NULL", 
+					new Params() { OrderBy = "content_name" })) ;
+			else ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id = @0", folderid, 
+					new Params() { OrderBy = "content_name" })) ;
+
+			// Get the content
+			if (folderid == Guid.Empty)
+				ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id IS NULL",
+					new Params() { OrderBy = "COALESCE(content_name, content_filename)" })) ;
+			else ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id = @0", folderid,
+				new Params() { OrderBy = "COALESCE(content_name, content_filename)" })) ;
+
+			return ret ;
+		}
+
+		/// <summary>
 		/// Gets the content for the given category id.
 		/// </summary>
 		/// <param name="id">The category id</param>
@@ -302,11 +389,18 @@ namespace Piranha.Models
 				if (File.Exists(CachedThumbnailPath(size))) {
 					// Return generated & cached thumbnail
 					WriteFile(context.Response, CachedThumbnailPath(size)) ;
-				} else if (File.Exists(PhysicalPath)) {
+				} else if (File.Exists(PhysicalPath) || IsFolder) {
 					Image img = null ;
 
 					if (IsImage) {
-						img = Image.FromFile(PhysicalPath) ; 
+						img = Image.FromFile(PhysicalPath) ;
+					} else if (IsFolder) {
+						Stream strm = null ;
+						if (size > 32)
+							strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(folderThumb) ;
+						else strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(folderThumbSmall) ;
+						img = Image.FromStream(strm) ;
+						strm.Close() ;
 					} else {
 						if (thumbs.ContainsKey(Type)) {
 							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(thumbs[Type]) ;
@@ -336,11 +430,7 @@ namespace Piranha.Models
 							bmp.Save(CachedThumbnailPath(size), img.RawFormat) ;
 						}
 						WriteFile(context.Response, CachedThumbnailPath(size)) ;
-					} /* else {
-						if (thumbs.ContainsKey(Type)) {
-							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(thumbs[Type]) ;
-						}
-					} */
+					} 
 				}
 			}
 		}

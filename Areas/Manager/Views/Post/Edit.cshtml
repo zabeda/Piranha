@@ -155,6 +155,10 @@
                         @Html.TextAreaFor(m => m.Post.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
                     @Html.ValidationMessageFor(m => m.Post.Description)
                 </li>
+                <li>
+                    @Html.LabelFor(m => m.Post.AllowRss)
+                    <p>@Html.CheckBoxFor(m => m.Post.AllowRss) (@Piranha.Resources.Post.AllowRssDescription)</p>
+                </li>
             </ul>
         </div>
     </div>

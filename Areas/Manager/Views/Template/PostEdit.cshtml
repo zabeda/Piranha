@@ -73,6 +73,10 @@
                         @Html.TextBoxFor(m => m.Template.ArchiveController, 
                             new { @placeholder = Piranha.Resources.Global.Optional })</div>
                 </li>
+                <li>
+                    @Html.LabelFor(m => m.Template.AllowRss)
+                    <p>@Html.CheckBoxFor(m => m.Template.AllowRss) (@Piranha.Resources.Template.AllowRssDescription)</p>
+                </li>
             </ul>
         </div>
     </div>

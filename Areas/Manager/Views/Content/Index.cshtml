@@ -6,14 +6,24 @@
 }
 @section Head {
     <script type="text/javascript">
+        function formatSitemap() {
+            $.each($(".sitemap li:visible"), function (i, e) {
+                if (i % 2 == 1)
+                    $(this).addClass("odd");
+                else $(this).removeClass("odd");
+            });
+        }
+
         $(document).ready(function () {
-            // Setup template list
-            var options = {
-                listClass: 'list-js',
-                searchId: 'search',
-                valueNames: ['filename', 'updated', 'created']
-            };
-            var list = new List('list', options);
+            formatSitemap();
+
+            // Handle the site tree
+            $(".sitemap .action").click(function () {
+                var li = $(this).parent().parent();
+                li.toggleClass("collapsed");
+                li.toggleClass("expanded");
+                formatSitemap();
+            });
         });
     </script>
 }
@@ -22,7 +32,8 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a href="@Url.Action("edit")" class="add"">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a href="@Url.Action("insert")" class="add"">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a href="@Url.Action("insertfolder")" class="addfolder">@Piranha.Resources.Content.ToolbarAddFolder</a></li>
             <li><a href="@Url.Action("index")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
@@ -31,32 +42,13 @@
 </div>
 }
 <div class="grid_12">
-    <table id="list" class="list">
-        <thead>
-            <tr>
-                <th class="thumb"></th>
-                <th><span class="sort asc" data-sort="filename">@Piranha.Resources.Content.Filename</span></th>
-                <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
-                <th class="one"><span class="one sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody class="list-js">
-            @foreach (var content in Model.Content) {
-            <tr>
-                <td><img src="@Url.Content("~/thumb/" + content.Id + "/50")" alt="@content.AlternateText" /></td>
-                <td class="filename"><a href="@Url.Action("edit", new { id = content.Id })">@content.Filename</a></td>
-                <td class="date updated">@content.Updated.ToString("yyyy-MM-dd")</td>
-                <td class="date created">@content.Created.ToString("yyyy-MM-dd")</td>
-                <td class="buttons">
-                    <a href="@Url.Action("delete", new { id = content.Id })" title="@Piranha.Resources.Content.ListDelete" class="icon delete"></a></td>
-            </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6"></td>
-            </tr>
-        </tfoot>
-    </table>
+    <ul class="sitemap media">
+        <li class="header">
+            <span class="buttons"></span>
+            <span class="date">@Piranha.Resources.Global.Created</span>
+            <span class="date">@Piranha.Resources.Global.Updated</span>
+            <span class="title">@Piranha.Resources.Content.Filename</span>
+        </li>
+        @Html.Partial("Partial/ContentTree", Model.Content)
+    </ul>
 </div>

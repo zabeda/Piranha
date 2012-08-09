@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -35,6 +36,11 @@ namespace Piranha.Models.Manager.ContentModels
 		public MultiSelectList Categories { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the available folders.
+		/// </summary>
+		public SelectList Folders { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional file.
 		/// </summary>
 		public HttpPostedFileBase UploadedFile { get ; set ; }
@@ -49,11 +55,22 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
-		public EditModel() {
-			Content = new Piranha.Models.Content() ;
+		public EditModel() : this(false, Guid.Empty) {}
+
+		/// <summary>
+		/// Default constructor. Creates a new model.
+		/// </summary>
+		/// <param name="isfolder">Weather this is a folder or not.</param>
+		public EditModel(bool isfolder, Guid parentid) {
+			Content = new Piranha.Models.Content() { IsFolder = isfolder, ParentId = parentid } ;
 			ContentCategories = new List<Guid>() ;
 			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
+			var folders = Content.GetFields("content_id, content_name", "content_folder=1", new Params() { OrderBy = "content_name" }) ;
+			folders.Insert(0, new Content()) ;
+			if (Content.ParentId == Guid.Empty)
+				Folders = new SelectList(folders, "Id", "Name") ;
+			else Folders = new SelectList(folders, "Id", "Name", Content.ParentId) ;
 		}
 
 		/// <summary>
@@ -67,6 +84,9 @@ namespace Piranha.Models.Manager.ContentModels
 			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
 			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
+			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
+			folders.Insert(0, new Content()) ;
+			em.Folders = new SelectList(folders, "Id", "Name", em.Content.ParentId) ;
 
 			return em ;
 		}
@@ -77,11 +97,26 @@ namespace Piranha.Models.Manager.ContentModels
 		public bool SaveAll() {
 			var context = HttpContext.Current ;
 			var hasfile = UploadedFile != null ;
+			byte[] data = null ;
+			WebClient web = new WebClient() ;
 
-			if (hasfile) {
+
+			if (!hasfile && !String.IsNullOrEmpty(FileUrl))
+				data = web.DownloadData(FileUrl) ;
+
+			if (hasfile || data != null) {
 				// Check if this is an image
 				try {
-					Image img = Image.FromStream(UploadedFile.InputStream) ;
+					Image img = null ;
+
+					if (hasfile) {
+						img = Image.FromStream(UploadedFile.InputStream) ;
+					} else {
+						MemoryStream mem = new MemoryStream(data) ;
+						img = Image.FromStream(mem) ;
+					}
+
+					// Image img = Image.FromStream(UploadedFile.InputStream) ;
 					try {
 						// Resize the image according to image max width
 						int max = Convert.ToInt32(SysParam.GetByName("IMAGE_MAX_WIDTH").Value) ;
@@ -94,12 +129,19 @@ namespace Piranha.Models.Manager.ContentModels
 				} catch {
 					Content.IsImage = false ;
 				}
-				Content.Filename = UploadedFile.FileName ;
-				Content.Type = UploadedFile.ContentType ;
-				Content.Size = UploadedFile.ContentLength ;
+				if (hasfile) {
+					Content.Filename = UploadedFile.FileName ;
+					Content.Type = UploadedFile.ContentType ;
+					Content.Size = UploadedFile.ContentLength ;
+				} else {
+					Content.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1) ;
+					Content.Type = web.ResponseHeaders["Content-Type"] ;
+					Content.Size = Convert.ToInt32(web.ResponseHeaders["Content-Length"]) ;
+				}
 			}
 
 			if (Content.Save()) {
+				// Save related information
 				Relation.DeleteByDataId(Content.Id) ;
 				List<Relation> relations = new List<Relation>() ;
 				ContentCategories.ForEach(c => relations.Add(new Relation() { 
@@ -107,14 +149,29 @@ namespace Piranha.Models.Manager.ContentModels
 					) ;
 				relations.ForEach(r => r.Save()) ;
 
-				if (hasfile) {
+				// Save the physical file
+				if (hasfile || data != null) {
 					string path = context.Server.MapPath("~/App_Data/content") ;
 					if (File.Exists(Content.PhysicalPath)) {
 						File.Delete(Content.PhysicalPath) ;
 						Content.DeleteCache() ;
 					}
-					UploadedFile.SaveAs(Content.PhysicalPath) ;
+					if (hasfile) {
+						UploadedFile.SaveAs(Content.PhysicalPath) ;
+					} else {
+						FileStream writer = new FileStream(Content.PhysicalPath, FileMode.Create) ;
+						BinaryWriter binary = new BinaryWriter(writer) ;
+						binary.Write(data) ;
+						binary.Flush() ;
+						binary.Close() ;
+					}
 				}
+				// Reset file url
+				FileUrl = "" ;
+
+				// Delete possible old thumbnails
+				Content.DeleteCache() ;
+
 				return true ;
 			}
 			return false ;

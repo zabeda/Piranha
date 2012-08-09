@@ -61,6 +61,24 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Include in RSS.
+        /// </summary>
+        public static string AllowRss {
+            get {
+                return ResourceManager.GetString("AllowRss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weather this post should be included in RSS feeds.
+        /// </summary>
+        public static string AllowRssDescription {
+            get {
+                return ResourceManager.GetString("AllowRssDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Archive template.
         /// </summary>
         public static string ArchiveTemplate {

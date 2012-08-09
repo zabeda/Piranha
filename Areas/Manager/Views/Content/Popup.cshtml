@@ -1,6 +1,7 @@
 ﻿@model Piranha.Models.Manager.ContentModels.PopupModel
 @{
     Layout = "";
+    var first = true ;
 }
 <div class="title">
     <ul class="box-tabs">
@@ -13,9 +14,14 @@
 <div id="attach-existing" class="inner gallery">
     @foreach (var content in Model.Content) {
         <div class="gallery-item @(Model.Content.Count > 12 ? "compressed" : "")">
-            <img@(!content.IsImage ? " class=document" : "") data-id="@content.Id" src="@Url.Content("~/thumb/" + content.Id + "/100")" title="@content.AlternateText" alt="@content.AlternateText" />
-            <p><small>@content.Filename</small></p>
+            @if (first && content.ParentId != Guid.Empty) {
+            <img class="folder" data-id="@content.Id" src="@Url.Content("~/areas/manager/content/img/ico-folder-up-96.png")" />
+            } else {
+            <img@(content.IsFolder ? " class=folder" : (!content.IsImage ? " class=document" : "")) data-id="@content.Id" src="@Url.Content("~/thumb/" + content.Id + "/96")" title="@content.AlternateText" alt="@content.AlternateText" />
+            }
+            <p><small>@content.DisplayName</small></p>
         </div>
+        first = false ;
     }
 </div>
 <div id="attach-new" class="inner hidden">

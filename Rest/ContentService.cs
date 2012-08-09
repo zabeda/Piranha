@@ -35,6 +35,8 @@ namespace Piranha.Rest
 					return new Content() {
 						Id = c.Id,
 						Filename = c.Filename,
+						Name = c.Name,
+						DisplayName = c.DisplayName,
 						Type = c.Type,
 						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + c.Id,
 						ContentUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") + "/" + c.Id,

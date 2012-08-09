@@ -144,6 +144,9 @@
   <data name="Everyone" xml:space="preserve">
     <value>Alla</value>
   </data>
+  <data name="FileUrl" xml:space="preserve">
+    <value>http://urltilldinfil</value>
+  </data>
   <data name="Group" xml:space="preserve">
     <value>Grupp</value>
   </data>

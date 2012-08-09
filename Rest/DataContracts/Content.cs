@@ -14,6 +14,10 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string Filename { get ; set ; }
 		[DataMember()]
+		public string Name { get ; set ; }
+		[DataMember()]
+		public string DisplayName { get ; set ; }
+		[DataMember()]
 		public string Type { get ; set ; }
 		[DataMember()]
 		public string ThumbnailUrl { get ; set ; }

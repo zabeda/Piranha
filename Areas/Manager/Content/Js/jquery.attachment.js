@@ -64,13 +64,31 @@ function bindAttachmentEvents() {
     // Handles a click in the attachments panel and
     // calls "addAtachment" to add the file.
     $(".gallery-item img").unbind();
-    $(".gallery-item img").click(function() {
+    $(".gallery-item img").click(function () {
+        if (!$(this).hasClass("folder")) {
+            $.ajax({
+                url: siteroot + "rest/content/get/" + $(this).attr("data-id"),
+                dataType: "json",
+                success: function (data) {
+                    addAttachment(data);
+                    floatBox.close("boxContent");
+                    bindAttachmentEvents();
+                }
+            });
+        }
+    });
+
+    //
+    // Reloads the media browser for the selected folder
+    $(".gallery-item img.folder").unbind();
+    $(".gallery-item img.folder").click(function () {
         $.ajax({
-            url: siteroot + "rest/content/get/" + $(this).attr("data-id"),
-            dataType: "json",
-            success: function(data) {
-                addAttachment(data) ;
-                floatBox.close("boxContent");
+            url: siteroot + "manager/content/popup/" + $(this).attr("data-id"),
+            success: function (data) {
+                $("#boxContent .box").html("");
+                $("#boxContent .box").append(data);
+                floatBox.position($("#boxContent .box"));
+                bindAjaxBoxEvents();
                 bindAttachmentEvents();
             }
         });

@@ -13,7 +13,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Default constructor. Gets the post list.
 		/// </summary>
-		/// <returns></returns>
+		[Access(Function="ADMIN_POST")]
 	    public ActionResult Index() {
 			return View("Index", ListModel.Get());
         }
@@ -23,6 +23,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="im">The insert model</param>
 		[HttpPost()]
+		[Access(Function="ADMIN_POST")]
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplate(im.TemplateId) ;
 
@@ -35,6 +36,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Edits the post with the given id.
 		/// </summary>
 		/// <param name="id">The post id</param>
+		[Access(Function="ADMIN_POST")]
 		public ActionResult Edit(string id) {
 			EditModel m = EditModel.GetById(new Guid(id)) ;
 			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
@@ -47,14 +49,15 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="m">The model</param>
 		[HttpPost(), ValidateInput(false)]
+		[Access(Function="ADMIN_POST")]
 		public ActionResult Edit(bool draft, EditModel m) {
 			if (ModelState.IsValid) {
 				if (m.SaveAll(draft)) {
 					ModelState.Clear() ;
 					if (!draft)
-						ViewBag.Message = Piranha.Resources.Post.MessagePublished ;
-					else ViewBag.Message = Piranha.Resources.Post.MessageSaved ;
-				} else ViewBag.Message = Piranha.Resources.Post.MessageNotSaved ;
+						SuccessMessage(Piranha.Resources.Post.MessagePublished) ;
+					else SuccessMessage(Piranha.Resources.Post.MessageSaved) ;
+				} else ErrorMessage(Piranha.Resources.Post.MessageNotSaved) ;
 			}
 			m.Refresh() ;
 
@@ -69,12 +72,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Deletes the post.
 		/// </summary>
 		/// <param name="id">The post id</param>
+		[Access(Function="ADMIN_POST")]
 		public ActionResult Delete(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Post.MessageDeleted ;
-			else ViewBag.Message = Piranha.Resources.Post.MessageNotDeleted ;
+				SuccessMessage(Piranha.Resources.Post.MessageDeleted) ;
+			else ErrorMessage(Piranha.Resources.Post.MessageNotDeleted) ;
 
 			return Index() ;
 		}
@@ -83,10 +87,11 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Reverts to latest published verison.
 		/// </summary>
 		/// <param name="id">The post id.</param>
+		[Access(Function="ADMIN_POST")]
 		public ActionResult Revert(string id) {
 			EditModel.Revert(new Guid(id)) ;
 
-			ViewBag.Message = Piranha.Resources.Post.MessageReverted ;
+			SuccessMessage(Piranha.Resources.Post.MessageReverted) ;
 
 			return Edit(id) ;
 		}
@@ -95,10 +100,11 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Unpublishes the specified page.
 		/// </summary>
 		/// <param name="id">The post id</param>
+		[Access(Function="ADMIN_POST")]
 		public ActionResult Unpublish(string id) {
 			EditModel.Unpublish(new Guid(id)) ;
 
-			ViewBag.Message = Piranha.Resources.Post.MessageUnpublished ;
+			SuccessMessage(Piranha.Resources.Post.MessageUnpublished) ;
 
 			return Edit(id) ;
 		}

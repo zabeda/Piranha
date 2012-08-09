@@ -35,7 +35,7 @@
             <div class="grid_12 header">
                 <a class="home" href="@Url.Action("index", "dashboard")"></a>
                 <a class="public-site" target="preview" href="http://@Request.Url.DnsSafeHost@Url.Content("~/")">
-                    http://@Request.Url.DnsSafeHost@Url.Content("~/")</a>
+                    @Piranha.WebPages.WebPiranha.GetSiteUrl()</a>
                 @Html.Partial("Partial/Menu")
             </div>
         </div>
@@ -52,7 +52,7 @@
             </div>
             @if (!String.IsNullOrEmpty(ViewBag.Message)) {
             <div class="grid_12 sys-message">
-                <div class="box">
+                <div class="box@(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : "")">
                     <div class="inner">
                         <div class="ico"></div><p>@ViewBag.Message</p>
                     </div>

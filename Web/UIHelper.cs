@@ -102,6 +102,14 @@ namespace Piranha.Web
 				}
 				str.AppendLine("<meta property=\"og:title\" content=\"" + title + "\" />") ;
 			}
+
+			/**
+			 * RSS Feeds
+			 */
+			str.AppendLine("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"" +
+				SysParam.GetByName("SITE_TITLE").Value + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
+				WebPages.WebPiranha.GetUrlPrefixForHandlerId("rss") + "\" />") ;
+
 			return new HtmlString(str.ToString()) ;
 		}
 

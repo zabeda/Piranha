@@ -142,6 +142,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://yourfileurl.
+        /// </summary>
+        public static string FileUrl {
+            get {
+                return ResourceManager.GetString("FileUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
         public static string Group {

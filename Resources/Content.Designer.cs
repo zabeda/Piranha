@@ -70,6 +70,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload file.
+        /// </summary>
+        public static string ChooseFile {
+            get {
+                return ResourceManager.GetString("ChooseFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File size.
         /// </summary>
         public static string ContentSize {
@@ -106,6 +115,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit folder.
+        /// </summary>
+        public static string EditTitleExistingFolder {
+            get {
+                return ResourceManager.GetString("EditTitleExistingFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Image.
         /// </summary>
         public static string EditTitleExistingImage {
@@ -120,6 +138,15 @@ namespace Piranha.Resources {
         public static string EditTitleNew {
             get {
                 return ResourceManager.GetString("EditTitleNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new folder.
+        /// </summary>
+        public static string EditTitleNewFolder {
+            get {
+                return ResourceManager.GetString("EditTitleNewFolder", resourceCulture);
             }
         }
         
@@ -214,6 +241,33 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The folder has been deleted..
+        /// </summary>
+        public static string MessageFolderDeleted {
+            get {
+                return ResourceManager.GetString("MessageFolderDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while deleting the folder..
+        /// </summary>
+        public static string MessageFolderNotDeleted {
+            get {
+                return ResourceManager.GetString("MessageFolderNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The folder has been saved..
+        /// </summary>
+        public static string MessageFolderSaved {
+            get {
+                return ResourceManager.GetString("MessageFolderSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The image has been deleted..
         /// </summary>
         public static string MessageImageDeleted {
@@ -250,6 +304,24 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        public static string ParentId {
+            get {
+                return ResourceManager.GetString("ParentId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The thumbnail will be shown after you have uploaded the new content..
         /// </summary>
         public static string ThumbnailNewDescription {
@@ -268,7 +340,16 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload.
+        ///   Looks up a localized string similar to Add folder.
+        /// </summary>
+        public static string ToolbarAddFolder {
+            get {
+                return ResourceManager.GetString("ToolbarAddFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From disc.
         /// </summary>
         public static string Upload {
             get {

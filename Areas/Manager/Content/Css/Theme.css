@@ -66,6 +66,7 @@ a {
 .box .title,
 .box .inner,
 table.list tr,
+table.tabbed,
 .tabs li a.selected,
 .edit, 
 .templates .preview {
@@ -94,7 +95,6 @@ table.list tr,
     border-width: 1px;
     border-style: solid;
     border-radius: 3px;
-    margin-top: -1px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.04);
     z-index: 100;
     }
@@ -177,10 +177,56 @@ table.list tr,
     float: right;
     }
 .sys-message .box {
-    border: none;
-    font-weight: bold;
+    border: 1px solid #ceae00;
     text-align: center;
     margin: 30px 0 0;
+    background-image: linear-gradient(bottom, rgb(252,229,99) 17%, rgb(252,234,130) 59%, rgb(252,242,184) 80%);
+    background-image: -o-linear-gradient(bottom, rgb(252,229,99) 17%, rgb(252,234,130) 59%, rgb(252,242,184) 80%);
+    background-image: -moz-linear-gradient(bottom, rgb(252,229,99) 17%, rgb(252,234,130) 59%, rgb(252,242,184) 80%);
+    background-image: -webkit-linear-gradient(bottom, rgb(252,229,99) 17%, rgb(252,234,130) 59%, rgb(252,242,184) 80%);
+    background-image: -ms-linear-gradient(bottom, rgb(252,229,99) 17%, rgb(252,234,130) 59%, rgb(252,242,184) 80%);
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.17, rgb(252,229,99)),
+	    color-stop(0.59, rgb(252,234,130)),
+	    color-stop(0.8, rgb(252,242,184))
+    );
+    }
+.sys-message .box.success {
+    border-color: #436c00;
+    background-image: linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
+    background-image: -o-linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
+    background-image: -moz-linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
+    background-image: -webkit-linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
+    background-image: -ms-linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.17, rgb(161,202,115)),
+	    color-stop(0.59, rgb(180,218,138)),
+	    color-stop(0.8, rgb(201,233,162))
+    );
+    }
+.sys-message .box.error {
+    border-color: #df6161;
+    color: #d10000;
+    background-image: linear-gradient(bottom, rgb(232,140,140) 17%, rgb(234,155,155) 59%, rgb(238,173,173) 80%);
+    background-image: -o-linear-gradient(bottom, rgb(232,140,140) 17%, rgb(234,155,155) 59%, rgb(238,173,173) 80%);
+    background-image: -moz-linear-gradient(bottom, rgb(232,140,140) 17%, rgb(234,155,155) 59%, rgb(238,173,173) 80%);
+    background-image: -webkit-linear-gradient(bottom, rgb(232,140,140) 17%, rgb(234,155,155) 59%, rgb(238,173,173) 80%);
+    background-image: -ms-linear-gradient(bottom, rgb(232,140,140) 17%, rgb(234,155,155) 59%, rgb(238,173,173) 80%);
+
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.17, rgb(232,140,140)),
+	    color-stop(0.59, rgb(234,155,155)),
+	    color-stop(0.8, rgb(238,173,173))
+    );
     }
 .sys-message .box .inner {
     border: none;
@@ -228,6 +274,13 @@ input[type=checkbox] {
 .grid_3 label, .grid_4 label {
     padding: 0 0 8px;
     }
+.upload button {
+    width: 90px;
+    height: 30px;
+    border-radius: 1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    }
 
 /**
  * Buttons
@@ -261,9 +314,6 @@ li.selected a,
 table.list {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    }
-table.list.tabbed {
-    border-top-left-radius: 0;
     }
 table.list tr {
     border-bottom-width: 1px;
@@ -304,6 +354,7 @@ table.list thead tr {
 .tabs {
     float: right;
     margin-right: 10px;
+    margin-bottom: -1px;
     }
 .tabs li { 
     float: left; 

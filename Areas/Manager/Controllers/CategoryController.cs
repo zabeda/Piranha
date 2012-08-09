@@ -16,6 +16,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Gets the list view for the categories.
 		/// </summary>
+		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Index() {
 			return View("Index", ListModel.Get()) ;
 		}
@@ -24,6 +25,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Edits or inserts a new category.
 		/// </summary>
 		/// <param name="id">The category id</param>
+		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Edit(string id = "") {
 			EditModel m = new EditModel() ;
 
@@ -42,15 +44,16 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="m">The model</param>
 		/// <returns></returns>
 		[HttpPost()]
+		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Edit(EditModel m) {
 			if (ModelState.IsValid) {
 				if (m.SaveAll()) {
 					ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
-					ViewBag.Message = Piranha.Resources.Category.MessageSaved ;
+					SuccessMessage(Piranha.Resources.Category.MessageSaved) ;
 					ModelState.Clear() ;
 				} else {
 					ViewBag.Title = Piranha.Resources.Category.EditTitleNew ;
-					ViewBag.Message = Piranha.Resources.Category.MessageNotSaved ;
+					ErrorMessage(Piranha.Resources.Category.MessageNotSaved) ;
 				}
 			}
 			return View("Edit", m) ;
@@ -60,12 +63,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Deletes the category with the given id.
 		/// </summary>
 		/// <param name="id">The category id</param>
+		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Delete(string id) {
 			EditModel m = EditModel.GetById(new Guid(id)) ;
 
 			if (m.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Category.MessageDeleted ;
-			else ViewBag.Message = Piranha.Resources.Category.MessageNotDeleted ;
+				SuccessMessage(Piranha.Resources.Category.MessageDeleted) ;
+			else ErrorMessage(Piranha.Resources.Category.MessageNotDeleted) ;
 			return  RedirectToAction("index") ;
 		}
 	}

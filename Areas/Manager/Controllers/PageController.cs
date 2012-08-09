@@ -13,6 +13,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Default controller. Gets the page list.
 		/// </summary>
+		[Access(Function="ADMIN_PAGE")]
         public ActionResult Index() {
 			try {
 				var param = Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
@@ -27,6 +28,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Opens the edit view for the selected page.
 		/// </summary>
 		/// <param name="id">The page id</param>
+		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Edit(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
@@ -40,17 +42,18 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="pm">The page model</param>
 		[HttpPost(), ValidateInput(false)]
+		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Edit(bool draft, EditModel pm) {
 			if (ModelState.IsValid) {
 				try {
 					if (pm.SaveAll(draft)) {
 						ModelState.Clear() ;
 						if (!draft)
-							ViewBag.Message = Piranha.Resources.Page.MessagePublished ;
-						else ViewBag.Message = Piranha.Resources.Page.MessageSaved ;
-					} else ViewBag.Message = Piranha.Resources.Page.MessageNotSaved ;
+							SuccessMessage(Piranha.Resources.Page.MessagePublished) ;
+						else SuccessMessage(Piranha.Resources.Page.MessageSaved) ;
+					} else ErrorMessage(Piranha.Resources.Page.MessageNotSaved) ;
 				} catch (Exception e) {
-					ViewBag.Message = e.ToString() ;
+					ErrorMessage(e.ToString()) ;
 				}
 			}
 			pm.Refresh();
@@ -67,6 +70,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="im">The insert model</param>
 		[HttpPost()]
+		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno) ;
 			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
@@ -78,15 +82,16 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Deletes the page specified by the given id.
 		/// </summary>
 		/// <param name="id">The page id</param>
+		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Delete(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id), true) ;
 
 			try {
 				if (pm.DeleteAll())
-					ViewBag.Message = Piranha.Resources.Page.MessageDeleted ;
-				else ViewBag.Message = Piranha.Resources.Page.MessageNotDeleted ;
+					SuccessMessage(Piranha.Resources.Page.MessageDeleted) ;
+				else ErrorMessage(Piranha.Resources.Page.MessageNotDeleted) ;
 			} catch (Exception e) {
-				ViewBag.Message = e.ToString() ;
+				ErrorMessage(e.ToString()) ;
 			}
 
 			return Index() ;
@@ -96,10 +101,11 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Reverts to latest published verison.
 		/// </summary>
 		/// <param name="id">The page id.</param>
+		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Revert(string id) {
 			EditModel.Revert(new Guid(id)) ;
 
-			ViewBag.Message = Piranha.Resources.Page.MessageReverted ;
+			SuccessMessage(Piranha.Resources.Page.MessageReverted) ;
 
 			return Edit(id) ;
 		}
@@ -108,10 +114,11 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Unpublishes the specified page.
 		/// </summary>
 		/// <param name="id">The page id</param>
+		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Unpublish(string id) {
 			EditModel.Unpublish(new Guid(id)) ;
 
-			ViewBag.Message = Piranha.Resources.Page.MessageUnpublished ;
+			SuccessMessage(Piranha.Resources.Page.MessageUnpublished) ;
 
 			return Edit(id) ;
 		}

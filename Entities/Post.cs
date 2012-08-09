@@ -44,6 +44,13 @@ namespace Piranha.Models
 		public Guid PermalinkId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets weather this post should be included in rss feeds.
+		/// </summary>
+		[Column(Name="post_rss")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="AllowRss")]
+		public bool AllowRss { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the title.
 		/// </summary>
 		[Column(Name="post_title")]

@@ -57,10 +57,10 @@ namespace Piranha.Areas.Manager.Controllers
 					if (um.SaveAll()) {
 						ModelState.Clear() ;
 						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
-						ViewBag.Message = Piranha.Resources.Settings.MessageUserSaved ;
-					} else ViewBag.Message = Piranha.Resources.Settings.MessageUserNotSaved ;
+						SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
+					} else ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
 				} catch (Exception e) {
-					ViewBag.Message = e.ToString() ;
+					ErrorMessage(e.ToString()) ;
 				}
 			}
 			return View("User", um) ;
@@ -76,8 +76,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "users" ;
 			if (um.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Settings.MessageUserDeleted ;
-			else ViewBag.Message = Piranha.Resources.Settings.MessageUserNotDeleted ;
+				SuccessMessage(Piranha.Resources.Settings.MessageUserDeleted) ;
+			else ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
 			
 			return UserList() ;
 		}
@@ -93,7 +93,7 @@ namespace Piranha.Areas.Manager.Controllers
 
 			password.Password = password.PasswordConfirm = newpwd ;
 			password.Save() ;
-			ViewBag.Message = Piranha.Resources.Settings.MessageNewPassword + newpwd ;
+			InformationMessage(Piranha.Resources.Settings.MessageNewPassword + newpwd) ;
 
 			return User(id) ;
 		}
@@ -139,10 +139,10 @@ namespace Piranha.Areas.Manager.Controllers
 					if (gm.SaveAll()) {
 						ModelState.Clear() ;
 						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingGroup ;
-						ViewBag.Message = Piranha.Resources.Settings.MessageGroupSaved ;
-					} else ViewBag.Message =Piranha.Resources.Settings.MessageGroupNotSaved ;
+						SuccessMessage(Piranha.Resources.Settings.MessageGroupSaved) ;
+					} else ErrorMessage(Piranha.Resources.Settings.MessageGroupNotSaved) ;
 				} catch (Exception e) {
-					ViewBag.Message = e.ToString() ;
+					ErrorMessage(e.ToString()) ;
 				}
 			}
 			gm.Refresh() ;
@@ -159,8 +159,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "groups" ;
 			if (gm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Settings.MessageGroupDeleted ;
-			else ViewBag.Message = Piranha.Resources.Settings.MessageGroupNotDeleted ;
+				SuccessMessage(Piranha.Resources.Settings.MessageGroupDeleted) ;
+			else ErrorMessage(Piranha.Resources.Settings.MessageGroupNotDeleted) ;
 			
 			return GroupList() ;
 		}
@@ -206,10 +206,10 @@ namespace Piranha.Areas.Manager.Controllers
 					if (am.SaveAll()) {
 						ModelState.Clear() ;
 						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingAccess ;
-						ViewBag.Message = Piranha.Resources.Settings.MessageAccessSaved ;
-					} else ViewBag.Message = Piranha.Resources.Settings.MessageAccessNotSaved ;
+						SuccessMessage(Piranha.Resources.Settings.MessageAccessSaved) ;
+					} else ErrorMessage(Piranha.Resources.Settings.MessageAccessNotSaved) ;
 				} catch (Exception e) {
-					ViewBag.Message = e.ToString() ;
+					ErrorMessage(e.ToString()) ;
 				}
 			}
 			return View("Access", am) ;
@@ -225,8 +225,8 @@ namespace Piranha.Areas.Manager.Controllers
 			
 			ViewBag.SelectedTab = "access" ;
 			if (am.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Settings.MessageAccessDeleted ;
-			else ViewBag.Message = Piranha.Resources.Settings.MessageAccessNotDeleted ;
+				SuccessMessage(Piranha.Resources.Settings.MessageAccessDeleted) ;
+			else ErrorMessage(Piranha.Resources.Settings.MessageAccessNotDeleted) ;
 
 			return AccessList() ;
 		}
@@ -272,10 +272,10 @@ namespace Piranha.Areas.Manager.Controllers
 					if (pm.SaveAll()) {
 						ModelState.Clear() ;
 						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingParam ;
-						ViewBag.Message = Piranha.Resources.Settings.MessageParamSaved ;
-					} else ViewBag.Message = Piranha.Resources.Settings.MessageParamNotSaved ;
+						SuccessMessage(Piranha.Resources.Settings.MessageParamSaved) ;
+					} else ErrorMessage(Piranha.Resources.Settings.MessageParamNotSaved) ;
 				} catch (Exception e) {
-					ViewBag.Message = e.ToString() ;
+					ErrorMessage(e.ToString()) ;
 				}
 			}
 			return View("Param", pm) ;
@@ -286,13 +286,14 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Deletes the specified param
 		/// </summary>
 		/// <param name="id">The param</param>
+		[Access(Function="ADMIN_PARAM")]
 		public ActionResult DeleteParam(string id) {
 			ParamEditModel pm = ParamEditModel.GetById(new Guid(id)) ;
 			
 			ViewBag.SelectedTab = "params" ;
 			if (pm.DeleteAll())
-				ViewBag.Message = Piranha.Resources.Settings.MessageParamDeleted ;
-			else ViewBag.Message = Piranha.Resources.Settings.MessageParamNotDeleted ;
+				SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
+			else ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
 
 			return ParamList() ;
 		}

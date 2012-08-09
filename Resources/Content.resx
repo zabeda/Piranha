@@ -120,6 +120,9 @@
   <data name="AlternateText" xml:space="preserve">
     <value>Alt. text</value>
   </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Upload file</value>
+  </data>
   <data name="ContentSize" xml:space="preserve">
     <value>File size</value>
   </data>
@@ -132,11 +135,17 @@
   <data name="EditTitleExistingDocument" xml:space="preserve">
     <value>Edit document</value>
   </data>
+  <data name="EditTitleExistingFolder" xml:space="preserve">
+    <value>Edit folder</value>
+  </data>
   <data name="EditTitleExistingImage" xml:space="preserve">
     <value>Edit Image</value>
   </data>
   <data name="EditTitleNew" xml:space="preserve">
     <value>Add new content</value>
+  </data>
+  <data name="EditTitleNewFolder" xml:space="preserve">
+    <value>Add new folder</value>
   </data>
   <data name="FileInformation" xml:space="preserve">
     <value>File information</value>
@@ -168,6 +177,15 @@
   <data name="MessageDocumentSaved" xml:space="preserve">
     <value>The document has been saved.</value>
   </data>
+  <data name="MessageFolderDeleted" xml:space="preserve">
+    <value>The folder has been deleted.</value>
+  </data>
+  <data name="MessageFolderNotDeleted" xml:space="preserve">
+    <value>An error occured while deleting the folder.</value>
+  </data>
+  <data name="MessageFolderSaved" xml:space="preserve">
+    <value>The folder has been saved.</value>
+  </data>
   <data name="MessageImageDeleted" xml:space="preserve">
     <value>The image has been deleted.</value>
   </data>
@@ -180,13 +198,22 @@
   <data name="MessageNotSaved" xml:space="preserve">
     <value>An error occurred while saving the content.</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ParentId" xml:space="preserve">
+    <value>Folder</value>
+  </data>
   <data name="ThumbnailNewDescription" xml:space="preserve">
     <value>The thumbnail will be shown after you have uploaded the new content.</value>
   </data>
   <data name="ToolbarAdd" xml:space="preserve">
     <value>Upload new content</value>
   </data>
+  <data name="ToolbarAddFolder" xml:space="preserve">
+    <value>Add folder</value>
+  </data>
   <data name="Upload" xml:space="preserve">
-    <value>Upload</value>
+    <value>From disc</value>
   </data>
 </root>

@@ -43,9 +43,12 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Gets all available content.
 		/// </summary>
 		/// <returns>A list of content records</returns>
-		public static PopupModel Get() {
+		public static PopupModel Get(string id = "") {
 			PopupModel lm = new PopupModel() ;
-			lm.Content = Piranha.Models.Content.Get(new Params() { OrderBy = "content_filename ASC" });
+
+			if (!String.IsNullOrEmpty(id))
+				lm.Content = Piranha.Models.Content.GetStructure(new Guid(id), true) ;
+			else lm.Content = Piranha.Models.Content.GetStructure() ;
 
 			return lm ;
 		}

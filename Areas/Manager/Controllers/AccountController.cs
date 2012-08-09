@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -23,6 +25,10 @@ namespace Piranha.Areas.Manager.Controllers
 			try {
 				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
 					return RedirectToAction("update", "install") ;
+
+				// Get current assembly version
+				ViewBag.Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion ;
+
 	            return View("Index") ;
 			} catch {}
 			return RedirectToAction("index", "install") ;
@@ -45,9 +51,11 @@ namespace Piranha.Areas.Manager.Controllers
 					return RedirectToAction("index", "page") ;
 				} else {
 					ViewBag.Message = @Piranha.Resources.Account.MessageLoginFailed ;
+					ViewBag.MessageCss = "error" ;
 				}
 			} else {
 				ViewBag.Message = @Piranha.Resources.Account.MessageLoginEmptyFields ;
+				ViewBag.MessageCss = "" ;
 			}
 			return Index() ;
 		}

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllowRss" xml:space="preserve">
+    <value>Inkludera i RSS</value>
+  </data>
+  <data name="AllowRssDescription" xml:space="preserve">
+    <value>Om det här inlägget ska inkluderas i RSS-flöden</value>
+  </data>
   <data name="ArchiveTemplate" xml:space="preserve">
     <value>Arkivmall</value>
   </data>

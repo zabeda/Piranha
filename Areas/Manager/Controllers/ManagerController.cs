@@ -17,6 +17,33 @@ namespace Piranha.Areas.Manager.Controllers
 	public abstract class ManagerController : Controller
 	{
 		/// <summary>
+		/// Adds a success message to the current view.
+		/// </summary>
+		/// <param name="msg">The message</param>
+		protected void SuccessMessage(string msg) {
+			ViewBag.MessageCss = "success" ;
+			ViewBag.Message = msg ;
+		}
+
+		/// <summary>
+		/// Adds an error message to the current view.
+		/// </summary>
+		/// <param name="msg"></param>
+		protected void ErrorMessage(string msg) {
+			ViewBag.MessageCss = "error" ;
+			ViewBag.Message = msg ;
+		}
+
+		/// <summary>
+		/// Adds an information message to the current view.
+		/// </summary>
+		/// <param name="msg"></param>
+		protected void InformationMessage(string msg) {
+			ViewBag.MessageCss = "" ;
+			ViewBag.Message = msg ;
+		}
+
+		/// <summary>
 		/// Do additional security checks for the manager area.
 		/// </summary>
 		/// <param name="filterContext"></param>
