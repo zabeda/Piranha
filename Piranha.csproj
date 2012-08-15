@@ -146,51 +146,6 @@
     <Compile Include="Mvc\PiranhaHelper.cs" />
     <Compile Include="Mvc\SinglePage.cs" />
     <Compile Include="Mvc\SinglePageController.cs" />
-    <Compile Include="Resources\Account.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Account.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Category.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Category.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Content.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Content.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Global.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Global.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Page.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Page.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Post.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Post.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Settings.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Tabs.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Tabs.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Template.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Template.resx</DependentUpon>
-    </Compile>
     <Compile Include="Rest\CategoryService.cs" />
     <Compile Include="Rest\ChangeService.cs" />
     <Compile Include="Rest\ContentService.cs" />
@@ -240,53 +195,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-arrow-down-16.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-arrow-up-16.png" />
     <EmbeddedResource Include="Data\Scripts\Updates\3.sql" />
-    <EmbeddedResource Include="Resources\Account.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Account.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Category.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Category.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Content.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Content.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Global.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Global.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Page.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Page.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Data\Scripts\Create.sql" />
-    <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Post.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Post.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Settings.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Tabs.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Tabs.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Template.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Template.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Drop.sql" />
@@ -544,6 +453,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Piranha.Globalization\Piranha.Globalization.csproj">
+      <Project>{E751E0EB-45A4-473C-9C37-FA0A43A7A321}</Project>
+      <Name>Piranha.Globalization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

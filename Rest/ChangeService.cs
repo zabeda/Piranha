@@ -39,7 +39,7 @@ namespace Piranha.Rest
 				Each((i, c) => changes.Categories.Add(c)) ;
 
 			// Get all content updated after the given date.
-			Models.Content.GetFields("content_id", "content_updated > @0", latest).ForEach(c =>
+			Models.Content.GetFields("content_id", "content_updated > @0 AND content_folder = 0", latest).ForEach(c =>
 				changes.Content.Add(new ContentService().Get(c.Id.ToString()))) ;
 
 			return changes ;
