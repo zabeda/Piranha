@@ -12,6 +12,8 @@ namespace Piranha.Models
 	/// <summary>
 	/// The sys group is a member classification for users. Groups are hierarchical
 	/// and inherit permissions from child groups.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="sysgroup_id")]
 	[Serializable]
@@ -66,6 +68,7 @@ namespace Piranha.Models
 		/// </summary>
 		public SysGroup() {
 			Groups = new List<SysGroup>() ;
+			LogChanges = true ;
 		}
 
 		/// <summary>

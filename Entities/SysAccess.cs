@@ -11,6 +11,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// Active record for the access control table.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="sysaccess_id")] 
 	[Join(TableName="sysgroup", ForeignKey="sysaccess_group_id", PrimaryKey="sysgroup_id")]
@@ -100,6 +102,13 @@ namespace Piranha.Models
 			return (Dictionary<string, SysAccess>)HttpContext.Current.Cache[typeof(SysAccess).Name] ;
 		}
 		#endregion
+
+		/// <summary>
+		/// Default constructor. 
+		/// </summary>
+		public SysAccess() : base() {
+			LogChanges = true ;
+		}
 
 		/// <summary>
 		/// Saves the current record.

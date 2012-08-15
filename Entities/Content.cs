@@ -18,6 +18,8 @@ namespace Piranha.Models
 	/// A content object is an image, document or other file that's been uploaded from
 	/// the manager area. Content uploaded from the application is usually handled using
 	/// the Upload record.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="content_id")]
 	public class Content : PiranhaRecord<Content>, ICacheRecord<Content>
@@ -246,8 +248,9 @@ namespace Piranha.Models
 		/// <summary>
 		/// Default constructor. Creates a new content object.
 		/// </summary>
-		public Content() {
+		public Content() : base() {
 			ChildContent = new List<Content>() ;
+			LogChanges = true ;
 		}
 
 		#region Static accessors

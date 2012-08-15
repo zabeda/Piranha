@@ -80,6 +80,7 @@
     <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Entities\DuplicateLoginException.cs" />
     <Compile Include="Entities\DuplicatePermalinkException.cs" />
+    <Compile Include="Entities\SysLog.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\ComplexName.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Rest\DataContracts\Category.cs" />
     <Compile Include="Rest\DataContracts\Changes.cs" />
     <Compile Include="Rest\DataContracts\Content.cs" />
+    <Compile Include="Rest\DataContracts\Deleted.cs" />
     <Compile Include="Rest\DataContracts\Page.cs" />
     <Compile Include="Rest\DataContracts\Property.cs" />
     <Compile Include="Rest\DataContracts\Region.cs" />
@@ -459,6 +461,9 @@
       <Project>{E751E0EB-45A4-473C-9C37-FA0A43A7A321}</Project>
       <Name>Piranha.Globalization</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\12.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

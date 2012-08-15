@@ -14,6 +14,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// Active record for a page.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="page_id,page_draft")]
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
@@ -257,6 +259,7 @@ namespace Piranha.Models
 			IsDraft = true ;
 			Seqno   = 1 ;
 			Attachments = new List<Guid>() ;
+			LogChanges = true ;
 		}
 
 		#region Static accessors

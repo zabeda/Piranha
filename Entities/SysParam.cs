@@ -11,6 +11,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// Active record for the system parameters.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="sysparam_id")] 
 	[Serializable]
@@ -108,6 +110,13 @@ namespace Piranha.Models
 			return null ;
 		}
 		#endregion
+
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
+		public SysParam() : base() {
+			LogChanges = true ;
+		}
 
 		/// <summary>
 		/// Saves the current record.

@@ -11,6 +11,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// Active record for a post template.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="posttemplate_id")]
 	public class PostTemplate : PiranhaRecord<PostTemplate>
@@ -113,6 +115,7 @@ namespace Piranha.Models
 		/// </summary>
 		public PostTemplate() : base() {
 			Properties = new List<string>() ;
+			LogChanges = true ;
 		}
 	}
 }

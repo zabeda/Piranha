@@ -12,6 +12,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// Active record for a page.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="post_id,post_draft")]
 	[Join(TableName="posttemplate", ForeignKey="post_template_id", PrimaryKey="posttemplate_id")]
@@ -154,9 +156,10 @@ namespace Piranha.Models
 		/// <summary>
 		/// Default constructor. Creates a new post.
 		/// </summary>
-		public Post() {
+		public Post() : base() {
 			IsDraft = true ;
 			Attachments = new List<Guid>() ;
+			LogChanges = true ;
 		}
 
 		#region Static accessors

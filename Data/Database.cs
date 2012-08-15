@@ -21,7 +21,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 11 ;
+		public static int CurrentVersion = 12 ;
 		#endregion
 
 		#region Properties

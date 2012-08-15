@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Piranha.Data;
@@ -15,6 +16,13 @@ namespace Piranha.Models
 	[Serializable]
 	public abstract class GuidRecord<T> : ActiveRecord<T>
 	{
+		#region Members
+		/// <summary>
+		/// Gets/sets weather to log changes made to this entity.
+		/// </summary>
+		public bool LogChanges = false ;
+		#endregion
+
 		#region Fields
 		/// <summary>
 		/// Gets/sets the id.
@@ -48,9 +56,52 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Wether the operation was successful</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
+			var isnew = IsNew ;
+
 			if (IsNew && Id == Guid.Empty)
 				Id = Guid.NewGuid() ;
-			return base.Save(tx);			
+			var success = base.Save(tx);
+		
+			// If the action was successful, insert a log entry.
+			if (LogChanges && success) {
+				bool draft = true ;
+				if (this is DraftRecord<T>)
+					draft = ((DraftRecord<T>)this).IsDraft ;
+
+				var log = new SysLog() {
+					ParentId = Id,
+					ParentType = ((string)typeof(T).GetProperty("TableName", 
+						BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper(),
+					Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE")
+				} ;
+				log.Save(tx) ;
+			}
+			return success ;
+		}
+
+		/// <summary>
+		/// Deletes the current records.
+		/// </summary>
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Wether the operation was successful</returns>
+		public override bool Delete(System.Data.IDbTransaction tx = null) {
+			var success =  base.Delete(tx);
+
+			// If the action was successful, insert a log entry.
+			if (LogChanges && success) {
+				bool draft = true ;
+				if (this is DraftRecord<T>)
+					draft = ((DraftRecord<T>)this).IsDraft ;
+
+				var log = new SysLog() {
+					ParentId = Id,
+					ParentType = ((string)typeof(T).GetProperty("TableName", 
+						BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper(),
+					Action = !draft ? "DEPUBLISH" : "DELETE"
+				} ;
+				log.Save(tx) ;
+			}
+			return success ;
 		}
 
 		/// <summary>

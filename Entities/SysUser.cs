@@ -10,6 +10,11 @@ using Piranha.Data;
 
 namespace Piranha.Models
 {
+	/// <summary>
+	/// Active record for the sys user.
+	/// 
+	/// Changes made to records of this type are logged.
+	/// </summary>
 	[PrimaryKey(Column="sysuser_id")]
 	[Join(TableName="SysGroup", ForeignKey="sysuser_group_id", PrimaryKey="sysgroup_id")]
 	[Serializable]
@@ -104,6 +109,13 @@ namespace Piranha.Models
 			get { return (Firstname + " " + Surname).Trim() ; }
 		}
 		#endregion
+
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
+		public SysUser() : base() {
+			LogChanges = true ;
+		}
 
 		/// <summary>
 		/// Authenticates the user and returns if it was successfull.

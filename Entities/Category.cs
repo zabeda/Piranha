@@ -10,6 +10,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// A category is used to classify content in the database.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="category_id")]
 	[Join(TableName="permalink", ForeignKey="category_permalink_id", PrimaryKey="permalink_id")]
@@ -99,8 +101,9 @@ namespace Piranha.Models
 		/// <summary>
 		/// Default constructor. Creates a new category.
 		/// </summary>
-		public Category() {
+		public Category() : base() {
 			Categories = new List<Category>() ;
+			LogChanges = true ;
 		}
 
 		#region Static accessors

@@ -11,6 +11,8 @@ namespace Piranha.Models
 {
 	/// <summary>
 	/// Active record for a page template.
+	/// 
+	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="pagetemplate_id")]
 	public class PageTemplate : PiranhaRecord<PageTemplate>, ICacheRecord<PageTemplate>
@@ -126,6 +128,7 @@ namespace Piranha.Models
 		public PageTemplate() : base() {
 			PageRegions = new List<string>() ;
 			Properties = new List<string>() ;
+			LogChanges = true ;
 		}
 
 		/// <summary>

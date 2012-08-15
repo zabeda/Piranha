@@ -42,6 +42,14 @@ namespace Piranha.Rest
 			Models.Content.GetFields("content_id", "content_updated > @0 AND content_folder = 0", latest).ForEach(c =>
 				changes.Content.Add(new ContentService().Get(c.Id.ToString()))) ;
 
+			// Get all deleted content
+			string query = "syslog_parent_type = @0 AND syslog_action = @1 AND syslog_created > @2" ;
+			changes.Deleted.Pages = Piranha.Models.SysLog.Get(query, "PAGE", "DEPUBLISH", latest).
+				Select(l => new DeletedItem() { Id = l.Id, Deleted = l.Created.ToShortDateString() }).ToList() ;
+			changes.Deleted.Content = Piranha.Models.SysLog.Get(query, "CONTENT", "DELETE", latest).
+				Select(l => new DeletedItem() { Id = l.Id, Deleted = l.Created.ToShortDateString() }).ToList() ;
+			changes.Deleted.Categories = Piranha.Models.SysLog.Get(query, "CATEGORY", "DELETE", latest).
+				Select(l => new DeletedItem() { Id = l.Id, Deleted = l.Created.ToShortDateString() }).ToList() ;
 			return changes ;
 		}
 

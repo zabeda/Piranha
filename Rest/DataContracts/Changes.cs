@@ -18,12 +18,15 @@ namespace Piranha.Rest.DataContracts
 		public List<Category> Categories { get ; set ; }
 		[DataMember()]
 		public List<Content> Content { get ; set ; }
+		[DataMember()]
+		public Deleted Deleted { get ; set ; }
 
 		public Changes() {
 			Sitemap = new List<Sitemap>() ;
 			Pages = new List<Page>() ;
 			Categories = new List<Category>() ;
 			Content = new List<Content>() ;
+			Deleted = new Deleted() ;
 		}
 	}
 }
