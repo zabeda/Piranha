@@ -23,11 +23,6 @@ namespace Piranha.WebPages
 		/// Gets the helper for the piranha methods.
 		/// </summary>
 		public PiranhaHelper UI { get ; private set ; }
-
-		/// <summary>
-		/// Gets the model facade helper.
-		/// </summary>
-		public PiranhaFacade Facade { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -35,7 +30,6 @@ namespace Piranha.WebPages
 		/// </summary>
 		public BasePage() : base() {
 			UI = new PiranhaHelper(this, Html) ;
-			Facade = new PiranhaFacade() ;
 		}
 
 		/// <summary>

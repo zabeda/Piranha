@@ -17,13 +17,10 @@ namespace Piranha.Mvc
 		internal Models.PageModel model = null ;
 		#endregion
 
-		#region Properties
 		/// <summary>
-		/// Gets/sets the model.
+		/// Triggered before an action is executed on the controller
 		/// </summary>
-		/// protected T Model { get ; set ; }
-		#endregion
-
+		/// <param name="filterContext">The context</param>
 		protected override void OnActionExecuting(ActionExecutingContext filterContext) {
 			string permalink = Request["permalink"] ;
 			bool   draft = false ;
@@ -66,7 +63,7 @@ namespace Piranha.Mvc
 		/// <summary>
 		/// Gets the lastest modification date for caching.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>The modification date</returns>
 		protected virtual DateTime GetLastModified() {
 			return page.Updated ;
 		}

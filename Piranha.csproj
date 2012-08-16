@@ -163,7 +163,6 @@
     <Compile Include="WebPages\BasePage.cs" />
     <Compile Include="WebPages\ContentPage.cs" />
     <Compile Include="WebPages\Archive.cs" />
-    <Compile Include="WebPages\PiranhaFacade.cs" />
     <Compile Include="WebPages\PiranhaHelper.cs" />
     <Compile Include="WebPages\RequestHandlers\AccountHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
