@@ -39,6 +39,7 @@ namespace Piranha.Rest
 						DisplayName = c.DisplayName,
 						Description = c.Description,
 						Type = c.Type,
+						Size = c.Size,
 						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + c.Id,
 						ContentUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") + "/" + c.Id,
 						Created = c.Created.ToShortDateString(),
