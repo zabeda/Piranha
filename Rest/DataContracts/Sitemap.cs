@@ -16,6 +16,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string Permalink { get ; set ; }
 		[DataMember()]
+		public bool IsHidden { get ; set ; }
+		[DataMember()]
 		public bool HasChildren { get ; set ; }
 		[DataMember()]
 		public List<Sitemap> ChildNodes { get ; set ; }

@@ -77,6 +77,7 @@ namespace Piranha.Rest
 						Id = map.Id,
 						Title = map.Title,
 						Permalink = map.Permalink,
+						IsHidden = map.IsHidden,
 						HasChildren = map.Pages.Count > 0,
 						ChildNodes = BuildMap(map.Pages),
 						LastPublished = map.LastPublished.ToShortDateString()
