@@ -181,7 +181,11 @@ namespace Piranha.Models
 				});
 			}
 			// Attachments
-			((Models.Page)Page).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
+			foreach (var guid in ((Models.Page)Page).Attachments) {
+				var a = Models.Content.GetSingle(guid) ;
+				if (a != null)
+					Attachments.Add(a) ;
+			}
 		}
 	}
 }
