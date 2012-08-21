@@ -38,7 +38,6 @@ namespace Piranha.Rest
 						Title = pm.Page.Title,
 						Permalink = pm.Page.Permalink,
 						IsHidden = ((Piranha.Models.Page)pm.Page).IsHidden,
-						Attachments = ((Models.Page)pm.Page).Attachments,
 						Created = pm.Page.Created.ToShortDateString(),
 						Updated = pm.Page.Updated.ToShortDateString(),
 						Published = pm.Page.Published.ToShortDateString(),
@@ -54,6 +53,10 @@ namespace Piranha.Rest
 					foreach (var key in ((IDictionary<string, object>)pm.Properties).Keys)
 						page.Properties.Add(new Property() { Name = key, Value = (string)
 							((string)((IDictionary<string, object>)pm.Properties)[key]) }) ;
+
+					// Attachments
+					foreach (var content in pm.Attachments)
+						page.Attachments.Add(new Attachment() { Id = content.Id, IsImage = content.IsImage }) ;
 
 					return page ;
 				}

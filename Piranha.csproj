@@ -150,6 +150,7 @@
     <Compile Include="Rest\CategoryService.cs" />
     <Compile Include="Rest\ChangeService.cs" />
     <Compile Include="Rest\ContentService.cs" />
+    <Compile Include="Rest\DataContracts\Attachment.cs" />
     <Compile Include="Rest\DataContracts\Category.cs" />
     <Compile Include="Rest\DataContracts\Changes.cs" />
     <Compile Include="Rest\DataContracts\Content.cs" />
