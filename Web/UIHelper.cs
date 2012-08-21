@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 
 using Piranha.Models;
+using Piranha.WebPages;
 
 namespace Piranha.Web
 {
@@ -258,7 +259,11 @@ namespace Piranha.Web
 						Current.Id, StartLevel) ;
 				}
 				if (sm != null) {
+					if (Hooks.Breadcrumb.RenderStart != null)
+						Hooks.Breadcrumb.RenderStart(this, str) ;
 					RenderBreadcrumb(Current, sm, str) ;
+					if (Hooks.Breadcrumb.RenderEnd != null)
+						Hooks.Breadcrumb.RenderEnd(this, str) ;
 				}
 			}
 			return new HtmlString(str.ToString()) ;
@@ -291,26 +296,6 @@ namespace Piranha.Web
 					return GetStartLevel(page.Pages, id, start) ;
 			return null ;
 		}
-
-		/// <summary>
-		/// Gets the page with the given id from the structure
-		/// </summary>
-		/// <param name="sm">The sitemap</param>
-		/// <param name="id">The id</param>
-		/// <returns>The record</returns>
-		/*
-		private Sitemap GetRootNode(List<Sitemap> sm, Guid id) {
-			if (sm != null) {
-				foreach (Sitemap page in sm) {
-					if (page.Id == id)
-						return page ;
-					Sitemap subpage = GetRootNode(page.Pages, id) ;
-					if (subpage != null)
-						return subpage ;
-				}
-			}
-			return null ;
-		}*/
 
 		/// <summary>
 		/// Renders an UL list for the given sitemap elements
@@ -357,10 +342,18 @@ namespace Piranha.Web
 			if (sm != null && sm.CountVisible() > 0) {
 				foreach (Sitemap page in sm) {
 					if (page.Id == curr.Id) {
-						str.Append("<span>" + page.Title + "</span>") ;
+						if (Hooks.Breadcrumb.RenderActiveItem != null) {
+							Hooks.Breadcrumb.RenderActiveItem(this, str, page) ;
+						} else {
+							str.Append("<span>" + page.Title + "</span>") ;
+						}
 						return ;
 					} else if (ChildActive(page, curr.Id)) {
-						str.Append("<span><a href=\"" + Permalink(page.Permalink).ToString() + "\">" + page.Title + "</a></span> / ") ;
+						if (Hooks.Breadcrumb.RenderItem != null) {
+							Hooks.Breadcrumb.RenderItem(this, str, page) ;
+						} else {
+							str.Append("<span><a href=\"" + Permalink(page.Permalink).ToString() + "\">" + page.Title + "</a></span> / ") ;
+						}
 						RenderBreadcrumb(curr, page.Pages, str) ;
 						return ;
 					}
