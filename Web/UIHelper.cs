@@ -306,10 +306,21 @@ namespace Piranha.Web
 		/// <param name="stoplevel">The desired stop level</param>
 		private void RenderUL(Page curr, List<Sitemap> sm, StringBuilder str, int stoplevel, string cssclass = "") {
 			if (sm != null && sm.CountVisible() > 0 && sm[0].Level <= stoplevel) {
-				str.AppendLine("<ul class=\"" + cssclass + "\">") ;
+				// Render level start
+				if (Hooks.Menu.RenderLevelStart != null) {
+					Hooks.Menu.RenderLevelStart(this, str, cssclass) ;
+				} else {
+					str.AppendLine("<ul class=\"" + cssclass + "\">") ;
+				}
+				// Render items
 				foreach (Sitemap page in sm)
 					if (!page.IsHidden) RenderLI(curr, page, str, stoplevel) ;
-				str.AppendLine("</ul>") ;
+				// Render level end
+				if (Hooks.Menu.RenderLevelEnd != null) {
+					Hooks.Menu.RenderLevelEnd(this, str, cssclass) ;
+				} else {
+					str.AppendLine("</ul>") ;
+				}
 			}
 		}
 
@@ -322,13 +333,32 @@ namespace Piranha.Web
 		/// <param name="stoplevel">The desired stop level</param>
 		private void RenderLI(Page curr, Sitemap page, StringBuilder str, int stoplevel) {
 			if (page.GroupId == Guid.Empty || HttpContext.Current.User.IsMember(page.GroupId)) {
-				str.AppendLine("<li" + (curr.Id == page.Id ? " class=\"active\"" : 
-					(ChildActive(page, curr.Id) ? " class=\"active-child	\"" : "")) + ">") ;
-				str.AppendLine(String.Format("<a href=\"{0}\">{1}</a>", GenerateUrl(page),
-					!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)) ;
+				var active = curr.Id == page.Id ;
+				var childactive = ChildActive(page, curr.Id) ;
+
+				// Render item start
+				if (Hooks.Menu.RenderItemStart != null) {
+					Hooks.Menu.RenderItemStart(this, str, page, active, childactive) ;
+				} else {
+					str.AppendLine("<li" + (curr.Id == page.Id ? " class=\"active\"" : 
+						(ChildActive(page, curr.Id) ? " class=\"active-child	\"" : "")) + ">") ;
+				}
+				// Render item link
+				if (Hooks.Menu.RenderItemLink != null) {
+					Hooks.Menu.RenderItemLink(this, str, page) ;
+				} else {
+					str.AppendLine(String.Format("<a href=\"{0}\">{1}</a>", GenerateUrl(page),
+						!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)) ;
+				}
+				// Render subpages
 				if (page.Pages.Count > 0)
 					RenderUL(curr, page.Pages, str, stoplevel) ;
-				str.AppendLine("</li>") ;
+				// Render item end
+				if (Hooks.Menu.RenderItemEnd != null) {
+					Hooks.Menu.RenderItemEnd(this, str, page, active, childactive) ;
+				} else {
+					str.AppendLine("</li>") ;
+				}
 			}
 		}
 

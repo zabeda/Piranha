@@ -11,18 +11,18 @@ namespace Piranha.WebPages
 	/// </summary>
 	public static class Hooks {
 		/// <summary>
-		/// The different hooks available for the Breadcrumb.
+		/// The different hooks available for the breadcrumb.
 		/// </summary>
 		public static class Breadcrumb {
 			/// <summary>
 			/// Renders the start of the breadcrumb.
 			/// </summary>
-			public static Delegates.BreadcrumbStart RenderStart ;
+			public static Delegates.BreadcrumbStartHook RenderStart ;
 
 			/// <summary>
 			/// Renders the end of the breadcrumb.
 			/// </summary>
-			public static Delegates.BreadcrumbEnd RenderEnd ;
+			public static Delegates.BreadcrumbEndHook RenderEnd ;
 
 			/// <summary>
 			/// Renders a breadcrumb item.
@@ -33,6 +33,36 @@ namespace Piranha.WebPages
 			/// Renders the currently active breadcrumb item.
 			/// </summary>
 			public static Delegates.BreadcrumbItemHook RenderActiveItem ;
+		}
+
+		/// <summary>
+		/// The different hooks availble for the menu.
+		/// </summary>
+		public static class Menu {
+			/// <summary>
+			/// Renders the start of a menu level.
+			/// </summary>
+			public static Delegates.MenuLevelHook RenderLevelStart ;
+
+			/// <summary>
+			/// Renders the end of a menu level.
+			/// </summary>
+			public static Delegates.MenuLevelHook RenderLevelEnd ;
+
+			/// <summary>
+			/// Renders the start of a menu item.
+			/// </summary>
+			public static Delegates.MenuItemHook RenderItemStart ;
+
+			/// <summary>
+			/// Renders the end of a menu item.
+			/// </summary>
+			public static Delegates.MenuItemHook RenderItemEnd ;
+
+			/// <summary>
+			/// Renders the menu item link.
+			/// </summary>
+			public static Delegates.MenuItemLinkHook RenderItemLink ;
 		}
 	}
 }

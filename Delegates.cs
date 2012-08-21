@@ -10,8 +10,12 @@ namespace Piranha
 	/// </summary>
 	public static class Delegates
 	{
-		public delegate void BreadcrumbStart(Web.UIHelper ui, StringBuilder str) ;
-		public delegate void BreadcrumbEnd(Web.UIHelper ui, StringBuilder str) ;
+		public delegate void BreadcrumbStartHook(Web.UIHelper ui, StringBuilder str) ;
+		public delegate void BreadcrumbEndHook(Web.UIHelper ui, StringBuilder str) ;
 		public delegate void BreadcrumbItemHook(Web.UIHelper ui, StringBuilder str, Models.Sitemap page) ;
+
+		public delegate void MenuItemHook(Web.UIHelper ui, StringBuilder str, Models.Sitemap page, bool active, bool activechild) ;
+		public delegate void MenuItemLinkHook(Web.UIHelper ui, StringBuilder str, Models.Sitemap page) ;
+		public delegate void MenuLevelHook(Web.UIHelper ui, StringBuilder str, string cssclass) ;
 	}
 }
