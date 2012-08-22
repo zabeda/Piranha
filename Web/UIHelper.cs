@@ -345,7 +345,8 @@ namespace Piranha.Web
 				}
 				// Render item link
 				if (Hooks.Menu.RenderItemLink != null) {
-					Hooks.Menu.RenderItemLink(this, str, page) ;
+					Hooks.Menu.RenderItemLink(this, str, 
+						!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title, GenerateUrl(page)) ;
 				} else {
 					str.AppendLine(String.Format("<a href=\"{0}\">{1}</a>", GenerateUrl(page),
 						!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)) ;
