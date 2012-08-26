@@ -13,14 +13,6 @@
     <AssemblyName>Piranha</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,6 +74,7 @@
     <Compile Include="Areas\Manager\Controllers\PostController.cs" />
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Entities\DuplicateLoginException.cs" />
     <Compile Include="Entities\DuplicatePermalinkException.cs" />
@@ -179,6 +172,7 @@
     <Compile Include="WebPages\BasePage.cs" />
     <Compile Include="WebPages\ContentPage.cs" />
     <Compile Include="WebPages\Archive.cs" />
+    <Compile Include="WebPages\Hooks.cs" />
     <Compile Include="WebPages\PiranhaHelper.cs" />
     <Compile Include="WebPages\RequestHandlers\AccountHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
