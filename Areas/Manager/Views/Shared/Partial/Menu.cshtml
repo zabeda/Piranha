@@ -1,6 +1,27 @@
-﻿<ul class="menu">
-    <li@(ViewBag.Selected == "Cms" ? " class=selected" : "")><a href="@Url.Action("index", "page")">@Piranha.Resources.Global.MenuContent</a></li>
-    <li@(ViewBag.Selected == "Settings" ? " class=selected" : "")><a href="@Url.Action("pagelist", "template")">@Piranha.Resources.Global.MenuSettings</a></li>
-    <li@(ViewBag.Selected == "System" ? " class=selected" : "")><a href="@Url.Action("userlist", "settings")">@Piranha.Resources.Global.MenuSystem</a></li>
+﻿@{
+    var contentUrl =
+        (User.HasAccess("ADMIN_PAGE") ? @Url.Action("index", "page") :
+        (User.HasAccess("ADMIN_POST") ? @Url.Action("index", "post") :
+        (User.HasAccess("ADMIN_CONTENT") ? @Url.Action("index", "content") : ""))) ;
+    
+    var settingsUrl =
+        (User.HasAccess("ADMIN_PAGE_TEMPLATE") ? @Url.Action("pagelist", "template") :
+        (User.HasAccess("ADMIN_POST_TEMPLATE") ? @Url.Action("postlist", "template") :
+        (User.HasAccess("ADMIN_CATEGORY") ? @Url.Action("index", "category") : ""))) ;
+        
+    var systemUrl =
+        (User.HasAccess("ADMIN_USER") ? @Url.Action("userlist", "settings") :
+        (User.HasAccess("ADMIN_GROUP") ? @Url.Action("grouplist", "settings") :
+        (User.HasAccess("ADMIN_ACCESS") ? @Url.Action("accesslist", "settings") : 
+        (User.HasAccess("ADMIN_PARAM") ? @Url.Action("paramlist", "settings") : "")))) ;
+}
+<ul class="menu">
+    <li@(ViewBag.Selected == "Cms" ? " class=selected" : "")><a href="@contentUrl">@Piranha.Resources.Global.MenuContent</a></li>
+    @if (User.HasAccess("ADMIN_PAGE_TEMPLATE") || User.HasAccess("ADMIN_POST_TEMPLATE") || User.HasAccess("ADMIN_CATEGORY")) {
+    <li@(ViewBag.Selected == "Settings" ? " class=selected" : "")><a href="@settingsUrl">@Piranha.Resources.Global.MenuSettings</a></li>
+    }
+    @if (User.HasAccess("ADMIN_USER") || User.HasAccess("ADMIN_GROUP") || User.HasAccess("ADMIN_ACCESS") || User.HasAccess("ADMIN_PARAM")) {
+    <li@(ViewBag.Selected == "System" ? " class=selected" : "")><a href="@systemUrl">@Piranha.Resources.Global.MenuSystem</a></li>
+    }
     <li><a href="@Url.Action("logout", "account")">@Piranha.Resources.Global.MenuLogout</a></li>
 </ul>

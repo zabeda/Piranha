@@ -615,6 +615,9 @@ table.list .buttons {
     text-align: right;
     padding-right: 0;
     }
+table.list .four {
+    width: 120px;
+    }
 table.list .three {
     width: 90px;
     }
@@ -678,6 +681,29 @@ table.attachments .add {
     height: 50px;
     cursor: pointer;
     }
+table.list .form {
+    padding: 6px 10px 6px 20px;
+    }
+table.list .form .input {
+    border: 1px solid #eee;
+    border-radius: 2px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.02);
+    padding: 6px 10px;
+    margin-left: 0;
+    }
+table.list .dark .form .input {
+    border-color: #ddd;
+    }
+table.list tbody td.form:first-child > div {
+    margin: 6px 10px;
+    }
+table.list .form span {
+    display: inline-block;
+    padding: 7px 0;
+    }
+table.list tr.dark td {
+    background: #eee;
+    }
 
 /**
  * Colors
@@ -704,6 +730,10 @@ table.attachments .add {
     border: 0;
     cursor: pointer;
     }
+.icon.disabled {
+    opacity: 0.5;
+    cursor: default;
+    }
 .delete, .btn.delete {
     background: url('../img/ico-delete-16.png') no-repeat 0 0;
     }
@@ -727,6 +757,13 @@ table.attachments .add {
     }
 .add-after {
     background: url('../img/ico-add-after-16.png') no-repeat 0 0;
+    }
+.buttons .edit {
+    width: 16px;
+    height: 16px;
+    border: none;
+    margin: 0;
+    background: url('../img/ico-edit-16.png') no-repeat 0 0;
     }
 ul.list .delete, ul.list .arrow-right, ul.list arrow-down {
     margin-top: 6px;
@@ -784,6 +821,8 @@ table.template {
     text-align: center;
     }
 table.template td {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
     background: #ccc;
     border: solid 4px #fff;
     cursor: pointer;
@@ -850,27 +889,33 @@ table.template td.locked {
 /**
  * Floats & overrides
  */
-.half         { width: 50%; }
-.left         { float: left; }
-.right        { float: right; margin-right: 0; }
-.marg         { margin-right: 10px; }
-.contentleft  { text-align: left; }
-.contentright { text-align: right; }
-.overflow     { overflow: visible; }
+.half              { width: 50%; }
+.left              { float: left; }
+.right             { float: right; margin-right: 0; }
+.marg,
+.buttons .marg     { margin-right: 10px; }
+.marg-big,
+.buttons .marg-big { margin-right: 20px; }
+.contentleft       { text-align: left; }
+.contentright      { text-align: right; }
+.overflow          { overflow: visible; }
+table.list tbody td:first-child > .hidden,
+table.list .form .hidden { display: none; } 
     
 /**
  * Editor
  */
 .content-editor .inner { border-top: 0 none !important; padding: 0; }
-.content-editor .input { border: 0 none; box-shadow: none; padding: 0; margin: 0; }
+.content-editor .editor { border: 0 none; width: 100%; }
+.content-editor .form { margin: 14px; }
 .content-editor .defaultSkin td.mceToolbar { padding: 2px 10px 6px; border-bottom: solid 1px #ddd !important; }
 .content-editor .defaultSkin .mceButton { background: transparent; padding: 3px; border: 0; border-radius: 3px; }
 .content-editor .defaultSkin a.mceButtonActive, .content-editor .defaultSkin a.mceButtonSelected { background: #99d3de; border: 0; }
 .content-editor .defaultSkin a.mceButtonActive:hover, .content-editor .defaultSkin a.mceButtonSelected:hover { background: #89c3ce; border: 0; }
 .content-editor .defaultSkin .mceButton:hover { background: #ddd; border: 0; }
-.content-editor .input .defaultSkin table.mceLayout { border-width: 0px }
-.content-editor .input .defaultSkin table.mceLayout tr.mceFirst td { border-width: 0px; padding-bottom: 1px; }
-.content-editor .input .defaultSkin table.mceLayout tr.mceLast td { border-width: 0px }
+.content-editor .region-body .defaultSkin table.mceLayout { border-width: 0px }
+.content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst td { border-width: 0px; padding-bottom: 1px; }
+.content-editor .region-body .defaultSkin table.mceLayout tr.mceLast td { border-width: 0px }
 .content-editor table.list tbody tr:first-child { background: #eee; }
 .content-editor .defaultSkin table.mceToolbar { padding-bottom: 6px; }
 .content-editor .defaultSkin .mceListBox .mceText { font-family: "Helvetica Neue",Helvetica,Arial; font-size: 12px; line-height: 25px; height: 24px; margin-top: 1px; }

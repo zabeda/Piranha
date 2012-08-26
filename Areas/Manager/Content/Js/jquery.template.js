@@ -11,13 +11,6 @@ $(document).ready(function () {
     // Process the form data some before sending it back to the server
     //
     $("form").submit(function () {
-        // Build page regions
-        $.each($("#pageregions").children(), function (index, val) {
-            $("#region_data").append(
-                '<input id="Template_PageRegions_' + index +
-                '_" name="Template.PageRegions[' + index +
-                ']" type="hidden" value="' + $(val).children("span:first").text() + '" />');
-        });
         // Build Properties
         $.each($("#properties").children(), function (index, val) {
             $("#region_data").append(
@@ -33,17 +26,6 @@ $(document).ready(function () {
 // every time an item is added or removed as this updates the DOM.
 //
 function bindEvents() {
-    $("#pr_add").click(function () {
-        var name = $("#pr_name").val();
-
-        if (name != null && name != "") {
-            $("#pageregions").append(
-                '<li><span>' + name.removeSpaces() + '</span><button class="btn delete right remove-region"></button></li>');
-            $("#pr_name").val("");
-        } else alert("Du måste ange ett namn för regionen.");
-        return false;
-    });
-
     $("#po_add").click(function () {
         var name = $("#po_name").val();
 

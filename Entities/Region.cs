@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 using Piranha.Data;
+using Piranha.Extend;
 
 namespace Piranha.Models
 {
@@ -13,8 +15,13 @@ namespace Piranha.Models
 	/// Active record for a page region.
 	/// </summary>
 	[PrimaryKey(Column="region_id,region_draft")]
+	[Join(TableName="regiontemplate", ForeignKey="region_regiontemplate_id", PrimaryKey="regiontemplate_id")]
 	public class Region : PiranhaRecord<Region>
 	{
+		#region Members
+		private IRegion body = null ;
+		#endregion
+
 		#region Fields
 		/// <summary>
 		/// Gets/sets the id.
@@ -41,16 +48,49 @@ namespace Piranha.Models
 		public bool IsPageDraft { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the id of the region template.
+		/// </summary>
+		[Column(Name="region_regiontemplate_id")]
+		public Guid RegiontemplateId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the internal id.
+		/// </summary>
+		[Column(Name="regiontemplate_internal_id", Table="regiontemplate")]
+		public string InternalId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
-		[Column(Name="region_name")]
+		[Column(Name="regiontemplate_name", Table="regiontemplate")]
 		public string Name { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the body content.
+		/// Gets/sets the value type.
 		/// </summary>
-		[Column(Name="region_body"), AllowHtml()]
-		public HtmlString Body { get ; set ; }
+		[Column(Name="regiontemplate_type", Table="regiontemplate")]
+		public string Type { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the internal body json data.
+		/// </summary>
+		[Column(Name="region_body", OnSave="OnBodySave")]
+		private string InternalBody { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the deserialized json body.
+		/// </summary>
+		[AllowHtml()]
+		public IRegion Body {
+			get {
+				if (body == null)
+					body = GetBody() ;
+				return body ;
+			}
+			set {
+				body = value ;
+			}
+		}
 
 		/// <summary>
 		/// Gets/sets the created date.
@@ -96,7 +136,7 @@ namespace Piranha.Models
 		/// <param name="draft">Weather this is a draft</param>
 		/// <returns>The regions</returns>
 		public static List<Region> GetContentByPageId(Guid id, bool draft = false) {
-			return GetFields("region_name, region_body", "region_page_id = @0 AND region_draft = @1", id, draft) ;
+			return GetFields("regiontemplate_internal_id, regiontemplate_type, region_body", "region_page_id = @0 AND region_draft = @1", id, draft) ;
 		}
 
 		/// <summary>
@@ -106,6 +146,38 @@ namespace Piranha.Models
 		/// <returns>The regions</returns>
 		internal static List<Region> GetAllByPageId(Guid id, bool draft = false) {
 			return Get("region_page_id = @0", id, draft) ;
+		}
+		#endregion
+
+		#region Event handlers
+		/// <summary>
+		/// Before saving the Internal body, serialize the body object.
+		/// </summary>
+		/// <param name="str">The current data</param>
+		/// <returns>The data to save</returns>
+		protected string OnBodySave(string str) {
+			var js = new JavaScriptSerializer() ;
+			if (Body is HtmlString)
+				return js.Serialize(((HtmlString)Body).ToHtmlString()) ;
+			return js.Serialize(Body) ;
+		}
+		#endregion
+
+		#region Private methods
+		/// <summary>
+		/// Gets the Json deserialized body for the region.
+		/// </summary>
+		/// <returns>The body</returns>
+		private IRegion GetBody() {
+			var js = new JavaScriptSerializer() ;
+
+			if (!String.IsNullOrEmpty(InternalBody)) {
+				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.RegionTypes[Type]))
+					return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type], 
+						js.Deserialize(InternalBody, typeof(string))) ;
+				return (IRegion)js.Deserialize(InternalBody, ExtensionManager.RegionTypes[Type]) ;
+			}
+			return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type]) ;
 		}
 		#endregion
 	}

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Piranha.Data;
+using Piranha.Extend;
 
 namespace Piranha.Models.Manager.TemplateModels
 {
@@ -40,6 +41,16 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// Gets/sets the page template
 		/// </summary>
 		public virtual PageTemplate Template { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available region templates.
+		/// </summary>
+		public List<RegionTemplate> Regions { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available region types.
+		/// </summary>
+		public List<dynamic> RegionTypes { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -47,6 +58,12 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		public PageEditModel() {
 			Template = new PageTemplate() ;
+			Regions = new List<RegionTemplate>() ;
+			RegionTypes = new List<dynamic>() ;
+
+			ExtensionManager.Regions.OrderBy(r => r.Name).Each((i, r) => 
+				RegionTypes.Add(new { Name = r.Name, Type = r.Type.ToString() })) ;
+			RegionTypes.Insert(0, new { Name = "", Type = "" }) ;
 		}
 
 		/// <summary>
@@ -57,6 +74,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		public static PageEditModel GetById(Guid id) {
 			PageEditModel m = new PageEditModel() ;
 			m.Template = PageTemplate.GetSingle(id) ;
+			m.Regions = RegionTemplate.Get("regiontemplate_template_id = @0", id, new Params() { OrderBy = "regiontemplate_seqno" }) ;
 
 			return m ;
 		}
@@ -80,10 +98,31 @@ namespace Piranha.Models.Manager.TemplateModels
 					"SELECT page_id FROM page WHERE page_template_id = @0) " +
 					(sql != "" ? "AND property_name NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
 
+				// Todo delete unattached regions
+
 				// Save the template
 				Template.Save(tx) ;
+				// Delete removed regions
+				sql = "" ;
+				args.Clear() ;
+				args.Add(Template.Id) ;				
+				Regions.Each((n, p) => {
+					if (p.Id != Guid.Empty) {
+						sql += (sql != "" ? "," : "") + "@" + (n + 1).ToString() ;
+						args.Add(p.Id) ;
+					}
+				});
+				RegionTemplate.Execute("DELETE FROM regiontemplate WHERE regiontemplate_template_id = @0 " +
+					(sql != "" ? "AND regiontemplate_id NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
+				// Save the regions
+				foreach (var reg in Regions)
+					reg.Save(tx) ;
 				tx.Commit() ;
 			}
+			// Reload regions
+			Regions = RegionTemplate.Get("regiontemplate_template_id = @0", Template.Id, 
+				new Params() { OrderBy = "regiontemplate_seqno" }) ;
+
 			return true ;
 		}
 

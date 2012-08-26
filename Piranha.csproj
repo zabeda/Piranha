@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
@@ -12,10 +13,14 @@
     <AssemblyName>Piranha</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -80,7 +85,14 @@
     <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Entities\DuplicateLoginException.cs" />
     <Compile Include="Entities\DuplicatePermalinkException.cs" />
+    <Compile Include="Entities\RegionTemplate.cs" />
     <Compile Include="Entities\SysLog.cs" />
+    <Compile Include="Extend\Extension.cs" />
+    <Compile Include="Extend\ExtensionAttribute.cs" />
+    <Compile Include="Extend\ExtensionManager.cs" />
+    <Compile Include="Extend\IProperty.cs" />
+    <Compile Include="Extend\IRegion.cs" />
+    <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\ComplexName.cs" />
@@ -119,6 +131,7 @@
     <Compile Include="Entities\PageTemplate.cs" />
     <Compile Include="Entities\Permalink.cs" />
     <Compile Include="Entities\PiranhaRecord.cs" />
+    <Compile Include="Models\Manager\TemplateModels\RegionInsertModel.cs" />
     <Compile Include="Models\PageModel.cs" />
     <Compile Include="Data\ActiveRecord.cs">
       <SubType>Code</SubType>
@@ -144,6 +157,8 @@
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="AccessAttribute.cs" />
     <Compile Include="Mvc\BaseViewPage.cs" />
+    <Compile Include="Mvc\ManagerViewEngine.cs" />
+    <Compile Include="Mvc\ModelBinders\IRegionBinder.cs" />
     <Compile Include="Mvc\PiranhaHelper.cs" />
     <Compile Include="Mvc\SinglePage.cs" />
     <Compile Include="Mvc\SinglePageController.cs" />
@@ -208,7 +223,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Content\Edit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\EditorTemplates\Region.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Region.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Attachments.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Post\Edit.cshtml" />
@@ -244,6 +259,9 @@
     <EmbeddedResource Include="Areas\Manager\Views\Settings\ExternalList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\Siblings.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Partial\ContentTree.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Template\Region.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\HtmlRegion.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
@@ -361,7 +379,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.attachment.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.page.js" />
     <EmbeddedResource Include="Data\Scripts\Updates\2.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -464,6 +481,21 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\12.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\13.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-edit-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\json2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regiontemplate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regions.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -764,6 +764,13 @@ function bindFormEvents() {
     });
 }
 
+// Shows a system message in popup-box
+function SysMsg(title, body) {
+    $('#SysMsgTitle').html(title);
+    $('#SysMsgBody').html(body);
+    floatBox.show('boxSysMsg', 340);
+}
+
 $(document).ready(function () {
     bindFormEvents();
 
@@ -894,6 +901,10 @@ function floatBoxDef() {
     this.show = function (id, width, height) {
         var outer = $("#" + id);
         var inner = outer.children(".box:first");
+        if (width)
+            inner.css('width', width + 'px');
+        if (height)
+            inner.css('height', height + 'px');
 
         // Show the box
         outer.fadeIn("medium");

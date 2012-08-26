@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 using Piranha.Models;
 
@@ -111,6 +113,46 @@ public static class PiranhaApp
 	public static T[] GetCustomAttributes<T>(this Type type, bool inherit) {
 		return Array.ConvertAll<object, T>(type.GetCustomAttributes(typeof(T), inherit), (o) => (T)o) ;
 	}
+	#endregion
+
+	#region MVC Extensions
+	/** 
+	 * Add the extension @Html.PartialFor
+	 * 
+	 * Thanks to jmcd (https://github.com/jmcd)
+	 *
+	 * Original Gist can be found at:
+	 * 
+	 * https://gist.github.com/2137475
+	 */
+    public static MvcHtmlString PartialFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
+    {
+        return html.PartialFor(typeof (TValue).Name, expression);
+    }
+
+    public static MvcHtmlString PartialFor<TModel, TValue>(this HtmlHelper<TModel> html, string partialViewName, Expression<Func<TModel, TValue>> expression)
+    {
+        var containingModel = html.ViewData.Model;
+        var model = expression.Compile()(containingModel);
+
+        var oldTemplateInfo = html.ViewData.TemplateInfo;
+        var newViewData = new ViewDataDictionary(html.ViewData)
+        {
+            TemplateInfo = new TemplateInfo
+            {
+                FormattedModelValue = oldTemplateInfo.FormattedModelValue,
+            }
+        };
+
+        var newPrefix = ExpressionHelper.GetExpressionText(expression);
+        if (oldTemplateInfo.HtmlFieldPrefix.Length > 0)
+        {
+            newPrefix = oldTemplateInfo.HtmlFieldPrefix + "." + newPrefix;
+        }
+        newViewData.TemplateInfo.HtmlFieldPrefix = newPrefix;
+
+        return html.Partial(partialViewName, model, newViewData);
+    }
 	#endregion
 
 	#region CMS extension

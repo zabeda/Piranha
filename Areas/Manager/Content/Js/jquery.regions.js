@@ -1,13 +1,13 @@
 ﻿/**
- * jQuery methods for the manager page views.
+ * jQuery methods for the region editor.
  *
- * 2012-03-13   @tidyui
+ * 2012-08-24   Håkan Edling    @tidyui
  */
 
 $(document).ready(function () {
-    // Show the first page region.
-    $("#pageregions .input:first").show();
-    var firstid = $("#pageregions .input:first").attr("id");
+    // Show the active region on startup.
+    $('#regions .region-body:first').show();
+    var firstid = $("#regions .region-body:first").attr("id");
     if (firstid) {
         $("#" + firstid).addClass("active");
         $(".edit td").removeClass("active");
@@ -15,13 +15,13 @@ $(document).ready(function () {
     }
 
     // 
-    // Event handler for switching page regions.
+    // Event handler for switching regions.
     //
-    $(".pageregion").click(function () {
+    $(".region").click(function () {
         var id = $(this).attr("id").substring(4);
 
         hideEditors();
-        $("#pageregions #" + id).show();
+        $("#regions #" + id).show();
         $(this).addClass("active");
         $(".edit td").removeClass("active");
         $(".edit #" + id).addClass("active");
@@ -30,7 +30,7 @@ $(document).ready(function () {
     });
 
     //
-    // Event handler for switching page regions by clicking 
+    // Event handler for switching regions by clicking 
     // in the template preview.
     //
     $(".edit td").click(function () {
@@ -38,7 +38,7 @@ $(document).ready(function () {
             var id = $(this).attr("id");
 
             hideEditors();
-            $("#pageregions #" + id).show();
+            $("#regions #" + id).show();
             $(".edit td").removeClass("active");
             $(this).addClass("active");
             $("#btn_" + id).addClass("active");

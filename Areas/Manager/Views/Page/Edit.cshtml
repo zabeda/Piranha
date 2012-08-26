@@ -4,7 +4,7 @@
     ViewBag.SelectedTab = "Page" ;
 }
 @section Head {
-    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.page.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.regions.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
@@ -29,6 +29,10 @@
         //
         function hideEditors() {
             $("#pageregions .input, #globalregions .input").hide();
+            $("#regionbuttons button").removeClass("active");
+            $("#attachments").hide();
+
+            $("#regions .region-body").hide();
             $("#regionbuttons button").removeClass("active");
             $("#attachments").hide();
         }
@@ -185,24 +189,24 @@
     <div class="box content-editor">
         <div class="title">
             <div id="regionbuttons" class="buttons">
-                @for (int n = 0; n < Model.PageRegions.Count; n++) {
-                <button id="@Html.Raw("btn_" + Model.PageRegions[n].Name)" class="btn@(n > 0 ? "" : " active") pageregion">@Model.PageRegions[n].Name</button>
+                @for (int n = 0; n < Model.Regions.Count; n++) {
+                    <button id="@Html.Raw("btn_" + Model.Regions[n].InternalId)" class="btn@(n > 0 ? "" : " active") region">@Model.Regions[n].Name</button>
                 }
-                <button id="btn_attachments" class="btn@(Model.PageRegions.Count == 0 ? " active" : "")">@Piranha.Resources.Page.Attachments</button>
+                <button id="btn_attachments" class="btn@(Model.Regions.Count == 0 ? " active" : "")">@Piranha.Resources.Page.Attachments</button>
             </div>
             <h2>@Piranha.Resources.Global.Content</h2>
         </div>
         <div class="inner">
-            @if (Model.PageRegions.Count > 0) {
-            <div id="pageregions">
-                @Html.EditorFor(m => m.PageRegions)
+            @if (Model.Regions.Count > 0) {
+            <div id="regions">
+                @Html.EditorFor(m => m.Regions)
             </div>
             }
-            <div id="attachments" @(Model.PageRegions.Count > 0 ? "style=display:none" : "")>
+            <div id="attachments" @(Model.Regions.Count > 0 ? "style=display:none" : "")>
                 @Html.Partial("Partial/Attachments")
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 <div class="grid_3">
     <div class="box pagetemplate">

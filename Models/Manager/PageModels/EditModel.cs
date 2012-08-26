@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Piranha.Data;
+using Piranha.Extend;
 
 namespace Piranha.Models.Manager.PageModels
 {
@@ -27,11 +28,13 @@ namespace Piranha.Models.Manager.PageModels
 			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
 				EditModel model = (EditModel)base.BindModel(controllerContext, bindingContext) ;
 
-				model.PageRegions.Each<Region>((i,m) => {
-					bindingContext.ModelState.Remove("PageRegions[" + i +"].Body") ;
-					m.Body = new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("PageRegions[" + i +"].Body").AttemptedValue) ; 
+				model.Regions.Each<Region>((i, m) => {
+					if (m.Body is HtmlString) {
+						bindingContext.ModelState.Remove("Regions[" + i +"].Body") ;
+						m.Body = (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[m.Type],
+ 							bindingContext.ValueProvider.GetUnvalidatedValue("Regions[" + i +"].Body").AttemptedValue) ;
+					}
 				}) ;
-
 				return model ;
 			}
 		}
@@ -54,9 +57,9 @@ namespace Piranha.Models.Manager.PageModels
 		public Permalink Permalink { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the page regions.
+		/// Gets/sets the regions.
 		/// </summary>
-		public virtual List<Region> PageRegions { get ; set ; }
+		public virtual List<Region> Regions { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the Properties.
@@ -108,7 +111,7 @@ namespace Piranha.Models.Manager.PageModels
 		/// Default constructor, creates a new model.
 		/// </summary>
 		public EditModel() {
-			PageRegions = new List<Region>() ;
+			Regions = new List<Region>() ;
 			Properties = new List<Property>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
@@ -241,7 +244,7 @@ namespace Piranha.Models.Manager.PageModels
 					else Page.SaveAndPublish(tx) ;
 
 					// Save regions & properties
-					PageRegions.ForEach(r => { 
+					Regions.ForEach(r => {
 						r.IsDraft = r.IsPageDraft = true ; 
 						r.Save(tx) ;
 						if (!draft) {
@@ -251,6 +254,17 @@ namespace Piranha.Models.Manager.PageModels
 							r.Save(tx) ;
 						}
 					}) ;
+					/*
+					PageRegions.ForEach(r => { 
+						r.IsDraft = r.IsPageDraft = true ; 
+						r.Save(tx) ;
+						if (!draft) {
+							if (Region.GetScalar("SELECT COUNT(region_id) FROM region WHERE region_id=@0 AND region_draft=0", r.Id) == 0)
+								r.IsNew = true ;
+							r.IsDraft = r.IsPageDraft = false ; 
+							r.Save(tx) ;
+						}
+					}) ;*/
 					Properties.ForEach(p => { 
 						p.IsDraft = true ; 
 						p.Save(tx) ;
@@ -322,7 +336,7 @@ namespace Piranha.Models.Manager.PageModels
 		#region Private methods
 		private void GetRelated() {
 			// Clear related
-			PageRegions.Clear() ;
+			Regions.Clear() ;
 			Properties.Clear() ;
 			AttachedContent.Clear() ;
 
@@ -348,14 +362,22 @@ namespace Piranha.Models.Manager.PageModels
 			}
 
 			if (Template != null) {
-				// Get page regions
-				foreach (string name in Template.PageRegions) {
-					Region reg = Region.GetSingle("region_name = @0 AND region_page_id = @1 AND region_draft = @2", 
-						name, Page.Id, Page.IsDraft) ;
+				// Get regions
+				var regions = RegionTemplate.Get("regiontemplate_template_id = @0", Template.Id, new Params() { OrderBy = "regiontemplate_seqno" }) ;
+				foreach (var rt in regions) {
+					var reg = Region.GetSingle("region_regiontemplate_id = @0 AND region_page_id = @1 and region_draft = @2",
+						rt.Id, Page.Id, Page.IsDraft) ;
 					if (reg != null)
-						PageRegions.Add(reg) ;
-					else PageRegions.Add(new Region() { Name = name, PageId = Page.Id, IsDraft = Page.IsDraft, IsPageDraft = Page.IsDraft }) ;
-				} 
+						Regions.Add(reg) ;
+					else Regions.Add(new Region() { 
+						InternalId = rt.InternalId, 
+						Name = rt.Name, 
+						Type = rt.Type,
+						PageId = Page.Id, 
+						RegiontemplateId = rt.Id, 
+						IsDraft = Page.IsDraft, 
+						IsPageDraft = Page.IsDraft }) ;
+				}
 
 				// Get Properties
 				foreach (string name in Template.Properties) {

@@ -133,5 +133,24 @@ namespace Piranha.Areas.Manager.Controllers
 			return RedirectToAction("postlist") ;
 		}
 		#endregion
+
+		#region Region templates
+		/// <summary>
+		/// Creates a new region template row from the given data.
+		/// </summary>
+		/// <param name="m">The model</param>
+		/// <returns>The region template</returns>
+		[HttpPost()]
+		public ActionResult RegionTemplate(RegionInsertModel m) {
+			var region = new Models.RegionTemplate() {
+				TemplateId = m.TemplateId,
+				Name = m.Name,
+				InternalId = m.InternalId,
+				Type = m.Type,
+				Seqno = m.Seqno
+			} ;
+			return View("Region", region) ;
+		}
+		#endregion
 	}
 }

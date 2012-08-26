@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.Mvc;
 
+using Piranha.Extend;
+
 namespace Piranha.Models
 {
 	/// <summary>
@@ -162,14 +164,16 @@ namespace Piranha.Models
 		protected void Init() {
 			PageTemplate pt = PageTemplate.GetSingle(((Page)Page).TemplateId) ;
 
-			// Page regions
-			if (pt.PageRegions.Count > 0) {
-				foreach (string str in pt.PageRegions)
-					((IDictionary<string, object>)Regions).Add(str, new HtmlString("")) ;
-				Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(pr => {
-					if (((IDictionary<string, object>)Regions).ContainsKey(pr.Name))
-						((IDictionary<string, object>)Regions)[pr.Name] = pr.Body ;
-				});
+			// Regions
+			var regions = RegionTemplate.GetByTemplateId(pt.Id) ;
+			if (regions.Count > 0) {
+				foreach (var rt in regions)
+					((IDictionary<string, object>)Regions).Add(rt.InternalId,
+						Activator.CreateInstance(ExtensionManager.RegionTypes[rt.Type])) ;
+				Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(reg => {
+					if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
+						((IDictionary<string, object>)Regions)[reg.InternalId] = reg.Body ;
+				}) ;
 			}
 			// Properties
 			if (pt.Properties.Count > 0) {

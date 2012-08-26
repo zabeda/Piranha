@@ -131,6 +131,15 @@ namespace Piranha.WebPages
 
 			// Reset template cache
 			Web.TemplateCache.Clear() ;
+
+			// Initialize the extension manager
+			Extend.ExtensionManager.Init() ;
+
+			// Register json deserialization for post data
+			ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+
+			// Add the new view engine
+			ViewEngines.Engines.Add(new Mvc.ManagerViewEngine());
 		}
 
 		/// <summary>
@@ -228,6 +237,8 @@ namespace Piranha.WebPages
 				new Piranha.Models.Manager.TemplateModels.PageEditModel.Binder()) ;
 			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PostEditModel),
 				new Piranha.Models.Manager.TemplateModels.PostEditModel.Binder()) ;
+			ModelBinders.Binders.Add(typeof(Piranha.Extend.IRegion),
+				new Piranha.Mvc.ModelBinders.IRegionBinder()) ;
 		}
 		#endregion
 	}
