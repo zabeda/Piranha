@@ -7,7 +7,7 @@ using System.Web;
 namespace Piranha.Extend.Regions
 {
 	/// <summary>
-	/// Standard html-region.
+	/// Standard html region.
 	/// </summary>
 	[Extension(Name="Html")]
 	public class HtmlRegion : HtmlString, IRegion

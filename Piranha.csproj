@@ -86,6 +86,7 @@
     <Compile Include="Extend\IProperty.cs" />
     <Compile Include="Extend\IRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
+    <Compile Include="Extend\Regions\ImageRegion.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\ComplexName.cs" />
@@ -258,6 +259,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Template\Region.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\HtmlRegion.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\GroupList.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\ImageRegion.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
@@ -492,6 +494,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regions.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.media.dialog.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
