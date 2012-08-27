@@ -105,13 +105,15 @@ namespace Piranha.Models.Manager.TemplateModels
 				// Delete removed regions
 				sql = "" ;
 				args.Clear() ;
-				args.Add(Template.Id) ;				
-				Regions.Each((n, p) => {
-					if (p.Id != Guid.Empty) {
-						sql += (sql != "" ? "," : "") + "@" + (n + 1).ToString() ;
-						args.Add(p.Id) ;
+				args.Add(Template.Id) ;
+				var pos = 1;
+				foreach (var reg in Regions) {
+					if (reg.Id != Guid.Empty) {
+						sql += (sql != "" ? "," : "") + "@" + pos.ToString() ;
+						args.Add(reg.Id) ;
+						pos++ ;
 					}
-				});
+				}
 				RegionTemplate.Execute("DELETE FROM regiontemplate WHERE regiontemplate_template_id = @0 " +
 					(sql != "" ? "AND regiontemplate_id NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
 				// Save the regions
