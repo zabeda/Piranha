@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Piranha.Models;
 using Piranha.Models.Manager.PageModels;
 
 namespace Piranha.Areas.Manager.Controllers
@@ -128,6 +129,20 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		public ActionResult Siblings(string page_id, string page_parentid, string page_seqno, string parentid) {
 			return View(EditModel.BuildSiblingPages(new Guid(page_id), new Guid(page_parentid), Convert.ToInt32(page_seqno), new Guid(parentid))) ;
+		}
+
+		/// <summary>
+		/// Gets the grouplist for the given group and page.
+		/// </summary>
+		/// <param name="page_id">The page id.</param>
+		/// <param name="group_id">The group id.</param>
+		public ActionResult GroupList(string page_id, string group_id) {
+			var page = Models.Page.GetSingle(new Guid(page_id), true) ;
+			var groups = SysGroup.GetParents(new Guid(group_id)) ;
+			groups.Reverse() ;
+
+			return View("Partial/GroupList", new GroupListModel() { 
+				Groups = groups, Page = page }) ;
 		}
     }
 }

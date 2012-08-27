@@ -84,6 +84,24 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Gets the parent groups for the given group id.
+		/// </summary>
+		/// <param name="id">The group id</param>
+		/// <returns>The parent groups</returns>
+		public static List<SysGroup> GetParents(Guid id) {
+			var groups = GetStructure().Flatten() ;
+
+			var tmp = new List<SysGroup>() ;
+			if (id != Guid.Empty) {
+				groups.ForEach(g => {
+					if (g.HasChild(id))
+						tmp.Add(g) ;
+				}) ;
+			} else tmp = groups ;
+			return tmp ;
+		}
+
+		/// <summary>
 		/// Checks if the current group has a child group with the given id.
 		/// </summary>
 		/// <param name="childid">The child id</param>

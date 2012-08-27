@@ -170,6 +170,7 @@ CREATE TABLE [page] (
 	[page_draft] BIT NOT NULL default(1),
 	[page_template_id] UNIQUEIDENTIFIER NOT NULL,
 	[page_group_id] UNIQUEIDENTIFIER NULL,
+	[page_group_disable_id] NTEXT NULL,
 	[page_parent_id] UNIQUEIDENTIFIER NULL,
 	[page_permalink_id] UNIQUEIDENTIFIER NOT NULL,
 	[page_seqno] INT NOT NULL DEFAULT(1),
@@ -194,12 +195,31 @@ CREATE TABLE [page] (
 	CONSTRAINT fk_page_updated_by FOREIGN KEY ([page_updated_by]) REFERENCES [sysuser] ([sysuser_id])
 );
 
+CREATE TABLE [regiontemplate] (
+	[regiontemplate_id] UNIQUEIDENTIFIER NOT NULL,
+	[regiontemplate_template_id] UNIQUEIDENTIFIER NOT NULL,
+	[regiontemplate_internal_id] NVARCHAR(32) NOT NULL,
+	[regiontemplate_seqno] INT NOT NULL default(1),
+	[regiontemplate_name] NVARCHAR(64) NOT NULL,
+	[regiontemplate_description] NVARCHAR(255) NULL,
+	[regiontemplate_type] NVARCHAR(255) NOT NULL,
+	[regiontemplate_created] DATETIME NOT NULL,
+	[regiontemplate_updated] DATETIME NOT NULL,
+	[regiontemplate_created_by] UNIQUEIDENTIFIER NOT NULL,
+	[regiontemplate_updated_by] UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT pk_regiontemplate_id PRIMARY KEY ([regiontemplate_id]),
+	CONSTRAINT fk_regiontemplate_created_by FOREIGN KEY ([regiontemplate_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_regiontemplate_updated_by FOREIGN KEY ([regiontemplate_updated_by]) REFERENCES [sysuser] ([sysuser_id])
+);
+CREATE UNIQUE INDEX [index_regiontemplate_internal_id] ON [regiontemplate] ([regiontemplate_template_id], [regiontemplate_internal_id]);
+
 CREATE TABLE [region] (
 	[region_id] UNIQUEIDENTIFIER NOT NULL,
 	[region_draft] BIT NOT NULL default(1),
 	[region_page_id] UNIQUEIDENTIFIER NULL,
 	[region_page_draft] BIT NOT NULL default(1),
-	[region_name] NVARCHAR(64) NOT NULL,
+	[region_regiontemplate_id] UNIQUEIDENTIFIER NULL,
+	[region_name] NVARCHAR(64) NULL,
 	[region_body] NTEXT NULL,
 	[region_created] DATETIME NOT NULL,
 	[region_updated] DATETIME NOT NULL,
@@ -207,6 +227,7 @@ CREATE TABLE [region] (
 	[region_updated_by] UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_region_id PRIMARY KEY ([region_id], [region_draft]),
 	CONSTRAINT fk_region_page_id FOREIGN KEY ([region_page_id], [region_page_draft]) REFERENCES [page] ([page_id], [page_draft]),
+	CONSTRAINT fk_region_regiontemplate FOREIGN KEY ([region_regiontemplate_id]) REFERENCES [regiontemplate] ([regiontemplate_id]) ON DELETE CASCADE,
 	CONSTRAINT fk_region_created_by FOREIGN KEY ([region_created_by]) REFERENCES [sysuser] ([sysuser_id]),
 	CONSTRAINT fk_region_updated_by FOREIGN KEY ([region_updated_by]) REFERENCES [sysuser] ([sysuser_id])
 );

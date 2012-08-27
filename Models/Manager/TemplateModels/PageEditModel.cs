@@ -102,7 +102,7 @@ namespace Piranha.Models.Manager.TemplateModels
 
 				// Save the template
 				Template.Save(tx) ;
-				// Delete removed regions
+				// Delete removed regions templates
 				sql = "" ;
 				args.Clear() ;
 				args.Add(Template.Id) ;

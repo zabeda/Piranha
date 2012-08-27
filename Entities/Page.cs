@@ -49,6 +49,13 @@ namespace Piranha.Models
 		public Guid GroupId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the optional group ids for which this page is disabled.
+		/// </summary>
+		[Column(Name="page_group_disable_id", Json=true, OnLoad="OnGuidListLoad")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="DisableGroups")]
+		public List<Guid> DisabledGroups { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the parent id.
 		/// </summary>
 		[Column(Name="page_parent_id")]
@@ -476,6 +483,17 @@ namespace Piranha.Models
 		/// <param name="lst">The attachments</param>
 		/// <returns>The attachments, or a default list</returns>
 		protected List<Guid> OnAttachmentsLoad(List<Guid> lst) {
+			if (lst != null)
+				return lst ;
+			return new List<Guid>() ;
+		}
+
+		/// <summary>
+		/// Create an empty guid list if it is null in the database.
+		/// </summary>
+		/// <param name="lst">The attachments</param>
+		/// <returns>The guid list, or a default list</returns>
+		protected List<Guid> OnGuidListLoad(List<Guid> lst) {
 			if (lst != null)
 				return lst ;
 			return new List<Guid>() ;

@@ -103,6 +103,7 @@
     <Compile Include="Models\Manager\ContentModels\EditModel.cs" />
     <Compile Include="Models\Manager\ContentModels\ListModel.cs" />
     <Compile Include="Models\Manager\PageModels\EditModel.cs" />
+    <Compile Include="Models\Manager\PageModels\GroupListModel.cs" />
     <Compile Include="Models\Manager\PageModels\InsertModel.cs" />
     <Compile Include="Models\Manager\PageModels\ListModel.cs" />
     <Compile Include="Models\Manager\PostModels\EditModel.cs" />
@@ -256,6 +257,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Template\Region.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\HtmlRegion.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\GroupList.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />

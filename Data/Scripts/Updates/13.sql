@@ -1,7 +1,7 @@
 ﻿--
 -- Database version 13 Update script
 --
--- 2012-08-15
+-- 2012-08-27
 --
 -- This update adds support for complex regions & properties
 
@@ -26,7 +26,10 @@ CREATE UNIQUE INDEX [index_regiontemplate_internal_id] ON [regiontemplate] ([reg
 
 -- Add a link to region templates from the regions.
 ALTER TABLE [region] ADD [region_regiontemplate_id] UNIQUEIDENTIFIER NULL;
+ALTER TABLE [region] ADD CONSTRAINT fk_region_regiontemplate FOREIGN KEY ([region_regiontemplate_id]) REFERENCES [regiontemplate] ([regiontemplate_id]) ON DELETE CASCADE;
 
 -- Allow nulls for region name.
 ALTER TABLE [region] ALTER COLUMN [region_name] NVARCHAR(64) NULL;
 
+-- Add possibility to disable pages for some groups.
+ALTER TABLE [page] ADD [page_group_disable_id] NTEXT NULL;

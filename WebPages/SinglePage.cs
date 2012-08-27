@@ -63,6 +63,13 @@ namespace Piranha.WebPages
 				mod = tmod > mod ? tmod : mod ;
 				cached = ClientCache.HandleClientCache(HttpContext.Current, page.Id.ToString(), mod) ;
 			}
+			// Check for disabled groups
+			if (page.DisabledGroups.Contains(User.GetProfile().GroupId)) {
+				SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
+				if (param != null)
+					Response.Redirect(param.Value) ;
+				else Response.Redirect("~/") ;
+			}
 			// Load the model if the page wasn't cached
 			if (!cached)
 				InitModel(PageModel.Get<T>(page)) ;

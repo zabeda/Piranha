@@ -87,6 +87,11 @@ namespace Piranha.Models.Manager.PageModels
 		public virtual SelectList Groups { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the groups that can be disabled.
+		/// </summary>
+		public List<SysGroup> DisableGroups { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the available parent pages.
 		/// </summary>
 		public List<PagePlacement> Parents { get ; set ; }
@@ -115,8 +120,11 @@ namespace Piranha.Models.Manager.PageModels
 			Properties = new List<Property>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
+			DisableGroups = SysGroup.GetParents(Guid.Empty) ;
+			DisableGroups.Reverse() ;
 
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
+			groups.Reverse() ;
 			groups.Insert(0, new SysGroup() { Name = Piranha.Resources.Global.Everyone }) ;
 			Groups = new SelectList(groups, "Id", "Name") ;
 		}
@@ -339,6 +347,10 @@ namespace Piranha.Models.Manager.PageModels
 			Regions.Clear() ;
 			Properties.Clear() ;
 			AttachedContent.Clear() ;
+
+			// Get group parents
+			DisableGroups = SysGroup.GetParents(Page.GroupId) ;
+			DisableGroups.Reverse() ;
 
 			// Get placement ref title
 			if (Page.ParentId != Guid.Empty || Page.Seqno > 1) {
