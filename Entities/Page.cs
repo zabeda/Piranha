@@ -263,6 +263,7 @@ namespace Piranha.Models
 		/// Default constructor.
 		/// </summary>
 		public Page() : base() {
+			DisabledGroups = new List<Guid>() ;
 			IsDraft = true ;
 			Seqno   = 1 ;
 			Attachments = new List<Guid>() ;
