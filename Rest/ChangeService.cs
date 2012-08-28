@@ -45,11 +45,11 @@ namespace Piranha.Rest
 			// Get all deleted content
 			string query = "syslog_parent_type = @0 AND syslog_action = @1 AND syslog_created > @2" ;
 			changes.Deleted.Pages = Piranha.Models.SysLog.Get(query, "PAGE", "DEPUBLISH", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToShortDateString() }).ToList() ;
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			changes.Deleted.Content = Piranha.Models.SysLog.Get(query, "CONTENT", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToShortDateString() }).ToList() ;
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			changes.Deleted.Categories = Piranha.Models.SysLog.Get(query, "CATEGORY", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToShortDateString() }).ToList() ;
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			return changes ;
 		}
 

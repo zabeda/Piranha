@@ -35,8 +35,8 @@ namespace Piranha.Rest
 					Name = c.Name,
 					Permalink = c.Permalink,
 					Description = c.Description,
-					Created = c.Created.ToShortDateString(),
-					Updated = c.Updated.ToShortDateString()
+					Created = c.Created.ToString(),
+					Updated = c.Updated.ToString()
 				}));
 			return categories ;
 		}

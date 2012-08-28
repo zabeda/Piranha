@@ -42,8 +42,8 @@ namespace Piranha.Rest
 						Size = c.Size,
 						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + c.Id,
 						ContentUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") + "/" + c.Id,
-						Created = c.Created.ToShortDateString(),
-						Updated = c.Updated.ToShortDateString()
+						Created = c.Created.ToString(),
+						Updated = c.Updated.ToString()
 					};
 				}
 			} catch {}

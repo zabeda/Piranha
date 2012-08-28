@@ -80,7 +80,7 @@ namespace Piranha.Rest
 						IsHidden = map.IsHidden,
 						HasChildren = map.Pages.Count > 0,
 						ChildNodes = BuildMap(map.Pages),
-						LastPublished = map.LastPublished.ToShortDateString()
+						LastPublished = map.LastPublished.ToString()
 					}) ;
 				}
 			}) ;

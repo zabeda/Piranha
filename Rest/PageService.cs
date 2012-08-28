@@ -38,10 +38,10 @@ namespace Piranha.Rest
 						Title = pm.Page.Title,
 						Permalink = pm.Page.Permalink,
 						IsHidden = ((Piranha.Models.Page)pm.Page).IsHidden,
-						Created = pm.Page.Created.ToShortDateString(),
-						Updated = pm.Page.Updated.ToShortDateString(),
-						Published = pm.Page.Published.ToShortDateString(),
-						LastPublished = pm.Page.LastPublished.ToShortDateString()
+						Created = pm.Page.Created.ToString(),
+						Updated = pm.Page.Updated.ToString(),
+						Published = pm.Page.Published.ToString(),
+						LastPublished = pm.Page.LastPublished.ToString()
 					} ;
 
 					// Regions
