@@ -45,9 +45,14 @@ namespace Piranha.Rest
 					} ;
 
 					// Regions
-					foreach (var key in ((IDictionary<string, object>)pm.Regions).Keys)
-						page.Regions.Add(new Region() { Name = key, Body = 
-							((HtmlString)((IDictionary<string, object>)pm.Regions)[key]).ToString() }) ;
+					foreach (var key in ((IDictionary<string, object>)pm.Regions).Keys) {
+						if (((IDictionary<string, object>)pm.Regions)[key] is HtmlString)
+							page.Regions.Add(new Region() { Name = key, Body = 
+								((HtmlString)((IDictionary<string, object>)pm.Regions)[key]).ToHtmlString() }) ;
+						else
+							page.Regions.Add(new Region() { Name = key, Body = 
+								((IDictionary<string, object>)pm.Regions)[key] }) ;
+					}
 
 					// Properties
 					foreach (var key in ((IDictionary<string, object>)pm.Properties).Keys)

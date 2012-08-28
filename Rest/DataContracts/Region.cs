@@ -12,6 +12,6 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string Name { get ; set ; }
 		[DataMember()]
-		public string Body { get ; set ; }
+		public object Body { get ; set ; }
 	}
 }
