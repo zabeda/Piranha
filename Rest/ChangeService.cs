@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -18,11 +19,21 @@ namespace Piranha.Rest
 	/// </summary>
 	[ServiceContract()]
 	[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-	public class ChangeService
+	public class ChangeService : BaseService
 	{
 		[OperationContract()]
 		[WebGet(UriTemplate="get/{date}", ResponseFormat=WebMessageFormat.Json)]
-		public Changes GetChanges(string date) {
+		public Stream GetChanges(string date) {
+			return Serialize(GetChangesInternal(date)) ;
+		}
+
+		[OperationContract()]
+		[WebGet(UriTemplate="get/xml/{date}", ResponseFormat=WebMessageFormat.Xml)]
+		public Changes GetChangesXml(string date) {
+			return GetChangesInternal(date) ;
+		}
+
+		internal Changes GetChangesInternal(string date) {
 			Changes changes = new Changes() ;
 			DateTime latest = Convert.ToDateTime(date) ;
 
@@ -32,7 +43,7 @@ namespace Piranha.Rest
 
 			// Get all pages last published after the given date.
 			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_draft = 0", latest).ForEach(p => 
-				changes.Pages.Add(new PageService().Get(p.Id.ToString()))) ;
+				changes.Pages.Add(new PageService().GetInternal(p.Id.ToString()))) ;
 
 			// Get all categories updated after the given date.
 			new CategoryService().Get().Where(c => Convert.ToDateTime(c.Updated) > latest).
@@ -51,12 +62,6 @@ namespace Piranha.Rest
 			changes.Deleted.Categories = Piranha.Models.SysLog.Get(query, "CATEGORY", "DELETE", latest).
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			return changes ;
-		}
-
-		[OperationContract()]
-		[WebGet(UriTemplate="get/xml/{date}", ResponseFormat=WebMessageFormat.Xml)]
-		public Changes GetChangesXml(string date) {
-			return GetChanges(date) ;
 		}
 	}
 }

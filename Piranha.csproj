@@ -85,6 +85,7 @@
     <Compile Include="Extend\Extension.cs" />
     <Compile Include="Extend\ExtensionAttribute.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
+    <Compile Include="Extend\ExtensionProvider.cs" />
     <Compile Include="Extend\IProperty.cs" />
     <Compile Include="Extend\IRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Mvc\PiranhaHelper.cs" />
     <Compile Include="Mvc\SinglePage.cs" />
     <Compile Include="Mvc\SinglePageController.cs" />
+    <Compile Include="Rest\BaseService.cs" />
     <Compile Include="Rest\CategoryService.cs" />
     <Compile Include="Rest\ChangeService.cs" />
     <Compile Include="Rest\ContentService.cs" />

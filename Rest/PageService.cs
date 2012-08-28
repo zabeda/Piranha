@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -17,8 +18,9 @@ namespace Piranha.Rest
 	/// ReST API for pages.
 	/// </summary>
 	[ServiceContract()]
+	[ServiceKnownType("GetKnownTypes", typeof(Extend.ExtensionProvider))]
 	[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-	public class PageService
+	public class PageService : BaseService
 	{
 		/// <summary>
 		/// Gets the page specified by the given id.
@@ -26,8 +28,28 @@ namespace Piranha.Rest
 		/// <param name="id">The page id</param>
 		/// <returns>The page</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/{id}", ResponseFormat=WebMessageFormat.Json)]
-		public Page Get(string id) {
+		[WebGet(UriTemplate="get/{id}")]
+		public Stream Get(string id) {
+			return Serialize(GetInternal(id)) ;
+		}
+
+		/// <summary>
+		/// Gets the page specified by the given id as xml.
+		/// </summary>
+		/// <param name="id">The page id</param>
+		/// <returns>The page</returns>
+		[OperationContract()]
+		[WebGet(UriTemplate="get/xml/{id}", ResponseFormat=WebMessageFormat.Xml)]
+		public Page GetXml(string id) {
+			return GetInternal(id) ;
+		}
+
+		/// <summary>
+		/// Gets the page specified by the given id.
+		/// </summary>
+		/// <param name="id">The page id</param>
+		/// <returns>The page.</returns>
+		internal Page GetInternal(string id) {
 			try {
 				Models.PageModel pm = Models.PageModel.GetById(new Guid(id)) ;
 
@@ -67,17 +89,6 @@ namespace Piranha.Rest
 				}
 			} catch {}
 			return null ;
-		}
-
-		/// <summary>
-		/// Gets the page specified by the given id as xml.
-		/// </summary>
-		/// <param name="id">The page id</param>
-		/// <returns>The page</returns>
-		[OperationContract()]
-		[WebGet(UriTemplate="get/xml/{id}", ResponseFormat=WebMessageFormat.Xml)]
-		public Page GetXml(string id) {
-			return Get(id) ;
 		}
 	}
 }
