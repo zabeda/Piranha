@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 
 using Piranha.Data;
+using Piranha.Data.Updates;
 using Piranha.Models;
 
 namespace Piranha.Areas.Manager.Controllers
@@ -62,30 +63,60 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Updates the database.
 		/// </summary>
 		[HttpPost()]
-		public ActionResult RunUpdate() {
-			// Execute all incremental updates in a transaction.
-			using (IDbTransaction tx = Database.OpenTransaction()) {
-				for (int n = Data.Database.InstalledVersion + 1; n <= Data.Database.CurrentVersion; n++) {
-					// Read embedded create script
-					Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream("Piranha.Data.Scripts.Updates." +
-						n.ToString() + ".sql") ;
-					String sql = new StreamReader(str).ReadToEnd() ;
-					str.Close() ;
-
-					// Split statements and execute
-					string[] stmts = sql.Split(new char[] { ';' }) ;
-					foreach (string stmt in stmts) {
-						if (!String.IsNullOrEmpty(stmt.Trim()))
-							SysUser.Execute(stmt.Trim(), tx) ;
-					}
+		public ActionResult RunUpdate(LoginModel m) {
+			// Authenticate the user
+			if (ModelState.IsValid) {
+				SysUser user = SysUser.Authenticate(m.Login, m.Password) ;
+				if (user != null) {
+					FormsAuthentication.SetAuthCookie(user.Id.ToString(), m.RememberMe) ;
+					HttpContext.Session[PiranhaApp.USER] = user ;
+					return RedirectToAction("ExecuteUpdate") ;
+				} else {
+					ViewBag.Message = @Piranha.Resources.Account.MessageLoginFailed ;
+					ViewBag.MessageCss = "error" ;
+					return Update() ;
 				}
-				// Now lets update the database version.
-				SysUser.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = 'SITE_VERSION'", 
-					tx, Data.Database.CurrentVersion) ;
-				SysParam.InvalidateParam("SITE_VERSION") ;
-				tx.Commit() ;
+			} else {
+				ViewBag.Message = @Piranha.Resources.Account.MessageLoginEmptyFields ;
+				ViewBag.MessageCss = "" ;
+				return Update() ;
 			}
-			return RedirectToAction("index", "account") ;
+		}
+
+		[HttpGet()]
+		public ActionResult ExecuteUpdate() {
+			if (User.Identity.IsAuthenticated && User.HasAccess("ADMIN")) {
+				// Execute all incremental updates in a transaction.
+				using (IDbTransaction tx = Database.OpenTransaction()) {
+					for (int n = Data.Database.InstalledVersion + 1; n <= Data.Database.CurrentVersion; n++) {
+						// Read embedded create script
+						Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream("Piranha.Data.Scripts.Updates." +
+							n.ToString() + ".sql") ;
+						String sql = new StreamReader(str).ReadToEnd() ;
+						str.Close() ;
+
+						// Split statements and execute
+						string[] stmts = sql.Split(new char[] { ';' }) ;
+						foreach (string stmt in stmts) {
+							if (!String.IsNullOrEmpty(stmt.Trim()))
+								SysUser.Execute(stmt.Trim(), tx) ;
+						}
+
+						// Check for update class
+						var utype = Type.GetType("Piranha.Data.Updates.Update" + n.ToString()) ;
+						if (utype != null) {
+							IUpdate update = (IUpdate)Activator.CreateInstance(utype) ;
+							update.Execute(tx) ;
+						}
+					}
+					// Now lets update the database version.
+					SysUser.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = 'SITE_VERSION'", 
+						tx, Data.Database.CurrentVersion) ;
+					SysParam.InvalidateParam("SITE_VERSION") ;
+					tx.Commit() ;
+				}
+				return RedirectToAction("index", "account") ;
+			} else return RedirectToAction("update") ;
 		}
 
 		/// <summary>

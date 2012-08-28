@@ -292,7 +292,9 @@ namespace Piranha.Data
 		/// </summary>
 		/// <param name="id">The primary key</param>
 		/// <returns>A single record</returns>
-		public static T GetSingle(object id) {
+		public static T GetSingle(object id, IDbTransaction tx = null) {
+			if (tx != null)
+				return GetSingle(PrimaryKeys[0] + "=@0", tx, id) ;
 			return GetSingle(PrimaryKeys[0] + "=@0", id) ;
 		}
 
@@ -312,9 +314,21 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the available records with the given query params.
 		/// </summary>
+		/// <returns>A list of records</returns>
+		public static List<T> Get(IDbTransaction tx) {
+			if (tx != null)
+				return GetFields(AllFields, "", tx) ;
+			return GetFields(AllFields) ;
+		}
+
+		/// <summary>
+		/// Gets the available records with the given query params.
+		/// </summary>
 		/// <param name="param">The query params</param>
 		/// <returns>A list of records</returns>
-		public static List<T> Get(Params param) {
+		public static List<T> Get(Params param, IDbTransaction tx = null) {
+			if (tx != null)
+				return GetFields(AllFields, "", tx, param) ;
 			return GetFields(AllFields, "", param) ;
 		}
 
@@ -334,7 +348,9 @@ namespace Piranha.Data
 		/// <param name="fields">The fields to load</param>
 		/// <param name="param">The query params</param>
 		/// <returns>A list of records</returns>
-		public static List<T> GetFields(string fields, Params param) {
+		public static List<T> GetFields(string fields, Params param, IDbTransaction tx = null) {
+			if (tx != null)
+				return GetFields(fields, "", tx, param) ;
 			return GetFields(fields, "", param) ;
 		}
 
@@ -384,9 +400,11 @@ namespace Piranha.Data
 		public static List<T> Query(string query, params object[] args) {
 			List<T> result = new List<T>() ;
 
-			using (IDbConnection conn = Database.OpenConnection()) {
-				using (IDbCommand cmd = Database.CreateCommand(conn, query, args)) {
-					using (IDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection)) { 
+			var tx = args.Count() > 0 && args[0] is IDbTransaction ? (IDbTransaction)args[0] : null ;
+
+			using (IDbConnection conn = tx != null ? null : Database.OpenConnection()) {
+				using (IDbCommand cmd = Database.CreateCommand(tx != null ? tx.Connection : conn, tx, query, args)) {
+					using (IDataReader rdr = cmd.ExecuteReader(CommandBehavior.Default)) {
 						while (rdr.Read()) {
 							// Create and fill object
 							object o = Activator.CreateInstance<T>() ;
@@ -546,7 +564,7 @@ namespace Piranha.Data
 			}
 
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, String.Format(SqlInsert, 
+			IDbCommand cmd = Database.CreateCommand(conn, null /*tx*/, String.Format(SqlInsert, 
 				TableName, fields, values), args.ToArray()) ;
 			if (tx != null)
 				cmd.Transaction = tx ;
@@ -598,7 +616,7 @@ namespace Piranha.Data
 			//args.Add(Columns[PrimaryKey].GetValue(this, null)) ;
 
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, String.Format(SqlUpdate, 
+			IDbCommand cmd = Database.CreateCommand(conn, /*tx*/null, String.Format(SqlUpdate, 
 				TableName, values, where), args.ToArray()) ;
 			if (tx != null)
 				cmd.Transaction = tx ;
@@ -623,7 +641,7 @@ namespace Piranha.Data
 			}
 
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, String.Format(SqlDelete,
+			IDbCommand cmd = Database.CreateCommand(conn, tx, String.Format(SqlDelete,
 				TableName, where), args.ToArray()) ;
 			if (tx != null)
 				cmd.Transaction = tx ;
@@ -640,7 +658,7 @@ namespace Piranha.Data
 		/// <returns>The command</returns>
 		private static IDbCommand CreateCommand(IDbConnection conn, string statement, IDbTransaction tx, object[] args) {
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, statement, args) ;
+			IDbCommand cmd = Database.CreateCommand(conn, tx, statement, args) ;
 			if (tx != null)
 				cmd.Transaction = tx ;
 			return cmd ;

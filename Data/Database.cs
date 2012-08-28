@@ -21,7 +21,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 12 ;
+		public static int CurrentVersion = 13 ;
 		#endregion
 
 		#region Properties
@@ -68,7 +68,7 @@ namespace Piranha.Data
 		/// <param name="sql">The sql statement</param>
 		/// <param name="args">The parameters</param>
 		/// <returns>A db command</returns>
-		public static IDbCommand CreateCommand(IDbConnection conn, string sql, object[] args = null) {
+		public static IDbCommand CreateCommand(IDbConnection conn, IDbTransaction tx, string sql, object[] args = null) {
 			// Convert all enum arguments to string
 			for (int n = 0; n < args.Length; n++)
 				if (args[n] != null && typeof(Enum).IsAssignableFrom(args[n].GetType())) 
@@ -76,9 +76,12 @@ namespace Piranha.Data
 
 			// Create command
 			IDbCommand cmd = conn.CreateCommand() ;
+			if (tx != null)
+				cmd.Transaction = tx ;
 			cmd.CommandText = sql ;
-			if (args != null)
-				for (int n = 0; n < args.Length; n++) {
+			if (args != null) {
+				int pos = args.Length > 0 && args[0] is IDbTransaction ? 1 : 0 ;
+				for (int n = 0 + pos; n < args.Length; n++) {
 					if (!(args[n] is Params)) {
 						IDbDataParameter p = cmd.CreateParameter() ;
 						p.ParameterName = String.Format("@{0}", n) ; 
@@ -97,6 +100,7 @@ namespace Piranha.Data
 						cmd.Parameters.Add(p) ;
 					}
 				}
+			}
 			return cmd ;
 		}
 

@@ -74,6 +74,8 @@
     <Compile Include="Areas\Manager\Controllers\PostController.cs" />
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
+    <Compile Include="Data\Updates\IUpdate.cs" />
+    <Compile Include="Data\Updates\Update13.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Entities\DuplicateLoginException.cs" />

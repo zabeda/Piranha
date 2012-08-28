@@ -158,7 +158,7 @@ namespace Piranha.Models
 		protected string OnBodySave(string str) {
 			var js = new JavaScriptSerializer() ;
 			if (Body is HtmlString)
-				return js.Serialize(((HtmlString)Body).ToHtmlString()) ;
+				return ((HtmlString)Body).ToHtmlString() ;
 			return js.Serialize(Body) ;
 		}
 		#endregion
@@ -173,8 +173,7 @@ namespace Piranha.Models
 
 			if (!String.IsNullOrEmpty(InternalBody)) {
 				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.RegionTypes[Type]))
-					return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type], 
-						js.Deserialize(InternalBody, typeof(string))) ;
+					return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type], InternalBody) ;
 				return (IRegion)js.Deserialize(InternalBody, ExtensionManager.RegionTypes[Type]) ;
 			}
 			return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type]) ;
