@@ -87,6 +87,7 @@ namespace Piranha.Models.Manager.TemplateModels
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				List<object> args = new List<object>() ;
 				string sql = "" ;
+				var isNew = Template.IsNew ;
 
 				// Delete all unattached properties
 				args.Add(Template.Id) ;
@@ -98,10 +99,13 @@ namespace Piranha.Models.Manager.TemplateModels
 					"SELECT page_id FROM page WHERE page_template_id = @0) " +
 					(sql != "" ? "AND property_name NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
 
-				// Todo delete unattached regions
-
 				// Save the template
 				Template.Save(tx) ;
+
+				// Update all regiontemplates with the id if this is an insert
+				if (isNew)
+					Regions.ForEach(r => r.TemplateId = Template.Id) ;
+
 				// Delete removed regions templates
 				sql = "" ;
 				args.Clear() ;
