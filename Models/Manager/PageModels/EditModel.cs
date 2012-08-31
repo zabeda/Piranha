@@ -262,17 +262,6 @@ namespace Piranha.Models.Manager.PageModels
 							r.Save(tx) ;
 						}
 					}) ;
-					/*
-					PageRegions.ForEach(r => { 
-						r.IsDraft = r.IsPageDraft = true ; 
-						r.Save(tx) ;
-						if (!draft) {
-							if (Region.GetScalar("SELECT COUNT(region_id) FROM region WHERE region_id=@0 AND region_draft=0", r.Id) == 0)
-								r.IsNew = true ;
-							r.IsDraft = r.IsPageDraft = false ; 
-							r.Save(tx) ;
-						}
-					}) ;*/
 					Properties.ForEach(p => { 
 						p.IsDraft = true ; 
 						p.Save(tx) ;
@@ -337,6 +326,24 @@ namespace Piranha.Models.Manager.PageModels
 					GetRelated() ;
 				} else {
 					Template = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
+
+					// Get placement ref title
+					if (Page.ParentId != Guid.Empty || Page.Seqno > 1) {
+						Page refpage = null ;
+						if (Page.Seqno > 1) {
+							if (Page.ParentId != Guid.Empty)
+								refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1) ;
+							else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1) ;
+						} else {
+							refpage = Page.GetSingle(Page.ParentId, true) ;
+						}
+						PlaceRef = refpage.Title ;
+					}
+
+					// Get page position
+					Parents = BuildParentPages(Sitemap.GetStructure(false), Page) ;
+					Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
+					Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
 				}
 			}
 		}

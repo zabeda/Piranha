@@ -22,15 +22,9 @@ namespace Piranha.Rest
 	public class ChangeService : BaseService
 	{
 		[OperationContract()]
-		[WebGet(UriTemplate="get/{date}", ResponseFormat=WebMessageFormat.Json)]
-		public Stream GetChanges(string date) {
-			return Serialize(GetChangesInternal(date)) ;
-		}
-
-		[OperationContract()]
-		[WebGet(UriTemplate="get/xml/{date}", ResponseFormat=WebMessageFormat.Xml)]
-		public Changes GetChangesXml(string date) {
-			return GetChangesInternal(date) ;
+		[WebGet(UriTemplate="get/{date}/{time}", ResponseFormat=WebMessageFormat.Json)]
+		public Stream GetChanges(string date, string time) {
+			return Serialize(GetChangesInternal(date + FormatTime(time))) ;
 		}
 
 		internal Changes GetChangesInternal(string date) {
@@ -62,6 +56,12 @@ namespace Piranha.Rest
 			changes.Deleted.Categories = Piranha.Models.SysLog.Get(query, "CATEGORY", "DELETE", latest).
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			return changes ;
+		}
+
+		private string FormatTime(string str) {
+			if (!String.IsNullOrEmpty(str))
+				return " " + str.Replace('-', ':') ;
+			return "" ;
 		}
 	}
 }

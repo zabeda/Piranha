@@ -113,7 +113,7 @@ button.full {
     }
 .form li {position:relative} 
 .form .field-validation-error {
-    background: #000;
+    background: #2d2d2d;
     color: #ccc;
     padding: 8px 12px;
     font-size: 13px;
