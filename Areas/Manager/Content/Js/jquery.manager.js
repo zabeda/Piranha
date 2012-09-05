@@ -940,5 +940,7 @@ var floatBox = new floatBoxDef();
 // Window resize event
 //
 $(window).resize(function () {
-    floatBox.position($(".floatbox .box"));
+    $.each($(".floatbox .box"), function (i, e) {
+        floatBox.position($(e));
+    });
 });
