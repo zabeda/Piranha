@@ -53,7 +53,7 @@ namespace Piranha.Areas.Manager.Controllers
 							SuccessMessage(Piranha.Resources.Page.MessagePublished) ;
 						else SuccessMessage(Piranha.Resources.Page.MessageSaved) ;
 					} else ErrorMessage(Piranha.Resources.Page.MessageNotSaved) ;
-				} catch (DuplicatePermalinkException e) {
+				} catch (DuplicatePermalinkException) {
 					// Manually set the duplicate error.
 					ModelState.AddModelError("Permalink", @Piranha.Resources.Global.PermalinkDuplicate) ;
 					// If this is the default permalink, remove the model state so it will be shown.

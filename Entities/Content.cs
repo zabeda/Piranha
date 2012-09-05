@@ -68,6 +68,7 @@ namespace Piranha.Models
 			{ "audio/avi", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
 			// Mpeg
 			{ "video/mpeg", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
+			{ "video/mp4", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
 			// Mov
 			{ "video/quicktime", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
 			{ "video/x-quicktime", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
@@ -238,9 +239,12 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<Guid, Content> Cache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Content).Name] == null)
-					HttpContext.Current.Cache[typeof(Content).Name] = new Dictionary<Guid, Content>() ;
-				return (Dictionary<Guid, Content>)HttpContext.Current.Cache[typeof(Content).Name] ;
+				if (HttpContext.Current != null) {
+					if (HttpContext.Current.Cache[typeof(Content).Name] == null)
+						HttpContext.Current.Cache[typeof(Content).Name] = new Dictionary<Guid, Content>() ;
+					return (Dictionary<Guid, Content>)HttpContext.Current.Cache[typeof(Content).Name] ;
+				}
+				return new Dictionary<Guid,Content>() ;
 			}
 		}
 		#endregion

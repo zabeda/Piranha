@@ -22,6 +22,11 @@ namespace Piranha.Data
 		/// Gets the current database version.
 		/// </summary>
 		public static int CurrentVersion = 13 ;
+
+		/// <summary>
+		/// Gets the currently logged in users identity.
+		/// </summary>
+		internal static Guid Identity ;
 		#endregion
 
 		#region Properties
@@ -37,6 +42,20 @@ namespace Piranha.Data
 			}
 		}
 		#endregion
+
+		public static bool Login(string login, string password) {
+			var usr = Models.SysUser.Authenticate(login, password) ;
+
+			if (usr != null) {
+				Identity = usr.Id ;
+				return true ;
+			}
+			return false ;
+		}
+
+		public static void Logout() {
+			Identity = Guid.Empty ;
+		}
 
 		/// <summary>
 		/// Gets the database connection from the current config.
