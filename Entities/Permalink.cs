@@ -53,13 +53,16 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<Guid, Dictionary<string, Permalink>> Cache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Permalink).Name] == null) {
-					var cache = new Dictionary<Guid, Dictionary<string, Permalink>>() ;
-					cache.Add(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), new Dictionary<string,Permalink>()) ;
-					cache.Add(new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067"), new Dictionary<string,Permalink>()) ;
-					HttpContext.Current.Cache[typeof(Permalink).Name] = cache ;
+				if (HttpContext.Current != null) {
+					if (HttpContext.Current.Cache[typeof(Permalink).Name] == null) {
+						var cache = new Dictionary<Guid, Dictionary<string, Permalink>>() ;
+						cache.Add(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), new Dictionary<string,Permalink>()) ;
+						cache.Add(new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067"), new Dictionary<string,Permalink>()) ;
+						HttpContext.Current.Cache[typeof(Permalink).Name] = cache ;
+					}
+					return (Dictionary<Guid, Dictionary<string, Permalink>>)HttpContext.Current.Cache[typeof(Permalink).Name] ;
 				}
-				return (Dictionary<Guid, Dictionary<string, Permalink>>)HttpContext.Current.Cache[typeof(Permalink).Name] ;
+				return new Dictionary<Guid,Dictionary<string,Permalink>>() ;
 			}
 		}
 
@@ -68,9 +71,12 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<Guid, Permalink> IdCache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] == null)
-					HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] = new Dictionary<Guid, Permalink>() ;
-				return (Dictionary<Guid, Permalink>)HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] ;
+				if (HttpContext.Current != null) {
+					if (HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] == null)
+						HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] = new Dictionary<Guid, Permalink>() ;
+					return (Dictionary<Guid, Permalink>)HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] ;
+				}
+				return new Dictionary<Guid,Permalink>() ;
 			}
 		} 
 		#endregion

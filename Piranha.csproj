@@ -86,6 +86,7 @@
     <Compile Include="Extend\ExtensionAttribute.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionProvider.cs" />
+    <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IProperty.cs" />
     <Compile Include="Extend\IRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />

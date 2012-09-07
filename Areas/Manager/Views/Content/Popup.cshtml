@@ -11,7 +11,7 @@
     <a class="close-btn right" data-id="boxContent"></a>
     <div class="clear"></div>
 </div>
-<div id="attach-existing" class="inner gallery">
+<div id="attach-existing" class="inner gallery @(Model.Content.Count > 12 ? "gallery-compressed" : "")">
     @foreach (var content in Model.Content) {
         <div class="gallery-item @(Model.Content.Count > 12 ? "compressed" : "")">
             @if (first && content.ParentId != Guid.Empty) {

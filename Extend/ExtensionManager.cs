@@ -31,6 +31,11 @@ namespace Piranha.Extend
 		/// The private list of properties.
 		/// </summary>
 		private static List<Extension> properties = null ;
+
+		/// <summary>
+		/// The private list of user extensions.
+		/// </summary>
+		private static List<Extension> userExtensions = new List<Extension>() ;
 		#endregion
 
 		#region Properties
@@ -80,6 +85,19 @@ namespace Piranha.Extend
 					// Get all available properties
 					if (type.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IProperty<>))) {
 						PropertyTypes.Add(type.FullName, type) ;
+					}
+
+					// Get all general extensions.
+					var attr = type.GetCustomAttribute<ExtensionAttribute>(false) ;
+					if (attr != null) {
+						if (attr.Type != ExtensionType.NotSet) {
+							if (attr.Type == ExtensionType.User) {
+								userExtensions.Add(new Extension() {
+									Name = attr.Name,
+									Type = type
+								});
+							}
+						}
 					}
 				}
 			}

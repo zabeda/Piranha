@@ -20,5 +20,17 @@ namespace Piranha.Extend
 		/// template preview in the manager interface.
 		/// </summary>
 		public string IconPath { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets what kind of extension this is.
+		/// </summary>
+		public ExtensionType Type { get ; set ; }
+		
+		/// <summary>
+		/// Default constructor. Creates a new attribute.
+		/// </summary>
+		public ExtensionAttribute() {
+			Type = ExtensionType.NotSet ;
+		}
 	}
 }

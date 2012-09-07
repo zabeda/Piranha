@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
+using Piranha.Data;
+
 namespace Piranha.Models
 {
 	/// <summary>
@@ -35,9 +37,9 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Weather the operation succeeded or not</returns>
 		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
-			var user = HttpContext.Current.User ;
+			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (user.Identity.IsAuthenticated) {
+			if (Database.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
 				// First get previously published record
 				IsDraft = false ;
 				T self = GetSelf() ;

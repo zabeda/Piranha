@@ -230,9 +230,12 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<Guid, Page> Cache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Page).Name] == null)
-					HttpContext.Current.Cache[typeof(Page).Name] = new Dictionary<Guid, Page>() ;
-				return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name] ;
+				if (HttpContext.Current != null) {
+					if (HttpContext.Current.Cache[typeof(Page).Name] == null)
+						HttpContext.Current.Cache[typeof(Page).Name] = new Dictionary<Guid, Page>() ;
+					return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name] ;
+				}
+				return new Dictionary<Guid,Page>() ;
 			}
 		}
 
@@ -241,9 +244,12 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<string, Page> PermalinkCache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] == null)
-					HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] = new Dictionary<string, Page>() ;
-				return (Dictionary<string, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] ;
+				if (HttpContext.Current != null) {
+					if (HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] == null)
+						HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] = new Dictionary<string, Page>() ;
+					return (Dictionary<string, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] ;
+				}
+				return new Dictionary<string,Page>() ;
 			}
 		}
 
@@ -252,9 +258,12 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<Guid, Page> PermalinkIdCache {
 			get {
-				if (HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] == null)
-					HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] = new Dictionary<Guid, Page>() ;
-				return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] ;
+				if (HttpContext.Current != null) {
+					if (HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] == null)
+						HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] = new Dictionary<Guid, Page>() ;
+					return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] ;
+				}
+				return new Dictionary<Guid,Page>() ;
 			}
 		}
 		#endregion

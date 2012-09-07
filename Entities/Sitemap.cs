@@ -212,7 +212,8 @@ namespace Piranha.Models
 		/// Invalidate the cache.
 		/// </summary>
 		public static void InvalidateCache() {
-			HttpContext.Current.Cache.Remove(typeof(Sitemap).Name) ;
+			if (HttpContext.Current != null)
+				HttpContext.Current.Cache.Remove(typeof(Sitemap).Name) ;
 		}
 
 		#region Private methods

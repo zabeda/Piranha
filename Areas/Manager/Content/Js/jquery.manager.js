@@ -894,7 +894,7 @@ function bindAjaxBoxEvents() {
 //
 // Floatbox object definition.
 //
-function floatBoxDef() {
+var floatBox = new function () {
     //
     // Shows the floatbox with the given id.
     //
@@ -934,7 +934,6 @@ function floatBoxDef() {
         });
     }
 }
-var floatBox = new floatBoxDef();
 
 //
 // Window resize event

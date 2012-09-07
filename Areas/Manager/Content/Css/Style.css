@@ -858,6 +858,9 @@ table.template td.locked {
     min-width: 480px;
     max-width: 640px;
     }
+#boxContent .gallery-compressed {
+    max-width: 750px;
+    }
 #boxContent .title {
     background-image: none;
     }
