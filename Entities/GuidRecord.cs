@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Web;
 
 using Piranha.Data;
 
@@ -63,7 +64,7 @@ namespace Piranha.Models
 			var success = base.Save(tx);
 		
 			// If the action was successful, insert a log entry.
-			if (LogChanges && success) {
+			if (HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated && LogChanges && success) {
 				bool draft = true ;
 				if (this is DraftRecord<T>)
 					draft = ((DraftRecord<T>)this).IsDraft ;
@@ -88,7 +89,7 @@ namespace Piranha.Models
 			var success =  base.Delete(tx);
 
 			// If the action was successful, insert a log entry.
-			if (LogChanges && success) {
+			if (HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated && LogChanges && success) {
 				bool draft = true ;
 				if (this is DraftRecord<T>)
 					draft = ((DraftRecord<T>)this).IsDraft ;

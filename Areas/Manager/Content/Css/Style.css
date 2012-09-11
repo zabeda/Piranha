@@ -2,8 +2,8 @@
  * Piranha manager styles
  */
  
-@import url('http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css');
-@import url('http://yui.yahooapis.com/3.4.1/build/cssfonts/cssfonts-min.css');
+@import url('ext/yui.reset.min.css');
+@import url('ext/yui.fonts.min.css');
 
 /**
  * 960.gs 12 col

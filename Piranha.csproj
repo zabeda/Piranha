@@ -503,6 +503,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.media.dialog.js" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.reset.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-1.7.2.min.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

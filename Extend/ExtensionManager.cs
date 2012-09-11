@@ -33,9 +33,9 @@ namespace Piranha.Extend
 		private static List<Extension> properties = null ;
 
 		/// <summary>
-		/// The private list of user extensions.
+		/// The private list of extensions.
 		/// </summary>
-		private static List<Extension> userExtensions = new List<Extension>() ;
+		private static List<Extension> extensions = new List<Extension>() ;
 		#endregion
 
 		#region Properties
@@ -66,6 +66,17 @@ namespace Piranha.Extend
 				return regions ;
 			}
 		}
+
+		/// <summary>
+		/// Gets the user extensions.
+		/// </summary>
+		public static List<Extension> UserExtensions {
+			get {
+				if (extensions != null)
+					return extensions.Where(e => e.ExtensionType == ExtensionType.User).ToList() ;
+				return new List<Extension>() ;
+			}
+		}
 		#endregion
 
 		/// <summary>
@@ -92,7 +103,8 @@ namespace Piranha.Extend
 					if (attr != null) {
 						if (attr.Type != ExtensionType.NotSet) {
 							if (attr.Type == ExtensionType.User) {
-								userExtensions.Add(new Extension() {
+								extensions.Add(new Extension() {
+									ExtensionType = attr.Type,
 									Name = attr.Name,
 									Type = type
 								});

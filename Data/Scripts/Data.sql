@@ -74,7 +74,7 @@ VALUES ('8a4ca0f3-261b-4689-8c1f-98065b65f9ee', '8940b41a-e3a9-44f3-b564-bfd2814
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '10', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '13', 'The currently installed version of Piranha.', 1,
 	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
@@ -114,15 +114,21 @@ VALUES ('A64A8479-8125-47BA-9980-B30B36E744D3', 'RSS_USE_EXCERPT', '1', 'Weather
 	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default templates
-INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_description, pagetemplate_page_regions,
+INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_description,
 	pagetemplate_preview, pagetemplate_created, pagetemplate_updated, pagetemplate_created_by, pagetemplate_updated_by)
 VALUES ('906761ea-6c04-4f4b-9365-f2c350ff4372', 'Standard page', 'Standard page type.',
-	'["Content"]', '<table class="template"><tr><td id="Content"></td></tr></table>', GETDATE(), GETDATE(), 
+	'<table class="template"><tr><td id="Content"></td></tr></table>', GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO posttemplate (posttemplate_id, posttemplate_name, posttemplate_description, posttemplate_preview,
 	posttemplate_created, posttemplate_updated, posttemplate_created_by, posttemplate_updated_by)
 VALUES ('5017dbe4-5685-4941-921b-ca922edc7a12', 'Standard post', 'Standard post type.', 
 	'<table class="template"><tr><td></td></tr></table>', GETDATE(), GETDATE(), 
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO regiontemplate (regiontemplate_id, regiontemplate_template_id, regiontemplate_internal_id, regiontemplate_seqno,
+	regiontemplate_name, regiontemplate_type, regiontemplate_created, regiontemplate_updated, 
+	regiontemplate_created_by, regiontemplate_updated_by)
+VALUES ('96ADAC79-5DC5-453D-A0DE-A6871D74FD99', '906761ea-6c04-4f4b-9365-f2c350ff4372', 'Content', 1, 
+	'Content', 'Piranha.Extend.Regions.HtmlRegion', GETDATE(), GETDATE(),
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default namespaces
@@ -155,13 +161,13 @@ VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 0, '906761ea-6c04-4f4b-9365-f2c3
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Region
-INSERT INTO region (region_id, region_draft, region_page_id, region_page_draft, region_name, region_body, 
-	region_created, region_updated, region_created_by, region_updated_by)
-VALUES ('87ec4dbd-c3ba-4a6b-af49-78421528c363', 1, '7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 1, 'Content',
+INSERT INTO region (region_id, region_draft, region_page_id, region_page_draft, region_regiontemplate_id,
+	region_body, region_created, region_updated, region_created_by, region_updated_by)
+VALUES ('87ec4dbd-c3ba-4a6b-af49-78421528c363', 1, '7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 1, '96ADAC79-5DC5-453D-A0DE-A6871D74FD99',
 	'<p>Welcome to Piranha -  the fun, fast and lightweight framework for developing cms-based web applications with an extra bite.</p>', GETDATE(), GETDATE(),
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
-INSERT INTO region (region_id, region_draft, region_page_id, region_page_draft, region_name, region_body, 
-	region_created, region_updated, region_created_by, region_updated_by)
-VALUES ('87ec4dbd-c3ba-4a6b-af49-78421528c363', 0, '7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 0, 'Content',
+INSERT INTO region (region_id, region_draft, region_page_id, region_page_draft, region_regiontemplate_id, 
+	region_body, region_created, region_updated, region_created_by, region_updated_by)
+VALUES ('87ec4dbd-c3ba-4a6b-af49-78421528c363', 0, '7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 0, '96ADAC79-5DC5-453D-A0DE-A6871D74FD99',
 	'<p>Welcome to Piranha -  the fun, fast and lightweight framework for developing cms-based web applications with an extra bite.</p>', GETDATE(), GETDATE(),
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');

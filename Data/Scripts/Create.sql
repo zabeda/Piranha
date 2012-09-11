@@ -255,6 +255,7 @@ CREATE TABLE [post] (
 	[post_title] NVARCHAR(128) NOT NULL,
 	[post_keywords] NVARCHAR(128) NULL,
 	[post_description] NVARCHAR(255) NULL,
+	[post_rss] BIT NOT NULL default(1),
 	[post_excerpt] NVARCHAR(255) NULL,
 	[post_body] NTEXT NULL,
 	[post_attachments] NTEXT NULL,
@@ -306,19 +307,19 @@ CREATE TABLE [upload] (
 	CONSTRAINT fk_upload_created_by FOREIGN KEY ([upload_created_by]) REFERENCES [sysuser] ([sysuser_id])
 );
 
-CREATE TABLE [comment] (
-	[comment_id] UNIQUEIDENTIFIER NOT NULL,
-	[comment_parent_id] UNIQUEIDENTIFIER NULL,
-	[comment_is_approved] BIT NOT NULL default(0),
-	[comment_title] NVARCHAR(128) NULL,
-	[comment_body] NEXT NULL,
-	[comment_created] DATETIME NOT NULL,
-	[comment_approved] DATETIME NULL,
-	[comment_created_by] UNIQUEIDENTIFIER NULL,
-	[comment_created_by_name] NVARCHAR(64) NULL,
-	[comment_created_by_email] NVARCHAR(128) NULL,
-	[comment_approved_by] UNIQUEIDENTIFIER NULL,
-	CONSTRAINT pk_comment_id PRIMARY KEY ([comment_id]),
-	CONSTRAINT fk_comment_created_by FOREIGN KEY ([comment_created_by]) REFERENCES [sysuser] ([sysuser_id]),
-	CONSTRAINT fk_comment_approved_by FOREIGN KEY ([comment_approved_by]) REFERENCES [sysuser] ([sysuser_id])
-);
+--CREATE TABLE [comment] (
+--	[comment_id] UNIQUEIDENTIFIER NOT NULL,
+--	[comment_parent_id] UNIQUEIDENTIFIER NULL,
+--	[comment_is_approved] BIT NOT NULL default(0),
+--	[comment_title] NVARCHAR(128) NULL,
+--	[comment_body] NTEXT NULL,
+--	[comment_created] DATETIME NOT NULL,
+--	[comment_approved] DATETIME NULL,
+--	[comment_created_by] UNIQUEIDENTIFIER NULL,
+--	[comment_created_by_name] NVARCHAR(64) NULL,
+--	[comment_created_by_email] NVARCHAR(128) NULL,
+--	[comment_approved_by] UNIQUEIDENTIFIER NULL,
+--	CONSTRAINT pk_comment_id PRIMARY KEY ([comment_id]),
+--	CONSTRAINT fk_comment_created_by FOREIGN KEY ([comment_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+--	CONSTRAINT fk_comment_approved_by FOREIGN KEY ([comment_approved_by]) REFERENCES [sysuser] ([sysuser_id])
+--);
