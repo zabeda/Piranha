@@ -19,6 +19,9 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		public List<Sitemap> Pages { get ; set ; }
 
+		/// <summary>
+		/// Gets/sets the sitemap.
+		/// </summary>
 		public List<Sitemap> SiteMap { get ; set ; }
 
 		/// <summary>

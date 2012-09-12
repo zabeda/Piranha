@@ -72,11 +72,6 @@ namespace Piranha.Models.Manager.PageModels
 		public virtual List<Content> AttachedContent { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the available content.
-		/// </summary>
-		public List<Content> Content { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the current template.
 		/// </summary>
 		public virtual PageTemplate Template { get ; private set ; }
@@ -119,7 +114,6 @@ namespace Piranha.Models.Manager.PageModels
 			Regions = new List<Region>() ;
 			Properties = new List<Property>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
-			Content = Piranha.Models.Content.Get() ;
 			DisableGroups = SysGroup.GetParents(Guid.Empty) ;
 			DisableGroups.Reverse() ;
 

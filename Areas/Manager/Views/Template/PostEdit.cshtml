@@ -82,6 +82,16 @@
     </div>
 </div>
 <div class="grid_3">
+    @if (!Model.Template.IsNew && !String.IsNullOrEmpty(Model.Template.Preview.ToHtmlString())) {
+    <div class="box pagetemplate">
+        <div class="title"><h2>@Piranha.Resources.Page.HtmlPreview</h2></div>
+        <div class="inner">
+            <div class="edit">
+                @Model.Template.Preview
+            </div>
+        </div>
+    </div>
+    }
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
         <div class="inner">

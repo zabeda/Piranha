@@ -47,12 +47,26 @@
             });
 
             $(".delete").click(function () {
-                /*currmove = $(this).parent().parent().attr("id");
-                $(this).parent().parent().addClass("move-active");
-                $("ul.sitemap").addClass("move");
-                bindMove();
-                return false;*/
                 return confirm(deletemsg);
+            });
+
+            // Setup page list
+            var options = {
+                listClass: 'list-js',
+                searchId: 'search',
+                valueNames: ['title', 'template', 'updated', 'created']
+            };
+            var pageList = new List('list', options);
+
+            // Switch between list/tree
+            $("#search").keyup(function () {
+                if ($(this).val() != "") {
+                    $(".sitemap").hide();
+                    $(".list").show();
+                } else {
+                    $(".list").hide();
+                    $(".sitemap").show();
+                }
             });
         });
 
@@ -66,6 +80,13 @@
             });
         }
     </script>
+    <!-- Restyle the list a bit to match tree -->
+    <style type="text/css">
+        table.list th:first-child,
+        table.list tbody td:first-child > * {
+            padding-left: 30px;
+            }
+    </style>
 }
 @section Toolbar { 
 @Html.Partial("Partial/TabsContent")
@@ -96,6 +117,43 @@
         </li>
         @Html.Partial("Partial/SiteTree", Model.SiteMap)
     </ul>
+    
+    <table id="list" class="list" style="display:none">
+        <thead>
+            <tr>
+                <th><span class="sort asc" data-sort="title">@Piranha.Resources.Global.Title</span></th>
+                <th style="width:200px"><span class="sort" data-sort="template">@Piranha.Resources.Global.Type</span></th>
+                <th class="date"><span class="sort" data-sort="updated">@Piranha.Resources.Global.Updated</span></th>
+                <th class="date"><span class="sort" data-sort="created">@Piranha.Resources.Global.Created</span></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="list-js">
+            @foreach (var page in Model.Pages) {
+            <tr@(page.Updated > page.LastPublished ? " class=draft" : "")>
+                <td class="title"><a href="@Url.Action("edit", new { id = page.Id })">
+                    @page.Title@Html.Raw(page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : ""))
+                </a></td>
+                <td class="template">@page.TemplateName</td>
+                <td class="updated">@page.Updated.ToString("yyyy-MM-dd")</td>
+                <td class="created">@page.Created.ToString("yyyy-MM-dd")</td>
+                <td class="buttons three">
+                    <button class="icon add-after marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @(page.Seqno + 1))" type="submit"></button>
+                    <button class="icon add-below marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
+                    @if (page.Pages.Count == 0) {
+                    <a href="@Url.Action("delete", "page", new { id = page.Id })" title="@Piranha.Resources.Page.ListDelete" class="icon delete"></a>
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+        </tfoot>
+    </table>
+    
 }
 </div>
 
