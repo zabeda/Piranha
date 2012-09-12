@@ -33,7 +33,7 @@
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             <li><a href="@Url.Action("delete", new { id = Model.Content.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
-            <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            <li><a href="@Url.Action("edit", new { id = Model.Content.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>
     </div>
