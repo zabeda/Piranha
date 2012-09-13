@@ -114,6 +114,7 @@ namespace Piranha.Models
 		/// Default constructor.
 		/// </summary>
 		public SysUser() : base() {
+			ExtensionType = Extend.ExtensionType.User ;
 			LogChanges = true ;
 		}
 

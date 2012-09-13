@@ -239,6 +239,8 @@ namespace Piranha.WebPages
 				new Piranha.Models.Manager.TemplateModels.PostEditModel.Binder()) ;
 			ModelBinders.Binders.Add(typeof(Piranha.Extend.IRegion),
 				new Piranha.Mvc.ModelBinders.IRegionBinder()) ;
+			ModelBinders.Binders.Add(typeof(Piranha.Extend.IExtension),
+				new Piranha.Mvc.ModelBinders.IExtensionBinder()) ;
 		}
 		#endregion
 	}

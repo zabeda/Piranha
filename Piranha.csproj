@@ -80,6 +80,7 @@
     <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Entities\DuplicateLoginException.cs" />
     <Compile Include="Entities\DuplicatePermalinkException.cs" />
+    <Compile Include="Entities\Extension.cs" />
     <Compile Include="Entities\RegionTemplate.cs" />
     <Compile Include="Entities\SysLog.cs" />
     <Compile Include="Extend\Extension.cs" />
@@ -87,7 +88,7 @@
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionProvider.cs" />
     <Compile Include="Extend\ExtensionType.cs" />
-    <Compile Include="Extend\IProperty.cs" />
+    <Compile Include="Extend\IExtension.cs" />
     <Compile Include="Extend\IRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="AccessAttribute.cs" />
     <Compile Include="Mvc\BaseViewPage.cs" />
     <Compile Include="Mvc\ManagerViewEngine.cs" />
+    <Compile Include="Mvc\ModelBinders\IExtensionBinder.cs" />
     <Compile Include="Mvc\ModelBinders\IRegionBinder.cs" />
     <Compile Include="Mvc\PiranhaHelper.cs" />
     <Compile Include="Mvc\SinglePage.cs" />
@@ -265,6 +267,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\HtmlRegion.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\GroupList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\ImageRegion.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />

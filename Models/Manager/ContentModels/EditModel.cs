@@ -41,6 +41,11 @@ namespace Piranha.Models.Manager.ContentModels
 		public SelectList Folders { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the available extensions.
+		/// </summary>
+		public List<Extension> Extensions { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional file.
 		/// </summary>
 		public HttpPostedFileBase UploadedFile { get ; set ; }
@@ -71,6 +76,7 @@ namespace Piranha.Models.Manager.ContentModels
 			if (Content.ParentId == Guid.Empty)
 				Folders = new SelectList(folders, "Id", "Name") ;
 			else Folders = new SelectList(folders, "Id", "Name", Content.ParentId) ;
+			Extensions = Content.GetExtensions() ;
 		}
 
 		/// <summary>
@@ -87,6 +93,7 @@ namespace Piranha.Models.Manager.ContentModels
 			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
 			em.Folders = new SelectList(folders, "Id", "Name", em.Content.ParentId) ;
+			em.Extensions = em.Content.GetExtensions() ;
 
 			return em ;
 		}
@@ -148,6 +155,12 @@ namespace Piranha.Models.Manager.ContentModels
 					DataId = Content.Id, RelatedId = c, IsDraft = false, Type = Relation.RelationType.CONTENTCATEGORY })
 					) ;
 				relations.ForEach(r => r.Save()) ;
+
+				// Save extensions
+				foreach (var ext in Extensions) {
+					ext.ParentId = Content.Id ;
+					ext.Save() ;
+				}
 
 				// Save the physical file
 				if (hasfile || data != null) {

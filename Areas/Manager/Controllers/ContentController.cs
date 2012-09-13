@@ -27,6 +27,26 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
+		/// Uploads a new content object from the popup dialog.
+		/// </summary>
+		/// <param name="m">The popup module</param>
+		/// <returns>A json result</returns>
+		[HttpPost()]
+		[Access(Function="ADMIN_CONTENT")]
+		public JsonResult Popup(PopupModel m) {
+			if (ModelState.IsValid) {
+				EditModel em = new EditModel() ;
+				em.Content = m.NewContent ;
+				em.FileUrl = m.FileUrl ;
+				em.UploadedFile = m.UploadedFile ;
+
+				if (em.SaveAll())
+					return new JsonResult() { Data = true } ;
+			}
+			return new JsonResult() { Data = false } ;
+		}
+
+		/// <summary>
 		/// Gets the files list.
 		/// </summary>
 		/// <returns></returns>

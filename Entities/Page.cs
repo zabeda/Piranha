@@ -272,6 +272,7 @@ namespace Piranha.Models
 		/// Default constructor.
 		/// </summary>
 		public Page() : base() {
+			ExtensionType = Extend.ExtensionType.Page ;
 			DisabledGroups = new List<Guid>() ;
 			IsDraft = true ;
 			Seqno   = 1 ;

@@ -31,6 +31,11 @@ namespace Piranha.Models.Manager.SettingModels
 		/// Gets/sets the available groups.
 		/// </summary>
 		public SelectList Groups { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the extensions.
+		/// </summary>
+		public IList<Extension> Extensions { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -48,6 +53,9 @@ namespace Piranha.Models.Manager.SettingModels
 			User = new SysUser() ;
 			Password = new SysUserPassword() ;
 			Groups = new SelectList(groups, "Id", "Name") ;
+
+			// Get extensions
+			Extensions = User.GetExtensions() ;
 		}
 
 		/// <summary>
@@ -60,6 +68,9 @@ namespace Piranha.Models.Manager.SettingModels
 			m.User = SysUser.GetSingle(id) ;
 			m.Password = SysUserPassword.GetSingle(id) ;
 			m.Groups = new SelectList(m.groups, "Id", "Name", m.User.GroupId) ;
+
+			// Load extensions
+			m.Extensions = m.User.GetExtensions() ;
 
 			return m ;
 		}
@@ -80,6 +91,10 @@ namespace Piranha.Models.Manager.SettingModels
 						Password.IsNew = false ;
 						Password.Save(tx) ;
 					}
+					foreach (var ext in Extensions) {
+						ext.ParentId = User.Id ;
+						ext.Save(tx) ;
+					}
 					tx.Commit();
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -91,7 +106,13 @@ namespace Piranha.Models.Manager.SettingModels
 		/// </summary>
 		/// <returns>Weather the action succeeded or not.</returns>
 		public virtual bool DeleteAll() {
-			return User.Delete() ;
+			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
+				try {
+					User.Delete(tx) ;
+					tx.Commit() ;
+				} catch { tx.Rollback() ; return false ; }
+			}
+			return true ;
 		}
 	}
 }

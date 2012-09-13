@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -26,9 +27,20 @@ namespace Piranha.Models.Manager.ContentModels
 		public Piranha.Models.Content NewContent { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the available folders.
+		/// </summary>
+		public SelectList Folders { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional file.
 		/// </summary>
 		public HttpPostedFileBase UploadedFile { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the url to get the file from.
+		/// </summary>
+		[Display(Name="FromUrl", ResourceType=typeof(Piranha.Resources.Content))]
+		public string FileUrl { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -37,6 +49,9 @@ namespace Piranha.Models.Manager.ContentModels
 		public PopupModel() {
 			Content = new List<Piranha.Models.Content>() ;
 			NewContent = new Piranha.Models.Content() ;
+			var folders = Piranha.Models.Content.GetFields("content_id, content_name", "content_folder=1", new Params() { OrderBy = "content_name" }) ;
+			folders.Insert(0, new Piranha.Models.Content()) ;
+			Folders = new SelectList(folders, "Id", "Name") ;
 		}
 
 		/// <summary>

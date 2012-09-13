@@ -67,6 +67,7 @@ namespace Piranha.Models
 		/// Default constructor.
 		/// </summary>
 		public SysGroup() {
+			ExtensionType = Extend.ExtensionType.Group ;
 			Groups = new List<SysGroup>() ;
 			LogChanges = true ;
 		}

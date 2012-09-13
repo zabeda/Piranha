@@ -78,6 +78,11 @@ namespace Piranha.Models.Manager.PostModels
 		/// Gets/sets the available content.
 		/// </summary>
 		public List<Content> Content { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available extensions.
+		/// </summary>
+		public List<Extension> Extensions { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -207,6 +212,18 @@ namespace Piranha.Models.Manager.PostModels
 						}
 					}) ;
 
+					// Save extensions
+					foreach (var ext in Extensions) {
+						ext.ParentId = Post.Id ;
+						ext.Save(tx) ;
+						if (!draft) {
+							if (Extension.GetScalar("SELECT COUNT(extension_id) FROM extension WHERE extension_id=@0 AND extension_draft=0", ext.Id) == 0)
+								ext.IsNew = true ;
+							ext.IsDraft = false ;
+							ext.Save(tx) ;
+						}
+					}
+
 					// Update categories
 					Relation.DeleteByDataId(Post.Id, tx, true) ;
 					List<Relation> relations = new List<Relation>() ;
@@ -289,6 +306,9 @@ namespace Piranha.Models.Manager.PostModels
 						AttachedContent.Add(c) ;
 				}) ;
 			}
+
+			// Get extensions
+			Extensions = Post.GetExtensions() ;
 		}
 		#endregion
 	}

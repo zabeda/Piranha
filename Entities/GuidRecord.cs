@@ -22,6 +22,11 @@ namespace Piranha.Models
 		/// Gets/sets weather to log changes made to this entity.
 		/// </summary>
 		public bool LogChanges = false ;
+
+		/// <summary>
+		/// Gets/sets the records extension type.
+		/// </summary>
+		protected Extend.ExtensionType ExtensionType = Extend.ExtensionType.NotSet ;
 		#endregion
 
 		#region Fields
@@ -88,6 +93,15 @@ namespace Piranha.Models
 		public override bool Delete(System.Data.IDbTransaction tx = null) {
 			var success =  base.Delete(tx);
 
+			// Delete extensions if we have any
+			if (success && ExtensionType != Extend.ExtensionType.NotSet) {
+				bool draft = false ;
+				PropertyInfo prop = this.GetType().GetProperty("IsDraft") ;
+				if (prop != null)
+					draft = (bool)prop.GetValue(this, null) ;
+				Extension.Execute("DELETE FROM extension WHERE extension_parent_id=@0 AND extension_draft=@1", tx, Id, draft) ;
+			}
+
 			// If the action was successful, insert a log entry.
 			if (HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated && LogChanges && success) {
 				bool draft = true ;
@@ -103,6 +117,33 @@ namespace Piranha.Models
 				log.Save(tx) ;
 			}
 			return success ;
+		}
+
+		/// <summary>
+		/// Gets the extensions attached to the current record.
+		/// </summary>
+		/// <returns>The extensions</returns>
+		public virtual List<Extension> GetExtensions() {
+			if (ExtensionType != Extend.ExtensionType.NotSet) {
+				PropertyInfo prop = this.GetType().GetProperty("IsDraft") ;
+				bool draft = prop != null ? (bool)prop.GetValue(this, null) : false ;
+				List<Extension> ret = null ;
+
+				if (Id != Guid.Empty) {
+					ret = Extend.ExtensionManager.GetByTypeAndEntity(ExtensionType, Id, draft) ;
+				} else {
+					ret = Extend.ExtensionManager.GetByType(ExtensionType, draft) ;
+				}
+
+				foreach (var ext in ret)
+					if (Extend.ExtensionManager.ExtensionTypes.ContainsKey(ext.Type)) {
+						var m = Extend.ExtensionManager.ExtensionTypes[ext.Type].GetMethod("Init") ;
+						if (m != null)
+							m.Invoke(ext.Body, new object[] { this }) ;
+					}
+				return ret ;
+			}
+			return new List<Extension>() ;
 		}
 
 		/// <summary>

@@ -15,22 +15,17 @@ namespace Piranha.Extend
 		/// <summary>
 		/// All available region types.
 		/// </summary>
-		internal static Dictionary<string, Type> RegionTypes = new Dictionary<string,Type>() ;
+		public static Dictionary<string, Type> RegionTypes = new Dictionary<string,Type>() ;
 
 		/// <summary>
-		/// All available property types.
+		/// All available extension types.
 		/// </summary>
-		internal static Dictionary<string, Type> PropertyTypes = new Dictionary<string,Type>() ;
+		public static Dictionary<string, Type> ExtensionTypes = new Dictionary<string,Type>() ;
 
 		/// <summary>
 		/// The private list of regions.
 		/// </summary>
 		private static List<Extension> regions = null ;
-
-		/// <summary>
-		/// The private list of properties.
-		/// </summary>
-		private static List<Extension> properties = null ;
 
 		/// <summary>
 		/// The private list of extensions.
@@ -52,30 +47,12 @@ namespace Piranha.Extend
 				return regions ;
 			}
 		}
-		
-		/// <summary>
-		/// Gets the currently available property types.
-		/// </summary>
-		public static List<Extension> Properties {
-			get {
-				if (properties == null) {
-					properties = new List<Extension>() ;
-					PropertyTypes.Keys.Each((i, e) => 
-						properties.Add(new Extension() { Name = GetPropertyNameByType(e), Type = PropertyTypes[e] })) ;
-				}
-				return regions ;
-			}
-		}
 
 		/// <summary>
-		/// Gets the user extensions.
+		/// Gets the currently available extensions.
 		/// </summary>
-		public static List<Extension> UserExtensions {
-			get {
-				if (extensions != null)
-					return extensions.Where(e => e.ExtensionType == ExtensionType.User).ToList() ;
-				return new List<Extension>() ;
-			}
+		public static List<Extension> Extensions {
+			get { return extensions ; }
 		}
 		#endregion
 
@@ -90,19 +67,15 @@ namespace Piranha.Extend
 				foreach (var type in assembly.GetTypes()) {
 					// Get all available regions
 					if (typeof(IRegion).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
-					//if (type.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRegion<>))) {
 						RegionTypes.Add(type.FullName, type) ;
-					}
-					// Get all available properties
-					if (type.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IProperty<>))) {
-						PropertyTypes.Add(type.FullName, type) ;
 					}
 
 					// Get all general extensions.
-					var attr = type.GetCustomAttribute<ExtensionAttribute>(false) ;
-					if (attr != null) {
-						if (attr.Type != ExtensionType.NotSet) {
-							if (attr.Type == ExtensionType.User) {
+					if (typeof(IExtension).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
+						var attr = type.GetCustomAttribute<ExtensionAttribute>(false) ;
+						if (attr != null) {
+							if (attr.Type != ExtensionType.NotSet) {
+								ExtensionTypes.Add(type.FullName, type) ;
 								extensions.Add(new Extension() {
 									ExtensionType = attr.Type,
 									Name = attr.Name,
@@ -131,18 +104,58 @@ namespace Piranha.Extend
 		}
 
 		/// <summary>
-		/// Gets the name for the given region type.
+		/// Gets the name for the given extension type.
 		/// </summary>
 		/// <param name="type">The type</param>
 		/// <returns>The name</returns>
-		public static string GetPropertyNameByType(string type) {
-			if (PropertyTypes.ContainsKey(type)) {
-				var attr = PropertyTypes[type].GetCustomAttribute<ExtensionAttribute>(false) ;
+		public static string GetExtensionNameByType(string type) {
+			if (ExtensionTypes.ContainsKey(type)) {
+				var attr = ExtensionTypes[type].GetCustomAttribute<ExtensionAttribute>(false) ;
 				if (attr != null)
 					return attr.Name ;
-				return PropertyTypes[type].Name ;
-			}
+				return ExtensionTypes[type].Name ;
+			} 
 			return "" ;
+		}
+
+		/// <summary>
+		/// Gets the extensions available for the given type.
+		/// </summary>
+		/// <param name="type">The extension type</param>
+		/// <param name="draft">Weather the entity is draft or not</param>
+		/// <returns>A list of extensions</returns>
+		public static List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
+			var ext = new List<Models.Extension>() ;
+
+			extensions.Where(extension => extension.ExtensionType == type).ToList().ForEach(e => {
+				ext.Add(new Models.Extension() {
+					IsDraft = draft,
+					Type = e.Type.ToString(),
+					Body = (IExtension)Activator.CreateInstance(e.Type)
+				}) ;
+			});
+			return ext ;
+		}
+
+		/// <summary>
+		/// Gets the extensions available for the given type and entity.
+		/// </summary>
+		/// <param name="type">The extension type</param>
+		/// <param name="id">The entity id</param>
+		/// <param name="draft">Weather the entity is draft or not</param>
+		/// <returns>A list of extensions</returns>
+		public static List<Models.Extension> GetByTypeAndEntity(ExtensionType type, Guid id, bool draft) {
+			var ret = new List<Models.Extension>() ;
+			var tmp = GetByType(type, draft) ;
+
+			foreach (var e in tmp) {
+				var ext = Models.Extension.GetSingle("extension_type = @0 AND extension_parent_id = @1 AND extension_draft = @2",
+					e.Type, id, draft) ;
+				if (ext != null)
+					ret.Add(ext) ;
+				else ret.Add(e) ;
+			}
+			return ret ;
 		}
 	}
 }

@@ -30,6 +30,11 @@ namespace Piranha.Models.Manager.CategoryModels
 		/// Gets/sets the categories.
 		/// </summary>
 		public SelectList Categories { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available extensions.
+		/// </summary>
+		public List<Extension> Extensions { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -66,6 +71,10 @@ namespace Piranha.Models.Manager.CategoryModels
 						Permalink.Name = Permalink.Generate(Category.Name) ;
 					Permalink.Save(tx) ;
 					Category.Save(tx) ;
+					foreach (var ext in Extensions) {
+						ext.ParentId = Category.Id ;
+						ext.Save(tx) ;
+					}
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
@@ -127,6 +136,9 @@ namespace Piranha.Models.Manager.CategoryModels
 				new Params() { OrderBy = "category_name ASC" }) ;
 			cats.Insert(0, new Category()) ;
 			Categories = new SelectList(cats, "Id", "Name") ;
+
+			// Get extensions
+			Extensions = Category.GetExtensions() ;
 		}
 	}
 }

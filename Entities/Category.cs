@@ -102,6 +102,7 @@ namespace Piranha.Models
 		/// Default constructor. Creates a new category.
 		/// </summary>
 		public Category() : base() {
+			ExtensionType = Extend.ExtensionType.Category ;
 			Categories = new List<Category>() ;
 			LogChanges = true ;
 		}

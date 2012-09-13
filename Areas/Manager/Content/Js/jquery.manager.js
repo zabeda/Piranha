@@ -820,12 +820,12 @@ $(document).ready(function () {
     //
     // File uploads
     //
-    $(".file").click(function () {
+    $(".file").live("click", function () {
         $("#" + $(this).attr("data-id")).click();
         return false;
     });
 
-    $("input[type=file]").change(function () {
+    $("input[type=file]").live("change", function () {
         $("#" + $(this).attr("data-id")).val($(this).val());
     });
 
@@ -883,7 +883,9 @@ function bindAjaxBoxEvents() {
 
         $(this).parent().siblings("li").removeClass("selected");
         $(this).parent().addClass("selected");
-        floatBox.position($(".floatbox .box"));
+        $.each($(".floatbox .box"), function (i, e) {
+            floatBox.position($(e));
+        });
     });
 }
 

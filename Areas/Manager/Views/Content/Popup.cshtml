@@ -25,6 +25,7 @@
     }
 </div>
 <div id="attach-new" class="inner hidden">
+    @{ Html.BeginForm("popup", "content", FormMethod.Post, new { enctype = "multipart/form-data" }) ; }
     @Html.HiddenFor(m => m.NewContent.Id)
     @Html.HiddenFor(m => m.NewContent.IsNew)
     @Html.HiddenFor(m => m.NewContent.IsImage)
@@ -38,15 +39,30 @@
     <ul class="form">
         <li>
             <label>@Piranha.Resources.Content.Upload</label>
-            <div class="hidden">
-                <input type="file" id="UploadedFile" name="UploadedFile" data-id="upload_name" />
-            </div>
             <div class="upload">
+                <input type="file" id="UploadedFile" name="UploadedFile" data-id="upload_name" />
                 <button class="btn blue file" data-id="UploadedFile">@Piranha.Resources.Global.ChooseFile</button>
                 <div class="input">
                     <input id="upload_name" type="text" />
                 </div>
             </div>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.FileUrl)
+            <div class="input">
+                @Html.TextBoxFor(m => m.FileUrl, 
+                    new { @placeholder = @Piranha.Resources.Global.FileUrl })</div>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.NewContent.Name)
+            <div class="input">
+                @Html.TextBoxFor(m => m.NewContent.Name, 
+                    new { @placeholder = @Piranha.Resources.Global.Optional })</div>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.NewContent.ParentId)
+            <div class="input">
+                @Html.DropDownListFor(m => m.NewContent.ParentId, Model.Folders)</div>
         </li>
         <li>
             @Html.LabelFor(m => m.NewContent.AlternateText)
@@ -61,5 +77,7 @@
                     new { @rows = 3, @placeholder = @Piranha.Resources.Global.Optional })</div>
         </li>
     </ul>
-    <button class="btn right">Upload</button>
+    <button id="btnContentPopup" class="btn right">Upload</button>
+    <br />
+    @{ Html.EndForm() ; }
 </div>

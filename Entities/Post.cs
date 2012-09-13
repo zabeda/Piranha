@@ -157,6 +157,7 @@ namespace Piranha.Models
 		/// Default constructor. Creates a new post.
 		/// </summary>
 		public Post() : base() {
+			ExtensionType = Extend.ExtensionType.Post ;
 			IsDraft = true ;
 			Attachments = new List<Guid>() ;
 			LogChanges = true ;

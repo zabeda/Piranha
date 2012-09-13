@@ -78,6 +78,10 @@ function bindAttachmentEvents() {
         }
     });
 
+    $("#btnContentPopup").live("click", function () {
+
+    });
+
     //
     // Reloads the media browser for the selected folder
     $(".gallery-item img.folder").unbind();
@@ -110,12 +114,6 @@ function bindAttachmentEvents() {
         $.each($("#attachments tr"), function (index, val) {
             if (index > 0) {
                 addAttachmentData(index - 1, val);
-                /*
-                $("#attachment_data").append(
-                '<input id="Page_Attachments_' + (index - 1) +
-                '_" name="Page.Attachments[' + (index - 1) +
-                ']" type="hidden" value="' + $(val).attr("data-id") + '" />');
-                */
             }
         });
     });

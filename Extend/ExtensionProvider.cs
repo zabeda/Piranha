@@ -10,7 +10,8 @@ namespace Piranha.Extend
 	{
 		 public static IEnumerable<Type> GetKnownTypes(ICustomAttributeProvider provider) {
 			 var ret = new List<Type>() ;
-			 ExtensionManager.Regions.ForEach((e) => ret.Add(e.Type)) ;
+			 ExtensionManager.Regions.ForEach(e => ret.Add(e.Type)) ;
+			 ExtensionManager.Extensions.ForEach(e => ret.Add(e.Type)) ;
 			 return ret ;
 		 }
 	}

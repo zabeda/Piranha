@@ -1,0 +1,19 @@
+﻿@model Piranha.Models.Extension
+@{
+    var folder = Model.Type.LastIndexOf('.') > -1 ? Model.Type.Substring(0, Model.Type.LastIndexOf('.')) : "" ;
+    folder = folder != "" ? folder + "/" : "" ;
+    var view = Model.Type.Substring(folder.Length) ;
+}
+<div class="box">
+    <div class="title"><h2>@Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Type)</h2></div>
+    <div class="inner">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.IsDraft)
+        @Html.HiddenFor(m => m.IsNew)
+        @Html.HiddenFor(m => m.ParentId)
+        @Html.HiddenFor(m => m.Type)
+        @Html.HiddenFor(m => m.Created)
+        @Html.HiddenFor(m => m.CreatedBy)
+        @Html.PartialFor(folder + view, m => m.Body)
+    </div>
+</div>

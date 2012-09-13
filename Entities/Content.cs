@@ -253,6 +253,7 @@ namespace Piranha.Models
 		/// Default constructor. Creates a new content object.
 		/// </summary>
 		public Content() : base() {
+			ExtensionType = Extend.ExtensionType.Media ;
 			ChildContent = new List<Content>() ;
 			LogChanges = true ;
 		}

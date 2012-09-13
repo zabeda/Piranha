@@ -95,6 +95,11 @@ namespace Piranha.Models.Manager.PageModels
 		/// Gets/sets the available siblings.
 		/// </summary>
 		public List<PagePlacement> Siblings { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the extensions.
+		/// </summary>
+		public List<Extension> Extensions { get ; set ; }
 		#endregion
 
 		#region Inner classes
@@ -267,6 +272,18 @@ namespace Piranha.Models.Manager.PageModels
 						}
 					}) ;
 
+					// Save extensions
+					foreach (var ext in Extensions) {
+						ext.ParentId = Page.Id ;
+						ext.Save(tx) ;
+						if (!draft) {
+							if (Extension.GetScalar("SELECT COUNT(extension_id) FROM extension WHERE extension_id=@0 AND extension_draft=0", ext.Id) == 0)
+								ext.IsNew = true ;
+							ext.IsDraft = false ;
+							ext.Save(tx) ;
+						}
+					}
+
 					// Save permalink last if the page isn't new
 					if (!permalinkfirst)
 						Permalink.Save(tx) ;
@@ -416,6 +433,9 @@ namespace Piranha.Models.Manager.PageModels
 			Parents = BuildParentPages(Sitemap.GetStructure(false), Page) ;
 			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
 			Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
+
+			// Get extensions
+			Extensions = Page.GetExtensions() ;
 		}
 
 		private static List<PagePlacement> BuildParentPages(List<Sitemap> sm, Page p = null) {
