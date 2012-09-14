@@ -31,7 +31,7 @@ namespace Piranha.Models.Manager.PageModels
 				model.Regions.Each<Region>((i, m) => {
 					if (m.Body is HtmlString) {
 						bindingContext.ModelState.Remove("Regions[" + i +"].Body") ;
-						m.Body = (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[m.Type],
+						m.Body = (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[m.Type],
  							bindingContext.ValueProvider.GetUnvalidatedValue("Regions[" + i +"].Body").AttemptedValue) ;
 					}
 				}) ;

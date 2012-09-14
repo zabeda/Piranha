@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using Piranha.Data;
+using Piranha.Extend;
 
 namespace Piranha.Models
 {
@@ -22,9 +23,14 @@ namespace Piranha.Models
 		public List<Category> Categories { get ; set ; }
 
 		/// <summary>
-		/// Gets the available Properties.
+		/// Gets the available properties.
 		/// </summary>
 		public dynamic Properties { get ; private set ; }
+
+		/// <summary>
+		/// Gets the available extensions.
+		/// </summary>
+		public dynamic Extensions { get ; private set ; }
 
 		/// <summary>
 		/// Gets the available attachments.
@@ -116,7 +122,10 @@ namespace Piranha.Models
 			}
 			// Attachments
 			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
-
+			// Extensions
+			foreach (var ext in ((Page)Page).GetExtensions()) {
+				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = ext.Body ;
+			}
 		}
 	}
 }

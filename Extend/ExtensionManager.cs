@@ -13,47 +13,21 @@ namespace Piranha.Extend
 	{
 		#region Members
 		/// <summary>
-		/// All available region types.
+		/// Gets the available extension attributes.
 		/// </summary>
-		public static Dictionary<string, Type> RegionTypes = new Dictionary<string,Type>() ;
-
-		/// <summary>
-		/// All available extension types.
-		/// </summary>
-		public static Dictionary<string, Type> ExtensionTypes = new Dictionary<string,Type>() ;
-
-		/// <summary>
-		/// The private list of regions.
-		/// </summary>
-		private static List<Extension> regions = null ;
-
-		/// <summary>
-		/// The private list of extensions.
-		/// </summary>
-		private static List<Extension> extensions = new List<Extension>() ;
+		private static Dictionary<string, ExtensionAttribute> ExtensionAttributes = new Dictionary<string,ExtensionAttribute>() ;
 		#endregion
 
 		#region Properties
 		/// <summary>
-		/// Gets the currently available region types.
+		/// Gets the available extension types.
 		/// </summary>
-		public static List<Extension> Regions {
-			get {
-				if (regions == null) {
-					regions = new List<Extension>() ;
-					RegionTypes.Keys.Each((i, e) => 
-						regions.Add(new Extension() { Name = GetRegionNameByType(e), Type = RegionTypes[e] })) ;
-				}
-				return regions ;
-			}
-		}
+		public static Dictionary<string, Type> ExtensionTypes { get ; private set ; }
 
 		/// <summary>
 		/// Gets the currently available extensions.
 		/// </summary>
-		public static List<Extension> Extensions {
-			get { return extensions ; }
-		}
+		public static List<Extension> Extensions { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -61,22 +35,22 @@ namespace Piranha.Extend
 		/// on application start.
 		/// </summary>
 		internal static void Init() {
+			// Create the extension list.
+			ExtensionTypes = new Dictionary<string, Type>() ;
+			Extensions = new List<Extension>() ;
+
 			// Get all loaded assemblies
 			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
 				// Iterate all types
 				foreach (var type in assembly.GetTypes()) {
-					// Get all available regions
-					if (typeof(IRegion).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
-						RegionTypes.Add(type.FullName, type) ;
-					}
-
-					// Get all general extensions.
+					// Get all extensions.
 					if (typeof(IExtension).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
 						var attr = type.GetCustomAttribute<ExtensionAttribute>(false) ;
 						if (attr != null) {
 							if (attr.Type != ExtensionType.NotSet) {
+								ExtensionAttributes.Add(type.FullName, attr) ;
 								ExtensionTypes.Add(type.FullName, type) ;
-								extensions.Add(new Extension() {
+								Extensions.Add(new Extension() {
 									ExtensionType = attr.Type,
 									Name = attr.Name,
 									Type = type
@@ -89,32 +63,25 @@ namespace Piranha.Extend
 		}
 
 		/// <summary>
-		/// Gets the name for the given region type.
-		/// </summary>
-		/// <param name="type">The type</param>
-		/// <returns>The name</returns>
-		public static string GetRegionNameByType(string type) {
-			if (RegionTypes.ContainsKey(type)) {
-				var attr = RegionTypes[type].GetCustomAttribute<ExtensionAttribute>(false) ;
-				if (attr != null)
-					return attr.Name ;
-				return RegionTypes[type].Name ;
-			} 
-			return "" ;
-		}
-
-		/// <summary>
 		/// Gets the name for the given extension type.
 		/// </summary>
 		/// <param name="type">The type</param>
 		/// <returns>The name</returns>
 		public static string GetExtensionNameByType(string type) {
-			if (ExtensionTypes.ContainsKey(type)) {
-				var attr = ExtensionTypes[type].GetCustomAttribute<ExtensionAttribute>(false) ;
-				if (attr != null)
-					return attr.Name ;
-				return ExtensionTypes[type].Name ;
-			} 
+			if (ExtensionAttributes.ContainsKey(type))
+				return ExtensionAttributes[type].Name ;
+			return "" ;
+		}
+
+		/// <summary>
+		/// Gets the internal id for the given extension type.
+		/// </summary>
+		/// <param name="type">The type</param>
+		/// <returns>The internal id</returns>
+		public static string GetInternalIdByType(string type) {
+			if (ExtensionAttributes.ContainsKey(type))
+				return ExtensionAttributes[type].InternalId != null ? ExtensionAttributes[type].InternalId : 
+					ExtensionAttributes[type].Name.Replace(" ", "").Replace(".", "") ;
 			return "" ;
 		}
 
@@ -127,7 +94,7 @@ namespace Piranha.Extend
 		public static List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
 			var ext = new List<Models.Extension>() ;
 
-			extensions.Where(extension => extension.ExtensionType == type).ToList().ForEach(e => {
+			Extensions.Where(extension => extension.ExtensionType == type).ToList().ForEach(e => {
 				ext.Add(new Models.Extension() {
 					IsDraft = draft,
 					Type = e.Type.ToString(),

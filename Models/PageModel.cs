@@ -28,9 +28,14 @@ namespace Piranha.Models
 		public dynamic Regions { get ; set ; }
 
 		/// <summary>
-		/// Gets the available Properties.
+		/// Gets the available properties.
 		/// </summary>
 		public dynamic Properties { get ; set ; }
+
+		/// <summary>
+		/// Gets the available extensions.
+		/// </summary>
+		public dynamic Extensions { get ; set ; }
 
 		/// <summary>
 		/// Gets the available attachments.
@@ -44,6 +49,7 @@ namespace Piranha.Models
 		public PageModel() {
 			Regions       = new ExpandoObject() ;
 			Properties    = new ExpandoObject() ;
+			Extensions    = new ExpandoObject() ;
 			Attachments   = new List<Content>() ;
 		}
 
@@ -169,7 +175,7 @@ namespace Piranha.Models
 			if (regions.Count > 0) {
 				foreach (var rt in regions)
 					((IDictionary<string, object>)Regions).Add(rt.InternalId,
-						Activator.CreateInstance(ExtensionManager.RegionTypes[rt.Type])) ;
+						Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type])) ;
 				Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(reg => {
 					if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
 						((IDictionary<string, object>)Regions)[reg.InternalId] = reg.Body ;
@@ -189,6 +195,10 @@ namespace Piranha.Models
 				var a = Models.Content.GetSingle(guid) ;
 				if (a != null)
 					Attachments.Add(a) ;
+			}
+			// Extensions
+			foreach (var ext in ((Page)Page).GetExtensions()) {
+				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = ext.Body ;
 			}
 		}
 	}

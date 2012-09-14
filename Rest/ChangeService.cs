@@ -32,7 +32,7 @@ namespace Piranha.Rest
 			DateTime latest = Convert.ToDateTime(date) ;
 
 			// Check if we have pages publised after the given date. If so return the sitemap
-			if (Models.Page.GetScalar("SELECT COUNT(page_id) FROM page WHERE page_published > @0", latest) > 0)
+			if (Models.Page.GetScalar("SELECT COUNT(page_id) FROM page WHERE page_last_published > @0", latest) > 0)
 				changes.Sitemap = new SitemapServices().Get() ;
 
 			// Get all pages last published after the given date.

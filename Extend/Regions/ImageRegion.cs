@@ -8,8 +8,8 @@ namespace Piranha.Extend.Regions
 	/// <summary>
 	/// Standard image region.
 	/// </summary>
-	[Extension(Name="Image")]
-	public class ImageRegion : IRegion
+	[Extension(Name="Image", Type=ExtensionType.Region)]
+	public class ImageRegion : IExtension
 	{
 		/// <summary>
 		/// Gets/sets the id of the image.

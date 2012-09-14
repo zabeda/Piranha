@@ -16,6 +16,11 @@ namespace Piranha.Extend
 		public string Name { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the internal id of the extension.
+		/// </summary>
+		public string InternalId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the possible icon path used in the
 		/// template preview in the manager interface.
 		/// </summary>

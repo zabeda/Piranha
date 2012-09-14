@@ -12,7 +12,6 @@ namespace Piranha.Extend
 	{
 		NotSet,
 		Region,
-		Property,
 		User,
 		Group,
 		Page,

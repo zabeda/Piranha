@@ -18,7 +18,6 @@ namespace Piranha.Rest
 	/// ReST API for pages.
 	/// </summary>
 	[ServiceContract()]
-	[ServiceKnownType("GetKnownTypes", typeof(Extend.ExtensionProvider))]
 	[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
 	public class PageService : BaseService
 	{

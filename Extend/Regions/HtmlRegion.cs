@@ -9,8 +9,8 @@ namespace Piranha.Extend.Regions
 	/// <summary>
 	/// Standard html region.
 	/// </summary>
-	[Extension(Name="Html")]
-	public class HtmlRegion : HtmlString, IRegion
+	[Extension(Name="Html", Type=ExtensionType.Region)]
+	public class HtmlRegion : HtmlString, IExtension
 	{
 		/// <summary>
 		/// Creates an empty html region.

@@ -19,7 +19,7 @@ namespace Piranha.Models
 	public class Region : PiranhaRecord<Region>
 	{
 		#region Members
-		private IRegion body = null ;
+		private IExtension body = null ;
 		#endregion
 
 		#region Fields
@@ -81,7 +81,7 @@ namespace Piranha.Models
 		/// Gets/sets the deserialized json body.
 		/// </summary>
 		[AllowHtml()]
-		public IRegion Body {
+		public IExtension Body {
 			get {
 				if (body == null)
 					body = GetBody() ;
@@ -168,15 +168,15 @@ namespace Piranha.Models
 		/// Gets the Json deserialized body for the region.
 		/// </summary>
 		/// <returns>The body</returns>
-		private IRegion GetBody() {
+		private IExtension GetBody() {
 			var js = new JavaScriptSerializer() ;
 
 			if (!String.IsNullOrEmpty(InternalBody)) {
-				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.RegionTypes[Type]))
-					return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type], InternalBody) ;
-				return (IRegion)js.Deserialize(InternalBody, ExtensionManager.RegionTypes[Type]) ;
+				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.ExtensionTypes[Type]))
+					return (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[Type], InternalBody) ;
+				return (IExtension)js.Deserialize(InternalBody, ExtensionManager.ExtensionTypes[Type]) ;
 			}
-			return (IRegion)Activator.CreateInstance(ExtensionManager.RegionTypes[Type]) ;
+			return (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[Type]) ;
 		}
 		#endregion
 	}
