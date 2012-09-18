@@ -1,6 +1,6 @@
 ﻿@model List<Piranha.Models.Content>
 @foreach (var content in Model) {
-    <li class="collapsed">
+    <li class="@(content.ChildContent.Count > 0 ? (content.HasChild(ViewBag.Expanded) ? "expanded" : "collapsed") : "collapsed")">
         <span class="buttons">
             @if (content.IsFolder) {
             <a href="@Url.Action("insert", "content", new { id = content.Id })" title="@Piranha.Resources.Global.ToolbarAdd" class="icon add marg"></a>

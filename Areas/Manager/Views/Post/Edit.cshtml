@@ -7,6 +7,8 @@
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
+        var folderId = "";
+
         $(document).ready(function () {
             $("#PostCategories").chosen().change(function () {
                 console.log("change");
@@ -45,6 +47,10 @@
         // This callback is called from jquery.attachments.js
         //
         function addAttachment(a) {
+            // Store folder id so we can open the same folder next time.
+            folderId = a.ParentId;
+
+            // Add the attachment
             $(".attachments").append(
                 '<tr data-id="' + a.Id + '">' +
                     '<td><img src="' + a.ThumbnailUrl + '/50")" /></td>' +

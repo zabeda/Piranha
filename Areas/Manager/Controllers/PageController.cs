@@ -15,12 +15,17 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Default controller. Gets the page list.
 		/// </summary>
 		[Access(Function="ADMIN_PAGE")]
-        public ActionResult Index() {
+        public ActionResult Index(string id = "") {
 			try {
 				var param = Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
 				ViewBag.Levels = param != null ? Convert.ToInt32(param.Value) : 0 ;
+
+				if (!String.IsNullOrEmpty(id))
+					ViewBag.Expanded = new Guid(id) ;
+				else ViewBag.Expanded = Guid.Empty ;
 			} catch {
 				ViewBag.Levels = 0 ;
+				ViewBag.Expanded = Guid.Empty ;
 			}
 			return View("Index", ListModel.Get()) ;
         }

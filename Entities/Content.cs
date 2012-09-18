@@ -479,6 +479,29 @@ namespace Piranha.Models
 			return ret ;
 		}
 
+		/// <summary>
+		/// Invalidates the cache for the given record.
+		/// </summary>
+		/// <param name="record">The record</param>
+		public void InvalidateRecord(Content record) {
+			if (Cache.ContainsKey(record.Id))
+				Cache.Remove(record.Id) ;
+		}
+
+		/// <summary>
+		/// Checks if the current entity has a child with the given id.
+		/// </summary>
+		/// <param name="id">The content id</param>
+		/// <returns>Weather the child was found</returns>
+		public bool HasChild(Guid id) {
+			if (ChildContent != null) {
+				foreach (var c in ChildContent)
+					if (HasChild(c, id))
+						return true ;
+			}
+			return false ;
+		}
+
 		#region Private methods
 		/// <summary>
 		/// Writes the given file to the http response
@@ -522,15 +545,23 @@ namespace Piranha.Models
 		private string CachedImagePath(int width, int height) {
 			return CacheDir() + Id.ToString() + "-" + width.ToString() + "x" + height.ToString() ;
 		}
-		#endregion
 
 		/// <summary>
-		/// Invalidates the cache for the given record.
+		/// Checks if the current entity has a child with the given id.
 		/// </summary>
-		/// <param name="record">The record</param>
-		public void InvalidateRecord(Content record) {
-			if (Cache.ContainsKey(record.Id))
-				Cache.Remove(record.Id) ;
+		/// <param name="content">The content</param>
+		/// <param name="id">The content id</param>
+		/// <returns>Weather the child was found</returns>
+		private bool HasChild(Content content, Guid id) {
+			if (content.Id == id)
+				return true ;
+			if (content.ChildContent != null) {
+				foreach (var c in content.ChildContent)
+					if (HasChild(c, id))
+						return true ;
+			}
+			return false ;
 		}
+		#endregion
 	}
 }

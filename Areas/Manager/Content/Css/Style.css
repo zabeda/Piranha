@@ -862,7 +862,9 @@ table.template td.locked {
     max-width: 640px;
     }
 #boxContent .gallery-compressed {
-    max-width: 750px;
+    max-width: 770px;
+    max-height: 451px;
+    overflow: scroll;
     }
 #boxContent .title {
     background-image: none;
