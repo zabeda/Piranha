@@ -55,6 +55,10 @@ namespace Piranha.Rest
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			changes.Deleted.Categories = Piranha.Models.SysLog.Get(query, "CATEGORY", "DELETE", latest).
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
+
+			// Set the timespage
+			changes.Timestamp = DateTime.Now.ToString() ;
+
 			return changes ;
 		}
 

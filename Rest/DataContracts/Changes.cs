@@ -20,6 +20,8 @@ namespace Piranha.Rest.DataContracts
 		public List<Content> Content { get ; set ; }
 		[DataMember()]
 		public Deleted Deleted { get ; set ; }
+		[DataMember()]
+		public string Timestamp { get ; set ; }
 
 		public Changes() {
 			Sitemap = new List<Sitemap>() ;
