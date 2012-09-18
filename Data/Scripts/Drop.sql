@@ -4,6 +4,7 @@ DROP TABLE [content];
 DROP TABLE [region];
 DROP TABLE [property];
 DROP TABLE [category];
+DROP TABLE [extension];
 DROP TABLE [page];
 DROP TABLE [post];
 DROP TABLE [permalink];

@@ -92,6 +92,7 @@ namespace Piranha.Models.Manager.PostModels
 			Post = new Post() ;
 			PostCategories = new List<Guid>() ;
 			Properties = new List<Property>() ;
+			Extensions = new List<Extension>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
 		}

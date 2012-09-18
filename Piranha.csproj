@@ -513,6 +513,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Img\icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\14.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
