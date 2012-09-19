@@ -15,7 +15,15 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Gets the list view.
 		/// </summary>
 		[Access(Function="ADMIN_CONTENT")]
-		public ActionResult Index() {
+		public ActionResult Index(string id = "") {
+			try {
+				if (!String.IsNullOrEmpty(id))
+					ViewBag.Expanded = new Guid(id) ;
+				else ViewBag.Expanded = Guid.Empty ;
+			} catch {
+				ViewBag.Expanded = Guid.Empty ;
+			}
+			
             return View("Index", ListModel.Get());
         }
 

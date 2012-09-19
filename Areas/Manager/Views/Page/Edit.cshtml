@@ -9,6 +9,7 @@
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
+        var folderId = "" ;
 
         $(document).ready(function () {
             $("#Page_Title").focus();
@@ -51,6 +52,10 @@
         // This callback is called from jquery.attachments.js
         //
         function addAttachment(a) {
+            // Store folder id so we can open the same folder next time.
+            folderId = a.ParentId;
+
+            // Add the attachment
             $(".attachments").append(
                 '<tr data-id="' + a.Id + '">' +
                     '<td><img src="' + a.ThumbnailUrl + '/50")" /></td>' +
@@ -92,7 +97,7 @@
             <li><a href="@Url.Action("revert", new { id = Model.Page.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
             }
             <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
-            <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@Url.Action("index", new { id = Model.Page.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Url.Action("edit", new { id = Model.Page.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>

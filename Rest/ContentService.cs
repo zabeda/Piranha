@@ -34,6 +34,7 @@ namespace Piranha.Rest
 				if (c != null) {
 					return new Content() {
 						Id = c.Id,
+						ParentId = c.ParentId,
 						Filename = c.Filename,
 						Name = c.Name,
 						DisplayName = c.DisplayName,

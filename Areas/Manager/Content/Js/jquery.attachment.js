@@ -50,7 +50,7 @@ function bindAttachmentEvents() {
         $("#boxContent .box > div").remove();
         floatBox.show("boxContent");
         $.ajax({
-            url: siteroot + "manager/content/popup",
+            url: siteroot + "manager/content/popup" + (folderId ? "/" + folderId : ""),
             success: function(data) {
                 $("#boxContent .box").append(data) ;
                 floatBox.position($("#boxContent .box"));

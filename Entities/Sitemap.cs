@@ -216,7 +216,36 @@ namespace Piranha.Models
 				HttpContext.Current.Cache.Remove(typeof(Sitemap).Name) ;
 		}
 
+		/// <summary>
+		/// Checks if the current element has a child with the given id.
+		/// </summary>
+		/// <param name="page">The sitemap element</param>
+		/// <param name="id">The page id to search for</param>
+		/// <returns>If the child id is found</returns>
+		public bool HasChild(Guid id) {
+			foreach (var sr in Pages)
+				if (HasChild(sr, id))
+					return true ;
+			return false ;
+		}
+
 		#region Private methods
+		/// <summary>
+		/// Checks if the given sitemap has a child with the given id.
+		/// </summary>
+		/// <param name="page">The sitemap element</param>
+		/// <param name="id">The page id to search for</param>
+		/// <returns>If the child id is found</returns>
+		private bool HasChild(Sitemap page, Guid id) {
+			if (page.Id == id)
+				return true ;
+			foreach (var sr in page.Pages) {
+				if (HasChild(sr, id))
+					return true ;
+			}
+			return false ;
+		}
+
 		/// <summary>
 		/// Sorts the page structure recursive.
 		/// </summary>

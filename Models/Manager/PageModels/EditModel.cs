@@ -118,6 +118,7 @@ namespace Piranha.Models.Manager.PageModels
 		public EditModel() {
 			Regions = new List<Region>() ;
 			Properties = new List<Property>() ;
+			Extensions = new List<Extension>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			DisableGroups = SysGroup.GetParents(Guid.Empty) ;
 			DisableGroups.Reverse() ;

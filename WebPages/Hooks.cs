@@ -36,6 +36,16 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// The different hooks available for the head.
+		/// </summary>
+		public static class Head {
+			/// <summary>
+			/// Renders optional information in the head.
+			/// </summary>
+			public static Delegates.HeadHook Render ;
+		}
+
+		/// <summary>
 		/// The different hooks availble for the menu.
 		/// </summary>
 		public static class Menu {
