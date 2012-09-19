@@ -857,17 +857,20 @@ table.template td.locked {
     width: 80px;
     text-align: center;
     }
-#boxContent .inner {
+.floatbox .box .inner {
     min-width: 480px;
     max-width: 640px;
     }
-#boxContent .gallery-compressed {
+.floatbox .box .gallery-compressed {
     max-width: 770px;
     max-height: 451px;
     overflow: scroll;
     }
-#boxContent .title {
+.floatbox .box .title {
     background-image: none;
+    }
+.floatbox .box .inner {
+    padding: 14px;
     }
 .gallery-item {
     float: left;

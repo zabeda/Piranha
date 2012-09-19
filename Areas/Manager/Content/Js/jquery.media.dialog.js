@@ -7,6 +7,7 @@
 if (!piranha)
     var piranha = {};
 
+piranha.folderId = null;
 piranha.media = function (buttonId, floatboxId, callback) {
     var self = this;
 
@@ -18,7 +19,7 @@ piranha.media = function (buttonId, floatboxId, callback) {
         $('#' + self.boxId + ' .box > div').remove();
         floatBox.show(self.boxId);
         $.ajax({
-            url: siteroot + 'manager/content/popup',
+            url: siteroot + 'manager/content/popup' + (piranha.folderId ? '/' + piranha.folderId : ''),
             success: function (data) {
                 $('#' + self.boxId + ' .box').html('');
                 $('#' + self.boxId + ' .box').append(data);
@@ -40,6 +41,8 @@ piranha.media = function (buttonId, floatboxId, callback) {
         }
     };
     this.folderClick = function () {
+        piranha.folderId = $(this).attr("data-id");
+
         $.ajax({
             url: siteroot + "manager/content/popup/" + $(this).attr("data-id"),
             success: function (data) {

@@ -111,6 +111,12 @@ namespace Piranha.Web
 				SysParam.GetByName("SITE_TITLE").Value + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
 				WebPages.WebPiranha.GetUrlPrefixForHandlerId("rss") + "\" />") ;
 
+			/**
+			 * Check if hook is attached.
+			 */
+			if (Hooks.Head.Render != null)
+				Hooks.Head.Render(this, str, CurrentPage, CurrentPost) ;
+
 			return new HtmlString(str.ToString()) ;
 		}
 
