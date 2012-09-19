@@ -180,18 +180,30 @@ button.full {
 .form .short {
     margin-right: 30px;
     }
-.left .form {
-    margin-right: 10px;
-    }
-.right .form {
-    margin-left: 10px;
-    }
 .form .block {
     margin-left: 130px;
     overflow: hidden;
     }
 .form .half p {
     margin-left: 0;
+    }
+
+/**
+ * Content toolbar
+ */
+.main-content .tools {
+    float: left;
+    width: 70px;
+    }
+.main-content .tools li {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    color: #666;
+    }
+.main-content .main {
+    margin-left: 70px;
+    border-left: solid 1px #ddd;
     }
     
 /** 
@@ -828,6 +840,9 @@ ul.list .delete, ul.list .arrow-right, ul.list arrow-down {
     width: 190px;
     height: 160px;
     overflow: hidden;
+    }
+.grid_3 .edit, .templates .preview {
+    margin-bottom: 5px;
     }
 table.template {
     width: 100%;
