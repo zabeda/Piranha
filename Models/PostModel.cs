@@ -48,6 +48,7 @@ namespace Piranha.Models
 		/// </summary>
 		public PostModel() {
 			Properties = new ExpandoObject() ;
+			Extensions = new ExpandoObject() ;
 			Attachments   = new List<Content>() ;
 		}
 
@@ -123,7 +124,7 @@ namespace Piranha.Models
 			// Attachments
 			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
 			// Extensions
-			foreach (var ext in ((Page)Page).GetExtensions()) {
+			foreach (var ext in ((Post)Post).GetExtensions()) {
 				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = ext.Body ;
 			}
 		}
