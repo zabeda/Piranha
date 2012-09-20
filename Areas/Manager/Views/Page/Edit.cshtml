@@ -1,4 +1,5 @@
-﻿    @model Piranha.Models.Manager.PageModels.EditModel
+﻿@model Piranha.Models.Manager.PageModels.EditModel
+@using Piranha.Extend;
 @{
     ViewBag.Selected = "Cms" ;
     ViewBag.SelectedTab = "Page" ;
@@ -32,6 +33,17 @@
                 $.get("@Url.Action("grouplist")?page_id=" + page_id + "&group_id=" + group_id, function(data) {
                     $("#disable-groups").html(data);
                 });
+            });
+
+            $('.main-content .tools a').click(function () {
+                var id = $(this).attr('data-id');
+
+                $('.main-content .tools li').removeClass('active');
+                $(this).parent().addClass('active');
+                $('.main-content .main').addClass('hidden');
+                $('#' + id).removeClass('hidden');
+
+                return false;
             });
         });
 
@@ -164,47 +176,6 @@
                         <p>@Piranha.Resources.Global.PlacementStart</p>
                         }
                     </li>
-                    @if (Model.Template.ShowController) {
-                    <li>@Html.LabelFor(m => m.Page.PageController)
-                        <div class="input">
-                            @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional })</div>
-                        @Html.ValidationMessageFor(m => m.Page.PageController)
-                    </li>
-                    }
-                    @if (Model.Template.ShowRedirect) {
-                    <li>@Html.LabelFor(m => m.Page.PageRedirect)
-                        <div class="input">
-                            @Html.TextBoxFor(m => m.Page.PageRedirect, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Redirect) ? Model.Template.Redirect : Piranha.Resources.Global.Optional })</div>
-                        @Html.ValidationMessageFor(m => m.Page.PageRedirect)
-                    </li>
-                    }
-                </ul>
-                <ul class="form optional">
-                    <li>
-                        @Html.LabelFor(m => m.Page.GroupId)
-                        <div class="input">
-                            @Html.DropDownListFor(m => m.Page.GroupId, Model.Groups)</div>
-                        @Html.LabelFor(m => m.Page.DisabledGroups)
-                        <div id="disable-groups" class="block">
-                            @{ var dGroups = Model.Groups.Where(g => g.Value != Guid.Empty.ToString()).ToList() ; }
-                            @Html.Partial("Partial/GroupList", new Piranha.Models.Manager.PageModels.GroupListModel() { 
-                                Groups = Model.DisableGroups, Page = Model.Page })
-                        </div>
-                    </li>
-                    <li>
-                        @Html.LabelFor(m => m.Page.IsHidden)
-                        <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (@Piranha.Resources.Page.HiddenDescription)</p>
-                    </li>
-                    <li>@Html.LabelFor(m => m.Page.Keywords)
-                        <div class="input"> 
-                            @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })</div>
-                        @Html.ValidationMessageFor(m => m.Page.Keywords)
-                    </li>
-                    <li>@Html.LabelFor(m => m.Page.Description)
-                        <div class="input">
-                            @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
-                        @Html.ValidationMessageFor(m => m.Page.Description)
-                    </li>
                 </ul>
             </div>
         </div>
@@ -223,66 +194,123 @@
 <div>
     <div class="grid_12">
         <div class="box main-content">
-            <div class="tools">
-                <ul>
-                    <li>Content</li>
-                    <li>Properties</li>
-                    <li>Settings</li>
-                    <li>SEO</li>
-                </ul>
-            </div>
-            <div class="main content-editor">
-                <div class="title">
-                    <div id="regionbuttons" class="buttons">
-                        @for (int n = 0; n < Model.Regions.Count; n++) {
-                            <button id="@Html.Raw("btn_" + Model.Regions[n].InternalId)" class="btn@(n > 0 ? "" : " active") region">@Model.Regions[n].Name</button>
+            <table>
+                <tr>
+                    <td class="tools">
+                        <ul>
+                            <li class="btn-content active"><a href="#" data-id="pnl-content">Content</a></li>
+                            <li class="btn-settings"><a href="#" data-id="pnl-settings">Settings</a></li>
+                            @if (Model.Properties.Count > 0) {
+                            <li class="btn-properties"><a href="#" data-id="pnl-properties">Properties</a></li>
+                            }
+                            @foreach (var ext in Model.Extensions) {
+                            <li>
+                                <a href="#"@(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@ExtensionManager.GetInternalIdByType(ext.Type).ToLower()">
+                                    @ExtensionManager.GetExtensionNameByType(ext.Type)
+                                </a>
+                            </li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        <div id="pnl-content" class="main content-editor">
+                            <div class="title">
+                                <div id="regionbuttons" class="buttons">
+                                    @for (int n = 0; n < Model.Regions.Count; n++) {
+                                        <button id="@Html.Raw("btn_" + Model.Regions[n].InternalId)" class="btn@(n > 0 ? "" : " active") region">@Model.Regions[n].Name</button>
+                                    }
+                                    <button id="btn_attachments" class="btn@(Model.Regions.Count == 0 ? " active" : "")">@Piranha.Resources.Page.Attachments</button>
+                                </div>
+                                <h2 id="section-title">@Piranha.Resources.Global.Content</h2>
+                            </div>
+                            <div class="inner">
+                                @if (Model.Regions.Count > 0) {
+                                <div id="regions">
+                                    @Html.EditorFor(m => m.Regions)
+                                </div>
+                                }
+                                <div id="attachments" @(Model.Regions.Count > 0 ? "style=display:none" : "")>
+                                    @Html.Partial("Partial/Attachments")
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.Properties.Count > 0) {
+                        <div id="pnl-properties" class="main hidden">
+                            <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
+                            <div class="inner">
+                                <ul class="form">
+                                @for (int n = 0; n < Model.Properties.Count; n++) {
+                                    <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
+                                        @Html.HiddenFor(m => m.Properties[n].Id)
+                                        @Html.HiddenFor(m => m.Properties[n].IsDraft)
+                                        @Html.HiddenFor(m => m.Properties[n].ParentId)
+                                        @Html.HiddenFor(m => m.Properties[n].Name)
+                                        @Html.HiddenFor(m => m.Properties[n].Created)
+                                        @Html.HiddenFor(m => m.Properties[n].CreatedBy)
+                                        @Html.HiddenFor(m => m.Properties[n].IsNew)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Properties[n].Value)</div>
+                                    </li>
+                                }
+                                </ul>
+                            </div>
+                        </div>
                         }
-                        <button id="btn_attachments" class="btn@(Model.Regions.Count == 0 ? " active" : "")">@Piranha.Resources.Page.Attachments</button>
-                    </div>
-                    <h2 id="section-title">@Piranha.Resources.Global.Content</h2>
-                </div>
-                <div class="inner">
-                    @if (Model.Regions.Count > 0) {
-                    <div id="regions">
-                        @Html.EditorFor(m => m.Regions)
-                    </div>
-                    }
-                    <div id="attachments" @(Model.Regions.Count > 0 ? "style=display:none" : "")>
-                        @Html.Partial("Partial/Attachments")
-                    </div>
-                </div>
-            </div>
+                        <div id="pnl-settings" class="main hidden">
+                            <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
+                            <div class="inner">
+                                <ul class="form">
+                                    <li>
+                                        @Html.LabelFor(m => m.Page.GroupId)
+                                        <div class="input">
+                                            @Html.DropDownListFor(m => m.Page.GroupId, Model.Groups)</div>
+                                        @Html.LabelFor(m => m.Page.DisabledGroups)
+                                        <div id="disable-groups" class="block">
+                                            @{ var dGroups = Model.Groups.Where(g => g.Value != Guid.Empty.ToString()).ToList() ; }
+                                            @Html.Partial("Partial/GroupList", new Piranha.Models.Manager.PageModels.GroupListModel() { 
+                                                Groups = Model.DisableGroups, Page = Model.Page })
+                                        </div>
+                                    </li>
+                                    <li>
+                                        @Html.LabelFor(m => m.Page.IsHidden)
+                                        <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (@Piranha.Resources.Page.HiddenDescription)</p>
+                                    </li>
+                                    <li>@Html.LabelFor(m => m.Page.Keywords)
+                                        <div class="input"> 
+                                            @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                                        @Html.ValidationMessageFor(m => m.Page.Keywords)
+                                    </li>
+                                    <li>@Html.LabelFor(m => m.Page.Description)
+                                        <div class="input">
+                                            @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
+                                        @Html.ValidationMessageFor(m => m.Page.Description)
+                                    </li>
+                                    @if (Model.Template.ShowController) {
+                                    <li>@Html.LabelFor(m => m.Page.PageController)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional })</div>
+                                        @Html.ValidationMessageFor(m => m.Page.PageController)
+                                    </li>
+                                    }
+                                    @if (Model.Template.ShowRedirect) {
+                                    <li>@Html.LabelFor(m => m.Page.PageRedirect)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Page.PageRedirect, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Redirect) ? Model.Template.Redirect : Piranha.Resources.Global.Optional })</div>
+                                        @Html.ValidationMessageFor(m => m.Page.PageRedirect)
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        @Html.EditorFor(m => m.Extensions)
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
-<div class="grid_9">
-    @if (Model.Extensions.Count > 0) {
-        @Html.EditorFor(m => m.Extensions)
-    }
-</div>
-<div class="grid_3">
-    @if (Model.Properties.Count > 0) {
-    <div class="box expandable">
-        <div class="title expanded"><h2>@Piranha.Resources.Global.Properties</h2></div>
-        <div class="inner optional">
-            <ul class="form">
-            @for (int n = 0; n < Model.Properties.Count; n++) {
-                <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
-                    @Html.HiddenFor(m => m.Properties[n].Id)
-                    @Html.HiddenFor(m => m.Properties[n].IsDraft)
-                    @Html.HiddenFor(m => m.Properties[n].ParentId)
-                    @Html.HiddenFor(m => m.Properties[n].Name)
-                    @Html.HiddenFor(m => m.Properties[n].Created)
-                    @Html.HiddenFor(m => m.Properties[n].CreatedBy)
-                    @Html.HiddenFor(m => m.Properties[n].IsNew)
-                    <div class="input">
-                        @Html.TextBoxFor(m => m.Properties[n].Value)</div>
-                </li>
-            }
-            </ul>
-        </div>
-    </div>
-    }
+<div class="grid_3 hidden">
     <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Page.Placement</h2></div>
         <div class="inner optional">

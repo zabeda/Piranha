@@ -176,9 +176,6 @@ table.tabbed,
 .box .title .buttons {
     float: right;
     }
-.main-content {
-    background: #eee;
-    }
 .sys-message .box {
     border: 1px solid #ceae00;
     text-align: center;

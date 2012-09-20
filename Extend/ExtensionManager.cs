@@ -86,6 +86,17 @@ namespace Piranha.Extend
 		}
 
 		/// <summary>
+		/// Gets the icon path for the given extension type.
+		/// </summary>
+		/// <param name="type">The type</param>
+		/// <returns>The icon path</returns>
+		public static string GetIconPathByType(string type) {
+			if (ExtensionAttributes.ContainsKey(type))
+				return ExtensionAttributes[type].IconPath != null ? ExtensionAttributes[type].IconPath : "" ;
+			return "" ;
+		}
+
+		/// <summary>
 		/// Gets the extensions available for the given type.
 		/// </summary>
 		/// <param name="type">The extension type</param>
