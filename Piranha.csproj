@@ -280,15 +280,12 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\license.txt" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\css\fullpage.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\editor_plugin.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\editor_plugin_src.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\fullpage.htm" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\js\fullpage.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\langs\en_dlg.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullscreen\editor_plugin.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullscreen\editor_plugin_src.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullscreen\fullscreen.htm" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\editor_plugin.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\editor_plugin_src.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
@@ -299,7 +296,6 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\window.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\inlinepopups\template.htm" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\editor_plugin.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\editor_plugin_src.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\js\pastetext.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\js\pasteword.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\langs\en_dlg.js" />
@@ -307,11 +303,9 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\pasteword.htm" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\spellchecker\css\content.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\spellchecker\editor_plugin.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\spellchecker\editor_plugin_src.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\spellchecker\img\wline.gif" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\css\props.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\editor_plugin.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\editor_plugin_src.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\js\props.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\langs\en_dlg.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\props.htm" />
@@ -527,6 +521,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-seo-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\autoresize\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.form.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

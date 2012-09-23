@@ -33,7 +33,7 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a onclick="floatBox.show('boxTemplates', 200, 240)" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
             <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
@@ -83,7 +83,7 @@
 <div id="boxTemplates" class="floatbox">
     <div class="bg"></div>
     <div class="box">
-        <div class="title"><h2>@Piranha.Resources.Post.PopupTypeTitle</h2></div>
+        <div class="title"><a class="close-btn right" data-id="boxContent"></a><h2>@Piranha.Resources.Post.PopupTypeTitle</h2></div>
         <div class="inner">
         @foreach (var template in Model.Templates) {
             <div class="templates @(Model.Templates.Count > 6 ? "compressed" : "") left" data-templateid="@template.Id">

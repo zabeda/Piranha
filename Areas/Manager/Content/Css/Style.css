@@ -40,6 +40,7 @@ input, select, textarea {
     font: normal 14px Arial;
     border: none 0px;
     width: 100%;
+    max-width: 100%;
     -webkit-appearance:none;
     }
 .upload {
@@ -91,6 +92,9 @@ p input[type="radio"] {
 a.btn {
     text-decoration: none;
     padding: 5px 10px;
+    }
+.form li .btn {
+    margin: 3px 8px 0 0;
     }
 button.full {
     width: 100%;
@@ -899,7 +903,7 @@ table.template td.locked {
     text-align: center;
     }
 .floatbox .box .inner {
-    min-width: 480px;
+    _min-width: 480px;
     max-width: 640px;
     }
 .floatbox .box .gallery-compressed {
@@ -983,6 +987,19 @@ table.list .form .hidden { display: none; }
 .content-editor .defaultSkin table.mceToolbar { padding-bottom: 6px; }
 .content-editor .defaultSkin .mceListBox .mceText { font-family: "Helvetica Neue",Helvetica,Arial; font-size: 12px; line-height: 25px; height: 24px; margin-top: 1px; }
 .content-editor .defaultSkin .mceListBox .mceOpen { height: 24px; background-position: -741px 3px; margin-top: 1px; }
+.content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst {
+    height: 40px;
+    }
+.content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst td.fixed-toolbar {
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    left: 50%;
+    margin-left: -386px;
+    padding: 6px 10px;
+    position: fixed;
+    top: 50px;
+    width: 826px;
+    }
 
 /**
  * Login splash

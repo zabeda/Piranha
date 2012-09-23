@@ -402,32 +402,44 @@ table.template td.locked {
  * Harvest chosen.
  */
 .chzn-container-multi .chzn-choices {
-    border-width: 1px;
-    border-style: solid;
+    border: none 0px;
     background: #fff;
-    border-radius: 2px;
+    padding: 0;
+    margin: 0;
+    width: 680px;
     }
 .chzn-container-active .chzn-choices {
-    border-width: 1px;
-    border-style: solid;
+    border: none 0px;
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -o-box-shadow; none;
     }
+.chzn-container-multi .chzn-choices .search-field {
+    border: none 0px;
+    background: #fff;
+    height: 20px;
+    }
 .chzn-container-multi .chzn-choices .search-field input {
     font-size: 14px;
     height: 16px;
-    margin: 3px 0 1px;
+    margin: 4px 0 0;
+    padding: 0;
     }
 .chzn-container .chzn-drop {
     border-width: 1px;
     border-style: solid;
     box-shadow: none;
-    margin-top: -1px;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -o-box-shadow; none;
+    }
+.chzn-container-multi .chzn-results {
+    margin: 0;
+    }
+.chzn-container .chzn-results li {
+    background: #fff;
+    border: none 0;
     }
 .chzn-container .chzn-results .highlighted {
     background: #666;

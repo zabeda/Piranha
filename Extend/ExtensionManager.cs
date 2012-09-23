@@ -105,7 +105,7 @@ namespace Piranha.Extend
 		public static List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
 			var ext = new List<Models.Extension>() ;
 
-			Extensions.Where(extension => (extension.ExtensionType & type) != ExtensionType.NotSet).ToList().ForEach(e => {
+			Extensions.Where(extension => extension.ExtensionType.HasFlag(type)).ToList().ForEach(e => {
 				ext.Add(new Models.Extension() {
 					IsDraft = draft,
 					Type = e.Type.ToString(),

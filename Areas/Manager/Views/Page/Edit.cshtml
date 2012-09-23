@@ -5,12 +5,13 @@
     ViewBag.SelectedTab = "Page" ;
 }
 @section Head {
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.regions.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
-        var folderId = "" ;
+        var folderId = "";
 
         $(document).ready(function () {
             $("#Page_Title").focus();
@@ -35,14 +36,9 @@
                 });
             });
 
-            $('.main-content .tools a').click(function () {
-                var id = $(this).attr('data-id');
-
-                $('.main-content .tools li').removeClass('active');
-                $(this).parent().addClass('active');
-                $('.main-content .main').addClass('hidden');
-                $('#' + id).removeClass('hidden');
-
+            $('#btnMove').click(function () {
+                $('#placement-edit').slideToggle('fast');
+                $(this).toggleClass('active');
                 return false;
             });
         });
@@ -170,11 +166,31 @@
                     </li>
                     <li>
                         <label>@Piranha.Resources.Global.Placement</label>
+                        <button class="btn right" id="btnMove">Move</button>
                         @if (!Model.Page.IsStartpage) {
                         <p>@Piranha.Resources.Global.PlacementPage <strong>@(Model.Page.Seqno > 1 ? @Piranha.Resources.Global.PlacementAfter : @Piranha.Resources.Global.PlacementBelow)</strong> &quot;@Model.PlaceRef&quot;</p>
                         } else {
                         <p>@Piranha.Resources.Global.PlacementStart</p>
                         }
+                        <div id="placement-edit" style="display:none">
+                            @Html.LabelFor(m => m.Page.ParentId)
+                            <div class="input">
+                                <select id="Page_ParentId" name="Page.ParentId">
+                                    @foreach (var p in Model.Parents) {
+                                    <option@(p.Level > 1 ? " style=padding-left:" + (p.Level - 1) * 14 + "px" : "") value="@p.Id"@(p.IsSelected ? " selected=selected" : "")>
+                                        @p.Title</option>
+                                    }
+                                </select>
+                            </div>
+                            @Html.LabelFor(m => m.Page.Seqno)
+                            <div class="input" id="div-seqno">
+                                <select id="Page_Seqno" name="Page.Seqno">
+                                @foreach (var s in Model.Siblings) {
+                                <option value="@s.Seqno"@(s.IsSelected ? " selected=selected" : "")>@s.Title</option>
+                                }
+                                </select>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -235,28 +251,6 @@
                                 </div>
                             </div>
                         </div>
-                        @if (Model.Properties.Count > 0) {
-                        <div id="pnl-properties" class="main hidden">
-                            <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
-                            <div class="inner">
-                                <ul class="form">
-                                @for (int n = 0; n < Model.Properties.Count; n++) {
-                                    <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
-                                        @Html.HiddenFor(m => m.Properties[n].Id)
-                                        @Html.HiddenFor(m => m.Properties[n].IsDraft)
-                                        @Html.HiddenFor(m => m.Properties[n].ParentId)
-                                        @Html.HiddenFor(m => m.Properties[n].Name)
-                                        @Html.HiddenFor(m => m.Properties[n].Created)
-                                        @Html.HiddenFor(m => m.Properties[n].CreatedBy)
-                                        @Html.HiddenFor(m => m.Properties[n].IsNew)
-                                        <div class="input">
-                                            @Html.TextBoxFor(m => m.Properties[n].Value)</div>
-                                    </li>
-                                }
-                                </ul>
-                            </div>
-                        </div>
-                        }
                         <div id="pnl-settings" class="main hidden">
                             <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
                             <div class="inner">
@@ -303,6 +297,28 @@
                                 </ul>
                             </div>
                         </div>
+                        @if (Model.Properties.Count > 0) {
+                        <div id="pnl-properties" class="main hidden">
+                            <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
+                            <div class="inner">
+                                <ul class="form">
+                                @for (int n = 0; n < Model.Properties.Count; n++) {
+                                    <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
+                                        @Html.HiddenFor(m => m.Properties[n].Id)
+                                        @Html.HiddenFor(m => m.Properties[n].IsDraft)
+                                        @Html.HiddenFor(m => m.Properties[n].ParentId)
+                                        @Html.HiddenFor(m => m.Properties[n].Name)
+                                        @Html.HiddenFor(m => m.Properties[n].Created)
+                                        @Html.HiddenFor(m => m.Properties[n].CreatedBy)
+                                        @Html.HiddenFor(m => m.Properties[n].IsNew)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Properties[n].Value)</div>
+                                    </li>
+                                }
+                                </ul>
+                            </div>
+                        </div>
+                        }
                         @Html.EditorFor(m => m.Extensions)
                     </td>
                 </tr>
@@ -311,32 +327,6 @@
     </div>
 </div>
 <div class="grid_3 hidden">
-    <div class="box expandable">
-        <div class="title"><h2>@Piranha.Resources.Page.Placement</h2></div>
-        <div class="inner optional">
-            <ul class="form">
-                <li>@Html.LabelFor(m => m.Page.ParentId)
-                    <div class="input">
-                        <select id="Page_ParentId" name="Page.ParentId">
-                            @foreach (var p in Model.Parents) {
-                            <option@(p.Level > 1 ? " style=padding-left:" + (p.Level - 1) * 14 + "px" : "") value="@p.Id"@(p.IsSelected ? " selected=selected" : "")>
-                                @p.Title</option>
-                            }
-                        </select>
-                    </div>
-                </li>
-                <li>@Html.LabelFor(m => m.Page.Seqno)
-                    <div class="input" id="div-seqno">
-                        <select id="Page_Seqno" name="Page.Seqno">
-                        @foreach (var s in Model.Siblings) {
-                        <option value="@s.Seqno"@(s.IsSelected ? " selected=selected" : "")>@s.Title</option>
-                        }
-                        </select>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
     @if (!Model.Page.IsNew) {
     <div class="box expandable">
         <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
