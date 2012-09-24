@@ -960,6 +960,7 @@ table.template td.locked {
  * Floats & overrides
  */
 .half              { width: 50%; }
+.third             { width: 33%; }
 .left              { float: left; }
 .right             { float: right; margin-right: 0; }
 .marg,

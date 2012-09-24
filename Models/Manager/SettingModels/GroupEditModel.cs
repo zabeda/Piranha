@@ -26,11 +26,6 @@ namespace Piranha.Models.Manager.SettingModels
 		/// Gets/sets the members of the group.
 		/// </summary>
 		public List<SysUser> Members { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the group extensions.
-		/// </summary>
-		public List<Extension> Extensions { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -44,7 +39,6 @@ namespace Piranha.Models.Manager.SettingModels
 			groups.Insert(0, new SysGroup() { Name = "" }) ;
 
 			Groups = new SelectList(groups, "Id", "Name") ;
-			Extensions = Group.GetExtensions() ;
 		}
 
 		/// <summary>
@@ -62,7 +56,6 @@ namespace Piranha.Models.Manager.SettingModels
 			m.Groups  = new SelectList(groups, "Id", "Name", m.Group.ParentId) ;
 			m.Members = SysUser.GetFields("sysuser_id, sysuser_firstname, sysuser_surname", 
 				"sysuser_group_id=@0", m.Group.Id) ;
-			m.Extensions = m.Group.GetExtensions() ;
 
 			return m ;
 		}
@@ -75,10 +68,6 @@ namespace Piranha.Models.Manager.SettingModels
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
 					Group.Save(tx) ;
-					foreach (var ext in Extensions) {
-						ext.ParentId = Group.Id ;
-						ext.Save(tx) ;
-					}
 					tx.Commit();
 				} catch { tx.Rollback() ; throw ; }
 			}

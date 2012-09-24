@@ -14,10 +14,9 @@ namespace Piranha.Extend
 		NotSet = 0,
 		Region = 1,
 		User = 2,
-		Group = 4,
-		Page = 8,
-		Post = 16,
-		Category = 32,
-		Media = 64
+		Page = 4,
+		Post = 8,
+		Category = 16,
+		Media = 32
 	}
 }
