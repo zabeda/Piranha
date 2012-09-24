@@ -351,6 +351,15 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Gets the full folder structure for the media content.
+		/// </summary>
+		/// <returns>The folder structure.</returns>
+		public static List<Content> GetFolderStructure() {
+			return SortStructure(Content.Get("content_folder = 1", new Params() { OrderBy = "content_parent_id, content_name" }), Guid.Empty) ;
+
+		}
+
+		/// <summary>
 		/// Gets the content for the given category id.
 		/// </summary>
 		/// <param name="id">The category id</param>
@@ -561,6 +570,14 @@ namespace Piranha.Models
 						return true ;
 			}
 			return false ;
+		}
+
+		private static List<Content> SortStructure(List<Content> content, Guid parentid) {
+			var ret = content.Where(c => c.ParentId == parentid).OrderBy(c => c.Name).ToList() ;
+
+			ret.ForEach(r => r.ChildContent = SortStructure(content, r.Id)) ;
+
+			return ret ;
 		}
 		#endregion
 	}

@@ -38,7 +38,7 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Gets/sets the available folders.
 		/// </summary>
-		public SelectList Folders { get ; set ; }
+		public IList<Placement> Folders { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available extensions.
@@ -73,10 +73,8 @@ namespace Piranha.Models.Manager.ContentModels
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
 			var folders = Content.GetFields("content_id, content_name", "content_folder=1", new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
-			if (Content.ParentId == Guid.Empty)
-				Folders = new SelectList(folders, "Id", "Name") ;
-			else Folders = new SelectList(folders, "Id", "Name", Content.ParentId) ;
 			Extensions = Content.GetExtensions() ;
+			Folders = SortFolders(Content.GetFolderStructure()) ;
 		}
 
 		/// <summary>
@@ -92,7 +90,6 @@ namespace Piranha.Models.Manager.ContentModels
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
 			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
-			em.Folders = new SelectList(folders, "Id", "Name", em.Content.ParentId) ;
 			em.Extensions = em.Content.GetExtensions() ;
 
 			return em ;
@@ -215,5 +212,27 @@ namespace Piranha.Models.Manager.ContentModels
 					new Params() { OrderBy = "category_name" }), "Id", "Name", ContentCategories) ;
 			}
 		}
+
+		#region Private methods
+		/// <summary>
+		/// Flattens the folder structure.
+		/// </summary>
+		/// <param name="media"></param>
+		/// <param name="level"></param>
+		/// <returns></returns>
+		private List<Placement> SortFolders(List<Content> media, int level = 1) {
+			var ret = new List<Placement>() ;
+
+			foreach (var m in media) {
+				ret.Add(new Placement() {
+					Text = m.Name,
+					Value = m.Id,
+					Level = level
+				}) ;
+				ret.AddRange(SortFolders(m.ChildContent, level + 1)) ;
+			}
+			return ret ;
+		}
+		#endregion
 	}
 }

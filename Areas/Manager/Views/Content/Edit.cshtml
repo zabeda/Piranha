@@ -68,7 +68,13 @@
                 <li>
                     @Html.LabelFor(m => m.Content.ParentId)
                     <div class="input">
-                        @Html.DropDownListFor(m => m.Content.ParentId, Model.Folders)</div>
+                        <select id="Content_ParentId" name="Content.ParentId">
+                            @foreach (var f in Model.Folders) {
+                            <option@(f.Level > 1 ? " style=padding-left:" + (f.Level - 1) * 14 + "px" : "") value="@f.Value"@(f.Value == Model.Content.ParentId ? " selected=selected" : "")>
+                                @f.Text</option>
+                            }
+                        </select>
+                    </div>
                 </li>
                 @if (!ViewBag.Folder) {
                 <li>

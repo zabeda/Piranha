@@ -88,6 +88,7 @@
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IExtension.cs" />
+    <Compile Include="Models\Manager\Placement.cs" />
     <Compile Include="WebPages\Manager.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
