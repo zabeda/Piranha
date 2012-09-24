@@ -88,6 +88,7 @@
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IExtension.cs" />
+    <Compile Include="WebPages\Manager.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -244,9 +245,6 @@
     <EmbeddedResource Include="Areas\Manager\Views\Category\Edit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Install\Update.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Popup.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\TabsContent.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\TabsSettings.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\TabsSystem.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Template\PageList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Template\PostList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Category\Index.cshtml" />
@@ -265,6 +263,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\GroupList.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\ImageRegion.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Tabs.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />

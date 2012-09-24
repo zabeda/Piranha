@@ -29,6 +29,11 @@ namespace Piranha.Areas.Manager.Controllers
 				// Get current assembly version
 				ViewBag.Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion ;
 
+				// Check if user is logged in and has permissions to the manager
+				if (User.Identity.IsAuthenticated && User.HasAccess("ADMIN")) {
+					var startpage = WebPages.Manager.Menu[0].Items[0] ;
+					return RedirectToAction(startpage.Action, startpage.Controller) ;
+				}
 	            return View("Index") ;
 			} catch {}
 			return RedirectToAction("index", "install") ;
@@ -48,7 +53,9 @@ namespace Piranha.Areas.Manager.Controllers
 					HttpContext.Session[PiranhaApp.USER] = user ;
 
 					// Redirect after logon
-					return RedirectToAction("index", "page") ;
+					var startpage = WebPages.Manager.Menu[0].Items[0] ;
+
+					return RedirectToAction(startpage.Action, startpage.Controller) ;
 				} else {
 					ViewBag.Message = @Piranha.Resources.Account.MessageLoginFailed ;
 					ViewBag.MessageCss = "error" ;

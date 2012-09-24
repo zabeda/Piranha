@@ -151,7 +151,7 @@ namespace Piranha.WebPages
 			context.MapRoute(
 				"Manager",
 				"manager/{controller}/{action}/{id}",
-				new { controller = "Page", action = "Index", id = UrlParameter.Optional }
+				new { controller = "account", action = "index", id = UrlParameter.Optional }
 			) ;
 
 			// Register filters & binders
