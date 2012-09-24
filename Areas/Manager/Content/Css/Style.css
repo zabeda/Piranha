@@ -96,6 +96,9 @@ a.btn {
 .form li .btn {
     margin: 3px 8px 0 0;
     }
+.form li .file {
+    margin: 0;
+    }
 button.full {
     width: 100%;
     margin: 0;
