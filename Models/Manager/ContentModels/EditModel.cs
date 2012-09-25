@@ -224,8 +224,11 @@ namespace Piranha.Models.Manager.ContentModels
 			var ret = new List<Placement>() ;
 
 			foreach (var m in media) {
+				var prefix = "" ;
+				for (int n = 1; n < level; n++)
+					prefix += "&nbsp;&nbsp;&nbsp;" ;
 				ret.Add(new Placement() {
-					Text = m.Name,
+					Text = prefix + m.Name,
 					Value = m.Id,
 					Level = level
 				}) ;

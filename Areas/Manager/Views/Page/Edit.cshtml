@@ -1,14 +1,11 @@
 ﻿@model Piranha.Models.Manager.PageModels.EditModel
 @using Piranha.Extend;
-@{
-    ViewBag.Selected = "Cms" ;
-    ViewBag.SelectedTab = "Page" ;
-}
 @section Head {
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.regions.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Ext/jquery.equalheights.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
         var folderId = "";
@@ -41,6 +38,8 @@
                 $(this).toggleClass('active');
                 return false;
             });
+
+            $('.first-row .box').equalHeights();
         });
 
         //
@@ -137,7 +136,7 @@
     <input type="hidden" id="draft" name="draft" value="true" />
     <input type="hidden" id="org_parentid" value="@Model.Page.ParentId" />
 </div>
-<div>
+<div class="first-row">
     <div class="grid_9">
         <div class="box">
             <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
@@ -177,8 +176,8 @@
                             <div class="input">
                                 <select id="Page_ParentId" name="Page.ParentId">
                                     @foreach (var p in Model.Parents) {
-                                    <option@(p.Level > 1 ? " style=padding-left:" + (p.Level - 1) * 14 + "px" : "") value="@p.Id"@(p.IsSelected ? " selected=selected" : "")>
-                                        @p.Title</option>
+                                    <option value="@p.Id"@(p.IsSelected ? " selected=selected" : "")>
+                                        @Html.Raw(p.Title)</option>
                                     }
                                 </select>
                             </div>

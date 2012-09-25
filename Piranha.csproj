@@ -528,6 +528,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.form.js" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery.equalheights.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

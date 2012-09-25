@@ -1,8 +1,4 @@
 ﻿@model Piranha.Models.Manager.ContentModels.EditModel
-@{
-    ViewBag.Selected = "Cms" ;
-    ViewBag.SelectedTab = "Content" ;
-}
 @section Toolbar {
 @Html.Partial("Partial/Tabs")
 <div class="toolbar">
@@ -70,8 +66,8 @@
                     <div class="input">
                         <select id="Content_ParentId" name="Content.ParentId">
                             @foreach (var f in Model.Folders) {
-                            <option@(f.Level > 1 ? " style=padding-left:" + (f.Level - 1) * 14 + "px" : "") value="@f.Value"@(f.Value == Model.Content.ParentId ? " selected=selected" : "")>
-                                @f.Text</option>
+                            <option value="@f.Value"@(f.Value == Model.Content.ParentId ? " selected=selected" : "")>
+                                @Html.Raw(f.Text)</option>
                             }
                         </select>
                     </div>

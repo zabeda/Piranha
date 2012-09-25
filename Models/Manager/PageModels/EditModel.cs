@@ -444,10 +444,13 @@ namespace Piranha.Models.Manager.PageModels
 
 			foreach (Sitemap s in sm) {
 				if (p == null || s.Id != p.Id) {
+					var prefix = "" ;
+					for (int n = 1; n < s.Level; n++)
+						prefix += "&nbsp;&nbsp;&nbsp;" ;
 					ret.Add(new PagePlacement() {
 						Id = s.Id, 
 						Level = s.Level, 
-						Title = s.Title, 
+						Title = prefix + s.Title, 
 						IsSelected = (p != null && s.Id == p.ParentId)
 					}) ;
 					if (s.Pages.Count > 0)
