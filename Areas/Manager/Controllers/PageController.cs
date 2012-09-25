@@ -27,7 +27,14 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Levels = 0 ;
 				ViewBag.Expanded = Guid.Empty ;
 			}
-			return View("Index", ListModel.Get()) ;
+			var m = ListModel.Get() ;
+			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
+
+			// Executes the page list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
+				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View("Index", m) ;
         }
 
 		/// <summary>
@@ -39,6 +46,10 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
 			ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+
+			// Executes the page list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
+				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 			return View("Edit", pm) ;
 		}
@@ -86,6 +97,10 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno) ;
 			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
+
+			// Executes the page list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
+				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 			return View("Edit", pm) ;
 		}

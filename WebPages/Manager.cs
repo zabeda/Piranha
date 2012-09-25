@@ -171,5 +171,20 @@ namespace Piranha.WebPages
 					Permission = "ADMIN_PARAM", SelectedActions = "paramlist, param" }
 			}}
 		} ;
+
+		/// <summary>
+		/// Gets the currently active menu item.
+		/// </summary>
+		/// <returns>The menu item</returns>
+		public static MenuItem GetActiveMenuItem() {
+			foreach (var group in Menu) {
+				if (group.IsActive()) {
+					foreach (var item in group.Items)
+						if (item.IsActive())
+							return item ;
+				}
+			}
+			return null ;
+		}
 	}
 }

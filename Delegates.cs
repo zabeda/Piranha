@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
+
+using Piranha.WebPages;
 
 namespace Piranha
 {
@@ -19,5 +22,7 @@ namespace Piranha
 		public delegate void MenuItemHook(Web.UIHelper ui, StringBuilder str, Models.Sitemap page, bool active, bool activechild) ;
 		public delegate void MenuItemLinkHook(Web.UIHelper ui, StringBuilder str, string title, string url) ;
 		public delegate void MenuLevelHook(Web.UIHelper ui, StringBuilder str, string cssclass) ;
+
+		public delegate void ModelLoadedHook<T>(Controller controller, Manager.MenuItem menu, T model) ;
 	}
 }

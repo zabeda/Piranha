@@ -74,5 +74,30 @@ namespace Piranha.WebPages
 			/// </summary>
 			public static Delegates.MenuItemLinkHook RenderItemLink ;
 		}
+
+		/// <summary>
+		/// The different hooks available for the manager area.
+		/// </summary>
+		public static class Manager {
+			/// <summary>
+			/// Executed after the post list model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.Manager.PostModels.ListModel> PostListModelLoaded ;
+
+			/// <summary>
+			/// Executed after the post edit model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.Manager.PostModels.EditModel> PostEditModelLoaded ;
+
+			/// <summary>
+			/// Executed after the page list model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.Manager.PageModels.ListModel> PageListModelLoaded ;
+
+			/// <summary>
+			/// Executed after the page edit model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
+		}
 	}
 }

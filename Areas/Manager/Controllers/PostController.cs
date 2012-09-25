@@ -15,7 +15,14 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_POST")]
 	    public ActionResult Index() {
-			return View("Index", ListModel.Get());
+			var m = ListModel.Get() ;
+			ViewBag.Title = @Piranha.Resources.Post.ListTitle ;
+
+			// Executes the post list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PostListModelLoaded != null)
+				WebPages.Hooks.Manager.PostListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View(@"~/Areas/Manager/Views/Post/Index.cshtml", m);
         }
 
 		/// <summary>
@@ -29,7 +36,11 @@ namespace Piranha.Areas.Manager.Controllers
 
 			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.ToLower() ;
 
-			return View("Edit", pm) ;
+			// Executes the post edit loaded hook, if registered
+			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
+				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+
+			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", pm) ;
 		}
 
 		/// <summary>
@@ -41,7 +52,11 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel m = EditModel.GetById(new Guid(id)) ;
 			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
-			return View("Edit", m) ;
+			// Executes the post edit loaded hook, if registered
+			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
+				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", m) ;
 		}
 
 		/// <summary>
@@ -65,7 +80,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Post.EditTitleNew + m.Template.Name.ToLower() ;
 			else ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
-			return View("Edit", m) ;
+			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", m) ;
 		}
 
 		/// <summary>

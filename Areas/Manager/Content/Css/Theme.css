@@ -408,6 +408,9 @@ table.template td.locked {
     margin: 0;
     width: 680px;
     }
+.grid_3 .chzn-container-multi .chzn-choices {
+    width: auto;
+    }
 .chzn-container-active .chzn-choices {
     border: none 0px;
     box-shadow: none;
