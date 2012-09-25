@@ -34,7 +34,7 @@ namespace Piranha.Areas.Manager.Controllers
 			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
 				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
-			return View("Index", m) ;
+			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
         }
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Piranha.Areas.Manager.Controllers
 			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
 				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
-			return View("Edit", pm) ;
+			return View(@"~/Areas/Manager/Views/Page/Edit.cshtml", pm) ;
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
 			else ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
 
-			return View("Edit", pm) ;
+			return View(@"~/Areas/Manager/Views/Page/Edit.cshtml", pm) ;
 		}
 
 		/// <summary>
@@ -102,7 +102,7 @@ namespace Piranha.Areas.Manager.Controllers
 			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
 				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
-			return View("Edit", pm) ;
+			return View(@"~/Areas/Manager/Views/Page/Edit.cshtml", pm) ;
 		}
 
 		/// <summary>
