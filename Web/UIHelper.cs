@@ -208,8 +208,9 @@ namespace Piranha.Web
 		/// </summary>
 		/// <param name="StartLevel">The start level of the menu</param>
 		/// <param name="StopLevel">The stop level of the menu</param>
+		/// <param name="Levels">The number of levels. Use this if you don't know the start level</param>
 		/// <returns>A html string</returns>
-		public IHtmlString Menu(int StartLevel = 1, int StopLevel = Int32.MaxValue, 
+		public IHtmlString Menu(int StartLevel = 1, int StopLevel = Int32.MaxValue, int Levels = 0,
 			string RootNode = "", string CssClass = "menu") 
 		{
 			StringBuilder str = new StringBuilder() ;
@@ -233,6 +234,8 @@ namespace Piranha.Web
 						Current.Id, StartLevel) ;
 				}
 				if (sm != null) {
+					if (StopLevel == Int32.MaxValue && Levels > 0 && sm.Count > 0)
+						StopLevel = sm[0].Level + Math.Max(0, Levels - 1) ;
 					RenderUL(Current, sm, str, StopLevel, CssClass) ;
 				}
 			}

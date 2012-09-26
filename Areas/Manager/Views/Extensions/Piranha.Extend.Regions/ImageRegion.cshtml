@@ -29,11 +29,11 @@
         });
     });
 </script>
-<div class="box image-thumb" style="width:71px;height:71px;float:right;margin:14px;border-color:#e2e2e2;">
+<div class="box" style="width:71px;height:71px;float:right;margin:14px;border-color:#e2e2e2;">
     <img id="@imgPrev" src="@Url.GetThumbnailUrl(Model.Id, 71)" alt="@Model.Description" />
 </div>
-<div class="image-main" style="margin-right:90px">
-    <ul class="form">
+<div style="margin-right:90px;">
+    <ul class="form" style="padding-bottom:4px;">
         <li>
             @Html.LabelFor(m => m.Name)
             <div class="upload">
@@ -49,7 +49,7 @@
                 @Html.TextBoxFor(m => m.Description)</div>
         </li>
     </ul>
-    <button id="@btnRm" class="btn" style="margin-left: 14px;">Remove current image</button>
+    <button id="@btnRm" class="btn" style="margin-left:14px;margin-bottom:14px;">Remove current image</button>
 </div>
 <div id="@boxId" class="floatbox">
     <div class="bg"></div>
