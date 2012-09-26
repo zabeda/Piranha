@@ -36,5 +36,30 @@ namespace Piranha.Web
 		public static string GetPreviewlink(this UrlHelper helper, Guid id) {
 			return helper.Content("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PREVIEW") + "/" + id.ToString()) ;
 		}
+
+		/// <summary>
+		/// Generates an image tag for the specified thumbnail.
+		/// </summary>
+		/// <param name="id">The content id</param>
+		/// <param name="size">Optional size</param>
+		/// <returns>The url</returns>
+		public static string GetThumbnailUrl(this UrlHelper helper, Guid id, int size = 0) {
+			Content cnt = Models.Content.GetSingle(id) ;
+			
+			if (cnt != null)
+				return helper.Content("~/" + 
+					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + 
+					id.ToString() + (size > 0 ? "/" + size.ToString() : "")) ;
+			return "" ;
+		}
+
+		/// <summary>
+		/// Generats the base url for all thumbnails.
+		/// </summary>
+		/// <param name="helper">The url helper</param>
+		/// <returns>The base url</returns>
+		public static string GetThumbnailBaseUrl(this UrlHelper helper) {
+			return helper.Content("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL")) ;
+		}
 	}
 }

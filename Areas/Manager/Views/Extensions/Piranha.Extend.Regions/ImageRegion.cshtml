@@ -8,33 +8,50 @@
     var nameId = @ViewData.TemplateInfo.GetFullHtmlFieldId("Name") ;
     var altId = @ViewData.TemplateInfo.GetFullHtmlFieldId("Description") ;
     var imgPrev = @ViewData.TemplateInfo.GetFullHtmlFieldId("Preview") ;
+    var btnRm = @ViewData.TemplateInfo.GetFullHtmlFieldId("btnRemove") ;
 }
 <script type="text/javascript">
+    var thumbpath = '@Url.GetThumbnailBaseUrl()';
+
     $(document).ready(function () {
         var m = new piranha.media('@btnId', '@boxId', function (data) {
             $('#@retId').val(data.Id);
             $('#@nameId').val(data.DisplayName);
             $('#@altId').val(data.Description);
+            $('#@imgPrev').attr('src', thumbpath + '/' + data.Id + '/71');
+        });
+        $('#@btnRm').click(function () {
+            $('#@retId').val('');
+            $('#@nameId').val('');
+            $('#@altId').val('');
+            $('#@imgPrev').attr('src', '');
+            return false;
         });
     });
 </script>
-<ul class="form">
-    <li>
-        @Html.LabelFor(m => m.Name)
-        <div class="upload">
-            @Html.HiddenFor(m => m.Id)
-            <button type="button" id="@btnId" class="btn right">@Piranha.Resources.Global.ChooseFile</button>
+<div class="box image-thumb" style="width:71px;height:71px;float:right;margin:14px;border-color:#e2e2e2;">
+    <img id="@imgPrev" src="@Url.GetThumbnailUrl(Model.Id, 71)" alt="@Model.Description" />
+</div>
+<div class="image-main" style="margin-right:90px">
+    <ul class="form">
+        <li>
+            @Html.LabelFor(m => m.Name)
+            <div class="upload">
+                @Html.HiddenFor(m => m.Id)
+                <button type="button" id="@btnId" class="btn right">@Piranha.Resources.Global.ChooseFile</button>
+                <div class="input">
+                    @Html.TextBoxFor(m => m.Name)</div>
+            </div>
+        </li>
+        <li>
+            @Html.LabelFor(m => m.Description)
             <div class="input">
-                @Html.TextBoxFor(m => m.Name)</div>
-        </div>
-    </li>
-    <li>
-        @Html.LabelFor(m => m.Description)
-        <div class="input">
-            @Html.TextBoxFor(m => m.Description)</div>
-    </li>
-</ul>
- <div id="@boxId" class="floatbox">
+                @Html.TextBoxFor(m => m.Description)</div>
+        </li>
+    </ul>
+    <button id="@btnRm" class="btn" style="margin-left: 14px;">Remove current image</button>
+</div>
+<div id="@boxId" class="floatbox">
     <div class="bg"></div>
     <div class="box" style="max-width:640px;min-width:510px;min-height:260px;">
     </div>

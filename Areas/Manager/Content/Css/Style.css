@@ -49,9 +49,9 @@ input, select, textarea {
 .upload .input {
     margin-right: 90px;
     }
-.upload button {
+.upload button,
+.form li .upload button {
     float: right;
-    width: 80px;
     margin: 0 0 0 10px;
     }
 .upload input[type="file"] {
@@ -203,6 +203,9 @@ button.full {
     }
 .main-content td {
     vertical-align: top;
+    }
+.main-content .list td {
+    vertical-align: middle;
     }
 .main-content .tools {
     background: #eee;
