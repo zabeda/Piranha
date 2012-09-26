@@ -23,7 +23,14 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <returns></returns>
 		[Access(Function="ADMIN_USER")]
 		public ActionResult UserList() {
-            return View("UserList", UserListModel.Get());
+			var m = UserListModel.Get() ;
+			ViewBag.Title = @Piranha.Resources.Settings.ListTitleUsers ;
+
+			// Executes the user list loaded hook, if registered
+			if (WebPages.Hooks.Manager.UserListModelLoaded != null)
+				WebPages.Hooks.Manager.UserListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+            return View(@"~/Areas/Manager/Views/Settings/UserList.cshtml", m);
 		}
 
 		/// <summary>
@@ -32,13 +39,20 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="id">The user id</param>
 		[Access(Function="ADMIN_USER")]
 		public new ActionResult User(string id) {
+			var m = new UserEditModel() ;
+
 			if (!String.IsNullOrEmpty(id)) {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
-				return View("User", UserEditModel.GetById(new Guid(id))) ;
+				m = UserEditModel.GetById(new Guid(id)) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
-				return View("User", new UserEditModel()) ;
 			}
+
+			// Executes the user list loaded hook, if registered
+			if (WebPages.Hooks.Manager.UserEditModelLoaded != null)
+				WebPages.Hooks.Manager.UserEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+	
+			return View(@"~/Areas/Manager/Views/Settings/User.cshtml", m) ;
 		}
 
 		/// <summary>
@@ -63,7 +77,7 @@ namespace Piranha.Areas.Manager.Controllers
 					ErrorMessage(e.ToString()) ;
 				}
 			}
-			return View("User", um) ;
+			return View(@"~/Areas/Manager/Views/Settings/User.cshtml", um) ;
 		}
 
 		/// <summary>
@@ -105,7 +119,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_GROUP")]
         public ActionResult GroupList() {
-            return View("GroupList", GroupListModel.Get());
+            return View(@"~/Areas/Manager/Views/Settings/GroupList.cshtml", GroupListModel.Get());
         }
 
 		/// <summary>
@@ -116,10 +130,10 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Group(string id) {
 			if (!String.IsNullOrEmpty(id)) {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingGroup ;
-				return View("Group", GroupEditModel.GetById(new Guid(id))) ;
+				return View(@"~/Areas/Manager/Views/Settings/Group.cshtml", GroupEditModel.GetById(new Guid(id))) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewGroup ;
-				return View("Group", new GroupEditModel()) ;
+				return View(@"~/Areas/Manager/Views/Settings/Group.cshtml", new GroupEditModel()) ;
 			}
 		}
 
@@ -146,7 +160,7 @@ namespace Piranha.Areas.Manager.Controllers
 				}
 			}
 			gm.Refresh() ;
-			return View("Group", gm) ;
+			return View(@"~/Areas/Manager/Views/Settings/Group.cshtml", gm) ;
 		}
 
 		/// <summary>
@@ -172,7 +186,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_ACCESS")]
         public ActionResult AccessList() {
-            return View("AccessList", AccessListModel.Get());
+            return View(@"~/Areas/Manager/Views/Settings/AccessList.cshtml", AccessListModel.Get());
         }
 
 		/// <summary>
@@ -183,10 +197,10 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Access(string id) {
 			if (!String.IsNullOrEmpty(id)) {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingAccess ;
-				return View("Access", AccessEditModel.GetById(new Guid(id))) ;
+				return View(@"~/Areas/Manager/Views/Settings/Access.cshtml", AccessEditModel.GetById(new Guid(id))) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewAccess ;
-				return View("Access", new AccessEditModel()) ;
+				return View(@"~/Areas/Manager/Views/Settings/Access.cshtml", new AccessEditModel()) ;
 			}
 		}
 
@@ -212,7 +226,7 @@ namespace Piranha.Areas.Manager.Controllers
 					ErrorMessage(e.ToString()) ;
 				}
 			}
-			return View("Access", am) ;
+			return View(@"~/Areas/Manager/Views/Settings/Access.cshtml", am) ;
 		}
 
 		/// <summary>
@@ -238,7 +252,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_PARAM")]
         public ActionResult ParamList() {
-            return View("ParamList", ParamListModel.Get());
+            return View(@"~/Areas/Manager/Views/Settings/ParamList.cshtml", ParamListModel.Get());
         }
 
 		/// <summary>
@@ -249,10 +263,10 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Param(string id) {
 			if (!String.IsNullOrEmpty(id)) {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingParam ;
-				return View("Param", ParamEditModel.GetById(new Guid(id))) ;
+				return View(@"~/Areas/Manager/Views/Settings/Param.cshtml", ParamEditModel.GetById(new Guid(id))) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewParam ;
-				return View("Param", new ParamEditModel()) ;
+				return View(@"~/Areas/Manager/Views/Settings/Param.cshtml", new ParamEditModel()) ;
 			}
 		}
 
@@ -278,7 +292,7 @@ namespace Piranha.Areas.Manager.Controllers
 					ErrorMessage(e.ToString()) ;
 				}
 			}
-			return View("Param", pm) ;
+			return View(@"~/Areas/Manager/Views/Settings/Param.cshtml", pm) ;
 		}
 
 
@@ -296,13 +310,6 @@ namespace Piranha.Areas.Manager.Controllers
 			else ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
 
 			return ParamList() ;
-		}
-		#endregion
-
-		#region External actions
-		[Access(Function="ADMIN_EXTERNAL")]
-		public ActionResult ExternalList() {
-			return View() ;
 		}
 		#endregion
 	}

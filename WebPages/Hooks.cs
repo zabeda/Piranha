@@ -98,6 +98,16 @@ namespace Piranha.WebPages
 			/// Executed after the page edit model is loaded but before the view is called.
 			/// </summary>
 			public static Delegates.ModelLoadedHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
+
+			/// <summary>
+			/// Executed after the user list model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.Manager.SettingModels.UserListModel> UserListModelLoaded ;
+
+			/// <summary>
+			/// Executed after the user edit model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
 		}
 	}
 }
