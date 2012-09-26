@@ -11,48 +11,63 @@ namespace Piranha.Models
 	/// </summary>
 	public interface IPost {
 		/// <summary>
-		/// Gets/sets the id.
+		/// Gets the id.
 		/// </summary>
 		Guid Id { get ; }
 
 		/// <summary>
-		/// Gets/sets the template id.
-		/// </summary>
-		Guid TemplateId { get ; }
-
-		/// <summary>
-		/// Gets/sets the title.
+		/// Gets the title.
 		/// </summary>
 		string Title { get ; }
 
 		/// <summary>
-		/// Gets/sets the permalink.
+		/// Gets the permalink.
 		/// </summary>
 		string Permalink { get ; }
 
 		/// <summary>
-		/// Gets/sets the excerpt.
+		/// Gets the excerpt.
 		/// </summary>
 		string Excerpt { get ; }
 
 		/// <summary>
-		/// Gets/sets the body.
+		/// Gets the body.
 		/// </summary>
 		HtmlString Body { get ; }
 
 		/// <summary>
-		/// Gets/sets the created date.
+		/// Gets the meta keywords.
+		/// </summary>
+		string Keywords { get ; }
+
+		/// <summary>
+		/// Gets the meta description.
+		/// </summary>
+		string Description { get ; }
+
+		/// <summary>
+		/// Gets the template name.
+		/// </summary>
+		string TemplateName { get ; }
+
+		/// <summary>
+		/// Gets the created date.
 		/// </summary>
 		DateTime Created { get ; }
 
 		/// <summary>
-		/// Gets/sets the updated date.
+		/// Gets the updated date.
 		/// </summary>
 		DateTime Updated { get ; }
 
 		/// <summary>
-		/// Gets/sets the published date.
+		/// Gets the published date.
 		/// </summary>
 		DateTime Published { get ; }
+
+		/// <summary>
+		/// Gets the last published date.
+		/// </summary>
+		DateTime LastPublished { get ; }
 	}
 }
