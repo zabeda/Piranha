@@ -55,6 +55,10 @@ namespace Piranha.Extend
 									Name = attr.Name,
 									Type = type
 								});
+								// Check if the extension implements the ensure method
+								var m = type.GetMethod("Ensure") ;
+								if (m != null)
+									m.Invoke(Activator.CreateInstance(type), null) ;
 							}
 						}
 					}
