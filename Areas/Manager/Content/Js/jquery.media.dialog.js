@@ -52,8 +52,12 @@ piranha.media = function (buttonId, floatboxId, callback) {
             }
         });
     };
+    this.boxClose = function () {
+        floatBox.close(self.boxId);
+    };
 
     $('#' + this.boxId + ' .gallery-item img').live('click', this.mediaClick);
     $('#' + this.boxId + ' .gallery-item img.folder').live('click', this.folderClick);
     $('#' + this.btnId).live('click', this.buttonClick);
+    $('#' + this.boxId + ' .title .close-btn').live('click', this.boxClose);
 };
