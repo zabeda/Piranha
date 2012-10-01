@@ -100,6 +100,11 @@ namespace Piranha.Models.Manager.PageModels
 		/// Gets/sets the extensions.
 		/// </summary>
 		public List<Extension> Extensions { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather this page can be removed.
+		/// </summary>
+		public bool CanDelete { get ; set ; }
 		#endregion
 
 		#region Inner classes
@@ -122,6 +127,7 @@ namespace Piranha.Models.Manager.PageModels
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			DisableGroups = SysGroup.GetParents(Guid.Empty) ;
 			DisableGroups.Reverse() ;
+			CanDelete = true ;
 
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
 			groups.Reverse() ;
@@ -144,6 +150,7 @@ namespace Piranha.Models.Manager.PageModels
 
 			if (m.Page != null) {
 				m.GetRelated() ;
+				m.CanDelete = Page.GetScalar("SELECT count(*) FROM page WHERE page_parent_id=@0", id) == 0;
 			} else throw new ArgumentException("Could not find page with id {" + id.ToString() + "}") ;
 
 			return m ;
