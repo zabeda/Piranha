@@ -55,6 +55,11 @@ namespace Piranha.WebPages
 			// Load the model if the post wasn't cached
 			if (!cached)
 				InitModel(PostModel.Get<T>(post)) ;
+
+			// Execute hook, if it exists
+			if (Hooks.Model.PostModelLoaded != null)
+				Hooks.Model.PostModelLoaded(Model) ;
+
 			base.InitializePage() ;
 		}
 

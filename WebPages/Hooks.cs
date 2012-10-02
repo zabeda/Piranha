@@ -76,38 +76,53 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// The different model hooks available for the application.
+		/// </summary>
+		public static class Model { 
+			/// <summary>
+			/// Executed after the page model is loaded.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.PageModel> PageModelLoaded ;
+
+			/// <summary>
+			/// Executed after the page model is loaded.
+			/// </summary>
+			public static Delegates.ModelLoadedHook<Models.PostModel> PostModelLoaded ;
+		}
+
+		/// <summary>
 		/// The different hooks available for the manager area.
 		/// </summary>
 		public static class Manager {
 			/// <summary>
 			/// Executed after the post list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ModelLoadedHook<Models.Manager.PostModels.ListModel> PostListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.PostModels.ListModel> PostListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the post edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ModelLoadedHook<Models.Manager.PostModels.EditModel> PostEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.PostModels.EditModel> PostEditModelLoaded ;
 
 			/// <summary>
 			/// Executed after the page list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ModelLoadedHook<Models.Manager.PageModels.ListModel> PageListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.PageModels.ListModel> PageListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the page edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ModelLoadedHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
 
 			/// <summary>
 			/// Executed after the user list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ModelLoadedHook<Models.Manager.SettingModels.UserListModel> UserListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserListModel> UserListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the user edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
 		}
 	}
 }

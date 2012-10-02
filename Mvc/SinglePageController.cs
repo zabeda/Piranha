@@ -57,6 +57,11 @@ namespace Piranha.Mvc
 			// Load the model if the page wasn't cached
 			if (!cached)
 				model = PageModel.Get(page) ;
+
+			// Execute hook, if it exists
+			if (WebPages.Hooks.Model.PageModelLoaded != null)
+				WebPages.Hooks.Model.PageModelLoaded(model) ;
+
 			base.OnActionExecuting(filterContext); 
 		}
 
@@ -80,6 +85,7 @@ namespace Piranha.Mvc
 			m.Regions = model.Regions ;
 			m.Attachments = model.Attachments ;
 			m.Properties = model.Properties ;
+			m.Extensions = model.Extensions ;
 
 			return m ;
 		}

@@ -23,6 +23,7 @@ namespace Piranha
 		public delegate void MenuItemLinkHook(Web.UIHelper ui, StringBuilder str, Models.Sitemap page) ;
 		public delegate void MenuLevelHook(Web.UIHelper ui, StringBuilder str, string cssclass) ;
 
-		public delegate void ModelLoadedHook<T>(Controller controller, Manager.MenuItem menu, T model) ;
+		public delegate void ModelLoadedHook<T>(T model) ;
+		public delegate void ManagerModelLoadedHook<T>(Controller controller, Manager.MenuItem menu, T model) ;
 	}
 }

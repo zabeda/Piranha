@@ -73,6 +73,11 @@ namespace Piranha.WebPages
 			// Load the model if the page wasn't cached
 			if (!cached)
 				InitModel(PageModel.Get<T>(page)) ;
+
+			// Execute hook, if it exists
+			if (Hooks.Model.PageModelLoaded != null)
+				Hooks.Model.PageModelLoaded(Model) ;
+
 			base.InitializePage() ;
 		}
 
