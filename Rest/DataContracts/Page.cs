@@ -24,6 +24,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public List<Attachment> Attachments { get ; set ; }
 		[DataMember()]
+		public List<Extension> Extensions { get ; set ; }
+		[DataMember()]
 		public string Created { get ; set ; }
 		[DataMember()]
 		public string Updated { get ; set ; }
@@ -39,6 +41,7 @@ namespace Piranha.Rest.DataContracts
 			Regions = new List<Region>() ;
 			Properties = new List<Property>() ;
 			Attachments = new List<Attachment>() ;
+			Extensions = new List<Extension>() ;
 		}
 	}
 }

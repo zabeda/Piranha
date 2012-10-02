@@ -84,6 +84,11 @@ namespace Piranha.Rest
 					foreach (var content in pm.Attachments)
 						page.Attachments.Add(new Attachment() { Id = content.Id, IsImage = content.IsImage }) ;
 
+					// Extensions
+					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys)
+						page.Extensions.Add(new Extension() { Name = key, Body =
+							((IDictionary<string, object>)pm.Extensions)[key] }) ;
+
 					return page ;
 				}
 			} catch {}
