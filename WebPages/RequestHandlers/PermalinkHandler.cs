@@ -53,9 +53,10 @@ namespace Piranha.WebPages.RequestHandlers
 								if (page.Controller.StartsWith("~/")) {
 									context.RewritePath(page.Controller + "/" + args.Subset(segments).Implode("/") + "?permalink=" + perm.Name, false);
 								} else context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + 
-									(draft ? "?draft=true" : ""), false) ;
+									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
 							} else {
-								context.RewritePath("~/page/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+								context.RewritePath("~/page/" + args.Implode("/") + 
+									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
 							}
 						} else {
 							context.Response.StatusCode = 404 ;
@@ -66,9 +67,10 @@ namespace Piranha.WebPages.RequestHandlers
 						if (post != null) {
 							if (!String.IsNullOrEmpty(post.Controller)) {
 								context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + 
-									(draft ? "?draft=true" : ""), false) ;
+									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
 							} else {
-								context.RewritePath("~/post/" + args.Implode("/") + (draft ? "?draft=true" : ""), false) ;
+								context.RewritePath("~/post/" + args.Implode("/") + 
+									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
 							}
 						} else {
 							context.Response.StatusCode = 404 ;
@@ -87,6 +89,15 @@ namespace Piranha.WebPages.RequestHandlers
 					context.RewritePath("~/templates/" + page.Controller, false) ;
 				else context.RewritePath("~/page", false) ;
 			}
+		}
+
+		/// <summary>
+		/// Gets the current culture param.
+		/// </summary>
+		/// <param name="draft">Weather this is a draft or not.</param>
+		/// <returns>The request param</returns>
+		private string GetCultureParam(bool draft) {
+			return (draft ? "&" : "?") + "piranha-culture=" + System.Globalization.CultureInfo.CurrentUICulture.Name ;
 		}
 	}
 }

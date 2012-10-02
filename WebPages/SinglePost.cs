@@ -50,7 +50,7 @@ namespace Piranha.WebPages
 			DateTime tmod = TemplateCache.GetLastModified(!String.IsNullOrEmpty(post.Controller) ?
 				post.Controller : "~/post.cshtml") ;
 			mod = tmod > mod ? tmod : mod ;
-			ClientCache.HandleClientCache(HttpContext.Current, post.Id.ToString(), mod) ;
+			ClientCache.HandleClientCache(HttpContext.Current, WebPiranha.GetCulturePrefix() + post.Id.ToString(), mod) ;
 
 			// Load the model if the post wasn't cached
 			if (!cached)

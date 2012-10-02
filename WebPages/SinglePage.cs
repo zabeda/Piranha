@@ -61,7 +61,7 @@ namespace Piranha.WebPages
 				DateTime tmod = TemplateCache.GetLastModified(!String.IsNullOrEmpty(page.Controller) ?
 					page.Controller : "~/page.cshtml") ;
 				mod = tmod > mod ? tmod : mod ;
-				cached = ClientCache.HandleClientCache(HttpContext.Current, page.Id.ToString(), mod) ;
+				cached = ClientCache.HandleClientCache(HttpContext.Current, WebPiranha.GetCulturePrefix() + page.Id.ToString(), mod) ;
 			}
 			// Check for disabled groups
 			if (page.DisabledGroups.Contains(User.GetProfile().GroupId)) {

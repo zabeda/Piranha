@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -135,21 +136,41 @@ namespace Piranha.Web
 		/// Generates the url to the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
+		/// <param name="prefix">Optional culture prefix</param>
 		/// <returns>The url</returns>
-		public IHtmlString Permalink(string permalink) {
-			return SiteUrl("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + permalink) ;
+		public IHtmlString Permalink(string permalink = "", string prefix = "") {
+			if (prefix == "") {
+				prefix = WebPiranha.CulturePrefixes.ContainsKey(CultureInfo.CurrentUICulture.Name) ? 
+					WebPiranha.CulturePrefixes[CultureInfo.CurrentUICulture.Name] + "/" : "" ;
+			}
+			if (prefix == null)
+				prefix = "" ;
+			if (prefix != "" && !prefix.EndsWith("/"))
+				prefix += "/" ;
+			if (permalink == "" && CurrentPage != null)
+				permalink = CurrentPage.Permalink ;
+			return SiteUrl("~/" + prefix + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + permalink) ;
 		}
 
 		/// <summary>
 		/// Generates the url to the given permalink.
 		/// </summary>
 		/// <param name="permalinkid">The id of the permalink</param>
+		/// <param name="prefix">Optional culture prefix</param>
 		/// <returns></returns>
-		public IHtmlString Permalink(Guid permalinkid) {
+		public IHtmlString Permalink(Guid permalinkid, string prefix = "") {
+			if (prefix == "") {
+				prefix = WebPiranha.CulturePrefixes.ContainsKey(CultureInfo.CurrentUICulture.Name) ? 
+					WebPiranha.CulturePrefixes[CultureInfo.CurrentUICulture.Name] + "/" : "" ;
+			}
+			if (prefix == null)
+				prefix = "" ;
+			if (prefix != "" && !prefix.EndsWith("/"))
+				prefix += "/" ;
 			var perm = Models.Permalink.GetSingle(permalinkid) ;
 			if (perm != null)
-				return SiteUrl("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + perm.Name) ;
-			return SiteUrl("~/") ;
+				return SiteUrl("~/" + prefix + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" + perm.Name) ;
+			return SiteUrl("~/" + prefix) ;
 		}
 
 		/// <summary>
@@ -354,8 +375,9 @@ namespace Piranha.Web
 				}
 				// Render item link
 				if (Hooks.Menu.RenderItemLink != null) {
-					Hooks.Menu.RenderItemLink(this, str, 
-						!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title, GenerateUrl(page)) ;
+					Hooks.Menu.RenderItemLink(this, str, page) ;
+					//Hooks.Menu.RenderItemLink(this, str, 
+					//	!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title, GenerateUrl(page)) ;
 				} else {
 					str.AppendLine(String.Format("<a href=\"{0}\">{1}</a>", GenerateUrl(page),
 						!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)) ;

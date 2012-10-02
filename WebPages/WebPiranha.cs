@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.ServiceModel.Activation;
 using System.Text;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Compilation;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -20,9 +22,19 @@ namespace Piranha.WebPages
 	{
 		#region Members
 		/// <summary>
-		/// The different request handlers
+		/// The different request handlers.
 		/// </summary>
-		private static Dictionary<string, RequestHandlerRegistration> Handlers = new Dictionary<string, RequestHandlerRegistration>() ;
+		internal static Dictionary<string, RequestHandlerRegistration> Handlers = new Dictionary<string, RequestHandlerRegistration>() ;
+
+		/// <summary>
+		/// The registered cultures.
+		/// </summary>
+		internal static Dictionary<string, CultureInfo> Cultures = new Dictionary<string,CultureInfo>() ;
+
+		/// <summary>
+		/// The registered cultures prefixes.
+		/// </summary>
+		internal static Dictionary<string, string> CulturePrefixes = new Dictionary<string, string>() ;
 		#endregion
 
 		#region Properties
@@ -50,6 +62,16 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Registers the culture to the given prefix.
+		/// </summary>
+		/// <param name="urlprefix">The url prefix.</param>
+		/// <param name="culture">The culture</param>
+		public static void RegisterCulture(string urlprefix, CultureInfo culture) {
+			Cultures.Add(urlprefix, culture) ;
+			CulturePrefixes.Add(culture.Name, urlprefix) ; 
+		}
+
+		/// <summary>
 		/// Gets the current url prefix used for the given handler id.
 		/// </summary>
 		/// <param name="id">The handler id</param>
@@ -58,6 +80,14 @@ namespace Piranha.WebPages
 			if (Handlers.ContainsKey(id.ToUpper()))
 				return Handlers[id.ToUpper()].UrlPrefix ;
 			return "" ;
+		}
+
+		/// <summary>
+		/// Get's the current culture prefix.
+		/// </summary>
+		/// <returns>The culture prefix</returns>
+		public static string GetCulturePrefix() {
+			return (CulturePrefixes.ContainsKey(CultureInfo.CurrentUICulture.Name) ? CulturePrefixes[CultureInfo.CurrentUICulture.Name] + "/" : "") ;
 		}
 
 		/// <summary>
@@ -181,15 +211,27 @@ namespace Piranha.WebPages
 			string[] args = path.Split(new char[] {'/'}).Subset(1) ;
 				
 			if (args.Length > 0) {
+				int pos = 0 ;
+
 				// Ensure database
 				if (args[0] == "" && SysParam.GetByName("SITE_VERSION") == null)
 					context.Response.Redirect("~/manager") ;
 
+				// Check for culture prefix
+				if (Cultures.ContainsKey(args[0])) {
+					System.Threading.Thread.CurrentThread.CurrentUICulture = Cultures[args[0]] ;
+					pos = 1;
+				} else {
+					var def = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization") ;
+					if (def != null)
+						System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
+				}
+
 				// Find the correct request handler
 				foreach (RequestHandlerRegistration hr in Handlers.Values) {
-					if (hr.UrlPrefix.ToLower() == args[0].ToLower()) {
+					if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
 						// Execute the handler
-						hr.Handler.HandleRequest(context, args.Subset(1)) ;
+						hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
 						break ;
 					}
 				}
