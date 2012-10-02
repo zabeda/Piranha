@@ -75,6 +75,7 @@ namespace Piranha.Models.Manager.ContentModels
 			folders.Insert(0, new Content()) ;
 			Extensions = Content.GetExtensions() ;
 			Folders = SortFolders(Content.GetFolderStructure()) ;
+			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
 		}
 
 		/// <summary>

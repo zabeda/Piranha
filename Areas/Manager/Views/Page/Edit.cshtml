@@ -103,7 +103,9 @@
             @if (Model.Page.Published > DateTime.MinValue && Model.Page.Updated > Model.Page.LastPublished) {
             <li><a href="@Url.Action("revert", new { id = Model.Page.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
             }
+            @if (!Model.Page.IsNew && Model.CanDelete) {
             <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            }
             <li><a href="@Url.Action("index", new { id = Model.Page.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Url.Action("edit", new { id = Model.Page.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
@@ -112,7 +114,7 @@
 </div>
 }
 
-@{ Html.BeginForm("edit", "page") ; }
+@{ Html.BeginForm("edit") ; }
 <div>
     @Html.HiddenFor(m => m.Page.IsNew)
     @Html.HiddenFor(m => m.Page.Id)

@@ -110,7 +110,7 @@
             <span class="type">@Piranha.Resources.Global.Type</span>
             <span class="title">@Piranha.Resources.Global.Title</span>
         </li>
-        @Html.Partial("Partial/SiteTree", Model.SiteMap)
+        @Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", Model.SiteMap)
     </ul>
     
     <table id="list" class="list" style="display:none">
