@@ -97,7 +97,7 @@
 </div>
 }
 <div class="grid_12">
-@using (Html.BeginForm("insert", "page")) {
+@using (Html.BeginForm("insert", (string)ViewContext.RouteData.Values["Controller"])) {
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")

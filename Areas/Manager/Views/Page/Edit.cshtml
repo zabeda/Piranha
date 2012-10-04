@@ -114,7 +114,7 @@
 </div>
 }
 
-@{ Html.BeginForm("edit") ; }
+@{ Html.BeginForm("edit", (string)ViewContext.RouteData.Values["Controller"]) ; }
 <div>
     @Html.HiddenFor(m => m.Page.IsNew)
     @Html.HiddenFor(m => m.Page.Id)

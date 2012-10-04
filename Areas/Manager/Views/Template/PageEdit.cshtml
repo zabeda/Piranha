@@ -29,7 +29,7 @@
 </div>
 }
 
-@{ Html.BeginForm("page") ; }
+@{ Html.BeginForm("page", "template") ; }
 <div>
     @Html.HiddenFor(m => m.Template.Id)
     @Html.HiddenFor(m => m.Template.IsNew)
