@@ -39,6 +39,10 @@ namespace Piranha.Rest
 			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_draft = 0", latest).ForEach(p => 
 				changes.Pages.Add(new PageService().GetInternal(p.Id.ToString()))) ;
 
+			// Get all posts last published after the given date.
+			Models.Post.GetFields("post_id", "post_last_published > @0 AND post_draft = 0", latest).ForEach(p =>
+				changes.Posts.Add(new PostService().GetInternal(p.Id.ToString()))) ;
+
 			// Get all categories updated after the given date.
 			new CategoryService().Get().Where(c => Convert.ToDateTime(c.Updated) > latest).
 				Each((i, c) => changes.Categories.Add(c)) ;

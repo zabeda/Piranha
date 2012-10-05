@@ -15,6 +15,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public List<Page> Pages { get ; set ; }
 		[DataMember()]
+		public List<Post> Posts { get ; set ; }
+		[DataMember()]
 		public List<Category> Categories { get ; set ; }
 		[DataMember()]
 		public List<Content> Content { get ; set ; }
@@ -26,6 +28,7 @@ namespace Piranha.Rest.DataContracts
 		public Changes() {
 			Sitemap = new List<Sitemap>() ;
 			Pages = new List<Page>() ;
+			Posts = new List<Post>() ;
 			Categories = new List<Category>() ;
 			Content = new List<Content>() ;
 			Deleted = new Deleted() ;
