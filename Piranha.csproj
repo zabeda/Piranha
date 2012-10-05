@@ -90,6 +90,8 @@
     <Compile Include="Extend\IExtension.cs" />
     <Compile Include="Models\Manager\Placement.cs" />
     <Compile Include="Rest\DataContracts\Extension.cs" />
+    <Compile Include="Rest\DataContracts\Post.cs" />
+    <Compile Include="Rest\PostService.cs" />
     <Compile Include="WebPages\Manager.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
