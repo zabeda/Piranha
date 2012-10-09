@@ -185,7 +185,6 @@
     <Compile Include="WebPages\Archive.cs" />
     <Compile Include="WebPages\Hooks.cs" />
     <Compile Include="WebPages\PiranhaHelper.cs" />
-    <Compile Include="WebPages\RequestHandlers\AccountHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ContentHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\DraftHandler.cs" />
@@ -200,6 +199,7 @@
     <Compile Include="WebPages\LayoutPage.cs" />
     <Compile Include="WebPages\ModelBinder.cs" />
     <Compile Include="WebPages\WebThumbnail.cs" />
+    <Compile Include="Web\AuthController.cs" />
     <Compile Include="Web\CultureHelper.cs" />
     <Compile Include="Web\GravatarHelper.cs" />
     <Compile Include="Web\ResourceHandler.cs" />

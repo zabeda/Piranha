@@ -122,7 +122,6 @@ namespace Piranha.WebPages
 			RegisterHandler("media", "CONTENT", new ContentHandler()) ;
 			RegisterHandler("thumb", "THUMBNAIL", new ThumbnailHandler()) ;
 			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;
-			RegisterHandler("account", "ACCOUNT", new AccountHandler()) ;
 			RegisterHandler("archive", "ARCHIVE", new ArchiveHandler()) ;
 			RegisterHandler("rss", "RSS", new RssHandler()) ;
 		}
@@ -153,6 +152,9 @@ namespace Piranha.WebPages
 				HostingEnvironment.RegisterVirtualPathProvider(new Piranha.Web.ResourcePathProvider()) ;
 			}
 
+			// Register the basic account route
+			RouteTable.Routes.MapRoute("Account", "account/{action}", new { controller = "auth", action = "index" }, new string[] { "Piranha.Web" }) ;
+
 			// This will trigger the manager area registration
 			AreaRegistration.RegisterAllAreas() ;
 
@@ -181,7 +183,7 @@ namespace Piranha.WebPages
 			context.MapRoute(
 				"Manager",
 				"manager/{controller}/{action}/{id}",
-				new { controller = "account", action = "index", id = UrlParameter.Optional }
+				new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional }
 			) ;
 
 			// Register filters & binders

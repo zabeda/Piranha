@@ -102,7 +102,7 @@ namespace Piranha.Models
 		public static Permalink GetByName(Guid namespaceid, string name) {
 			if (Cache.ContainsKey(namespaceid)) {
 				if (!Cache[namespaceid].ContainsKey(name)) {
-					Cache[namespaceid][name] = GetSingle("permalink_name = @0", name) ;
+					Cache[namespaceid][name] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
 					if (Cache[namespaceid][name] != null)
 						IdCache[Cache[namespaceid][name].Id] = Cache[namespaceid][name] ;
 				}
