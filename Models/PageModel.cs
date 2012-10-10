@@ -164,6 +164,32 @@ namespace Piranha.Models
 		}
 		#endregion
 
+		#region Helper methods
+		/// <summary>
+		/// Gets the region with the given internal id.
+		/// </summary>
+		/// <typeparam name="T">The target type</typeparam>
+		/// <param name="internalId">The internal id</param>
+		/// <returns>The region</returns>
+		public T Region<T>(string internalId) {
+			if (((IDictionary<string,object>)Regions).ContainsKey(internalId))
+				return (T)((Dictionary<string,object>)Regions)[internalId] ;
+			return default(T) ;
+		}
+
+		/// <summary>
+		/// Gets the extension with the given internal id.
+		/// </summary>
+		/// <typeparam name="T">The target type</typeparam>
+		/// <param name="internalId">The internal id</param>
+		/// <returns>The extension</returns>
+		public T Extension<T>(string internalId) {
+			if (((IDictionary<string,object>)Extensions).ContainsKey(internalId))
+				return (T)((Dictionary<string,object>)Extensions)[internalId] ;
+			return default(T) ;
+		}
+		#endregion
+
 		/// <summary>
 		/// Gets the associated regions for the current page
 		/// </summary>
@@ -176,7 +202,7 @@ namespace Piranha.Models
 				foreach (var rt in regions)
 					((IDictionary<string, object>)Regions).Add(rt.InternalId,
 						Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type])) ;
-				Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(reg => {
+				Piranha.Models.Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(reg => {
 					if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
 						((IDictionary<string, object>)Regions)[reg.InternalId] = reg.Body ;
 				}) ;
