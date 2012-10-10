@@ -342,6 +342,7 @@ namespace Piranha.Models.Manager.PageModels
 			if (Page != null) {
 				if (!Page.IsNew) { // Page.Id != Guid.Empty) {
 					Page = Page.GetSingle(Page.Id, true) ;
+					CanDelete = Page.GetScalar("SELECT count(*) FROM page WHERE page_parent_id = @0", Page.Id) == 0;
 					GetRelated() ;
 				} else {
 					Template = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;

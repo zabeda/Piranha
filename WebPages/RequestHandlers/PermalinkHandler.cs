@@ -53,10 +53,10 @@ namespace Piranha.WebPages.RequestHandlers
 								if (page.Controller.StartsWith("~/")) {
 									context.RewritePath(page.Controller + "/" + args.Subset(segments).Implode("/") + "?permalink=" + perm.Name, false);
 								} else context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
+									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
 							} else {
 								context.RewritePath("~/page/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
+									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
 							}
 						} else {
 							context.Response.StatusCode = 404 ;
@@ -67,10 +67,10 @@ namespace Piranha.WebPages.RequestHandlers
 						if (post != null) {
 							if (!String.IsNullOrEmpty(post.Controller)) {
 								context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
+									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
 							} else {
 								context.RewritePath("~/post/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(draft), false) ;
+									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
 							}
 						} else {
 							context.Response.StatusCode = 404 ;
@@ -96,8 +96,13 @@ namespace Piranha.WebPages.RequestHandlers
 		/// </summary>
 		/// <param name="draft">Weather this is a draft or not.</param>
 		/// <returns>The request param</returns>
-		private string GetCultureParam(bool draft) {
-			return (draft ? "&" : "?") + "piranha-culture=" + System.Globalization.CultureInfo.CurrentUICulture.Name ;
+		private string GetCultureParam(HttpContext context, bool draft) {
+			var query = "" ;
+
+			foreach (var param in context.Request.QueryString.AllKeys) {
+				query += "&" + param + "=" + context.Request.QueryString[param] ;
+			}
+			return (draft ? "&" : "?") + "piranha-culture=" + System.Globalization.CultureInfo.CurrentUICulture.Name + query ;
 		}
 	}
 }

@@ -21,9 +21,11 @@ namespace Piranha.Web
 			string login  = Request["login"] ;
 			string passwd = Request["password"] ;
 			string returl = Request["returnurl"] ;
-			bool persist  = Request["remeberme"] == "1" ;
+			string failurl = Request["failureurl"] ;
+			bool persist = Request["remeberme"] == "1" ;
 
-			SysUser.LoginUser(login, passwd, persist) ;
+			if (!SysUser.LoginUser(login, passwd, persist) && !String.IsNullOrEmpty(failurl))
+				return Redirect(failurl) ;
 
 			if (!String.IsNullOrEmpty(returl))
 				return Redirect(returl) ;
