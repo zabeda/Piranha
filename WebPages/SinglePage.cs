@@ -40,7 +40,18 @@ namespace Piranha.WebPages
 					} catch {}
 				}
 			}
-			
+
+            int segments = 0;
+			// Accept permalinks with '/' in them
+			for (int n = 0; n < UrlData.Count; n++) {
+				var perm = Permalink.GetByName(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), UrlData.ToArray().Subset(0, UrlData.Count - n).Implode("/")) ;
+                segments = UrlData.Count - n;
+				if (perm != null) {
+					permalink = perm.Name ;
+					break ;
+				}
+			}
+
 			// Load the current page
 			if (!String.IsNullOrEmpty(permalink))
 				page = Models.Page.GetByPermalink(permalink, draft) ;

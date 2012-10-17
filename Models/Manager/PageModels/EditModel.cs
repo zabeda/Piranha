@@ -247,9 +247,15 @@ namespace Piranha.Models.Manager.PageModels
 
 					// Save permalink first if the page is new
 					if (permalinkfirst) {
-						if (Permalink.IsNew)
+						if (Permalink.IsNew) {
 							Permalink.Name = Permalink.Generate(!String.IsNullOrEmpty(Page.NavigationTitle) ?
 								Page.NavigationTitle : Page.Title) ;
+							var param = SysParam.GetByName("HIERARCHICAL_PERMALINKS") ;
+							if (param != null && param.Value == "1" && Page.ParentId != Guid.Empty) {
+								var parent = Page.GetSingle(Page.ParentId, true) ;
+								Permalink.Name = parent.Permalink + "/" + Permalink.Name ;
+							}
+						}
 						Permalink.Save(tx) ;
 					}
 
