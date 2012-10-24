@@ -90,7 +90,7 @@ namespace Piranha.Areas.Manager.Controllers
 				using (IDbTransaction tx = Database.OpenTransaction()) {
 					for (int n = Data.Database.InstalledVersion + 1; n <= Data.Database.CurrentVersion; n++) {
 						// Read embedded create script
-						Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream("Piranha.Data.Scripts.Updates." +
+						Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Updates." +
 							n.ToString() + ".sql") ;
 						String sql = new StreamReader(str).ReadToEnd() ;
 						str.Close() ;
@@ -127,12 +127,12 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Create(InstallModel m) {
 			if (m.InstallType == "SCHEMA" || ModelState.IsValid) {
 				// Read embedded create script
-				Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream("Piranha.Data.Scripts.Create.sql") ;
+				Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Create.sql") ;
 				String sql = new StreamReader(str).ReadToEnd() ;
 				str.Close() ;
 
 				// Read embedded data script
-				str = Assembly.GetExecutingAssembly().GetManifestResourceStream("Piranha.Data.Scripts.Data.sql") ;
+				str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Data.sql") ;
 				String data = new StreamReader(str).ReadToEnd() ;
 				str.Close() ;
 

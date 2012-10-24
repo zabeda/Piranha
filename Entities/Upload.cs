@@ -14,7 +14,7 @@ namespace Piranha.Models
 	/// record handled by the cms.
 	/// </summary>
 	[PrimaryKey(Column="upload_id")]
-	public class Upload : GuidRecord<Upload>
+	public class Upload : PiranhaRecord<Upload>
 	{
 		#region Fields
 		/// <summary>
@@ -45,13 +45,25 @@ namespace Piranha.Models
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name="upload_created")]
-		public DateTime Created { get ; set ; }
+		public override DateTime Created { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the id of the creator.
+		/// Gets/sets the updated date.
+		/// </summary>
+		[Column(Name="upload_updated")]
+		public override DateTime Updated { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the id of the user who created the record.
 		/// </summary>
 		[Column(Name="upload_created_by")]
-		public Guid CreatedBy { get ; set ; }
+		public override Guid CreatedBy { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the id of the user who last updated the record.
+		/// </summary>
+		[Column(Name="upload_updated_by")]
+		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Properties
@@ -113,16 +125,14 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
-		/// Saves the record to the database.
+		/// Deletes the upload and it's physical file.
 		/// </summary>
-		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
-		public override bool Save(System.Data.IDbTransaction tx = null) {
-			if (IsNew) {
-				Created   = DateTime.Now ;
-				CreatedBy = new Guid(HttpContext.Current.User.Identity.Name) ;
-			}
-			return base.Save(tx) ;
+		/// <param name="tx"></param>
+		/// <returns></returns>
+		public override bool Delete(System.Data.IDbTransaction tx = null) {
+			if (!IsNew && File.Exists(PhysicalPath))
+				File.Delete(PhysicalPath) ;
+			return base.Delete(tx);
 		}
 
 		#region Private methods

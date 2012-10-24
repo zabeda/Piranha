@@ -300,11 +300,14 @@ CREATE TABLE [upload] (
 	[upload_id] UNIQUEIDENTIFIER NOT NULL,
 	[upload_parent_id] UNIQUEIDENTIFIER NULL,
 	[upload_filename] NVARCHAR(128) NOT NULL,
-	[upload_type] NVARCHAR(64) NOT NULL,
+	[upload_type] NVARCHAR(255) NOT NULL,
 	[upload_created] DATETIME NOT NULL,
+	[upload_updated] DATETIME NOT NULL,
 	[upload_created_by] UNIQUEIDENTIFIER NOT NULL,
+	[upload_updated_by] UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_upload_id PRIMARY KEY ([upload_id]),
-	CONSTRAINT fk_upload_created_by FOREIGN KEY ([upload_created_by]) REFERENCES [sysuser] ([sysuser_id])
+	CONSTRAINT fk_upload_created_by FOREIGN KEY ([upload_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_upload_updated_by FOREIGN KEY ([upload_updated_by]) REFERENCES [sysuser] ([sysuser_id])
 );
 
 CREATE TABLE [extension] (

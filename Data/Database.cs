@@ -21,12 +21,17 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 15 ;
+		public static int CurrentVersion = 16 ;
 
 		/// <summary>
 		/// Gets the currently logged in users identity.
 		/// </summary>
 		internal static Guid Identity ;
+
+		/// <summary>
+		/// Gets/sets the current provider name.
+		/// </summary>
+		public static string ProviderName { get ; set ; }
 		#endregion
 
 		#region Properties
@@ -41,8 +46,39 @@ namespace Piranha.Data
 				return version ;
 			}
 		}
+
+		/// <summary>
+		/// Gets weather the current provider is SqlServer.
+		/// </summary>
+		public static bool IsSqlServer {
+			get { return ProviderName.ToLower() == "system.data.sqlclient" ; }
+		}
+
+		/// <summary>
+		/// Gets weather the current provider is MySql.
+		/// </summary>
+		public static bool IsMySql {
+			get { return ProviderName.ToLower() == "mysql.data.mysqlclient" ; }
+		}
+
+		/// <summary>
+		/// Gets the root namespace for all scripts for the current provider.
+		/// </summary>
+		public static string ScriptRoot {
+			get {
+				if (IsMySql)
+					return "Piranha.Data.Scripts.MySql" ;
+				return "Piranha.Data.Scripts" ;
+			}
+		}
 		#endregion
 
+		/// <summary>
+		/// Logs in the given user when no HttpContext is available.
+		/// </summary>
+		/// <param name="login">Username</param>
+		/// <param name="password">Password</param>
+		/// <returns>If the login was successful</returns>
 		public static bool Login(string login, string password) {
 			var usr = Models.SysUser.Authenticate(login, password) ;
 
@@ -53,6 +89,9 @@ namespace Piranha.Data
 			return false ;
 		}
 
+		/// <summary>
+		/// Logs out the current user.
+		/// </summary>
 		public static void Logout() {
 			Identity = Guid.Empty ;
 		}
@@ -132,6 +171,9 @@ namespace Piranha.Data
 		private static DbProviderFactory GetFactory(string name) {
 			if (ConfigurationManager.ConnectionStrings[name] == null)
 				throw new ConfigurationErrorsException("No connection string found with name \"" + name + "\"") ;
+			// Store the provider name.
+			ProviderName = ConfigurationManager.ConnectionStrings[name].ProviderName ;
+			// Create the factory.
 			return DbProviderFactories.GetFactory(ConfigurationManager.ConnectionStrings[name].ProviderName) ;
 		}
 

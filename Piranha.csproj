@@ -74,6 +74,7 @@
     <Compile Include="Areas\Manager\Controllers\PostController.cs" />
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
+    <Compile Include="Areas\Manager\Controllers\UploadController.cs" />
     <Compile Include="Data\Updates\IUpdate.cs" />
     <Compile Include="Data\Updates\Update13.cs" />
     <Compile Include="Delegates.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IExtension.cs" />
     <Compile Include="Models\Manager\Placement.cs" />
+    <Compile Include="Models\Manager\UploadModels\EditModel.cs" />
     <Compile Include="Rest\DataContracts\Extension.cs" />
     <Compile Include="Rest\DataContracts\Post.cs" />
     <Compile Include="Rest\PostService.cs" />
@@ -536,6 +538,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\15.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\16.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Create.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Data.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

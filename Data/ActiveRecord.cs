@@ -152,7 +152,7 @@ namespace Piranha.Data
 				if (String.IsNullOrEmpty(_tablename)) {
 					TableAttribute ar = typeof(T).GetCustomAttribute<TableAttribute>(true) ;
 					if (ar != null && !String.IsNullOrEmpty(ar.Name))
-						_tablename = ar.Name ;
+						_tablename = ar.Name.ToLower() ;
 					else _tablename = typeof(T).Name.ToLower() ;
 				}
 				return _tablename ;
@@ -191,8 +191,8 @@ namespace Piranha.Data
 					JoinAttribute[] ja = typeof(T).GetCustomAttributes<JoinAttribute>(true) ;
 					if (ja != null) {
 						foreach (var join in ja)
-							_joins += " JOIN " + join.TableName + " ON " + TableName + "." + join.ForeignKey + "=" +
-								join.TableName + "." + join.PrimaryKey ;
+							_joins += " JOIN " + join.TableName.ToLower() + " ON " + TableName + "." + join.ForeignKey.ToLower() + "=" +
+								join.TableName.ToLower() + "." + join.PrimaryKey.ToLower() ;
 					}
 				}
 				return _joins ;
@@ -435,6 +435,16 @@ namespace Piranha.Data
 											val = new HtmlString(Convert.ToString(val)) ;
 										else if (typeof(Enum).IsAssignableFrom(Columns[name].PropertyType))
 											val = Enum.Parse(Columns[name].PropertyType, (string)val) ;
+
+										// Extra type conversions for MySql
+										if (Database.IsMySql) {
+											if (Columns[name].PropertyType == typeof(Guid) && val == null)
+												val = Guid.Empty ;
+											else if (Columns[name].PropertyType == typeof(Guid) && val.GetType() == typeof(string))
+												val = new Guid((string)val) ;
+											else if (Columns[name].PropertyType == typeof(bool) && val.GetType() == typeof(ulong))
+												val = (ulong)val == 1 ;
+										}
 									}
 									Columns[name].SetValue(o, val, null) ;
 								}
@@ -541,7 +551,7 @@ namespace Piranha.Data
 			foreach (string key in Columns.Keys) {
 				// Exclude joined & read only members
 				if (!Attributes[key].ReadOnly && String.IsNullOrEmpty(Attributes[key].Table)) {
-					fields += (fields != "" ? "," : "") + "[" + key + "]" ;
+					fields += (fields != "" ? "," : "") + key ;
 					values += (values != "" ? "," : "") + "@" + args.Count ;
 
 					// If the ActiveField is marked with the OnSave property, process the value
@@ -586,7 +596,7 @@ namespace Piranha.Data
 			foreach (string key in Columns.Keys) {
 				// Exclude joined & read only members
 				if (!Attributes[key].ReadOnly && String.IsNullOrEmpty(Attributes[key].Table)) {
-					values += (values != "" ? "," : "") + "[" + key + "] = @" + args.Count.ToString() ;
+					values += (values != "" ? "," : "") + key + " = @" + args.Count.ToString() ;
 
 					// Check if the ActiveField is marked with the OnSave property.
 					if (!String.IsNullOrEmpty(Attributes[key].OnSave)) {

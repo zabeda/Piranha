@@ -49,16 +49,30 @@ namespace Piranha.WebPages
 				return root ;
 			}
 		}
+
+		/// <summary>
+		/// Gets/sets weather to use extensionsless permalinks.
+		/// </summary>
+		public static bool ExtensionlessPermalinks { get ; set ; }
 		#endregion
 
 		/// <summary>
-		/// Registers the given 
+		/// Registers the given.
 		/// </summary>
 		/// <param name="urlprefix">The url prefix</param>
 		/// <param name="id">The handler id</param>
 		/// <param name="handler">The actual handler</param>
 		public static void RegisterHandler(string urlprefix, string id, IRequestHandler handler) {
 			Handlers.Add(id.ToUpper(), new RequestHandlerRegistration() { UrlPrefix = urlprefix, Id = id, Handler = handler }) ;
+		}
+
+		/// <summary>
+		/// Removes the handler with the given id.
+		/// </summary>
+		/// <param name="id">The handler id</param>
+		public static void RemoveHandler(string id) {
+			if (Handlers.ContainsKey(id.ToUpper()))
+				Handlers.Remove(id.ToUpper()) ;
 		}
 
 		/// <summary>
@@ -230,12 +244,26 @@ namespace Piranha.WebPages
 						System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
 				}
 
+				var handled = false ;
+
 				// Find the correct request handler
 				foreach (RequestHandlerRegistration hr in Handlers.Values) {
 					if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
-						// Execute the handler
-						hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
-						break ;
+						if (hr.Id != "PERMALINK" || !ExtensionlessPermalinks) {
+							// Execute the handler
+							hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
+							handled = false ;
+							break ;
+						}
+					}
+				}
+
+				// If no handler was found and we are using prefixless permalinks, 
+				// route traffic to the permalink handler.
+				if (!handled && ExtensionlessPermalinks) {
+					if (Permalink.GetByName(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), args[0]) != null) {
+						var handler = new PermalinkHandler() ;
+						handler.HandleRequest(context, args) ;
 					}
 				}
 			}
