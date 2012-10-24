@@ -12,7 +12,7 @@
         <span class="date">@page.Updated.ToString("yyyy-MM-dd")</span>
         <span class="type">@page.TemplateName</span>
         <span class="title">@if (page.Pages.Count > 0) {<span class="action"></span>}<a href="@Url.Action("edit", "page", new { id = page.Id })">
-            @Html.Raw(page.Title + (page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : "")))</a></span>
+            @Html.Raw((!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title) + (page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : "")))</a></span>
         @if (page.Pages.Count > 0) {
         <ul>
             @Html.Partial("Partial/SiteTree", page.Pages)

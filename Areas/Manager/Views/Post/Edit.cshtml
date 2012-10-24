@@ -86,7 +86,7 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             @if (!Model.Post.IsNew) {
-            <li><a href="http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Post.Permalink, true).ToLower()" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
+            <li><a href="http://@Request.Url.DnsSafeHost@UI.Permalink(Model.Post.Permalink)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
             <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
             @if (Model.Post.Published > DateTime.MinValue) {
@@ -139,7 +139,7 @@
                     </li>
                     <li class="protected">@Html.LabelFor(m => m.Post.Permalink)
                 	    @if (!Model.Post.IsNew) {
-                        <p>http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Post.Permalink).ToLower()</p>
+                        <p>http://@Request.Url.DnsSafeHost@UI.Permalink(Model.Post.Permalink)</p>
                         } else {
                         <p><i>@Piranha.Resources.Post.PermalinkDescription</i></p>
                         }

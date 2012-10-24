@@ -551,6 +551,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Scripts\MySql\Updates\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
