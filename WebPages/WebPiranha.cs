@@ -51,9 +51,9 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// Gets/sets weather to use extensionsless permalinks.
+		/// Gets/sets weather to use prefixless permalinks.
 		/// </summary>
-		public static bool ExtensionlessPermalinks { get ; set ; }
+		public static bool PrefixlessPermalinks { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -249,7 +249,7 @@ namespace Piranha.WebPages
 				// Find the correct request handler
 				foreach (RequestHandlerRegistration hr in Handlers.Values) {
 					if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
-						if (hr.Id != "PERMALINK" || !ExtensionlessPermalinks) {
+						if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
 							// Execute the handler
 							hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
 							handled = false ;
@@ -260,7 +260,7 @@ namespace Piranha.WebPages
 
 				// If no handler was found and we are using prefixless permalinks, 
 				// route traffic to the permalink handler.
-				if (!handled && ExtensionlessPermalinks) {
+				if (!handled && PrefixlessPermalinks) {
 					if (Permalink.GetByName(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), args[0]) != null) {
 						var handler = new PermalinkHandler() ;
 						handler.HandleRequest(context, args) ;
