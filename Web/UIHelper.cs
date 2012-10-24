@@ -227,6 +227,28 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
+		/// Gets the url to the uploaded content with the given id.
+		/// </summary>
+		/// <param name="id">The upload id</param>
+		/// <returns>The url</returns>
+		public IHtmlString Upload(Guid id) {
+			Upload ul = Models.Upload.GetSingle(id) ;
+			
+			if (ul != null)
+				return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("UPLOAD") + "/" + id.ToString())) ;
+			return new HtmlString("") ; // TODO: Maybe a "missing content" url
+		}
+
+		/// <summary>
+		/// Gets the url to the uploaded content with the given id.
+		/// </summary>
+		/// <param name="id">The upload id</param>
+		/// <returns>The url</returns>
+		public IHtmlString Upload(string id) {
+			return Upload(new Guid(id)) ;
+		}
+
+		/// <summary>
 		/// Return the site structure as an ul/li list with the current page selected.
 		/// </summary>
 		/// <param name="StartLevel">The start level of the menu</param>
