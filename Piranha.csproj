@@ -245,6 +245,7 @@
     <Compile Include="WebPages\RequestHandlers\PreviewHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\RequestHandlerRegistration.cs" />
     <Compile Include="WebPages\RequestHandlers\RssHandler.cs" />
+    <Compile Include="WebPages\RequestHandlers\SitemapHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ThumbnailHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\UploadHandler.cs" />
     <Compile Include="WebPages\SinglePost.cs" />

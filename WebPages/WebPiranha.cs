@@ -138,6 +138,7 @@ namespace Piranha.WebPages
 			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;
 			RegisterHandler("archive", "ARCHIVE", new ArchiveHandler()) ;
 			RegisterHandler("rss", "RSS", new RssHandler()) ;
+			RegisterHandler("sitemap.xml", "SITEMAP", new SitemapHandler()) ;
 		}
 
 		/// <summary>
