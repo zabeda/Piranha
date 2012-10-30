@@ -23,6 +23,11 @@ namespace Piranha.WebPages
 		/// Gets the helper for the piranha methods.
 		/// </summary>
 		public PiranhaHelper UI { get ; private set ; }
+
+		/// <summary>
+		/// Gets the helper for the piranha site.
+		/// </summary>
+		public Web.SiteHelper Site { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -30,6 +35,7 @@ namespace Piranha.WebPages
 		/// </summary>
 		public BasePage() : base() {
 			UI = new PiranhaHelper(this, Html) ;
+			Site = new Web.SiteHelper() ;
 		}
 
 		/// <summary>
