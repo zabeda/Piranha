@@ -82,6 +82,7 @@
     <Compile Include="Entities\DuplicateLoginException.cs" />
     <Compile Include="Entities\DuplicatePermalinkException.cs" />
     <Compile Include="Entities\Extension.cs" />
+    <Compile Include="Entities\MediaFile.cs" />
     <Compile Include="Entities\RegionTemplate.cs" />
     <Compile Include="Entities\SysLog.cs" />
     <Compile Include="Extend\Extension.cs" />

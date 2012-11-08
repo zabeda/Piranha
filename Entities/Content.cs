@@ -22,7 +22,7 @@ namespace Piranha.Models
 	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="content_id")]
-	public class Content : PiranhaRecord<Content>, ICacheRecord<Content>
+	public class Content : MediaFile<Content>, ICacheRecord<Content>
 	{
 		#region Members
 		private Dictionary<string, string> thumbs = new Dictionary<string, string>() {
@@ -119,14 +119,14 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="content_filename")]
 		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="Filename")]
-		public string Filename { get ; set ; }
+		public override string Filename { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the type
 		/// </summary>
 		[Column(Name="content_type")]
 		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="ContentType")]
-		public string Type { get ; set ; }
+		public override string Type { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the content size.
@@ -221,20 +221,6 @@ namespace Piranha.Models
 		public List<Content> ChildContent { get ; set ; }
 
 		/// <summary>
-		/// Gets the virtual path for the content media file.
-		/// </summary>
-		public string VirtualPath { 
-			get { return "~/App_Data/Content/" + Id ; }
-		}
-
-		/// <summary>
-		/// Gets the physical path for the content media file.
-		/// </summary>
-		public string PhysicalPath {
-			get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
-		}
-
-		/// <summary>
 		/// Gets the page cache object.
 		/// </summary>
 		private static Dictionary<Guid, Content> Cache {
@@ -252,7 +238,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Default constructor. Creates a new content object.
 		/// </summary>
-		public Content() : base() {
+		public Content() : base("~/App_Data/Content/", "~/App_Data/Cache/Content/") {
 			ExtensionType = Extend.ExtensionType.Media ;
 			ChildContent = new List<Content>() ;
 			LogChanges = true ;
@@ -372,40 +358,15 @@ namespace Piranha.Models
 		#endregion
 
 		/// <summary>
-		/// Gets the physical media related to the content record and writes it to
-		/// the given http response.
-		/// </summary>
-		/// <param name="response">The http response</param>
-		public void GetMedia(HttpContext context, int? width = null) {
-			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
-				if (IsImage && width != null) {
-					width = width < Width ? width : Width ;
-					int height = Convert.ToInt32(((double)width / Width) * Height) ;
-
-					if (File.Exists(CachedImagePath(width.Value, height))) {
-						// Return generated & cached resized image
-						WriteFile(context.Response, CachedImagePath(width.Value, height)) ;
-					} else if (File.Exists(PhysicalPath)) {
-						Image img = Drawing.ImageUtils.Resize(Image.FromFile(PhysicalPath), width.Value) ;
-						img.Save(CachedImagePath(width.Value, height), img.RawFormat) ;
-
-						WriteFile(context.Response, CachedImagePath(width.Value, height)) ;
-					}
-				}
-				WriteFile(context.Response, PhysicalPath) ;
-			}
-		}
-
-		/// <summary>
 		/// Gets a thumbnail representing the current content file.
 		/// </summary>
 		/// <param name="response">The http response</param>
 		/// <param name="size">The desired size</param>
 		public void GetThumbnail(HttpContext context, int size = 60) {
 			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
-				if (File.Exists(CachedThumbnailPath(size))) {
+				if (File.Exists(GetCacheThumbPath(size))) {
 					// Return generated & cached thumbnail
-					WriteFile(context.Response, CachedThumbnailPath(size)) ;
+					WriteFile(context.Response, GetCacheThumbPath(size)) ;
 				} else if (File.Exists(PhysicalPath) || IsFolder) {
 					Image img = null ;
 
@@ -444,22 +405,12 @@ namespace Piranha.Models
 								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
 								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
 
-							bmp.Save(CachedThumbnailPath(size), img.RawFormat) ;
+							bmp.Save(GetCacheThumbPath(size), img.RawFormat) ;
 						}
-						WriteFile(context.Response, CachedThumbnailPath(size)) ;
+						WriteFile(context.Response, GetCacheThumbPath(size)) ;
 					} 
 				}
 			}
-		}
-
-		/// <summary>
-		/// Deletes all cached versions of the content media.
-		/// </summary>
-		public void DeleteCache() {
-			DirectoryInfo dir = new DirectoryInfo(CacheDir()) ;
-
-			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) 
-				file.Delete() ;
 		}
 
 		/// <summary>
@@ -469,23 +420,11 @@ namespace Piranha.Models
 		public long GetTotalSize() {
 			long total = Size ;
 
-			DirectoryInfo dir = new DirectoryInfo(CacheDir()) ;
+			DirectoryInfo dir = new DirectoryInfo(CachePath) ;
 			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) {
 				total += file.Length ;
 			}
 			return Math.Max(total, 1024) ;
-		}
-
-		/// <summary>
-		/// Deletes the current record.
-		/// </summary>
-		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
-		public override bool Delete(System.Data.IDbTransaction tx = null) {
-			bool ret = base.Delete(tx) ;
-			if (ret)
-				DeleteCache() ;
-			return ret ;
 		}
 
 		/// <summary>
@@ -512,49 +451,6 @@ namespace Piranha.Models
 		}
 
 		#region Private methods
-		/// <summary>
-		/// Writes the given file to the http response
-		/// </summary>
-		/// <param name="response"></param>
-		/// <param name="path"></param>
-		private void WriteFile(HttpResponse response, string path) {
-			if (File.Exists(path)) {
-				response.StatusCode = 200 ;
-				response.ContentType = Type ;
-				response.WriteFile(path) ;
-				response.End() ;
-			} else {
-				response.StatusCode = 404 ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the physical dir for the content cache.
-		/// </summary>
-		/// <returns>The path</returns>
-		private string CacheDir() {
-			return HttpContext.Current.Server.MapPath("~/App_Data/Cache/Content/") ;
-		}
-		
-		/// <summary>
-		/// Gets the physical path for the cached file with the given name.
-		/// </summary>
-		/// <param name="size">Thumbnail size</param>
-		/// <returns>The physical cache path</returns>
-		private string CachedThumbnailPath(int size) {
-			return CacheDir() + Id.ToString() + "-" + size.ToString() ;
-		}
-
-		/// <summary>
-		/// Gets the physical path for the cached file with the given dimensions.
-		/// </summary>
-		/// <param name="width">The image width</param>
-		/// <param name="height">The image height</param>
-		/// <returns>The physical path</returns>
-		private string CachedImagePath(int width, int height) {
-			return CacheDir() + Id.ToString() + "-" + width.ToString() + "x" + height.ToString() ;
-		}
-
 		/// <summary>
 		/// Checks if the current entity has a child with the given id.
 		/// </summary>

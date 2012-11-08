@@ -14,7 +14,7 @@ namespace Piranha.Models
 	/// record handled by the cms.
 	/// </summary>
 	[PrimaryKey(Column="upload_id")]
-	public class Upload : PiranhaRecord<Upload>
+	public class Upload : MediaFile<Upload>
 	{
 		#region Fields
 		/// <summary>
@@ -33,13 +33,13 @@ namespace Piranha.Models
 		/// Gets/sets the filename.
 		/// </summary>
 		[Column(Name="upload_filename")]
-		public string Filename { get ; set ; }
+		public override string Filename { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the file content type.
 		/// </summary>
 		[Column(Name="upload_type")]
-		public string Type { get ; set ; }
+		public override string Type { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the created date.
@@ -64,22 +64,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="upload_updated_by")]
 		public override Guid UpdatedBy { get ; set ; }
-		#endregion
-
-		#region Properties
-		/// <summary>
-		/// Gets the virtual path for the content media file.
-		/// </summary>
-		public string VirtualPath { 
-			get { return "~/App_Data/Uploads/" + Id ; }
-		}
-
-		/// <summary>
-		/// Gets the physical path for the content media file.
-		/// </summary>
-		public string PhysicalPath {
-			get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
-		}
 		#endregion
 
 		#region Static accessors
@@ -116,41 +100,8 @@ namespace Piranha.Models
 		#endregion
 
 		/// <summary>
-		/// Gets the physical media related to the upload and writes it to
-		/// the given http response.
+		/// Default constructor. Creates a new upload entity.
 		/// </summary>
-		/// <param name="response">The http response</param>
-		public void GetFile(HttpResponse response) {
-			WriteFile(response, PhysicalPath) ;
-		}
-
-		/// <summary>
-		/// Deletes the upload and it's physical file.
-		/// </summary>
-		/// <param name="tx"></param>
-		/// <returns></returns>
-		public override bool Delete(System.Data.IDbTransaction tx = null) {
-			if (!IsNew && File.Exists(PhysicalPath))
-				File.Delete(PhysicalPath) ;
-			return base.Delete(tx);
-		}
-
-		#region Private methods
-		/// <summary>
-		/// Writes the given file to the http response
-		/// </summary>
-		/// <param name="response"></param>
-		/// <param name="path"></param>
-		private void WriteFile(HttpResponse response, string path) {
-			if (File.Exists(path)) {
-				response.StatusCode = 200 ;
-				response.ContentType = Type ;
-				response.WriteFile(path) ;
-				response.End() ;
-			} else {
-				response.StatusCode = 404 ;
-			}
-		}
-		#endregion
+		public Upload() : base("~/App_Data/Uploads/", "~/App_Data/Cache/Uploads") {}
 	}
 }
