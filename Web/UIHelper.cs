@@ -179,14 +179,15 @@ namespace Piranha.Web
 		/// Gets the URL to the content with the given id.
 		/// </summary>
 		/// <param name="id">The content id</param>
-		/// <param name="size">Optional image size</param>
+		/// <param name="width">Optional width</param>
+		/// <param name="height">Optional height</param>
 		/// <returns>The content url</returns>
-		public IHtmlString Content(Guid id, int size = 0) {
+		public IHtmlString Content(Guid id, int width = 0, int height = 0) {
 			Content cnt = Models.Content.GetSingle(id) ;
 			
 			if (cnt != null)
 				return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") +
-					"/" + id.ToString() + (size > 0 ? "/" + size.ToString() : ""))) ;
+					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
 
@@ -194,10 +195,11 @@ namespace Piranha.Web
 		/// Gets the URL to the content with the given id.
 		/// </summary>
 		/// <param name="id">The content id</param>
-		/// <param name="size">Optional image size</param>
+		/// <param name="width">Optional width</param>
+		/// <param name="height">Optional height</param>
 		/// <returns>The content url</returns>
-		public IHtmlString Content(string id, int size = 0) {
-			return Content(new Guid(id), size) ;
+		public IHtmlString Content(string id, int width = 0, int height = 0) {
+			return Content(new Guid(id), width, height) ;
 		}
 
 		/// <summary>
@@ -230,12 +232,15 @@ namespace Piranha.Web
 		/// Gets the url to the uploaded content with the given id.
 		/// </summary>
 		/// <param name="id">The upload id</param>
+		/// <param name="width">Optional width</param>
+		/// <param name="height">Optional height</param>
 		/// <returns>The url</returns>
-		public IHtmlString Upload(Guid id) {
+		public IHtmlString Upload(Guid id, int width = 0, int height = 0) {
 			Upload ul = Models.Upload.GetSingle(id) ;
 			
 			if (ul != null)
-				return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("UPLOAD") + "/" + id.ToString())) ;
+				return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("UPLOAD") + 
+					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
 
@@ -243,9 +248,11 @@ namespace Piranha.Web
 		/// Gets the url to the uploaded content with the given id.
 		/// </summary>
 		/// <param name="id">The upload id</param>
+		/// <param name="width">Optional width</param>
+		/// <param name="height">Optional height</param>
 		/// <returns>The url</returns>
-		public IHtmlString Upload(string id) {
-			return Upload(new Guid(id)) ;
+		public IHtmlString Upload(string id, int width = 0, int height = 0) {
+			return Upload(new Guid(id), width, height) ;
 		}
 
 		/// <summary>
