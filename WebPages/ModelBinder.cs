@@ -46,23 +46,47 @@ namespace Piranha.WebPages
 		/// <returns>The model</returns>
 		private static object BindModel(NameValueCollection form, Type type, string name, string prefix = "") {
 			if (form.AllKeys.Contains(prefix + name)) {
-				if (type == typeof(HtmlString))
+				if (type == typeof(HtmlString)) {
 					return new HtmlString(form[prefix + name]) ;
-				else if (typeof(Enum).IsAssignableFrom(type))
+				} else if (typeof(Enum).IsAssignableFrom(type)) {
 					return Enum.Parse(type, form[prefix + name]) ;
+				} else if (typeof(Guid).IsAssignableFrom(type)) {
+					try {
+						return new Guid(form[prefix + name]) ;
+					} catch { return Guid.Empty ; }
+				} else if (typeof(int).IsAssignableFrom(type)) {
+					try {
+						return Convert.ToInt32(form[prefix + name]) ;
+					} catch { return 0 ; }
+				} else if (typeof(long).IsAssignableFrom(type)) {
+					try {
+						return Convert.ToInt64(form[prefix + name]) ;
+					} catch { return 0 ; }
+				} else if (typeof(double).IsAssignableFrom(type)) {
+					try {
+						return Convert.ToDouble(form[prefix + name]) ;
+					} catch { return 0.0 ; }
+				} else if (typeof(DateTime).IsAssignableFrom(type)) {
+					try {
+						return Convert.ToDateTime(form[prefix + name]) ;
+					} catch { return null ; }
+				} 
 				return Convert.ChangeType(form[prefix + name], type) ;
 			} else {
 				var subform = new NameValueCollection() ;
 
 				form.AllKeys.Each((i, e) => {
-					if (e.StartsWith(prefix + name))
+					if (e.StartsWith(prefix + name + "."))
 						subform.Add(e, form[e]) ;
 				});
 				if (subform.Count > 0) {
 					object ret = Activator.CreateInstance(type) ;
 					foreach (PropertyInfo p in ret.GetType().GetProperties()) {
-						if (p.CanWrite)
-							p.SetValue(ret, BindModel(form, p.PropertyType, p.Name, prefix + name + "."), null) ; 
+						if (p.CanWrite) {
+							var val = BindModel(form, p.PropertyType, p.Name, prefix + name + ".") ;
+							if (val != null)
+								p.SetValue(ret, val, null) ; 
+						}
 					}
 					return ret ;
 				} else if (prefix == "") {
