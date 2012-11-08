@@ -57,8 +57,11 @@ namespace Piranha.Extend
 								});
 								// Check if the extension implements the ensure method
 								var m = type.GetMethod("Ensure") ;
-								if (m != null)
+								if (m != null) {
+									Data.Database.LoginSys() ;
 									m.Invoke(Activator.CreateInstance(type), null) ;
+									Data.Database.Logout() ;
+								}
 							}
 						}
 					}

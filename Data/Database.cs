@@ -32,6 +32,11 @@ namespace Piranha.Data
 		/// Gets/sets the current provider name.
 		/// </summary>
 		public static string ProviderName { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the id of the sys user.
+		/// </summary>
+		private static Guid SysUserId = new Guid("CA19D4E7-92F0-42F6-926A-68413BBDAFBC") ;
 		#endregion
 
 		#region Properties
@@ -87,6 +92,13 @@ namespace Piranha.Data
 				return true ;
 			}
 			return false ;
+		}
+
+		/// <summary>
+		/// Logs in the default sys user.
+		/// </summary>
+		internal static void LoginSys() {
+			Identity = SysUserId ;
 		}
 
 		/// <summary>
