@@ -54,7 +54,12 @@ namespace Piranha.WebPages
 					try {
 						return new Guid(form[prefix + name]) ;
 					} catch { return Guid.Empty ; }
-				} else if (typeof(int).IsAssignableFrom(type)) {
+				} else if (typeof(Guid?).IsAssignableFrom(type)) {
+					try {
+						return new Guid(form[prefix + name]);
+					} catch { return null; }
+				} else if (typeof(int).IsAssignableFrom(type))
+				{
 					try {
 						return Convert.ToInt32(form[prefix + name]) ;
 					} catch { return 0 ; }
