@@ -144,7 +144,7 @@ namespace Piranha.Models
 		/// Deletes all cached versions of the media file.
 		/// </summary>
 		public void DeleteCache() {
-			DirectoryInfo dir = new DirectoryInfo(CachePath) ;
+			DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(CachePath)) ;
 
 			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) 
 				file.Delete() ;

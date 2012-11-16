@@ -1,7 +1,10 @@
 bin/*
 obj/*
+*/bin/*
+*/obj/*
 *.user
 ._*
 
 *.suo
 *.vspscc
+packages/*

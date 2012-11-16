@@ -420,7 +420,7 @@ namespace Piranha.Models
 		public long GetTotalSize() {
 			long total = Size ;
 
-			DirectoryInfo dir = new DirectoryInfo(CachePath) ;
+			DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(CachePath)) ;
 			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) {
 				total += file.Length ;
 			}
