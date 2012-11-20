@@ -68,8 +68,13 @@ namespace Piranha.WebPages
 				var action = ActionName ;
 				
 				foreach (var item in ItemsForUser())
-					if (item.Controller == controller && (String.IsNullOrEmpty(item.SelectedActions) || item.SelectedActions.Split(new char[] { ',' }).Contains(action)))
-						return true ;
+					if (item.Controller == controller) {
+						if (String.IsNullOrEmpty(item.SelectedActions))
+							return true ;
+						foreach (var str in item.SelectedActions.Split(new char[] { ',' }))
+							if (str.Trim().ToLower() == action.ToLower())
+								return true ;
+					}
 				return false ;
 			}
 
