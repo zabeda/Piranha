@@ -44,10 +44,15 @@ namespace Piranha.Web
 		/// <param name="virtualpath">The virtual path</param>
 		/// <returns>If the path exists</returns>
 		private bool IsResourceFile(string virtualpath) {
-			string name = VirtualPathUtility.ToAppRelative(virtualpath).Replace("/", ".").Replace("~", "Piranha").Replace("res.ashx.", "").ToLower() ;
-			ManifestResourceInfo info = Resources.ContainsKey(name) ? 
-				Assembly.GetExecutingAssembly().GetManifestResourceInfo(Resources[name]) : null ;
-			return !File.Exists(HttpContext.Current.Server.MapPath(virtualpath)) && info != null ;
+			var path = VirtualPathUtility.ToAppRelative(virtualpath) ;
+
+			if (path.ToLower().StartsWith("~/areas/manager/")) {
+				string name = path.Replace("/", ".").Replace("~", "Piranha").Replace("res.ashx.", "").ToLower() ;
+				ManifestResourceInfo info = Resources.ContainsKey(name) ? 
+					Assembly.GetExecutingAssembly().GetManifestResourceInfo(Resources[name]) : null ;
+				return !File.Exists(HttpContext.Current.Server.MapPath(virtualpath)) && info != null ;
+			}
+			return false ;
 		}
 
 		/// <summary>
@@ -56,7 +61,7 @@ namespace Piranha.Web
 		/// <param name="virtualpath">Theh virtual path</param>
 		/// <returns>If the file exists</returns>
         public override bool FileExists(string virtualpath) {
-            return (IsResourceFile(virtualpath) || base.FileExists(virtualpath)) ;
+            return (IsResourceFile(virtualpath) || Previous.FileExists(virtualpath)) ;
         }
 
 		/// <summary>
@@ -67,7 +72,7 @@ namespace Piranha.Web
         public override VirtualFile GetFile(string virtualpath) {
             if (IsResourceFile(virtualpath))
                 return new ResourceVirtualFile(virtualpath) ;
-            return base.GetFile(virtualpath) ;
+            return Previous.GetFile(virtualpath) ;
         }
 
 		/// <summary>
@@ -80,7 +85,7 @@ namespace Piranha.Web
         public override CacheDependency GetCacheDependency(string virtualpath, IEnumerable dependencies, DateTime start) {
             if (IsResourceFile(virtualpath))
 				return new CacheDependency(Assembly.GetExecutingAssembly().Location, start) ;
-            return base.GetCacheDependency(virtualpath, dependencies, start) ;
+            return Previous.GetCacheDependency(virtualpath, dependencies, start) ;
         }
 	}
 
