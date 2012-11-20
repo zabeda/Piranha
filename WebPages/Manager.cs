@@ -35,6 +35,13 @@ namespace Piranha.WebPages
 			private string ControllerName {
 				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() ; }
 			}
+
+			/// <summary>
+			/// Gets the name of the current action.
+			/// </summary>
+			private string ActionName {
+				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() ; }
+			}
 			#endregion
 
 			/// <summary>
@@ -58,9 +65,10 @@ namespace Piranha.WebPages
 			/// <returns>Weather the group is active</returns>
 			public bool IsActive() {
 				var controller = ControllerName ;
+				var action = ActionName ;
 				
 				foreach (var item in ItemsForUser())
-					if (item.Controller == controller)
+					if (item.Controller == controller && (String.IsNullOrEmpty(item.SelectedActions) || item.SelectedActions.Split(new char[] { ',' }).Contains(action)))
 						return true ;
 				return false ;
 			}
@@ -118,6 +126,13 @@ namespace Piranha.WebPages
 			/// </summary>
 			public string SelectedActions { get ; set ; }
 			#endregion
+
+			/// <summary>
+			/// Default constructor.
+			/// </summary>
+			public MenuItem() {
+				SelectedActions = "" ;
+			}
 
 			/// <summary>
 			/// Gets weather this menu item is currently active.
