@@ -104,6 +104,7 @@ namespace Piranha.Models.Manager.ContentModels
 			var hasfile = UploadedFile != null ;
 			byte[] data = null ;
 			WebClient web = new WebClient() ;
+			Image img = null ;
 
 
 			if (!hasfile && !String.IsNullOrEmpty(FileUrl))
@@ -112,7 +113,7 @@ namespace Piranha.Models.Manager.ContentModels
 			if (hasfile || data != null) {
 				// Check if this is an image
 				try {
-					Image img = null ;
+					//Image img = null ;
 
 					if (hasfile) {
 						img = Image.FromStream(UploadedFile.InputStream) ;
@@ -167,7 +168,15 @@ namespace Piranha.Models.Manager.ContentModels
 						File.Delete(Content.PhysicalPath) ;
 						Content.DeleteCache() ;
 					}
-					if (hasfile) {
+					if (img != null) {
+						// If we have an image, save the resized version.
+						img.Save(Content.PhysicalPath, img.RawFormat) ;
+
+						// Now update the filesize
+						var imgInfo = new FileInfo(Content.PhysicalPath) ;
+						Content.Size = (int)imgInfo.Length ;
+						Content.Save() ;
+					} else if (hasfile) {
 						UploadedFile.SaveAs(Content.PhysicalPath) ;
 					} else {
 						FileStream writer = new FileStream(Content.PhysicalPath, FileMode.Create) ;
