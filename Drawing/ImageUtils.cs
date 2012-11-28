@@ -39,6 +39,7 @@ namespace Piranha.Drawing
 					MemoryStream mem = new MemoryStream() ;
 					bmp.Save(mem, img.RawFormat) ;
 					mem.Position = 0;
+					grp.Dispose() ;
 
 					return Image.FromStream(mem) ;
 				}
@@ -66,6 +67,7 @@ namespace Piranha.Drawing
 				var newRect = new Rectangle(((width - img.Width) / 2) * -1, ((height - img.Height) / 2) * -1, width, height) ;
 				var orgBmp = new Bitmap(img) ;
 				var crpBmp = orgBmp.Clone(newRect, img.PixelFormat) ;
+				orgBmp.Dispose() ;
 
 				return (Image)crpBmp ;
 			}

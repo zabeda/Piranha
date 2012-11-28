@@ -110,9 +110,11 @@ namespace Piranha.Models
 					} else if (File.Exists(PhysicalPath)) {
 						int orgWidth = img.Width, orgHeight = img.Height ;
 
-						img = Drawing.ImageUtils.Resize(img, width.Value, height.Value) ;
-						if (img.Width != orgWidth || img.Height != orgHeight)
-							img.Save(GetCachePath(width.Value, height.Value), img.RawFormat) ;
+						var resized = Drawing.ImageUtils.Resize(img, width.Value, height.Value) ;
+						if (resized.Width != orgWidth || resized.Height != orgHeight)
+							resized.Save(GetCachePath(width.Value, height.Value), resized.RawFormat) ;
+						img.Dispose() ;
+						resized.Dispose() ;
 
 						WriteFile(context.Response, GetCachePath(width.Value, height.Value)) ;
 					}
