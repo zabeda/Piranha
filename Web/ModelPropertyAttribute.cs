@@ -7,9 +7,9 @@ using System.Web.Caching;
 namespace Piranha.Web
 {
 	/// <summary>
-	/// Attribute for marking a model property to be cached.
+	/// Attribute for marking a property to be automatically handled by the model loader.
 	/// </summary>
-	public class CachePropertyAttribute : Attribute
+	public class ModelPropertyAttribute : Attribute
 	{
 		/// <summary>
 		/// Gets/sets the absolute expiration of the cache in minutes.
@@ -34,7 +34,7 @@ namespace Piranha.Web
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public CachePropertyAttribute() {
+		public ModelPropertyAttribute() {
 			Priority = CacheItemPriority.Normal ;
 		}
 	}
