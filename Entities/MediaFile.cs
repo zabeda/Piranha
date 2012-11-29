@@ -106,6 +106,7 @@ namespace Piranha.Models
 
 					if (File.Exists(GetCachePath(width.Value, height.Value))) {
 						// Return generated & cached resized image
+						img.Dispose() ;
 						WriteFile(context.Response, GetCachePath(width.Value, height.Value)) ;
 					} else if (File.Exists(PhysicalPath)) {
 						int orgWidth = img.Width, orgHeight = img.Height ;

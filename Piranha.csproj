@@ -75,6 +75,7 @@
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Manager\Controllers\UploadController.cs" />
+    <Compile Include="Web\CachePropertyAttribute.cs" />
     <Compile Include="Data\Updates\IUpdate.cs" />
     <Compile Include="Data\Updates\Update13.cs" />
     <Compile Include="Delegates.cs" />
