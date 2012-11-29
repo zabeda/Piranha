@@ -99,7 +99,8 @@ namespace Piranha.Extend
 		/// <returns>The icon path</returns>
 		public static string GetIconPathByType(string type) {
 			if (ExtensionAttributes.ContainsKey(type))
-				return ExtensionAttributes[type].IconPath != null ? ExtensionAttributes[type].IconPath : "" ;
+				return !String.IsNullOrEmpty(ExtensionAttributes[type].IconPath) ? ExtensionAttributes[type].IconPath :
+					"~/areas/manager/content/img/ico-missing-ico.png" ;
 			return "" ;
 		}
 

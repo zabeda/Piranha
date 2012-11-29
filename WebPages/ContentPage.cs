@@ -27,6 +27,11 @@ namespace Piranha.WebPages
 		/// Initializes the page.
 		/// </summary>
 		protected override void InitializePage() {
+			// Create the model if it's not initialized
+			if (Model == null)
+				Model = Activator.CreateInstance<T>() ;
+
+			// Get all model properties
 			var properties = Model.GetType().GetProperties() ;
 
 			// Check for model properties marked for caching.
