@@ -36,7 +36,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets/sets the id of the sys user.
 		/// </summary>
-		private static Guid SysUserId = new Guid("CA19D4E7-92F0-42F6-926A-68413BBDAFBC") ;
+		public static Guid SysUserId = new Guid("CA19D4E7-92F0-42F6-926A-68413BBDAFBC") ;
 		#endregion
 
 		#region Properties

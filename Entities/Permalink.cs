@@ -14,6 +14,10 @@ namespace Piranha.Models
 	[PrimaryKey(Column="permalink_id")]
 	public class Permalink : PiranhaRecord<Permalink>, ICacheRecord<Permalink>
 	{
+		#region Members
+		public static Guid DefaultNamespace = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
+		#endregion
+
 		#region Inner classes
 		public enum PermalinkType {
 			PAGE, POST, CATEGORY
@@ -91,6 +95,15 @@ namespace Piranha.Models
 			if (!IdCache.ContainsKey(id))
 				IdCache[id] = GetSingle((object)id) ;
 			return IdCache[id] ;
+		}
+
+		/// <summary>
+		/// Gets the permalink with the given name from the default namespace.
+		/// </summary>
+		/// <param name="name">The permalink name</param>
+		/// <returns>The permalink</returns>
+		public static Permalink GetByName(string name) {
+			return GetByName(DefaultNamespace, name) ;
 		}
 
 		/// <summary>

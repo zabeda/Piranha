@@ -262,7 +262,7 @@ namespace Piranha.WebPages
 				// If no handler was found and we are using prefixless permalinks, 
 				// route traffic to the permalink handler.
 				if (!handled && PrefixlessPermalinks) {
-					if (Permalink.GetByName(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), args[0]) != null) {
+					if (Permalink.GetByName(Permalink.DefaultNamespace, args[0]) != null) {
 						var handler = new PermalinkHandler() ;
 						handler.HandleRequest(context, args) ;
 					}
