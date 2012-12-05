@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0EDC7F3F-1CD6-43F6-9EB2-34E7430F6B8F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Piranha</RootNamespace>
+    <AssemblyName>Piranha.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataContext.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Extension.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Log.cs" />
+    <Compile Include="Entities\Maps\CategoryMap.cs" />
+    <Compile Include="Entities\Maps\CommentMap.cs" />
+    <Compile Include="Entities\Maps\ExtensionMap.cs" />
+    <Compile Include="Entities\Maps\GroupMap.cs" />
+    <Compile Include="Entities\Maps\LogMap.cs" />
+    <Compile Include="Entities\Maps\MediaMap.cs" />
+    <Compile Include="Entities\Maps\NamespaceMap.cs" />
+    <Compile Include="Entities\Maps\PageMap.cs" />
+    <Compile Include="Entities\Maps\PageTemplateMap.cs" />
+    <Compile Include="Entities\Maps\ParamMap.cs" />
+    <Compile Include="Entities\Maps\PermalinkMap.cs" />
+    <Compile Include="Entities\Maps\PermissionMap.cs" />
+    <Compile Include="Entities\Maps\PostMap.cs" />
+    <Compile Include="Entities\Maps\PostTemplateMap.cs" />
+    <Compile Include="Entities\Maps\PropertyMap.cs" />
+    <Compile Include="Entities\Maps\RegionMap.cs" />
+    <Compile Include="Entities\Maps\RegionTemplateMap.cs" />
+    <Compile Include="Entities\Maps\UploadMap.cs" />
+    <Compile Include="Entities\Maps\UserMap.cs" />
+    <Compile Include="Entities\Media.cs" />
+    <Compile Include="Entities\Namespace.cs" />
+    <Compile Include="Entities\Page.cs" />
+    <Compile Include="Entities\PageTemplate.cs" />
+    <Compile Include="Entities\Param.cs" />
+    <Compile Include="Entities\Permalink.cs" />
+    <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\PostTemplate.cs" />
+    <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Region.cs" />
+    <Compile Include="Entities\RegionTemplate.cs" />
+    <Compile Include="Entities\StandardEntity.cs" />
+    <Compile Include="Entities\Upload.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="DataExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Piranha\Piranha.csproj">
+      <Project>{7e07dd4f-41ed-4faf-8407-62196aae0d0f}</Project>
+      <Name>Piranha</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.md" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
