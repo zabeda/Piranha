@@ -97,7 +97,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Logs in the default sys user.
 		/// </summary>
-		internal static void LoginSys() {
+		public static void LoginSys() {
 			Identity = SysUserId ;
 		}
 
