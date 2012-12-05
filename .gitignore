@@ -8,3 +8,5 @@ obj/*
 *.suo
 *.vspscc
 packages/*
+.svn/*
+Solution Items/*
