@@ -72,6 +72,11 @@ namespace Piranha.Entities
 		/// Gets/sets the currently available extensions.
 		/// </summary>
 		public IList<Extension> Extensions { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently available comments.
+		/// </summary>
+		public IList<Comment> Comments { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -79,6 +84,7 @@ namespace Piranha.Entities
 		/// </summary>
 		public Media() {
 			Extensions = new List<Extension>() ;
+			Comments = new List<Comment>() ;
 		}
 	}
 }

@@ -25,6 +25,11 @@ namespace Piranha.Entities
 		public Guid ParentId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets weather the comment is attached to a draft.
+		/// </summary>
+		public bool ParentIsDraft { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets weather this comment is approved or not.
 		/// </summary>
 		public bool Approved { get ; set ; }
@@ -98,6 +103,9 @@ namespace Piranha.Entities
 		/// <param name="state">The current entity state</param>
 		public override void OnSave(System.Data.EntityState state) {
 			var user = HttpContext.Current.User;
+
+			// We never connect comments to drafts.
+			ParentIsDraft = false ;
 
 			if (state == EntityState.Added) {
 				if (Id == Guid.Empty)

@@ -34,6 +34,7 @@ namespace Piranha.Entities.Maps
 			HasRequired(m => m.CreatedBy) ;
 			HasRequired(m => m.UpdatedBy) ;
 			HasMany(m => m.Extensions).WithRequired().HasForeignKey(e => e.ParentId) ;
+			HasMany(m => m.Comments).WithRequired().HasForeignKey(c => c.ParentId) ;
 		}
 	}
 }

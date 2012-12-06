@@ -16,6 +16,7 @@ namespace Piranha.Entities.Maps
 
 			Property(c => c.Id).HasColumnName("comment_id") ;
 			Property(c => c.ParentId).HasColumnName("comment_parent_id") ;
+			Property(c => c.ParentIsDraft).HasColumnName("comment_parent_draft") ;
 			Property(c => c.Approved).HasColumnName("comment_approved") ;
 			Property(c => c.Title).HasColumnName("comment_title") ;
 			Property(c => c.Body).HasColumnName("comment_body").IsRequired() ;

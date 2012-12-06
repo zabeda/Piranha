@@ -42,6 +42,7 @@ namespace Piranha.Entities.Maps
 			}) ;
 			HasMany(p => p.Properties).WithRequired().HasForeignKey(pr => new { pr.ParentId, pr.IsDraft }) ;
 			HasMany(p => p.Extensions).WithRequired().HasForeignKey(e => new { e.ParentId, e.IsDraft }) ;
+			HasMany(p => p.Comments).WithRequired().HasForeignKey(c => new { c.ParentId, c.ParentIsDraft }) ;
 			HasRequired(p => p.CreatedBy) ;
 			HasRequired(p => p.UpdatedBy) ;
 		}
