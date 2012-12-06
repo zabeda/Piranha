@@ -650,11 +650,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Scripts\MySql\Updates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-missing-ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\17.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\17.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
