@@ -37,7 +37,7 @@ namespace Piranha.WebPages
 			// Check for model properties marked for caching.
 			foreach (var prop in properties) {
 				var attr = prop.GetCustomAttribute<ModelPropertyAttribute>(true) ;
-				if (attr != null) {
+				if (attr != null && (!IsPost || attr.LoadOnPost)) {
 					var name = "CACHE_" + this.GetType().Name.ToUpper() + "_" +
 						(Model is PageModel ? ((PageModel)(object)Model).Page.Permalink.ToUpper() + "_" : "") +
 						(Model is PostModel ? ((PostModel)(object)Model).Post.Permalink.ToUpper() + "_" : "") + prop.Name.ToUpper() ;
@@ -60,7 +60,7 @@ namespace Piranha.WebPages
 			// Now check if we should update some cache.
 			foreach (var prop in properties) {
 				var attr = prop.GetCustomAttribute<ModelPropertyAttribute>(true) ;
-				if (attr != null) {
+				if (attr != null && (!IsPost || attr.LoadOnPost)) {
 					var name = "CACHE_" + this.GetType().Name.ToUpper() + "_" +
 						(Model is PageModel ? ((PageModel)(object)Model).Page.Permalink.ToUpper() + "_" : "") +
 						(Model is PostModel ? ((PostModel)(object)Model).Post.Permalink.ToUpper() + "_" : "") + prop.Name.ToUpper() ;

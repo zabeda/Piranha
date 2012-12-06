@@ -324,3 +324,20 @@ CREATE TABLE [extension] (
 	CONSTRAINT fk_extension_created_by FOREIGN KEY ([extension_created_by]) REFERENCES [sysuser] ([sysuser_id]),
 	CONSTRAINT fk_extension_updated_by FOREIGN KEY ([extension_updated_by]) REFERENCES [sysuser] ([sysuser_id])
 );
+
+CREATE TABLE [comment] (
+	[comment_id] UNIQUEIDENTIFIER NOT NULL,
+	[comment_parent_id] UNIQUEIDENTIFIER NOT NULL,
+	[comment_approved] BIT DEFAULT(1),
+	[comment_title] NVARCHAR(64) NULL,
+	[comment_body] NTEXT NOT NULL,
+	[comment_author_name] NVARCHAR(128) NULL,
+	[comment_author_email] NVARCHAR(128) NULL,
+	[comment_created] DATETIME NOT NULL,
+	[comment_updated] DATETIME NOT NULL,
+	[comment_created_by] UNIQUEIDENTIFIER NULL,
+	[comment_updated_by] UNIQUEIDENTIFIER NULL,
+	CONSTRAINT pk_comment_id PRIMARY KEY ([comment_id]),
+	CONSTRAINT fk_comment_created_by FOREIGN KEY ([comment_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_comment_updated_by FOREIGN KEY ([comment_updated_by]) REFERENCES [sysuser] ([sysuser_id])
+);
