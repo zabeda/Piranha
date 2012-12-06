@@ -118,6 +118,11 @@ namespace Piranha.Entities
 		/// Gets/sets the currently available extensions.
 		/// </summary>
 		public IList<Extension> Extensions { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently available comments.
+		/// </summary>
+		public IList<Comment> Comments { get ; set ; }
 		#endregion
 
 		#region Internal properties
@@ -135,6 +140,7 @@ namespace Piranha.Entities
 			Regions = new List<Region>() ;
 			Properties = new List<Property>() ;
 			Extensions = new List<Extension>() ;
+			Comments = new List<Comment>() ;
 		}
 
 		/// <summary>

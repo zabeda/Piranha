@@ -328,6 +328,7 @@ CREATE TABLE [extension] (
 CREATE TABLE [comment] (
 	[comment_id] UNIQUEIDENTIFIER NOT NULL,
 	[comment_parent_id] UNIQUEIDENTIFIER NOT NULL,
+	[comment_parent_draft] BIT NOT NULL default(0),
 	[comment_approved] BIT DEFAULT(1),
 	[comment_title] NVARCHAR(64) NULL,
 	[comment_body] NTEXT NOT NULL,

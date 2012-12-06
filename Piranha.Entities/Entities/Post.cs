@@ -125,6 +125,11 @@ namespace Piranha.Entities
 		public IList<Extension> Extensions { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the currently available comments.
+		/// </summary>
+		public IList<Comment> Comments { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the user who initially created the template.
 		/// </summary>
 		public User CreatedBy { get ; set ; }
@@ -149,6 +154,7 @@ namespace Piranha.Entities
 			Attachments = new List<Guid>() ;
 			Categories = new List<Category>() ;
 			Extensions = new List<Extension>() ;
+			Comments = new List<Comment>() ;
 		}
 
 		/// <summary>

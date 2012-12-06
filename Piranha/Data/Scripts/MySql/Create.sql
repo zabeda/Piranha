@@ -328,6 +328,7 @@ CREATE TABLE extension (
 CREATE TABLE comment (
 	comment_id CHAR(38) NOT NULL,
 	comment_parent_id CHAR(38) NOT NULL,
+	comment_parent_draft BIT NOT NULL default false,
 	comment_approved BIT DEFAULT(1),
 	comment_title VARCHAR(64) NULL,
 	comment_body TEXT NOT NULL,
