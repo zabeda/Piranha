@@ -11,6 +11,12 @@ using System.Web.Hosting;
 
 namespace Piranha.Web
 {
+	public class ResourceFile 
+	{
+		public Assembly Assembly { get ; set ; }
+		public string Name { get ; set ; }
+	}
+
 	/// <summary>
 	/// Provider that serves embedded content from the manager area.
 	/// </summary>
@@ -20,15 +26,22 @@ namespace Piranha.Web
 		/// <summary>
 		/// Gets the cached resource map.
 		/// </summary>
-		public static Dictionary<string, string> Resources {
+		public static Dictionary<string, ResourceFile> Resources {
 			get {
 				if (HttpContext.Current.Cache["ResourceMap"] == null) {
-					HttpContext.Current.Cache["ResourceMap"] = new Dictionary<string, string>() ;
+					HttpContext.Current.Cache["ResourceMap"] = new Dictionary<string, ResourceFile>() ;
 					string[] names = Assembly.GetExecutingAssembly().GetManifestResourceNames() ;
 					foreach (string name in names)
-						((Dictionary<string, string>)HttpContext.Current.Cache["ResourceMap"]).Add(name.ToLower(), name) ;
+						((Dictionary<string, ResourceFile>)HttpContext.Current.Cache["ResourceMap"]).Add(name.ToLower(), 
+							new ResourceFile() { Assembly = Assembly.GetExecutingAssembly(), Name = name}) ;
+					foreach (var assembly in Extend.ExtensionManager.Modules) {
+						names = assembly.GetManifestResourceNames() ;
+						foreach (string name in names)
+							((Dictionary<string, ResourceFile>)HttpContext.Current.Cache["ResourceMap"]).Add(name.ToLower(), 
+								new ResourceFile() { Assembly = assembly, Name = name}) ;
+						}
 				}
-				return (Dictionary<string, string>)HttpContext.Current.Cache["ResourceMap"] ;
+				return (Dictionary<string, ResourceFile>)HttpContext.Current.Cache["ResourceMap"] ;
 			}
 		}
 		#endregion
@@ -48,8 +61,19 @@ namespace Piranha.Web
 
 			if (path.ToLower().StartsWith("~/areas/manager/")) {
 				string name = path.Replace("/", ".").Replace("~", "Piranha").Replace("res.ashx.", "").ToLower() ;
+				// Check core namespace
 				ManifestResourceInfo info = Resources.ContainsKey(name) ? 
-					Assembly.GetExecutingAssembly().GetManifestResourceInfo(Resources[name]) : null ;
+					Resources[name].Assembly.GetManifestResourceInfo(Resources[name].Name) : null ;
+				if (info == null) {
+					// Check modules with different namespace
+					foreach (var assembly in Extend.ExtensionManager.Modules) {
+						name = path.Replace("/", ".").Replace("~", assembly.GetName().Name).Replace("res.ashx.", "").ToLower() ;
+						info = Resources.ContainsKey(name) ? 
+							Resources[name].Assembly.GetManifestResourceInfo(Resources[name].Name) : null ;
+						if (info != null)
+							break ;
+					}
+				}
 				return !File.Exists(HttpContext.Current.Server.MapPath(virtualpath)) && info != null ;
 			}
 			return false ;
@@ -113,7 +137,18 @@ namespace Piranha.Web
 		/// <returns>The stream</returns>
         public override Stream Open() {
 			string res = path.Replace("/", ".").Replace("~", "Piranha").Replace("res.ashx.", "").ToLower() ;
-			return Assembly.GetExecutingAssembly().GetManifestResourceStream(ResourcePathProvider.Resources[res]) ;
+			// Try to get resource from core namespace
+			if (ResourcePathProvider.Resources.ContainsKey(res))
+				return ResourcePathProvider.Resources[res].Assembly.GetManifestResourceStream(
+					ResourcePathProvider.Resources[res].Name) ;
+			// if not found, scan modules
+			foreach (var assembly in Extend.ExtensionManager.Modules) {
+				res = path.Replace("/", ".").Replace("~", assembly.GetName().Name).Replace("res.ashx.", "").ToLower() ;
+				if (ResourcePathProvider.Resources.ContainsKey(res))
+					return ResourcePathProvider.Resources[res].Assembly.GetManifestResourceStream(
+						ResourcePathProvider.Resources[res].Name) ;
+			}
+			return null ;
         }
     }
 }

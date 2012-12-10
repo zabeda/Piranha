@@ -16,6 +16,11 @@ namespace Piranha.Extend
 		/// Gets the available extension attributes.
 		/// </summary>
 		private static Dictionary<string, ExtensionAttribute> ExtensionAttributes = new Dictionary<string,ExtensionAttribute>() ;
+
+		/// <summary>
+		/// Gets the available module attributes.
+		/// </summary>
+		private static Dictionary<string, ModuleAttribute> ModuleAttributes = new Dictionary<string,ModuleAttribute>() ;
 		#endregion
 
 		#region Properties
@@ -28,6 +33,11 @@ namespace Piranha.Extend
 		/// Gets the currently available extensions.
 		/// </summary>
 		public static List<Extension> Extensions { get ; private set ; }
+
+		/// <summary>
+		/// Gets the currently available modules.
+		/// </summary>
+		public static List<Assembly> Modules { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -38,6 +48,7 @@ namespace Piranha.Extend
 			// Create the extension list.
 			ExtensionTypes = new Dictionary<string, Type>() ;
 			Extensions = new List<Extension>() ;
+			Modules = new List<Assembly>() ;
 
 			// Get all loaded assemblies
 			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
@@ -63,6 +74,19 @@ namespace Piranha.Extend
 									Data.Database.Logout() ;
 								}
 							}
+						}
+					} else if (typeof(Module).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
+						var attr = type.GetCustomAttribute<ModuleAttribute>(false) ;
+						if (attr != null) {
+							// Register the module
+							ModuleAttributes.Add(attr.InternalId, attr) ;
+							Modules.Add(assembly) ;
+
+							// Ensure the module
+							Module m = (Module)Activator.CreateInstance(type) ;
+							Data.Database.LoginSys() ;
+							m.Ensure() ;
+							Data.Database.Logout() ;
 						}
 					}
 				}
