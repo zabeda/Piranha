@@ -152,7 +152,7 @@ namespace Piranha.WebPages
 			//
 			// for more information on the issue
 			//
-			PropertyInfo pc = typeof(BuildManager).GetProperty("IsPrecompiledApp", BindingFlags.NonPublic | BindingFlags.Static) ;
+			PropertyInfo pc = typeof(BuildManager).GetProperty("IsPrecompiledApp", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static) ;
 			if (pc != null && (bool)pc.GetValue(null, null)) {
 				// This is a precompiled application, bend the framework a bit.
 				HostingEnvironment instance = (HostingEnvironment)typeof(HostingEnvironment).InvokeMember("_theHostingEnvironment", 
