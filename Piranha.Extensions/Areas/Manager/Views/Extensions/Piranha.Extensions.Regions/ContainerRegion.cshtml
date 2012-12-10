@@ -1,0 +1,227 @@
+﻿@model Piranha.Extensions.Regions.ContainerRegion
+@using System.Data.Entity;
+@using Piranha.Entities;
+@{
+    var baseId = @ViewData.TemplateInfo.GetFullHtmlFieldName("Posts") ;
+}
+<style type="text/css">
+    .floatbox .list {
+        font-size: 13px;
+        }
+    .list .disabled {
+        color: #999;
+        }
+    .post-list i {
+        line-height: 45px;
+        }
+    .floatbox .toolbar {
+        border: 0px none;
+        background: #fff;
+        padding: 0;
+        }
+    .toolbar input {
+        width: 550px;
+        }
+    .scroll {
+        max-height: 500px;
+        overflow: auto;
+        }
+</style>
+<script type="text/javascript">
+    var posts = [];
+    @for (int n = 0; n < Model.Current.Count; n++) {
+    @Html.Raw("posts[" + n + "] = '" + Model.Current[n].Id + "';");
+    }
+
+    /**
+     * Adds a product row.
+     */
+    function addPostRow(row) {
+        var html =
+            '<tr>' +
+            '  <td class="thumb"><img src="@UI.SiteUrl("~/" + 
+                Piranha.WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL"))/' + row.find('input').val() + '/40" /></td>' + 
+            '  <td>' + row.find('.post-title').html() + '</td>' +
+            '  <td>' + row.find('.post-template').html() + '</td>' +
+            '  <td>' + row.find('.post-updated').html() + '</td>' +
+            '  <td class="buttons three"><a class="icon up marg" href="#"></a><a class="icon down marg" href="#"></a><a class="icon delete delete-product" href="#"></a></td>' +
+            '</tr>';
+        $('.post-list tbody').append(html);
+    }
+
+    function buildInputs() {
+        // Clear inputs
+        $('#post-inputs').html('');
+
+        for (var n = 0; n < posts.length; n++) {
+            $('#post-inputs').append(
+                '<input type="hidden" name="@(baseId)[' + n + ']" value="' + posts[n] + '" />'
+            );
+        }
+    }
+
+    $(document).ready(function () {
+        $('#pnl-products').addClass('content-editor');
+
+        // Shows the post popup-dialog
+        $('#btn_add_post').click(function () {
+
+            // Uncheck & disabled/enable
+            $('#tbl_posts input').each(function (i, e) {
+                $(e).removeAttr('checked');
+                $(e).removeAttr('disabled');
+                $(e).parent().parent().removeClass('disabled');
+                for (var n = 0; n < posts.length; n++) {
+                    if (posts[n] == $(e).val()) {
+                        $(e).attr('checked', 'checked');
+                        $(e).attr('disabled', 'disabled');
+                        $(e).parent().parent().addClass('disabled');
+                    }
+                }
+            });
+
+            floatBox.show('boxPosts');
+        });
+
+        // Attaches the selected posts.
+        $('#btn_attach_posts').click(function () {
+            var pos = posts.length;
+
+            $('#tbl_posts input:checked').each(function (i, e) {
+                if ($(e).attr('disabled') != 'disabled') {
+                    posts[pos] = $(e).val();
+                    pos++;
+                    addPostRow($(e).parent().parent());
+                }
+            });
+            buildInputs();
+            floatBox.close('boxPosts');
+
+            return false;
+        });
+
+        // Deletes the clicked post from the list.
+        $('.delete-post').live('click', function () {
+            var row = $(this).parent().parent();
+            var idx = $('.post-list tr').index(row) - 1;
+
+            // Remove row, id and rebuild inputs
+            row.remove();
+            posts.splice(idx, 1);
+            buildInputs();
+
+            return false;
+        });
+
+        // Moves the clicked post up in the list.
+        $('.move-up-post').live('click', function () {
+            var row = $(this).parent().parent();
+            var idx = $('.post-list tr').index(row) - 1;
+
+            if (idx > 0) {
+                row.remove();
+                $('.post-list tr').eq(idx - 1).after(row);
+
+                var post = posts.splice(idx, 1);
+                posts.splice(idx - 1, 0, post);
+                buildInputs();
+            }
+            return false;
+        });
+
+        // Moves the clicked post down in the list.
+        $('.move-down-post').live('click', function () {
+            var row = $(this).parent().parent();
+            var idx = $('.post-list tr').index(row) - 1;
+
+            if (idx < (posts.length - 1)) {
+                row.remove();
+                $('.post-list tr').eq(idx + 1).after(row);
+
+                var prod = posts.splice(idx, 1);
+                posts.splice(idx + 1, 0, prod);
+                buildInputs();
+            }
+            return false;
+        });
+
+        // Setup post list.
+        var options = {
+            listClass: 'list-js',
+            searchId: 'search',
+            valueNames: ['post-title', 'post-template', 'post-updated', 'post-created']
+        };
+        var prodList = new List('list', options);
+    });
+</script>
+<div id="post-inputs">
+    @for (int n = 0; n < Model.Posts.Count; n++) {
+    @Html.HiddenFor(m => m.Posts[n])
+    }
+</div>
+<table class="list attachments post-list">
+    <tbody>
+        <tr>
+            <td colspan="5"><a id="btn_add_post" class="add left"></a><i>@Piranha.Extensions.Resources.CRAttach</i></td>            
+        </tr>
+        @foreach (var post in Model.Current) {
+        <tr>
+            @if (post.Attachments.Count > 0) {
+            <td class="thumb">
+                @UI.Thumbnail(post.Id, 40)
+            </td>
+            }
+            <td><span>@post.Title</span></td>
+            <td><span>@post.Template.Name</span></td>
+            <td class="date">@(post.Updated.ToShortDateString())</td>
+            <td class="buttons three">
+                <a class="icon up marg move-up-post" href="#"></a>
+                <a class="icon down marg move-down-post" href="#"></a>
+                <a class="icon delete delete-post" href="#"></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<div id="boxPosts" class="floatbox">
+    <div class="bg"></div>
+    <div class="box" style="min-width:640px;min-height:260px">
+        <div class="title">
+            <a class="close-btn right" data-id="boxContent"></a>
+            <h2>@Piranha.Extensions.Resources.CRTitle</h2>
+        </div>
+        <div class="inner">
+            <div class="toolbar">
+                <button class="search" title="Search"></button>
+                <input id="search" type="text" />
+                <div class="clear"></div>
+            </div>
+            <div class="scroll">
+                <table id="list" class="list">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <th><span class="sort asc" data-sort="post-title">@Piranha.Extensions.Resources.CRListName</span></th>
+                            <th><span class="sort" data-sort="post-template">@Piranha.Extensions.Resources.CRListTemplate</span></th>
+                            <th><span class="sort" data-sort="post-updated">@Piranha.Extensions.Resources.CRListUpdated</span></th>
+                            <th><span class="sort" data-sort="post-created">@Piranha.Extensions.Resources.CRListCreated</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts" class="list-js">
+                        @foreach (var post in Model.Available) {
+                        <tr>
+                            <td class="buttons one"><input type="checkbox" value="@post.Id" /></td>
+                            <td class="post-title"><span>@post.Title</span></td>
+                            <td class="post-template"><span>@post.Template.Name</span></td>
+                            <td class="date post-updated">@post.Updated.ToShortDateString()</td>
+                            <td class="date post-created">@post.Created.ToShortDateString()</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <button id="btn_attach_posts" class="btn right">@Piranha.Extensions.Resources.CRListAdd</button>
+        </div>
+    </div>
+</div>
