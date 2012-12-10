@@ -205,16 +205,26 @@ namespace Piranha.Web
 		/// <summary>
 		/// Generates an image tag for the specified thumbnail.
 		/// </summary>
-		/// <param name="id">The content id</param>
+		/// <param name="id">The content, page or post id.</param>
 		/// <param name="size">Optional size</param>
 		/// <returns>The image html string</returns>
 		public IHtmlString Thumbnail(Guid id, int size = 0) {
 			Content cnt = Models.Content.GetSingle(id) ;
 			
-			if (cnt != null)
+			if (cnt != null) {
 				return new HtmlString(String.Format("<img src=\"{0}\" alt=\"{1}\" />", Url("~/" + 
 					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + 
 					id.ToString() + (size > 0 ? "/" + size.ToString() : "")), cnt.AlternateText)) ;
+			} else {
+				Page page = Page.GetSingle(id) ;
+				if (page != null && page.Attachments.Count > 0) {
+					return Thumbnail(page.Attachments[0], size) ;
+				}
+				Post post = Post.GetSingle(id) ;
+				if (post != null && post.Attachments.Count > 0) {
+					return Thumbnail(post.Attachments[0], size) ;
+				}
+			}
 			return new HtmlString("") ; // TODO: Maybe a "missing image" image
 		}
 
