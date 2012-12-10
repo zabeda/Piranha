@@ -451,6 +451,14 @@ namespace Piranha.Models.Manager.PageModels
 
 			// Get extensions
 			Extensions = Page.GetExtensions() ;
+
+			// Initialize regions
+			foreach (var reg in Regions)
+				if (Extend.ExtensionManager.ExtensionTypes.ContainsKey(reg.Type)) {
+					var m = Extend.ExtensionManager.ExtensionTypes[reg.Type].GetMethod("Init") ;
+					if (m != null)
+						m.Invoke(reg.Body, new object[] { this }) ;
+				}
 		}
 
 		private static List<PagePlacement> BuildParentPages(List<Sitemap> sm, Page p = null) {
