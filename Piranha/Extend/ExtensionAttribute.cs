@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 
 namespace Piranha.Extend
@@ -10,10 +11,34 @@ namespace Piranha.Extend
 	/// </summary>
 	public class ExtensionAttribute : Attribute
 	{
+		#region Members
+		private string name ;
+		private string resourcename ;
+		#endregion
+
 		/// <summary>
 		/// Gets/sets the name of the extension.
 		/// </summary>
-		public string Name { get ; set ; }
+		public string Name { 
+			get {
+				if (ResourceType != null && !String.IsNullOrEmpty(name)) {
+					if (resourcename == null) {
+						var mgr = new ResourceManager(ResourceType) ;
+						resourcename = mgr.GetString(name) ;
+					}
+					return resourcename ;
+				}
+				return name ;
+			}
+			set {
+				name = value ;
+			}
+		}
+
+		/// <summary>
+		/// Gets/sets the optional name of the resource class.
+		/// </summary>
+		public Type ResourceType { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the internal id of the extension.
