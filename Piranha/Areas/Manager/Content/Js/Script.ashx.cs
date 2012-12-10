@@ -30,6 +30,7 @@ namespace Piranha.Areas.Manager.Content.Js
 		/// </summary>
 		public void ProcessRequest(HttpContext context) {
 			DateTime mod = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime ;
+			var compressor = new JavaScriptCompressor() ;
 
 			if (!ClientCache.HandleClientCache(context, resource, mod)) {
 				StreamReader io = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(resource)) ;
@@ -37,7 +38,7 @@ namespace Piranha.Areas.Manager.Content.Js
 #if DEBUG
 				context.Response.Write(io.ReadToEnd()) ;
 #else
-				context.Response.Write(JavaScriptCompressor.Compress(io.ReadToEnd())) ;
+				context.Response.Write(compressor.Compress(io.ReadToEnd())) ;
 #endif
 				io.Close() ;
 			}

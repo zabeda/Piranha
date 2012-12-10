@@ -32,6 +32,8 @@ namespace Piranha.Areas.Manager.Content.Css
 		/// </summary>
 		public void ProcessRequest(HttpContext context) {
 			DateTime mod = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime ;
+			var compressor = new CssCompressor() ;
+
 			if (File.Exists(context.Server.MapPath("~/Areas/Manager/Content/Css/Style.css"))) {
 				FileInfo file = new FileInfo(context.Server.MapPath("~/Areas/Manager/Content/Css/Style.css")) ;
 				mod = file.LastWriteTime > mod ? file.LastWriteTime : mod ;
@@ -43,7 +45,7 @@ namespace Piranha.Areas.Manager.Content.Css
 #if DEBUG
 				context.Response.Write(io.ReadToEnd()) ;
 #else
-				context.Response.Write(CssCompressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
+				context.Response.Write(compressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
 #endif
 				io.Close() ;
 
@@ -53,7 +55,7 @@ namespace Piranha.Areas.Manager.Content.Css
 #if DEBUG
 					context.Response.Write(io.ReadToEnd()) ;
 #else
-					context.Response.Write(CssCompressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
+					context.Response.Write(compressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
 #endif
 					io.Close() ;
 				}
@@ -64,7 +66,7 @@ namespace Piranha.Areas.Manager.Content.Css
 #if DEBUG
 					context.Response.Write(io.ReadToEnd()) ;
 #else
-					context.Response.Write(CssCompressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
+					context.Response.Write(compressor.Compress(io.ReadToEnd()).Replace("\n","")) ;
 #endif
 					io.Close() ;
 				}
