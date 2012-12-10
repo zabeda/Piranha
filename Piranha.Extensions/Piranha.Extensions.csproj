@@ -114,7 +114,10 @@
       <Name>Piranha</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="LICENSE.md" />
+    <Content Include="README.md" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extensions.Regions\ContainerRegion.cshtml" />
     <EmbeddedResource Include="Resources.resx">
