@@ -17,7 +17,7 @@ namespace Piranha.WebPages
 	{
 		#region Members
 		private HtmlHelper Html ;
-		private WebPage Parent ;
+		private WebPageRenderingBase Parent ;
 		#endregion
 
 		#region Properties
@@ -47,7 +47,7 @@ namespace Piranha.WebPages
 		/// Default constructor.
 		/// </summary>
 		/// <param name="html"></param>
-		public PiranhaHelper(WebPage parent, HtmlHelper html) {
+		public PiranhaHelper(WebPageRenderingBase parent, HtmlHelper html) {
 			Parent = parent ;
 			Html = html ;
 		}

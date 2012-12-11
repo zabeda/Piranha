@@ -81,6 +81,7 @@
     <Compile Include="Areas\Manager\Controllers\UploadController.cs" />
     <Compile Include="Extend\Module.cs" />
     <Compile Include="Extend\ModuleAttribute.cs" />
+    <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="Web\ModelPropertyAttribute.cs" />
     <Compile Include="Data\Updates\IUpdate.cs" />
     <Compile Include="Data\Updates\Update13.cs" />
