@@ -35,6 +35,10 @@
     <Reference Include="EcmaScript.NET">
       <HintPath>..\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Users\Håkan Edling\Documents\Visual Studio 2010\Projects\Piranha\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -42,6 +46,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -79,20 +84,92 @@
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Manager\Controllers\UploadController.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="DataExtensions.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Extension.cs" />
+    <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Internal\Category.cs" />
+    <Compile Include="Entities\Internal\ComplexName.cs" />
+    <Compile Include="Entities\Internal\Content.cs" />
+    <Compile Include="Entities\Internal\DraftRecord.cs" />
+    <Compile Include="Entities\Internal\DuplicateLoginException.cs" />
+    <Compile Include="Entities\Internal\DuplicatePermalinkException.cs" />
+    <Compile Include="Entities\Internal\Extension.cs" />
+    <Compile Include="Entities\Internal\GuidRecord.cs" />
+    <Compile Include="Entities\Internal\IPage.cs" />
+    <Compile Include="Entities\Internal\IPost.cs" />
+    <Compile Include="Entities\Internal\ISitemap.cs" />
+    <Compile Include="Entities\Internal\MediaFile.cs" />
+    <Compile Include="Entities\Internal\Page.cs" />
+    <Compile Include="Entities\Internal\PageTemplate.cs" />
+    <Compile Include="Entities\Internal\Permalink.cs" />
+    <Compile Include="Entities\Internal\PiranhaRecord.cs" />
+    <Compile Include="Entities\Internal\Post.cs" />
+    <Compile Include="Entities\Internal\PostTemplate.cs" />
+    <Compile Include="Entities\Internal\Property.cs" />
+    <Compile Include="Entities\Internal\Region.cs" />
+    <Compile Include="Entities\Internal\RegionTemplate.cs" />
+    <Compile Include="Entities\Internal\Relation.cs" />
+    <Compile Include="Entities\Internal\Sitemap.cs" />
+    <Compile Include="Entities\Internal\SysAccess.cs" />
+    <Compile Include="Entities\Internal\SysGroup.cs" />
+    <Compile Include="Entities\Internal\SysLog.cs" />
+    <Compile Include="Entities\Internal\SysParam.cs" />
+    <Compile Include="Entities\Internal\SysUser.cs" />
+    <Compile Include="Entities\Internal\SysUserPassword.cs" />
+    <Compile Include="Entities\Internal\Upload.cs" />
+    <Compile Include="Entities\Log.cs" />
+    <Compile Include="Entities\Maps\CategoryMap.cs" />
+    <Compile Include="Entities\Maps\CommentMap.cs" />
+    <Compile Include="Entities\Maps\ExtensionMap.cs" />
+    <Compile Include="Entities\Maps\GroupMap.cs" />
+    <Compile Include="Entities\Maps\LogMap.cs" />
+    <Compile Include="Entities\Maps\MediaMap.cs" />
+    <Compile Include="Entities\Maps\NamespaceMap.cs" />
+    <Compile Include="Entities\Maps\PageMap.cs" />
+    <Compile Include="Entities\Maps\PageTemplateMap.cs" />
+    <Compile Include="Entities\Maps\ParamMap.cs" />
+    <Compile Include="Entities\Maps\PermalinkMap.cs" />
+    <Compile Include="Entities\Maps\PermissionMap.cs" />
+    <Compile Include="Entities\Maps\PostMap.cs" />
+    <Compile Include="Entities\Maps\PostTemplateMap.cs" />
+    <Compile Include="Entities\Maps\PropertyMap.cs" />
+    <Compile Include="Entities\Maps\RegionMap.cs" />
+    <Compile Include="Entities\Maps\RegionTemplateMap.cs" />
+    <Compile Include="Entities\Maps\UploadMap.cs" />
+    <Compile Include="Entities\Maps\UserMap.cs" />
+    <Compile Include="Entities\Media.cs" />
+    <Compile Include="Entities\Namespace.cs" />
+    <Compile Include="Entities\Page.cs" />
+    <Compile Include="Entities\PageTemplate.cs" />
+    <Compile Include="Entities\Param.cs" />
+    <Compile Include="Entities\Permalink.cs" />
+    <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\PostTemplate.cs" />
+    <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Region.cs" />
+    <Compile Include="Entities\RegionTemplate.cs" />
+    <Compile Include="Entities\StandardEntity.cs" />
+    <Compile Include="Entities\Upload.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Extend\Module.cs" />
     <Compile Include="Extend\ModuleAttribute.cs" />
+    <Compile Include="Extend\Regions\PostRegion.cs" />
+    <Compile Include="Resources\Extensions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extensions.resx</DependentUpon>
+    </Compile>
     <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="Web\ModelPropertyAttribute.cs" />
     <Compile Include="Data\Updates\IUpdate.cs" />
     <Compile Include="Data\Updates\Update13.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Drawing\ImageUtils.cs" />
-    <Compile Include="Entities\DuplicateLoginException.cs" />
-    <Compile Include="Entities\DuplicatePermalinkException.cs" />
-    <Compile Include="Entities\Extension.cs" />
-    <Compile Include="Entities\MediaFile.cs" />
-    <Compile Include="Entities\RegionTemplate.cs" />
-    <Compile Include="Entities\SysLog.cs" />
     <Compile Include="Extend\Extension.cs" />
     <Compile Include="Extend\ExtensionAttribute.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
@@ -157,15 +234,7 @@
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\ComplexName.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
-    <Compile Include="Entities\Content.cs" />
-    <Compile Include="Entities\DraftRecord.cs" />
-    <Compile Include="Entities\GuidRecord.cs" />
-    <Compile Include="Entities\IPage.cs" />
-    <Compile Include="Entities\IPost.cs" />
-    <Compile Include="Entities\ISitemap.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\ListModel.cs" />
     <Compile Include="Models\Manager\ContentModels\FileModel.cs" />
@@ -191,10 +260,6 @@
     <Compile Include="Models\Manager\TemplateModels\PageEditModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\PostEditModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\PostListModel.cs" />
-    <Compile Include="Entities\Page.cs" />
-    <Compile Include="Entities\PageTemplate.cs" />
-    <Compile Include="Entities\Permalink.cs" />
-    <Compile Include="Entities\PiranhaRecord.cs" />
     <Compile Include="Models\Manager\TemplateModels\RegionInsertModel.cs" />
     <Compile Include="Models\PageModel.cs" />
     <Compile Include="Data\ActiveRecord.cs">
@@ -205,20 +270,8 @@
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="Areas\Manager\Controllers\ManagerController.cs" />
-    <Compile Include="Entities\Post.cs" />
     <Compile Include="Models\PostArchive.cs" />
     <Compile Include="Models\PostModel.cs" />
-    <Compile Include="Entities\PostTemplate.cs" />
-    <Compile Include="Entities\Property.cs" />
-    <Compile Include="Entities\Region.cs" />
-    <Compile Include="Entities\Relation.cs" />
-    <Compile Include="Entities\Sitemap.cs" />
-    <Compile Include="Entities\SysAccess.cs" />
-    <Compile Include="Entities\SysGroup.cs" />
-    <Compile Include="Entities\SysParam.cs" />
-    <Compile Include="Entities\SysUser.cs" />
-    <Compile Include="Entities\SysUserPassword.cs" />
-    <Compile Include="Entities\Upload.cs" />
     <Compile Include="AccessAttribute.cs" />
     <Compile Include="Mvc\BaseViewPage.cs" />
     <Compile Include="Mvc\ManagerViewEngine.cs" />
@@ -296,6 +349,11 @@
       <LastGenOutput>Content.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Extensions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Extensions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Global.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
@@ -382,6 +440,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\ImageRegion.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Tabs.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\PostRegion.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />

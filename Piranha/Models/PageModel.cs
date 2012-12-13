@@ -173,7 +173,7 @@ namespace Piranha.Models
 		/// <returns>The region</returns>
 		public T Region<T>(string internalId) {
 			if (((IDictionary<string,object>)Regions).ContainsKey(internalId))
-				return (T)((Dictionary<string,object>)Regions)[internalId] ;
+				return (T)((IDictionary<string,object>)Regions)[internalId] ;
 			return default(T) ;
 		}
 
@@ -185,7 +185,7 @@ namespace Piranha.Models
 		/// <returns>The extension</returns>
 		public T Extension<T>(string internalId) {
 			if (((IDictionary<string,object>)Extensions).ContainsKey(internalId))
-				return (T)((Dictionary<string,object>)Extensions)[internalId] ;
+				return (T)((IDictionary<string,object>)Extensions)[internalId] ;
 			return default(T) ;
 		}
 		#endregion
@@ -199,12 +199,27 @@ namespace Piranha.Models
 			// Regions
 			var regions = RegionTemplate.GetByTemplateId(pt.Id) ;
 			if (regions.Count > 0) {
-				foreach (var rt in regions)
-					((IDictionary<string, object>)Regions).Add(rt.InternalId,
-						Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type])) ;
+				foreach (var rt in regions) {
+					if (rt.Type != "Piranha.Extend.Regions.PostRegion") {
+						((IDictionary<string, object>)Regions).Add(rt.InternalId,
+							Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type])) ;
+					} else {
+						((IDictionary<string, object>)Regions).Add(rt.InternalId, new List<Piranha.Entities.Post>()) ;
+					}
+				}
 				Piranha.Models.Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(reg => {
-					if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
-						((IDictionary<string, object>)Regions)[reg.InternalId] = reg.Body ;
+					string cachename = null ;
+					if (!Page.IsDraft)
+						cachename = Extend.Regions.PostRegion.CacheName(Page, reg) ;
+
+					if (!(reg.Body is Extend.Regions.PostRegion)) {
+						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
+							((IDictionary<string, object>)Regions)[reg.InternalId] = reg.Body ;
+					} else {
+						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
+							((IDictionary<string, object>)Regions)[reg.InternalId] = 
+								((Extend.Regions.PostRegion)reg.Body).GetMatchingPosts(cachename) ;
+					}
 				}) ;
 			}
 			// Properties

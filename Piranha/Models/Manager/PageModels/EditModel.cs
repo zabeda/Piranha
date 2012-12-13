@@ -306,6 +306,13 @@ namespace Piranha.Models.Manager.PageModels
 					if (!draft)
 						Web.ClientCache.SetSiteLastModified(tx) ;
 
+					// Clear cache for all post regions if we're publishing
+					if (!draft) {
+						foreach (var reg in Regions)
+							if (reg.Body is Extend.Regions.PostRegion)
+								((Extend.Regions.PostRegion)reg.Body).ClearCache(Page, reg) ;
+					}
+
 					tx.Commit() ;
 				} catch { tx.Rollback() ; throw ; }
 			}
