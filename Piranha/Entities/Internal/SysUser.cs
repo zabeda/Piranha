@@ -77,6 +77,18 @@ namespace Piranha.Models
 		public string GroupName { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the last time the user logged in to the system.
+		/// </summary>
+		[Column(Name="sysuser_last_login")]
+		public DateTime LastLogin { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the previous login for the user.
+		/// </summary>
+		[Column(Name="sysuser_prev_login")]
+		public DateTime PreviousLogin { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name="sysuser_created")]
@@ -125,8 +137,18 @@ namespace Piranha.Models
 		/// <param name="password">The password</param>
 		/// <returns>An authenticated user</returns>
 		public static SysUser Authenticate(string login, string password) {
-			return GetSingle("sysuser_login = @0 AND sysuser_password = @1",
+			var users = GetFields(" * ", "sysuser_login = @0 AND sysuser_password = @1",
 				login, SysUser.Encrypt(password)) ;
+			if (users.Count == 1) {
+				// Update last & prev login date.
+				if (Convert.ToInt32(SysParam.GetByName("SITE_VERSION").Value) > 18) {
+					users[0].PreviousLogin = users[0].LastLogin ;
+					users[0].LastLogin = DateTime.Now ;
+					users[0].Save() ;
+				}
+				return users[0] ;
+			}
+			return null ;
 		}
 
 		/// <summary>

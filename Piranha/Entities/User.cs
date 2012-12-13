@@ -54,6 +54,16 @@ namespace Piranha.Entities
 		public string Culture { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the last time the user logged in to the system.
+		/// </summary>
+		public DateTime? LastLogin { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the previous login for the user.
+		/// </summary>
+		public DateTime? PreviousLogin { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the date the user was initially created.
 		/// </summary>
 		public DateTime Created { get ; set ; }

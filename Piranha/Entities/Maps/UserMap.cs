@@ -22,6 +22,8 @@ namespace Piranha.Entities.Maps
 			Property(u => u.Email).HasColumnName("sysuser_email").HasMaxLength(128) ;
 			Property(u => u.GroupId).HasColumnName("sysuser_group_id") ;
 			Property(u => u.Culture).HasColumnName("sysuser_culture").HasMaxLength(5) ;
+			Property(u => u.LastLogin).HasColumnName("sysuser_last_login") ;
+			Property(u => u.PreviousLogin).HasColumnName("sysuser_prev_login") ;
 			Property(u => u.Created).HasColumnName("sysuser_created") ;
 			Property(u => u.Updated).HasColumnName("sysuser_updated") ;
 			Property(u => u.CreatedById).HasColumnName("sysuser_created_by") ;
