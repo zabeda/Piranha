@@ -7,6 +7,8 @@
 	sysuser_email VARCHAR(128) NULL,
 	sysuser_group_id CHAR(38) NULL,
 	sysuser_culture VARCHAR(5) NULL,
+	sysuser_last_login DATETIME NULL,
+	sysuser_prev_login DATETIME NULL,
 	sysuser_created DATETIME NOT NULL,
 	sysuser_updated DATETIME NOT NULL,
 	sysuser_created_by CHAR(38) NULL,
