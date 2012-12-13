@@ -52,48 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext.cs" />
-    <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\Category.cs" />
-    <Compile Include="Entities\Comment.cs" />
-    <Compile Include="Entities\Extension.cs" />
-    <Compile Include="Entities\Group.cs" />
-    <Compile Include="Entities\Log.cs" />
-    <Compile Include="Entities\Maps\CategoryMap.cs" />
-    <Compile Include="Entities\Maps\CommentMap.cs" />
-    <Compile Include="Entities\Maps\ExtensionMap.cs" />
-    <Compile Include="Entities\Maps\GroupMap.cs" />
-    <Compile Include="Entities\Maps\LogMap.cs" />
-    <Compile Include="Entities\Maps\MediaMap.cs" />
-    <Compile Include="Entities\Maps\NamespaceMap.cs" />
-    <Compile Include="Entities\Maps\PageMap.cs" />
-    <Compile Include="Entities\Maps\PageTemplateMap.cs" />
-    <Compile Include="Entities\Maps\ParamMap.cs" />
-    <Compile Include="Entities\Maps\PermalinkMap.cs" />
-    <Compile Include="Entities\Maps\PermissionMap.cs" />
-    <Compile Include="Entities\Maps\PostMap.cs" />
-    <Compile Include="Entities\Maps\PostTemplateMap.cs" />
-    <Compile Include="Entities\Maps\PropertyMap.cs" />
-    <Compile Include="Entities\Maps\RegionMap.cs" />
-    <Compile Include="Entities\Maps\RegionTemplateMap.cs" />
-    <Compile Include="Entities\Maps\UploadMap.cs" />
-    <Compile Include="Entities\Maps\UserMap.cs" />
-    <Compile Include="Entities\Media.cs" />
-    <Compile Include="Entities\Namespace.cs" />
-    <Compile Include="Entities\Page.cs" />
-    <Compile Include="Entities\PageTemplate.cs" />
-    <Compile Include="Entities\Param.cs" />
-    <Compile Include="Entities\Permalink.cs" />
-    <Compile Include="Entities\Permission.cs" />
-    <Compile Include="Entities\Post.cs" />
-    <Compile Include="Entities\PostTemplate.cs" />
-    <Compile Include="Entities\Property.cs" />
-    <Compile Include="Entities\Region.cs" />
-    <Compile Include="Entities\RegionTemplate.cs" />
-    <Compile Include="Entities\StandardEntity.cs" />
-    <Compile Include="Entities\Upload.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="DataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +64,9 @@
       <Project>{7e07dd4f-41ed-4faf-8407-62196aae0d0f}</Project>
       <Name>Piranha</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
