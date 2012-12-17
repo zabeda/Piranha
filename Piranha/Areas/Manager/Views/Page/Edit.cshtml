@@ -94,7 +94,7 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             @if (!Model.Page.IsNew) {
-            <li><a href="http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
+            <li><a href="http://@Request.Url.DnsSafeHost@(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : "")@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
             <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
             @if (Model.Page.Published > DateTime.MinValue) {
