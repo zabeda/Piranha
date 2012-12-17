@@ -176,5 +176,32 @@ namespace Piranha.Resources {
                 return ResourceManager.GetString("PostRegionTemplate", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string TextRegionBody {
+            get {
+                return ResourceManager.GetString("TextRegionBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simple text.
+        /// </summary>
+        public static string TextRegionName {
+            get {
+                return ResourceManager.GetString("TextRegionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string TextRegionTitle {
+            get {
+                return ResourceManager.GetString("TextRegionTitle", resourceCulture);
+            }
+        }
     }
 }

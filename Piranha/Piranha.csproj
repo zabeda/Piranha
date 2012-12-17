@@ -161,6 +161,7 @@
     <Compile Include="Extend\Module.cs" />
     <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\PostRegion.cs" />
+    <Compile Include="Extend\Regions\TextRegion.cs" />
     <Compile Include="Resources\Extensions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -443,6 +444,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Tabs.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\PostRegion.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\TextRegion.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
