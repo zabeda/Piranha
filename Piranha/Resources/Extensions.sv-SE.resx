@@ -126,6 +126,21 @@
   <data name="PostRegionCache" xml:space="preserve">
     <value>Cache (minuter)</value>
   </data>
+  <data name="PostRegionInclude" xml:space="preserve">
+    <value>Inkludera</value>
+  </data>
+  <data name="PostRegionIncludeCategories" xml:space="preserve">
+    <value>Alla kategorier</value>
+  </data>
+  <data name="PostRegionIncludeCreatedBy" xml:space="preserve">
+    <value>Användaren som skapade artikeln</value>
+  </data>
+  <data name="PostRegionIncludeTemplate" xml:space="preserve">
+    <value>Artikeltypen</value>
+  </data>
+  <data name="PostRegionIncludeUpdatedBy" xml:space="preserve">
+    <value>Användaren som senast uppdaterade artikeln</value>
+  </data>
   <data name="PostRegionMatchingTitle" xml:space="preserve">
     <value>Matchande artiklar</value>
   </data>
@@ -140,5 +155,14 @@
   </data>
   <data name="PostRegionTemplate" xml:space="preserve">
     <value>Artikeltyp</value>
+  </data>
+  <data name="TextRegionBody" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TextRegionName" xml:space="preserve">
+    <value>Vanlig text</value>
+  </data>
+  <data name="TextRegionTitle" xml:space="preserve">
+    <value>Titel</value>
   </data>
 </root>

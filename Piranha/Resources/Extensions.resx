@@ -156,4 +156,13 @@
   <data name="PostRegionTemplate" xml:space="preserve">
     <value>Post type</value>
   </data>
+  <data name="TextRegionBody" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TextRegionName" xml:space="preserve">
+    <value>Simple text</value>
+  </data>
+  <data name="TextRegionTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
 </root>
