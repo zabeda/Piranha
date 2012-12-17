@@ -171,12 +171,14 @@ namespace Piranha.Models
 		private IExtension GetBody() {
 			var js = new JavaScriptSerializer() ;
 
-			if (!String.IsNullOrEmpty(InternalBody)) {
-				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.ExtensionTypes[Type]))
-					return (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[Type], InternalBody) ;
-				return (IExtension)js.Deserialize(InternalBody, ExtensionManager.ExtensionTypes[Type]) ;
-			}
-			return (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[Type]) ;
+			if (ExtensionManager.ExtensionTypes.ContainsKey(Type)) {
+				if (!String.IsNullOrEmpty(InternalBody)) {
+					if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.ExtensionTypes[Type]))
+						return (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[Type], InternalBody) ;
+					return (IExtension)js.Deserialize(InternalBody, ExtensionManager.ExtensionTypes[Type]) ;
+				}
+				return (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[Type]) ;
+			} else return null ;
 		}
 		#endregion
 	}
