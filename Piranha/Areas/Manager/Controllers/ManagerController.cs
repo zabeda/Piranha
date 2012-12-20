@@ -53,12 +53,12 @@ namespace Piranha.Areas.Manager.Controllers
 				MethodInfo m = null ;
 
 				try {
-					m = this.GetType().GetMethod(filterContext.ActionDescriptor.ActionName) ;
+					m = this.GetType().GetMethod(filterContext.ActionDescriptor.ActionName, BindingFlags.Public|BindingFlags.Instance|BindingFlags.IgnoreCase) ;
 				} catch {
 					// If this fails we have multiple actions with the same name. We'll have to try and
 					// match it on FormMethod.
 					this.GetType().GetMethods().Each((i, method) => {
-						if (method.Name == filterContext.ActionDescriptor.ActionName) {
+						if (method.Name.ToLower() == filterContext.ActionDescriptor.ActionName.ToLower()) {
 							if (Request.HttpMethod == "POST") {
 								if (method.GetCustomAttribute<HttpPostAttribute>(true) != null) {
 									m = method ;
