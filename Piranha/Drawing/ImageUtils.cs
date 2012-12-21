@@ -56,20 +56,22 @@ namespace Piranha.Drawing
 		/// <returns>The resized image</returns>
 		public static Image Resize(Image img, int width, int height) {
 			// We only reduce size and crop, we don't magnify images
-			if (width <= img.Width && height <= img.Height) {
-				var xRatio = width / (double)img.Width ;
-				var yRatio = height / (double)img.Height ;
+			if (!(img.Width == width && img.Height == height)) {
+				if (width <= img.Width && height <= img.Height) {
+					var xRatio = width / (double)img.Width ;
+					var yRatio = height / (double)img.Height ;
 
-				if (img.Height * xRatio < height)
-					img = Resize(img, Convert.ToInt32(img.Width * yRatio)) ;
-				else img = Resize(img, Convert.ToInt32(width)) ;
+					if (img.Height * xRatio < height)
+						img = Resize(img, Convert.ToInt32(img.Width * yRatio)) ;
+					else img = Resize(img, Convert.ToInt32(width)) ;
 
-				var newRect = new Rectangle(((width - img.Width) / 2) * -1, ((height - img.Height) / 2) * -1, width, height) ;
-				var orgBmp = new Bitmap(img) ;
-				var crpBmp = orgBmp.Clone(newRect, img.PixelFormat) ;
-				orgBmp.Dispose() ;
+					var newRect = new Rectangle(((width - img.Width) / 2) * -1, ((height - img.Height) / 2) * -1, width, height) ;
+					var orgBmp = new Bitmap(img) ;
+					var crpBmp = orgBmp.Clone(newRect, img.PixelFormat) ;
+					orgBmp.Dispose() ;
 
-				return (Image)crpBmp ;
+					return (Image)crpBmp ;
+				}
 			}
 			return img ;
 		}
