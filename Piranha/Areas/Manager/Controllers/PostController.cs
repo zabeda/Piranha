@@ -15,7 +15,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_POST")]
 	    public ActionResult Index() {
-			var m = ListModel.Get() ;
+			var m = Models.PostListModel.Get() ;
 			ViewBag.Title = @Piranha.Resources.Post.ListTitle ;
 
 			// Executes the post list loaded hook, if registered

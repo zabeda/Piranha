@@ -105,6 +105,16 @@ namespace Piranha.Models.Manager.PageModels
 		/// Gets/sets weather this page can be removed.
 		/// </summary>
 		public bool CanDelete { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather comments should be enabled.
+		/// </summary>
+		public bool EnableComments { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently available comments for the current post.
+		/// </summary>
+		public List<Entities.Comment> Comments { get ; set ; }
 		#endregion
 
 		#region Inner classes
@@ -128,6 +138,7 @@ namespace Piranha.Models.Manager.PageModels
 			DisableGroups = SysGroup.GetParents(Guid.Empty) ;
 			DisableGroups.Reverse() ;
 			CanDelete = true ;
+			Comments = new List<Entities.Comment>() ;
 
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
 			groups.Reverse() ;
@@ -247,7 +258,7 @@ namespace Piranha.Models.Manager.PageModels
 
 					// Save permalink first if the page is new
 					if (permalinkfirst) {
-						if (Permalink.IsNew) {
+						if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name)) {
 							Permalink.Name = Permalink.Generate(!String.IsNullOrEmpty(Page.NavigationTitle) ?
 								Page.NavigationTitle : Page.Title) ;
 							var param = SysParam.GetByName("HIERARCHICAL_PERMALINKS") ;
@@ -466,6 +477,17 @@ namespace Piranha.Models.Manager.PageModels
 					if (m != null)
 						m.Invoke(reg.Body, new object[] { this }) ;
 				}
+
+			// Get weather comments should be enabled
+			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePages ;
+			if (!Page.IsNew && EnableComments) {
+				using (var db = new DataContext()) {
+					Comments = db.Comments.
+						Include("CreatedBy").
+						Where(c => c.ParentId == Page.Id && c.ParentIsDraft == false).
+						OrderByDescending(c => c.Created).ToList() ;
+				}
+			}
 		}
 
 		private static List<PagePlacement> BuildParentPages(List<Sitemap> sm, Page p = null) {

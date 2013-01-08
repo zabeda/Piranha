@@ -97,7 +97,7 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Executed after the post list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.PostModels.ListModel> PostListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Areas.Manager.Models.PostListModel> PostListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the post edit model is loaded but before the view is called.

@@ -132,6 +132,9 @@
   <data name="ChooseFile" xml:space="preserve">
     <value>Bläddra</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Kommentarer</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Bekräfta</value>
   </data>
@@ -140,6 +143,12 @@
   </data>
   <data name="Created" xml:space="preserve">
     <value>Skapad</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Radera</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Ändra</value>
   </data>
   <data name="Everyone" xml:space="preserve">
     <value>Alla</value>
@@ -227,6 +236,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Inställningar</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="Thumbnail" xml:space="preserve">
     <value>Tumnagel</value>

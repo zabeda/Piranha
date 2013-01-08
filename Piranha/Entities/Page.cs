@@ -85,12 +85,12 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Gets/sets the date the post was initially published.
 		/// </summary>
-		public DateTime ?Published { get ; set ; }
+		public DateTime? Published { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the date the post was last updated.
 		/// </summary>
-		public DateTime ?LastPublished { get ; set ; }
+		public DateTime? LastPublished { get ; set ; }
 		#endregion
 
 		#region Navigation properties

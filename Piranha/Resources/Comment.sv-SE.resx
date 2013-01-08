@@ -117,46 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ContentAliases" xml:space="preserve">
-    <value>Aliases</value>
+  <data name="Approve" xml:space="preserve">
+    <value>Godkänn</value>
   </data>
-  <data name="ContentMedia" xml:space="preserve">
-    <value>Images &amp; documents</value>
+  <data name="Approved" xml:space="preserve">
+    <value>Godkänd</value>
   </data>
-  <data name="ContentPages" xml:space="preserve">
-    <value>Pages</value>
+  <data name="Author" xml:space="preserve">
+    <value>Skrivet av</value>
   </data>
-  <data name="ContentPosts" xml:space="preserve">
-    <value>Posts</value>
+  <data name="ListTitle" xml:space="preserve">
+    <value>Kommentarer</value>
   </data>
-  <data name="ContentTags" xml:space="preserve">
-    <value>Tags</value>
+  <data name="MessageDeleted" xml:space="preserve">
+    <value>Kommentaren har raderats.</value>
   </data>
-  <data name="SettingsCategories" xml:space="preserve">
-    <value>Categories</value>
+  <data name="MessageNotDeleted" xml:space="preserve">
+    <value>Ett fel har inträffat. Kommentaren kunde inte raderas.</value>
   </data>
-  <data name="SettingsComments" xml:space="preserve">
-    <value>Comments</value>
+  <data name="MessageNotSaved" xml:space="preserve">
+    <value>Ett fel har inträffat. Kommentaren kunde inte sparas.</value>
   </data>
-  <data name="SettingsPageTypes" xml:space="preserve">
-    <value>Page types</value>
+  <data name="MessageSaved" xml:space="preserve">
+    <value>Kommentaren har sparats.</value>
   </data>
-  <data name="SettingsPostTypes" xml:space="preserve">
-    <value>Post types</value>
+  <data name="New" xml:space="preserve">
+    <value>Ny</value>
   </data>
-  <data name="SystemAccess" xml:space="preserve">
-    <value>Permissions</value>
+  <data name="NotApproved" xml:space="preserve">
+    <value>Ej godkänd</value>
   </data>
-  <data name="SystemExternals" xml:space="preserve">
-    <value>External systems</value>
+  <data name="Reject" xml:space="preserve">
+    <value>Dra tillbaka</value>
   </data>
-  <data name="SystemGroups" xml:space="preserve">
-    <value>Groups</value>
-  </data>
-  <data name="SystemParams" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="SystemUsers" xml:space="preserve">
-    <value>Users</value>
+  <data name="Reply" xml:space="preserve">
+    <value>Svara</value>
   </data>
 </root>

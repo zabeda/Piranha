@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Areas\Manager\Controllers\AccountController.cs" />
     <Compile Include="Areas\Manager\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Manager\Controllers\CommentController.cs" />
     <Compile Include="Areas\Manager\Controllers\ContentController.cs" />
     <Compile Include="Areas\Manager\Controllers\InstallController.cs" />
     <Compile Include="Areas\Manager\Controllers\PageController.cs" />
@@ -86,6 +87,9 @@
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Manager\Controllers\UploadController.cs" />
+    <Compile Include="Areas\Manager\Models\CommentEditModel.cs" />
+    <Compile Include="Areas\Manager\Models\CommentSettingsModel.cs" />
+    <Compile Include="Areas\Manager\Models\PostListModel.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
@@ -162,6 +166,12 @@
     <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\PostRegion.cs" />
     <Compile Include="Extend\Regions\TextRegion.cs" />
+    <Compile Include="Areas\Manager\Models\CommentListModel.cs" />
+    <Compile Include="Resources\Comment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Comment.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Extensions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -250,7 +260,6 @@
     <Compile Include="Models\Manager\PageModels\ListModel.cs" />
     <Compile Include="Models\Manager\PostModels\EditModel.cs" />
     <Compile Include="Models\Manager\PostModels\InsertModel.cs" />
-    <Compile Include="Models\Manager\PostModels\ListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\AccessEditModel.cs" />
     <Compile Include="Models\Manager\SettingModels\AccessListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\ParamListModel.cs" />
@@ -347,6 +356,11 @@
       <LastGenOutput>Category.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Comment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Content.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Content.Designer.cs</LastGenOutput>
@@ -445,6 +459,9 @@
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Tabs.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\PostRegion.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\TextRegion.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Comment\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Comment\List.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Comment\Edit.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
@@ -740,6 +757,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\19.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-comments-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\20.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.comments.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\20.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

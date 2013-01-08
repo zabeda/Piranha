@@ -127,7 +127,10 @@
             @foreach (var page in Model.Pages) {
             <tr@(page.Updated > page.LastPublished ? " class=draft" : "")>
                 <td class="title"><a href="@Url.Action("edit", new { id = page.Id })">
-                    @page.Title@Html.Raw(page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : ""))
+                    @(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)
+                    <div class="list-info">
+                        @Html.Raw(page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : ""))
+                    </div>
                 </a></td>
                 <td class="template">@page.TemplateName</td>
                 <td class="updated">@page.Updated.ToString("yyyy-MM-dd")</td>

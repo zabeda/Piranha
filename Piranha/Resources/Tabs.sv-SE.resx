@@ -135,6 +135,9 @@
   <data name="SettingsCategories" xml:space="preserve">
     <value>Kategorier</value>
   </data>
+  <data name="SettingsComments" xml:space="preserve">
+    <value>Kommentarer</value>
+  </data>
   <data name="SettingsPageTypes" xml:space="preserve">
     <value>Sidtyper</value>
   </data>

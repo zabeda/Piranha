@@ -1,0 +1,35 @@
+﻿@model List<Piranha.Entities.Comment>
+@{
+    Layout = "" ;
+}
+<table class="list">
+    <tr>
+        <td><strong>@Piranha.Resources.Global.Title</strong></td>
+        <td><strong>@Piranha.Resources.Comment.Author</strong></td>
+        <td><strong>@Piranha.Resources.Global.Status</strong></td>
+        <td class="date"><strong>@Piranha.Resources.Global.Created</strong></td>
+    </tr>
+    @foreach (var comment in Model) {
+    <tr>
+        <td><a class="btn-comment-expand" href="#" data-id="@comment.Id">@comment.Title</a></td>
+        <td><a href="mailto:@comment.Author.Email">@comment.Author.Name</a></td>
+        <td>@comment.StatusName</td>
+        <td>@comment.Created.ToString("yyyy-MM-dd")</td>
+    </tr>
+    <tr class="comment-detail" style="display:none" id="@comment.Id">
+        <td colspan="4">
+            <p>@comment.Body</p>
+            @if (User.HasAccess("ADMIN_COMMENT")) {
+            <p class="comment-tools right">
+                <a class="btn" href="@Url.Action("edit", "comment", new { @id = comment.Id })">@Piranha.Resources.Global.Edit</a>
+                <a class="btn" href="#" data-id="@comment.Id" class="comment-approve">@Piranha.Resources.Comment.Approve</a>
+                <a class="btn" href="#" data-id="@comment.Id" class="comment-reject">@Piranha.Resources.Comment.Reject</a>
+                <a class="btn" href="#" class="comment-reply">@Piranha.Resources.Comment.Reply</a>
+                <a class="btn" href="#" data-id="@comment.Id" class="comment-delete">@Piranha.Resources.Global.Delete</a>
+            </p>
+            }
+        </td>
+    </tr>
+    }
+</table>
+
