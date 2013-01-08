@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Activate" xml:space="preserve">
+    <value>Aktivera</value>
+  </data>
+  <data name="AllowAnonymous" xml:space="preserve">
+    <value>Tillåt anonyma kommentarer</value>
+  </data>
   <data name="Approve" xml:space="preserve">
     <value>Godkänn</value>
   </data>
@@ -126,8 +132,14 @@
   <data name="Author" xml:space="preserve">
     <value>Skrivet av</value>
   </data>
+  <data name="EditTitleExisting" xml:space="preserve">
+    <value>Ändra kommentar</value>
+  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Kommentarer</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Bilder &amp; dokument</value>
   </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>Kommentaren har raderats.</value>
@@ -147,10 +159,22 @@
   <data name="NotApproved" xml:space="preserve">
     <value>Ej godkänd</value>
   </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Sidor</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>Artiklar</value>
+  </data>
   <data name="Reject" xml:space="preserve">
     <value>Dra tillbaka</value>
   </data>
   <data name="Reply" xml:space="preserve">
     <value>Svara</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Kommentarsinställningar</value>
+  </data>
+  <data name="Uploads" xml:space="preserve">
+    <value>Uppladdningar</value>
   </data>
 </root>

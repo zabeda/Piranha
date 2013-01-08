@@ -46,6 +46,11 @@ namespace Piranha.Areas.Manager.Models
 		/// Gets/sets weather comments should be enabled by anonymous users.
 		/// </summary>
 		public bool EnableAnonymous { get ; set ; }
+
+		public int PageCommentCount { get ; set ; }
+		public int PostCommentCount { get ; set ; }
+		public int MediaCommentCount { get ; set ; }
+		public int UploadCommentCount { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -64,24 +69,28 @@ namespace Piranha.Areas.Manager.Models
 				if (param != null)
 					model.EnablePages = param.Value == "1" ;
 				else model.EnablePages = false ;
+				model.PageCommentCount = db.Database.SqlQuery<int>("SELECT COUNT(*) FROM comment JOIN page ON comment_parent_id = page_id").First() ; 
 
 				// Posts
 				param = paramList.Where(p => p.Name == PARAM_POSTS).SingleOrDefault() ;
 				if (param != null)
 					model.EnablePosts = param.Value == "1" ;
 				else model.EnablePosts = true ;
+				model.PostCommentCount = db.Database.SqlQuery<int>("SELECT COUNT(*) FROM comment JOIN post ON comment_parent_id = post_id").First() ; 
 
 				// Media
 				param = paramList.Where(p => p.Name == PARAM_MEDIA).SingleOrDefault() ;
 				if (param != null)
 					model.EnableMedia = param.Value == "1" ;
 				else model.EnableMedia = false ;
+				model.PostCommentCount = db.Database.SqlQuery<int>("SELECT COUNT(*) FROM comment JOIN content ON comment_parent_id = content_id").First() ; 
 
 				// Uploads
 				param = paramList.Where(p => p.Name == PARAM_UPLOADS).SingleOrDefault() ;
 				if (param != null)
 					model.EnableUploads = param.Value == "1" ;
 				else model.EnableUploads = false ;
+				model.PostCommentCount = db.Database.SqlQuery<int>("SELECT COUNT(*) FROM comment JOIN upload ON comment_parent_id = upload_id").First() ; 
 
 				// Anonymous
 				param = paramList.Where(p => p.Name == PARAM_ANONYMOUS).SingleOrDefault() ;

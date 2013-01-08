@@ -12,7 +12,7 @@ using Piranha.Extend;
 namespace Piranha.Models
 {
 	/// <summary>
-	/// Page model for the from cms application.
+	/// Page view model.
 	/// </summary>
 	public class PageModel
 	{

@@ -1,6 +1,6 @@
 ﻿@model Piranha.Areas.Manager.Models.CommentEditModel
 @{
-    ViewBag.Title = "Edit comment" ;
+    ViewBag.Title = @Piranha.Resources.Comment.EditTitleExisting ;
 }
 @section Toolbar {
 @Html.Partial("Partial/Tabs")
@@ -49,7 +49,7 @@
             <ul class="form">
                 <li>@Html.LabelFor(m => m.AuthorName)
                 @if (Model.CreatedById.HasValue) {
-                    <p><a href="@Url.Action("edit", "user", new { @id = Model.CreatedById.Value })">@Model.AuthorName</a></p>
+                    <p><a href="@Url.Action("user", "settings", new { @id = Model.CreatedById.Value })">@Model.AuthorName</a></p>
                 } else {
                     <p>@Model.AuthorName</p>
                 }

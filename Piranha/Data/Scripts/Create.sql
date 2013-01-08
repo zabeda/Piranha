@@ -96,6 +96,7 @@ CREATE TABLE [pagetemplate] (
 
 CREATE TABLE [posttemplate] (
 	[posttemplate_id] UNIQUEIDENTIFIER NOT NULL,
+	[posttemplate_permalink_id] UNIQUEIDENTIFIER NOT NULL,
 	[posttemplate_name] NVARCHAR(64) NOT NULL,
 	[posttemplate_description] NVARCHAR(255) NULL,
 	[posttemplate_preview] NTEXT NULL,
