@@ -8,7 +8,7 @@
 CREATE TABLE [comment] (
 	[comment_id] UNIQUEIDENTIFIER NOT NULL,
 	[comment_parent_id] UNIQUEIDENTIFIER NOT NULL,
-	[comment_approved] BIT DEFAULT(1),
+	[comment_approved] BIT,
 	[comment_title] NVARCHAR(64) NULL,
 	[comment_body] NTEXT NOT NULL,
 	[comment_author_name] NVARCHAR(128) NULL,

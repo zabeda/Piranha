@@ -126,7 +126,7 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Gets/sets the internal integer status value.
 		/// </summary>
-		internal int InternalStatus { get ; set ; }
+		public int InternalStatus { get ; set ; }
 		#endregion
 
 		#region Ignored properties
