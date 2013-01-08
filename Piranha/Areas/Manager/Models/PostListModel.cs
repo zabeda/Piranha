@@ -121,7 +121,7 @@ namespace Piranha.Areas.Manager.Models
 				// Get the posts
 				m.Posts = db.PostDrafts.
 					Include(p => p.Template).
-					OrderByDescending(p => p.Updated).
+					OrderByDescending(p => p.Updated).ToList().
 					Select(p => new PostModel() {
 						Id = p.Id,
 						Title = p.Title,
