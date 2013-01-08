@@ -13,7 +13,7 @@
         <article class="post">
             <header>
                 <h3><a href="@UI.Permalink(post.PermalinkId)">@post.Title</a></h3>
-                <p><small>Published: @post.Published.ToShortDateString()</small></p>
+                <p><small>Published: @post.Published.Value.ToShortDateString()</small></p>
             </header>
             <p>@post.Excerpt</p>
         </article>
