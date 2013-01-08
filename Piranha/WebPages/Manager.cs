@@ -168,10 +168,14 @@ namespace Piranha.WebPages
 		/// </summary>
 		public static List<MenuGroup> Menu = new List<MenuGroup>() {
 			new MenuGroup() { InternalId = "Content", Name = @Resources.Global.MenuContent, Items = new List<MenuItem>() {
-				new MenuItem() { InternalId = "Pages", Name = @Resources.Tabs.ContentPages, Action = "index", Controller = "page", Permission = "ADMIN_PAGE" },
-				new MenuItem() { InternalId = "Posts", Name = @Resources.Tabs.ContentPosts, Action = "index", Controller = "post", Permission = "ADMIN_POST" },
-				new MenuItem() { InternalId = "Media", Name = @Resources.Tabs.ContentMedia, Action = "index", Controller = "content", Permission = "ADMIN_CONTENT" },
-				new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Action = "index", Controller = "comment", Permission = "ADMIN_COMMENT" },
+				new MenuItem() { InternalId = "Pages", Name = @Resources.Tabs.ContentPages, Action = "index", Controller = "page", 
+					Permission = "ADMIN_PAGE" },
+				new MenuItem() { InternalId = "Posts", Name = @Resources.Tabs.ContentPosts, Action = "index", Controller = "post", 
+					Permission = "ADMIN_POST" },
+				new MenuItem() { InternalId = "Media", Name = @Resources.Tabs.ContentMedia, Action = "index", Controller = "content", 
+					Permission = "ADMIN_CONTENT" },
+				new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Action = "index", Controller = "comment", 
+					Permission = "ADMIN_COMMENT", SelectedActions = "index, delete, edit" },
 			}},
 			new MenuGroup() { InternalId = "Settings", Name = @Resources.Global.MenuSettings, Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "PageTypes", Name = @Resources.Tabs.SettingsPageTypes, Action = "pagelist", Controller = "template", 
@@ -179,17 +183,19 @@ namespace Piranha.WebPages
 				new MenuItem() { InternalId = "PostTypes", Name = @Resources.Tabs.SettingsPostTypes, Action = "postlist", Controller = "template", 
 					Permission = "ADMIN_POST_TEMPLATE", SelectedActions = "postlist, post" },
 				new MenuItem() { InternalId = "Categories", Name = @Resources.Tabs.SettingsCategories, Action = "index", Controller = "category", 
-					Permission = "ADMIN_CATEGORY" }
+					Permission = "ADMIN_CATEGORY" },
+				new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Action = "settings", Controller = "comment", 
+					Permission = "ADMIN_COMMENT", SelectedActions = "settings" },
 			}},
 			new MenuGroup() { InternalId = "System", Name = @Resources.Global.MenuSystem, Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "Users", Name = @Resources.Tabs.SystemUsers, Action = "userlist", Controller = "settings", 
-					Permission = "ADMIN_USER", SelectedActions = "userlist, user" },
+					Permission = "ADMIN_USER", SelectedActions = "userlist, user, deleteuser" },
 				new MenuItem() { InternalId = "Groups", Name = @Resources.Tabs.SystemGroups, Action = "grouplist", Controller = "settings", 
-					Permission = "ADMIN_GROUP", SelectedActions = "grouplist, group" },
+					Permission = "ADMIN_GROUP", SelectedActions = "grouplist, group, deletegroup" },
 				new MenuItem() { InternalId = "Permissions", Name = @Resources.Tabs.SystemAccess, Action = "accesslist", Controller = "settings", 
-					Permission = "ADMIN_ACCESS", SelectedActions = "accesslist, access" },
+					Permission = "ADMIN_ACCESS", SelectedActions = "accesslist, access, deleteaccess" },
 				new MenuItem() { InternalId = "Parameters", Name = @Resources.Tabs.SystemParams, Action = "paramlist", Controller = "settings", 
-					Permission = "ADMIN_PARAM", SelectedActions = "paramlist, param" }
+					Permission = "ADMIN_PARAM", SelectedActions = "paramlist, param, deleteparam" }
 			}}
 		} ;
 

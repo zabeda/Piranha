@@ -74,12 +74,12 @@ namespace Piranha.Areas.Manager.Models
 			using (var db = new DataContext()) {
 				m.Comments = db.Comments.Include("CreatedBy").Select(c => new CommentModel() {
 					Id = c.Id,
-					Title = c.Title,
+					Title = !String.IsNullOrEmpty(c.Title) ? c.Title : c.Body.Substring(0, 32) + "...",
 					Created = c.Created,
 					AuthorName = c.CreatedBy != null ? c.CreatedBy.Firstname + " " + c.CreatedBy.Surname : c.AuthorName,
 					AuthorEmail = c.CreatedBy != null ? c.CreatedBy.Email : c.AuthorEmail,
 					Status = (Comment.CommentStatus)c.InternalStatus,
-				}).ToList() ;
+				}).OrderByDescending(c => c.Created).ToList() ;
 			}
 			return m ;
 		}

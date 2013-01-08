@@ -67,6 +67,10 @@ input[type="checkbox"],
 input[type="radio"] {
     margin: 8px;
     }
+.title input[type="checkbox"],
+.title input[type="radio"] {
+    margin: 4px 8px 8px;
+    }
 p input[type="checkbox"],
 p input[type="radio"] {
     margin: 0;

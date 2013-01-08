@@ -462,6 +462,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Comment\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Comment\List.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Comment\Edit.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\Comment\Settings.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
