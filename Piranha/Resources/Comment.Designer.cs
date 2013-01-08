@@ -169,6 +169,24 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while saving the comment settings..
+        /// </summary>
+        public static string MessageSettingsNotSaved {
+            get {
+                return ResourceManager.GetString("MessageSettingsNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The comment settings have been saved..
+        /// </summary>
+        public static string MessageSettingsSaved {
+            get {
+                return ResourceManager.GetString("MessageSettingsSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string New {
