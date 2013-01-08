@@ -153,6 +153,12 @@
   <data name="MessageSaved" xml:space="preserve">
     <value>The comment has been saved.</value>
   </data>
+  <data name="MessageSettingsNotSaved" xml:space="preserve">
+    <value>An error occured while saving the comment settings.</value>
+  </data>
+  <data name="MessageSettingsSaved" xml:space="preserve">
+    <value>The comment settings have been saved.</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
   </data>

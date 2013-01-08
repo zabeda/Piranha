@@ -83,8 +83,8 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Settings(CommentSettingsModel m) {
 			if (ModelState.IsValid) {
 				m.Save() ;
-				return RedirectToAction("index") ;
-			}
+				SuccessMessage(Piranha.Resources.Comment.MessageSettingsSaved) ;
+			} else ErrorMessage(Piranha.Resources.Comment.MessageSettingsNotSaved) ;
 			return View(m) ;
 		}
 

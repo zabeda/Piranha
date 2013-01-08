@@ -153,6 +153,12 @@
   <data name="MessageSaved" xml:space="preserve">
     <value>Kommentaren har sparats.</value>
   </data>
+  <data name="MessageSettingsNotSaved" xml:space="preserve">
+    <value>Ett fel har inträffat. Inställningarna kunde inte sparas.</value>
+  </data>
+  <data name="MessageSettingsSaved" xml:space="preserve">
+    <value>Inställningarna har sparats.</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>Ny</value>
   </data>
