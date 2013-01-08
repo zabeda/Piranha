@@ -5,6 +5,7 @@
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.regions.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.comments.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Ext/jquery.equalheights.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
@@ -40,6 +41,8 @@
             });
 
             $('.first-row .box').equalHeights();
+
+            var c = new piranha.comment('@Model.Page.Id', 'comment-notification', 'pnl-comments .inner');
         });
 
         //
@@ -220,6 +223,15 @@
                             @if (Model.Properties.Count > 0) {
                             <li class="btn-properties"><a href="#" data-id="pnl-properties">@Piranha.Resources.Global.Properties</a></li>
                             }
+                            @if (Model.EnableComments) {
+                            <li class="btn-comments">
+                                @{
+                                    var count = Model.Comments.Where(c => c.Status == Piranha.Entities.Comment.CommentStatus.New).Count() ;
+                                }
+                                <span @(count == 0 ? "style=display:none" : "") id="comment-notification" class="notification">@count</span>
+                                <a href="#" data-id="pnl-comments">@Piranha.Resources.Global.Comments</a>
+                            </li>
+                            }
                             @foreach (var ext in Model.Extensions) {
                             <li>
                                 <a href="#"@(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
@@ -317,6 +329,14 @@
                                     </li>
                                 }
                                 </ul>
+                            </div>
+                        </div>
+                        }
+                        @if (Model.EnableComments) {
+                        <div id="pnl-comments" class="main content-editor hidden">
+                            <div class="title"><h2>@Piranha.Resources.Global.Comments</h2></div>
+                            <div class="inner region-body">
+                                @Html.Partial("~/Areas/Manager/Views/Comment/List.cshtml", Model.Comments)
                             </div>
                         </div>
                         }

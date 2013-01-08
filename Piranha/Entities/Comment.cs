@@ -13,6 +13,32 @@ namespace Piranha.Entities
 	/// </summary>
 	public class Comment : BaseEntity
 	{
+		#region Inner classes
+		/// <summary>
+		/// Inner class representing the author of a comment.
+		/// </summary>
+		public class CommentAuthor {
+			/// <summary>
+			/// Gets the name of the author.
+			/// </summary>
+			public string Name { get ; internal set ; }
+
+			/// <summary>
+			/// Gets the email of the author.
+			/// </summary>
+			public string Email { get ; internal set ; }
+		}
+
+		/// <summary>
+		/// The different comment statuses.
+		/// </summary>
+		public enum CommentStatus {
+			New = 0,
+			Approved = 1,
+			NotApproved = 2
+		}
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets/sets the comment id.
@@ -30,9 +56,18 @@ namespace Piranha.Entities
 		public bool ParentIsDraft { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this comment is approved or not.
+		/// Gets/sets the current comment status.
 		/// </summary>
-		public bool Approved { get ; set ; }
+		public CommentStatus Status {
+			get { return (CommentStatus)InternalStatus ; }
+			set { InternalStatus = (int)value ; }
+		}
+
+		/// <summary>
+		/// Gets/sets the number of times this comment has been reported
+		/// as abusive.
+		/// </summary>
+		public int ReportedCount { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the title.
@@ -87,6 +122,46 @@ namespace Piranha.Entities
 		public User UpdatedBy { get ; set ; }
 		#endregion
 
+		#region Internal properties
+		/// <summary>
+		/// Gets/sets the internal integer status value.
+		/// </summary>
+		internal int InternalStatus { get ; set ; }
+		#endregion
+
+		#region Ignored properties
+		/// <summary>
+		/// Gets the comment author for display purposes.
+		/// </summary>
+		public CommentAuthor Author {
+			get {
+				if (CreatedById.HasValue) {
+					if (CreatedBy == null)
+						using (var db = new DataContext()) {
+							CreatedBy = db.Users.Where(u => u.Id == CreatedById).SingleOrDefault() ;
+						}
+					return new CommentAuthor() {
+						Name = CreatedBy.Firstname + " " + CreatedBy.Surname,
+						Email = CreatedBy.Email
+					} ;
+				}
+				return new CommentAuthor() {
+					Name = AuthorName,
+					Email = AuthorEmail
+				} ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the resource name for the current comment status.
+		/// </summary>
+		public string StatusName {
+			get {
+				return GetStatusName(Status) ;
+			}
+		}
+		#endregion
+
 		/// <summary>
 		/// Attaches the entity to the given context.
 		/// </summary>
@@ -118,6 +193,19 @@ namespace Piranha.Entities
 				if (user.Identity.IsAuthenticated || DataContext.Identity != Guid.Empty)
 					UpdatedById = DataContext.Identity != Guid.Empty ? DataContext.Identity : new Guid(user.Identity.Name) ;
 			}
+		}
+
+		/// <summary>
+		/// Gets the name for the given comment status.
+		/// </summary>
+		/// <param name="status">The status</param>
+		/// <returns>The name</returns>
+		public static string GetStatusName(CommentStatus status) {
+			if (status == CommentStatus.New)
+				return Piranha.Resources.Comment.New ;
+			else if (status == CommentStatus.Approved)
+				return Piranha.Resources.Comment.Approved ;
+			else return Piranha.Resources.Comment.NotApproved ;
 		}
 	}
 }

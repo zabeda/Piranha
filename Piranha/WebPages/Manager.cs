@@ -170,7 +170,8 @@ namespace Piranha.WebPages
 			new MenuGroup() { InternalId = "Content", Name = @Resources.Global.MenuContent, Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "Pages", Name = @Resources.Tabs.ContentPages, Action = "index", Controller = "page", Permission = "ADMIN_PAGE" },
 				new MenuItem() { InternalId = "Posts", Name = @Resources.Tabs.ContentPosts, Action = "index", Controller = "post", Permission = "ADMIN_POST" },
-				new MenuItem() { InternalId = "Media", Name = @Resources.Tabs.ContentMedia, Action = "index", Controller = "content", Permission = "ADMIN_CONTENT" }
+				new MenuItem() { InternalId = "Media", Name = @Resources.Tabs.ContentMedia, Action = "index", Controller = "content", Permission = "ADMIN_CONTENT" },
+				new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Action = "index", Controller = "comment", Permission = "ADMIN_COMMENT" },
 			}},
 			new MenuGroup() { InternalId = "Settings", Name = @Resources.Global.MenuSettings, Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "PageTypes", Name = @Resources.Tabs.SettingsPageTypes, Action = "pagelist", Controller = "template", 

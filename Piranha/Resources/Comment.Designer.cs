@@ -22,14 +22,14 @@ namespace Piranha.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Tabs {
+    public class Comment {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Tabs() {
+        internal Comment() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Piranha.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Piranha.Resources.Tabs", typeof(Tabs).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Piranha.Resources.Comment", typeof(Comment).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,128 +61,110 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aliases.
+        ///   Looks up a localized string similar to Approve.
         /// </summary>
-        public static string ContentAliases {
+        public static string Approve {
             get {
-                return ResourceManager.GetString("ContentAliases", resourceCulture);
+                return ResourceManager.GetString("Approve", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Images &amp; documents.
+        ///   Looks up a localized string similar to Approved.
         /// </summary>
-        public static string ContentMedia {
+        public static string Approved {
             get {
-                return ResourceManager.GetString("ContentMedia", resourceCulture);
+                return ResourceManager.GetString("Approved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pages.
+        ///   Looks up a localized string similar to Author.
         /// </summary>
-        public static string ContentPages {
+        public static string Author {
             get {
-                return ResourceManager.GetString("ContentPages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Posts.
-        /// </summary>
-        public static string ContentPosts {
-            get {
-                return ResourceManager.GetString("ContentPosts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tags.
-        /// </summary>
-        public static string ContentTags {
-            get {
-                return ResourceManager.GetString("ContentTags", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Categories.
-        /// </summary>
-        public static string SettingsCategories {
-            get {
-                return ResourceManager.GetString("SettingsCategories", resourceCulture);
+                return ResourceManager.GetString("Author", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Comments.
         /// </summary>
-        public static string SettingsComments {
+        public static string ListTitle {
             get {
-                return ResourceManager.GetString("SettingsComments", resourceCulture);
+                return ResourceManager.GetString("ListTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Page types.
+        ///   Looks up a localized string similar to The comment has been deleted..
         /// </summary>
-        public static string SettingsPageTypes {
+        public static string MessageDeleted {
             get {
-                return ResourceManager.GetString("SettingsPageTypes", resourceCulture);
+                return ResourceManager.GetString("MessageDeleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Post types.
+        ///   Looks up a localized string similar to An error occured while deleting the comment..
         /// </summary>
-        public static string SettingsPostTypes {
+        public static string MessageNotDeleted {
             get {
-                return ResourceManager.GetString("SettingsPostTypes", resourceCulture);
+                return ResourceManager.GetString("MessageNotDeleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permissions.
+        ///   Looks up a localized string similar to An error occured while saving the comment..
         /// </summary>
-        public static string SystemAccess {
+        public static string MessageNotSaved {
             get {
-                return ResourceManager.GetString("SystemAccess", resourceCulture);
+                return ResourceManager.GetString("MessageNotSaved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to External systems.
+        ///   Looks up a localized string similar to The comment has been saved..
         /// </summary>
-        public static string SystemExternals {
+        public static string MessageSaved {
             get {
-                return ResourceManager.GetString("SystemExternals", resourceCulture);
+                return ResourceManager.GetString("MessageSaved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Groups.
+        ///   Looks up a localized string similar to New.
         /// </summary>
-        public static string SystemGroups {
+        public static string New {
             get {
-                return ResourceManager.GetString("SystemGroups", resourceCulture);
+                return ResourceManager.GetString("New", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters.
+        ///   Looks up a localized string similar to Not approved.
         /// </summary>
-        public static string SystemParams {
+        public static string NotApproved {
             get {
-                return ResourceManager.GetString("SystemParams", resourceCulture);
+                return ResourceManager.GetString("NotApproved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Users.
+        ///   Looks up a localized string similar to Reject.
         /// </summary>
-        public static string SystemUsers {
+        public static string Reject {
             get {
-                return ResourceManager.GetString("SystemUsers", resourceCulture);
+                return ResourceManager.GetString("Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reply.
+        /// </summary>
+        public static string Reply {
+            get {
+                return ResourceManager.GetString("Reply", resourceCulture);
             }
         }
     }

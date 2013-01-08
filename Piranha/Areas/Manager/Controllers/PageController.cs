@@ -17,7 +17,7 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_PAGE")]
         public ActionResult Index(string id = "") {
 			try {
-				var param = Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
+				var param = Piranha.Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
 				ViewBag.Levels = param != null ? Convert.ToInt32(param.Value) : 0 ;
 
 				if (!String.IsNullOrEmpty(id))
@@ -163,7 +163,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="page_id">The page id.</param>
 		/// <param name="group_id">The group id.</param>
 		public ActionResult GroupList(string page_id, string group_id) {
-			var page = Models.Page.GetSingle(new Guid(page_id), true) ;
+			var page = Piranha.Models.Page.GetSingle(new Guid(page_id), true) ;
 			var groups = SysGroup.GetParents(new Guid(group_id)) ;
 			groups.Reverse() ;
 

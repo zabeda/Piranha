@@ -4,6 +4,7 @@
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.comments.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Ext/jquery.equalheights.js")"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
@@ -36,6 +37,8 @@
             });
 
             $('.first-row .box').equalHeights();
+
+            var c = new piranha.comment('@Model.Post.Id', 'comment-notification', 'pnl-comments .inner');
         });
 
         //
@@ -106,6 +109,7 @@
 
 @{ Html.BeginForm("edit", (string)ViewContext.RouteData.Values["Controller"]) ; }
 <div>
+    <input type="hidden" id="postid" value="@Model.Post.Id" />
     @Html.HiddenFor(m => m.Post.IsNew)
     @Html.HiddenFor(m => m.Post.Id)
     @Html.HiddenFor(m => m.Post.IsDraft)
@@ -179,6 +183,15 @@
                             <li class="btn-settings"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
                             @if (Model.Properties.Count > 0) {
                             <li class="btn-properties"><a href="#" data-id="pnl-properties">@Piranha.Resources.Global.Properties</a></li>
+                            }
+                            @if (Model.EnableComments) {
+                            <li class="btn-comments">
+                                @{
+                                    var count = Model.Comments.Where(c => c.Status == Piranha.Entities.Comment.CommentStatus.New).Count() ;
+                                }
+                                <span @(count == 0 ? "style=display:none" : "") id="comment-notification" class="notification">@count</span>
+                                <a href="#" data-id="pnl-comments">@Piranha.Resources.Global.Comments</a>
+                            </li>
                             }
                             @foreach (var ext in Model.Extensions) {
                             <li>
@@ -257,6 +270,14 @@
                                     </li>
                                 }
                                 </ul>
+                            </div>
+                        </div>
+                        }
+                        @if (Model.EnableComments) {
+                        <div id="pnl-comments" class="main content-editor hidden">
+                            <div class="title"><h2>@Piranha.Resources.Global.Comments</h2></div>
+                            <div class="inner region-body">
+                                @Html.Partial("~/Areas/Manager/Views/Comment/List.cshtml", Model.Comments)
                             </div>
                         </div>
                         }

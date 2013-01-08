@@ -195,11 +195,13 @@ namespace Piranha.WebPages
 		/// <param name="context"></param>
 		public static void InitManager(AreaRegistrationContext context) {
 			// Register manager routing
-			context.MapRoute(
-				"Manager",
-				"manager/{controller}/{action}/{id}",
-				new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional }
-			) ;
+			if (context.Routes["Manager"] == null) {
+				context.MapRoute(
+					"Manager",
+					"manager/{controller}/{action}/{id}",
+					new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional }
+				) ;
+			}
 
 			// Register filters & binders
 			RegisterGlobalFilters(GlobalFilters.Filters) ;
@@ -303,16 +305,21 @@ namespace Piranha.WebPages
 		/// Registers all custom binders.
 		/// </summary>
 		private static void RegisterBinders() {
-			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.PageModels.EditModel), 
-				new Piranha.Models.Manager.PageModels.EditModel.Binder()) ;
-			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.PostModels.EditModel), 
-				new Piranha.Models.Manager.PostModels.EditModel.Binder()) ;
-			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PageEditModel),
-				new Piranha.Models.Manager.TemplateModels.PageEditModel.Binder()) ;
-			ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PostEditModel),
-				new Piranha.Models.Manager.TemplateModels.PostEditModel.Binder()) ;
-			ModelBinders.Binders.Add(typeof(Piranha.Extend.IExtension),
-				new Piranha.Mvc.ModelBinders.IExtensionBinder()) ;
+			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.PageModels.EditModel)] == null)
+				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.PageModels.EditModel), 
+					new Piranha.Models.Manager.PageModels.EditModel.Binder()) ;
+			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.PostModels.EditModel)] == null)
+				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.PostModels.EditModel), 
+					new Piranha.Models.Manager.PostModels.EditModel.Binder()) ;
+			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.TemplateModels.PageEditModel)] == null)
+				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PageEditModel),
+					new Piranha.Models.Manager.TemplateModels.PageEditModel.Binder()) ;
+			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.TemplateModels.PostEditModel)] == null)
+				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PostEditModel),
+					new Piranha.Models.Manager.TemplateModels.PostEditModel.Binder()) ;
+			if (ModelBinders.Binders[typeof(Piranha.Extend.IExtension)] == null)
+				ModelBinders.Binders.Add(typeof(Piranha.Extend.IExtension),
+					new Piranha.Mvc.ModelBinders.IExtensionBinder()) ;
 		}
 		#endregion
 	}

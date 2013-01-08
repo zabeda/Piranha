@@ -331,7 +331,8 @@ CREATE TABLE comment (
 	comment_id CHAR(38) NOT NULL,
 	comment_parent_id CHAR(38) NOT NULL,
 	comment_parent_draft BIT NOT NULL default false,
-	comment_approved BIT DEFAULT(1),
+	comment_status INT NOT NULL default '0',
+	comment_reported_count INT NOT NULL default '0',
 	comment_title VARCHAR(64) NULL,
 	comment_body TEXT NOT NULL,
 	comment_author_name VARCHAR(128) NULL,
@@ -344,3 +345,4 @@ CREATE TABLE comment (
 	CONSTRAINT fk_comment_created_by FOREIGN KEY (comment_created_by) REFERENCES sysuser (sysuser_id),
 	CONSTRAINT fk_comment_updated_by FOREIGN KEY (comment_updated_by) REFERENCES sysuser (sysuser_id)
 );
+

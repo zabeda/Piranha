@@ -1,4 +1,5 @@
-﻿@model Piranha.Models.Manager.PostModels.ListModel
+﻿@model Piranha.Areas.Manager.Models.PostListModel
+@using Piranha.Areas.Manager.Models;
 @section Head {
     <script type="text/javascript">
         $(document).ready(function () {
@@ -53,9 +54,15 @@
         </thead>
         <tbody class="list-js">
             @foreach (var post in Model.Posts) {
-            <tr@(post.Updated > post.LastPublished ? " class=draft" : "")>
+            <tr@(post.Status == PostListModel.PostStatus.DRAFT || post.Status == PostListModel.PostStatus.UNPUBLISHED ? " class=draft" : "")>
                 <td class="title"><a href="@Url.Action("edit", new { id = post.Id })">
-                    @post.Title@Html.Raw(post.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (post.Updated > post.LastPublished ? "<span class=info-draft></span>" : ""))
+                    @post.Title
+                    <div class="list-info">
+                        @Html.Raw(post.Status == PostListModel.PostStatus.UNPUBLISHED ? "<span class=info-unpublished></span>" : (post.Status == PostListModel.PostStatus.DRAFT ? "<span class=info-draft></span>" : ""))
+                        @if (post.NewComments > 0) {
+                        <span class="notification">@post.NewComments</span>
+                        }
+                    </div>
                 </a></td>
                 <td class="template">@post.TemplateName</td>
                 <td class="updated">@post.Updated.ToString("yyyy-MM-dd")</td>
@@ -84,7 +91,7 @@
             <div class="templates @(Model.Templates.Count > 6 ? "compressed" : "") left" data-templateid="@template.Id">
                 <h3>@template.Name</h3>
                 <div class="preview" style="width:120px;height:120px;margin:0 auto;">
-                    @template.Preview
+                    @template.Preview.Html()
                 </div>
                 <p>@template.Description</p>
             </div>

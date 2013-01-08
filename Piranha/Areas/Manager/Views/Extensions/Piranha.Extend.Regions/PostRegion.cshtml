@@ -32,9 +32,7 @@
         <p>@Html.CheckBoxFor(m => m.IncludeUpdatedBy) @Piranha.Resources.Extensions.PostRegionIncludeUpdatedBy</p>
     </li>
 </ul>
-</div>
 <div class="title" style="border-top: 1px solid #ddd"><h2>@Piranha.Resources.Extensions.PostRegionMatchingTitle</h2></div>
-<div class="inner">
 <table class="list attachments">
     <tr>
         <td><span><strong>@Piranha.Resources.Global.Title</strong></span></td>
@@ -46,8 +44,8 @@
     <tr>
         <td><a href="@Url.Action("edit", "post", new { id = post.Id })">@post.Title</a></td>
         <td>@post.Template.Name</td>
-        <td class="date">@post.Published.ToString("yyyy-MM-dd")</td>
-        <td class="date">@post.LastPublished.ToString("yyyy-MM-dd")</td>
+        <td class="date">@post.Published.Value.ToString("yyyy-MM-dd")</td>
+        <td class="date">@post.LastPublished.Value.ToString("yyyy-MM-dd")</td>
     </tr>
     }
 </table>

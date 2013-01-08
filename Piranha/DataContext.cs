@@ -24,6 +24,7 @@ namespace Piranha
 		#endregion
 
 		#region DbSets
+		// External DbSets
 		public DbSet<Entities.User> Users { get ; set ; }
 		public DbSet<Entities.Group> Groups { get ; set ; }
 		public DbSet<Entities.Permission> Permissions { get ; set ; }
@@ -43,6 +44,10 @@ namespace Piranha
 		public DbSet<Entities.Extension> Extensions { get ; set ; }
 		public DbSet<Entities.Upload> Uploads { get ; set ; }
 		public DbSet<Entities.Comment> Comments { get ; set ; }
+
+		// Internal DbSets
+		internal IQueryable<Entities.Page> PageDrafts { get { return Set<Entities.Page>().Where(p => p.IsDraft) ; } }
+		internal IQueryable<Entities.Post> PostDrafts { get { return Set<Entities.Post>().Where(p => p.IsDraft) ; } }
 		#endregion
 
 		/// <summary>

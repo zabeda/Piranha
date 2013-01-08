@@ -142,7 +142,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <returns>The region template</returns>
 		[HttpPost()]
 		public ActionResult RegionTemplate(RegionInsertModel m) {
-			var region = new Models.RegionTemplate() {
+			var region = new Piranha.Models.RegionTemplate() {
 				TemplateId = m.TemplateId,
 				Name = m.Name,
 				InternalId = m.InternalId,

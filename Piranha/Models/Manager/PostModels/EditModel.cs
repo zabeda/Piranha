@@ -83,6 +83,16 @@ namespace Piranha.Models.Manager.PostModels
 		/// Gets/sets the available extensions.
 		/// </summary>
 		public List<Extension> Extensions { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather comments should be enabled.
+		/// </summary>
+		public bool EnableComments { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently available comments for the current post.
+		/// </summary>
+		public List<Entities.Comment> Comments { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -95,6 +105,7 @@ namespace Piranha.Models.Manager.PostModels
 			Extensions = new List<Extension>() ;
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
+			Comments = new List<Entities.Comment>() ;
 		}
 
 		/// <summary>
@@ -187,7 +198,7 @@ namespace Piranha.Models.Manager.PostModels
 					// Save permalink before the post if this is an insert
 					if (permalinkfirst) {
 						// Permalink
-						if (Permalink.IsNew)
+						if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
 							Permalink.Name = Permalink.Generate(Post.Title) ;
 						Permalink.Save(tx) ;
 					}
@@ -310,6 +321,17 @@ namespace Piranha.Models.Manager.PostModels
 
 			// Get extensions
 			Extensions = Post.GetExtensions() ;
+
+			// Get weather comments should be enabled
+			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePosts ;
+			if (!Post.IsNew && EnableComments) {
+				using (var db = new DataContext()) {
+					Comments = db.Comments.
+						Include("CreatedBy").
+						Where(c => c.ParentId == Post.Id && c.ParentIsDraft == false).
+						OrderByDescending(c => c.Created).ToList() ;
+				}
+			}
 		}
 		#endregion
 	}
