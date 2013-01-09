@@ -124,7 +124,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Images &amp; documents.
+        ///   Looks up a localized string similar to Media.
         /// </summary>
         public static string Media {
             get {
