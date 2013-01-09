@@ -133,6 +133,23 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
+		/// Generates an absolute url from the virtual path or site url.
+		/// </summary>
+		/// <param name="url">The url</param>
+		/// <returns>The absolute url</returns>
+		public IHtmlString AbsoluteUrl(string url) {
+			var request = HttpContext.Current.Request ;
+
+			// First, convert virtual paths to site url's
+			if (url.StartsWith("~/"))
+				url = SiteUrl(url).ToString() ; ;
+
+			// Now add server, scheme and port
+			return new HtmlString(request.Url.Scheme + "://" + request.Url.DnsSafeHost + 
+				(!request.Url.IsDefaultPort ? ":" + request.Url.Port.ToString() : "") + url) ;
+		}
+
+		/// <summary>
 		/// Generates the url to the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
