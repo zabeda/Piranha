@@ -1,7 +1,7 @@
 ﻿License agreement
 =================
 
-Copyright 2011-2012 Håkan Edling
+Copyright 2011-2013 Håkan Edling
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
