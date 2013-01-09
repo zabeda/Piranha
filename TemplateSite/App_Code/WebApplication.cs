@@ -6,7 +6,7 @@ using System.Web;
 using Piranha.WebPages;
 
 /// <summary>
-/// Summary description for Class1
+/// Main class for initializing the application.
 /// </summary>
 public static class WebApplication
 {

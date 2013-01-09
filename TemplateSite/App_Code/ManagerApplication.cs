@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Piranha.WebPages;
 
 /// <summary>
-/// Summary description for ManagerApplication
+/// Area registration for the manager interface.
 /// </summary>
 public class ManagerApplication : AreaRegistration
 {
