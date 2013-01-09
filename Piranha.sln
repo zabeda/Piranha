@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha", "Piranha\Piranha.csproj", "{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Entities", "Piranha.Entities\Piranha.Entities.csproj", "{0EDC7F3F-1CD6-43F6-9EB2-34E7430F6B8F}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "TemplateSite\", "{4F94EA08-A2AB-4AC6-A581-460A2F79300F}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
@@ -32,8 +30,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Extensions", "Piranha.Extensions\Piranha.Extensions.csproj", "{CD87DD41-C057-4ABC-9E71-265A8179E56A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B9B2FF56-3B77-4403-B692-FE12464EA461}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -51,18 +47,10 @@ Global
 		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0EDC7F3F-1CD6-43F6-9EB2-34E7430F6B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0EDC7F3F-1CD6-43F6-9EB2-34E7430F6B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0EDC7F3F-1CD6-43F6-9EB2-34E7430F6B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0EDC7F3F-1CD6-43F6-9EB2-34E7430F6B8F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{CD87DD41-C057-4ABC-9E71-265A8179E56A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD87DD41-C057-4ABC-9E71-265A8179E56A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD87DD41-C057-4ABC-9E71-265A8179E56A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD87DD41-C057-4ABC-9E71-265A8179E56A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
