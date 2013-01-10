@@ -107,10 +107,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Piranha.Entities\Piranha.Entities.csproj">
-      <Project>{0edc7f3f-1cd6-43f6-9eb2-34e7430f6b8f}</Project>
-      <Name>Piranha.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Piranha\Piranha.csproj">
       <Project>{7e07dd4f-41ed-4faf-8407-62196aae0d0f}</Project>
       <Name>Piranha</Name>
