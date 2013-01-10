@@ -144,6 +144,9 @@
   <data name="AccessNameRequired" xml:space="preserve">
     <value>Du måste ange ett namn.</value>
   </data>
+  <data name="Account" xml:space="preserve">
+    <value>Användarkonto</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Ändra lösenord</value>
   </data>
@@ -230,6 +233,15 @@
   </data>
   <data name="ListTitleUsers" xml:space="preserve">
     <value>Användare</value>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Spärra</value>
+  </data>
+  <data name="LockedInfo" xml:space="preserve">
+    <value>Om användaren ska vara spärrad från att logga in</value>
+  </data>
+  <data name="LockedUntil" xml:space="preserve">
+    <value>Spärra till</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Användarnamn</value>

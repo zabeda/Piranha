@@ -144,6 +144,9 @@
   <data name="AccessNameRequired" xml:space="preserve">
     <value>The name is required.</value>
   </data>
+  <data name="Account" xml:space="preserve">
+    <value>User account</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
@@ -230,6 +233,15 @@
   </data>
   <data name="ListTitleUsers" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="LockedInfo" xml:space="preserve">
+    <value>Weather the user should be unable to log in</value>
+  </data>
+  <data name="LockedUntil" xml:space="preserve">
+    <value>Lock until</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Username</value>

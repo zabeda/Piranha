@@ -9,6 +9,8 @@
 	sysuser_culture VARCHAR(5) NULL,
 	sysuser_last_login DATETIME NULL,
 	sysuser_prev_login DATETIME NULL,
+	sysuser_locked INT NOT NULL default '0',
+	sysuser_locked_until DATETIME NULL,
 	sysuser_created DATETIME NOT NULL,
 	sysuser_updated DATETIME NOT NULL,
 	sysuser_created_by CHAR(38) NULL,

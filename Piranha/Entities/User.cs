@@ -64,6 +64,16 @@ namespace Piranha.Entities
 		public DateTime? PreviousLogin { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets weather the user account is locked or not.
+		/// </summary>
+		public bool IsLocked { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the optional end date of user lock.
+		/// </summary>
+		public DateTime? LockedUntil { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the date the user was initially created.
 		/// </summary>
 		public DateTime Created { get ; set ; }

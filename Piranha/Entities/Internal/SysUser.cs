@@ -89,6 +89,21 @@ namespace Piranha.Models
 		public DateTime PreviousLogin { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets weather the user account is locked or not.
+		/// </summary>
+		[Column(Name="sysuser_locked")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="Locked")]
+		public bool IsLocked { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the optional end date of user lock.
+		/// </summary>
+		[Column(Name="sysuser_locked_until")]
+		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="LockedUntil")]
+		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+		public DateTime LockedUntil { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name="sysuser_created")]
@@ -137,13 +152,18 @@ namespace Piranha.Models
 		/// <param name="password">The password</param>
 		/// <returns>An authenticated user</returns>
 		public static SysUser Authenticate(string login, string password) {
-			var users = GetFields(" * ", "sysuser_login = @0 AND sysuser_password = @1",
-				login, SysUser.Encrypt(password)) ;
+			var siteversion = Convert.ToInt32(SysParam.GetByName("SITE_VERSION").Value) ;
+
+			var users = GetFields(" * ", "sysuser_login = @0 AND sysuser_password = @1" + 
+				(siteversion > 20 ? " AND (sysuser_locked = 0 OR (sysuser_locked_until IS NOT NULL AND sysuser_locked_until <= @2))" : ""),
+				login, SysUser.Encrypt(password), DateTime.Now) ;
 			if (users.Count == 1) {
 				// Update last & prev login date.
-				if (Convert.ToInt32(SysParam.GetByName("SITE_VERSION").Value) > 18) {
+				if (siteversion > 20) {
 					users[0].PreviousLogin = users[0].LastLogin ;
 					users[0].LastLogin = DateTime.Now ;
+					users[0].IsLocked = false ;
+					users[0].LockedUntil = DateTime.MinValue ;
 					users[0].Save() ;
 				}
 				return users[0] ;
