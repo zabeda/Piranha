@@ -845,7 +845,9 @@ $(document).ready(function () {
 
         if ($(this).hasClass("unlocked")) {
             // Copy new permalink
-            $(p).html(p.html().substring(0, p.html().lastIndexOf("/")) + "/" + $(i).find("input").val());
+            if (!$(this).hasClass("absolute-url"))
+                $(p).html(p.html().substring(0, p.html().lastIndexOf("/")) + "/" + $(i).find("input").val());
+            else $(p).html($(i).find("input").val());
 
             // Hide/show controls
             $(i).hide();

@@ -196,6 +196,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server date.
+        /// </summary>
+        public static string LastSynced {
+            get {
+                return ResourceManager.GetString("LastSynced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete content.
         /// </summary>
         public static string ListDelete {
@@ -232,11 +241,47 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The document was not found on the server..
+        /// </summary>
+        public static string MessageDocumentNotFound {
+            get {
+                return ResourceManager.GetString("MessageDocumentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No newer version of the document exists on the server..
+        /// </summary>
+        public static string MessageDocumentNotSynced {
+            get {
+                return ResourceManager.GetString("MessageDocumentNotSynced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The document has been saved..
         /// </summary>
         public static string MessageDocumentSaved {
             get {
                 return ResourceManager.GetString("MessageDocumentSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The document has been updated from the server..
+        /// </summary>
+        public static string MessageDocumentSynced {
+            get {
+                return ResourceManager.GetString("MessageDocumentSynced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured on the document server..
+        /// </summary>
+        public static string MessageDocumentSyncError {
+            get {
+                return ResourceManager.GetString("MessageDocumentSyncError", resourceCulture);
             }
         }
         
@@ -286,11 +331,47 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The image was not found on the server..
+        /// </summary>
+        public static string MessageImageNotFound {
+            get {
+                return ResourceManager.GetString("MessageImageNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No newer version of the image exists on the server..
+        /// </summary>
+        public static string MessageImageNotSynced {
+            get {
+                return ResourceManager.GetString("MessageImageNotSynced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The image has been saved..
         /// </summary>
         public static string MessageImageSaved {
             get {
                 return ResourceManager.GetString("MessageImageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The image has been updated from the server..
+        /// </summary>
+        public static string MessageImageSynced {
+            get {
+                return ResourceManager.GetString("MessageImageSynced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured on the image server..
+        /// </summary>
+        public static string MessageImageSyncError {
+            get {
+                return ResourceManager.GetString("MessageImageSyncError", resourceCulture);
             }
         }
         
@@ -309,6 +390,15 @@ namespace Piranha.Resources {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original URL.
+        /// </summary>
+        public static string OriginalUrl {
+            get {
+                return ResourceManager.GetString("OriginalUrl", resourceCulture);
             }
         }
         

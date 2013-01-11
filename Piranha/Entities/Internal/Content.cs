@@ -122,6 +122,22 @@ namespace Piranha.Models
 		public override string Filename { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the original url the media object was 
+		/// fetched from.
+		/// </summary>
+		[Column(Name="content_url")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="OriginalUrl")]
+		public string OriginalUrl { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the last time the media object was synced 
+		/// from its external url.
+		/// </summary>
+		[Column(Name="content_synced")]
+		[Display(ResourceType=typeof(Piranha.Resources.Content), Name="LastSynced")]
+		public DateTime LastSynced { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the type
 		/// </summary>
 		[Column(Name="content_type")]

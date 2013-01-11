@@ -162,6 +162,9 @@
   <data name="IncludingCache" xml:space="preserve">
     <value>Including cache</value>
   </data>
+  <data name="LastSynced" xml:space="preserve">
+    <value>Server date</value>
+  </data>
   <data name="ListDelete" xml:space="preserve">
     <value>Delete content</value>
   </data>
@@ -174,8 +177,20 @@
   <data name="MessageDocumentNotDeleted" xml:space="preserve">
     <value>An error occurred while deleting the document.</value>
   </data>
+  <data name="MessageDocumentNotFound" xml:space="preserve">
+    <value>The document was not found on the server.</value>
+  </data>
+  <data name="MessageDocumentNotSynced" xml:space="preserve">
+    <value>No newer version of the document exists on the server.</value>
+  </data>
   <data name="MessageDocumentSaved" xml:space="preserve">
     <value>The document has been saved.</value>
+  </data>
+  <data name="MessageDocumentSynced" xml:space="preserve">
+    <value>The document has been updated from the server.</value>
+  </data>
+  <data name="MessageDocumentSyncError" xml:space="preserve">
+    <value>An error occured on the document server.</value>
   </data>
   <data name="MessageFolderDeleted" xml:space="preserve">
     <value>The folder has been deleted.</value>
@@ -192,14 +207,29 @@
   <data name="MessageImageNotDeleted" xml:space="preserve">
     <value>An error occurred while deleting the image.</value>
   </data>
+  <data name="MessageImageNotFound" xml:space="preserve">
+    <value>The image was not found on the server.</value>
+  </data>
+  <data name="MessageImageNotSynced" xml:space="preserve">
+    <value>No newer version of the image exists on the server.</value>
+  </data>
   <data name="MessageImageSaved" xml:space="preserve">
     <value>The image has been saved.</value>
+  </data>
+  <data name="MessageImageSynced" xml:space="preserve">
+    <value>The image has been updated from the server.</value>
+  </data>
+  <data name="MessageImageSyncError" xml:space="preserve">
+    <value>An error occured on the image server.</value>
   </data>
   <data name="MessageNotSaved" xml:space="preserve">
     <value>An error occurred while saving the content.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="OriginalUrl" xml:space="preserve">
+    <value>Original URL</value>
   </data>
   <data name="ParentId" xml:space="preserve">
     <value>Folder</value>

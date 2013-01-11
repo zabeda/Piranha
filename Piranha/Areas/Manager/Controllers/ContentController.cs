@@ -140,6 +140,39 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
+		/// Syncs the media object with the given id.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		[Access(Function="ADMIN_CONTENT")]
+		public ActionResult Sync(string id) {
+			var m = EditModel.GetById(new Guid(id)) ;
+
+			try {
+				if (m.Sync()) {
+					if (m.Content.IsImage)
+						SuccessMessage(Piranha.Resources.Content.MessageImageSynced) ;
+					else SuccessMessage(Piranha.Resources.Content.MessageDocumentSynced) ;
+				} else {
+					if (m.Content.IsImage)
+						InformationMessage(Piranha.Resources.Content.MessageImageNotSynced) ;
+					else InformationMessage(Piranha.Resources.Content.MessageDocumentNotSynced) ;
+				}
+			} catch (HttpException e) {
+				if (e.GetHttpCode() == 404) {
+					if (m.Content.IsImage)
+						ErrorMessage(Piranha.Resources.Content.MessageImageNotFound) ;
+					else ErrorMessage(Piranha.Resources.Content.MessageDocumentNotFound) ;
+				} else {
+					if (m.Content.IsImage)
+						ErrorMessage(Piranha.Resources.Content.MessageImageSyncError) ;
+					else ErrorMessage(Piranha.Resources.Content.MessageDocumentSyncError) ;
+				}
+			}
+			return EditInternal(m) ;
+		}
+
+		/// <summary>
 		/// Deletes the specified content record.
 		/// </summary>
 		/// <param name="id">The content id</param>

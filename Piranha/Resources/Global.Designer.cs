@@ -547,6 +547,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sync.
+        /// </summary>
+        public static string ToolbarSync {
+            get {
+                return ResourceManager.GetString("ToolbarSync", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unpublish.
         /// </summary>
         public static string ToolbarUnpublish {

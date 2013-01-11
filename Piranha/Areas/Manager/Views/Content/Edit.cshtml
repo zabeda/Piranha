@@ -8,6 +8,9 @@
             <li><a href="@Url.Action("delete", new { id = Model.Content.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             <li><a href="@Url.Action("index", new { id = Model.Content.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Url.Action("edit", new { id = Model.Content.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            @if (!Model.Content.IsNew && !Model.Content.IsFolder && !String.IsNullOrEmpty(Model.Content.OriginalUrl)) {
+            <li><a href="@Url.Action("sync", new { @id = Model.Content.Id })" class="sync">@Piranha.Resources.Global.ToolbarSync</a></li>
+            }
         </ul>
         <div class="clear"></div>
     </div>
@@ -25,6 +28,7 @@
 @Html.HiddenFor(m => m.Content.Width)
 @Html.HiddenFor(m => m.Content.Height)
 @Html.HiddenFor(m => m.Content.Size)
+@Html.HiddenFor(m => m.Content.LastSynced)
 <div class="grid_9">
     @if (!ViewBag.Folder) {
     <div class="box">
@@ -55,6 +59,14 @@
         <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
+                @if (!Model.Content.IsNew && !Model.Content.IsFolder) {
+                <li class="protected">@Html.LabelFor(m => m.Content.OriginalUrl)
+                    <p>@Html.Raw(!String.IsNullOrEmpty(Model.Content.OriginalUrl) ? Model.Content.OriginalUrl : "&nbsp;")</p>
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Content.OriginalUrl)</div>
+                    <a class="locked absolute-url"></a>
+                </li>
+                }
                 <li>
                     @Html.LabelFor(m => m.Content.Name)
                     <div class="input">
@@ -106,6 +118,11 @@
                 <li>@Html.LabelFor(m => m.Content.Type)
                     <p>@Model.Content.Type</p>
                 </li>
+                @if (!String.IsNullOrEmpty(Model.Content.OriginalUrl)) {
+                <li>@Html.LabelFor(m => m.Content.LastSynced)
+                    <p>@Html.Raw(Model.Content.LastSynced != DateTime.MinValue ? Model.Content.LastSynced.ToString("yyyy-MM-dd HH:mm") : "&nbsp;")</p>
+                </li>
+                }
                 @if (Model.Content.IsImage) {
                 <li><label>@Piranha.Resources.Content.ImageSize</label>
                     <p>@(Model.Content.Width)x@(Model.Content.Height) px</p>

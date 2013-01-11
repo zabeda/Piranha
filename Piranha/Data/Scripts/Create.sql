@@ -282,6 +282,8 @@ CREATE TABLE [content] (
 	[content_id] UNIQUEIDENTIFIER NOT NULL,
 	[content_parent_id] UNIQUEIDENTIFIER NULL,
 	[content_filename] NVARCHAR(128) NULL,
+	[content_url] NVARCHAR(255) NULL,
+	[content_synced] DATETIME NULL,
 	[content_name] NVARCHAR(128) NULL,
 	[content_type] NVARCHAR(255) NULL,
 	[content_size] INT NOT NULL default(0),

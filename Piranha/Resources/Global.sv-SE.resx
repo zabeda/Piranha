@@ -276,6 +276,9 @@
   <data name="ToolbarSearch" xml:space="preserve">
     <value>Sök</value>
   </data>
+  <data name="ToolbarSync" xml:space="preserve">
+    <value>Synka</value>
+  </data>
   <data name="ToolbarUnpublish" xml:space="preserve">
     <value>Avpublicera</value>
   </data>

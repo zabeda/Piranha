@@ -795,7 +795,12 @@
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\jquery-ui-1.9.2.custom.min.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-ui-1.9.2.custom.min.js" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\22.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\22.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

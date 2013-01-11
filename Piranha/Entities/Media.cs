@@ -22,6 +22,18 @@ namespace Piranha.Entities
 		public string Filename { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the original url the media object was 
+		/// fetched from.
+		/// </summary>
+		public string OriginalUrl { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the last time the media object was synced 
+		/// from its external url.
+		/// </summary>
+		public DateTime? LastSynced { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the content type.
 		/// </summary>
 		public string ContentType { get ; set ; }

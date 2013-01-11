@@ -17,6 +17,8 @@ namespace Piranha.Entities.Maps
 			Property(m => m.Id).HasColumnName("content_id") ;
 			Property(m => m.ParentId).HasColumnName("content_parent_id") ;
 			Property(m => m.Filename).HasColumnName("content_filename").HasMaxLength(128) ;
+			Property(m => m.OriginalUrl).HasColumnName("content_url").HasMaxLength(255) ;
+			Property(m => m.LastSynced).HasColumnName("content_synced") ;
 			Property(m => m.ContentType).HasColumnName("content_type").HasMaxLength(255) ;
 			Property(m => m.Size).HasColumnName("content_size") ;
 			Property(m => m.IsImage).HasColumnName("content_image") ;

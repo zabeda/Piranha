@@ -282,6 +282,8 @@ CREATE TABLE content (
 	content_id CHAR(38) NOT NULL,
 	content_parent_id CHAR(38) NULL,
 	content_filename VARCHAR(128) NULL,
+	content_url VARCHAR(255) NULL,
+	content_synced DATETIME NULL,
 	content_name VARCHAR(128) NULL,
 	content_type VARCHAR(255) NULL,
 	content_size INT NOT NULL default '0',

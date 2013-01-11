@@ -106,9 +106,20 @@ namespace Piranha.Models.Manager.ContentModels
 			WebClient web = new WebClient() ;
 			Image img = null ;
 
+			// Check if the original URL has been updated, and if so 
+			if (!Content.IsNew && !String.IsNullOrEmpty(Content.OriginalUrl)) {
+				var old = Content.GetSingle(Content.Id) ;
+				if (Content.OriginalUrl != old.OriginalUrl) {
+					FileUrl = Content.OriginalUrl ;
+				}
+			}
 
-			if (!hasfile && !String.IsNullOrEmpty(FileUrl))
+			// Download file from web
+			if (!hasfile && !String.IsNullOrEmpty(FileUrl)) {
 				data = web.DownloadData(FileUrl) ;
+				Content.OriginalUrl = FileUrl ;
+				Content.LastSynced = Convert.ToDateTime(web.ResponseHeaders[HttpResponseHeader.LastModified]) ;
+			}
 
 			if (hasfile || data != null) {
 				// Check if this is an image
@@ -145,6 +156,7 @@ namespace Piranha.Models.Manager.ContentModels
 					Content.Size = Convert.ToInt32(web.ResponseHeaders["Content-Length"]) ;
 				}
 			}
+
 
 			if (Content.Save()) {
 				// Save related information
@@ -193,6 +205,42 @@ namespace Piranha.Models.Manager.ContentModels
 				Content.DeleteCache() ;
 
 				return true ;
+			}
+			return false ;
+		}
+
+		/// <summary>
+		/// Syncronizes the media object from the original url.
+		/// </summary>
+		/// <returns></returns>
+		public bool Sync(string url = "") {
+			if (url == "")
+				url = Content.OriginalUrl ;
+
+			if (!String.IsNullOrEmpty(url)) {
+				var req = (HttpWebRequest)WebRequest.Create(url) ;
+				var res = req.GetResponse() ;
+				res.Close() ; // Let's not read the response from this object
+
+				if (((HttpWebResponse)res).StatusCode == HttpStatusCode.OK) {
+					if (!String.IsNullOrEmpty(res.Headers[HttpResponseHeader.LastModified])) {
+						var lastMod = Convert.ToDateTime(res.Headers[HttpResponseHeader.LastModified]) ;
+						if (lastMod != Content.LastSynced) {
+							// Update FileUrl and save the model
+							FileUrl = url ;
+							return SaveAll() ;
+						}
+					}
+				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.MovedPermanently) {
+					Content.OriginalUrl = res.Headers[HttpResponseHeader.Location] ; // This will cause the Original URL to be updated.
+					return Sync(Content.OriginalUrl) ;
+				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.Moved) {
+					return Sync(Content.OriginalUrl) ;
+				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.NotFound) {
+					throw new HttpException(404, "Not found") ;
+				} else {
+					throw new HttpException("Sync error") ;
+				}
 			}
 			return false ;
 		}
