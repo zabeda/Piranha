@@ -178,6 +178,7 @@
       <DependentUpon>Extensions.resx</DependentUpon>
     </Compile>
     <Compile Include="WebPages\BaseHelper.cs" />
+    <Compile Include="Web\AppCommentController.cs" />
     <Compile Include="Web\ModelPropertyAttribute.cs" />
     <Compile Include="Data\Updates\IUpdate.cs" />
     <Compile Include="Data\Updates\Update13.cs" />
@@ -800,6 +801,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\22.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-sync-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

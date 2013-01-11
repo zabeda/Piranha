@@ -378,6 +378,9 @@ em     { font-style: italic; }
 .toolbar .preview {
     background: url('../img/ico-preview-24.png') no-repeat 50% 8px ;
     }
+.toolbar .sync {
+    background: url('../img/ico-sync-24.png') no-repeat 50% 8px ;
+    }
 
 /**
  * Toolbar search
