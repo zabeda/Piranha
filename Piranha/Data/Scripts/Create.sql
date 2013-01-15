@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [sysuser] (
 	[sysuser_id] UNIQUEIDENTIFIER NOT NULL,
+	[sysuser_apikey] UNIQUEIDENTIFIER NULL,
 	[sysuser_login] NVARCHAR(64) NOT NULL,
 	[sysuser_password] NVARCHAR(64) NULL,
 	[sysuser_firstname] NVARCHAR(128) NULL,

@@ -24,6 +24,11 @@ namespace Piranha.Entities
 		public Guid? GroupId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the users API-key for ReST services.
+		/// </summary>
+		public Guid? APIKey { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the unique login name.
 		/// </summary>
 		public string Login { get ; set ; }

@@ -368,6 +368,32 @@ namespace Piranha.Web
 				action)) ;
 		}
 
+		/// <summary>
+		/// Gets an encrypted API-key valid for 30 minutes.
+		/// </summary>
+		/// <param name="apiKey">The API-key</param>
+		/// <returns>The ecnrypted key</returns>
+		public IHtmlString APIKey(Guid apiKey) {
+			return new HtmlString(HttpUtility.UrlEncode(APIKeys.EncryptApiKey(apiKey))) ;
+		}
+
+		/// <summary>
+		/// Gets an ecrypted API-key valid for 30 minutes. If no API-key is provided
+		/// the key for the currently logged in user is used.
+		/// </summary>
+		/// <param name="apiKey"></param>
+		/// <returns></returns>
+		public IHtmlString APIKey(string apiKey = "") {
+			if (String.IsNullOrEmpty(apiKey)) {
+				var user = HttpContext.Current.User ;
+
+				if (user.Identity.IsAuthenticated && user.GetProfile().APIKey != Guid.Empty)
+					return APIKey(user.GetProfile().APIKey) ;
+				return new HtmlString("") ;
+			}
+			return APIKey(new Guid(apiKey)) ;
+		}
+
 		#region Private methods
 		/// <summary>
 		/// Gets the current start level for the sitemap.

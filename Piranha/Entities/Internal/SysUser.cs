@@ -28,6 +28,12 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the API-key.
+		/// </summary>
+		[Column(Name="sysuser_apikey")]
+		public Guid APIKey { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the login name.
 		/// </summary>
 		[Column(Name="sysuser_login")]
@@ -159,7 +165,7 @@ namespace Piranha.Models
 				login, SysUser.Encrypt(password), DateTime.Now) ;
 			if (users.Count == 1) {
 				// Update last & prev login date.
-				if (siteversion > 20) {
+				if (siteversion > 22) {
 					users[0].PreviousLogin = users[0].LastLogin ;
 					users[0].LastLogin = DateTime.Now ;
 					users[0].IsLocked = false ;

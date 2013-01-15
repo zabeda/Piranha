@@ -1,5 +1,6 @@
 ﻿CREATE TABLE sysuser (
 	sysuser_id CHAR(38) NOT NULL,
+	sysuser_apikey CHAR(38) NULL,
 	sysuser_login VARCHAR(64) NOT NULL,
 	sysuser_password VARCHAR(64) NULL,
 	sysuser_firstname VARCHAR(128) NULL,

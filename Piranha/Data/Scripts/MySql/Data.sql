@@ -1,6 +1,6 @@
 ﻿-- Default users
-INSERT INTO sysuser (sysuser_id, sysuser_login, sysuser_group_id, sysuser_created, sysuser_updated)
-VALUES ('ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'sys', '7c536b66-d292-4369-8f37-948b32229b83',
+INSERT INTO sysuser (sysuser_id, sysuser_apikey, sysuser_login, sysuser_group_id, sysuser_created, sysuser_updated)
+VALUES ('ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'FE868D4F-797C-4E60-B876-64E6FC2424AA', 'sys', '7c536b66-d292-4369-8f37-948b32229b83',
 	NOW(), NOW());
 
 -- Default groups
@@ -79,7 +79,7 @@ VALUES ('f65bd7dd-6dfe-45b7-87e3-20a11e1f8d55', '8940b41a-e3a9-44f3-b564-bfd2814
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '20', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '23', 'The currently installed version of Piranha.', 1,
 	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
@@ -120,6 +120,10 @@ VALUES ('A64A8479-8125-47BA-9980-B30B36E744D3', 'RSS_USE_EXCERPT', '1', 'Weather
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
 VALUES ('5A0D6307-F041-41A1-B63A-563E712F3B8C', 'HIERARCHICAL_PERMALINKS', '0', 'Weather or not permalink generation should be hierarchical.', 1,
+	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
+	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
+VALUES ('4C694949-DEE0-465E-AB08-253927BDCBD8', 'SITE_PRIVATE_KEY', SUBSTRING(MD5(RAND()), 1, 16), 'The private key used for public key encryption.', 1, 
 	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default templates
