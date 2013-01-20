@@ -88,9 +88,12 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<string, SysParam> Cache {
 			get {
-				if (HttpContext.Current.Cache[typeof(SysParam).Name] == null)
-					HttpContext.Current.Cache[typeof(SysParam).Name] = new Dictionary<string, SysParam>() ;
-				return (Dictionary<string, SysParam>)HttpContext.Current.Cache[typeof(SysParam).Name] ;
+				if (HttpContext.Current != null && HttpContext.Current.Cache != null) {
+					if (HttpContext.Current.Cache[typeof(SysParam).Name] == null)
+						HttpContext.Current.Cache[typeof(SysParam).Name] = new Dictionary<string, SysParam>() ;
+					return (Dictionary<string, SysParam>)HttpContext.Current.Cache[typeof(SysParam).Name] ;
+				}
+				return new Dictionary<string, SysParam>() ;
 			}
 		}
 		#endregion
