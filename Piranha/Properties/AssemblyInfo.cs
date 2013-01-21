@@ -9,9 +9,9 @@ using System.Web.UI;
 [assembly: AssemblyTitle("Piranha")]
 [assembly: AssemblyDescription("Application framework for building CMS based web applications for .NET.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("piranhacms.org")]
+[assembly: AssemblyCompany("Håkan Edling")]
 [assembly: AssemblyProduct("Piranha")]
-[assembly: AssemblyCopyright("Copyright © piranhacms.org 2011")]
+[assembly: AssemblyCopyright("Copyright © Håkan Edling 2011-2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,4 +34,4 @@ using System.Web.UI;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.1.*")]
-[assembly: AssemblyFileVersion("1.1.3.0")]
+[assembly: AssemblyFileVersion("1.1.4.0")]

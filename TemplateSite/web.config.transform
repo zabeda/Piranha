@@ -1,28 +1,25 @@
-﻿<?xml version="1.0"?>
-<configuration>
+﻿<configuration>
   <appSettings>
     <add key="webPages:Version" value="1.0"/>
   </appSettings>
   <system.web>
-    <compilation debug="true" targetFramework="4.0">
+    <compilation>
       <assemblies>
         <add assembly="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
         <add assembly="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
-        <add assembly="System.Data.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
       </assemblies>
     </compilation>
     <authentication mode="Forms">
-      <forms name="Template" timeout="30"/>
+      <forms name="PiranhaTemplate" timeout="30"/>
     </authentication>
     <sessionState timeout="30"/>
-    <customErrors mode="Off"/>
   </system.web>
   <system.webServer>
     <handlers>
-      <add name="TinyMCE" verb="*" path="*/tiny_mce/*" type="Piranha.Web.ResourceHandler, Piranha"/>
-      <add name="Js" verb="*" path="*/Manager/Content/Js/*" type="Piranha.Web.ResourceHandler, Piranha"/>
-      <add name="ExtCss" verb="*" path="*/Manager/Content/Css/Ext/*.*" type="Piranha.Web.ResourceHandler, Piranha"/>
-      <add name="Img" verb="*" path="*/Manager/Content/Img/*.*" type="Piranha.Web.ResourceHandler, Piranha"/>
+      <add name="TinyMCE" verb="*" path="*/tiny_mce/*"                  type="Piranha.Web.ResourceHandler, Piranha"/>
+      <add name="Js"      verb="*" path="*/Manager/Content/Js/*"        type="Piranha.Web.ResourceHandler, Piranha"/>
+      <add name="ExtCss"  verb="*" path="*/Manager/Content/Css/Ext/*.*" type="Piranha.Web.ResourceHandler, Piranha"/>
+      <add name="Img"     verb="*" path="*/Manager/Content/Img/*.*"     type="Piranha.Web.ResourceHandler, Piranha"/>
     </handlers>
     <modules>
       <remove name="UrlRoutingModule-4.0"/>
