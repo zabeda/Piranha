@@ -388,6 +388,14 @@ namespace Piranha.Models.Manager.PageModels
 					Parents = BuildParentPages(Sitemap.GetStructure(false), Page) ;
 					Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
 					Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
+
+					// Initialize regions
+					foreach (var reg in Regions)
+						if (Extend.ExtensionManager.ExtensionTypes.ContainsKey(reg.Type)) {
+							var m = Extend.ExtensionManager.ExtensionTypes[reg.Type].GetMethod("Init") ;
+							if (m != null)
+								m.Invoke(reg.Body, new object[] { this }) ;
+						}
 				}
 			}
 		}
