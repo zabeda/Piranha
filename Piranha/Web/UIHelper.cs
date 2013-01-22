@@ -454,8 +454,10 @@ namespace Piranha.Web
 				if (Hooks.Menu.RenderItemStart != null) {
 					Hooks.Menu.RenderItemStart(this, str, page, active, childactive) ;
 				} else {
-					str.AppendLine("<li" + (curr.Id == page.Id ? " class=\"active\"" : 
-						(ChildActive(page, curr.Id) ? " class=\"active-child	\"" : "")) + ">") ;
+					var hasChild = page.Pages.Count > 0 ? " has-child" : "" ;
+					str.AppendLine("<li" + (curr.Id == page.Id ? " class=\"active" + hasChild + "\"" : 
+						(ChildActive(page, curr.Id) ? " class=\"active-child" + hasChild + "\"" :
+						(page.Pages.Count > 0 ? " class=\"has-child\"" : ""))) + ">") ;
 				}
 				// Render item link
 				if (Hooks.Menu.RenderItemLink != null) {
