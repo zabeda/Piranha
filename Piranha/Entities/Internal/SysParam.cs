@@ -108,6 +108,8 @@ namespace Piranha.Models
 			try {
 				if (!Cache.ContainsKey(name.ToUpper()))
 					Cache[name.ToUpper()] = SysParam.GetSingle("sysparam_name = @0", name) ;
+				if (!Cache.ContainsKey(name.ToUpper()))
+					return SysParam.GetSingle("sysparam_name = @0", name) ;
 				return Cache[name.ToUpper()] ;
 			} catch {}
 			return null ;
