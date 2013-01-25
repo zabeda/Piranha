@@ -124,5 +124,10 @@ namespace Piranha.WebPages
 			/// </summary>
 			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
 		}
+
+		public static class Mail
+		{
+			public static Delegates.SendPasswordMail SendPasswordMail ;
+		}
 	}
 }
