@@ -1,0 +1,121 @@
+﻿@* Generator: WebPage *@
+
+@inherits Piranha.Manager.Templates.UserEdit
+@section Toolbar {
+@*@Html.Partial("Partial/Tabs")*@
+<div class="toolbar">
+    <div class="inner">
+        <ul>
+            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
+            <li><a href="@Manager.Href("~/user/delete/" + Model.User.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Manager.Href("~/user")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@Manager.Href("~/user/edit/" + Model.User.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+}
+@section Head {
+    <script type="text/javascript" src="@Manager.Href("~/content/js/ext/jquery-ui-1.9.2.custom.min.js")"></script>
+    <script type="text/javascript">
+        function disableLockedUntil() {
+            $('#User_LockedUntil').val('').attr('disabled', true);
+        }
+        function enableLockedUntil() {
+            $('#User_LockedUntil').val('').removeAttr('disabled');
+        }
+
+        $(document).ready(function () {
+            if (!$('#User_IsLocked').is(':checked')) {
+                disableLockedUntil();
+            }
+            $('#User_IsLocked').click(function () {
+                if (!$(this).is(':checked'))
+                    disableLockedUntil();
+                else enableLockedUntil();
+            });
+            $('.datepicker input').datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+}
+<form method="post">
+@UI.FormAction("Save")
+@Html.Hidden("m.User.Id", Model.User.Id)
+<div class="grid_9">
+    <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Settings.UserInfo</h2></div>
+        <div class="inner">
+            <ul class="form">
+                <li>
+                    @Html.Label(@Piranha.Resources.Settings.Login)
+                    <div class="input">
+                        @Form.TextBoxFor(m => m.User.Login)</div>
+                    @Html.ValidationMessage("m.User.Login")
+                </li>
+                <li>
+                    @Html.Label(@Piranha.Resources.Settings.Firstname)
+                    <div class="input">
+                        @Form.TextBoxFor(m => m.User.Firstname)</div>
+                    @Html.ValidationMessage("m.User.Firstname")
+                </li>
+                <li>
+                    @Html.Label(@Piranha.Resources.Settings.Surname)
+                    <div class="input">
+                        @Form.TextBoxFor(m => m.User.Surname)</div>
+                    @Html.ValidationMessage("m.User.Surname")
+                </li>
+                <li>
+                    @Html.Label(@Piranha.Resources.Settings.Email)
+                    <div class="input">
+                        @Form.TextBoxFor(m => m.User.Email)</div>
+                    @Html.ValidationMessage("m.User.Email")
+                </li>
+                <li>
+                    @Html.Label(@Piranha.Resources.Settings.GroupName)
+                    <div class="input">
+                        @Html.DropDownList("m.User.GroupId", Model.Groups, Model.User.GroupId)</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="box">
+        <div class="title"><h2>@Piranha.Resources.Settings.Account</h2></div>
+        <div class="inner">
+            <ul class="form">
+                <li>@Html.Label(@Piranha.Resources.Settings.Locked)
+                    <p>@Html.CheckBox("m.User.IsLocked", ModelState["m.User.IsLocked"].Value) (@Piranha.Resources.Settings.LockedInfo)</p>
+                </li>
+                @*<li>@Html.Label(@Piranha.Resources.Settings.LockedUntil)
+                    <div class="input datepicker">
+                        @Html.TextBox("m.User.LockedUntil", ModelState["m.User.LockedUntil"].Value)</div>
+                </li>*@
+            </ul>
+        </div>
+    </div>
+    @*@if (Model.Extensions.Count > 0) {
+        @Html.EditorFor(m => m.Extensions)
+    }*@
+</div>
+<div class="grid_3">
+    <div class="box">
+        <div class="title"><h2>@(Model.User.Id == Guid.Empty ? @Piranha.Resources.Settings.CreatePassword : @Piranha.Resources.Settings.ChangePassword)</h2></div>
+        <div class="inner">
+            <ul class="form">
+                <li>
+                    @Html.Label(@Piranha.Resources.Global.Password)
+                    <div class="input">
+                        @Html.Password("m.Password.Password")</div>
+                </li>
+                <li>
+                    @Html.Label(@Piranha.Resources.Global.Confirm)
+                    <div class="input">
+                        @Html.Password("m.Password.PasswordConfirm")</div>
+                    @Html.ValidationMessage("m.Password.PasswordConfirm")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</form>

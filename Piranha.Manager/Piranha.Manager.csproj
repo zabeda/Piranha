@@ -1,0 +1,617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{861A44BA-A5BC-41D4-92CE-8DEC08A0E040}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Piranha.Manager</RootNamespace>
+    <AssemblyName>Piranha.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.1.0.20105.408\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ManagerBasePage.cs" />
+    <Compile Include="ManagerContentPage.cs" />
+    <Compile Include="ManagerHelper.cs" />
+    <Compile Include="ManagerLayoutPage.cs" />
+    <Compile Include="Models\PermissionListModel.cs" />
+    <Compile Include="Models\UserEditModel.cs" />
+    <Compile Include="Models\UserListModel.cs" />
+    <Compile Include="Permission\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="SiteManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\UserEdit.cs" />
+    <Compile Include="User\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="User\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Piranha\Piranha.csproj">
+      <Project>{7e07dd4f-41ed-4faf-8407-62196aae0d0f}</Project>
+      <Name>Piranha</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.md" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Permission\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="README.md" />
+    <None Include="User\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="User\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\chosen-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\chosen.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\jquery-ui-1.9.2.custom.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_diagonals-thick_20_666666_40x40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_flat_10_000000_40x100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_glass_100_f6f6f6_1x400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_glass_100_fdf5ce_1x400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_glass_65_ffffff_1x400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-icons_222222_256x240.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-icons_228ef1_256x240.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-icons_ef8c08_256x240.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-icons_ffd27a_256x240.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\ui-icons_ffffff_256x240.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\yui.fonts.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Ext\yui.reset.min.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Css\Theme.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-add-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-add-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-add-after-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-add-below-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-add-folder-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-add-folder-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-arrow-down-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-arrow-up-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-back-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-comments-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-content-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-delete-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-delete-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-doc-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-edit-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-excel-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-folder-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-folder-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-folder-up-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-locked-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-missing-ico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-movie-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-pdf-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-ppt-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-preview-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-properties-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-publish-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-reload-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-revert-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-save-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-search-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-seo-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-settings-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-sound-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-sync-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-unlocked-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-unpublish-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-zip-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\info-draft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\info-unpublished.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\chosen.jquery.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\jquery-1.7.2.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\jquery-ui-1.9.2.custom.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\jquery.equalheights.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\json2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\langs\en.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\license.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\autoresize\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullpage\css\fullpage.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullpage\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullpage\fullpage.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullpage\js\fullpage.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullpage\langs\en_dlg.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullscreen\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\fullscreen\fullscreen.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\skins\clearlooks2\window.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\inlinepopups\template.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\paste\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\paste\js\pastetext.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\paste\js\pasteword.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\paste\langs\en_dlg.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\paste\pastetext.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\paste\pasteword.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\spellchecker\css\content.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\spellchecker\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\spellchecker\img\wline.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\style\css\props.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\style\editor_plugin.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\style\js\props.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\style\langs\en_dlg.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\plugins\style\props.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\about.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\anchor.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\charmap.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\color_picker.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\editor_template.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\editor_template_src.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\image.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\colorpicker.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\flash.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\icons.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\icons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\iframe.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\pagebreak.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\quicktime.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\realmedia.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\shockwave.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\trans.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\video.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\img\windowsmedia.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\about.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\anchor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\charmap.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\color_picker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\image.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\link.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\js\source_editor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\langs\en.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\langs\en_dlg.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\link.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\shortcuts.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\content.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\dialog.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\img\buttons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\img\items.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\img\menu_arrow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\img\menu_check.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\img\progress.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\img\tabs.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\skins\default\ui.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\themes\advanced\source_editor.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\tiny_mce.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\tiny_mce_popup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\utils\editable_selects.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\utils\form_utils.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\utils\mctabs.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\Ext\tiny_mce\utils\validate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.attachment.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.comments.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.form.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.manager.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.media.dialog.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.regions.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.regiontemplate.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Js\jquery.template.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

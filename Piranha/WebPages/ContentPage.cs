@@ -21,7 +21,19 @@ namespace Piranha.WebPages
 		/// Gets/sets the content model.
 		/// </summary>
 		public new T Model { get ; protected set ; }
+
+		/// <summary>
+		/// Gets/sets the form helper.
+		/// </summary>
+		public FormHelper<T> Form { get ; private set ; }
 		#endregion
+
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
+		public ContentPage() : base() {
+			Form = new FormHelper<T>(this) ;
+		}
 
 		/// <summary>
 		/// Initializes the page.
