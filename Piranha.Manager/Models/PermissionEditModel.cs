@@ -7,20 +7,19 @@ using System.Web.WebPages.Html;
 
 using AutoMapper;
 using Piranha.Entities;
-using Piranha.Web;
 
 namespace Piranha.Manager.Models
 {
 	/// <summary>
-	/// Edit model for the user eidt view.
+	/// Edit model for the permission view.
 	/// </summary>
-	public class UserEditModel
+	public class PermissionEditModel
 	{
 		#region Properties
 		/// <summary>
-		/// Gets/sets the current user.
+		/// Gets/sets the current permission.
 		/// </summary>
-		public Entities.User User { get ; set ; }
+		public Entities.Permission Permission { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available groups.
@@ -31,7 +30,7 @@ namespace Piranha.Manager.Models
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public UserEditModel() {
+		public PermissionEditModel() {
 			using (var db = new DataContext()) {
 				Groups = Mapper.Map<List<SelectListItem>>(db.Groups.OrderBy(g => g.Name).ToList()) ;
 			}
@@ -42,11 +41,11 @@ namespace Piranha.Manager.Models
 		/// </summary>
 		/// <param name="id">The id</param>
 		/// <returns>The model</returns>
-		public static UserEditModel GetById(Guid id) {
-			var m = new UserEditModel() ;
+		public static PermissionEditModel GetById(Guid id) {
+			var m = new PermissionEditModel() ;
 
 			using (var db = new DataContext()) {
-				m.User = db.Users.Where(u => u.Id == id).Single() ;
+				m.Permission = db.Permissions.Where(p => p.Id == id).Single() ;
 			}
 			return m ;
 		}
@@ -57,15 +56,12 @@ namespace Piranha.Manager.Models
 		/// <returns>If the entity was updated in the database.</returns>
 		public bool Save() {
 			using (var db = new DataContext()) {
-				var user = db.Users.Where(u => u.Id == User.Id).SingleOrDefault() ;
-				if (user == null) {
-					user = new Entities.User() ;
-					user.Attach(db, EntityState.Added) ;
+				var permission = db.Permissions.Where(u => u.Id == Permission.Id).SingleOrDefault() ;
+				if (permission == null) {
+					permission = new Entities.Permission() ;
+					permission.Attach(db, EntityState.Added) ;
 				}
-				Mapper.Map<Entities.User, Entities.User>(User, user) ;
-
-				if (!String.IsNullOrEmpty(User.Password))
-					user.Password = Piranha.Models.SysUser.Encrypt(User.Password) ;
+				Mapper.Map<Entities.Permission, Entities.Permission>(Permission, permission) ;
 
 				return db.SaveChanges() > 0 ;
 			}

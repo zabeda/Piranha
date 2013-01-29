@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using System.Web.WebPages.Html;
 
 namespace Piranha.WebPages
 {
@@ -35,6 +36,38 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Gets a textbox for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="htmlAttributes">Additional html attributes</param>
+		/// <returns>The textbox</returns>
+		public IHtmlString TextBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
+			return Page.Html.TextBox(expr.Body.ToString(), GetValue(expr), htmlAttributes) ;
+		}
+
+		/// <summary>
+		/// Gets a textarea for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <returns>The textbox</returns>
+		public IHtmlString TextAreaFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
+			return Page.Html.TextArea(expr.Body.ToString(), GetValue(expr).ToString()) ;
+		}
+
+		/// <summary>
+		/// Gets a textarea for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="htmlAttributes">Additional html attributes</param>
+		/// <returns>The textbox</returns>
+		public IHtmlString TextAreaFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
+			return Page.Html.TextArea(expr.Body.ToString(), GetValue(expr).ToString(), htmlAttributes) ;
+		}
+
+		/// <summary>
 		/// Gets a checkbox for the specified model property.
 		/// </summary>
 		/// <typeparam name="TProperty">The property type</typeparam>
@@ -52,6 +85,47 @@ namespace Piranha.WebPages
 		/// <returns>The password</returns>
 		public IHtmlString PasswordFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
 			return Page.Html.Password(expr.Body.ToString()) ;
+		}
+
+		/// <summary>
+		/// Gets a hidden field for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <returns>The hidden field</returns>
+		public IHtmlString HiddenFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
+			return Page.Html.Hidden(expr.Body.ToString(), GetValue(expr)) ;
+		}
+
+		/// <summary>
+		/// Gets a validation message for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <returns>The validation message</returns>
+		public IHtmlString ValidationMessageFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
+			return Page.Html.ValidationMessage(expr.Body.ToString()) ;
+		}
+
+		/// <summary>
+		/// Gets a sekect list for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <returns>The select list</returns>
+		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList) {
+			return Page.Html.DropDownList(expr.Body.ToString(), selectList) ;
+		}
+
+		/// <summary>
+		/// Gets a sekect list for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="htmlAttributes">Additional html attributes</param>
+		/// <returns>The select list</returns>
+		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList, object htmlAttributes) {
+			return Page.Html.DropDownList(expr.Body.ToString(), selectList, htmlAttributes) ;
 		}
 
 		#region Private methods

@@ -46,7 +46,7 @@
         <tbody class="list-js">
             @foreach (var permission in Model.Permissions) {
             <tr>
-                <td class="name"><a href="@Manager.Href("~/permssion/edit/" + permission.Id)">@permission.Name</a></td>
+                <td class="name"><a href="@Manager.Href("~/permission/edit/" + permission.Id)">@permission.Name</a></td>
                 <td class="group">@permission.Group.Name</td>
                 <td class="updated">@permission.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@permission.Created.ToString("yyyy-MM-dd")</td>

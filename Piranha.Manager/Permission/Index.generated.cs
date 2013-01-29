@@ -200,7 +200,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
             
             #line 49 "..\..\Permission\Index.cshtml"
-                                     Write(Manager.Href("~/permssion/edit/" + permission.Id));
+                                     Write(Manager.Href("~/permission/edit/" + permission.Id));
 
             
             #line default
@@ -210,7 +210,7 @@ WriteLiteral("\">");
 
             
             #line 49 "..\..\Permission\Index.cshtml"
-                                                                                         Write(permission.Name);
+                                                                                          Write(permission.Name);
 
             
             #line default
