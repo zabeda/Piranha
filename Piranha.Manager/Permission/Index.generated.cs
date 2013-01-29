@@ -26,7 +26,7 @@ namespace Piranha.Manager.Permission
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Permission/Index.cshtml")]
-    public class Index : Piranha.Manager.ManagerContentPage<Piranha.Manager.Models.PermissionListModel>
+    public class Index : Piranha.Manager.Templates.ManagerContentPage<Piranha.Manager.Models.PermissionListModel>
     {
 
                 // Resolve package relative syntax

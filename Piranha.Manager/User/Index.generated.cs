@@ -26,7 +26,7 @@ namespace Piranha.Manager.User
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/User/Index.cshtml")]
-    public class Index : Piranha.Manager.ManagerContentPage<Piranha.Manager.Models.UserListModel>
+    public class Index : Piranha.Manager.Templates.ManagerContentPage<Piranha.Manager.Models.UserListModel>
     {
 
                 // Resolve package relative syntax

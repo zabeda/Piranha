@@ -5,7 +5,7 @@ using System.Web;
 
 using Piranha.WebPages;
 
-namespace Piranha.Manager
+namespace Piranha.Manager.Templates
 {
 	public abstract class ManagerLayoutPage : LayoutPage
 	{

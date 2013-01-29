@@ -5,9 +5,9 @@ using System.Web;
 
 using Piranha.WebPages;
 
-namespace Piranha.Manager
+namespace Piranha.Manager.Templates
 {
-	public abstract class ManagerBasePage : BasePage
+	public abstract class ManagerPage : BasePage
 	{
 		/// <summary>
 		/// The manager helper.
@@ -17,7 +17,7 @@ namespace Piranha.Manager
 		/// <summary>
 		/// Default constructor. Creates a new manager layout page.
 		/// </summary>
-		public ManagerBasePage() : base() {
+		public ManagerPage() : base() {
 			Manager = new ManagerHelper(this) ;
 		}
 	}

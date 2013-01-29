@@ -77,10 +77,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagerBasePage.cs" />
-    <Compile Include="ManagerContentPage.cs" />
+    <Compile Include="Templates\ManagerPage.cs" />
+    <Compile Include="Templates\ManagerContentPage.cs" />
     <Compile Include="ManagerHelper.cs" />
-    <Compile Include="ManagerLayoutPage.cs" />
+    <Compile Include="Templates\ManagerLayoutPage.cs" />
     <Compile Include="Models\PermissionListModel.cs" />
     <Compile Include="Models\UserEditModel.cs" />
     <Compile Include="Models\UserListModel.cs" />

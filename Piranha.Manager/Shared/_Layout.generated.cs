@@ -26,7 +26,7 @@ namespace Piranha.Manager.Shared
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Shared/_Layout.cshtml")]
-    public class Layout : Piranha.Manager.ManagerLayoutPage
+    public class Layout : Piranha.Manager.Templates.ManagerLayoutPage
     {
 
                 // Resolve package relative syntax
