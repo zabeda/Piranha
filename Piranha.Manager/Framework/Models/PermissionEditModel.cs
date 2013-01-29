@@ -33,6 +33,7 @@ namespace Piranha.Manager.Models
 		public PermissionEditModel() {
 			using (var db = new DataContext()) {
 				Groups = Mapper.Map<List<SelectListItem>>(db.Groups.OrderBy(g => g.Name).ToList()) ;
+				Permission = new Entities.Permission() ;
 			}
 		}
 
@@ -43,7 +44,6 @@ namespace Piranha.Manager.Models
 		/// <returns>The model</returns>
 		public static PermissionEditModel GetById(Guid id) {
 			var m = new PermissionEditModel() ;
-
 			using (var db = new DataContext()) {
 				m.Permission = db.Permissions.Where(p => p.Id == id).Single() ;
 			}
@@ -53,7 +53,7 @@ namespace Piranha.Manager.Models
 		/// <summary>
 		/// Saves the current edit model.
 		/// </summary>
-		/// <returns>If the entity was updated in the database.</returns>
+		/// <returns>Weather the database was updated</returns>
 		public bool Save() {
 			using (var db = new DataContext()) {
 				var permission = db.Permissions.Where(u => u.Id == Permission.Id).SingleOrDefault() ;
@@ -63,6 +63,17 @@ namespace Piranha.Manager.Models
 				}
 				Mapper.Map<Entities.Permission, Entities.Permission>(Permission, permission) ;
 
+				return db.SaveChanges() > 0 ;
+			}
+		}
+
+		/// <summary>
+		/// Deletes the current edit model.
+		/// </summary>
+		/// <returns>Weather the database was updated</returns>
+		public bool Delete() {
+			using (var db = new DataContext()) {
+				Permission.Attach(db, EntityState.Deleted) ;
 				return db.SaveChanges() > 0 ;
 			}
 		}

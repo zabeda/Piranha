@@ -77,19 +77,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\PermissionEditModel.cs" />
+    <Compile Include="Framework\Models\PermissionEditModel.cs" />
     <Compile Include="Permission\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Templates\ManagerPage.cs" />
-    <Compile Include="Templates\ManagerContentPage.cs" />
-    <Compile Include="ManagerHelper.cs" />
-    <Compile Include="Templates\ManagerLayoutPage.cs" />
-    <Compile Include="Models\PermissionListModel.cs" />
-    <Compile Include="Models\UserEditModel.cs" />
-    <Compile Include="Models\UserListModel.cs" />
+    <Compile Include="Framework\Templates\ManagerPage.cs" />
+    <Compile Include="Framework\Templates\ManagerContentPage.cs" />
+    <Compile Include="Framework\ManagerHelper.cs" />
+    <Compile Include="Framework\Templates\ManagerLayoutPage.cs" />
+    <Compile Include="Framework\Models\PermissionListModel.cs" />
+    <Compile Include="Framework\Models\UserEditModel.cs" />
+    <Compile Include="Framework\Models\UserListModel.cs" />
     <Compile Include="Permission\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,10 +100,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_Layout.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="SiteManager.cs" />
+    <Compile Include="Framework\SiteManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\PermissionEdit.cs" />
-    <Compile Include="Templates\UserEdit.cs" />
+    <Compile Include="Framework\Templates\PermissionEdit.cs" />
+    <Compile Include="Framework\Templates\UserEdit.cs" />
     <Compile Include="User\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -145,7 +145,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </None>
-    <None Include="Web.config" />
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

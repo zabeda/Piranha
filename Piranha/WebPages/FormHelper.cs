@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -23,6 +24,15 @@ namespace Piranha.WebPages
 		/// <param name="page">The current page.</param>
 		public FormHelper(ContentPage<TModel> page) {
 			Page = page ;
+		}
+
+		/// <summary>
+		/// Renders the hidden form action field.
+		/// </summary>
+		/// <param name="action">The name of the method to invoke</param>
+		/// <returns>The hidden field</returns>
+		public IHtmlString Action(string action) {
+			return Page.Html.Hidden("piranha_form_action", action) ;
 		}
 
 		/// <summary>
@@ -98,22 +108,12 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// Gets a validation message for the specified model property.
-		/// </summary>
-		/// <typeparam name="TProperty">The property type</typeparam>
-		/// <param name="expr">The model expression</param>
-		/// <returns>The validation message</returns>
-		public IHtmlString ValidationMessageFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.ValidationMessage(expr.Body.ToString()) ;
-		}
-
-		/// <summary>
 		/// Gets a sekect list for the specified model property.
 		/// </summary>
 		/// <typeparam name="TProperty">The property type</typeparam>
 		/// <param name="expr">The model expression</param>
 		/// <returns>The select list</returns>
-		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList) {
+ 		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList) {
 			return Page.Html.DropDownList(expr.Body.ToString(), selectList) ;
 		}
 
@@ -126,6 +126,16 @@ namespace Piranha.WebPages
 		/// <returns>The select list</returns>
 		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList, object htmlAttributes) {
 			return Page.Html.DropDownList(expr.Body.ToString(), selectList, htmlAttributes) ;
+		}
+
+		/// <summary>
+		/// Gets a validation message for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <returns>The validation message</returns>
+		public IHtmlString ValidationMessageFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
+			return Page.Html.ValidationMessage(expr.Body.ToString()) ;
 		}
 
 		#region Private methods
@@ -142,7 +152,11 @@ namespace Piranha.WebPages
 
 			if (state != null)
 				return Page.ModelState[name].Value ;
-			return expr.Compile()(Page.Model) ;
+
+			var ret = expr.Compile()(Page.Model) ;
+			if (ret != null)
+				return ret ;
+			return "" ;
 		}
 		#endregion
 	}

@@ -41,5 +41,17 @@ namespace Piranha.Manager.Templates
 				else ErrorMessage(Piranha.Resources.Settings.MessageAccessNotSaved) ;
 			}
 		}
+
+		/// <summary>
+		/// Deletes the model with the given id.
+		/// </summary>
+		/// <param name="id">The id</param>
+		public void Delete(string id) {
+			Model = PermissionEditModel.GetById(new Guid(id)) ;
+
+			if (Model.Delete())
+				Response.Redirect(SiteManager.VirtualPath + "permission?msg=deleted") ;
+			else ErrorMessage(Piranha.Resources.Settings.MessageAccessNotDeleted) ;
+		}
 	}
 }

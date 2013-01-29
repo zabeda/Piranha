@@ -3,6 +3,13 @@
 @inherits Piranha.Manager.Templates.ManagerContentPage<Piranha.Manager.Models.PermissionListModel>
 @{
     Page.Title = @Piranha.Resources.Settings.ListTitleAccess ;
+    
+    var msg = Request["msg"] ;
+    if (!String.IsNullOrEmpty(msg)) {
+        if (msg.ToLower() == "deleted") {
+            SuccessMessage(Piranha.Resources.Settings.MessageAccessDeleted) ;
+        }
+    }
 }
 @section Head {
     <script type="text/javascript">

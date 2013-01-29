@@ -34,6 +34,7 @@ namespace Piranha.Manager.Models
 		public UserEditModel() {
 			using (var db = new DataContext()) {
 				Groups = Mapper.Map<List<SelectListItem>>(db.Groups.OrderBy(g => g.Name).ToList()) ;
+				User = new Entities.User() ;
 			}
 		}
 

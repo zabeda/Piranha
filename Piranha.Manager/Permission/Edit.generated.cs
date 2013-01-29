@@ -78,7 +78,7 @@ WriteLiteral("            <li><a href=\"");
 
             
             #line 11 "..\..\Permission\Edit.cshtml"
-                    Write(Manager.Href("~/permission/delete/" + Model.Permission.Id));
+                    Write(Manager.Href("~/permission/edit/delete/" + Model.Permission.Id));
 
             
             #line default
@@ -88,7 +88,7 @@ WriteLiteral("\" class=\"delete\">");
 
             
             #line 11 "..\..\Permission\Edit.cshtml"
-                                                                                                Write(Piranha.Resources.Global.ToolbarDelete);
+                                                                                                     Write(Piranha.Resources.Global.ToolbarDelete);
 
             
             #line default

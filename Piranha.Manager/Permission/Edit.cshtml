@@ -8,7 +8,7 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             @if (!Model.Permission.IsLocked) {
-            <li><a href="@Manager.Href("~/permission/delete/" + Model.Permission.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Manager.Href("~/permission/edit/delete/" + Model.Permission.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
             <li><a href="@Manager.Href("~/permission")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Manager.Href("~/permission/edit/" + Model.Permission.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
