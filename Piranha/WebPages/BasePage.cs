@@ -93,6 +93,14 @@ namespace Piranha.WebPages
 			            List<object> args = new List<object>() ;
 			            foreach (var param in m.GetParameters())
 			                args.Add(ModelBinder.BindModel(param.ParameterType, param.Name, "", ModelState)) ;
+						// Validate model
+						if (!Config.DisableModelStateBinding) {
+							foreach (var arg in args) {
+								var val = arg.GetType().GetMethod("Validate") ;
+								if (val != null)
+									val.Invoke(arg, new object[] { ModelState }) ;
+							}
+						}
 			            m.Invoke(this, args.ToArray()) ;
 			        }
 			    }
