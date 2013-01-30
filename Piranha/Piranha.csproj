@@ -116,6 +116,7 @@
     <Compile Include="Areas\Manager\Models\CommentEditModel.cs" />
     <Compile Include="Areas\Manager\Models\CommentSettingsModel.cs" />
     <Compile Include="Areas\Manager\Models\PostListModel.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataExtensions.cs" />
     <Compile Include="Entities\BaseEntity.cs" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using System.Web.WebPages.Html;
 
 namespace Piranha.WebPages
 {
@@ -19,9 +20,10 @@ namespace Piranha.WebPages
 		/// <typeparam name="T">The model type</typeparam>
 		/// <param name="name">The model name</param>
 		/// <param name="prefix">Optional name prefix</param>
+		/// <param name="state">Optional model state</param>
 		/// <returns>The model</returns>
-		public static T BindModel<T>(string name, string prefix = "") {
-			return (T)BindModel(typeof(T), name, prefix) ;
+		public static T BindModel<T>(string name, string prefix = "", ModelStateDictionary state = null) {
+			return (T)BindModel(typeof(T), name, prefix, state) ;
 		}
 
 		/// <summary>
@@ -30,9 +32,10 @@ namespace Piranha.WebPages
 		/// <param name="type">The model type</param>
 		/// <param name="name">The model name</param>
 		/// <param name="prefix">Optional form prefix</param>
+		/// <param name="state">Optional model state</param>
 		/// <returns>The model</returns>
-		public static object BindModel(Type type, string name, string prefix = "") {
-			return BindModel(HttpContext.Current.Request.Form, type, name, prefix) ;
+		public static object BindModel(Type type, string name, string prefix = "", ModelStateDictionary state = null) {
+			return BindModel(HttpContext.Current.Request.Form, type, name, prefix, state) ;
 		}
 
 		#region Private members
@@ -43,8 +46,9 @@ namespace Piranha.WebPages
 		/// <param name="type">The model type</param>
 		/// <param name="name">The model name</param>
 		/// <param name="prefix">Optional name prefix</param>
+		/// <param name="state">Optional model state</param>
 		/// <returns>The model</returns>
-		private static object BindModel(NameValueCollection form, Type type, string name, string prefix = "") {
+		private static object BindModel(NameValueCollection form, Type type, string name, string prefix = "", ModelStateDictionary state = null) {
 			if (form.AllKeys.Contains(prefix + name)) {
 				if (type == typeof(HtmlString)) {
 					return new HtmlString(form[prefix + name]) ;
@@ -88,9 +92,22 @@ namespace Piranha.WebPages
 					object ret = Activator.CreateInstance(type) ;
 					foreach (PropertyInfo p in ret.GetType().GetProperties()) {
 						if (p.CanWrite) {
-							var val = BindModel(form, p.PropertyType, p.Name, prefix + name + ".") ;
-							if (val != null)
+							var val = BindModel(form, p.PropertyType, p.Name, prefix + name + ".", state) ;
+							if (val != null) {
+								if (!Config.DisableModelStateBinding) {
+									// Set model state value
+									if (state != null) {
+										var modelstate = state[prefix + name + "." + p.Name] ;
+										if (modelstate == null) {
+											modelstate = new ModelState() ;
+											state.Add(prefix + name + "." + p.Name, modelstate) ;
+										}
+										modelstate.Value = val ;
+									}
+								}
+								// Set model value
 								p.SetValue(ret, val, null) ; 
+							}
 						}
 					}
 					return ret ;

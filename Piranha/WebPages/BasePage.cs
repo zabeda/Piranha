@@ -44,7 +44,35 @@ namespace Piranha.WebPages
 		protected override void InitializePage() {
 			base.InitializePage() ;
 
-			ExecutePage() ;
+			var invoked = false ;
+			if (!Config.DisableMethodBinding) {
+				if (!IsPost) {
+					if (UrlData.Count > 0) {
+						var m = this.GetType().GetMethod(UrlData[0], BindingFlags.Public|BindingFlags.Instance|BindingFlags.IgnoreCase) ;
+						if (m != null) {
+							var parameters = m.GetParameters() ;
+							var input = new List<object>() ;
+
+							// Add parameters
+							for (var n = 1; n < Math.Min(UrlData.Count, parameters.Length + 1); n++) {
+								input.Add(Convert.ChangeType(UrlData[n], parameters[n - 1].ParameterType)) ;
+							}
+							// Add optional parameters
+							for (var n = input.Count; n < parameters.Length; n++) {
+								if (parameters[n].IsOptional)
+									input.Add(parameters[n].DefaultValue) ;
+								else break ;
+							}
+							// Invoke
+							m.Invoke(this, input.ToArray()) ;
+							invoked = true ;
+						}
+					} 
+				}
+			}
+
+			if (IsPost || !invoked)
+				ExecutePage() ;
 
 			if (IsPost) {
 			    if (Request.Form.AllKeys.Contains("piranha_form_action")) {
@@ -64,7 +92,7 @@ namespace Piranha.WebPages
 			            // Bind model
 			            List<object> args = new List<object>() ;
 			            foreach (var param in m.GetParameters())
-			                args.Add(ModelBinder.BindModel(param.ParameterType, param.Name)) ;
+			                args.Add(ModelBinder.BindModel(param.ParameterType, param.Name, "", ModelState)) ;
 			            m.Invoke(this, args.ToArray()) ;
 			        }
 			    }
