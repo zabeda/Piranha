@@ -63,7 +63,10 @@ namespace Piranha.Manager.Models
 				}
 				Mapper.Map<Entities.Permission, Entities.Permission>(Permission, permission) ;
 
-				return db.SaveChanges() > 0 ;
+				var ret = db.SaveChanges() > 0 ;
+				Permission.Id = permission.Id ;
+
+				return ret ;
 			}
 		}
 
@@ -76,6 +79,24 @@ namespace Piranha.Manager.Models
 				Permission.Attach(db, EntityState.Deleted) ;
 				return db.SaveChanges() > 0 ;
 			}
+		}
+
+		/// <summary>
+		/// Validates the current model and stores the result in the model state.
+		/// </summary>
+		/// <param name="state">The model state</param>
+		public void Validate(ModelStateDictionary state) {
+			// Group Id
+			if (Permission.GroupId == Guid.Empty)
+				state.AddError("m.Permission.GroupId", Piranha.Resources.Settings.AccessGroupRequired) ;
+			// Name
+			if (String.IsNullOrEmpty(Permission.Name))
+				state.AddError("m.Permission.Name", Piranha.Resources.Settings.AccessNameRequired) ;
+			else if (Permission.Name.Length > 64)
+				state.AddError("m.Permission.Name", Piranha.Resources.Settings.AccessNameLength) ;
+			// Description
+			if (Permission.Description.Length > 255)
+				state.AddError("m.Permission.Description", Piranha.Resources.Settings.AccessDescriptionLength) ;
 		}
 	}
 }

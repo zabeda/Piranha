@@ -813,7 +813,7 @@ $(document).ready(function () {
     //
     // Form validation errors
     //
-    $(".field-validation-error").click(function () {
+    $("span.field-validation-error").click(function () {
         $(this).fadeOut();
     });
 

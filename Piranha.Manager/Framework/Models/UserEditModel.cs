@@ -68,7 +68,10 @@ namespace Piranha.Manager.Models
 				if (!String.IsNullOrEmpty(User.Password))
 					user.Password = Piranha.Models.SysUser.Encrypt(User.Password) ;
 
-				return db.SaveChanges() > 0 ;
+				var ret = db.SaveChanges() > 0 ;
+				User.Id = user.Id ;
+
+				return ret ;
 			}
 		}
 	}
