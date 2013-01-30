@@ -1,6 +1,9 @@
 ﻿@* Generator: WebPage *@
 
 @inherits Piranha.Manager.Templates.PermissionEdit
+@{
+    Layout = "~/Manager/Shared/_Layout.cshtml" ;
+}
 @section Toolbar {
 @*@Html.Partial("Partial/Tabs")*@
 <div class="toolbar">
@@ -8,10 +11,10 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             @if (!Model.Permission.IsLocked) {
-            <li><a href="@Manager.Href("~/permission/edit/delete/" + Model.Permission.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Href("~/manager/permission/edit/delete/" + Model.Permission.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
-            <li><a href="@Manager.Href("~/permission")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
-            <li><a href="@Manager.Href("~/permission/edit/" + Model.Permission.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            <li><a href="@Href("~/manager/permission")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@Href("~/manager/permission/edit/" + Model.Permission.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>
     </div>

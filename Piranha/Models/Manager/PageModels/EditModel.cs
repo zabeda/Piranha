@@ -519,7 +519,7 @@ namespace Piranha.Models.Manager.PageModels
 			return ret ;
 		}
 
-		public static List<PagePlacement> BuildSiblingPages(Guid page_id, Guid page_parentid, int page_seqno, Guid parentid) {
+		internal static List<PagePlacement> BuildSiblingPages(Guid page_id, Guid page_parentid, int page_seqno, Guid parentid) {
 			List<Page> sib = null ;
 			if (parentid != Guid.Empty)
 				sib = Page.Get("page_parent_id = @0 AND page_id != @1 AND page_draft = 1", parentid, page_id, new Params() { OrderBy = "page_seqno" }) ;

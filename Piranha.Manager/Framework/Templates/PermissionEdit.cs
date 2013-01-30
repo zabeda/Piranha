@@ -10,7 +10,7 @@ namespace Piranha.Manager.Templates
 	/// <summary>
 	/// Page template for the permission edit view.
 	/// </summary>
-	public abstract class PermissionEdit : ManagerContentPage<Models.PermissionEditModel>
+	public abstract class PermissionEdit : Piranha.WebPages.ContentPage<Models.PermissionEditModel>
 	{
 		/// <summary>
 		/// Executes the page.
@@ -37,8 +37,8 @@ namespace Piranha.Manager.Templates
 
 			if (ModelState.IsValid) {
 				if (m.Save())
-					SuccessMessage(Piranha.Resources.Settings.MessageAccessSaved) ;
-				else ErrorMessage(Piranha.Resources.Settings.MessageAccessNotSaved) ;
+					this.SuccessMessage(Piranha.Resources.Settings.MessageAccessSaved) ;
+				else this.ErrorMessage(Piranha.Resources.Settings.MessageAccessNotSaved) ;
 			}
 		}
 
@@ -51,7 +51,7 @@ namespace Piranha.Manager.Templates
 
 			if (Model.Delete())
 				Response.Redirect(SiteManager.VirtualPath + "permission?msg=deleted") ;
-			else ErrorMessage(Piranha.Resources.Settings.MessageAccessNotDeleted) ;
+			else this.ErrorMessage(Piranha.Resources.Settings.MessageAccessNotDeleted) ;
 		}
 	}
 }

@@ -27,7 +27,7 @@ namespace Piranha.Manager
 		/// Gets/sets the virtual path of the manager interface.
 		/// </summary>
 		public static string VirtualPath { 
-			get { return "~/mgr/" ; } 
+			get { return "~/manager/" ; } 
 		}
 		#endregion
 

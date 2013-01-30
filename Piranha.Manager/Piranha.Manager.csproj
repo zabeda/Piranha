@@ -77,16 +77,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\Extensions.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
     <Compile Include="Permission\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Edit.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Templates\ManagerPage.cs" />
-    <Compile Include="Framework\Templates\ManagerContentPage.cs" />
-    <Compile Include="Framework\ManagerHelper.cs" />
-    <Compile Include="Framework\Templates\ManagerLayoutPage.cs" />
     <Compile Include="Framework\Models\PermissionListModel.cs" />
     <Compile Include="Framework\Models\UserEditModel.cs" />
     <Compile Include="Framework\Models\UserListModel.cs" />

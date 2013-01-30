@@ -1,22 +1,25 @@
 ﻿@* Generator: WebPage *@
 
 @inherits Piranha.Manager.Templates.UserEdit
+@{
+    Layout = "~/Manager/Shared/_Layout.cshtml" ;
+}
 @section Toolbar {
 @*@Html.Partial("Partial/Tabs")*@
 <div class="toolbar">
     <div class="inner">
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
-            <li><a href="@Manager.Href("~/user/delete/" + Model.User.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
-            <li><a href="@Manager.Href("~/user")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
-            <li><a href="@Manager.Href("~/user/edit/" + Model.User.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            <li><a href="@Href("~/manager/user/delete/" + Model.User.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Href("~/manager/user")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@Href("~/manager/user/edit/" + Model.User.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>
     </div>
 </div>
 }
 @section Head {
-    <script type="text/javascript" src="@Manager.Href("~/content/js/ext/jquery-ui-1.9.2.custom.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/manager/content/js/ext/jquery-ui-1.9.2.custom.min.js")"></script>
     <script type="text/javascript">
         function disableLockedUntil() {
             $('#User_LockedUntil').val('').attr('disabled', true);

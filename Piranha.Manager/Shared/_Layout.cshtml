@@ -1,6 +1,6 @@
 ﻿@* Generator: WebPage *@
 
-@inherits Piranha.Manager.Templates.ManagerLayoutPage
+@inherits Piranha.WebPages.LayoutPage
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +9,16 @@
 
     <title>@Page.Title</title>
 
-    <link rel="icon" href="@Manager.Href("~/content/img/icon.ico")" type="image/x-icon">
-    <link rel="shortcut icon" href="@Manager.Href("~/content/img/icon.ico")" type="image/x-icon"> 
-    <link href="@Manager.Href("~/content/css/ext/chosen.min.css")" rel="stylesheet" type="text/css"/>
-    <link href="@Manager.Href("~/content/css/ext/jquery-ui-1.9.2.custom.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Manager.Href("~/content/css/style.css")" rel="stylesheet" type="text/css"/>
-    <link href="@Manager.Href("~/content/css/theme.css")" rel="stylesheet" type="text/css"/>
+    <link rel="icon" href="@Href("~/manager/content/img/icon.ico")" type="image/x-icon">
+    <link rel="shortcut icon" href="@Href("~/manager/content/img/icon.ico")" type="image/x-icon"> 
+    <link href="@Href("~/manager/content/css/ext/chosen.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Href("~/manager/content/css/ext/jquery-ui-1.9.2.custom.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Href("~/manager/content/css/style.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Href("~/manager/content/css/theme.css")" rel="stylesheet" type="text/css"/>
 
-    <script type="text/javascript" src="@Manager.Href("~/content/js/ext/jquery-1.7.2.min.js")"></script>
-    <script type="text/javascript" src="@Manager.Href("~/content/js/jquery.manager.js")"></script>
-    <script type="text/javascript" src="@Manager.Href("~/content/js/ext/chosen.jquery.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/manager/content/js/ext/jquery-1.7.2.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/manager/content/js/jquery.manager.js")"></script>
+    <script type="text/javascript" src="@Href("~/manager/content/js/ext/chosen.jquery.min.js")"></script>
     <script type="text/javascript">
         var siteroot = "@Href("~/")";
         @*var apikey = "@UI.APIKey("FE868D4F-797C-4E60-B876-64E6FC2424AA")";*@
@@ -43,7 +43,7 @@
     <div class="top">
         <div class="container_12">
             <div class="grid_12 header">
-                <a class="home" href="@Manager.Href("~/")"></a>
+                <a class="home" href="@Href("~/manager/")"></a>
                 <a class="public-site" target="preview" href="http://@Request.Url.DnsSafeHost@Href("~/")">
                     @Piranha.WebPages.WebPiranha.GetSiteUrl()</a>
                 @*@Html.Partial("Partial/Menu")*@

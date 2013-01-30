@@ -12,7 +12,7 @@ namespace Piranha.Manager.Templates
 	/// <summary>
 	/// Page template for the user edit view.
 	/// </summary>
-	public abstract class UserEdit : ManagerContentPage<UserEditModel>
+	public abstract class UserEdit : Piranha.WebPages.ContentPage<UserEditModel>
 	{
 		/// <summary>
 		/// Executes the page.
@@ -40,8 +40,8 @@ namespace Piranha.Manager.Templates
 
 			if (ModelState.IsValid) {
 				if (m.Save())
-					SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
-				else ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
+					this.SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
+				else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
 			}
 			CreateModelState(m) ;
 		}

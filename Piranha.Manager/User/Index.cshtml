@@ -1,7 +1,8 @@
 ﻿@* Generator: WebPage *@
-@inherits Piranha.Manager.Templates.ManagerContentPage<Piranha.Manager.Models.UserListModel>
+@inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.UserListModel>
 @{
     Page.Title = @Piranha.Resources.Settings.ListTitleUsers ;
+    Layout = "~/Manager/Shared/_Layout.cshtml" ;
 }
 @section Head {
     <script type="text/javascript">
@@ -20,8 +21,8 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li id="add"><a href="@Manager.Href("~/user/edit")" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
-            <li><a href="@Manager.Href("~/user")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            <li id="add"><a href="@Href("~/manager/user/edit")" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a href="@Href("~/manager/user")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <button class="search"></button>@Html.TextBox("search")
         <div class="clear"></div>
@@ -52,7 +53,7 @@
                 </td>
                 <td class="login">
                     @if (User.IsMember(user.GroupId.Value)) {
-                    <a href="@Manager.Href("~/user/edit/" + user.Id)">@user.Login</a>
+                    <a href="@Href("~/manager/user/edit/" + user.Id)">@user.Login</a>
                     } else {
                     @user.Login
                     }
@@ -63,7 +64,7 @@
                 <td class="created">@user.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     @if (User.IsMember(user.GroupId.Value)) {
-                    <a class="icon delete" href="@Manager.Href("~/user/delete/" + user.Id)"></a>
+                    <a class="icon delete" href="@Href("~/manager/user/delete/" + user.Id)"></a>
                     }
                 </td>
             </tr>
