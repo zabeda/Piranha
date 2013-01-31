@@ -26,7 +26,6 @@ namespace Piranha.Manager.Templates
 					Page.Title = Piranha.Resources.Settings.EditTitleNewUser ;
 					Model = new UserEditModel() ;
 				}
-				CreateModelState(Model) ;
 			}
 		}
 
@@ -43,21 +42,6 @@ namespace Piranha.Manager.Templates
 					this.SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
 				else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
 			}
-			CreateModelState(m) ;
-		}
-
-		/// <summary>
-		/// Binds the model state. THIS SHOULD BE MOVED TO Piranha.WebPages.ModelBinder
-		/// </summary>
-		/// <param name="m">The model</param>
-		private void CreateModelState(UserEditModel m) {
-			ModelState.Add("m.User.Login", new ModelState() { Value = m.User.Login }) ;
-			ModelState.Add("m.User.Firstname", new ModelState() { Value = m.User.Firstname }) ;
-			ModelState.Add("m.User.Surname", new ModelState() { Value = m.User.Surname }) ;
-			ModelState.Add("m.User.Email", new ModelState() { Value = m.User.Email }) ;
-			ModelState.Add("m.User.GroupId", new ModelState() { Value = m.User.GroupId }) ;
-			ModelState.Add("m.User.IsLocked", new ModelState() { Value = m.User.IsLocked }) ;
-			ModelState.Add("m.User.LockedUntil", new ModelState() { Value = m.User.LockedUntil }) ;
 		}
 	}
 }

@@ -74,5 +74,32 @@ namespace Piranha.Manager.Models
 				return ret ;
 			}
 		}
+
+		/// <summary>
+		/// Validates the current model and stores the result in the model state.
+		/// </summary>
+		/// <param name="state">The model state</param>
+		public void Validate(ModelStateDictionary state) {
+			// Login
+			if (String.IsNullOrEmpty(User.Login))
+				state.AddError("m.User.Login", Piranha.Resources.Settings.LoginRequired) ;
+			else if (User.Login.Length > 64)
+				state.AddError("m.User.Login", Piranha.Resources.Settings.LoginLength) ;
+			// Firstname
+			if (String.IsNullOrEmpty(User.Firstname))
+				state.AddError("m.User.Firstname", Piranha.Resources.Settings.FirstnameRequired) ;
+			else if (User.Firstname.Length > 128)
+				state.AddError("m.User.Firstname", Piranha.Resources.Settings.FirstnameLength) ;
+			// Surname
+			if (String.IsNullOrEmpty(User.Surname))
+				state.AddError("m.User.Surname", Piranha.Resources.Settings.SurnameRequired) ;
+			else if (User.Surname.Length > 128)
+				state.AddError("m.User.Surname", Piranha.Resources.Settings.SurnameLength) ;
+			// Email
+			if (String.IsNullOrEmpty(User.Email))
+				state.AddError("m.User.Email", Piranha.Resources.Settings.EmailRequired) ;
+			else if (User.Email.Length > 128)
+				state.AddError("m.User.Email", Piranha.Resources.Settings.EmailLength) ;
+		}
 	}
 }
