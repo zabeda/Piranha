@@ -217,13 +217,15 @@ namespace Piranha.Models
 						cachename = Extend.Regions.PostRegion.CacheName(Page, reg) ;
 
 					if (!(reg.Body is Extend.Regions.PostRegion)) {
+						object content = reg.Body ;
+
 						// Initialize region
-						var init = reg.Body.GetType().GetMethod("Init") ;
-						if (init != null)
-							init.Invoke(reg.Body, new object[] { this }) ;
+						var getContent = reg.Body.GetType().GetMethod("GetContent") ;
+						if (getContent != null)
+							content = getContent.Invoke(reg.Body, new object[] { this }) ;
 
 						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
-							((IDictionary<string, object>)Regions)[reg.InternalId] = reg.Body ;
+							((IDictionary<string, object>)Regions)[reg.InternalId] = content ;
 					} else {
 						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
 							((IDictionary<string, object>)Regions)[reg.InternalId] = 
