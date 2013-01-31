@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="WebPages\FormHelper.cs" />
+    <Compile Include="WebPages\HttpPostAttribute.cs" />
     <Compile Include="Web\APIKeyAuthorization.cs" />
     <Compile Include="Web\APIKeys.cs" />
     <Compile Include="Web\AppCommentController.cs" />
