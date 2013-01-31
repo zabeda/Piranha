@@ -1,6 +1,7 @@
 ﻿@* Generator: WebPage *@
 
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.ParamListModel>
+@using Piranha.Manager
 @{
     Page.Title = @Piranha.Resources.Settings.ListTitleParams ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
@@ -57,16 +58,11 @@
                 <td class="created">@param.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     @if (!param.IsLocked) {
-                    <a class="icon delete" href="@Href("~/manager/param/delete/" + param.Id)"></a>
+                    <a class="icon delete" href="@Href("~/manager/param/edit/delete/" + param.Id)"></a>
                     }
                 </td>
             </tr>
             }
         </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6"></td>
-            </tr>
-        </tfoot>
     </table>
 </div>

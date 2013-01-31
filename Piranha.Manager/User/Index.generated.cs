@@ -365,7 +365,7 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
             
             #line 67 "..\..\User\Index.cshtml"
-                                            Write(Href("~/manager/user/delete/" + user.Id));
+                                            Write(Href("~/manager/user/edit/delete/" + user.Id));
 
             
             #line default

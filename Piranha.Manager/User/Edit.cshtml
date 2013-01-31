@@ -10,9 +10,13 @@
     <div class="inner">
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
-            <li><a href="@Href("~/manager/user/delete/" + Model.User.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            @if (Model.User.Id != Guid.Empty) {
+            <li><a href="@Href("~/manager/user/edit/delete/" + Model.User.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            }
             <li><a href="@Href("~/manager/user")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            @if (Model.User.Id != Guid.Empty) {
             <li><a href="@Href("~/manager/user/edit/" + Model.User.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            }
         </ul>
         <div class="clear"></div>
     </div>

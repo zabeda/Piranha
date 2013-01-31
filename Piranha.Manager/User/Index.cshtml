@@ -64,7 +64,7 @@
                 <td class="created">@user.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     @if (User.IsMember(user.GroupId.Value)) {
-                    <a class="icon delete" href="@Href("~/manager/user/delete/" + user.Id)"></a>
+                    <a class="icon delete" href="@Href("~/manager/user/edit/delete/" + user.Id)"></a>
                     }
                 </td>
             </tr>

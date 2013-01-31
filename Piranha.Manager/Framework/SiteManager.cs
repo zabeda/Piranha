@@ -60,10 +60,17 @@ namespace Piranha.Manager
 					.ForMember(u => u.Password, o => o.Ignore()) ;
 				Mapper.CreateMap<Entities.Permission, Entities.Permission>()
 					.ForMember(p => p.Id, o => o.Ignore())
+					.ForMember(p => p.IsLocked, o => o.Ignore())
 					.ForMember(p => p.Created, o => o.Ignore())
 					.ForMember(p => p.CreatedById, o => o.Ignore())
 					.ForMember(p => p.Updated, o => o.Ignore())
 					.ForMember(p => p.UpdatedById, o => o.Ignore()) ;
+				Mapper.CreateMap<Entities.Param, Entities.Param>()
+					.ForMember(p => p.Id, o => o.Ignore())
+					.ForMember(p => p.Created, o => o.Ignore())
+					.ForMember(p => p.CreatedById, o => o.Ignore())
+					.ForMember(p => p.Updated, o => o.Ignore())
+					.ForMember(p => p.UpdatedBy, o => o.Ignore()) ;
 				Mapper.AssertConfigurationIsValid() ;
 
 				Initialized = true ;

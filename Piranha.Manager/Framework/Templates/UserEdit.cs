@@ -12,6 +12,7 @@ namespace Piranha.Manager.Templates
 	/// <summary>
 	/// Page template for the user edit view.
 	/// </summary>
+	[Access(Function="ADMIN_USER", RedirectUrl="~/manager/account")]
 	public abstract class UserEdit : Piranha.WebPages.ContentPage<UserEditModel>
 	{
 		/// <summary>
@@ -42,6 +43,18 @@ namespace Piranha.Manager.Templates
 					this.SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
 				else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
 			}
+		}
+
+		/// <summary>
+		/// Deletes the model with the given id.
+		/// </summary>
+		/// <param name="id">The id</param>
+		public void Delete(string id) {
+			Model = UserEditModel.GetById(new Guid(id)) ;
+
+			if (Model.Delete())
+				Response.Redirect("~/manager/user?msg=deleted") ;
+			else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
 		}
 	}
 }

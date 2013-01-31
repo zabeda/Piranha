@@ -78,8 +78,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\Extensions.cs" />
+    <Compile Include="Framework\Models\ParamEditModel.cs" />
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
+    <Compile Include="Framework\Templates\ParamEdit.cs" />
     <Compile Include="Param\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

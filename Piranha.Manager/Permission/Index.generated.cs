@@ -275,7 +275,7 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
             
             #line 64 "..\..\Permission\Index.cshtml"
-                                            Write(Href("~/manager/permission/delete/" + permission.Id));
+                                            Write(Href("~/manager/permission/edit/delete/" + permission.Id));
 
             
             #line default

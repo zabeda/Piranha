@@ -76,6 +76,17 @@ namespace Piranha.Manager.Models
 		}
 
 		/// <summary>
+		/// Deletes the current edit model.
+		/// </summary>
+		/// <returns>Weather the database was updated</returns>
+		public bool Delete() {
+			using (var db = new DataContext()) {
+				User.Attach(db, EntityState.Deleted) ;
+				return db.SaveChanges() > 0 ;
+			}
+		}
+
+		/// <summary>
 		/// Validates the current model and stores the result in the model state.
 		/// </summary>
 		/// <param name="state">The model state</param>

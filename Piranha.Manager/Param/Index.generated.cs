@@ -24,6 +24,12 @@ namespace Piranha.Manager.Param
     using System.Web.WebPages;
     using System.Web.WebPages.Html;
     
+    #line 4 "..\..\Param\Index.cshtml"
+    using Piranha.Manager;
+    
+    #line default
+    #line hidden
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Param/Index.cshtml")]
     public class Index : Piranha.WebPages.ContentPage<Piranha.Manager.Models.ParamListModel>
@@ -46,8 +52,9 @@ WriteLiteral("\r\n\r\n");
 
 
 
+
             
-            #line 4 "..\..\Param\Index.cshtml"
+            #line 5 "..\..\Param\Index.cshtml"
   
     Page.Title = @Piranha.Resources.Settings.ListTitleParams ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
@@ -98,7 +105,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 34 "..\..\Param\Index.cshtml"
+            #line 35 "..\..\Param\Index.cshtml"
                              Write(Href("~/manager/param/edit"));
 
             
@@ -108,7 +115,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 34 "..\..\Param\Index.cshtml"
+            #line 35 "..\..\Param\Index.cshtml"
                                                                         Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -118,7 +125,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 35 "..\..\Param\Index.cshtml"
+            #line 36 "..\..\Param\Index.cshtml"
                     Write(Href("~/manager/param"));
 
             
@@ -128,7 +135,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 35 "..\..\Param\Index.cshtml"
+            #line 36 "..\..\Param\Index.cshtml"
                                                               Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -138,7 +145,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\"></b
 
 
             
-            #line 37 "..\..\Param\Index.cshtml"
+            #line 38 "..\..\Param\Index.cshtml"
                                    Write(Html.TextBox("search"));
 
             
@@ -154,7 +161,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"list
 
 
             
-            #line 46 "..\..\Param\Index.cshtml"
+            #line 47 "..\..\Param\Index.cshtml"
                                                        Write(Piranha.Resources.Global.Name);
 
             
@@ -165,7 +172,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 47 "..\..\Param\Index.cshtml"
+            #line 48 "..\..\Param\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -176,7 +183,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 48 "..\..\Param\Index.cshtml"
+            #line 49 "..\..\Param\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -187,7 +194,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 53 "..\..\Param\Index.cshtml"
+            #line 54 "..\..\Param\Index.cshtml"
              foreach (var param in Model.Params) {
 
             
@@ -197,7 +204,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
 
             
-            #line 55 "..\..\Param\Index.cshtml"
+            #line 56 "..\..\Param\Index.cshtml"
                                      Write(Href("~/manager/param/edit/" + param.Id));
 
             
@@ -207,7 +214,7 @@ WriteLiteral("\">");
 
 
             
-            #line 55 "..\..\Param\Index.cshtml"
+            #line 56 "..\..\Param\Index.cshtml"
                                                                                 Write(param.Name);
 
             
@@ -217,7 +224,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 56 "..\..\Param\Index.cshtml"
+            #line 57 "..\..\Param\Index.cshtml"
                                Write(param.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -227,7 +234,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 57 "..\..\Param\Index.cshtml"
+            #line 58 "..\..\Param\Index.cshtml"
                                Write(param.Created.ToString("yyyy-MM-dd"));
 
             
@@ -237,7 +244,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n");
 
 
             
-            #line 59 "..\..\Param\Index.cshtml"
+            #line 60 "..\..\Param\Index.cshtml"
                      if (!param.IsLocked) {
 
             
@@ -247,8 +254,8 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
 
             
-            #line 60 "..\..\Param\Index.cshtml"
-                                            Write(Href("~/manager/param/delete/" + param.Id));
+            #line 61 "..\..\Param\Index.cshtml"
+                                            Write(Href("~/manager/param/edit/delete/" + param.Id));
 
             
             #line default
@@ -257,7 +264,7 @@ WriteLiteral("\"></a>\r\n");
 
 
             
-            #line 61 "..\..\Param\Index.cshtml"
+            #line 62 "..\..\Param\Index.cshtml"
                     }
 
             
@@ -267,14 +274,13 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 64 "..\..\Param\Index.cshtml"
+            #line 65 "..\..\Param\Index.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral("        </tbody>\r\n        <tfoot>\r\n            <tr>\r\n                <td colspan=" +
-"\"6\"></td>\r\n            </tr>\r\n        </tfoot>\r\n    </table>\r\n</div>");
+WriteLiteral("        </tbody>\r\n    </table>\r\n</div>");
 
 
         }

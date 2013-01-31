@@ -10,6 +10,7 @@ namespace Piranha.Manager.Templates
 	/// <summary>
 	/// Page template for the permission edit view.
 	/// </summary>
+	[Access(Function="ADMIN_ACCESS", RedirectUrl="~/manager/account")]
 	public abstract class PermissionEdit : Piranha.WebPages.ContentPage<Models.PermissionEditModel>
 	{
 		/// <summary>

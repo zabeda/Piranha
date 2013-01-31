@@ -61,7 +61,7 @@
                 <td class="created">@permission.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     @if (!permission.IsLocked) {
-                    <a class="icon delete" href="@Href("~/manager/permission/delete/" + permission.Id)"></a>
+                    <a class="icon delete" href="@Href("~/manager/permission/edit/delete/" + permission.Id)"></a>
                     }
                 </td>
             </tr>

@@ -73,12 +73,22 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
             
             #line default
             #line hidden
-WriteLiteral("</a></li>\r\n            <li><a href=\"");
+WriteLiteral("</a></li>\r\n");
 
 
             
             #line 13 "..\..\User\Edit.cshtml"
-                    Write(Href("~/manager/user/delete/" + Model.User.Id));
+             if (Model.User.Id != Guid.Empty) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <li><a href=\"");
+
+
+            
+            #line 14 "..\..\User\Edit.cshtml"
+                    Write(Href("~/manager/user/edit/delete/" + Model.User.Id));
 
             
             #line default
@@ -87,17 +97,27 @@ WriteLiteral("\" class=\"delete\">");
 
 
             
-            #line 13 "..\..\User\Edit.cshtml"
-                                                                                    Write(Piranha.Resources.Global.ToolbarDelete);
+            #line 14 "..\..\User\Edit.cshtml"
+                                                                                         Write(Piranha.Resources.Global.ToolbarDelete);
 
             
             #line default
             #line hidden
-WriteLiteral("</a></li>\r\n            <li><a href=\"");
+WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 14 "..\..\User\Edit.cshtml"
+            #line 15 "..\..\User\Edit.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <li><a href=\"");
+
+
+            
+            #line 16 "..\..\User\Edit.cshtml"
                     Write(Href("~/manager/user"));
 
             
@@ -107,17 +127,27 @@ WriteLiteral("\" class=\"back\">");
 
 
             
-            #line 14 "..\..\User\Edit.cshtml"
+            #line 16 "..\..\User\Edit.cshtml"
                                                           Write(Piranha.Resources.Global.ToolbarBack);
 
             
             #line default
             #line hidden
-WriteLiteral("</a></li>\r\n            <li><a href=\"");
+WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 15 "..\..\User\Edit.cshtml"
+            #line 17 "..\..\User\Edit.cshtml"
+             if (Model.User.Id != Guid.Empty) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <li><a href=\"");
+
+
+            
+            #line 18 "..\..\User\Edit.cshtml"
                     Write(Href("~/manager/user/edit/" + Model.User.Id));
 
             
@@ -127,14 +157,23 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 15 "..\..\User\Edit.cshtml"
+            #line 18 "..\..\User\Edit.cshtml"
                                                                                    Write(Piranha.Resources.Global.ToolbarReload);
 
             
             #line default
             #line hidden
-WriteLiteral("</a></li>\r\n        </ul>\r\n        <div class=\"clear\"></div>\r\n    </div>\r\n</div>\r\n" +
-"");
+WriteLiteral("</a></li>\r\n");
+
+
+            
+            #line 19 "..\..\User\Edit.cshtml"
+            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        </ul>\r\n        <div class=\"clear\"></div>\r\n    </div>\r\n</div>\r\n");
 
 
 });
@@ -148,7 +187,7 @@ WriteLiteral("\r\n    <script type=\"text/javascript\" src=\"");
 
 
             
-            #line 22 "..\..\User\Edit.cshtml"
+            #line 26 "..\..\User\Edit.cshtml"
                                    Write(Href("~/manager/content/js/ext/jquery-ui-1.9.2.custom.min.js"));
 
             
@@ -186,7 +225,7 @@ WriteLiteral("\r\n<form method=\"post\">\r\n");
 
 
             
-            #line 47 "..\..\User\Edit.cshtml"
+            #line 51 "..\..\User\Edit.cshtml"
 Write(UI.FormAction("Save"));
 
             
@@ -196,7 +235,7 @@ WriteLiteral("\r\n");
 
 
             
-            #line 48 "..\..\User\Edit.cshtml"
+            #line 52 "..\..\User\Edit.cshtml"
 Write(Html.Hidden("m.User.Id", Model.User.Id));
 
             
@@ -206,7 +245,7 @@ WriteLiteral("\r\n<div class=\"grid_9\">\r\n    <div class=\"box\">\r\n        <
 
 
             
-            #line 51 "..\..\User\Edit.cshtml"
+            #line 55 "..\..\User\Edit.cshtml"
                           Write(Piranha.Resources.Settings.UserInfo);
 
             
@@ -217,7 +256,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
 
             
-            #line 55 "..\..\User\Edit.cshtml"
+            #line 59 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Settings.Login));
 
             
@@ -227,7 +266,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 57 "..\..\User\Edit.cshtml"
+            #line 61 "..\..\User\Edit.cshtml"
                    Write(Form.TextBoxFor(m => m.User.Login));
 
             
@@ -237,7 +276,7 @@ WriteLiteral("</div>\r\n                    ");
 
 
             
-            #line 58 "..\..\User\Edit.cshtml"
+            #line 62 "..\..\User\Edit.cshtml"
                Write(Html.ValidationMessage("m.User.Login"));
 
             
@@ -247,7 +286,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 61 "..\..\User\Edit.cshtml"
+            #line 65 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Settings.Firstname));
 
             
@@ -257,7 +296,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 63 "..\..\User\Edit.cshtml"
+            #line 67 "..\..\User\Edit.cshtml"
                    Write(Form.TextBoxFor(m => m.User.Firstname));
 
             
@@ -267,7 +306,7 @@ WriteLiteral("</div>\r\n                    ");
 
 
             
-            #line 64 "..\..\User\Edit.cshtml"
+            #line 68 "..\..\User\Edit.cshtml"
                Write(Html.ValidationMessage("m.User.Firstname"));
 
             
@@ -277,7 +316,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 67 "..\..\User\Edit.cshtml"
+            #line 71 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Settings.Surname));
 
             
@@ -287,7 +326,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 69 "..\..\User\Edit.cshtml"
+            #line 73 "..\..\User\Edit.cshtml"
                    Write(Form.TextBoxFor(m => m.User.Surname));
 
             
@@ -297,7 +336,7 @@ WriteLiteral("</div>\r\n                    ");
 
 
             
-            #line 70 "..\..\User\Edit.cshtml"
+            #line 74 "..\..\User\Edit.cshtml"
                Write(Html.ValidationMessage("m.User.Surname"));
 
             
@@ -307,7 +346,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 73 "..\..\User\Edit.cshtml"
+            #line 77 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Settings.Email));
 
             
@@ -317,7 +356,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 75 "..\..\User\Edit.cshtml"
+            #line 79 "..\..\User\Edit.cshtml"
                    Write(Form.TextBoxFor(m => m.User.Email));
 
             
@@ -327,7 +366,7 @@ WriteLiteral("</div>\r\n                    ");
 
 
             
-            #line 76 "..\..\User\Edit.cshtml"
+            #line 80 "..\..\User\Edit.cshtml"
                Write(Html.ValidationMessage("m.User.Email"));
 
             
@@ -337,7 +376,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 79 "..\..\User\Edit.cshtml"
+            #line 83 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Settings.GroupName));
 
             
@@ -347,7 +386,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 81 "..\..\User\Edit.cshtml"
+            #line 85 "..\..\User\Edit.cshtml"
                    Write(Html.DropDownList("m.User.GroupId", Model.Groups, Model.User.GroupId));
 
             
@@ -358,7 +397,7 @@ WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </
 
 
             
-            #line 87 "..\..\User\Edit.cshtml"
+            #line 91 "..\..\User\Edit.cshtml"
                           Write(Piranha.Resources.Settings.Account);
 
             
@@ -369,7 +408,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
 
             
-            #line 90 "..\..\User\Edit.cshtml"
+            #line 94 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Settings.Locked));
 
             
@@ -379,7 +418,7 @@ WriteLiteral("\r\n                    <p>");
 
 
             
-            #line 91 "..\..\User\Edit.cshtml"
+            #line 95 "..\..\User\Edit.cshtml"
                   Write(Html.CheckBox("m.User.IsLocked", ModelState["m.User.IsLocked"].Value));
 
             
@@ -389,7 +428,7 @@ WriteLiteral(" (");
 
 
             
-            #line 91 "..\..\User\Edit.cshtml"
+            #line 95 "..\..\User\Edit.cshtml"
                                                                                           Write(Piranha.Resources.Settings.LockedInfo);
 
             
@@ -408,7 +447,7 @@ WriteLiteral("\r\n</div>\r\n<div class=\"grid_3\">\r\n    <div class=\"box\">\r\
 
 
             
-            #line 106 "..\..\User\Edit.cshtml"
+            #line 110 "..\..\User\Edit.cshtml"
                            Write(Model.User.Id == Guid.Empty ? @Piranha.Resources.Settings.CreatePassword : @Piranha.Resources.Settings.ChangePassword);
 
             
@@ -419,7 +458,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
 
             
-            #line 110 "..\..\User\Edit.cshtml"
+            #line 114 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Global.Password));
 
             
@@ -429,7 +468,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 112 "..\..\User\Edit.cshtml"
+            #line 116 "..\..\User\Edit.cshtml"
                    Write(Html.Password("m.Password.Password"));
 
             
@@ -439,7 +478,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n       
 
 
             
-            #line 115 "..\..\User\Edit.cshtml"
+            #line 119 "..\..\User\Edit.cshtml"
                Write(Html.Label(@Piranha.Resources.Global.Confirm));
 
             
@@ -449,7 +488,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
 
             
-            #line 117 "..\..\User\Edit.cshtml"
+            #line 121 "..\..\User\Edit.cshtml"
                    Write(Html.Password("m.Password.PasswordConfirm"));
 
             
@@ -459,7 +498,7 @@ WriteLiteral("</div>\r\n                    ");
 
 
             
-            #line 118 "..\..\User\Edit.cshtml"
+            #line 122 "..\..\User\Edit.cshtml"
                Write(Html.ValidationMessage("m.Password.PasswordConfirm"));
 
             
