@@ -44,12 +44,18 @@ namespace Piranha.WebPages
 		protected override void InitializePage() {
 			base.InitializePage() ;
 
+			// First check permissions for the entire page
+			this.GetType().CheckAccess() ;
+
 			var invoked = false ;
 			if (!Config.DisableMethodBinding) {
 				if (!IsPost) {
 					if (UrlData.Count > 0) {
 						var m = this.GetType().GetMethod(UrlData[0], BindingFlags.Public|BindingFlags.Instance|BindingFlags.IgnoreCase) ;
 						if (m != null) {
+							// Check permissions
+							m.CheckAccess() ;
+
 							var parameters = m.GetParameters() ;
 							var input = new List<object>() ;
 
@@ -79,17 +85,10 @@ namespace Piranha.WebPages
 			        MethodInfo m = GetType().GetMethod(Request.Form["piranha_form_action"],
 			            BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance|BindingFlags.IgnoreCase);
 			        if (m != null) {
-			            // Check for access rules
-			            var access = m.GetCustomAttribute<AccessAttribute>(true) ;
-			            if (access != null) {
-			                if (!User.HasAccess(access.Function)) {
-			                    SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
-			                    if (param != null)
-			                        Response.Redirect(param.Value) ;
-			                    else Response.Redirect("~/") ;
-			                }
-			            }
-			            // Bind model
+			            // Check permissions
+						m.CheckAccess() ;
+
+						// Bind model
 			            List<object> args = new List<object>() ;
 			            foreach (var param in m.GetParameters())
 			                args.Add(ModelBinder.BindModel(param.ParameterType, param.Name, "", ModelState)) ;

@@ -221,6 +221,47 @@ public static class PiranhaApp
 			return IsMember(p, g.Id) ;
 		return false ;
 	}
+
+	/// <summary>
+	/// Checks if the current user has access to the method. If the user is not
+	/// authorized he/she is redirect to the correct url.
+	/// </summary>
+	/// <param name="m">The method</param>
+	public static void CheckAccess(this MethodInfo m) {
+		CheckAccess(HttpContext.Current.User, m.GetCustomAttribute<Piranha.AccessAttribute>(true)) ;
+
+	}
+
+	/// <summary>
+	/// Checks if the current user has access to the method. If the user is not
+	/// authorized he/she is redirect to the correct url.
+	/// </summary>
+	/// <param name="m">The method</param>
+	public static void CheckAccess(this Type t) {
+		CheckAccess(HttpContext.Current.User, t.GetCustomAttribute<Piranha.AccessAttribute>(true)) ;
+
+	}
+
+	/// <summary>
+	/// Checks the given users access to the permissions specified in the given
+	/// access attribute.
+	/// </summary>
+	/// <param name="user">The user</param>
+	/// <param name="access">The attribute</param>
+	private static void CheckAccess(IPrincipal user, Piranha.AccessAttribute access) {
+		if (access != null) {
+			if (!user.HasAccess(access.Function)) {
+				if (!String.IsNullOrEmpty(access.RedirectUrl)) {
+					HttpContext.Current.Response.Redirect(access.RedirectUrl) ;
+				} else {
+					SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
+					if (param != null)
+						HttpContext.Current.Response.Redirect(param.Value) ;
+					else HttpContext.Current.Response.Redirect("~/") ;
+				}
+			}
+		}
+	}
 	#endregion
 
 	#region Entity extensions
