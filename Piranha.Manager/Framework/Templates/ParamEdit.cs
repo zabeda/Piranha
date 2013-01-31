@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using Piranha.Manager.Models;
+using Piranha.WebPages;
 
 namespace Piranha.Manager.Templates
 {
@@ -32,6 +33,7 @@ namespace Piranha.Manager.Templates
 		/// Saves the given edit model.
 		/// </summary>
 		/// <param name="m">The model</param>
+		[HttpPost()]
 		public void Save(ParamEditModel m) {
 			Model = m ;
 			Page.Title = Piranha.Resources.Settings.EditTitleExistingParam ;

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.WebPages.Html;
 
 using Piranha.Manager.Models;
+using Piranha.WebPages;
 
 namespace Piranha.Manager.Templates
 {
@@ -34,6 +35,7 @@ namespace Piranha.Manager.Templates
 		/// Saves the given user model.
 		/// </summary>
 		/// <param name="m">The model</param>
+		[HttpPost()]
 		public void Save(UserEditModel m) {
 			Model = m ;
 			Page.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
