@@ -419,7 +419,7 @@ WriteLiteral("\r\n                    <p>");
 
             
             #line 95 "..\..\User\Edit.cshtml"
-                  Write(Html.CheckBox("m.User.IsLocked", ModelState["m.User.IsLocked"].Value));
+                  Write(Form.CheckBoxFor(m => m.User.IsLocked));
 
             
             #line default
@@ -429,7 +429,7 @@ WriteLiteral(" (");
 
             
             #line 95 "..\..\User\Edit.cshtml"
-                                                                                          Write(Piranha.Resources.Settings.LockedInfo);
+                                                           Write(Piranha.Resources.Settings.LockedInfo);
 
             
             #line default

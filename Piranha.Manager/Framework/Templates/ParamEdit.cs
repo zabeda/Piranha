@@ -38,10 +38,14 @@ namespace Piranha.Manager.Templates
 			Model = m ;
 			Page.Title = Piranha.Resources.Settings.EditTitleExistingParam ;
 
-			if (ModelState.IsValid) {
-				if (m.Save())
-					this.SuccessMessage(Piranha.Resources.Settings.MessageParamSaved) ;
-				else this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotSaved) ;
+			try {
+				if (ModelState.IsValid) {
+					if (m.Save())
+						this.SuccessMessage(Piranha.Resources.Settings.MessageParamSaved) ;
+					else this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotSaved) ;
+				}
+			} catch {
+				this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotSaved) ;
 			}
 		}
 
@@ -49,12 +53,23 @@ namespace Piranha.Manager.Templates
 		/// Deletes the model with the given id.
 		/// </summary>
 		/// <param name="id">The id</param>
-		public void Delete(string id) {
+		/// <param name="fromList">Weather the call came from the list</param>
+		public void Delete(string id, bool fromList = false) {
 			Model = ParamEditModel.GetById(new Guid(id)) ;
 
-			if (Model.Delete())
-				Response.Redirect("~/manager/param?msg=deleted") ;
-			else this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
+			try {
+				if (Model.Delete())
+					Response.Redirect("~/manager/param?msg=deleted") ;
+				else {
+					if (fromList)
+						Response.Redirect("~/manager/param?msg=notdeleted") ;
+					else this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
+				}
+			} catch {
+				if (fromList)
+					Response.Redirect("~/manager/param?msg=notdeleted") ;
+				else this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
+			}
 		}
 	}
 }

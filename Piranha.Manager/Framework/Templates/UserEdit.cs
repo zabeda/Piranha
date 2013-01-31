@@ -40,10 +40,14 @@ namespace Piranha.Manager.Templates
 			Model = m ;
 			Page.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 
-			if (ModelState.IsValid) {
-				if (m.Save())
-					this.SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
-				else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
+			try {
+				if (ModelState.IsValid) {
+					if (m.Save())
+						this.SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
+					else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
+				}
+			} catch {
+				this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
 			}
 		}
 
@@ -51,12 +55,23 @@ namespace Piranha.Manager.Templates
 		/// Deletes the model with the given id.
 		/// </summary>
 		/// <param name="id">The id</param>
-		public void Delete(string id) {
+		/// <param name="fromList">Weather the call came from the list</param>
+		public void Delete(string id, bool fromList = false) {
 			Model = UserEditModel.GetById(new Guid(id)) ;
-
-			if (Model.Delete())
-				Response.Redirect("~/manager/user?msg=deleted") ;
-			else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+			
+			try {
+				if (Model.Delete()) {
+					Response.Redirect("~/manager/user?msg=deleted") ;
+				} else { 
+					if (fromList)
+						Response.Redirect("~/manager/user?msg=notdeleted") ;
+					else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+				}
+			} catch {
+				if (fromList)
+					Response.Redirect("~/manager/user?msg=notdeleted") ;
+				else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+			}
 		}
 	}
 }

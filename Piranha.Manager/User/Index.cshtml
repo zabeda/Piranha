@@ -1,8 +1,19 @@
 ﻿@* Generator: WebPage *@
+
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.UserListModel>
+@using Piranha.Manager
 @{
     Page.Title = @Piranha.Resources.Settings.ListTitleUsers ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    var msg = Request["msg"] ;
+    if (!String.IsNullOrEmpty(msg)) {
+        if (msg.ToLower() == "deleted") {
+            this.SuccessMessage(Piranha.Resources.Settings.MessageUserDeleted) ;
+        } else if (msg.ToLower() == "notdeleted") {
+            this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+        }
+    }
 }
 @section Head {
     <script type="text/javascript">
@@ -64,7 +75,7 @@
                 <td class="created">@user.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     @if (User.IsMember(user.GroupId.Value)) {
-                    <a class="icon delete" href="@Href("~/manager/user/edit/delete/" + user.Id)"></a>
+                    <a class="icon delete" href="@Href("~/manager/user/edit/delete/" + user.Id + "/true")"></a>
                     }
                 </td>
             </tr>

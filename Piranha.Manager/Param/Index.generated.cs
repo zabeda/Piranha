@@ -63,6 +63,8 @@ WriteLiteral("\r\n\r\n");
     if (!String.IsNullOrEmpty(msg)) {
         if (msg.ToLower() == "deleted") {
             this.SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
+        } else if (msg.ToLower() == "notdeleted") {
+            this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
         }
     }
 
@@ -105,7 +107,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 35 "..\..\Param\Index.cshtml"
+            #line 37 "..\..\Param\Index.cshtml"
                              Write(Href("~/manager/param/edit"));
 
             
@@ -115,7 +117,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 35 "..\..\Param\Index.cshtml"
+            #line 37 "..\..\Param\Index.cshtml"
                                                                         Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -125,7 +127,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 36 "..\..\Param\Index.cshtml"
+            #line 38 "..\..\Param\Index.cshtml"
                     Write(Href("~/manager/param"));
 
             
@@ -135,7 +137,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 36 "..\..\Param\Index.cshtml"
+            #line 38 "..\..\Param\Index.cshtml"
                                                               Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -145,7 +147,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\"></b
 
 
             
-            #line 38 "..\..\Param\Index.cshtml"
+            #line 40 "..\..\Param\Index.cshtml"
                                    Write(Html.TextBox("search"));
 
             
@@ -161,7 +163,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"list
 
 
             
-            #line 47 "..\..\Param\Index.cshtml"
+            #line 49 "..\..\Param\Index.cshtml"
                                                        Write(Piranha.Resources.Global.Name);
 
             
@@ -172,7 +174,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 48 "..\..\Param\Index.cshtml"
+            #line 50 "..\..\Param\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -183,7 +185,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 49 "..\..\Param\Index.cshtml"
+            #line 51 "..\..\Param\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -194,7 +196,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 54 "..\..\Param\Index.cshtml"
+            #line 56 "..\..\Param\Index.cshtml"
              foreach (var param in Model.Params) {
 
             
@@ -204,7 +206,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
 
             
-            #line 56 "..\..\Param\Index.cshtml"
+            #line 58 "..\..\Param\Index.cshtml"
                                      Write(Href("~/manager/param/edit/" + param.Id));
 
             
@@ -214,7 +216,7 @@ WriteLiteral("\">");
 
 
             
-            #line 56 "..\..\Param\Index.cshtml"
+            #line 58 "..\..\Param\Index.cshtml"
                                                                                 Write(param.Name);
 
             
@@ -224,7 +226,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 57 "..\..\Param\Index.cshtml"
+            #line 59 "..\..\Param\Index.cshtml"
                                Write(param.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -234,7 +236,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 58 "..\..\Param\Index.cshtml"
+            #line 60 "..\..\Param\Index.cshtml"
                                Write(param.Created.ToString("yyyy-MM-dd"));
 
             
@@ -244,7 +246,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n");
 
 
             
-            #line 60 "..\..\Param\Index.cshtml"
+            #line 62 "..\..\Param\Index.cshtml"
                      if (!param.IsLocked) {
 
             
@@ -254,8 +256,8 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
 
             
-            #line 61 "..\..\Param\Index.cshtml"
-                                            Write(Href("~/manager/param/edit/delete/" + param.Id));
+            #line 63 "..\..\Param\Index.cshtml"
+                                            Write(Href("~/manager/param/edit/delete/" + param.Id + "/true"));
 
             
             #line default
@@ -264,7 +266,7 @@ WriteLiteral("\"></a>\r\n");
 
 
             
-            #line 62 "..\..\Param\Index.cshtml"
+            #line 64 "..\..\Param\Index.cshtml"
                     }
 
             
@@ -274,7 +276,7 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 65 "..\..\Param\Index.cshtml"
+            #line 67 "..\..\Param\Index.cshtml"
             }
 
             

@@ -92,7 +92,7 @@
         <div class="inner">
             <ul class="form">
                 <li>@Html.Label(@Piranha.Resources.Settings.Locked)
-                    <p>@Html.CheckBox("m.User.IsLocked", ModelState["m.User.IsLocked"].Value) (@Piranha.Resources.Settings.LockedInfo)</p>
+                    <p>@Form.CheckBoxFor(m => m.User.IsLocked) (@Piranha.Resources.Settings.LockedInfo)</p>
                 </li>
                 @*<li>@Html.Label(@Piranha.Resources.Settings.LockedUntil)
                     <div class="input datepicker">

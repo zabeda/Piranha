@@ -10,6 +10,8 @@
     if (!String.IsNullOrEmpty(msg)) {
         if (msg.ToLower() == "deleted") {
             this.SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
+        } else if (msg.ToLower() == "notdeleted") {
+            this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
         }
     }
 }
@@ -58,7 +60,7 @@
                 <td class="created">@param.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
                     @if (!param.IsLocked) {
-                    <a class="icon delete" href="@Href("~/manager/param/edit/delete/" + param.Id)"></a>
+                    <a class="icon delete" href="@Href("~/manager/param/edit/delete/" + param.Id + "/true")"></a>
                     }
                 </td>
             </tr>
