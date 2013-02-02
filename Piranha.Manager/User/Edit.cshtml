@@ -56,33 +56,33 @@
         <div class="inner">
             <ul class="form">
                 <li>
-                    @Html.Label(@Piranha.Resources.Settings.Login)
+                    @Form.LabelFor(m => m.User.Login, @Piranha.Resources.Settings.Login)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Login)</div>
-                    @Html.ValidationMessage("m.User.Login")
+                    @Form.ValidationMessageFor(m => m.User.Login)
                 </li>
                 <li>
-                    @Html.Label(@Piranha.Resources.Settings.Firstname)
+                    @Form.LabelFor(m => m.User.Firstname, @Piranha.Resources.Settings.Firstname)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Firstname)</div>
-                    @Html.ValidationMessage("m.User.Firstname")
+                    @Form.ValidationMessageFor(m => m.User.Firstname)
                 </li>
                 <li>
-                    @Html.Label(@Piranha.Resources.Settings.Surname)
+                    @Form.LabelFor(m => m.User.Surname, @Piranha.Resources.Settings.Surname)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Surname)</div>
-                    @Html.ValidationMessage("m.User.Surname")
+                    @Form.ValidationMessageFor(m => m.User.Surname)
                 </li>
                 <li>
-                    @Html.Label(@Piranha.Resources.Settings.Email)
+                    @Form.LabelFor(m => m.User.Email, @Piranha.Resources.Settings.Email)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Email)</div>
-                    @Html.ValidationMessage("m.User.Email")
+                    @Form.ValidationMessageFor(m => m.User.Email)
                 </li>
                 <li>
-                    @Html.Label(@Piranha.Resources.Settings.GroupName)
+                    @Form.LabelFor(m => m.User.Group, @Piranha.Resources.Settings.GroupName)
                     <div class="input">
-                        @Html.DropDownList("m.User.GroupId", Model.Groups, Model.User.GroupId)</div>
+                        @Form.DropDownListFor(m => m.User.Group, Model.Groups, Model.User.GroupId)</div>
                 </li>
             </ul>
         </div>
@@ -91,7 +91,7 @@
         <div class="title"><h2>@Piranha.Resources.Settings.Account</h2></div>
         <div class="inner">
             <ul class="form">
-                <li>@Html.Label(@Piranha.Resources.Settings.Locked)
+                <li>@Form.LabelFor(m => m.User.IsLocked, @Piranha.Resources.Settings.Locked)
                     <p>@Form.CheckBoxFor(m => m.User.IsLocked) (@Piranha.Resources.Settings.LockedInfo)</p>
                 </li>
                 @*<li>@Html.Label(@Piranha.Resources.Settings.LockedUntil)
@@ -111,15 +111,15 @@
         <div class="inner">
             <ul class="form">
                 <li>
-                    @Html.Label(@Piranha.Resources.Global.Password)
+                    @Form.LabelFor(m => m.User.Password, @Piranha.Resources.Global.Password)
                     <div class="input">
-                        @Html.Password("m.Password.Password")</div>
+                        @Form.PasswordFor(m => m.User.Password)</div>
                 </li>
                 <li>
-                    @Html.Label(@Piranha.Resources.Global.Confirm)
+                    @Form.LabelFor(m => m.ConfirmPassword, @Piranha.Resources.Global.Confirm)
                     <div class="input">
-                        @Html.Password("m.Password.PasswordConfirm")</div>
-                    @Html.ValidationMessage("m.Password.PasswordConfirm")
+                        @Form.PasswordFor(m => m.ConfirmPassword)</div>
+                    @Form.ValidationMessageFor(m => m.ConfirmPassword)
                 </li>
             </ul>
         </div>

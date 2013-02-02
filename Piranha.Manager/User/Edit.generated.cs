@@ -257,7 +257,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
             
             #line 59 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Settings.Login));
+               Write(Form.LabelFor(m => m.User.Login, @Piranha.Resources.Settings.Login));
 
             
             #line default
@@ -277,7 +277,7 @@ WriteLiteral("</div>\r\n                    ");
 
             
             #line 62 "..\..\User\Edit.cshtml"
-               Write(Html.ValidationMessage("m.User.Login"));
+               Write(Form.ValidationMessageFor(m => m.User.Login));
 
             
             #line default
@@ -287,7 +287,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 65 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Settings.Firstname));
+               Write(Form.LabelFor(m => m.User.Firstname, @Piranha.Resources.Settings.Firstname));
 
             
             #line default
@@ -307,7 +307,7 @@ WriteLiteral("</div>\r\n                    ");
 
             
             #line 68 "..\..\User\Edit.cshtml"
-               Write(Html.ValidationMessage("m.User.Firstname"));
+               Write(Form.ValidationMessageFor(m => m.User.Firstname));
 
             
             #line default
@@ -317,7 +317,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 71 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Settings.Surname));
+               Write(Form.LabelFor(m => m.User.Surname, @Piranha.Resources.Settings.Surname));
 
             
             #line default
@@ -337,7 +337,7 @@ WriteLiteral("</div>\r\n                    ");
 
             
             #line 74 "..\..\User\Edit.cshtml"
-               Write(Html.ValidationMessage("m.User.Surname"));
+               Write(Form.ValidationMessageFor(m => m.User.Surname));
 
             
             #line default
@@ -347,7 +347,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 77 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Settings.Email));
+               Write(Form.LabelFor(m => m.User.Email, @Piranha.Resources.Settings.Email));
 
             
             #line default
@@ -367,7 +367,7 @@ WriteLiteral("</div>\r\n                    ");
 
             
             #line 80 "..\..\User\Edit.cshtml"
-               Write(Html.ValidationMessage("m.User.Email"));
+               Write(Form.ValidationMessageFor(m => m.User.Email));
 
             
             #line default
@@ -377,7 +377,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 83 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Settings.GroupName));
+               Write(Form.LabelFor(m => m.User.Group, @Piranha.Resources.Settings.GroupName));
 
             
             #line default
@@ -387,7 +387,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
             
             #line 85 "..\..\User\Edit.cshtml"
-                   Write(Html.DropDownList("m.User.GroupId", Model.Groups, Model.User.GroupId));
+                   Write(Form.DropDownListFor(m => m.User.Group, Model.Groups, Model.User.GroupId));
 
             
             #line default
@@ -409,7 +409,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
             
             #line 94 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Settings.Locked));
+               Write(Form.LabelFor(m => m.User.IsLocked, @Piranha.Resources.Settings.Locked));
 
             
             #line default
@@ -459,7 +459,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
             
             #line 114 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Global.Password));
+               Write(Form.LabelFor(m => m.User.Password, @Piranha.Resources.Global.Password));
 
             
             #line default
@@ -469,7 +469,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
             
             #line 116 "..\..\User\Edit.cshtml"
-                   Write(Html.Password("m.Password.Password"));
+                   Write(Form.PasswordFor(m => m.User.Password));
 
             
             #line default
@@ -479,7 +479,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n       
 
             
             #line 119 "..\..\User\Edit.cshtml"
-               Write(Html.Label(@Piranha.Resources.Global.Confirm));
+               Write(Form.LabelFor(m => m.ConfirmPassword, @Piranha.Resources.Global.Confirm));
 
             
             #line default
@@ -489,7 +489,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
             
             #line 121 "..\..\User\Edit.cshtml"
-                   Write(Html.Password("m.Password.PasswordConfirm"));
+                   Write(Form.PasswordFor(m => m.ConfirmPassword));
 
             
             #line default
@@ -499,7 +499,7 @@ WriteLiteral("</div>\r\n                    ");
 
             
             #line 122 "..\..\User\Edit.cshtml"
-               Write(Html.ValidationMessage("m.Password.PasswordConfirm"));
+               Write(Form.ValidationMessageFor(m => m.ConfirmPassword));
 
             
             #line default

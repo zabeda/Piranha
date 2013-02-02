@@ -23,6 +23,11 @@ namespace Piranha.Manager.Models
 		public Entities.User User { get ; set ; }
 
 		/// <summary>
+		/// Extra confirmation field for the password.
+		/// </summary>
+		public string ConfirmPassword { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the available groups.
 		/// </summary>
 		public IList<SelectListItem> Groups { get ; set ; }
@@ -111,6 +116,9 @@ namespace Piranha.Manager.Models
 				state.AddError("m.User.Email", Piranha.Resources.Settings.EmailRequired) ;
 			else if (User.Email.Length > 128)
 				state.AddError("m.User.Email", Piranha.Resources.Settings.EmailLength) ;
+			// Password
+			if (!String.IsNullOrEmpty(User.Password) && User.Password != ConfirmPassword)
+				state.AddError("m.ConfirmPassword", Piranha.Resources.Settings.PasswordConfirmError) ;
 		}
 	}
 }

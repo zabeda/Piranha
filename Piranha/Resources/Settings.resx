@@ -327,6 +327,9 @@
   <data name="ParentGroup" xml:space="preserve">
     <value>Parent group</value>
   </data>
+  <data name="PasswordConfirmError" xml:space="preserve">
+    <value>The passwords does not match.</value>
+  </data>
   <data name="Surname" xml:space="preserve">
     <value>Surname</value>
   </data>
