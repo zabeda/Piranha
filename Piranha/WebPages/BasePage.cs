@@ -101,9 +101,11 @@ namespace Piranha.WebPages
 						// Validate model
 						if (!Config.DisableModelStateBinding) {
 							foreach (var arg in args) {
-								var val = arg.GetType().GetMethod("Validate") ;
-								if (val != null)
-									val.Invoke(arg, new object[] { ModelState }) ;
+								if (arg != null) {
+									var val = arg.GetType().GetMethod("Validate") ;
+									if (val != null)
+										val.Invoke(arg, new object[] { ModelState }) ;
+								}
 							}
 						}
 			            m.Invoke(this, args.ToArray()) ;

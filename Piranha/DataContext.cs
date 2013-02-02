@@ -75,6 +75,21 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Logs in the given user with the given apikey when no HttpContext is available.
+		/// </summary>
+		/// <param name="apiKey">The api key</param>
+		/// <returns>If the login was successful</returns>
+		public static bool Login(string apiKey) {
+			var id = Web.APIKeys.GetUserId(apiKey) ;
+
+			if (id.HasValue) {
+				Identity = id.Value ;
+				return true ;
+			}
+			return false ;
+		}
+
+		/// <summary>
 		/// Logs in the default sys user.
 		/// </summary>
 		public static void LoginSys() {
