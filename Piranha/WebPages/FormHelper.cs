@@ -36,6 +36,29 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Renders a label for the the specified model property
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="labelText">The label text</param>
+		/// <returns>The label</returns>
+		public IHtmlString LabelFor<TProperty>(Expression<Func<TModel, TProperty>> expr, string labelText) {
+			return Page.Html.Label(labelText, expr.Body.ToString()) ;
+		}
+
+		/// <summary>
+		/// Renders a label for the the specified model property
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="labelText">The label text</param>
+		/// <param name="htmlAttributes">Additional html attributes</param>
+		/// <returns>The label</returns>
+		public IHtmlString LabelFor<TProperty>(Expression<Func<TModel, TProperty>> expr, string labelText, object htmlAttributes) {
+			return Page.Html.Label(labelText, expr.Body.ToString(), htmlAttributes) ;
+		}
+
+		/// <summary>
 		/// Gets a textbox for the specified model property.
 		/// </summary>
 		/// <typeparam name="TProperty">The property type</typeparam>
