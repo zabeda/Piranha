@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Piranha.Manager.Permission
+namespace Piranha.Manager.Param
 {
     using System;
     using System.Collections.Generic;
@@ -25,8 +25,8 @@ namespace Piranha.Manager.Permission
     using System.Web.WebPages.Html;
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
-    [System.Web.WebPages.PageVirtualPathAttribute("~/Permission/Edit.cshtml")]
-    public class Edit : Piranha.Manager.Templates.PermissionEdit
+    [System.Web.WebPages.PageVirtualPathAttribute("~/Param/Edit.cshtml")]
+    public class Edit : Piranha.Manager.Templates.ParamEdit
     {
 
                 // Resolve package relative syntax
@@ -47,7 +47,7 @@ WriteLiteral("\r\n\r\n");
 
 
             
-            #line 4 "..\..\Permission\Edit.cshtml"
+            #line 4 "..\..\Param\Edit.cshtml"
   
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
 
@@ -67,7 +67,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 12 "..\..\Permission\Edit.cshtml"
+            #line 12 "..\..\Param\Edit.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -77,8 +77,8 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 13 "..\..\Permission\Edit.cshtml"
-             if (Model.Permission.Id != Guid.Empty && !Model.Permission.IsLocked) {
+            #line 13 "..\..\Param\Edit.cshtml"
+             if (Model.Param.Id != Guid.Empty && !Model.Param.IsLocked) {
 
             
             #line default
@@ -87,8 +87,8 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 14 "..\..\Permission\Edit.cshtml"
-                    Write(Href("~/manager/permission/edit/delete/" + Model.Permission.Id));
+            #line 14 "..\..\Param\Edit.cshtml"
+                    Write(Href("~/manager/param/edit/delete/" + Model.Param.Id));
 
             
             #line default
@@ -97,8 +97,8 @@ WriteLiteral("\" class=\"delete\">");
 
 
             
-            #line 14 "..\..\Permission\Edit.cshtml"
-                                                                                                     Write(Piranha.Resources.Global.ToolbarDelete);
+            #line 14 "..\..\Param\Edit.cshtml"
+                                                                                           Write(Piranha.Resources.Global.ToolbarDelete);
 
             
             #line default
@@ -107,7 +107,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 15 "..\..\Permission\Edit.cshtml"
+            #line 15 "..\..\Param\Edit.cshtml"
             }
 
             
@@ -117,8 +117,8 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 16 "..\..\Permission\Edit.cshtml"
-                    Write(Href("~/manager/permission"));
+            #line 16 "..\..\Param\Edit.cshtml"
+                    Write(Href("~/manager/param"));
 
             
             #line default
@@ -127,8 +127,8 @@ WriteLiteral("\" class=\"back\">");
 
 
             
-            #line 16 "..\..\Permission\Edit.cshtml"
-                                                                Write(Piranha.Resources.Global.ToolbarBack);
+            #line 16 "..\..\Param\Edit.cshtml"
+                                                           Write(Piranha.Resources.Global.ToolbarBack);
 
             
             #line default
@@ -137,8 +137,8 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 17 "..\..\Permission\Edit.cshtml"
-             if (Model.Permission.Id != Guid.Empty) {
+            #line 17 "..\..\Param\Edit.cshtml"
+             if (Model.Param.Id != Guid.Empty) {
 
             
             #line default
@@ -147,8 +147,8 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 18 "..\..\Permission\Edit.cshtml"
-                    Write(Href("~/manager/permission/edit/" + Model.Permission.Id));
+            #line 18 "..\..\Param\Edit.cshtml"
+                    Write(Href("~/manager/param/edit/" + Model.Param.Id));
 
             
             #line default
@@ -157,8 +157,8 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 18 "..\..\Permission\Edit.cshtml"
-                                                                                               Write(Piranha.Resources.Global.ToolbarReload);
+            #line 18 "..\..\Param\Edit.cshtml"
+                                                                                     Write(Piranha.Resources.Global.ToolbarReload);
 
             
             #line default
@@ -167,7 +167,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 19 "..\..\Permission\Edit.cshtml"
+            #line 19 "..\..\Param\Edit.cshtml"
             }
 
             
@@ -182,18 +182,8 @@ WriteLiteral("\r\n<form method=\"post\">\r\n");
 
 
             
-            #line 26 "..\..\Permission\Edit.cshtml"
-Write(UI.FormAction("Save"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-
-            
-            #line 27 "..\..\Permission\Edit.cshtml"
-Write(Form.HiddenFor(m => m.Permission.Id));
+            #line 26 "..\..\Param\Edit.cshtml"
+Write(Form.HiddenFor(m => m.Param.Id));
 
             
             #line default
@@ -202,7 +192,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <div class=\"box\">\r\n        
 
 
             
-            #line 30 "..\..\Permission\Edit.cshtml"
+            #line 29 "..\..\Param\Edit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -213,8 +203,8 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
 
             
-            #line 34 "..\..\Permission\Edit.cshtml"
-               Write(Form.LabelFor(m => m.Permission.Name, Piranha.Resources.Settings.AccessName));
+            #line 33 "..\..\Param\Edit.cshtml"
+               Write(Form.LabelFor(m => m.Param.Name, Piranha.Resources.Settings.ParamName));
 
             
             #line default
@@ -223,51 +213,51 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 36 "..\..\Permission\Edit.cshtml"
-                         if (!Model.Permission.IsLocked) {
+            #line 35 "..\..\Param\Edit.cshtml"
+                         if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Permission\Edit.cshtml"
-                       Write(Form.TextBoxFor(m => m.Permission.Name));
+            #line 36 "..\..\Param\Edit.cshtml"
+                       Write(Form.TextBoxFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Permission\Edit.cshtml"
-                                                                    
+            #line 36 "..\..\Param\Edit.cshtml"
+                                                               
                         } else {
                             
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Permission\Edit.cshtml"
-                       Write(Form.TextBoxFor(m => m.Permission.Name, new { disabled = "disabled" }));
+            #line 38 "..\..\Param\Edit.cshtml"
+                       Write(Form.TextBoxFor(m => m.Param.Name, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Permission\Edit.cshtml"
-                                                                                                   
+            #line 38 "..\..\Param\Edit.cshtml"
+                                                                                               
                             
             
             #line default
             #line hidden
             
-            #line 40 "..\..\Permission\Edit.cshtml"
-                       Write(Form.HiddenFor(m => m.Permission.Name));
+            #line 39 "..\..\Param\Edit.cshtml"
+                       Write(Form.HiddenFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 40 "..\..\Permission\Edit.cshtml"
-                                                                   
+            #line 39 "..\..\Param\Edit.cshtml"
+                                                              
                         }
 
             
@@ -277,8 +267,8 @@ WriteLiteral("                    </div>\r\n                    ");
 
 
             
-            #line 43 "..\..\Permission\Edit.cshtml"
-               Write(Form.ValidationMessageFor(m => m.Permission.Name));
+            #line 42 "..\..\Param\Edit.cshtml"
+               Write(Form.ValidationMessageFor(m => m.Param.Name));
 
             
             #line default
@@ -287,38 +277,8 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 46 "..\..\Permission\Edit.cshtml"
-               Write(Form.LabelFor(m => m.Permission.GroupId, Piranha.Resources.Settings.AccessGroup));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                    <div class=\"input\">\r\n                        ");
-
-
-            
-            #line 48 "..\..\Permission\Edit.cshtml"
-                   Write(Form.DropDownListFor(m => m.Permission.GroupId, Model.Groups));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    ");
-
-
-            
-            #line 49 "..\..\Permission\Edit.cshtml"
-               Write(Form.ValidationMessageFor(m => m.Permission.GroupId));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                </li>\r\n                <li>\r\n                    ");
-
-
-            
-            #line 52 "..\..\Permission\Edit.cshtml"
-               Write(Form.LabelFor(m => m.Permission.Description, Piranha.Resources.Settings.AccessDescription));
+            #line 45 "..\..\Param\Edit.cshtml"
+               Write(Form.LabelFor(m => m.Param.Value, Piranha.Resources.Settings.ParamValue));
 
             
             #line default
@@ -327,22 +287,87 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 54 "..\..\Permission\Edit.cshtml"
-                         if (!Model.Permission.IsLocked) {
+            #line 47 "..\..\Param\Edit.cshtml"
+                         if (Model.Param.Name != "SITE_VERSION") {
                             
             
             #line default
             #line hidden
             
-            #line 55 "..\..\Permission\Edit.cshtml"
-                       Write(Form.TextAreaFor(m => m.Permission.Description, 
+            #line 48 "..\..\Param\Edit.cshtml"
+                       Write(Form.TextBoxFor(m => m.Param.Value));
+
+            
+            #line default
+            #line hidden
+            
+            #line 48 "..\..\Param\Edit.cshtml"
+                                                                
+                        } else {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 50 "..\..\Param\Edit.cshtml"
+                       Write(Form.TextBoxFor(m => m.Param.Value, new { @disabled = "disabled" }));
+
+            
+            #line default
+            #line hidden
+            
+            #line 50 "..\..\Param\Edit.cshtml"
+                                                                                                
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 51 "..\..\Param\Edit.cshtml"
+                       Write(Form.HiddenFor(m => m.Param.Value));
+
+            
+            #line default
+            #line hidden
+            
+            #line 51 "..\..\Param\Edit.cshtml"
+                                                               
+                        } 
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    </div>\r\n                </li>\r\n                <li>\r\n        " +
+"            ");
+
+
+            
+            #line 56 "..\..\Param\Edit.cshtml"
+               Write(Form.LabelFor(m => m.Param.Description, Piranha.Resources.Settings.ParamDescription));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    <div class=\"input\">\r\n");
+
+
+            
+            #line 58 "..\..\Param\Edit.cshtml"
+                         if (!Model.Param.IsLocked) {
+                            
+            
+            #line default
+            #line hidden
+            
+            #line 59 "..\..\Param\Edit.cshtml"
+                       Write(Form.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Permission\Edit.cshtml"
+            #line 60 "..\..\Param\Edit.cshtml"
                                                                                                     
                         } else {
                             
@@ -350,37 +375,37 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 58 "..\..\Permission\Edit.cshtml"
-                       Write(Form.TextAreaFor(m => m.Permission.Description, 
+            #line 62 "..\..\Param\Edit.cshtml"
+                       Write(Form.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @disabled = "disabled", @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
             
-            #line 59 "..\..\Permission\Edit.cshtml"
+            #line 63 "..\..\Param\Edit.cshtml"
                                                                                                                             
                             
             
             #line default
             #line hidden
             
-            #line 60 "..\..\Permission\Edit.cshtml"
-                       Write(Form.HiddenFor(m => m.Permission.Description));
+            #line 64 "..\..\Param\Edit.cshtml"
+                       Write(Form.HiddenFor(m => m.Param.Description));
 
             
             #line default
             #line hidden
             
-            #line 60 "..\..\Permission\Edit.cshtml"
-                                                                          
+            #line 64 "..\..\Param\Edit.cshtml"
+                                                                     
                         }
 
             
             #line default
             #line hidden
 WriteLiteral("                    </div>\r\n                </li>\r\n            </ul>\r\n        </d" +
-"iv>\r\n    </div>\r\n</div>\r\n</form>");
+"iv>\r\n    </div>\r\n</div>\r\n</form>\r\n");
 
 
         }

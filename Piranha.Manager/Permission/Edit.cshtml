@@ -25,14 +25,13 @@
 <form method="post">
 @UI.FormAction("Save")
 @Form.HiddenFor(m => m.Permission.Id)
-@Form.HiddenFor(m => m.Permission.IsLocked)
 <div class="grid_12">
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>
-                    @Html.Label(Piranha.Resources.Settings.AccessName)
+                    @Form.LabelFor(m => m.Permission.Name, Piranha.Resources.Settings.AccessName)
                     <div class="input">
                         @if (!Model.Permission.IsLocked) {
                             @Form.TextBoxFor(m => m.Permission.Name)
@@ -44,13 +43,13 @@
                     @Form.ValidationMessageFor(m => m.Permission.Name)
                 </li>
                 <li>
-                    @Html.Label(Piranha.Resources.Settings.AccessGroup)
+                    @Form.LabelFor(m => m.Permission.GroupId, Piranha.Resources.Settings.AccessGroup)
                     <div class="input">
                         @Form.DropDownListFor(m => m.Permission.GroupId, Model.Groups)</div>
                     @Form.ValidationMessageFor(m => m.Permission.GroupId)
                 </li>
                 <li>
-                    @Html.Label(Piranha.Resources.Settings.AccessDescription)
+                    @Form.LabelFor(m => m.Permission.Description, Piranha.Resources.Settings.AccessDescription)
                     <div class="input">
                         @if (!Model.Permission.IsLocked) {
                             @Form.TextAreaFor(m => m.Permission.Description, 

@@ -82,6 +82,11 @@
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
     <Compile Include="Framework\Templates\ParamEdit.cs" />
+    <Compile Include="Param\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Param\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -136,6 +141,10 @@
     <None Include="Param\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Param\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </None>
     <None Include="Permission\Edit.cshtml">
       <Generator>RazorGenerator</Generator>
