@@ -77,7 +77,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Extensions.cs" />
+    <Compile Include="Framework\Models\AccountLoginModel.cs" />
     <Compile Include="Framework\Models\ParamEditModel.cs" />
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
@@ -132,6 +138,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Account\index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>index.generated.cs</LastGenOutput>
+    </None>
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Shared\_Layout.cshtml">
@@ -167,7 +177,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Media\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\Css\Ext\chosen-sprite.png" />
   </ItemGroup>

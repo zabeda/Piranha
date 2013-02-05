@@ -1,0 +1,63 @@
+﻿@* Generator: WebPage *@
+
+@inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.AccountLoginModel>
+@{
+    Page.Title = @Piranha.Resources.Account.Title ;
+    Layout = "" ;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <title>@Page.Title</title>
+
+    <link rel="icon" href="@Href("~/manager/content/img/icon.ico")" type="image/x-icon">
+    <link rel="shortcut icon" href="@Href("~/manager/content/img/icon.ico")" type="image/x-icon"> 
+    <link href="@Href("~/manager/content/css/style.css")" rel="stylesheet" type="text/css"/>
+    <link href="@Href("~/manager/content/css/theme.css")" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="@Href("~/manager/content/js/ext/jquery-1.7.2.min.js")"></script>
+    <script type="text/javascript" src="@Href("~/manager/content/js/jquery.manager.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".message").click(function () { $(this).fadeOut("medium"); });
+
+            if ($("#sysMsg").text() != "") {
+                floatBox.show("boxMessage");
+            }
+
+            $("#login").focus();
+        });
+    </script>
+</head>
+<body>
+    <div class="container_12">
+        <div class="grid_4 box login">
+            <div class="title"><small>@("v" + Model.Version)</small><h2>@Piranha.Resources.Account.Title</h2></div>
+            <div class="inner">
+                <form method="post" action="@Href("~/account/login")">
+                @Html.Hidden("returnurl", "~/manager/param")
+                <ul class="form">
+                    <li><label>@Piranha.Resources.Account.Username</label>
+                        <div class="input"><input id="login" name="login" type="text" /></div></li>
+                    <li><label>@Piranha.Resources.Account.Password</label>
+                        <div class="input"><input name="password" type="password" /></div></li>
+                </ul>
+                <button type="submit" class="btn right">@Piranha.Resources.Account.Login</button>
+                </form>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div id="boxMessage" class="floatbox">
+        <div class="bg"></div>
+        <div class="box">
+            <div class="title"><h2>@Piranha.Resources.Global.PopupMessageTitle</h2></div>
+            <div class="inner" style="width: 360px;min-height:60px;text-align:center">
+                <p id="sysMsg">@Page.Message</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
