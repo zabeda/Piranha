@@ -30,7 +30,7 @@ piranha.media = function (buttonId, floatboxId, callback) {
     this.mediaClick = function () {
         if (!$(this).hasClass("folder")) {
             $.ajax({
-                url: siteroot + "rest/content/get/" + $(this).attr("data-id"),
+                url: siteroot + "rest/content/get/" + $(this).attr("data-id") + "?apikey=" + apikey,
                 dataType: "json",
                 success: function (data) {
                     if (self.cb)
