@@ -13,12 +13,6 @@ body{min-width:960px}.container_12{margin-left:auto;margin-right:auto;width:960p
 /**
  * Base styling
  */
-.top .home {
-    display: none;
-    }
-.top .public-site {
-    display: none;
-    }
 .toolbar-container {
     margin-top: -30px;
     }
@@ -289,20 +283,8 @@ span.field-validation-valid {
 /**
  * Colors and stuff
  */
-body {
-    font: normal 15px Arial;
-    }
 .content {
     margin-top: 30px;
-    }
-.menu    { float: right; margin-top: 10px; }
-.menu li { float: left; margin-left: 20px; }
-.menu a  {
-    display: block;
-    }
-.menu a:hover {
-    }
-.menu .selected a {
     }
 
 /**
@@ -322,32 +304,6 @@ em     { font-style: italic; }
 /**
  * Toolbar
  */
-.toolbar {
-    background: #eee;
-    }
-.toolbar .inner {
-    padding: 6px 14px 6px 1px;
-    }
-.toolbar li {
-    float: left;
-    border-right: dotted 1px #ddd;
-    padding: 0 5px;
-    position: relative;
-    }
-.toolbar a {
-    display: block;
-    width: 56px;
-    border-radius: 4px;
-    font-size: 11px;
-    text-decoration: none;
-    text-align: center;
-    padding-top: 36px;
-    padding: 38px 0 2px;
-    color: #444;
-    }
-.toolbar a:hover {
-    background-color: #ddd;
-    }
 .toolbar .add, .attachments .add {
     background: url('../img/ico-add-24.png') no-repeat 50% 8px ;
     }
@@ -441,9 +397,6 @@ em     { font-style: italic; }
     }
 .expandable h2.expanded {
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAh0lEQVR42u3UsQqCUBhA4SbD1hDEB2hwUWoWfARBwQcQRHAVIyL53/x2BmkR1FvXQLjDN5/tHJRSm7IBG/h/IMJ1q4CPB54ITAdcNJBRi5PJQAEBPkpTgQQCTKS/Bi4YIDPCbwNndJAFPTzdgIMKslKNo04gg2jK1wZivHDXNOBmX2QDOwy8AQ+R3/urUjdKAAAAAElFTkSuQmCC) 97% 60% no-repeat;
-    }
-.box .title {
-    padding: 14px 14px 0;
     }
 .box .title h2 {
     margin: 0;

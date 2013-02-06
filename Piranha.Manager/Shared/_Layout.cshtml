@@ -43,9 +43,12 @@
     <div class="top">
         <div class="container_12">
             <div class="grid_12 header">
-                <a class="home" href="@Href("~/manager/")"></a>
-                <a class="public-site" target="preview" href="http://@Request.Url.DnsSafeHost@Href("~/")">
-                    @Piranha.WebPages.WebPiranha.GetSiteUrl()</a>
+                <a class="home" href="@Href("~/manager/")"><img src="@Href("~/manager/content/img/icon-top.png")" /></a>
+                <div class="site">
+                    <p>@User.GetProfile().Name</p>
+                    <p><a target="preview" href="@UI.AbsoluteUrl("~/")">@UI.AbsoluteUrl("~/")</a></p>
+                </div>
+                @RenderPage("~/manager/shared/menu.cshtml")
                 @*@Html.Partial("Partial/Menu")*@
             </div>
         </div>
