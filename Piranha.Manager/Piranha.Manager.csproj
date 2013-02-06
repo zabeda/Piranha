@@ -85,10 +85,17 @@
     <Compile Include="Framework\Extensions.cs" />
     <Compile Include="Framework\Menu.cs" />
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
+    <Compile Include="Framework\Models\PageListModel.cs" />
     <Compile Include="Framework\Models\ParamEditModel.cs" />
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
+    <Compile Include="Framework\Templates\PageList.cs" />
     <Compile Include="Framework\Templates\ParamEdit.cs" />
+    <Compile Include="Page\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Param\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,6 +123,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Menu.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\SiteTree.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteTree.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Tabs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabs.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Shared\_Layout.generated.cs">
       <AutoGen>True</AutoGen>
@@ -154,6 +171,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Layout.generated.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Page\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
     <None Include="Param\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
@@ -174,6 +195,14 @@
     <None Include="Shared\Menu.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Menu.generated.cs</LastGenOutput>
+    </None>
+    <EmbeddedResource Include="Shared\Tabs.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Tabs.generated.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Shared\SiteTree.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SiteTree.generated.cs</LastGenOutput>
     </None>
     <None Include="User\Index.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -660,6 +689,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\Img\icon-top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-menu-content.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-menu-settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-menu-system.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Content\Img\ico-menu-logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

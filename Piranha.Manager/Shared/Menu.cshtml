@@ -1,12 +1,13 @@
 ﻿@* Generator: WebPage *@
 
-@inherits Piranha.WebPages.BasePage
 <ul class="menu">
     @foreach (var group in Piranha.Manager.Menu.Items) {
         if (group.HasAccess()) {
             var items = group.ItemsForUser() ;
-            <li@(group.IsActive() ? " class=selected" : "")><a href="@Href(items[0].Href)">@group.Name</a></li>
+            <li@(group.IsActive() ? " class=selected" : "")>
+                <a@(!String.IsNullOrEmpty(group.IconUrl) ? " style=padding-left:36px;background-image:url('" + Href(group.IconUrl) + "')" : "") href="@Href(items[0].Href)">@group.Name</a>
+            </li>
         }
     }
-    <li><a href="@Href("~/account/logout")">@Piranha.Resources.Global.MenuLogout</a></li>
+    <li><a style="padding-left:36px;background-image:url('@Href("~/manager/content/img/ico-menu-logout.png")')" href="@Href("~/account/logout")">@Piranha.Resources.Global.MenuLogout</a></li>
 </ul>

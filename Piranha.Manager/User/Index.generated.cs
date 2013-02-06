@@ -96,16 +96,12 @@ WriteLiteral("\r\n");
 
 DefineSection("Toolbar", () => {
 
-WriteLiteral("\r\n");
-
-
-
 WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n        <ul>\r\n            <li i" +
 "d=\"add\"><a href=\"");
 
 
             
-            #line 35 "..\..\User\Index.cshtml"
+            #line 34 "..\..\User\Index.cshtml"
                              Write(Href("~/manager/user/edit"));
 
             
@@ -115,7 +111,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 35 "..\..\User\Index.cshtml"
+            #line 34 "..\..\User\Index.cshtml"
                                                                        Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -125,7 +121,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 36 "..\..\User\Index.cshtml"
+            #line 35 "..\..\User\Index.cshtml"
                     Write(Href("~/manager/user"));
 
             
@@ -135,7 +131,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 36 "..\..\User\Index.cshtml"
+            #line 35 "..\..\User\Index.cshtml"
                                                              Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -145,7 +141,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\"></b
 
 
             
-            #line 38 "..\..\User\Index.cshtml"
+            #line 37 "..\..\User\Index.cshtml"
                                    Write(Html.TextBox("search"));
 
             
@@ -162,7 +158,7 @@ WriteLiteral("\r\n\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"
 
 
             
-            #line 49 "..\..\User\Index.cshtml"
+            #line 48 "..\..\User\Index.cshtml"
                                                         Write(Piranha.Resources.Global.Username);
 
             
@@ -172,7 +168,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 50 "..\..\User\Index.cshtml"
+            #line 49 "..\..\User\Index.cshtml"
                                                    Write(Piranha.Resources.Global.Name);
 
             
@@ -182,7 +178,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 51 "..\..\User\Index.cshtml"
+            #line 50 "..\..\User\Index.cshtml"
                                                     Write(Piranha.Resources.Global.Group);
 
             
@@ -193,7 +189,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 52 "..\..\User\Index.cshtml"
+            #line 51 "..\..\User\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -204,7 +200,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 53 "..\..\User\Index.cshtml"
+            #line 52 "..\..\User\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -215,7 +211,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 58 "..\..\User\Index.cshtml"
+            #line 57 "..\..\User\Index.cshtml"
              foreach (var user in Model.Users) {
 
             
@@ -225,7 +221,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"gravatar\">\r\n");
 
 
             
-            #line 61 "..\..\User\Index.cshtml"
+            #line 60 "..\..\User\Index.cshtml"
                      if (!String.IsNullOrEmpty(user.Email)) {
 
             
@@ -235,7 +231,7 @@ WriteLiteral("                        <img src=\"");
 
 
             
-            #line 62 "..\..\User\Index.cshtml"
+            #line 61 "..\..\User\Index.cshtml"
                              Write(UI.Gravatar.Image(user.Email, 30));
 
             
@@ -245,7 +241,7 @@ WriteLiteral("\" alt=\"Gravatar for ");
 
 
             
-            #line 62 "..\..\User\Index.cshtml"
+            #line 61 "..\..\User\Index.cshtml"
                                                                                    Write(user.Email);
 
             
@@ -255,7 +251,7 @@ WriteLiteral("\" />\r\n");
 
 
             
-            #line 63 "..\..\User\Index.cshtml"
+            #line 62 "..\..\User\Index.cshtml"
                     }
 
             
@@ -265,7 +261,7 @@ WriteLiteral("                </td>\r\n                <td class=\"login\">\r\n"
 
 
             
-            #line 66 "..\..\User\Index.cshtml"
+            #line 65 "..\..\User\Index.cshtml"
                      if (User.IsMember(user.GroupId.Value)) {
 
             
@@ -275,7 +271,7 @@ WriteLiteral("                    <a href=\"");
 
 
             
-            #line 67 "..\..\User\Index.cshtml"
+            #line 66 "..\..\User\Index.cshtml"
                         Write(Href("~/manager/user/edit/" + user.Id));
 
             
@@ -285,7 +281,7 @@ WriteLiteral("\">");
 
 
             
-            #line 67 "..\..\User\Index.cshtml"
+            #line 66 "..\..\User\Index.cshtml"
                                                                  Write(user.Login);
 
             
@@ -295,21 +291,21 @@ WriteLiteral("</a>\r\n");
 
 
             
-            #line 68 "..\..\User\Index.cshtml"
+            #line 67 "..\..\User\Index.cshtml"
                     } else {
                     
             
             #line default
             #line hidden
             
-            #line 69 "..\..\User\Index.cshtml"
+            #line 68 "..\..\User\Index.cshtml"
                Write(user.Login);
 
             
             #line default
             #line hidden
             
-            #line 69 "..\..\User\Index.cshtml"
+            #line 68 "..\..\User\Index.cshtml"
                                
                     }
 
@@ -320,7 +316,7 @@ WriteLiteral("                </td>        \r\n                <td class=\"name\
 
 
             
-            #line 72 "..\..\User\Index.cshtml"
+            #line 71 "..\..\User\Index.cshtml"
                             Write(user.Firstname);
 
             
@@ -330,7 +326,7 @@ WriteLiteral(" ");
 
 
             
-            #line 72 "..\..\User\Index.cshtml"
+            #line 71 "..\..\User\Index.cshtml"
                                             Write(user.Surname);
 
             
@@ -340,7 +336,7 @@ WriteLiteral("</td>\r\n                <td class=\"group\">");
 
 
             
-            #line 73 "..\..\User\Index.cshtml"
+            #line 72 "..\..\User\Index.cshtml"
                              Write(user.Group.Name);
 
             
@@ -350,7 +346,7 @@ WriteLiteral("</td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 74 "..\..\User\Index.cshtml"
+            #line 73 "..\..\User\Index.cshtml"
                                Write(user.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -360,7 +356,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 75 "..\..\User\Index.cshtml"
+            #line 74 "..\..\User\Index.cshtml"
                                Write(user.Created.ToString("yyyy-MM-dd"));
 
             
@@ -370,7 +366,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n");
 
 
             
-            #line 77 "..\..\User\Index.cshtml"
+            #line 76 "..\..\User\Index.cshtml"
                      if (User.IsMember(user.GroupId.Value)) {
 
             
@@ -380,7 +376,7 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
 
             
-            #line 78 "..\..\User\Index.cshtml"
+            #line 77 "..\..\User\Index.cshtml"
                                             Write(Href("~/manager/user/edit/delete/" + user.Id + "/true"));
 
             
@@ -390,7 +386,7 @@ WriteLiteral("\"></a>\r\n");
 
 
             
-            #line 79 "..\..\User\Index.cshtml"
+            #line 78 "..\..\User\Index.cshtml"
                     }
 
             
@@ -400,7 +396,7 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 82 "..\..\User\Index.cshtml"
+            #line 81 "..\..\User\Index.cshtml"
             }
 
             

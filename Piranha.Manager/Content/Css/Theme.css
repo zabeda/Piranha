@@ -45,6 +45,9 @@ a {
 .top .site a:hover {
     text-decoration: underline;
     }
+div.title {
+    margin-bottom: 4px;
+    }
 
 /**
  * Menu
@@ -66,16 +69,20 @@ a {
     font-size: 13px;
     margin: 0 0 0 6px;
     background: #1f7ea6;
+    background-position: 6px 50%;
+    background-repeat: no-repeat;
     color: #fff;
     border-radius: 3px;
     text-transform: uppercase;
+    }
+.menu li.selected a {
+    background-color: #55a812;
     }
 
 /**
  * Primary border color (Boxes, containers & lists)
  */
 .toolbar,
-table.list tr,
 table.tabbed,
 .tabs li a.selected,
 .edit, 
@@ -98,9 +105,11 @@ table.tabbed,
     }
 
 /**
- * Third border color (Boxes)
+ * Third border color (Boxes & lists)
  */
-.box {
+
+.box,
+table.list tr {
     border-color: #d2d0c9;
     }
 
@@ -320,7 +329,6 @@ input[type=checkbox] {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     }
 .btn.active,
-li.selected a,
 .edit table.template td.active {
     color: #fff;
     background: #55a812;
@@ -330,18 +338,13 @@ li.selected a,
  * Lists
  */
 table.list {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
     }
 table.list tr {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     }
-table.list tbody tr.odd {
-    background: #f8f8f8;
-    }    
-table.list tbody tr:nth-child(2n+1) {
-    background: #f8f8f8;
+table.list tbody tr:hover {
+    background: #f2f2ee;
     }
 table.list tbody td:first-child {
     padding: 0;
@@ -358,8 +361,11 @@ table.list tfoot {
     display: none;
     }
 table.list thead tr {
-    border-bottom-width: 4px;
-    border-bottom-style: solid;
+    background: #fff;
+    color: #5f5b4c;
+    font-size: 15px;
+    border: 1px solid #d2d0c9;
+    border-radius: 3px;
     }
 .box table.list {
     background: #fff;
@@ -371,26 +377,24 @@ table.list thead tr {
  */
 .tabs {
     float: right;
-    margin-right: 10px;
-    margin-bottom: -1px;
     }
 .tabs li { 
     float: left; 
+    margin-left: 4px;
     }
 .tabs li a {
-    background: #ddd;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom: none;
-    padding: 8px 20px 6px;
-    margin-top: 2px;
+    display: block;
+    color: #1f7ea6;
+    padding: 8px 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 3px;
     }    
 .tabs li a.selected {
-    padding: 9px 20px 6px;
-    margin-top: 0;
-    border-width: 1px;
-    border-style: solid;
-    border-bottom: none;
+    background: #55a812;
+    color: #fff;
+    padding: 7px 12px;
+    border: 1px solid #43890b;
     }
 
 /**

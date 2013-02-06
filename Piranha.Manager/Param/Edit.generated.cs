@@ -58,16 +58,12 @@ WriteLiteral("\r\n\r\n");
 
 DefineSection("Toolbar", () => {
 
-WriteLiteral("\r\n");
-
-
-
 WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n        <ul>\r\n            <li><" +
 "a class=\"save submit\">");
 
 
             
-            #line 12 "..\..\Param\Edit.cshtml"
+            #line 11 "..\..\Param\Edit.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -77,7 +73,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 13 "..\..\Param\Edit.cshtml"
+            #line 12 "..\..\Param\Edit.cshtml"
              if (Model.Param.Id != Guid.Empty && !Model.Param.IsLocked) {
 
             
@@ -87,7 +83,7 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 14 "..\..\Param\Edit.cshtml"
+            #line 13 "..\..\Param\Edit.cshtml"
                     Write(Href("~/manager/param/edit/delete/" + Model.Param.Id));
 
             
@@ -97,7 +93,7 @@ WriteLiteral("\" class=\"delete\">");
 
 
             
-            #line 14 "..\..\Param\Edit.cshtml"
+            #line 13 "..\..\Param\Edit.cshtml"
                                                                                            Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -107,7 +103,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 15 "..\..\Param\Edit.cshtml"
+            #line 14 "..\..\Param\Edit.cshtml"
             }
 
             
@@ -117,7 +113,7 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 16 "..\..\Param\Edit.cshtml"
+            #line 15 "..\..\Param\Edit.cshtml"
                     Write(Href("~/manager/param"));
 
             
@@ -127,7 +123,7 @@ WriteLiteral("\" class=\"back\">");
 
 
             
-            #line 16 "..\..\Param\Edit.cshtml"
+            #line 15 "..\..\Param\Edit.cshtml"
                                                            Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -137,7 +133,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 17 "..\..\Param\Edit.cshtml"
+            #line 16 "..\..\Param\Edit.cshtml"
              if (Model.Param.Id != Guid.Empty) {
 
             
@@ -147,7 +143,7 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 18 "..\..\Param\Edit.cshtml"
+            #line 17 "..\..\Param\Edit.cshtml"
                     Write(Href("~/manager/param/edit/" + Model.Param.Id));
 
             
@@ -157,7 +153,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 18 "..\..\Param\Edit.cshtml"
+            #line 17 "..\..\Param\Edit.cshtml"
                                                                                      Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -167,7 +163,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 19 "..\..\Param\Edit.cshtml"
+            #line 18 "..\..\Param\Edit.cshtml"
             }
 
             
@@ -182,7 +178,7 @@ WriteLiteral("\r\n<form method=\"post\">\r\n");
 
 
             
-            #line 26 "..\..\Param\Edit.cshtml"
+            #line 25 "..\..\Param\Edit.cshtml"
 Write(Form.HiddenFor(m => m.Param.Id));
 
             
@@ -192,7 +188,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <div class=\"box\">\r\n        
 
 
             
-            #line 29 "..\..\Param\Edit.cshtml"
+            #line 28 "..\..\Param\Edit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -203,7 +199,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
 
             
-            #line 33 "..\..\Param\Edit.cshtml"
+            #line 32 "..\..\Param\Edit.cshtml"
                Write(Form.LabelFor(m => m.Param.Name, Piranha.Resources.Settings.ParamName));
 
             
@@ -213,21 +209,21 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 35 "..\..\Param\Edit.cshtml"
+            #line 34 "..\..\Param\Edit.cshtml"
                          if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Param\Edit.cshtml"
+            #line 35 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Param\Edit.cshtml"
+            #line 35 "..\..\Param\Edit.cshtml"
                                                                
                         } else {
                             
@@ -235,28 +231,28 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 38 "..\..\Param\Edit.cshtml"
+            #line 37 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Name, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Param\Edit.cshtml"
+            #line 37 "..\..\Param\Edit.cshtml"
                                                                                                
                             
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Param\Edit.cshtml"
+            #line 38 "..\..\Param\Edit.cshtml"
                        Write(Form.HiddenFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 39 "..\..\Param\Edit.cshtml"
+            #line 38 "..\..\Param\Edit.cshtml"
                                                               
                         }
 
@@ -267,7 +263,7 @@ WriteLiteral("                    </div>\r\n                    ");
 
 
             
-            #line 42 "..\..\Param\Edit.cshtml"
+            #line 41 "..\..\Param\Edit.cshtml"
                Write(Form.ValidationMessageFor(m => m.Param.Name));
 
             
@@ -277,7 +273,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 45 "..\..\Param\Edit.cshtml"
+            #line 44 "..\..\Param\Edit.cshtml"
                Write(Form.LabelFor(m => m.Param.Value, Piranha.Resources.Settings.ParamValue));
 
             
@@ -287,21 +283,21 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 47 "..\..\Param\Edit.cshtml"
+            #line 46 "..\..\Param\Edit.cshtml"
                          if (Model.Param.Name != "SITE_VERSION") {
                             
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Param\Edit.cshtml"
+            #line 47 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Value));
 
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Param\Edit.cshtml"
+            #line 47 "..\..\Param\Edit.cshtml"
                                                                 
                         } else {
                             
@@ -309,28 +305,28 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 50 "..\..\Param\Edit.cshtml"
+            #line 49 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Value, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Param\Edit.cshtml"
+            #line 49 "..\..\Param\Edit.cshtml"
                                                                                                 
                             
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Param\Edit.cshtml"
+            #line 50 "..\..\Param\Edit.cshtml"
                        Write(Form.HiddenFor(m => m.Param.Value));
 
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Param\Edit.cshtml"
+            #line 50 "..\..\Param\Edit.cshtml"
                                                                
                         } 
 
@@ -342,7 +338,7 @@ WriteLiteral("                    </div>\r\n                </li>\r\n           
 
 
             
-            #line 56 "..\..\Param\Edit.cshtml"
+            #line 55 "..\..\Param\Edit.cshtml"
                Write(Form.LabelFor(m => m.Param.Description, Piranha.Resources.Settings.ParamDescription));
 
             
@@ -352,14 +348,14 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 58 "..\..\Param\Edit.cshtml"
+            #line 57 "..\..\Param\Edit.cshtml"
                          if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 59 "..\..\Param\Edit.cshtml"
+            #line 58 "..\..\Param\Edit.cshtml"
                        Write(Form.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -367,7 +363,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 60 "..\..\Param\Edit.cshtml"
+            #line 59 "..\..\Param\Edit.cshtml"
                                                                                                     
                         } else {
                             
@@ -375,7 +371,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 62 "..\..\Param\Edit.cshtml"
+            #line 61 "..\..\Param\Edit.cshtml"
                        Write(Form.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @disabled = "disabled", @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -383,21 +379,21 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 63 "..\..\Param\Edit.cshtml"
+            #line 62 "..\..\Param\Edit.cshtml"
                                                                                                                             
                             
             
             #line default
             #line hidden
             
-            #line 64 "..\..\Param\Edit.cshtml"
+            #line 63 "..\..\Param\Edit.cshtml"
                        Write(Form.HiddenFor(m => m.Param.Description));
 
             
             #line default
             #line hidden
             
-            #line 64 "..\..\Param\Edit.cshtml"
+            #line 63 "..\..\Param\Edit.cshtml"
                                                                      
                         }
 

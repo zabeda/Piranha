@@ -26,7 +26,7 @@ namespace Piranha.Manager.Shared
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Shared/Menu.cshtml")]
-    public class Menu : Piranha.WebPages.BasePage
+    public class Menu : System.Web.WebPages.WebPage
     {
 
                 // Resolve package relative syntax
@@ -42,14 +42,11 @@ namespace Piranha.Manager.Shared
         {
 
 
-WriteLiteral("\r\n\r\n");
-
-
-WriteLiteral("<ul class=\"menu\">\r\n");
+WriteLiteral("\r\n\r\n<ul class=\"menu\">\r\n");
 
 
             
-            #line 5 "..\..\Shared\Menu.cshtml"
+            #line 4 "..\..\Shared\Menu.cshtml"
      foreach (var group in Piranha.Manager.Menu.Items) {
         if (group.HasAccess()) {
             var items = group.ItemsForUser() ;
@@ -61,18 +58,28 @@ WriteLiteral("            <li");
 
 
             
-            #line 8 "..\..\Shared\Menu.cshtml"
+            #line 7 "..\..\Shared\Menu.cshtml"
            Write(group.IsActive() ? " class=selected" : "");
 
             
             #line default
             #line hidden
-WriteLiteral("><a href=\"");
+WriteLiteral(">\r\n                <a");
 
 
             
             #line 8 "..\..\Shared\Menu.cshtml"
-                                                                Write(Href(items[0].Href));
+              Write(!String.IsNullOrEmpty(group.IconUrl) ? " style=padding-left:36px;background-image:url('" + Href(group.IconUrl) + "')" : "");
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" href=\"");
+
+
+            
+            #line 8 "..\..\Shared\Menu.cshtml"
+                                                                                                                                                 Write(Href(items[0].Href));
 
             
             #line default
@@ -82,28 +89,38 @@ WriteLiteral("\">");
 
             
             #line 8 "..\..\Shared\Menu.cshtml"
-                                                                                      Write(group.Name);
+                                                                                                                                                                       Write(group.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("</a></li>\r\n");
+WriteLiteral("</a>\r\n            </li>\r\n");
 
 
             
-            #line 9 "..\..\Shared\Menu.cshtml"
+            #line 10 "..\..\Shared\Menu.cshtml"
         }
     }
 
             
             #line default
             #line hidden
-WriteLiteral("    <li><a href=\"");
+WriteLiteral("    <li><a style=\"padding-left:36px;background-image:url(\'");
 
 
             
-            #line 11 "..\..\Shared\Menu.cshtml"
-            Write(Href("~/account/logout"));
+            #line 12 "..\..\Shared\Menu.cshtml"
+                                                     Write(Href("~/manager/content/img/ico-menu-logout.png"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\')\" href=\"");
+
+
+            
+            #line 12 "..\..\Shared\Menu.cshtml"
+                                                                                                                 Write(Href("~/account/logout"));
 
             
             #line default
@@ -112,8 +129,8 @@ WriteLiteral("\">");
 
 
             
-            #line 11 "..\..\Shared\Menu.cshtml"
-                                       Write(Piranha.Resources.Global.MenuLogout);
+            #line 12 "..\..\Shared\Menu.cshtml"
+                                                                                                                                            Write(Piranha.Resources.Global.MenuLogout);
 
             
             #line default

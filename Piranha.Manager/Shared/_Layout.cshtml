@@ -49,13 +49,15 @@
                     <p><a target="preview" href="@UI.AbsoluteUrl("~/")">@UI.AbsoluteUrl("~/")</a></p>
                 </div>
                 @RenderPage("~/manager/shared/menu.cshtml")
-                @*@Html.Partial("Partial/Menu")*@
             </div>
         </div>
     </div>
     <div class="title">
         <div class="container_12">
-            <div class="grid_12"><h1>@Page.Title</h1></div>
+            <div class="grid_12">
+                @RenderPage("~/manager/shared/tabs.cshtml")
+                <h1>@Page.Title</h1>
+            </div>
         </div>
     </div>
     <div class="body">
