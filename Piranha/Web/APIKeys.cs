@@ -48,7 +48,7 @@ namespace Piranha.Web
 
 						if (!Cache.ContainsKey(apiKey)) {
 							using (var db = new DataContext()) {
-								Cache[apiKey] = db.Users.Where(u => u.APIKey == apiKey).Select(u => u.APIKey).SingleOrDefault() ;
+								Cache[apiKey] = db.Users.Where(u => u.APIKey == apiKey).Select(u => u.Id).SingleOrDefault() ;
 							}
 						}
 						return Cache[apiKey] ;
