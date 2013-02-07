@@ -212,21 +212,32 @@ WriteLiteral("\r\n</head>\r\n<body>\r\n    <div class=\"top\">\r\n        <div c
             
             #line default
             #line hidden
-WriteLiteral("\"><img src=\"");
+WriteLiteral("\">\r\n                    <img class=\"logo-regular\" src=\"");
 
 
             
-            #line 46 "..\..\Shared\_Layout.cshtml"
-                                                                Write(Href("~/manager/content/img/icon-top.png"));
+            #line 47 "..\..\Shared\_Layout.cshtml"
+                                              Write(Href("~/manager/content/img/icon-top.png"));
 
             
             #line default
             #line hidden
-WriteLiteral("\" /></a>\r\n                <div class=\"site\">\r\n                    <p>");
+WriteLiteral("\" />\r\n                    <img class=\"logo-small\" src=\"");
 
 
             
             #line 48 "..\..\Shared\_Layout.cshtml"
+                                            Write(Href("~/manager/content/img/icon-top-small.png"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" />\r\n                </a>\r\n                <div class=\"site\">\r\n                 " +
+"   <p>");
+
+
+            
+            #line 51 "..\..\Shared\_Layout.cshtml"
                   Write(User.GetProfile().Name);
 
             
@@ -236,7 +247,7 @@ WriteLiteral("</p>\r\n                    <p><a target=\"preview\" href=\"");
 
 
             
-            #line 49 "..\..\Shared\_Layout.cshtml"
+            #line 52 "..\..\Shared\_Layout.cshtml"
                                             Write(UI.AbsoluteUrl("~/"));
 
             
@@ -246,7 +257,7 @@ WriteLiteral("\">");
 
 
             
-            #line 49 "..\..\Shared\_Layout.cshtml"
+            #line 52 "..\..\Shared\_Layout.cshtml"
                                                                    Write(UI.AbsoluteUrl("~/"));
 
             
@@ -256,7 +267,7 @@ WriteLiteral("</a></p>\r\n                </div>\r\n                ");
 
 
             
-            #line 51 "..\..\Shared\_Layout.cshtml"
+            #line 54 "..\..\Shared\_Layout.cshtml"
            Write(RenderPage("~/manager/shared/menu.cshtml"));
 
             
@@ -268,7 +279,7 @@ WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div
 
 
             
-            #line 58 "..\..\Shared\_Layout.cshtml"
+            #line 61 "..\..\Shared\_Layout.cshtml"
            Write(RenderPage("~/manager/shared/tabs.cshtml"));
 
             
@@ -278,7 +289,7 @@ WriteLiteral("\r\n                <h1>");
 
 
             
-            #line 59 "..\..\Shared\_Layout.cshtml"
+            #line 62 "..\..\Shared\_Layout.cshtml"
                Write(Page.Title);
 
             
@@ -290,7 +301,7 @@ WriteLiteral("</h1>\r\n            </div>\r\n        </div>\r\n    </div>\r\n   
 
 
             
-            #line 66 "..\..\Shared\_Layout.cshtml"
+            #line 69 "..\..\Shared\_Layout.cshtml"
            Write(RenderSection("Toolbar", false));
 
             
@@ -300,7 +311,7 @@ WriteLiteral("\r\n            </div>\r\n");
 
 
             
-            #line 68 "..\..\Shared\_Layout.cshtml"
+            #line 71 "..\..\Shared\_Layout.cshtml"
              if (!String.IsNullOrEmpty(Page.Message)) {
 
             
@@ -310,7 +321,7 @@ WriteLiteral("            <div class=\"grid_12 sys-message\">\r\n               
 
 
             
-            #line 70 "..\..\Shared\_Layout.cshtml"
+            #line 73 "..\..\Shared\_Layout.cshtml"
                            Write(!String.IsNullOrEmpty(Page.MessageCss) ? " " + Page.MessageCss : "");
 
             
@@ -321,7 +332,7 @@ WriteLiteral("\">\r\n                    <div class=\"inner\">\r\n              
 
 
             
-            #line 72 "..\..\Shared\_Layout.cshtml"
+            #line 75 "..\..\Shared\_Layout.cshtml"
                                              Write(Page.Message);
 
             
@@ -331,7 +342,7 @@ WriteLiteral("</p>\r\n                    </div>\r\n                </div>\r\n  
 
 
             
-            #line 76 "..\..\Shared\_Layout.cshtml"
+            #line 79 "..\..\Shared\_Layout.cshtml"
             }
 
             
@@ -341,7 +352,7 @@ WriteLiteral("            <div class=\"content left\">\r\n                ");
 
 
             
-            #line 78 "..\..\Shared\_Layout.cshtml"
+            #line 81 "..\..\Shared\_Layout.cshtml"
            Write(RenderBody());
 
             
@@ -364,7 +375,7 @@ WriteLiteral(@"
 
 
             
-            #line 91 "..\..\Shared\_Layout.cshtml"
+            #line 94 "..\..\Shared\_Layout.cshtml"
 Write(RenderSection("Foot", false));
 
             

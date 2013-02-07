@@ -37,7 +37,7 @@
             <div class="title"><small>@("v" + Model.Version)</small><h2>@Piranha.Resources.Account.Title</h2></div>
             <div class="inner">
                 <form method="post" action="@Href("~/account/login")">
-                @Html.Hidden("returnurl", "~/manager/param")
+                @Html.Hidden("returnurl", "~/manager/page")
                 <ul class="form">
                     <li><label>@Piranha.Resources.Account.Username</label>
                         <div class="input"><input id="login" name="login" type="text" /></div></li>

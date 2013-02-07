@@ -43,7 +43,10 @@
     <div class="top">
         <div class="container_12">
             <div class="grid_12 header">
-                <a class="home" href="@Href("~/manager/")"><img src="@Href("~/manager/content/img/icon-top.png")" /></a>
+                <a class="home" href="@Href("~/manager/")">
+                    <img class="logo-regular" src="@Href("~/manager/content/img/icon-top.png")" />
+                    <img class="logo-small" src="@Href("~/manager/content/img/icon-top-small.png")" />
+                </a>
                 <div class="site">
                     <p>@User.GetProfile().Name</p>
                     <p><a target="preview" href="@UI.AbsoluteUrl("~/")">@UI.AbsoluteUrl("~/")</a></p>

@@ -179,7 +179,7 @@ WriteLiteral("\">\r\n                ");
 
             
             #line 40 "..\..\Account\index.cshtml"
-           Write(Html.Hidden("returnurl", "~/manager/param"));
+           Write(Html.Hidden("returnurl", "~/manager/page"));
 
             
             #line default

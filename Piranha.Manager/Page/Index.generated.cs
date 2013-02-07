@@ -75,12 +75,7 @@ WriteLiteral(@"
         ul.sites {
             float: left;
             margin-left: 10px;
-            margin-right: 0;
-            margin-bottom: 0;
-            }
-        ul.sites li a.selected {
-            border: 0 none;
-            padding: 10px 20px 6px;
+            margin-top: -15px;
             }
     </style>
     <script type=""text/javascript"">
@@ -99,7 +94,7 @@ WriteLiteral(@"
 
 
             
-            #line 38 "..\..\Page\Index.cshtml"
+            #line 33 "..\..\Page\Index.cshtml"
                     Write(Piranha.Resources.Page.MessageDeleteConfirm);
 
             
@@ -167,7 +162,7 @@ WriteLiteral(" \r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n     
 
 
             
-            #line 90 "..\..\Page\Index.cshtml"
+            #line 85 "..\..\Page\Index.cshtml"
                                                                   Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -177,7 +172,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 91 "..\..\Page\Index.cshtml"
+            #line 86 "..\..\Page\Index.cshtml"
                     Write(Href("~/manager/page/index/site/" + Model.ActiveSite.ToLower()));
 
             
@@ -187,7 +182,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 91 "..\..\Page\Index.cshtml"
+            #line 86 "..\..\Page\Index.cshtml"
                                                                                                       Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -197,7 +192,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\" tit
 
 
             
-            #line 93 "..\..\Page\Index.cshtml"
+            #line 88 "..\..\Page\Index.cshtml"
                                  Write(Piranha.Resources.Global.ToolbarSearch);
 
             
@@ -207,7 +202,7 @@ WriteLiteral("\"></button>");
 
 
             
-            #line 93 "..\..\Page\Index.cshtml"
+            #line 88 "..\..\Page\Index.cshtml"
                                                                                    Write(Html.TextBox("search"));
 
             
@@ -222,7 +217,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n<form method=\"post\" action=\"");
 
 
             
-            #line 99 "..\..\Page\Index.cshtml"
+            #line 94 "..\..\Page\Index.cshtml"
                        Write(Href("~/manager/page/edit/insert"));
 
             
@@ -232,7 +227,7 @@ WriteLiteral("\">\r\n    ");
 
 
             
-            #line 100 "..\..\Page\Index.cshtml"
+            #line 95 "..\..\Page\Index.cshtml"
 Write(Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372"));
 
             
@@ -242,7 +237,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 101 "..\..\Page\Index.cshtml"
+            #line 96 "..\..\Page\Index.cshtml"
 Write(Html.Hidden("ParentId"));
 
             
@@ -252,7 +247,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 102 "..\..\Page\Index.cshtml"
+            #line 97 "..\..\Page\Index.cshtml"
 Write(Html.Hidden("Seqno"));
 
             
@@ -262,7 +257,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 103 "..\..\Page\Index.cshtml"
+            #line 98 "..\..\Page\Index.cshtml"
 Write(Html.Hidden("SiteTree", Model.ActiveSite));
 
             
@@ -272,7 +267,7 @@ WriteLiteral("\r\n    ");
 
 
             
-            #line 104 "..\..\Page\Index.cshtml"
+            #line 99 "..\..\Page\Index.cshtml"
 Write(Html.Hidden("OriginalId"));
 
             
@@ -282,7 +277,7 @@ WriteLiteral("\r\n\r\n");
 
 
             
-            #line 106 "..\..\Page\Index.cshtml"
+            #line 101 "..\..\Page\Index.cshtml"
      if (Model.Sites.Count > 0) {
 
             
@@ -292,7 +287,7 @@ WriteLiteral("    <div>\r\n        <ul class=\"sites tabs\">\r\n");
 
 
             
-            #line 109 "..\..\Page\Index.cshtml"
+            #line 104 "..\..\Page\Index.cshtml"
              foreach (var site in Model.Sites) {
 
             
@@ -302,7 +297,7 @@ WriteLiteral("            <li><a href=\"");
 
 
             
-            #line 110 "..\..\Page\Index.cshtml"
+            #line 105 "..\..\Page\Index.cshtml"
                     Write(Href("~/manager/page/index/site/" + site.InternalId.ToLower()));
 
             
@@ -312,7 +307,7 @@ WriteLiteral("\" ");
 
 
             
-            #line 110 "..\..\Page\Index.cshtml"
+            #line 105 "..\..\Page\Index.cshtml"
                                                                                       Write(site.InternalId == Model.ActiveSite ? "class=selected" : "");
 
             
@@ -322,7 +317,7 @@ WriteLiteral(">");
 
 
             
-            #line 110 "..\..\Page\Index.cshtml"
+            #line 105 "..\..\Page\Index.cshtml"
                                                                                                                                                     Write(site.Name);
 
             
@@ -332,7 +327,7 @@ WriteLiteral("</a></li>\r\n");
 
 
             
-            #line 111 "..\..\Page\Index.cshtml"
+            #line 106 "..\..\Page\Index.cshtml"
             }
 
             
@@ -342,7 +337,7 @@ WriteLiteral("        </ul>\r\n        <div class=\"clear\"></div>\r\n    </div>
 
 
             
-            #line 115 "..\..\Page\Index.cshtml"
+            #line 110 "..\..\Page\Index.cshtml"
     }
 
             
@@ -353,7 +348,7 @@ WriteLiteral("    <ul class=\"sitemap\">\r\n        <li class=\"header\">\r\n   
 
 
             
-            #line 119 "..\..\Page\Index.cshtml"
+            #line 114 "..\..\Page\Index.cshtml"
                           Write(Piranha.Resources.Global.Created);
 
             
@@ -363,7 +358,7 @@ WriteLiteral("</span>\r\n            <span class=\"date\">");
 
 
             
-            #line 120 "..\..\Page\Index.cshtml"
+            #line 115 "..\..\Page\Index.cshtml"
                           Write(Piranha.Resources.Global.Updated);
 
             
@@ -373,7 +368,7 @@ WriteLiteral("</span>\r\n            <span class=\"type\">");
 
 
             
-            #line 121 "..\..\Page\Index.cshtml"
+            #line 116 "..\..\Page\Index.cshtml"
                           Write(Piranha.Resources.Global.Type);
 
             
@@ -383,7 +378,7 @@ WriteLiteral("</span>\r\n            <span class=\"title\">");
 
 
             
-            #line 122 "..\..\Page\Index.cshtml"
+            #line 117 "..\..\Page\Index.cshtml"
                            Write(Piranha.Resources.Global.Title);
 
             
@@ -393,7 +388,7 @@ WriteLiteral("</span>\r\n        </li>\r\n        ");
 
 
             
-            #line 124 "..\..\Page\Index.cshtml"
+            #line 119 "..\..\Page\Index.cshtml"
    Write(RenderPage("~/manager/shared/sitetree.cshtml", Model.PageMap));
 
             
@@ -405,7 +400,7 @@ WriteLiteral("\r\n    </ul>\r\n    \r\n    <table id=\"list\" class=\"list\" sty
 
 
             
-            #line 130 "..\..\Page\Index.cshtml"
+            #line 125 "..\..\Page\Index.cshtml"
                                                         Write(Piranha.Resources.Global.Title);
 
             
@@ -416,7 +411,7 @@ WriteLiteral("</span></th>\r\n                <th style=\"width:200px\"><span cl
 
 
             
-            #line 131 "..\..\Page\Index.cshtml"
+            #line 126 "..\..\Page\Index.cshtml"
                                                                            Write(Piranha.Resources.Global.Type);
 
             
@@ -427,7 +422,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 132 "..\..\Page\Index.cshtml"
+            #line 127 "..\..\Page\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -438,7 +433,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 133 "..\..\Page\Index.cshtml"
+            #line 128 "..\..\Page\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -449,7 +444,7 @@ WriteLiteral("</span></th>\r\n                <th></th>\r\n            </tr>\r\n
 
 
             
-            #line 138 "..\..\Page\Index.cshtml"
+            #line 133 "..\..\Page\Index.cshtml"
              foreach (var page in Model.Pages) {
 
             
@@ -459,7 +454,7 @@ WriteLiteral("            <tr");
 
 
             
-            #line 139 "..\..\Page\Index.cshtml"
+            #line 134 "..\..\Page\Index.cshtml"
            Write(page.Status == PageListModel.PageStatus.DRAFT ? " class=draft" : "");
 
             
@@ -469,7 +464,7 @@ WriteLiteral(">\r\n                <td class=\"title\"><a href=\"");
 
 
             
-            #line 140 "..\..\Page\Index.cshtml"
+            #line 135 "..\..\Page\Index.cshtml"
                                       Write(Href("~/manager/page/edit/" + page.Id));
 
             
@@ -479,7 +474,7 @@ WriteLiteral("\">\r\n                    ");
 
 
             
-            #line 141 "..\..\Page\Index.cshtml"
+            #line 136 "..\..\Page\Index.cshtml"
                Write(page.DisplayTitle);
 
             
@@ -489,7 +484,7 @@ WriteLiteral("\r\n                    <div class=\"list-info\">\r\n             
 
 
             
-            #line 143 "..\..\Page\Index.cshtml"
+            #line 138 "..\..\Page\Index.cshtml"
                    Write(Html.Raw(page.Status == PageListModel.PageStatus.UNPUBLISHED ? "<span class=info-unpublished></span>" : (page.Status == PageListModel.PageStatus.DRAFT ? "<span class=info-draft></span>" : "")));
 
             
@@ -500,7 +495,7 @@ WriteLiteral("\r\n                    </div>\r\n                </a></td>\r\n   
 
 
             
-            #line 146 "..\..\Page\Index.cshtml"
+            #line 141 "..\..\Page\Index.cshtml"
                                 Write(page.TemplateName);
 
             
@@ -510,7 +505,7 @@ WriteLiteral("</td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 147 "..\..\Page\Index.cshtml"
+            #line 142 "..\..\Page\Index.cshtml"
                                Write(page.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -520,7 +515,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 148 "..\..\Page\Index.cshtml"
+            #line 143 "..\..\Page\Index.cshtml"
                                Write(page.Created.ToString("yyyy-MM-dd"));
 
             
@@ -531,7 +526,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons three\">\r\n         
 
 
             
-            #line 150 "..\..\Page\Index.cshtml"
+            #line 145 "..\..\Page\Index.cshtml"
                                                           Write(Piranha.Resources.Page.ListAddAfter);
 
             
@@ -541,7 +536,7 @@ WriteLiteral("\" onclick=\"return preSubmit(\'");
 
 
             
-            #line 150 "..\..\Page\Index.cshtml"
+            #line 145 "..\..\Page\Index.cshtml"
                                                                                                                            Write(page.ParentId);
 
             
@@ -551,7 +546,7 @@ WriteLiteral("\', ");
 
 
             
-            #line 150 "..\..\Page\Index.cshtml"
+            #line 145 "..\..\Page\Index.cshtml"
                                                                                                                                              Write(page.Seqno + 1);
 
             
@@ -562,7 +557,7 @@ WriteLiteral(")\" type=\"submit\"></button>\r\n                    <button class
 
 
             
-            #line 151 "..\..\Page\Index.cshtml"
+            #line 146 "..\..\Page\Index.cshtml"
                                                           Write(Piranha.Resources.Page.ListAddBelow);
 
             
@@ -572,7 +567,7 @@ WriteLiteral("\" onclick=\"return preSubmit(\'");
 
 
             
-            #line 151 "..\..\Page\Index.cshtml"
+            #line 146 "..\..\Page\Index.cshtml"
                                                                                                                            Write(page.Id);
 
             
@@ -582,7 +577,7 @@ WriteLiteral("\', 1)\" type=\"submit\"></button>\r\n");
 
 
             
-            #line 152 "..\..\Page\Index.cshtml"
+            #line 147 "..\..\Page\Index.cshtml"
                      if (page.Pages.Count == 0) {
 
             
@@ -592,7 +587,7 @@ WriteLiteral("                    <a href=\"");
 
 
             
-            #line 153 "..\..\Page\Index.cshtml"
+            #line 148 "..\..\Page\Index.cshtml"
                         Write(Href("~/manager/page/edit/delete/" + page.Id));
 
             
@@ -602,7 +597,7 @@ WriteLiteral("\" title=\"");
 
 
             
-            #line 153 "..\..\Page\Index.cshtml"
+            #line 148 "..\..\Page\Index.cshtml"
                                                                                Write(Piranha.Resources.Page.ListDelete);
 
             
@@ -612,7 +607,7 @@ WriteLiteral("\" class=\"icon delete\"></a>\r\n");
 
 
             
-            #line 154 "..\..\Page\Index.cshtml"
+            #line 149 "..\..\Page\Index.cshtml"
                     }
 
             
@@ -622,7 +617,7 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 157 "..\..\Page\Index.cshtml"
+            #line 152 "..\..\Page\Index.cshtml"
             }
 
             
@@ -639,7 +634,7 @@ WriteLiteral("\r\n<div id=\"boxTemplates\" class=\"floatbox\">\r\n    <div class
 
 
             
-            #line 169 "..\..\Page\Index.cshtml"
+            #line 164 "..\..\Page\Index.cshtml"
                                                       Write(Piranha.Resources.Page.PopupTypeTitle);
 
             
@@ -656,7 +651,7 @@ WriteLiteral("\r\n            <div class=\"clear\"></div>\r\n        </div>\r\n 
 
 
             
-            #line 176 "..\..\Page\Index.cshtml"
+            #line 171 "..\..\Page\Index.cshtml"
              foreach (var template in Model.Templates) {
 
             
@@ -666,7 +661,7 @@ WriteLiteral("            <div class=\"templates ");
 
 
             
-            #line 177 "..\..\Page\Index.cshtml"
+            #line 172 "..\..\Page\Index.cshtml"
                               Write(Model.Templates.Count > 6 ? "compressed" : "");
 
             
@@ -676,7 +671,7 @@ WriteLiteral(" left\" data-templateid=\"");
 
 
             
-            #line 177 "..\..\Page\Index.cshtml"
+            #line 172 "..\..\Page\Index.cshtml"
                                                                                                      Write(template.Id);
 
             
@@ -686,7 +681,7 @@ WriteLiteral("\">\r\n                <h3>");
 
 
             
-            #line 178 "..\..\Page\Index.cshtml"
+            #line 173 "..\..\Page\Index.cshtml"
                Write(template.Name);
 
             
@@ -696,7 +691,7 @@ WriteLiteral("</h3>\r\n                <div class=\"preview\">\r\n              
 
 
             
-            #line 180 "..\..\Page\Index.cshtml"
+            #line 175 "..\..\Page\Index.cshtml"
                Write(template.Preview.Html());
 
             
@@ -706,7 +701,7 @@ WriteLiteral("\r\n                </div>\r\n                <p>");
 
 
             
-            #line 182 "..\..\Page\Index.cshtml"
+            #line 177 "..\..\Page\Index.cshtml"
               Write(template.Description);
 
             
@@ -716,7 +711,7 @@ WriteLiteral("</p>\r\n            </div>\r\n");
 
 
             
-            #line 184 "..\..\Page\Index.cshtml"
+            #line 179 "..\..\Page\Index.cshtml"
             }
 
             
@@ -732,7 +727,7 @@ WriteLiteral(@"            <div class=""clear""></div>
 
 
             
-            #line 191 "..\..\Page\Index.cshtml"
+            #line 186 "..\..\Page\Index.cshtml"
                                                                 Write(Piranha.Resources.Global.Title);
 
             
@@ -743,7 +738,7 @@ WriteLiteral("</span></th>\r\n                        <th><span class=\"sort\" d
 
 
             
-            #line 192 "..\..\Page\Index.cshtml"
+            #line 187 "..\..\Page\Index.cshtml"
                                                                Write(Piranha.Resources.Global.Type);
 
             
@@ -755,7 +750,7 @@ WriteLiteral("</span></th>\r\n                        <th><span class=\"sort\" d
 
 
             
-            #line 197 "..\..\Page\Index.cshtml"
+            #line 192 "..\..\Page\Index.cshtml"
                  foreach (var page in Model.Pages) {
 
             
@@ -766,7 +761,7 @@ WriteLiteral("                    <tr>\r\n                        <td><a class=\
 
 
             
-            #line 199 "..\..\Page\Index.cshtml"
+            #line 194 "..\..\Page\Index.cshtml"
                                                      Write(page.Id);
 
             
@@ -776,7 +771,7 @@ WriteLiteral("\" href=\"#\"> ");
 
 
             
-            #line 199 "..\..\Page\Index.cshtml"
+            #line 194 "..\..\Page\Index.cshtml"
                                                                           Write(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title);
 
             
@@ -786,7 +781,7 @@ WriteLiteral("</a></td>\r\n                        <td>");
 
 
             
-            #line 200 "..\..\Page\Index.cshtml"
+            #line 195 "..\..\Page\Index.cshtml"
                        Write(page.TemplateName);
 
             
@@ -796,7 +791,7 @@ WriteLiteral("</td>\r\n                        <td>");
 
 
             
-            #line 201 "..\..\Page\Index.cshtml"
+            #line 196 "..\..\Page\Index.cshtml"
                        Write(page.SiteTreeName);
 
             
@@ -806,7 +801,7 @@ WriteLiteral("</td>\r\n                    </tr>\r\n");
 
 
             
-            #line 203 "..\..\Page\Index.cshtml"
+            #line 198 "..\..\Page\Index.cshtml"
                 }
 
             
