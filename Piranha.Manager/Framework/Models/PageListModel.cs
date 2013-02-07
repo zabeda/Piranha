@@ -8,28 +8,94 @@ using Piranha.Entities;
 
 namespace Piranha.Manager.Models
 {
+	/// <summary>
+	/// View model for the page list.
+	/// </summary>
 	public class PageListModel
 	{
 		#region Inner classes
+		/// <summary>
+		/// The different statuses a page can have.
+		/// </summary>
 		public enum PageStatus {
 			UNPUBLISHED, DRAFT, PUBLISHED
 		}
 
-		public class PageStructure {
+		/// <summary>
+		/// The page structure model.
+		/// </summary>
+		public class PageStructure
+		{
+			#region Properties
+			/// <summary>
+			/// Gets/sets the id .
+			/// </summary>
 			public Guid Id { get ; set ; }
-			public Guid? ParentId { get ; set ; }
-			public int Seqno { get ; set ; }
-			public string Title { get ; set ; }
-			public string NavigationTitle { get ; set ; }
-			public string DisplayTitle { get { return !String.IsNullOrEmpty(NavigationTitle) ? NavigationTitle : Title ; } }
-			public string TemplateName { get ; set ; }
-			public string SiteTreeName { get ; set ; }
-			public int Level { get ; set ; }
-			public DateTime Created { get ; set ; }
-			public DateTime Updated { get ; set ; }
-			public PageStatus Status { get ; set ; }
-			public IList<PageStructure> Pages { get ; set ; }
 
+			/// <summary>
+			/// Gets/sets the optional parent id.
+			/// </summary>
+			public Guid? ParentId { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the sequence number.
+			/// </summary>
+			public int Seqno { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the title.
+			/// </summary>
+			public string Title { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the navigation title.
+			/// </summary>
+			public string NavigationTitle { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the title to display.
+			/// </summary>
+			public string DisplayTitle { get { return !String.IsNullOrEmpty(NavigationTitle) ? NavigationTitle : Title ; } }
+
+			/// <summary>
+			/// Gets/sets the template name.
+			/// </summary>
+			public string TemplateName { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the site tree name.
+			/// </summary>
+			public string SiteTreeName { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the current level.
+			/// </summary>
+			public int Level { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the created date.
+			/// </summary>
+			public DateTime Created { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the updated date.
+			/// </summary>
+			public DateTime Updated { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the status of the page.
+			/// </summary>
+			public PageStatus Status { get ; set ; }
+
+			/// <summary>
+			/// Gets/sets the child pages.
+			/// </summary>
+			public IList<PageStructure> Pages { get ; set ; }
+			#endregion
+
+			/// <summary>
+			/// Default constructor
+			/// </summary>
 			public PageStructure() {
 				Pages = new List<PageStructure>() ;
 			}
@@ -49,6 +115,7 @@ namespace Piranha.Manager.Models
 				return false ;
 			}
 
+			#region Private methods
 			/// <summary>
 			/// Checks if the given page has a child with the given id.
 			/// </summary>
@@ -64,17 +131,40 @@ namespace Piranha.Manager.Models
 				}
 				return false ;
 			}
-
+			#endregion
 		}
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Gets/sets the available pages in a flat structure.
+		/// </summary>
 		public IList<PageStructure> Pages { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the recursively sorted page structure.
+		/// </summary>
+		public IList<PageStructure> PageMap { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available page templates.
+		/// </summary>
 		public IList<PageTemplate> Templates { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available sites
+		/// </summary>
 		public IList<SiteTree> Sites { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently active site.
+		/// </summary>
 		public string ActiveSite { get ; set ; }
 		#endregion
 
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
 		public PageListModel() {
 			Pages = new List<PageStructure>() ;
 			Templates = new List<PageTemplate>() ;
@@ -97,7 +187,7 @@ namespace Piranha.Manager.Models
 				m.ActiveSite = internalId ;
 				m.Templates = db.PageTemplates.OrderBy(t => t.Name).ToList() ;
 				m.Sites = db.SiteTrees.OrderBy(s => s.Name).ToList() ;
-				m.Pages = Sort(db.PageDrafts
+				m.Pages = db.PageDrafts
 					.Include(p => p.Template)
 					.Include(p => p.SiteTree)
 					.Where(p => p.SiteTree.InternalId == internalId).OrderBy(p => p.ParentId).ThenBy(p => p.Seqno).ToList()
@@ -112,18 +202,20 @@ namespace Piranha.Manager.Models
 						Status = (!p.Published.HasValue ? PageStatus.UNPUBLISHED : (p.Updated > p.LastPublished.Value ? PageStatus.DRAFT : PageStatus.PUBLISHED)),
 						Created = p.Created,
 						Updated = p.Updated
-					}).ToList()) ;
+					}).ToList() ;
+				m.PageMap = Sort(m.Pages) ;
 			}
 			return m ;
 		}
 
+		#region Private method
 		/// <summary>
 		/// Sorts the page structure recursive.
 		/// </summary>
 		/// <param name="pages">The pages</param>
 		/// <param name="parentid">The parent id</param>
 		/// <returns>The sorted pages</returns>
-		private static List<PageStructure> Sort(List<PageStructure> pages, Guid? parentid = null, int level = 1) {
+		private static IList<PageStructure> Sort(IList<PageStructure> pages, Guid? parentid = null, int level = 1) {
 			var ret = new List<PageStructure>() ;
 
 			foreach (var page in pages) {
@@ -135,5 +227,6 @@ namespace Piranha.Manager.Models
 			}
 			return ret ;
 		}
+		#endregion
 	}
 }

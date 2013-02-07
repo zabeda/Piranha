@@ -8,6 +8,10 @@
 }
 @section Head {
     <style type="text/css">
+        table.list th:first-child,
+        table.list tbody td:first-child > * {
+            padding-left: 30px;
+            }
         ul.sites {
             float: left;
             margin-left: 10px;
@@ -33,25 +37,13 @@
 
         var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
-        function formatSitemap() {
-            $.each($(".sitemap li:visible"), function (i, e) {
-                if (i % 2 == 1)
-                    $(this).addClass("odd");
-                else $(this).removeClass("odd");
-            });
-        }
-
-        var currmove;
-
         $(document).ready(function () {
-            formatSitemap();
 
             // Handle the site tree
             $(".sitemap .action").click(function () {
                 var li = $(this).parent().parent();
                 li.toggleClass("collapsed");
                 li.toggleClass("expanded");
-                formatSitemap();
             });
 
             // Set the selected template id
@@ -76,7 +68,7 @@
                 searchId: 'search',
                 valueNames: ['title', 'template', 'updated', 'created']
             };
-            var pageList = new List('list', options);
+            new List('list', options);
 
             // Switch between list/tree
             $("#search").keyup(function () {
@@ -89,31 +81,14 @@
                 }
             });
         });
-
-        function bindMove() {
-            $(".move .title a").click(function () {
-                if ($(this).parent().parent().hasClass("expanded"))
-                    alert("move: " + currmove + " below: " + $(this).parent().parent().attr("id"));
-                else alert("move: " + currmove + " after: " + $(this).parent().parent().attr("id"));
-
-                return false;
-            });
-        }
     </script>
-    <!-- Restyle the list a bit to match tree -->
-    <style type="text/css">
-        table.list th:first-child,
-        table.list tbody td:first-child > * {
-            padding-left: 30px;
-            }
-    </style>
 }
 @section Toolbar { 
 <div class="toolbar">
     <div class="inner">
         <ul>
             <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
-            <li><a href="@Href("~/manager/page")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            <li><a href="@Href("~/manager/page/index/site/" + Model.ActiveSite.ToLower())" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         <div class="clear"></div>
@@ -132,7 +107,7 @@
     <div>
         <ul class="sites tabs">
             @foreach (var site in Model.Sites) {
-            <li><a href="@Href("~/manager/page/site/" + site.InternalId.ToLower())" @(site.InternalId == Model.ActiveSite ? "class=selected" : "")>@site.Name</a></li>
+            <li><a href="@Href("~/manager/page/index/site/" + site.InternalId.ToLower())" @(site.InternalId == Model.ActiveSite ? "class=selected" : "")>@site.Name</a></li>
             }
         </ul>
         <div class="clear"></div>
@@ -146,8 +121,7 @@
             <span class="type">@Piranha.Resources.Global.Type</span>
             <span class="title">@Piranha.Resources.Global.Title</span>
         </li>
-        @RenderPage("~/manager/shared/sitetree.cshtml", Model.Pages)
-        @*@Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", Model.SiteMap)*@
+        @RenderPage("~/manager/shared/sitetree.cshtml", Model.PageMap)
     </ul>
     
     <table id="list" class="list" style="display:none">

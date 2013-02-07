@@ -7,6 +7,7 @@ using System.Web.WebPages;
 using System.Web.WebPages.Html;
 
 using AutoMapper;
+using Piranha.Manager.Models;
 
 namespace Piranha.Manager
 {

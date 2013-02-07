@@ -20,5 +20,13 @@ namespace Piranha.Manager.Templates
 		protected override void ExecutePage() {
 			Model = PageListModel.GetByInternalId() ;
 		}
+
+		/// <summary>
+		/// Gets the list view for the site with the given internal id
+		/// </summary>
+		/// <param name="internalid">The internal id</param>
+		public void Site(string internalid) {
+			Model = PageListModel.GetByInternalId(internalid.ToUpper()) ;
+		}
 	}
 }
