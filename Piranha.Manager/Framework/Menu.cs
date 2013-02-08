@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Piranha.Manager
 {
+	/// <summary>
+	/// Defines the managers menu.
+	/// </summary>
 	public static class Menu
 	{
 		public static List<MenuGroup> Items = new List<MenuGroup>() {
@@ -94,10 +97,8 @@ namespace Piranha.Manager
 		/// </summary>
 		/// <returns>Weather the group is active</returns>
 		public bool IsActive() {
-			var href = "~" + HttpContext.Current.Request.Url.PathAndQuery.ToLower() ;
-
 			foreach (var item in ItemsForUser()) {
-				if (href.StartsWith(item.Href))
+				if (item.IsActive())
 					return true ;
 			}
 			return false ;
@@ -151,11 +152,14 @@ namespace Piranha.Manager
 		/// </summary>
 		/// <returns>Weather the item is active</returns>
 		public bool IsActive() {
-			var href = "~" + HttpContext.Current.Request.Url.PathAndQuery.ToLower() ;
-
-			if (href.StartsWith(Href))
-				return true ;
-			return false ;
+			var current = ("~" + HttpContext.Current.Request.Url.PathAndQuery.ToLower()).Split(new char[] { '/' }) ;
+			var href = Href.ToLower().Split(new char[] { '/' }) ;
+			
+			for (int n = 0; n < href.Length; n++) {
+				if (current.Length < n || href[n] != current[n])
+					return false ;
+			}
+			return true ;
 		}
 	}
 }

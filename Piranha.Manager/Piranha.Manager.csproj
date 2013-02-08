@@ -86,11 +86,19 @@
     <Compile Include="Framework\Menu.cs" />
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
     <Compile Include="Framework\Models\PageListModel.cs" />
+    <Compile Include="Framework\Models\PageTypeEditModel.cs" />
+    <Compile Include="Framework\Models\PageTypeListModel.cs" />
     <Compile Include="Framework\Models\ParamEditModel.cs" />
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
     <Compile Include="Framework\Templates\PageList.cs" />
+    <Compile Include="Framework\Templates\PageTypeEdit.cs" />
     <Compile Include="Framework\Templates\ParamEdit.cs" />
+    <Compile Include="PageType\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Page\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +179,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Layout.generated.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="PageType\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
     <None Include="Page\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
