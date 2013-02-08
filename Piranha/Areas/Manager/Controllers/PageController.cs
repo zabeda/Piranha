@@ -16,18 +16,25 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_PAGE")]
         public ActionResult Index(string id = "") {
+			var internalId = Config.SiteTree ;
+
 			try {
 				var param = Piranha.Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
 				ViewBag.Levels = param != null ? Convert.ToInt32(param.Value) : 0 ;
 
-				if (!String.IsNullOrEmpty(id))
+				if (!String.IsNullOrEmpty(id)) {
+					var p = Page.GetSingle(new Guid(id)) ;
+					if (p != null)
+						internalId = p.SiteTreeInternalId ;
+
 					ViewBag.Expanded = new Guid(id) ;
+				}
 				else ViewBag.Expanded = Guid.Empty ;
 			} catch {
 				ViewBag.Levels = 0 ;
 				ViewBag.Expanded = Guid.Empty ;
 			}
-			var m = ListModel.Get() ;
+			var m = ListModel.Get(internalId) ;
 			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
 
 			// Executes the page list loaded hook, if registered
@@ -36,6 +43,30 @@ namespace Piranha.Areas.Manager.Controllers
 
 			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
         }
+
+		/// <summary>
+		/// Gets the site tree with the given id.
+		/// </summary>
+		/// <param name="id">The internal id of the site tree</param>
+		[Access(Function="ADMIN_PAGE")]
+		public ActionResult Site(string id) {
+			try {
+				var param = Piranha.Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
+				ViewBag.Levels = param != null ? Convert.ToInt32(param.Value) : 0 ;
+				ViewBag.Expanded = Guid.Empty ;
+			} catch {
+				ViewBag.Levels = 0 ;
+				ViewBag.Expanded = Guid.Empty ;
+			}
+			var m = ListModel.Get(id) ;
+			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
+
+			// Executes the page list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
+				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
+		}
 
 		/// <summary>
 		/// Opens the edit view for the selected page.
@@ -95,7 +126,12 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost()]
 		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Insert(InsertModel im) {
-			EditModel pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno) ;
+			EditModel pm = null ;
+
+			if (im.OriginalId != Guid.Empty)
+				pm = EditModel.CreateByOriginalAndPosition(im.OriginalId, im.ParentId, im.Seqno, im.SiteTreeId, im.SiteTree) ;
+			else pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno, im.SiteTreeId, im.SiteTree) ;
+
 			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			// Executes the page list loaded hook, if registered
@@ -153,8 +189,8 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Renders the sibling select list from the given input parameters.
 		/// </summary>
-		public ActionResult Siblings(string page_id, string page_parentid, string page_seqno, string parentid) {
-			return View(EditModel.BuildSiblingPages(new Guid(page_id), new Guid(page_parentid), Convert.ToInt32(page_seqno), new Guid(parentid))) ;
+		public ActionResult Siblings(string page_id, string page_parentid, string page_seqno, string parentid, string site_tree) {
+			return View(EditModel.BuildSiblingPages(new Guid(page_id), new Guid(page_parentid), Convert.ToInt32(page_seqno), new Guid(parentid), site_tree)) ;
 		}
 
 		/// <summary>

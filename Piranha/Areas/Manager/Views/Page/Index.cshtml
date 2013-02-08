@@ -1,5 +1,17 @@
 ﻿@model Piranha.Models.Manager.PageModels.ListModel
 @section Head {
+    <style type="text/css">
+        ul.sites {
+            float: left;
+            margin-left: 10px;
+            margin-right: 0;
+            margin-bottom: 0;
+            }
+        ul.sites li a.selected {
+            border: 0 none;
+            padding: 10px 20px 6px;
+            }
+    </style>
     <script type="text/javascript">
         //
         // Sets all hidden fields before submit
@@ -38,6 +50,12 @@
             // Set the selected template id
             $(".templates").click(function () {
                 $("#TemplateId").val($(this).attr("data-templateid"));
+                $("form").submit();
+            });
+
+            // Set the original id
+            $(".copy-page").click(function () {
+                $("#OriginalId").val($(this).attr("data-id"));
                 $("form").submit();
             });
 
@@ -101,7 +119,19 @@
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
+    @Html.Hidden("SiteTree", Model.ActiveSite)
+    @Html.Hidden("OriginalId")
 
+    if (Model.SiteTrees.Count > 0) {
+    <div>
+        <ul class="sites tabs">
+            @foreach (var site in Model.SiteTrees) {
+            <li><a href="@Url.Action("site", "page", new { @id = site.InternalId.ToLower() })" @(site.InternalId == Model.ActiveSite ? "class=selected" : "")>@site.Name</a></li>
+            }
+        </ul>
+        <div class="clear"></div>
+    </div>
+    }
     <ul class="sitemap">
         <li class="header">
             <span class="buttons"></span>
@@ -159,9 +189,16 @@
 <div id="boxTemplates" class="floatbox">
     <div class="bg"></div>
     <div class="box">
-        <div class="title"><a class="close-btn right" data-id="boxContent"></a><h2>@Piranha.Resources.Page.PopupTypeTitle</h2></div>
-        <div class="inner">
-        @foreach (var template in Model.Templates) {
+        <div class="title">
+            <ul class="box-tabs">
+                <li class="selected"><a href="#create-new">@Piranha.Resources.Page.PopupTypeTitle</a></li>
+                <li class="hidden"><a href="#create-copy">Create copy</a></li>
+            </ul>
+            <a class="close-btn right" data-id="boxTemplates"></a>@*<h2>@Piranha.Resources.Page.PopupTypeTitle</h2>*@
+            <div class="clear"></div>
+        </div>
+        <div id="create-new" class="inner">
+            @foreach (var template in Model.Templates) {
             <div class="templates @(Model.Templates.Count > 6 ? "compressed" : "") left" data-templateid="@template.Id">
                 <h3>@template.Name</h3>
                 <div class="preview">
@@ -169,8 +206,28 @@
                 </div>
                 <p>@template.Description</p>
             </div>
-        }
+            }
             <div class="clear"></div>
+        </div>
+        <div id="create-copy" class="inner hidden" style="width:660px;max-height:460px;overflow:scroll;">
+            <table class="list">
+                <thead>
+                    <tr>
+                        <th><span class="sort asc" data-sort="title">@Piranha.Resources.Global.Title</span></th>
+                        <th><span class="sort" data-sort="template">@Piranha.Resources.Global.Type</span></th>
+                        <th><span class="sort" data-sort="sitetree">Site tree</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var page in Model.AllPages) {
+                    <tr>
+                        <td><a class="copy-page" data-id="@page.Id" href="#"> @(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)</a></td>
+                        <td>@page.TemplateName</td>
+                        <td>@page.SiteTreeName</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

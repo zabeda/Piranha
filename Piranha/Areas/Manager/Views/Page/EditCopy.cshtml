@@ -222,11 +222,7 @@
                 <tr>
                     <td class="tools">
                         <ul>
-                            <li class="btn-content active"><a href="#" data-id="pnl-content">@Piranha.Resources.Global.Content</a></li>
                             <li class="btn-settings"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
-                            @if (Model.Properties.Count > 0) {
-                            <li class="btn-properties"><a href="#" data-id="pnl-properties">@Piranha.Resources.Global.Properties</a></li>
-                            }
                             @if (Model.EnableComments) {
                             <li class="btn-comments">
                                 @{
@@ -236,38 +232,9 @@
                                 <a href="#" data-id="pnl-comments">@Piranha.Resources.Global.Comments</a>
                             </li>
                             }
-                            @foreach (var ext in Model.Extensions) {
-                            <li>
-                                <a href="#"@(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@ExtensionManager.GetInternalIdByType(ext.Type).ToLower()">
-                                    @ExtensionManager.GetExtensionNameByType(ext.Type)
-                                </a>
-                            </li>
-                            }
                         </ul>
                     </td>
                     <td>
-                        <div id="pnl-content" class="main content-editor">
-                            <div class="title">
-                                <div id="regionbuttons" class="buttons">
-                                    @for (int n = 0; n < Model.Regions.Count; n++) {
-                                        <button id="@Html.Raw("btn_" + Model.Regions[n].InternalId)" class="btn@(n > 0 ? "" : " active") region">@Model.Regions[n].Name</button>
-                                    }
-                                    <button id="btn_attachments" class="btn@(Model.Regions.Count == 0 ? " active" : "")">@Piranha.Resources.Page.Attachments</button>
-                                </div>
-                                <h2 id="section-title">@Piranha.Resources.Global.Content</h2>
-                            </div>
-                            <div class="inner">
-                                @if (Model.Regions.Count > 0) {
-                                <div id="regions">
-                                    @Html.EditorFor(m => m.Regions)
-                                </div>
-                                }
-                                <div id="attachments" @(Model.Regions.Count > 0 ? "style=display:none" : "")>
-                                    @Html.Partial("Partial/Attachments")
-                                </div>
-                            </div>
-                        </div>
                         <div id="pnl-settings" class="main hidden">
                             <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
                             <div class="inner">
@@ -314,28 +281,6 @@
                                 </ul>
                             </div>
                         </div>
-                        @if (Model.Properties.Count > 0) {
-                        <div id="pnl-properties" class="main hidden">
-                            <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
-                            <div class="inner">
-                                <ul class="form">
-                                @for (int n = 0; n < Model.Properties.Count; n++) {
-                                    <li>@Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name)
-                                        @Html.HiddenFor(m => m.Properties[n].Id)
-                                        @Html.HiddenFor(m => m.Properties[n].IsDraft)
-                                        @Html.HiddenFor(m => m.Properties[n].ParentId)
-                                        @Html.HiddenFor(m => m.Properties[n].Name)
-                                        @Html.HiddenFor(m => m.Properties[n].Created)
-                                        @Html.HiddenFor(m => m.Properties[n].CreatedBy)
-                                        @Html.HiddenFor(m => m.Properties[n].IsNew)
-                                        <div class="input">
-                                            @Html.TextBoxFor(m => m.Properties[n].Value)</div>
-                                    </li>
-                                }
-                                </ul>
-                            </div>
-                        </div>
-                        }
                         @if (Model.EnableComments) {
                         <div id="pnl-comments" class="main content-editor hidden">
                             <div class="title"><h2>@Piranha.Resources.Global.Comments</h2></div>
@@ -344,45 +289,11 @@
                             </div>
                         </div>
                         }
-                        @Html.EditorFor(m => m.Extensions)
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
-<div class="grid_3 hidden">
-    @if (!Model.Page.IsNew) {
-    <div class="box expandable">
-        <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
-        <div class="inner optional">
-            <ul class="list">
-                <li>@Piranha.Resources.Global.LastPublished <small class="right">
-                    @(Model.Page.LastPublished > DateTime.MinValue ? Model.Page.LastPublished.ToShortDateString() : "")</small></li>
-                <li>@Piranha.Resources.Global.Published <small class="right">
-                    @(Model.Page.Published > DateTime.MinValue ? Model.Page.Published.ToShortDateString() : "")</small></li>
-                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Page.Updated.ToShortDateString()</small></li>
-                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Page.Created.ToShortDateString()</small></li>
-            </ul>
-        </div>
-    </div>
-    }
-</div>
 @{ Html.EndForm() ; }
-@section Foot {
- <div id="boxContent" class="floatbox">
-    <div class="bg"></div>
-    <div class="box" style="min-width: 510px;min-height:260px;">
-    </div>
-</div>
-   @if (false) { // (!Model.Page.IsNew) {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".toolbar .page-preview").attr("src", "http://@Request.Url.DnsSafeHost@Url.GetPreviewlink(Model.Page.Id).ToLower()");
-            $.each($(".toolbar .tooltip"), function (i, e) {
-                $(this).css({ left: -(($(this).outerWidth() - $(this).parent("li").width()) / 2) });
-            });
-        });
-    </script>
-    }
 }

@@ -60,9 +60,9 @@ namespace Piranha.Entities
 
 		#region Navigation properties
 		/// <summary>
-		/// Gets/sets the pages who have this page type.
+		/// Gets/sets the region template associated with this template.
 		/// </summary>
-		//IList<Page> Pages { get ; set ; }
+		public IList<RegionTemplate> RegionTemplates { get ; set ; }
 		#endregion
 
 		#region Internal properties
@@ -89,26 +89,28 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Called when the entity has been loaded.
 		/// </summary>
-		public override void OnLoad() {
+		/// <param name="db">The db context</param>
+		public override void OnLoad(DataContext db) {
 			var js = new JavaScriptSerializer() ;
 
 			Regions = !String.IsNullOrEmpty(RegionsJson) ? js.Deserialize<List<string>>(RegionsJson) : Regions ;
 			Properties = !String.IsNullOrEmpty(PropertiesJson) ? js.Deserialize<List<string>>(PropertiesJson) : Properties ;
 
-			base.OnLoad() ;
+			base.OnLoad(db) ;
 		}
 
 		/// <summary>
 		/// Called when the entity is about to be saved.
 		/// </summary>
+		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
-		public override void OnSave(System.Data.EntityState state) {
+		public override void OnSave(DataContext db, System.Data.EntityState state) {
 			var js = new JavaScriptSerializer() ;
 
 			RegionsJson = js.Serialize(Regions) ;
 			PropertiesJson = js.Serialize(Properties) ;
 
-			base.OnSave(state);
+			base.OnSave(db, state);
 		}
 		#endregion
 	}

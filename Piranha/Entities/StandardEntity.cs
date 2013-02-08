@@ -72,19 +72,20 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Saves the current entity.
 		/// </summary>
+		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
-		public override void OnSave(System.Data.EntityState state) {
+		public override void OnSave(DataContext db, System.Data.EntityState state) {
 			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (DataContext.Identity != Guid.Empty || user.Identity.IsAuthenticated || AllowAnonymous) {
+			if (db.Identity != Guid.Empty || user.Identity.IsAuthenticated || AllowAnonymous) {
 				if (state == EntityState.Added) {
 					if (Id == Guid.Empty)
 						Id = Guid.NewGuid() ;
 					Created = Updated = DateTime.Now ;
-					CreatedById = UpdatedById = DataContext.Identity != Guid.Empty ? DataContext.Identity : new Guid(user.Identity.Name) ;
+					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
 				} else if (state == EntityState.Modified) {
 					Updated = DateTime.Now ;
-					UpdatedById = DataContext.Identity != Guid.Empty ? DataContext.Identity : new Guid(user.Identity.Name) ;
+					UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
 				}
 			} else throw new UnauthorizedAccessException("User must be logged in to save entity") ;
 		}
@@ -92,8 +93,9 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Deletes the current entity.
 		/// </summary>
-		public override void OnDelete() {
-			if (DataContext.Identity == Guid.Empty && !HttpContext.Current.User.Identity.IsAuthenticated && !AllowAnonymous)
+		/// <param name="db">The db context</param>
+		public override void OnDelete(DataContext db) {
+			if (db.Identity == Guid.Empty && !HttpContext.Current.User.Identity.IsAuthenticated && !AllowAnonymous)
 				throw new UnauthorizedAccessException("User must be logged in to delete entity") ;
 		}
 	}

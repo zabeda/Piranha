@@ -147,6 +147,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Radera</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beskrivning</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Ändra</value>
   </data>

@@ -121,19 +121,20 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Saves the current user.
 		/// </summary>
+		/// <param name="db">The db context</param>
 		/// <param name="state">The entity state</param>
-		public override void OnSave(System.Data.EntityState state) {
+		public override void OnSave(DataContext db, System.Data.EntityState state) {
 			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (DataContext.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
+			if (db.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
 				if (state == EntityState.Added) {
 					if (Id == Guid.Empty)
 						Id = Guid.NewGuid() ;
 					Created = Updated = DateTime.Now ;
-					CreatedById = UpdatedById = DataContext.Identity != Guid.Empty ? DataContext.Identity : new Guid(user.Identity.Name) ;
+					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
 				} else if (state == EntityState.Modified) {
 					Updated = DateTime.Now ;
-					UpdatedById = DataContext.Identity != Guid.Empty ? DataContext.Identity : new Guid(user.Identity.Name) ;
+					UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
 				}
 			} else throw new UnauthorizedAccessException("User must be logged in to save entity") ;
 		}

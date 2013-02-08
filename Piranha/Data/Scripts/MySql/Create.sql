@@ -131,6 +131,22 @@ CREATE TABLE namespace (
 	CONSTRAINT fk_namespace_updated_by FOREIGN KEY (namespace_updated_by) REFERENCES sysuser (sysuser_id)
 );
 
+CREATE TABLE sitetree (
+	sitetree_id CHAR(38) NOT NULL,
+	sitetree_namespace_id CHAR(38) NOT NULL,
+	sitetree_internal_id VARCHAR(32) NOT NULL,
+	sitetree_name VARCHAR(64) NOT NULL,
+	sitetree_description VARCHAR(255) NULL,
+	sitetree_created DATETIME NOT NULL,
+	sitetree_updated DATETIME NOT NULL,
+	sitetree_created_by CHAR(38) NOT NULL,
+	sitetree_updated_by CHAR(38) NOT NULL,
+	CONSTRAINT pk_sitetree_id PRIMARY KEY (sitetree_id),
+	CONSTRAINT fk_sitetree_namespace_id FOREIGN KEY (sitetree_namespace_id) REFERENCES namespace (namespace_id),
+	CONSTRAINT fk_sitetree_created_by FOREIGN KEY (sitetree_created_by) REFERENCES sysuser (sysuser_id),
+	CONSTRAINT fk_sitetree_updated_by FOREIGN KEY (sitetree_updated_by) REFERENCES sysuser (sysuser_id)
+);
+
 CREATE TABLE permalink (
 	permalink_id CHAR(38) NOT NULL,
 	permalink_namespace_id CHAR(38) NOT NULL,
@@ -172,6 +188,8 @@ CREATE TABLE relation (
 
 CREATE TABLE page (
 	page_id CHAR(38) NOT NULL,
+	page_sitetree_id CHAR(38) NOT NULL,
+	page_original_id CHAR(38) NULL,
 	page_draft BIT NOT NULL default true,
 	page_template_id CHAR(38) NOT NULL,
 	page_group_id CHAR(38) NULL,

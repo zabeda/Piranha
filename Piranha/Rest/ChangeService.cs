@@ -22,21 +22,21 @@ namespace Piranha.Rest
 	public class ChangeService : BaseService
 	{
 		[OperationContract()]
-		[WebGet(UriTemplate="get/{date}/{time}", ResponseFormat=WebMessageFormat.Json)]
-		public Stream GetChanges(string date, string time) {
-			return Serialize(GetChangesInternal(date + FormatTime(time))) ;
+		[WebGet(UriTemplate="get/{internalid}/{date}/{time}", ResponseFormat=WebMessageFormat.Json)]
+		public Stream GetChanges(string internalid, string date, string time) {
+			return Serialize(GetChangesInternal(internalid.ToUpper(), date + FormatTime(time))) ;
 		}
 
-		internal Changes GetChangesInternal(string date) {
+		internal Changes GetChangesInternal(string internalid, string date) {
 			Changes changes = new Changes() ;
 			DateTime latest = Convert.ToDateTime(date) ;
 
 			// Check if we have pages publised after the given date. If so return the sitemap
-			if (Models.Page.GetScalar("SELECT COUNT(page_id) FROM page WHERE page_last_published > @0", latest) > 0)
-				changes.Sitemap = new SitemapServices().Get() ;
+			if (Models.Page.GetScalar("SELECT COUNT(page_id) FROM page JOIN sitetree ON page_sitetree_id = sitetree_id WHERE page_last_published > @0 AND sitetree_internal_id = @1", latest, internalid) > 0)
+				changes.Sitemap = new SitemapServices().Get(internalid) ;
 
 			// Get all pages last published after the given date.
-			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_draft = 0", latest).ForEach(p => 
+			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_draft = 0 AND sitetree_internal_id = @1", latest, internalid).ForEach(p => 
 				changes.Pages.Add(new PageService().GetInternal(p.Id.ToString()))) ;
 
 			// Get all posts last published after the given date.

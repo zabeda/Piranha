@@ -1,4 +1,5 @@
-﻿DROP TABLE [relation];
+﻿DROP TABLE [comment];
+DROP TABLE [relation];
 DROP TABLE [upload];
 DROP TABLE [content];
 DROP TABLE [region];
@@ -11,6 +12,7 @@ DROP TABLE [permalink];
 DROP TABLE [regiontemplate];
 DROP TABLE [posttemplate];
 DROP TABLE [pagetemplate];
+DROP TABLE [sitetree];
 DROP TABLE [namespace];
 DROP TABLE [sysparam];
 DROP TABLE [sysaccess];

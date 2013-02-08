@@ -20,6 +20,7 @@ namespace Piranha.Models
 	[PrimaryKey(Column="page_id,page_draft")]
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
 	[Join(TableName="permalink", ForeignKey="page_permalink_id", PrimaryKey="permalink_id")]
+	[Join(TableName="sitetree", ForeignKey="page_sitetree_id", PrimaryKey="sitetree_id")]
 	public class Page : DraftRecord<Page>, IPage, ISitemap, ICacheRecord<Page>
 	{
 		#region Fields
@@ -28,6 +29,24 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="page_id")]
 		public override Guid Id { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the site tree id.
+		/// </summary>
+		[Column(Name="page_sitetree_id")]
+		public Guid SiteTreeId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the site tree internal id.
+		/// </summary>
+		[Column(Name="sitetree_internal_id", Table="sitetree", ReadOnly=true)]
+		public string SiteTreeInternalId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the original id if this is a copy.
+		/// </summary>
+		[Column(Name="page_original_id")]
+		public Guid OriginalId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets weather this is a draft.
@@ -317,9 +336,14 @@ namespace Piranha.Models
 		/// <param name="draft">Weather to get the current draft</param>
 		/// <returns>The startpage</returns>
 		public static Page GetStartpage(bool draft = false) {
-			if (!Cache.ContainsKey(Guid.Empty))
-				Cache[Guid.Empty] = Page.GetSingle("page_parent_id IS NULL and page_seqno = 1 AND page_draft = @0", draft) ;
-			return Cache[Guid.Empty] ;
+			var startpageId = Config.StartpageId ;
+
+			if (!Cache.ContainsKey(startpageId)) {
+				if (startpageId == Guid.Empty)
+					Cache[startpageId] = Page.GetSingle("page_parent_id IS NULL and page_seqno = 1 AND page_draft = @0 AND page_sitetree_id = @1", draft, Config.SiteTreeId) ;
+				else Cache[startpageId] = Page.GetSingle(startpageId, draft) ;
+			}
+			return Cache[startpageId] ;
 		}
 
 		/// <summary>
@@ -380,14 +404,14 @@ namespace Piranha.Models
 			// simply change states.
 			if (IsDraft) {
 				if (IsNew) {
-					MoveSeqno(Id, ParentId, Seqno, true, t) ;
+					MoveSeqno(SiteTreeId, Id, ParentId, Seqno, true, t) ;
 				} else {
 					Page old = GetSingle(Id, true) ;
 					Page pub = GetSingle(Id, false) ;
 
 					if (old.ParentId != ParentId || old.Seqno != Seqno) {
-						MoveSeqno(Id, old.ParentId, old.Seqno + 1, false, t) ;
-						MoveSeqno(Id, ParentId, Seqno, true, t) ;
+						MoveSeqno(SiteTreeId, Id, old.ParentId, old.Seqno + 1, false, t) ;
+						MoveSeqno(SiteTreeId, Id, ParentId, Seqno, true, t) ;
 						if (pub != null) {
 							pub.ParentId = ParentId ;
 							pub.Seqno = Seqno ;
@@ -409,13 +433,13 @@ namespace Piranha.Models
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
 
 			if (IsNew) {
-				MoveSeqno(Id, ParentId, Seqno, true) ;
+				MoveSeqno(SiteTreeId, Id, ParentId, Seqno, true) ;
 			} else {
 				using (IDbTransaction itx = Database.OpenTransaction()) {
 					Page old = GetSingle(Id, true) ;
 					if (old.ParentId != ParentId || old.Seqno != Seqno) {
-						MoveSeqno(Id, old.ParentId, old.Seqno + 1, false, itx) ;
-						MoveSeqno(Id, ParentId, Seqno, true, itx) ;
+						MoveSeqno(SiteTreeId, Id, old.ParentId, old.Seqno + 1, false, itx) ;
+						MoveSeqno(SiteTreeId, Id, ParentId, Seqno, true, itx) ;
 						itx.Commit() ;
 					}
 				}
@@ -436,7 +460,7 @@ namespace Piranha.Models
 				// Only move pages around when we're deleting the draft so we don't get
 				// multiple move operations in the site tree.
 				if (IsDraft)
-					MoveSeqno(Id, ParentId, Seqno + 1, false, t) ;
+					MoveSeqno(SiteTreeId, Id, ParentId, Seqno + 1, false, t) ;
 				Web.ClientCache.SetSiteLastModified(t) ;
 				if (base.Delete(t)) {
 					if (tx == null) 
@@ -456,15 +480,16 @@ namespace Piranha.Models
 		/// <summary>
 		/// Moves the seqno around so that a page can be inserted into the structure.
 		/// </summary>
+		/// <param name="sitetreeid">The site tree id</param>
 		/// <param name="parentid">The parent id</param>
 		/// <param name="seqno">The seqno</param>
 		/// <param name="inc">Weather to increase or decrease</param>
-		internal static void MoveSeqno(Guid pageid, Guid parentid, int seqno, bool inc, IDbTransaction tx = null) {
+		internal static void MoveSeqno(Guid sitetreeid, Guid pageid, Guid parentid, int seqno, bool inc, IDbTransaction tx = null) {
 			if (parentid != Guid.Empty)
 				Execute("UPDATE page SET page_seqno = page_seqno " + (inc ? "+ 1" : "- 1") +
-					" WHERE page_parent_id = @0 AND page_seqno >= @1", tx, parentid, seqno) ;
+					" WHERE page_parent_id = @0 AND page_seqno >= @1 AND page_sitetree_id = @2", tx, parentid, seqno, sitetreeid) ;
 			else Execute("UPDATE page SET page_seqno = page_seqno " + (inc ? "+ 1" : "- 1") +
-				" WHERE page_parent_id IS NULL AND page_seqno >= @0", tx, seqno) ;
+				" WHERE page_parent_id IS NULL AND page_seqno >= @0 AND page_sitetree_id = @1", tx, seqno, sitetreeid) ;
 		}
 
 		/// <summary>
@@ -484,7 +509,7 @@ namespace Piranha.Models
 
 			// Invalidate public sitemap
 			if (!record.IsDraft)
-				Sitemap.InvalidateCache() ;
+				Sitemap.InvalidateCache(record.SiteTreeInternalId) ;
 		}
 
 		#region Handlers

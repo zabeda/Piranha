@@ -17,6 +17,8 @@ namespace Piranha.Entities.Maps
 			HasKey(p => new { p.Id, p.IsDraft }) ;
 			Property(p => p.Id).HasColumnName("page_id") ;
 			Property(p => p.IsDraft).HasColumnName("page_draft") ;
+			Property(p => p.SiteTreeId).HasColumnName("page_sitetree_id") ;
+			Property(p => p.OriginalId).HasColumnName("page_original_id") ;
 			Property(p => p.TemplateId).HasColumnName("page_template_id") ;
 			Property(p => p.GroupId).HasColumnName("page_group_id") ;
 			Property(p => p.ParentId).HasColumnName("page_parent_id") ;
@@ -37,6 +39,7 @@ namespace Piranha.Entities.Maps
 			Property(p => p.CreatedById).HasColumnName("page_created_by") ;
 			Property(p => p.UpdatedById).HasColumnName("page_updated_by") ;
 
+			HasRequired(p => p.SiteTree) ;
 			HasRequired(p => p.Template) ;
 			HasRequired(p => p.Permalink) ;
 			HasMany(p => p.Regions).WithRequired(r => r.Page) ;

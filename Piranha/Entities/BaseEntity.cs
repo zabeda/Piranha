@@ -25,19 +25,21 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Called when the entity has been loaded.
 		/// </summary>
-		/// <param name="?"></param>
-		public virtual void OnLoad() {}
+		/// <param name="db">The db context</param>
+		public virtual void OnLoad(DataContext db) {}
 
 		/// <summary>
 		/// Called when the entity is about to get saved.
 		/// </summary>
+		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
-		public virtual void OnSave(EntityState state) {}
+		public virtual void OnSave(DataContext db, EntityState state) {}
 
 		/// <summary>
 		/// Called when the entity is about to get deleted.
 		/// </summary>
-		public virtual void OnDelete() {}
+		/// <param name="db">The db context</param>
+		public virtual void OnDelete(DataContext db) {}
 
 		/// <summary>
 		/// Validates an entity

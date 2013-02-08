@@ -17,10 +17,10 @@ namespace Piranha
 	{
 		#region Members
 		/// <summary>
-		/// Gets/sets the logged in identity in case this context is
-		/// used outside of the HttpContext.
+		/// Gets the logged in identity in case this context is used
+		/// without a HttpContext.
 		/// </summary>
-		internal static Guid Identity { get ; set ; }
+		internal Guid Identity { get ; private set ; }
 		#endregion
 
 		#region DbSets
@@ -34,6 +34,7 @@ namespace Piranha
 		public DbSet<Entities.PostTemplate> PostTemplates { get ; set ; }
 		public DbSet<Entities.RegionTemplate> RegionTemplates { get ; set ; }
 		public DbSet<Entities.Namespace> Namespaces { get ; set ; }
+		public DbSet<Entities.SiteTree> SiteTrees { get ; set ; }
 		public DbSet<Entities.Permalink> Permalinks { get ; set ; }
 		public DbSet<Entities.Category> Categories { get ; set ; }
 		public DbSet<Entities.Media> Media { get ; set ; }
@@ -45,9 +46,9 @@ namespace Piranha
 		public DbSet<Entities.Upload> Uploads { get ; set ; }
 		public DbSet<Entities.Comment> Comments { get ; set ; }
 
-		// Internal DbSets
-		internal IQueryable<Entities.Page> PageDrafts { get { return Set<Entities.Page>().Where(p => p.IsDraft) ; } }
-		internal IQueryable<Entities.Post> PostDrafts { get { return Set<Entities.Post>().Where(p => p.IsDraft) ; } }
+		// Drafts
+		public IQueryable<Entities.Page> PageDrafts { get { return Set<Entities.Page>().Where(p => p.IsDraft) ; } }
+		public IQueryable<Entities.Post> PostDrafts { get { return Set<Entities.Post>().Where(p => p.IsDraft) ; } }
 		#endregion
 
 		/// <summary>
@@ -59,12 +60,12 @@ namespace Piranha
 		}
 
 		/// <summary>
-		/// Logs in the given user when no HttpContext is available.
+		/// Logs in the given user to the current data context.
 		/// </summary>
-		/// <param name="login">Username</param>
-		/// <param name="password">Password</param>
-		/// <returns>If the login was successful</returns>
-		public static bool Login(string login, string password) {
+		/// <param name="login">The username</param>
+		/// <param name="password">The password</param>
+		/// <returns>Weather the login was successful</returns>
+		public bool Login(string login, string password) {
 			var usr = Models.SysUser.Authenticate(login, password) ;
 
 			if (usr != null) {
@@ -75,11 +76,11 @@ namespace Piranha
 		}
 
 		/// <summary>
-		/// Logs in the given user with the given apikey when no HttpContext is available.
+		/// Logs in the user with the given encrypted api key to the current data context.
 		/// </summary>
-		/// <param name="apiKey">The api key</param>
-		/// <returns>If the login was successful</returns>
-		public static bool Login(string apiKey) {
+		/// <param name="apiKey">The encrypted api key</param>
+		/// <returns>Weather the login was successful</returns>
+		public bool Login(string apiKey) {
 			var id = Web.APIKeys.GetUserId(apiKey) ;
 
 			if (id.HasValue) {
@@ -92,14 +93,14 @@ namespace Piranha
 		/// <summary>
 		/// Logs in the default sys user.
 		/// </summary>
-		public static void LoginSys() {
+		public void LoginSys() {
 			Identity = Piranha.Data.Database.SysUserId ;
 		}
 
 		/// <summary>
 		/// Logs out the current user.
 		/// </summary>
-		public static void Logout() {
+		public void Logout() {
 			Identity = Guid.Empty ;
 		}
 
@@ -117,6 +118,7 @@ namespace Piranha
 			modelBuilder.Configurations.Add(new Entities.Maps.PostTemplateMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.RegionTemplateMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.NamespaceMap()) ;
+			modelBuilder.Configurations.Add(new Entities.Maps.SiteTreeMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.PermalinkMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.CategoryMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.MediaMap()) ;
@@ -138,7 +140,7 @@ namespace Piranha
 		/// <param name="e">Event arguments</param>
 		void OnEntityLoad(object sender, System.Data.Objects.ObjectMaterializedEventArgs e) {
 			if (e.Entity is Entities.BaseEntity)
-				((Entities.BaseEntity)e.Entity).OnLoad() ;
+				((Entities.BaseEntity)e.Entity).OnLoad(this) ;
 		}
 
 		/// <summary>
@@ -152,11 +154,9 @@ namespace Piranha
 				//
 				if (entity.Entity is Entities.BaseEntity) {
 					if (entity.State == EntityState.Added || entity.State == EntityState.Modified) {
-						((Entities.BaseEntity)entity.Entity).OnSave(entity.State) ;
-						//((Entities.BaseEntity)entity.Entity).OnInvalidate(entity.State) ;
+						((Entities.BaseEntity)entity.Entity).OnSave(this, entity.State) ;
 					} else if (entity.State == EntityState.Deleted) {
-						((Entities.BaseEntity)entity.Entity).OnDelete() ;
-						//((Entities.BaseEntity)entity.Entity).OnInvalidate(entity.State) ;
+						((Entities.BaseEntity)entity.Entity).OnDelete(this) ;
 					}
 				}
 			}

@@ -58,7 +58,8 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Deletes the current upload.
 		/// </summary>
-		public override void OnDelete() {
+		/// <param name="db">The db context</param>
+		public override void OnDelete(DataContext db) {
 			// Delete the main file
 			if (File.Exists(PhysicalPath))
 				File.Delete(PhysicalPath) ;

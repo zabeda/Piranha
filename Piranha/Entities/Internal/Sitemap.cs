@@ -14,6 +14,7 @@ namespace Piranha.Models
 	[Table(Name="page")]
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
 	[Join(TableName="permalink", ForeignKey="page_permalink_id", PrimaryKey="permalink_id")]
+	[Join(TableName="sitetree", ForeignKey="page_sitetree_id", PrimaryKey="sitetree_id")]
 	[Serializable]
 	public class Sitemap : PiranhaRecord<Sitemap>, ISitemap
 	{
@@ -23,6 +24,30 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="page_id")]
 		public override Guid Id { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the site tree id.
+		/// </summary>
+		[Column(Name="page_sitetree_id")]
+		public Guid SiteTreeId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the site tree internal id.
+		/// </summary>
+		[Column(Name="sitetree_internal_id", Table="sitetree", ReadOnly=true)]
+		public string SiteTreeInternalId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the site tree name.
+		/// </summary>
+		[Column(Name="sitetree_name", Table="sitetree", ReadOnly=true)]
+		public string SiteTreeName { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the original id if this is a copy.
+		/// </summary>
+		[Column(Name="page_original_id")]
+		public Guid OriginalId { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the group needed to view the page.
@@ -187,22 +212,32 @@ namespace Piranha.Models
 		/// <param name="published">Weather only published pages should be included.</param>
 		/// <returns>The site structure</returns>
 		public static List<Sitemap> GetStructure(bool published = true) {
+			return GetStructure(Config.SiteTree, published) ;
+		}
+
+		/// <summary>
+		/// Gets the sorted sitemap structure for the site tree with the given internal id.
+		/// </summary>
+		/// <param name="internalId">The internal id of the site tree</param>
+		/// <param name="published">Weather to only get published pages.</param>
+		/// <returns>The sitemap</returns>
+		public static List<Sitemap> GetStructure(string internalId, bool published = true) {
 			if (published) {
 				// Return the cached public sitemap if it exists.
-				if (published && HttpContext.Current.Cache[typeof(Sitemap).Name] != null)
-					return (List<Sitemap>)HttpContext.Current.Cache[typeof(Sitemap).Name] ;
+				if (published && HttpContext.Current.Cache[typeof(Sitemap).Name + "_" + internalId] != null)
+					return (List<Sitemap>)HttpContext.Current.Cache[typeof(Sitemap).Name + "_" + internalId] ;
 
 				// Get the sitemap from the database
-				List<Sitemap> pages = Get("page_draft = 0", new Params() { OrderBy = "page_parent_id, page_seqno" }) ;
+				List<Sitemap> pages = Get("sitetree_internal_id = @0 AND page_draft = 0", internalId, new Params() { OrderBy = "page_parent_id, page_seqno" }) ;
 				pages = Sort(pages, Guid.Empty) ;
 			
 				// If this is the public sitemap, cache it
 				if (published)
-					HttpContext.Current.Cache[typeof(Sitemap).Name] = pages ;
+					HttpContext.Current.Cache[typeof(Sitemap).Name + "_" + internalId] = pages ;
 				return pages ;
 			} else {
 				// Get the sitemap from the database
-				List<Sitemap> pages = Get("page_draft = 1", new Params() { OrderBy = "page_parent_id, page_seqno" }) ;
+				List<Sitemap> pages = Get("sitetree_internal_id = @0 AND page_draft = 1", internalId, new Params() { OrderBy = "page_parent_id, page_seqno" }) ;
 				pages = Sort(pages, Guid.Empty) ;			
 				return pages ;
 			}
@@ -211,9 +246,10 @@ namespace Piranha.Models
 		/// <summary>
 		/// Invalidate the cache.
 		/// </summary>
-		public static void InvalidateCache() {
+		/// <param name="internalId">The internal id of the sitemap</param>
+		public static void InvalidateCache(string internalId = "DEFAULT_SITE") {
 			if (HttpContext.Current != null)
-				HttpContext.Current.Cache.Remove(typeof(Sitemap).Name) ;
+				HttpContext.Current.Cache.Remove(typeof(Sitemap).Name + "_" + internalId) ;
 		}
 
 		/// <summary>

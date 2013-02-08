@@ -13,6 +13,16 @@ namespace Piranha.Entities
 	{
 		#region Properties
 		/// <summary>
+		/// Gets/sets the site tree id.
+		/// </summary>
+		public Guid SiteTreeId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the original id if this is a copy.
+		/// </summary>
+		public Guid? OriginalId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets weather this page instance is a draft.
 		/// </summary>
 		internal bool IsDraft { get ; set ; }
@@ -95,6 +105,11 @@ namespace Piranha.Entities
 
 		#region Navigation properties
 		/// <summary>
+		/// Gets/sets the sitetree the page is positioned in.
+		/// </summary>
+		public SiteTree SiteTree { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the page template.
 		/// </summary>
 		public PageTemplate Template { get ; set ; }
@@ -157,24 +172,25 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Called when the entity has been loaded.
 		/// </summary>
-		public override void OnLoad() {
+		/// <param name="db">The db context</param>
+		public override void OnLoad(DataContext db) {
 			var js = new JavaScriptSerializer() ;
-
 			Attachments = !String.IsNullOrEmpty(AttachmentsJson) ? js.Deserialize<List<Guid>>(AttachmentsJson) : Attachments ;
 
-			base.OnLoad() ;
+			base.OnLoad(db) ;
 		}
 
 		/// <summary>
 		/// Called when the entity is about to be saved.
 		/// </summary>
+		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
-		public override void OnSave(System.Data.EntityState state) {
+		public override void OnSave(DataContext db, System.Data.EntityState state) {
 			var js = new JavaScriptSerializer() ;
 
 			AttachmentsJson = js.Serialize(Attachments) ;
 
-			base.OnSave(state);
+			base.OnSave(db, state);
 		}
 		#endregion
 	}

@@ -79,7 +79,7 @@ VALUES ('f65bd7dd-6dfe-45b7-87e3-20a11e1f8d55', '8940b41a-e3a9-44f3-b564-bfd2814
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '23', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '24', 'The currently installed version of Piranha.', 1,
 	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
@@ -154,6 +154,11 @@ INSERT INTO namespace (namespace_id, namespace_internal_id, namespace_name, name
 	VALUES ('AE46C4C4-20F7-4582-888D-DFC148FE9067', 'CATEGORY', 'Category namespace', 'This is the namespace for all categories.',
 		NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
+-- Default site tree
+INSERT INTO sitetree (sitetree_id, sitetree_namespace_id, sitetree_internal_id, sitetree_name, sitetree_description, sitetree_created,
+	sitetree_updated, sitetree_created_by, sitetree_updated_by)
+VALUES ('C2F87B2B-F585-4696-8A2B-3C9DF882701E', '8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'DEFAULT_SITE', 'Default site', 'This is the default site tree.',
+	NOW(), NOW(), 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC', 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC');
 
 -- Permalink
 INSERT INTO permalink (permalink_id, permalink_namespace_id, permalink_type, permalink_name, permalink_created,
@@ -162,14 +167,14 @@ VALUES ('1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', '8FF4A4B4-9B6C-4176-AAA2-DB031D7
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default page
-INSERT INTO page (page_id, page_draft, page_template_id, page_permalink_id, page_seqno, page_title, page_keywords, page_description,
+INSERT INTO page (page_id, page_sitetree_id, page_draft, page_template_id, page_permalink_id, page_seqno, page_title, page_keywords, page_description,
 	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
-VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 1, '906761ea-6c04-4f4b-9365-f2c350ff4372', '1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 
+VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 1, '906761ea-6c04-4f4b-9365-f2c350ff4372', '1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 
 	1, 'Start', 'Piranha, Welcome', 'Welcome to Piranha', NOW(), NOW(), NOW(), NOW(),
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
-INSERT INTO page (page_id, page_draft, page_template_id, page_permalink_id, page_seqno, page_title, page_keywords, page_description,
+INSERT INTO page (page_id, page_sitetree_id, page_draft, page_template_id, page_permalink_id, page_seqno, page_title, page_keywords, page_description,
 	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
-VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 0, '906761ea-6c04-4f4b-9365-f2c350ff4372', '1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 
+VALUES ('7849b6d6-dc43-43f6-8b5a-5770ab89fbcf', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 0, '906761ea-6c04-4f4b-9365-f2c350ff4372', '1e64c1d4-e24f-4c7c-8f61-f3a75ad2e2fe', 
 	1, 'Start', 'Piranha, Welcome', 'Welcome to Piranha', NOW(), NOW(), NOW(), NOW(),
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 

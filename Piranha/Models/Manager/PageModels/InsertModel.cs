@@ -25,6 +25,27 @@ namespace Piranha.Models.Manager.PageModels
 		/// Page seqno
 		/// </summary>
 		public int Seqno { get ; set ; }
+
+		/// <summary>
+		/// The id of the page to create a copy of.
+		/// </summary>
+		public Guid OriginalId { get ; set ; }
+
+		/// <summary>
+		/// Internal id of the site tree.
+		/// </summary>
+		public string SiteTree { get ; set ; }
+
+		/// <summary>
+		/// Gets the id of the selected site tree.
+		/// </summary>
+		public Guid SiteTreeId {
+			get {
+				using (var db = new DataContext()) {
+					return db.SiteTrees.Where(s => s.InternalId == SiteTree).Select(s => s.Id).Single() ;
+				}
+			} 
+		}
 		#endregion
 
 		/// <summary>
@@ -34,6 +55,7 @@ namespace Piranha.Models.Manager.PageModels
 			TemplateId = Guid.Empty ;
 			ParentId = Guid.Empty ;
 			Seqno = 1 ;
+			SiteTree = Config.SiteTree ;
 		}
 	}
 }

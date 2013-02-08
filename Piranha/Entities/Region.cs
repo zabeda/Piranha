@@ -124,10 +124,11 @@ namespace Piranha.Entities
 		#endregion
 
 		#region Events
-		public override void OnSave(System.Data.EntityState state) {
+		public override void OnSave(DataContext db, System.Data.EntityState state) {
 			JavaScriptSerializer js = new JavaScriptSerializer() ;
-
 			InternalBody = js.Serialize(Body) ;
+
+			base.OnSave(db, state) ;
 		}
 		#endregion
 	}

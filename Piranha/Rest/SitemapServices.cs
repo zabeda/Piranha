@@ -25,9 +25,9 @@ namespace Piranha.Rest
 		/// </summary>
 		/// <returns>The sitemap</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get", ResponseFormat=WebMessageFormat.Json)]
-		public List<Sitemap> Get() {
-			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(true) ;
+		[WebGet(UriTemplate="get/{internalid}", ResponseFormat=WebMessageFormat.Json)]
+		public List<Sitemap> Get(string internalid) {
+			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(internalid.ToUpper(), true) ;
 			return BuildMap(sm) ;
 		}
 
@@ -36,9 +36,9 @@ namespace Piranha.Rest
 		/// </summary>
 		/// <returns>The sitemap</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/xml", ResponseFormat=WebMessageFormat.Xml)]
-		public List<Sitemap> GetXml() {
-			return Get() ;
+		[WebGet(UriTemplate="get/xml/{internalid}", ResponseFormat=WebMessageFormat.Xml)]
+		public List<Sitemap> GetXml(string internalid) {
+			return Get(internalid) ;
 		}
 
 		/// <summary>

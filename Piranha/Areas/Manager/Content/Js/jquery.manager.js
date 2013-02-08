@@ -833,8 +833,9 @@ $(document).ready(function () {
     // Floatbox close button
     //
     $(".floatbox .box .title").click(function () {
-        floatBox.close($(this).parent().parent().attr("id"));
+        //floatBox.close($(this).parent().parent().attr("id"));
     });
+    bindAjaxBoxEvents();
 
     //
     // Locked form fields
@@ -888,6 +889,7 @@ function bindAjaxBoxEvents() {
         $.each($(".floatbox .box"), function (i, e) {
             floatBox.position($(e));
         });
+        return false;
     });
 }
 

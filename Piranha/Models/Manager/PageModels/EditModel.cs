@@ -173,12 +173,14 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		/// <param name="templateId">The template id</param>
 		/// <returns>The edit model</returns>
+		[Obsolete("Please use CreateByTemplateAndPosition instead")]
 		public static EditModel CreateByTemplate(Guid templateId) {
 			EditModel m = new EditModel() ;
 
 			m.Page = new Piranha.Models.Page() {
 				Id = Guid.NewGuid(),
-				TemplateId = templateId 
+				TemplateId = templateId,
+				SiteTreeId = Config.SiteTreeId
 			} ;
 			m.GetRelated() ;
 
@@ -192,13 +194,37 @@ namespace Piranha.Models.Manager.PageModels
 		/// <param name="templateId">The template id</param>
 		/// <param name="parentId">The parent id</param>
 		/// <param name="seqno">The position sequence number</param>
+		/// <param name="siteTreeId">The id of the site tree</param>
+		/// <param name="siteTree">The internal id of the site tree</param>
 		/// <returns>The edit model</returns>
-		public static EditModel CreateByTemplateAndPosition(Guid templateId, Guid parentId, int seqno) {
+		public static EditModel CreateByTemplateAndPosition(Guid templateId, Guid parentId, int seqno, Guid siteTreeId, string siteTree) {
 			EditModel m = new EditModel() ;
 
 			m.Page = new Piranha.Models.Page() {
 				Id = Guid.NewGuid(),
 				TemplateId = templateId, 
+				SiteTreeId = siteTreeId,
+				SiteTreeInternalId = siteTree,
+				ParentId = parentId,
+				Seqno = seqno
+			} ;
+			m.GetRelated() ;
+
+			return m ;
+		}
+
+		public static EditModel CreateByOriginalAndPosition(Guid originalId, Guid parentId, int seqno, Guid siteTreeId, string siteTree) {
+			var m = new EditModel() ;
+			var p = Page.GetSingle(originalId) ;
+
+			m.Page = new Piranha.Models.Page() {
+				Id = Guid.NewGuid(),
+				Title = p.Title,
+				NavigationTitle = p.NavigationTitle,
+				TemplateId = p.TemplateId,
+				OriginalId = originalId,
+				SiteTreeId = siteTreeId,
+				SiteTreeInternalId = siteTree,
 				ParentId = parentId,
 				Seqno = seqno
 			} ;
@@ -385,9 +411,9 @@ namespace Piranha.Models.Manager.PageModels
 					}
 
 					// Get page position
-					Parents = BuildParentPages(Sitemap.GetStructure(false), Page) ;
+					Parents = BuildParentPages(Sitemap.GetStructure(Page.SiteTreeInternalId, false), Page) ;
 					Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
-					Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
+					Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId, Page.SiteTreeInternalId) ;
 
 					// Initialize regions
 					foreach (var reg in Regions)
@@ -471,9 +497,9 @@ namespace Piranha.Models.Manager.PageModels
 			}
 
 			// Get page position
-			Parents = BuildParentPages(Sitemap.GetStructure(false), Page) ;
+			Parents = BuildParentPages(Sitemap.GetStructure(Page.SiteTreeInternalId, false), Page) ;
 			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
-			Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId) ;
+			Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId, Page.SiteTreeInternalId) ;
 
 			// Get extensions
 			Extensions = Page.GetExtensions() ;
@@ -519,11 +545,13 @@ namespace Piranha.Models.Manager.PageModels
 			return ret ;
 		}
 
-		internal static List<PagePlacement> BuildSiblingPages(Guid page_id, Guid page_parentid, int page_seqno, Guid parentid) {
+		internal static List<PagePlacement> BuildSiblingPages(Guid page_id, Guid page_parentid, int page_seqno, Guid parentid, string siteTree) {
 			List<Page> sib = null ;
 			if (parentid != Guid.Empty)
-				sib = Page.Get("page_parent_id = @0 AND page_id != @1 AND page_draft = 1", parentid, page_id, new Params() { OrderBy = "page_seqno" }) ;
-			else sib = Page.Get("page_parent_id IS NULL AND page_id != @0 AND page_draft = 1", page_id, new Params() { OrderBy = "page_seqno" }) ;
+				sib = Page.Get("page_parent_id = @0 AND page_id != @1 AND page_draft = 1 AND sitetree_internal_id = @2", 
+					parentid, page_id, siteTree, new Params() { OrderBy = "page_seqno" }) ;
+			else sib = Page.Get("page_parent_id IS NULL AND page_id != @0 AND page_draft = 1 AND sitetree_internal_id = @1", 
+				page_id, siteTree, new Params() { OrderBy = "page_seqno" }) ;
 
 			var ret = new List<PagePlacement>() ;
 			ret.Add(new PagePlacement() { Seqno = 1, IsSelected = page_parentid == parentid && page_seqno == 1 }) ;
