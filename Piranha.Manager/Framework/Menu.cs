@@ -11,39 +11,39 @@ namespace Piranha.Manager
 	public static class Menu
 	{
 		public static List<MenuGroup> Items = new List<MenuGroup>() {
-			new MenuGroup() { InternalId = "Content", Name = @Resources.Global.MenuContent, IconUrl = "~/manager/content/img/ico-menu-content.png", 
+			new MenuGroup() { InternalId = "Content", Name = @Resources.Menu.Content, IconUrl = "~/manager/content/img/ico-menu-content.png", 
 				Items = new List<MenuItem>() {
-					new MenuItem() { InternalId = "Pages", Name = @Resources.Tabs.ContentPages, Href = "~/manager/page",
+					new MenuItem() { InternalId = "Pages", Name = @Resources.Menu.ContentPages, Href = "~/manager/page",
 						Permission = "ADMIN_PAGE" },
-					new MenuItem() { InternalId = "Posts", Name = @Resources.Tabs.ContentPosts, Href = "~/manager/post",
+					new MenuItem() { InternalId = "Posts", Name = @Resources.Menu.ContentPosts, Href = "~/manager/post",
 						Permission = "ADMIN_POST" },
-					new MenuItem() { InternalId = "Media", Name = @Resources.Tabs.ContentMedia, Href = "~/manager/media",
+					new MenuItem() { InternalId = "Media", Name = @Resources.Menu.ContentMedia, Href = "~/manager/media",
 						Permission = "ADMIN_CONTENT" },
-					new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Href = "~/manager/comment",
+					new MenuItem() { InternalId = "Comments", Name = @Resources.Menu.ContentComments, Href = "~/manager/comment",
 						Permission = "ADMIN_COMMENT" },
 				}
 			},
-			new MenuGroup() { InternalId = "Settings", Name = @Resources.Global.MenuSettings, IconUrl = "~/manager/content/img/ico-menu-settings.png",
+			new MenuGroup() { InternalId = "Settings", Name = @Resources.Menu.Settings, IconUrl = "~/manager/content/img/ico-menu-settings.png",
 				Items = new List<MenuItem>() {
-					new MenuItem() { InternalId = "PageTypes", Name = @Resources.Tabs.SettingsPageTypes, Href = "~/manager/pagetype",
+					new MenuItem() { InternalId = "PageTypes", Name = @Resources.Menu.SettingsPageTypes, Href = "~/manager/pagetype",
 						Permission = "ADMIN_PAGE_TEMPLATE" },
-					new MenuItem() { InternalId = "PostTypes", Name = @Resources.Tabs.SettingsPostTypes, Href = "~/manager/posttype",
+					new MenuItem() { InternalId = "PostTypes", Name = @Resources.Menu.SettingsPostTypes, Href = "~/manager/posttype",
 						Permission = "ADMIN_POST_TEMPLATE" },
-					new MenuItem() { InternalId = "Categories", Name = @Resources.Tabs.SettingsCategories, Href = "~/manager/category",
+					new MenuItem() { InternalId = "Categories", Name = @Resources.Menu.SettingsCategories, Href = "~/manager/category",
 						Permission = "ADMIN_CATEGORY" },
-					new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Href = "~/manager/commentsettings",
+					new MenuItem() { InternalId = "Comments", Name = @Resources.Menu.SettingsComments, Href = "~/manager/commentsettings",
 						Permission = "ADMIN_COMMENT" },
 				}
 			},
-			new MenuGroup() { InternalId = "System", Name = @Resources.Global.MenuSystem, IconUrl = "~/manager/content/img/ico-menu-system.png",
+			new MenuGroup() { InternalId = "System", Name = @Resources.Menu.System, IconUrl = "~/manager/content/img/ico-menu-system.png",
 				Items = new List<MenuItem>() {
-					new MenuItem() { InternalId = "Users", Name = @Resources.Tabs.SystemUsers, Href = "~/manager/user",
+					new MenuItem() { InternalId = "Users", Name = @Resources.Menu.SystemUsers, Href = "~/manager/user",
 						Permission = "ADMIN_USER" },
-					new MenuItem() { InternalId = "Groups", Name = @Resources.Tabs.SystemGroups, Href = "~/manager/group",
+					new MenuItem() { InternalId = "Groups", Name = @Resources.Menu.SystemGroups, Href = "~/manager/group",
 						Permission = "ADMIN_GROUP" },
-					new MenuItem() { InternalId = "Permissions", Name = @Resources.Tabs.SystemAccess, Href = "~/manager/permission",
+					new MenuItem() { InternalId = "Permissions", Name = @Resources.Menu.SystemPermissions, Href = "~/manager/permission",
 						Permission = "ADMIN_ACCESS" },
-					new MenuItem() { InternalId = "Parameters", Name = @Resources.Tabs.SystemParams, Href = "~/manager/param",
+					new MenuItem() { InternalId = "Parameters", Name = @Resources.Menu.SystemParams, Href = "~/manager/param",
 						Permission = "ADMIN_PARAM" }
 				}
 			}

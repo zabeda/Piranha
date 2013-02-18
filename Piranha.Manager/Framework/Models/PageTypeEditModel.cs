@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.WebPages.Html;
 
 using Piranha.Entities;
+using Piranha.Extend;
 
 namespace Piranha.Manager.Models
 {
@@ -18,6 +20,11 @@ namespace Piranha.Manager.Models
 		/// Get/sets the current template.
 		/// </summary>
 		public Entities.PageTemplate Template { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the different region types available.
+		/// </summary>
+		public IList<SelectListItem> RegionTypes { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -25,6 +32,8 @@ namespace Piranha.Manager.Models
 		/// </summary>
 		public PageTypeEditModel() {
 			Template = new Entities.PageTemplate() ;
+			RegionTypes = ExtensionManager.Extensions.Where(e => e.ExtensionType == ExtensionType.Region).OrderBy(e => e.Name).Select(e =>
+				new SelectListItem() { Text = e.Name, Value = e.Type.ToString() }).ToList() ;
 		}
 
 		/// <summary>
@@ -36,7 +45,7 @@ namespace Piranha.Manager.Models
 			var m = new PageTypeEditModel() ;
 
 			using (var db = new DataContext()) {
-				m.Template = db.PageTemplates.Include(t => t.RegionTemplates).Single() ;
+				m.Template = db.PageTemplates.Include(t => t.RegionTemplates).Where(pt => pt.Id == id).Single() ;
 			}
 			return m ;
 		}

@@ -85,15 +85,23 @@
     <Compile Include="Framework\Extensions.cs" />
     <Compile Include="Framework\Menu.cs" />
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
+    <Compile Include="Framework\Models\PostTypeListModel.cs" />
     <Compile Include="Framework\Models\PageListModel.cs" />
     <Compile Include="Framework\Models\PageTypeEditModel.cs" />
     <Compile Include="Framework\Models\PageTypeListModel.cs" />
     <Compile Include="Framework\Models\ParamEditModel.cs" />
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
+    <Compile Include="Framework\Models\PostListModel.cs" />
+    <Compile Include="Framework\Templates\PostList.cs" />
     <Compile Include="Framework\Templates\PageList.cs" />
     <Compile Include="Framework\Templates\PageTypeEdit.cs" />
     <Compile Include="Framework\Templates\ParamEdit.cs" />
+    <Compile Include="PageType\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="PageType\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,6 +134,41 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="PostType\Index.generated.cs">
+      <DependentUpon>Index.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Post\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\PageType.Designer.cs">
+      <DependentUpon>PageType.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Global.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Menu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Menu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\PostType.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostType.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Toolbar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Toolbar.resx</DependentUpon>
     </Compile>
     <Compile Include="Shared\Menu.generated.cs">
       <AutoGen>True</AutoGen>
@@ -175,6 +218,31 @@
     </None>
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\PageType.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\PageType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PageType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Global.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Menu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Menu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Menu.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\PostType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PostType.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Toolbar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Toolbar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Toolbar.sv-SE.resx" />
     <EmbeddedResource Include="Shared\_Layout.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Layout.generated.cs</LastGenOutput>
@@ -182,6 +250,10 @@
     <None Include="PageType\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="PageType\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </None>
     <None Include="Page\Index.cshtml">
       <Generator>RazorGenerator</Generator>
@@ -200,6 +272,14 @@
       <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </None>
     <None Include="Permission\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="PostType\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Post\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </None>
@@ -230,7 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Media\" />
-    <Folder Include="Post\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\Css\Ext\chosen-sprite.png" />

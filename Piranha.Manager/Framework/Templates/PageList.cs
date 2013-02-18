@@ -25,7 +25,7 @@ namespace Piranha.Manager.Templates
 		/// Gets the list view for the site with the given internal id
 		/// </summary>
 		/// <param name="internalid">The internal id</param>
-		public void Site(string internalid) {
+		public new void Site(string internalid) {
 			Model = PageListModel.GetByInternalId(internalid.ToUpper()) ;
 		}
 	}

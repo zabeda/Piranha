@@ -72,6 +72,13 @@ namespace Piranha.Manager
 					.ForMember(p => p.CreatedById, o => o.Ignore())
 					.ForMember(p => p.Updated, o => o.Ignore())
 					.ForMember(p => p.UpdatedBy, o => o.Ignore()) ;
+				Mapper.CreateMap<Entities.Post, Manager.Models.PostListModel.PostModel>()
+					.ForMember(p => p.NavigationTitle, o => o.Ignore())
+					.ForMember(p => p.TemplateName, o => o.ResolveUsing(p => p.Template.Name))
+					.ForMember(p => p.Status, o => o.ResolveUsing(p => 
+						(!p.Published.HasValue ? PostListModel.PostStatus.UNPUBLISHED : 
+						(p.Updated > p.LastPublished.Value ? PostListModel.PostStatus.DRAFT : PostListModel.PostStatus.PUBLISHED))))
+					.ForMember(p => p.NewComments, o => o.ResolveUsing(p => p.Comments.Count)) ;
 				Mapper.AssertConfigurationIsValid() ;
 
 				Initialized = true ;
