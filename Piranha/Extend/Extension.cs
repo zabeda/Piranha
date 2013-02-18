@@ -24,6 +24,6 @@ namespace Piranha.Extend
 		/// <summary>
 		/// Gets/sets the extension type.
 		/// </summary>
-		internal ExtensionType ExtensionType { get ; set ; }
+		public ExtensionType ExtensionType { get ; set ; }
 	}
 }

@@ -131,6 +131,17 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Gets a hidden field for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="htmlAttributes">Additional html attributes</param>
+		/// <returns>The hidden field</returns>
+		public IHtmlString HiddenFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
+			return Page.Html.Hidden(expr.Body.ToString(), GetValue(expr), htmlAttributes) ;
+		}
+
+		/// <summary>
 		/// Gets a sekect list for the specified model property.
 		/// </summary>
 		/// <typeparam name="TProperty">The property type</typeparam>
