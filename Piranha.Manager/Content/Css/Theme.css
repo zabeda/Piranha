@@ -370,9 +370,15 @@ table.list thead tr {
     border: 1px solid #d2d0c9;
     border-radius: 3px;
     }
+table.list tr.dark td {
+    background: #edede9;
+    }
 .box table.list {
-    background: #fff;
-    border-style: none;
+    border: 1px solid #c9c6bc;
+    border-radius: 2px;
+    }
+.box table.list thead tr {
+    background: #edede9;
     }
     
 /**

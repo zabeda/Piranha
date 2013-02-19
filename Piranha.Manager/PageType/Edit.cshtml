@@ -8,11 +8,16 @@
     <script type="text/javascript" src="@Href("~/manager/content/js/jquery.template.js")"></script>
     <script type="text/javascript" src="@Href("~/manager/content/js/jquery.regiontemplate.js")"></script>
     <script type="text/javascript" src="@Href("~/manager/content/js/ext/json2.js")"></script>
+    <script type="text/javascript" src="@Href("~/manager/content/Js/ext/jquery.equalheights.js")"></script>
     <script type="text/javascript">
         /**
          * This var is needed by the regiontemplate script.
          */
         var templateid = '@Model.Template.Id';
+
+        $(document).ready(function () {
+            $('.first-row .box').equalHeights();
+        });
     </script>
 }
 @section Toolbar {
@@ -34,127 +39,154 @@
         @Form.Action("Save")
         @Form.HiddenFor(m => m.Template.Id)
     </div>
-    <div class="grid_9">
-        <div class="box expandable">
-            <div class="title"><h2>@Piranha.Manager.Resources.Global.Information</h2></div>
-            <div class="inner">
-                <ul class="form">
-                    <li>@Form.LabelFor(m => m.Template.Name, Piranha.Manager.Resources.Global.Name)
-                        <div class="input">
-                            @Form.TextBoxFor(m => m.Template.Name)</div>
-                        @Form.ValidationMessageFor(m => m.Template.Name)
-                    </li>
-                    <li>@Form.LabelFor(m => m.Template.Description, Piranha.Manager.Resources.Global.Description)
-                        <div class="input">
-                            @Form.TextAreaFor(m => m.Template.Description, 
-                                new { @placeholder = Piranha.Resources.Global.Optional })</div>
-                    </li>
-                </ul>
-                <ul class="form optional">               
-                    <li>@Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview)
-                        <div class="input">
-                            @Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} )</div>
-                    </li>                
-                </ul>
-            </div>
-        </div>
-        <div class="box content-editor">
-            <div class="title"><h2>@Piranha.Resources.Global.Regions</h2></div>
-            <div class="inner">
-                <table class="list region-editor">
-                    <tbody>
-                        <tr>
-                            <th>@Piranha.Resources.Global.Name</th>
-                            <th>@Piranha.Resources.Global.InternalId</th>
-                            <th>@Piranha.Resources.Global.Type</th>
-                            <th></th>
-                        </tr>
-                        @for (int n = 0; n < Model.Template.RegionTemplates.Count; n++) {
-                        <tr>
-                            <td class="form">
-                                <span>@Model.Template.RegionTemplates[n].Name</span>
-                                <div class="input hidden">
-                                    @Form.TextBoxFor(m => m.Template.RegionTemplates[n].Name)</div>
-                                @Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].Name)
-                            </td>
-                            <td class="form">
-                                <span>@Model.Template.RegionTemplates[n].InternalId</span>
-                                <div class="input hidden">
-                                    @Form.TextBoxFor(m => m.Template.RegionTemplates[n].InternalId)</div>
-                                <div style="position: relative">
-                                    @Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].InternalId)</div>
-                            </td>
-                            <td>
-                                <span class="readonly">@Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Template.RegionTemplates[n].Type)</span>
-                            </td>
-                            <td class="buttons four">
-                                <a class="icon up marg"></a>
-                                <a class="icon down marg"></a>
-                                <a class="icon edit marg"></a>
-                                <a class="icon delete"></a>
-                                <div class="hidden">
-                                    @Form.HiddenFor(m => m.Template.RegionTemplates[n].Id)
-                                    @Form.HiddenFor(m => m.Template.RegionTemplates[n].Seqno, new { @class = "region-seqno" })
-                                    @Form.HiddenFor(m => m.Template.RegionTemplates[n].Type)
-                                    @Form.HiddenFor(m => m.Template.RegionTemplates[n].Description)
-                                </div>
-                            </td> 
-                        </tr>
-                        }
-                        <tr class="dark">
-                            <td class="form">
-                                <div class="input">
-                                    <input type="text" id="newregionName" /></div>
-                            </td>
-                            <td class="form">
-                                <div class="input">
-                                    <input type="text" id="newregionInternalId" /></div>
-                            </td>
-                            <td class="form">
-                                <div class="input">
-                                    @Html.DropDownList("newregionType", "", Model.RegionTypes)</div>
-                            </td>
-                            <td class="buttons four">
-                                <button id="btnAddRegion" class="btn marg-big">@Piranha.Resources.Global.Add</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="box">
-            <div class="title"><h2>@Piranha.Manager.Resources.Global.Advanced</h2></div>
-            <div class="inner">
-                <ul class="form">
-                    <li>@Form.LabelFor(m => m.Template.ViewTemplate, Piranha.Manager.Resources.PageType.ViewTemplate)
-                        <div class="right">
-                            @Form.CheckBoxFor(m => m.Template.ShowViewTemplate)</div>
-                        <div class="input short">
-                            @Form.TextBoxFor(m => m.Template.ViewTemplate, 
-                                new { @placeholder = Piranha.Resources.Global.Optional })</div>
-                    </li>
-                    <li>@Form.LabelFor(m => m.Template.ViewRedirect, Piranha.Manager.Resources.PageType.ViewRedirect)
-                        <div class="right">
-                            @Form.CheckBoxFor(m => m.Template.ShowViewRedirect)</div>
-                        <div class="input short">
-                            @Form.TextBoxFor(m => m.Template.ViewRedirect, 
-                                new { @placeholder = Piranha.Resources.Global.Optional })</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="grid_3">
-        @if (Model.Template.Id != Guid.Empty && !String.IsNullOrEmpty(Model.Template.Preview)) {
-        <div class="box pagetemplate">
-            <div class="title"><h2>@Piranha.Manager.Resources.PageType.Preview</h2></div>
-            <div class="inner">
-                <div class="edit">
-                    @Model.Template.Preview.Html()
+    <div class="first-row">
+        <div class="grid_9">
+            <div class="box expandable">
+                <div class="title"><h2>@Piranha.Manager.Resources.Global.Information</h2></div>
+                <div class="inner">
+                    <ul class="form">
+                        <li>@Form.LabelFor(m => m.Template.Name, Piranha.Manager.Resources.Global.Name)
+                            <div class="input">
+                                @Form.TextBoxFor(m => m.Template.Name)</div>
+                            @Form.ValidationMessageFor(m => m.Template.Name)
+                        </li>
+                        <li>@Form.LabelFor(m => m.Template.ViewTemplate, Piranha.Manager.Resources.PageType.ViewTemplate)
+                            <div class="right">
+                                @Form.CheckBoxFor(m => m.Template.ShowViewTemplate)</div>
+                            <div class="input short">
+                                @Form.TextBoxFor(m => m.Template.ViewTemplate, 
+                                    new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                        </li>
+                        <li>@Form.LabelFor(m => m.Template.ViewRedirect, Piranha.Manager.Resources.PageType.ViewRedirect)
+                            <div class="right">
+                                @Form.CheckBoxFor(m => m.Template.ShowViewRedirect)</div>
+                            <div class="input short">
+                                @Form.TextBoxFor(m => m.Template.ViewRedirect, 
+                                    new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                        </li>
+                        <li>@Form.LabelFor(m => m.Template.Description, Piranha.Manager.Resources.Global.Description)
+                            <div class="input">
+                                @Form.TextAreaFor(m => m.Template.Description, 
+                                    new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                        </li>
+                    </ul>
+                    <ul class="form optional">               
+                        <li>@Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview)
+                            <div class="input">
+                                @Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} )</div>
+                        </li>                
+                    </ul>
                 </div>
             </div>
         </div>
-        }
+        <div class="grid_3">
+            <div class="box pagetemplate">
+                <div class="title"><h2>@Piranha.Manager.Resources.PageType.Preview</h2></div>
+                <div class="inner">
+                    <div class="edit">
+                        @Model.Template.Preview.Html()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="grid_12">
+            <div class="box main-content">
+                <table>
+                    <tr>
+                        <td class="tools">
+                            <ul>
+                                <li class="btn-regions active"><a href="#" data-id="pnl-regions">Regions</a></li>
+                                <li class="btn-properties"><a href="#" data-id="pnl-properties">Properties</a></li>
+                                <li class="btn-preview"><a href="#" data-id="pnl-preview">Preview</a></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <div id="pnl-regions" class="main">
+                                <div class="title"><h2>Regions</h2></div>
+                                <div class="inner">
+                                    <table class="list">
+                                        <thead>
+                                            <tr>
+                                                <th>@Piranha.Resources.Global.Name</th>
+                                                <th>@Piranha.Resources.Global.InternalId</th>
+                                                <th>@Piranha.Resources.Global.Type</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int n = 0; n < Model.Template.RegionTemplates.Count; n++) {
+                                            <tr>
+                                                <td class="form">
+                                                    <span>@Model.Template.RegionTemplates[n].Name</span>
+                                                    <div class="input hidden">
+                                                        @Form.TextBoxFor(m => m.Template.RegionTemplates[n].Name)</div>
+                                                    @Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].Name)
+                                                </td>
+                                                <td class="form">
+                                                    <span>@Model.Template.RegionTemplates[n].InternalId</span>
+                                                    <div class="input hidden">
+                                                        @Form.TextBoxFor(m => m.Template.RegionTemplates[n].InternalId)</div>
+                                                    <div style="position: relative">
+                                                        @Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].InternalId)</div>
+                                                </td>
+                                                <td>
+                                                    <span class="readonly">@Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Template.RegionTemplates[n].Type)</span>
+                                                </td>
+                                                <td class="buttons four">
+                                                    <a class="icon up marg"></a>
+                                                    <a class="icon down marg"></a>
+                                                    <a class="icon edit marg"></a>
+                                                    <a class="icon delete"></a>
+                                                    <div class="hidden">
+                                                        @Form.HiddenFor(m => m.Template.RegionTemplates[n].Id)
+                                                        @Form.HiddenFor(m => m.Template.RegionTemplates[n].Seqno, new { @class = "region-seqno" })
+                                                        @Form.HiddenFor(m => m.Template.RegionTemplates[n].Type)
+                                                        @Form.HiddenFor(m => m.Template.RegionTemplates[n].Description)
+                                                    </div>
+                                                </td> 
+                                            </tr>
+                                            }
+                                            <tr class="dark">
+                                                <td class="form">
+                                                    <div class="input">
+                                                        <input type="text" id="newregionName" /></div>
+                                                </td>
+                                                <td class="form">
+                                                    <div class="input">
+                                                        <input type="text" id="newregionInternalId" /></div>
+                                                </td>
+                                                <td class="form">
+                                                    <div class="input">
+                                                        @Html.DropDownList("newregionType", "", Model.RegionTypes)</div>
+                                                </td>
+                                                <td class="buttons four">
+                                                    <button id="btnAddRegion" class="btn marg-big">@Piranha.Resources.Global.Add</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div id="pnl-properties" class="main hidden">
+                                <div class="title"><h2>Properties</h2></div>
+                                <div class="inner">Yo</div>
+                            </div>
+                            <div id="pnl-preview" class="main hidden">
+                                <div class="title"><h2>Preview</h2></div>
+                                <div class="inner">Yo</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="grid_9">
+    </div>
+    <div class="grid_3">
         <div class="box">
             <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
             <div class="inner">

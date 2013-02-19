@@ -88,19 +88,30 @@ WriteLiteral("\"></script>\r\n    <script type=\"text/javascript\" src=\"");
             
             #line default
             #line hidden
+WriteLiteral("\"></script>\r\n    <script type=\"text/javascript\" src=\"");
+
+
+            
+            #line 11 "..\..\PageType\Edit.cshtml"
+                                   Write(Href("~/manager/content/Js/ext/jquery.equalheights.js"));
+
+            
+            #line default
+            #line hidden
 WriteLiteral("\"></script>\r\n    <script type=\"text/javascript\">\r\n        /**\r\n         * This va" +
 "r is needed by the regiontemplate script.\r\n         */\r\n        var templateid =" +
 " \'");
 
 
             
-            #line 15 "..\..\PageType\Edit.cshtml"
+            #line 16 "..\..\PageType\Edit.cshtml"
                      Write(Model.Template.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("\';\r\n    </script>\r\n");
+WriteLiteral("\';\r\n\r\n        $(document).ready(function () {\r\n            $(\'.first-row .box\').e" +
+"qualHeights();\r\n        });\r\n    </script>\r\n");
 
 
 });
@@ -115,7 +126,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 22 "..\..\PageType\Edit.cshtml"
+            #line 27 "..\..\PageType\Edit.cshtml"
                                   Write(Piranha.Manager.Resources.Toolbar.Save);
 
             
@@ -125,7 +136,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 23 "..\..\PageType\Edit.cshtml"
+            #line 28 "..\..\PageType\Edit.cshtml"
                     Write(Href("~/manager/pagetype/edit/delete" + Model.Template.Id));
 
             
@@ -135,7 +146,7 @@ WriteLiteral("\" class=\"delete\" title=\"\">");
 
 
             
-            #line 23 "..\..\PageType\Edit.cshtml"
+            #line 28 "..\..\PageType\Edit.cshtml"
                                                                                                          Write(Piranha.Manager.Resources.Toolbar.Delete);
 
             
@@ -145,7 +156,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 24 "..\..\PageType\Edit.cshtml"
+            #line 29 "..\..\PageType\Edit.cshtml"
                     Write(Href("~/manager/pagetype"));
 
             
@@ -155,7 +166,7 @@ WriteLiteral("\" class=\"back\">");
 
 
             
-            #line 24 "..\..\PageType\Edit.cshtml"
+            #line 29 "..\..\PageType\Edit.cshtml"
                                                               Write(Piranha.Manager.Resources.Toolbar.Back);
 
             
@@ -165,7 +176,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 25 "..\..\PageType\Edit.cshtml"
+            #line 30 "..\..\PageType\Edit.cshtml"
                     Write(Href("~/manager/pagetype/edit/" + Model.Template.Id));
 
             
@@ -175,7 +186,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 25 "..\..\PageType\Edit.cshtml"
+            #line 30 "..\..\PageType\Edit.cshtml"
                                                                                            Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
@@ -191,7 +202,7 @@ WriteLiteral("\r\n\r\n<form>\r\n    <div>\r\n        ");
 
 
             
-            #line 34 "..\..\PageType\Edit.cshtml"
+            #line 39 "..\..\PageType\Edit.cshtml"
    Write(Form.Action("Save"));
 
             
@@ -201,442 +212,459 @@ WriteLiteral("\r\n        ");
 
 
             
-            #line 35 "..\..\PageType\Edit.cshtml"
+            #line 40 "..\..\PageType\Edit.cshtml"
    Write(Form.HiddenFor(m => m.Template.Id));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n    </div>\r\n    <div class=\"grid_9\">\r\n        <div class=\"box expandable\">\r\n   " +
-"         <div class=\"title\"><h2>");
-
-
-            
-            #line 39 "..\..\PageType\Edit.cshtml"
-                              Write(Piranha.Manager.Resources.Global.Information);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</h2></div>\r\n            <div class=\"inner\">\r\n                <ul class=\"form\">\r\n" +
-"                    <li>");
-
-
-            
-            #line 42 "..\..\PageType\Edit.cshtml"
-                   Write(Form.LabelFor(m => m.Template.Name, Piranha.Manager.Resources.Global.Name));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div class=\"input\">\r\n                            ");
-
-
-            
-            #line 44 "..\..\PageType\Edit.cshtml"
-                       Write(Form.TextBoxFor(m => m.Template.Name));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                        ");
+WriteLiteral("\r\n    </div>\r\n    <div class=\"first-row\">\r\n        <div class=\"grid_9\">\r\n        " +
+"    <div class=\"box expandable\">\r\n                <div class=\"title\"><h2>");
 
 
             
             #line 45 "..\..\PageType\Edit.cshtml"
-                   Write(Form.ValidationMessageFor(m => m.Template.Name));
+                                  Write(Piranha.Manager.Resources.Global.Information);
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                    </li>\r\n                    <li>");
+WriteLiteral("</h2></div>\r\n                <div class=\"inner\">\r\n                    <ul class=\"" +
+"form\">\r\n                        <li>");
 
 
             
-            #line 47 "..\..\PageType\Edit.cshtml"
-                   Write(Form.LabelFor(m => m.Template.Description, Piranha.Manager.Resources.Global.Description));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div class=\"input\">\r\n                            ");
-
-
-            
-            #line 49 "..\..\PageType\Edit.cshtml"
-                       Write(Form.TextAreaFor(m => m.Template.Description, 
-                                new { @placeholder = Piranha.Resources.Global.Optional }));
+            #line 48 "..\..\PageType\Edit.cshtml"
+                       Write(Form.LabelFor(m => m.Template.Name, Piranha.Manager.Resources.Global.Name));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                    </li>\r\n                </ul>\r\n                <ul cla" +
-"ss=\"form optional\">               \r\n                    <li>");
+WriteLiteral("\r\n                            <div class=\"input\">\r\n                              " +
+"  ");
 
 
             
-            #line 54 "..\..\PageType\Edit.cshtml"
-                   Write(Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div class=\"input\">\r\n                            ");
-
-
-            
-            #line 56 "..\..\PageType\Edit.cshtml"
-                       Write(Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} ));
+            #line 50 "..\..\PageType\Edit.cshtml"
+                           Write(Form.TextBoxFor(m => m.Template.Name));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                    </li>                \r\n                </ul>\r\n       " +
-"     </div>\r\n        </div>\r\n        <div class=\"box content-editor\">\r\n         " +
-"   <div class=\"title\"><h2>");
+WriteLiteral("</div>\r\n                            ");
+
+
+            
+            #line 51 "..\..\PageType\Edit.cshtml"
+                       Write(Form.ValidationMessageFor(m => m.Template.Name));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                        </li>\r\n                        <li>");
+
+
+            
+            #line 53 "..\..\PageType\Edit.cshtml"
+                       Write(Form.LabelFor(m => m.Template.ViewTemplate, Piranha.Manager.Resources.PageType.ViewTemplate));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            <div class=\"right\">\r\n                              " +
+"  ");
+
+
+            
+            #line 55 "..\..\PageType\Edit.cshtml"
+                           Write(Form.CheckBoxFor(m => m.Template.ShowViewTemplate));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                            <div class=\"input short\">\r\n                  " +
+"              ");
+
+
+            
+            #line 57 "..\..\PageType\Edit.cshtml"
+                           Write(Form.TextBoxFor(m => m.Template.ViewTemplate, 
+                                    new { @placeholder = Piranha.Resources.Global.Optional }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        </li>\r\n                        <li>");
+
+
+            
+            #line 60 "..\..\PageType\Edit.cshtml"
+                       Write(Form.LabelFor(m => m.Template.ViewRedirect, Piranha.Manager.Resources.PageType.ViewRedirect));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                            <div class=\"right\">\r\n                              " +
+"  ");
 
 
             
             #line 62 "..\..\PageType\Edit.cshtml"
-                              Write(Piranha.Resources.Global.Regions);
+                           Write(Form.CheckBoxFor(m => m.Template.ShowViewRedirect));
 
             
             #line default
             #line hidden
-WriteLiteral("</h2></div>\r\n            <div class=\"inner\">\r\n                <table class=\"list " +
-"region-editor\">\r\n                    <tbody>\r\n                        <tr>\r\n    " +
-"                        <th>");
+WriteLiteral("</div>\r\n                            <div class=\"input short\">\r\n                  " +
+"              ");
+
+
+            
+            #line 64 "..\..\PageType\Edit.cshtml"
+                           Write(Form.TextBoxFor(m => m.Template.ViewRedirect, 
+                                    new { @placeholder = Piranha.Resources.Global.Optional }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                        </li>\r\n                        <li>");
 
 
             
             #line 67 "..\..\PageType\Edit.cshtml"
-                           Write(Piranha.Resources.Global.Name);
+                       Write(Form.LabelFor(m => m.Template.Description, Piranha.Manager.Resources.Global.Description));
 
             
             #line default
             #line hidden
-WriteLiteral("</th>\r\n                            <th>");
-
-
-            
-            #line 68 "..\..\PageType\Edit.cshtml"
-                           Write(Piranha.Resources.Global.InternalId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</th>\r\n                            <th>");
+WriteLiteral("\r\n                            <div class=\"input\">\r\n                              " +
+"  ");
 
 
             
             #line 69 "..\..\PageType\Edit.cshtml"
-                           Write(Piranha.Resources.Global.Type);
+                           Write(Form.TextAreaFor(m => m.Template.Description, 
+                                    new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
-WriteLiteral("</th>\r\n                            <th></th>\r\n                        </tr>\r\n");
+WriteLiteral("</div>\r\n                        </li>\r\n                    </ul>\r\n               " +
+"     <ul class=\"form optional\">               \r\n                        <li>");
 
 
             
-            #line 72 "..\..\PageType\Edit.cshtml"
-                         for (int n = 0; n < Model.Template.RegionTemplates.Count; n++) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                        <tr>\r\n                            <td class=\"form\">\r\n    " +
-"                            <span>");
-
-
-            
-            #line 75 "..\..\PageType\Edit.cshtml"
-                                 Write(Model.Template.RegionTemplates[n].Name);
+            #line 74 "..\..\PageType\Edit.cshtml"
+                       Write(Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview));
 
             
             #line default
             #line hidden
-WriteLiteral("</span>\r\n                                <div class=\"input hidden\">\r\n            " +
-"                        ");
+WriteLiteral("\r\n                            <div class=\"input\">\r\n                              " +
+"  ");
 
 
             
-            #line 77 "..\..\PageType\Edit.cshtml"
-                               Write(Form.TextBoxFor(m => m.Template.RegionTemplates[n].Name));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                                ");
-
-
-            
-            #line 78 "..\..\PageType\Edit.cshtml"
-                           Write(Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].Name));
+            #line 76 "..\..\PageType\Edit.cshtml"
+                           Write(Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} ));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                            </td>\r\n                            <td class=\"form\"" +
-">\r\n                                <span>");
+WriteLiteral("</div>\r\n                        </li>                \r\n                    </ul>\r" +
+"\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=" +
+"\"grid_3\">\r\n            <div class=\"box pagetemplate\">\r\n                <div clas" +
+"s=\"title\"><h2>");
 
 
             
-            #line 81 "..\..\PageType\Edit.cshtml"
-                                 Write(Model.Template.RegionTemplates[n].InternalId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</span>\r\n                                <div class=\"input hidden\">\r\n            " +
-"                        ");
-
-
-            
-            #line 83 "..\..\PageType\Edit.cshtml"
-                               Write(Form.TextBoxFor(m => m.Template.RegionTemplates[n].InternalId));
+            #line 84 "..\..\PageType\Edit.cshtml"
+                                  Write(Piranha.Manager.Resources.PageType.Preview);
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                                <div style=\"position: relative\">\r\n       " +
-"                             ");
+WriteLiteral("</h2></div>\r\n                <div class=\"inner\">\r\n                    <div class=" +
+"\"edit\">\r\n                        ");
 
 
             
-            #line 85 "..\..\PageType\Edit.cshtml"
-                               Write(Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].InternalId));
+            #line 87 "..\..\PageType\Edit.cshtml"
+                   Write(Model.Template.Preview.Html());
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                            </td>\r\n                            <td>\r\n    " +
-"                            <span class=\"readonly\">");
+WriteLiteral(@"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class=""grid_12"">
+            <div class=""box main-content"">
+                <table>
+                    <tr>
+                        <td class=""tools"">
+                            <ul>
+                                <li class=""btn-regions active""><a href=""#"" data-id=""pnl-regions"">Regions</a></li>
+                                <li class=""btn-properties""><a href=""#"" data-id=""pnl-properties"">Properties</a></li>
+                                <li class=""btn-preview""><a href=""#"" data-id=""pnl-preview"">Preview</a></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <div id=""pnl-regions"" class=""main"">
+                                <div class=""title""><h2>Regions</h2></div>
+                                <div class=""inner"">
+                                    <table class=""list"">
+                                        <thead>
+                                            <tr>
+                                                <th>");
 
 
             
-            #line 88 "..\..\PageType\Edit.cshtml"
-                                                  Write(Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Template.RegionTemplates[n].Type));
+            #line 112 "..\..\PageType\Edit.cshtml"
+                                               Write(Piranha.Resources.Global.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n                                                <th>");
+
+
+            
+            #line 113 "..\..\PageType\Edit.cshtml"
+                                               Write(Piranha.Resources.Global.InternalId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n                                                <th>");
+
+
+            
+            #line 114 "..\..\PageType\Edit.cshtml"
+                                               Write(Piranha.Resources.Global.Type);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</th>\r\n                                                <th></th>\r\n               " +
+"                             </tr>\r\n                                        </th" +
+"ead>\r\n                                        <tbody>\r\n");
+
+
+            
+            #line 119 "..\..\PageType\Edit.cshtml"
+                                             for (int n = 0; n < Model.Template.RegionTemplates.Count; n++) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <tr>\r\n                               " +
+"                 <td class=\"form\">\r\n                                            " +
+"        <span>");
+
+
+            
+            #line 122 "..\..\PageType\Edit.cshtml"
+                                                     Write(Model.Template.RegionTemplates[n].Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                                    <div class=\"input hi" +
+"dden\">\r\n                                                        ");
+
+
+            
+            #line 124 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.TextBoxFor(m => m.Template.RegionTemplates[n].Name));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                                                    ");
+
+
+            
+            #line 125 "..\..\PageType\Edit.cshtml"
+                                               Write(Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].Name));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                                </td>\r\n                        " +
+"                        <td class=\"form\">\r\n                                     " +
+"               <span>");
+
+
+            
+            #line 128 "..\..\PageType\Edit.cshtml"
+                                                     Write(Model.Template.RegionTemplates[n].InternalId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                                                    <div class=\"input hi" +
+"dden\">\r\n                                                        ");
+
+
+            
+            #line 130 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.TextBoxFor(m => m.Template.RegionTemplates[n].InternalId));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                                                    <div style=\"position:" +
+" relative\">\r\n                                                        ");
+
+
+            
+            #line 132 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.ValidationMessageFor(m => m.Template.RegionTemplates[n].InternalId));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                                                </td>\r\n                  " +
+"                              <td>\r\n                                            " +
+"        <span class=\"readonly\">");
+
+
+            
+            #line 135 "..\..\PageType\Edit.cshtml"
+                                                                      Write(Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Template.RegionTemplates[n].Type));
 
             
             #line default
             #line hidden
 WriteLiteral(@"</span>
-                            </td>
-                            <td class=""buttons four"">
-                                <a class=""icon up marg""></a>
-                                <a class=""icon down marg""></a>
-                                <a class=""icon edit marg""></a>
-                                <a class=""icon delete""></a>
-                                <div class=""hidden"">
-                                    ");
+                                                </td>
+                                                <td class=""buttons four"">
+                                                    <a class=""icon up marg""></a>
+                                                    <a class=""icon down marg""></a>
+                                                    <a class=""icon edit marg""></a>
+                                                    <a class=""icon delete""></a>
+                                                    <div class=""hidden"">
+                                                        ");
 
 
             
-            #line 96 "..\..\PageType\Edit.cshtml"
-                               Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Id));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                    ");
-
-
-            
-            #line 97 "..\..\PageType\Edit.cshtml"
-                               Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Seqno, new { @class = "region-seqno" }));
+            #line 143 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Id));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                    ");
+WriteLiteral("\r\n                                                        ");
 
 
             
-            #line 98 "..\..\PageType\Edit.cshtml"
-                               Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Type));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                                    ");
-
-
-            
-            #line 99 "..\..\PageType\Edit.cshtml"
-                               Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Description));
+            #line 144 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Seqno, new { @class = "region-seqno" }));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                </div>\r\n                            </td> \r\n   " +
-"                     </tr>\r\n");
+WriteLiteral("\r\n                                                        ");
 
 
             
-            #line 103 "..\..\PageType\Edit.cshtml"
-                        }
-
-            
-            #line default
-            #line hidden
-WriteLiteral(@"                        <tr class=""dark"">
-                            <td class=""form"">
-                                <div class=""input"">
-                                    <input type=""text"" id=""newregionName"" /></div>
-                            </td>
-                            <td class=""form"">
-                                <div class=""input"">
-                                    <input type=""text"" id=""newregionInternalId"" /></div>
-                            </td>
-                            <td class=""form"">
-                                <div class=""input"">
-                                    ");
-
-
-            
-            #line 115 "..\..\PageType\Edit.cshtml"
-                               Write(Html.DropDownList("newregionType", "", Model.RegionTypes));
+            #line 145 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Type));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                            </td>\r\n                            <td class=" +
-"\"buttons four\">\r\n                                <button id=\"btnAddRegion\" class" +
-"=\"btn marg-big\">");
+WriteLiteral("\r\n                                                        ");
 
 
             
-            #line 118 "..\..\PageType\Edit.cshtml"
-                                                                          Write(Piranha.Resources.Global.Add);
+            #line 146 "..\..\PageType\Edit.cshtml"
+                                                   Write(Form.HiddenFor(m => m.Template.RegionTemplates[n].Description));
 
             
             #line default
             #line hidden
-WriteLiteral("</button>\r\n                            </td>\r\n                        </tr>\r\n    " +
-"                </tbody>\r\n                </table>\r\n            </div>\r\n        " +
-"</div>\r\n        <div class=\"box\">\r\n            <div class=\"title\"><h2>");
-
-
-            
-            #line 126 "..\..\PageType\Edit.cshtml"
-                              Write(Piranha.Manager.Resources.Global.Advanced);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</h2></div>\r\n            <div class=\"inner\">\r\n                <ul class=\"form\">\r\n" +
-"                    <li>");
-
-
-            
-            #line 129 "..\..\PageType\Edit.cshtml"
-                   Write(Form.LabelFor(m => m.Template.ViewTemplate, Piranha.Manager.Resources.PageType.ViewTemplate));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div class=\"right\">\r\n                            ");
-
-
-            
-            #line 131 "..\..\PageType\Edit.cshtml"
-                       Write(Form.CheckBoxFor(m => m.Template.ShowViewTemplate));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                        <div class=\"input short\">\r\n                      " +
-"      ");
-
-
-            
-            #line 133 "..\..\PageType\Edit.cshtml"
-                       Write(Form.TextBoxFor(m => m.Template.ViewTemplate, 
-                                new { @placeholder = Piranha.Resources.Global.Optional }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    </li>\r\n                    <li>");
-
-
-            
-            #line 136 "..\..\PageType\Edit.cshtml"
-                   Write(Form.LabelFor(m => m.Template.ViewRedirect, Piranha.Manager.Resources.PageType.ViewRedirect));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                        <div class=\"right\">\r\n                            ");
-
-
-            
-            #line 138 "..\..\PageType\Edit.cshtml"
-                       Write(Form.CheckBoxFor(m => m.Template.ShowViewRedirect));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                        <div class=\"input short\">\r\n                      " +
-"      ");
-
-
-            
-            #line 140 "..\..\PageType\Edit.cshtml"
-                       Write(Form.TextBoxFor(m => m.Template.ViewRedirect, 
-                                new { @placeholder = Piranha.Resources.Global.Optional }));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n   " +
-"     </div>\r\n    </div>\r\n    <div class=\"grid_3\">\r\n");
-
-
-            
-            #line 148 "..\..\PageType\Edit.cshtml"
-         if (Model.Template.Id != Guid.Empty && !String.IsNullOrEmpty(Model.Template.Preview)) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("        <div class=\"box pagetemplate\">\r\n            <div class=\"title\"><h2>");
+WriteLiteral("\r\n                                                    </div>\r\n                   " +
+"                             </td> \r\n                                           " +
+" </tr>\r\n");
 
 
             
             #line 150 "..\..\PageType\Edit.cshtml"
-                              Write(Piranha.Manager.Resources.PageType.Preview);
+                                            }
 
             
             #line default
             #line hidden
-WriteLiteral("</h2></div>\r\n            <div class=\"inner\">\r\n                <div class=\"edit\">\r" +
-"\n                    ");
+WriteLiteral(@"                                            <tr class=""dark"">
+                                                <td class=""form"">
+                                                    <div class=""input"">
+                                                        <input type=""text"" id=""newregionName"" /></div>
+                                                </td>
+                                                <td class=""form"">
+                                                    <div class=""input"">
+                                                        <input type=""text"" id=""newregionInternalId"" /></div>
+                                                </td>
+                                                <td class=""form"">
+                                                    <div class=""input"">
+                                                        ");
 
 
             
-            #line 153 "..\..\PageType\Edit.cshtml"
-               Write(Model.Template.Preview.Html());
+            #line 162 "..\..\PageType\Edit.cshtml"
+                                                   Write(Html.DropDownList("newregionType", "", Model.RegionTypes));
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n                </div>\r\n            </div>\r\n        </div>\r\n");
+WriteLiteral("</div>\r\n                                                </td>\r\n                  " +
+"                              <td class=\"buttons four\">\r\n                       " +
+"                             <button id=\"btnAddRegion\" class=\"btn marg-big\">");
 
 
             
-            #line 157 "..\..\PageType\Edit.cshtml"
-        }
+            #line 165 "..\..\PageType\Edit.cshtml"
+                                                                                              Write(Piranha.Resources.Global.Add);
 
             
             #line default
             #line hidden
-WriteLiteral("        <div class=\"box\">\r\n            <div class=\"title\"><h2>");
+WriteLiteral(@"</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div id=""pnl-properties"" class=""main hidden"">
+                                <div class=""title""><h2>Properties</h2></div>
+                                <div class=""inner"">Yo</div>
+                            </div>
+                            <div id=""pnl-preview"" class=""main hidden"">
+                                <div class=""title""><h2>Preview</h2></div>
+                                <div class=""inner"">Yo</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class=""grid_9"">
+    </div>
+    <div class=""grid_3"">
+        <div class=""box"">
+            <div class=""title""><h2>");
 
 
             
-            #line 159 "..\..\PageType\Edit.cshtml"
+            #line 191 "..\..\PageType\Edit.cshtml"
                               Write(Piranha.Resources.Global.Properties);
 
             
@@ -647,7 +675,7 @@ WriteLiteral("</h2></div>\r\n            <div class=\"inner\">\r\n              
 
 
             
-            #line 163 "..\..\PageType\Edit.cshtml"
+            #line 195 "..\..\PageType\Edit.cshtml"
                      foreach (var property in Model.Template.Properties) {
 
             
@@ -657,7 +685,7 @@ WriteLiteral("                    <li><span>");
 
 
             
-            #line 164 "..\..\PageType\Edit.cshtml"
+            #line 196 "..\..\PageType\Edit.cshtml"
                          Write(property);
 
             
@@ -667,7 +695,7 @@ WriteLiteral("</span><button class=\"btn delete right remove-region\"></button><
 
 
             
-            #line 165 "..\..\PageType\Edit.cshtml"
+            #line 197 "..\..\PageType\Edit.cshtml"
                     }
 
             
@@ -678,7 +706,7 @@ WriteLiteral("                </ul>\r\n                <div class=\"input\">\r\n
 
 
             
-            #line 168 "..\..\PageType\Edit.cshtml"
+            #line 200 "..\..\PageType\Edit.cshtml"
                                                             Write(Piranha.Resources.Template.PropertyPlaceholder);
 
             
@@ -688,7 +716,7 @@ WriteLiteral("\" /></div>\r\n                <button id=\"po_add\" class=\"btn r
 
 
             
-            #line 169 "..\..\PageType\Edit.cshtml"
+            #line 201 "..\..\PageType\Edit.cshtml"
                                                  Write(Piranha.Resources.Global.Add);
 
             
