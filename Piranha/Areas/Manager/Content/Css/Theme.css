@@ -176,7 +176,8 @@ table.tabbed,
 .box .title .buttons {
     float: right;
     }
-.sys-message .box {
+.sys-message .box,
+.page-message .box {
     border: 1px solid #ceae00;
     text-align: center;
     margin: 30px 0 0;
@@ -194,7 +195,8 @@ table.tabbed,
 	    color-stop(0.8, rgb(252,242,184))
     );
     }
-.sys-message .box.success {
+.sys-message .box.success,
+.page-message .box.success {
     border-color: #436c00;
     background-image: linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
     background-image: -o-linear-gradient(bottom, rgb(161,202,115) 17%, rgb(180,218,138) 59%, rgb(201,233,162) 80%);
@@ -210,7 +212,8 @@ table.tabbed,
 	    color-stop(0.8, rgb(201,233,162))
     );
     }
-.sys-message .box.error {
+.sys-message .box.error,
+.page-message .box.error {
     border-color: #df6161;
     color: #d10000;
     background-image: linear-gradient(bottom, rgb(232,140,140) 17%, rgb(234,155,155) 59%, rgb(238,173,173) 80%);
@@ -228,7 +231,8 @@ table.tabbed,
 	    color-stop(0.8, rgb(238,173,173))
     );
     }
-.sys-message .box .inner {
+.sys-message .box .inner,
+.page-message .box .inner {
     border: none;
     }
 

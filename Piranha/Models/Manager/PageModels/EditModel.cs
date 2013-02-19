@@ -215,7 +215,7 @@ namespace Piranha.Models.Manager.PageModels
 
 		public static EditModel CreateByOriginalAndPosition(Guid originalId, Guid parentId, int seqno, Guid siteTreeId, string siteTree) {
 			var m = new EditModel() ;
-			var p = Page.GetSingle(originalId) ;
+			var p = Page.GetSingle(originalId, true) ;
 
 			m.Page = new Piranha.Models.Page() {
 				Id = Guid.NewGuid(),
@@ -226,7 +226,9 @@ namespace Piranha.Models.Manager.PageModels
 				SiteTreeId = siteTreeId,
 				SiteTreeInternalId = siteTree,
 				ParentId = parentId,
-				Seqno = seqno
+				Seqno = seqno,
+				PageController = p.PageController,
+				PageRedirect = p.PageRedirect
 			} ;
 			m.GetRelated() ;
 

@@ -1,13 +1,11 @@
 ﻿@model Piranha.Models.Manager.PageModels.EditModel
 @using Piranha.Extend;
 @section Head {
-    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.regions.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.comments.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/Ext/jquery.equalheights.js")"></script>
-    @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
         var folderId = "";
 
@@ -117,7 +115,16 @@
     </div>
 </div>
 }
-
+<div>
+    <div class="grid_12 page-message">
+        <div class="box info" style="margin:0 0 30px;">
+            <div class="inner">
+                <div class="ico"></div>
+                <p>This page is a copy. To edit the actual content of the page, please edit the original <a href="@Url.Action("edit", new { @id = Model.Page.OriginalId })">here</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
 @{ Html.BeginForm("edit", (string)ViewContext.RouteData.Values["Controller"]) ; }
 <div>
     @Html.HiddenFor(m => m.Page.IsNew)
@@ -222,7 +229,7 @@
                 <tr>
                     <td class="tools">
                         <ul>
-                            <li class="btn-settings"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
+                            <li class="btn-settings active"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
                             @if (Model.EnableComments) {
                             <li class="btn-comments">
                                 @{
@@ -235,42 +242,19 @@
                         </ul>
                     </td>
                     <td>
-                        <div id="pnl-settings" class="main hidden">
+                        <div id="pnl-settings" class="main">
                             <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
                             <div class="inner">
                                 <ul class="form">
                                     <li>
-                                        @Html.LabelFor(m => m.Page.GroupId)
-                                        <div class="input">
-                                            @Html.DropDownListFor(m => m.Page.GroupId, Model.Groups)</div>
-                                        @Html.LabelFor(m => m.Page.DisabledGroups)
-                                        <div id="disable-groups" class="block">
-                                            @{ var dGroups = Model.Groups.Where(g => g.Value != Guid.Empty.ToString()).ToList() ; }
-                                            @Html.Partial("Partial/GroupList", new Piranha.Models.Manager.PageModels.GroupListModel() { 
-                                                Groups = Model.DisableGroups, Page = Model.Page })
-                                        </div>
-                                    </li>
-                                    <li>
                                         @Html.LabelFor(m => m.Page.IsHidden)
                                         <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (@Piranha.Resources.Page.HiddenDescription)</p>
                                     </li>
-                                    <li>@Html.LabelFor(m => m.Page.Keywords)
-                                        <div class="input"> 
-                                            @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })</div>
-                                        @Html.ValidationMessageFor(m => m.Page.Keywords)
-                                    </li>
-                                    <li>@Html.LabelFor(m => m.Page.Description)
-                                        <div class="input">
-                                            @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
-                                        @Html.ValidationMessageFor(m => m.Page.Description)
-                                    </li>
-                                    @if (Model.Template.ShowController) {
                                     <li>@Html.LabelFor(m => m.Page.PageController)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
                                     </li>
-                                    }
                                     @if (Model.Template.ShowRedirect) {
                                     <li>@Html.LabelFor(m => m.Page.PageRedirect)
                                         <div class="input">
@@ -296,4 +280,3 @@
     </div>
 </div>
 @{ Html.EndForm() ; }
-}

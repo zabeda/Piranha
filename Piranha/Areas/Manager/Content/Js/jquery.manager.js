@@ -774,11 +774,6 @@ function SysMsg(title, body) {
 $(document).ready(function () {
     bindFormEvents();
 
-    $(".info").click(function () {
-        $(".help").slideToggle("medium");
-        return false;
-    });
-
     //
     // Toggle optional content
     //

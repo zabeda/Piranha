@@ -54,7 +54,7 @@
             });
 
             // Set the original id
-            $(".copy-page").click(function () {
+            $(".copy-page").live('click', function () {
                 $("#OriginalId").val($(this).attr("data-id"));
                 $("form").submit();
             });
@@ -69,15 +69,23 @@
                 searchId: 'search',
                 valueNames: ['title', 'template', 'updated', 'created']
             };
-            var pageList = new List('list', options);
+            new List('list', options);
+
+            // Setup page copy list
+            var copyoptions = {
+                listClass: 'copy-list-js',
+                searchId: 'page-search',
+                valueNames: ['copypage-title', 'copypage-template', 'copypage-siteid']
+            };
+            new List('page-list', copyoptions);
 
             // Switch between list/tree
             $("#search").keyup(function () {
                 if ($(this).val() != "") {
                     $(".sitemap").hide();
-                    $(".list").show();
+                    $("#list").show();
                 } else {
-                    $(".list").hide();
+                    $("#list").hide();
                     $(".sitemap").show();
                 }
             });
@@ -192,9 +200,9 @@
         <div class="title">
             <ul class="box-tabs">
                 <li class="selected"><a href="#create-new">@Piranha.Resources.Page.PopupTypeTitle</a></li>
-                <li class="hidden"><a href="#create-copy">Create copy</a></li>
+                <li><a href="#create-copy">Create copy</a></li>
             </ul>
-            <a class="close-btn right" data-id="boxTemplates"></a>@*<h2>@Piranha.Resources.Page.PopupTypeTitle</h2>*@
+            <a class="close-btn right" data-id="boxTemplates"></a>
             <div class="clear"></div>
         </div>
         <div id="create-new" class="inner">
@@ -210,20 +218,25 @@
             <div class="clear"></div>
         </div>
         <div id="create-copy" class="inner hidden" style="width:660px;max-height:460px;overflow:scroll;">
-            <table class="list">
+            <ul class="form" style="position:fixed;width:645px">
+                <li><label>Search</label>
+                    <div class="input"><input type="text" id="page-search" /></div>
+                </li>
+            </ul>
+            <table class="list" id="page-list" style="margin-top:34px;">
                 <thead>
                     <tr>
-                        <th><span class="sort asc" data-sort="title">@Piranha.Resources.Global.Title</span></th>
-                        <th><span class="sort" data-sort="template">@Piranha.Resources.Global.Type</span></th>
-                        <th><span class="sort" data-sort="sitetree">Site tree</span></th>
+                        <th><span class="sort asc" data-sort="copypage-title">@Piranha.Resources.Global.Title</span></th>
+                        <th><span class="sort" data-sort="copypage-template">@Piranha.Resources.Global.Type</span></th>
+                        <th><span class="sort" data-sort="copypage-siteid">Site tree</span></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="copy-list-js">
                 @foreach (var page in Model.AllPages) {
                     <tr>
-                        <td><a class="copy-page" data-id="@page.Id" href="#"> @(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)</a></td>
-                        <td>@page.TemplateName</td>
-                        <td>@page.SiteTreeName</td>
+                        <td class="copypage-title"><a class="copy-page" data-id="@page.Id" href="#"> @(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)</a></td>
+                        <td class="copypage-template">@page.TemplateName</td>
+                        <td class="copypage-siteid">@page.SiteTreeName</td>
                     </tr>
                 }
                 </tbody>
