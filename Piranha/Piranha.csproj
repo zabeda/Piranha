@@ -378,6 +378,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebPages\WebPiranha.cs" />
     <Compile Include="Web\RssHelper.cs" />
+    <Compile Include="Web\ServerCache.cs" />
     <Compile Include="Web\SiteHelper.cs" />
     <Compile Include="Web\TemplateCache.cs" />
     <Compile Include="Web\UIHelper.cs" />
@@ -511,6 +512,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Comment\Settings.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Page\EditCopy.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\SiteTree\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Manager\Views\SiteTree\Edit.cshtml" />
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
@@ -866,6 +868,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\Updates\25.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\25.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\info-copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\26.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\26.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

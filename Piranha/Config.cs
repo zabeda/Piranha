@@ -46,13 +46,23 @@ namespace Piranha
 
 		/// <summary>
 		/// Gets the optional internal id of the current sitetree. If the parameter is empty
-		/// DEFAULT_SITE is used.
+		/// the current host name is resolved. If the hostname isn't found DEFAULT_SITE is used.
 		/// </summary>
 		public static string SiteTree {
 			get {
+				// Check for configured site tree in the config
 				var internalId = ConfigurationManager.AppSettings["sitetree"] ;
 				if (!String.IsNullOrEmpty(internalId))
 					return internalId ;
+				
+				// Check for configured site tree from the host name
+				if (HttpContext.Current != null && HttpContext.Current.Request != null) {
+					var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
+					if (WebPages.WebPiranha.HostNames.ContainsKey(hostname))
+						return WebPages.WebPiranha.HostNames[hostname].InternalId ;
+				}
+
+				// Nothing found, return default
 				return "DEFAULT_SITE" ;
 			}
 		}
@@ -70,6 +80,13 @@ namespace Piranha
 				}
 				return siteTreeId.Value ;
 			}
+		}
+
+		/// <summary>
+		/// Clears the internal cache of the config.
+		/// </summary>
+		public static void ClearCache() {
+			siteTreeId = null ;
 		}
 	}
 }

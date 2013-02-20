@@ -117,7 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="EditTitleExisting" xml:space="preserve">
+    <value>Edit site tree</value>
+  </data>
+  <data name="EditTitleNew" xml:space="preserve">
+    <value>Add new site tree</value>
+  </data>
+  <data name="HostNames" xml:space="preserve">
+    <value>Host names</value>
+  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Sites</value>
+  </data>
+  <data name="MessageDeleted" xml:space="preserve">
+    <value>The site tree has been deleted.</value>
+  </data>
+  <data name="MessageNotDeleted" xml:space="preserve">
+    <value>An error occurred while deleting the site tree.</value>
+  </data>
+  <data name="MessageNotSaved" xml:space="preserve">
+    <value>An error occurred while saving the site tree.</value>
+  </data>
+  <data name="MessageSaved" xml:space="preserve">
+    <value>The site tree has been saved.</value>
+  </data>
+  <data name="NamespaceId" xml:space="preserve">
+    <value>Namespace</value>
   </data>
 </root>

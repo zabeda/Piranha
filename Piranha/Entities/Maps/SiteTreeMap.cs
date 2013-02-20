@@ -19,6 +19,7 @@ namespace Piranha.Entities.Maps
 			Property(s => s.InternalId).HasColumnName("sitetree_internal_id").IsRequired().HasMaxLength(32) ;
 			Property(s => s.Name).HasColumnName("sitetree_name").IsRequired().HasMaxLength(64) ;
 			Property(s => s.Description).HasColumnName("sitetree_description").HasMaxLength(255) ;
+			Property(s => s.HostNames).HasColumnName("sitetree_hostnames") ;
 			Property(s => s.Created).HasColumnName("sitetree_created") ;
 			Property(s => s.Updated).HasColumnName("sitetree_updated") ;
 			Property(s => s.CreatedById).HasColumnName("sitetree_created_by") ;

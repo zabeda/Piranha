@@ -31,6 +31,11 @@ namespace Piranha.Entities
 		/// Gets/sets the optional description.
 		/// </summary>
 		public string Description { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the optional hostnames.
+		/// </summary>
+		public string HostNames { get ; set ; }
 		#endregion
 
 		#region Navigation properties

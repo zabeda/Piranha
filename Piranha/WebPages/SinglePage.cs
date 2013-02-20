@@ -102,6 +102,8 @@ namespace Piranha.WebPages
 				((Models.Page)Model.Page).DisabledGroups = org.DisabledGroups ;
 				((Models.Page)Model.Page).Keywords = org.Keywords ;
 				((Models.Page)Model.Page).Description = org.Description ;
+
+				Page.Current = Model.Page ;
 			}
 
 			// Execute hook, if it exists

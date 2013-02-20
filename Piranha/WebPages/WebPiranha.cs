@@ -35,6 +35,16 @@ namespace Piranha.WebPages
 		/// The registered cultures prefixes.
 		/// </summary>
 		internal static Dictionary<string, string> CulturePrefixes = new Dictionary<string, string>() ;
+
+		/// <summary>
+		/// The registered hostnames.
+		/// </summary>
+		internal static Dictionary<string, Entities.SiteTree> HostNames = new Dictionary<string,Entities.SiteTree>() ;
+
+		/// <summary>
+		/// Cache wrapper.
+		/// </summary>
+		public static Web.ServerCache Cache = new Web.ServerCache() ;
 		#endregion
 
 		#region Properties
@@ -142,6 +152,35 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
+		/// Registers all of the hostnames configured in the database.
+		/// </summary>
+		public static void RegisterDefaultHostNames() {
+			HostNames.Clear() ;
+			Page.InvalidateStartpage() ;
+			Config.ClearCache() ;
+
+			// We need to check version so we don't try to access the column sitetree_hostnames
+			// before it's been created in the database.
+			if (Data.Database.InstalledVersion > 24) {
+				using (var db = new DataContext()) {
+					var sites = db.SiteTrees.ToList() ;
+					
+					foreach (var site in sites) {
+						if (!String.IsNullOrEmpty(site.HostNames)) {
+							var hostnames = site.HostNames.Split(new char[] { ',' }) ;
+
+							foreach (var host in hostnames) {
+								if (HostNames.ContainsKey(host))
+									throw new Exception("Duplicates of the hostname [" + host + "] was found configured") ;
+								HostNames.Add(host.ToLower(), site) ;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/// <summary>
 		/// Initializes the webb app.
 		/// </summary>
 		public static void Init() {
@@ -175,6 +214,9 @@ namespace Piranha.WebPages
 
 			// Register handlers
 			RegisterDefaultHandlers() ;
+
+			// Register hostnames
+			RegisterDefaultHostNames() ;
 
 			// Reset template cache
 			Web.TemplateCache.Clear() ;

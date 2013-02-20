@@ -75,11 +75,16 @@ INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sys
 VALUES ('f65bd7dd-6dfe-45b7-87e3-20a11e1f8d55', '8940b41a-e3a9-44f3-b564-bfd281416141', 'ADMIN_COMMENT', 
 	'Access to administrate comments.', 1, GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
+	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
+VALUES ('f71ca1b9-1276-4c3e-a090-5fba6c4980ce', '8940b41a-e3a9-44f3-b564-bfd281416141', 'ADMIN_SITETREE', 
+	'Access to administrate site trees.', 1, GETDATE(), GETDATE(), 
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '24', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '26', 'The currently installed version of Piranha.', 1,
 	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)

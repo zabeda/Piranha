@@ -512,6 +512,14 @@ namespace Piranha.Models
 				Sitemap.InvalidateCache(record.SiteTreeInternalId) ;
 		}
 
+		/// <summary>
+		/// Invalidates the cache for the site startpage.
+		/// </summary>
+		public static void InvalidateStartpage() {
+			if (Cache.ContainsKey(Guid.Empty))
+				Cache.Remove(Guid.Empty) ;
+		}
+
 		#region Handlers
 		/// <summary>
 		/// Create an empty attachment list if it is null in the database.

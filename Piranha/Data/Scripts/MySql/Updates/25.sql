@@ -5,4 +5,4 @@
 --
 -- Adds more features to the site tree
 
-ALTER TABLE [sitetree] ADD [sitetree_hostnames] NTEXT NULL;
+ALTER TABLE sitetree ADD sitetree_hostnames TEXT NULL;

@@ -61,11 +61,83 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit site tree.
+        /// </summary>
+        public static string EditTitleExisting {
+            get {
+                return ResourceManager.GetString("EditTitleExisting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new site tree.
+        /// </summary>
+        public static string EditTitleNew {
+            get {
+                return ResourceManager.GetString("EditTitleNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Host names.
+        /// </summary>
+        public static string HostNames {
+            get {
+                return ResourceManager.GetString("HostNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sites.
         /// </summary>
         public static string ListTitle {
             get {
                 return ResourceManager.GetString("ListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The site tree has been deleted..
+        /// </summary>
+        public static string MessageDeleted {
+            get {
+                return ResourceManager.GetString("MessageDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while deleting the site tree..
+        /// </summary>
+        public static string MessageNotDeleted {
+            get {
+                return ResourceManager.GetString("MessageNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while saving the site tree..
+        /// </summary>
+        public static string MessageNotSaved {
+            get {
+                return ResourceManager.GetString("MessageNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The site tree has been saved..
+        /// </summary>
+        public static string MessageSaved {
+            get {
+                return ResourceManager.GetString("MessageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        public static string NamespaceId {
+            get {
+                return ResourceManager.GetString("NamespaceId", resourceCulture);
             }
         }
     }

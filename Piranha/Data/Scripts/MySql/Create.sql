@@ -137,6 +137,7 @@ CREATE TABLE sitetree (
 	sitetree_internal_id VARCHAR(32) NOT NULL,
 	sitetree_name VARCHAR(64) NOT NULL,
 	sitetree_description VARCHAR(255) NULL,
+	sitetree_hostnames TEXT NULL,
 	sitetree_created DATETIME NOT NULL,
 	sitetree_updated DATETIME NOT NULL,
 	sitetree_created_by CHAR(38) NOT NULL,

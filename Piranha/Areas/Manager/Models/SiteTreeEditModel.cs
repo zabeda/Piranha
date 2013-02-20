@@ -38,6 +38,11 @@ namespace Piranha.Areas.Manager.Models
 		public string Name { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the host names.
+		/// </summary>
+		public string HostNames { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional description.
 		/// </summary>
 		public string Description { get ; set ; }
@@ -46,17 +51,29 @@ namespace Piranha.Areas.Manager.Models
 		/// Gets/sets the available namespaces.
 		/// </summary>
 		public SelectList Namespaces { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather the site tree can be deleted.
+		/// </summary>
+		public bool CanDelete { get ; set ; }
 		#endregion
 
 		/// <summary>
-		/// Default constructor.
+		/// Default constructor. Creates a new site tree model.
 		/// </summary>
-		/// <param name="id">Optional namespace id</param>
-		public SiteTreeEditModel(Guid? namespaceId = null) {
+		public SiteTreeEditModel() : this(Guid.Empty) {
+			CanDelete = true ;
+		}
+
+		/// <summary>
+		/// Creates a new site tree model for the given namespace.
+		/// </summary>
+		/// <param name="id">Namespace id</param>
+		public SiteTreeEditModel(Guid namespaceId) {
 			using (var db = new DataContext()) {
 				var ns = db.Namespaces.OrderBy(n => n.Name).ToList() ;
-				if (namespaceId.HasValue)
-					Namespaces = new SelectList(ns, "Id", "Name", namespaceId.Value) ;
+				if (namespaceId != Guid.Empty)
+					Namespaces = new SelectList(ns, "Id", "Name", namespaceId) ;
 				Namespaces = new SelectList(ns, "Id", "Name") ;
 			}
 		}
@@ -68,14 +85,16 @@ namespace Piranha.Areas.Manager.Models
 		/// <returns></returns>
 		public static SiteTreeEditModel GetById(Guid id) {
 			using (var db = new DataContext()) {
-				var m = db.SiteTrees.Where(s => s.Id == id).Select(s =>
-					new SiteTreeEditModel(s.NamespaceId) {
-						Id = s.Id,
-						InternalId = s.InternalId,
-						NamespaceId = s.NamespaceId,
-						Description = s.Description
-					}).Single() ;		
-				return m ;
+				var site = db.SiteTrees.Where(s => s.Id == id).Single() ;
+				return new SiteTreeEditModel(site.NamespaceId) {
+					Id = site.Id,
+					InternalId = site.InternalId,
+					Name = site.Name,
+					NamespaceId = site.NamespaceId,
+					HostNames = site.HostNames,
+					Description = site.Description,
+					CanDelete = db.PageDrafts.Where(s => s.SiteTreeId == id).Count() == 0
+				} ;
 			}
 		}
 
@@ -85,7 +104,25 @@ namespace Piranha.Areas.Manager.Models
 		/// <returns>Weather the entity was updated or not</returns>
 		public bool Save() {
 			using (var db = new DataContext()) {
-				return db.SaveChanges() > 0 ;
+				var site = db.SiteTrees.Where(s => s.Id == Id).SingleOrDefault() ;
+				if (site == null) {
+					site = new SiteTree() ;
+					db.SiteTrees.Add(site) ;
+				}
+				site.NamespaceId = NamespaceId ;
+				site.InternalId = InternalId ;
+				site.Name = Name ;
+				site.HostNames = HostNames ;
+				site.Description = Description ;
+
+				var ret = db.SaveChanges() > 0 ;
+
+				Id = site.Id ;
+
+				// Refresh host name configuration
+				if (ret)
+					WebPages.WebPiranha.RegisterDefaultHostNames() ;
+				return ret ;
 			}
 		}
 
@@ -95,7 +132,15 @@ namespace Piranha.Areas.Manager.Models
 		/// <returns>Weather the entity was removed or not</returns>
 		public bool Delete() {
 			using (var db = new DataContext()) {
-				return false ;
+				var site = db.SiteTrees.Where(s => s.Id == Id).Single() ;
+
+				db.SiteTrees.Remove(site) ;
+
+				var ret = db.SaveChanges() > 0 ;
+				// Refresh host name configuration
+				if (ret)
+					WebPages.WebPiranha.RegisterDefaultHostNames() ;
+				return ret ;
 			}
 		}
 	}

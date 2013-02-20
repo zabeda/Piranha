@@ -137,6 +137,7 @@ CREATE TABLE [sitetree] (
 	[sitetree_internal_id] NVARCHAR(32) NOT NULL,
 	[sitetree_name] NVARCHAR(64) NOT NULL,
 	[sitetree_description] NVARCHAR(255) NULL,
+	[sitetree_hostnames] NTEXT NULL,
 	[sitetree_created] DATETIME NOT NULL,
 	[sitetree_updated] DATETIME NOT NULL,
 	[sitetree_created_by] UNIQUEIDENTIFIER NOT NULL,
