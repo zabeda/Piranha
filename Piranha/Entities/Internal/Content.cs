@@ -235,20 +235,6 @@ namespace Piranha.Models
 		/// Gets/sets the possible child content if this is a folder.
 		/// </summary>
 		public List<Content> ChildContent { get ; set ; }
-
-		/// <summary>
-		/// Gets the page cache object.
-		/// </summary>
-		private static Dictionary<Guid, Content> Cache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(Content).Name] == null)
-						HttpContext.Current.Cache[typeof(Content).Name] = new Dictionary<Guid, Content>() ;
-					return (Dictionary<Guid, Content>)HttpContext.Current.Cache[typeof(Content).Name] ;
-				}
-				return new Dictionary<Guid,Content>() ;
-			}
-		}
 		#endregion
 
 		/// <summary>
@@ -267,9 +253,9 @@ namespace Piranha.Models
 		/// <param name="id">The record id</param>
 		/// <returns>The record</returns>
 		public static Content GetSingle(Guid id) {
-			if (!Cache.ContainsKey(id))
-				Cache[id] = Content.GetSingle((object)id) ;
-			return Cache[id] ;
+			if (!Cache.Current.Contains(id.ToString()))
+				Cache.Current[id.ToString()] = Content.GetSingle((object)id) ;
+			return (Content)Cache.Current[id.ToString()] ;
 		}
 
 		/// <summary>
@@ -448,8 +434,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Content record) {
-			if (Cache.ContainsKey(record.Id))
-				Cache.Remove(record.Id) ;
+			Cache.Current.Remove(record.Id.ToString()) ;
 		}
 
 		/// <summary>

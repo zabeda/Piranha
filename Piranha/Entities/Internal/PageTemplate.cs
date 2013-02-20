@@ -109,19 +109,6 @@ namespace Piranha.Models
 		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
-		#region Properties
-		/// <summary>
-		/// Gets the cache object.
-		/// </summary>
-		private static Dictionary<Guid, PageTemplate> Cache {
-			get {
-				if (HttpContext.Current.Cache[typeof(PageTemplate).Name] == null)
-					HttpContext.Current.Cache[typeof(PageTemplate).Name] = new Dictionary<Guid, PageTemplate>() ;
-				return (Dictionary<Guid, PageTemplate>)HttpContext.Current.Cache[typeof(PageTemplate).Name] ;
-			}
-		}
-		#endregion
-
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
@@ -137,9 +124,9 @@ namespace Piranha.Models
 		/// <param name="id">The template id</param>
 		/// <returns>The page</returns>
 		public static PageTemplate GetSingle(Guid id) {
-			if (!Cache.ContainsKey(id))
-				Cache[id] = PageTemplate.GetSingle((object)id) ;
-			return Cache[id] ;
+			if (!Cache.Current.Contains(id.ToString()))
+				Cache.Current[id.ToString()] = PageTemplate.GetSingle((object)id) ;
+			return (PageTemplate)Cache.Current[id.ToString()] ;
 		}
 
 		/// <summary>
@@ -147,8 +134,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record.</param>
 		public void InvalidateRecord(PageTemplate record) {
-			if (Cache.ContainsKey(record.Id))
-				Cache.Remove(record.Id) ;
+			Cache.Current.Remove(record.Id.ToString()) ;
 		}
 	}
 }

@@ -14,6 +14,26 @@ namespace Piranha.Models
 	[PrimaryKey(Column="permalink_id")]
 	public class Permalink : PiranhaRecord<Permalink>, ICacheRecord<Permalink>
 	{
+		#region Inner classes
+		/// <summary>
+		/// Inner class for mapping permalink names in namespaces to permalink id.
+		/// </summary>
+		private class NamespaceDictionary
+		{
+			#region Members
+			private Dictionary<Guid, Dictionary<string, Guid>> InnerCache = new Dictionary<Guid,Dictionary<string,Guid>>() ;
+			#endregion
+
+			public Dictionary<string, Guid> this[Guid namespaceId] {
+				get {
+					if (!InnerCache.ContainsKey(namespaceId))
+						InnerCache.Add(namespaceId, new Dictionary<string,Guid>()) ;
+					return InnerCache[namespaceId] ;
+				}
+			}
+		}
+		#endregion
+
 		#region Members
 		public static Guid DefaultNamespace = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
 		#endregion
@@ -51,38 +71,8 @@ namespace Piranha.Models
 		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
-		#region Properties
-		/// <summary>
-		/// Gets the permalink cache object.
-		/// </summary>
-		private static Dictionary<Guid, Dictionary<string, Permalink>> Cache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(Permalink).Name] == null) {
-						var cache = new Dictionary<Guid, Dictionary<string, Permalink>>() ;
-						cache.Add(new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03"), new Dictionary<string,Permalink>()) ;
-						cache.Add(new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067"), new Dictionary<string,Permalink>()) ;
-						HttpContext.Current.Cache[typeof(Permalink).Name] = cache ;
-					}
-					return (Dictionary<Guid, Dictionary<string, Permalink>>)HttpContext.Current.Cache[typeof(Permalink).Name] ;
-				}
-				return new Dictionary<Guid,Dictionary<string,Permalink>>() ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the permalink id cache object.
-		/// </summary>
-		private static Dictionary<Guid, Permalink> IdCache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] == null)
-						HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] = new Dictionary<Guid, Permalink>() ;
-					return (Dictionary<Guid, Permalink>)HttpContext.Current.Cache[typeof(Permalink).Name + "_Id"] ;
-				}
-				return new Dictionary<Guid,Permalink>() ;
-			}
-		} 
+		#region Cache
+		private static NamespaceDictionary NamespaceCache = new NamespaceDictionary() ;
 		#endregion
 
 		#region Static accessors
@@ -92,9 +82,13 @@ namespace Piranha.Models
 		/// <param name="id">The id</param>
 		/// <returns>The permalink</returns>
 		public static Permalink GetSingle(Guid id) {
-			if (!IdCache.ContainsKey(id))
-				IdCache[id] = GetSingle((object)id) ;
-			return IdCache[id] ;
+			if (!Cache.Current.Contains(id.ToString())) {
+				var perm = GetSingle((object)id) ;
+				if (perm != null)
+					AddToCache(perm) ;
+				return perm ;
+			}
+			return (Permalink)Cache.Current[id.ToString()] ;
 		}
 
 		/// <summary>
@@ -113,15 +107,16 @@ namespace Piranha.Models
 		/// <param name="name">The permalink name</param>
 		/// <returns>The permalink</returns>
 		public static Permalink GetByName(Guid namespaceid, string name) {
-			if (Cache.ContainsKey(namespaceid)) {
-				if (!Cache[namespaceid].ContainsKey(name)) {
-					Cache[namespaceid][name] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
-					if (Cache[namespaceid][name] != null)
-						IdCache[Cache[namespaceid][name].Id] = Cache[namespaceid][name] ;
+			if (!NamespaceCache[namespaceid].ContainsKey(name)) {
+				var perm = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
+
+				if (perm != null) {
+					AddToCache(perm) ;
+					return perm ;
 				}
-				return Cache[namespaceid][name] ;
+				return null ;
 			}
-			return null ;
+			return (Permalink)Cache.Current[NamespaceCache[namespaceid][name].ToString()] ;
 		}
 		#endregion
 
@@ -152,12 +147,18 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Permalink record) {
-			if (Cache.ContainsKey(NamespaceId)) {
-				if (Cache[NamespaceId].ContainsKey(record.Name))
-					Cache[NamespaceId].Remove(record.Name) ;
-			}
-			if (IdCache.ContainsKey(Id))
-				IdCache.Remove(Id) ;
+			Cache.Current.Remove(record.Id.ToString()) ;
+			if (NamespaceCache[record.NamespaceId].ContainsKey(record.Name))
+				NamespaceCache[record.NamespaceId].Remove(record.Name) ;
+		}
+
+		/// <summary>
+		/// Adds the given permalink to the cache.
+		/// </summary>
+		/// <param name="perm">The permalink</param>
+		private static void AddToCache(Permalink perm) {
+			Cache.Current[perm.Id.ToString()] = perm ;
+			NamespaceCache[perm.NamespaceId][perm.Name] = perm.Id ;
 		}
 	}
 }

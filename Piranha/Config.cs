@@ -33,28 +33,11 @@ namespace Piranha
 		}
 
 		/// <summary>
-		/// Gets the optional startpage id.
-		/// </summary>
-		public static Guid StartpageId {
-			get {
-				var id = ConfigurationManager.AppSettings["startpage_id"] ;
-				if (!String.IsNullOrEmpty(id))
-					return new Guid(id) ;
-				return Guid.Empty ;
-			}
-		}
-
-		/// <summary>
 		/// Gets the optional internal id of the current sitetree. If the parameter is empty
 		/// the current host name is resolved. If the hostname isn't found DEFAULT_SITE is used.
 		/// </summary>
 		public static string SiteTree {
 			get {
-				// Check for configured site tree in the config
-				var internalId = ConfigurationManager.AppSettings["sitetree"] ;
-				if (!String.IsNullOrEmpty(internalId))
-					return internalId ;
-				
 				// Check for configured site tree from the host name
 				if (HttpContext.Current != null && HttpContext.Current.Request != null) {
 					var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;

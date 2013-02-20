@@ -243,48 +243,18 @@ namespace Piranha.Models
 		public bool IsStartpage {
 			get { return ParentId == Guid.Empty && Seqno == 1 ; }
 		}
+		#endregion
+
+		#region Cache
+		/// <summary>
+		/// Maps permalink to page id.
+		/// </summary>
+		private static Dictionary<string, Guid> PermalinkCache = new Dictionary<string,Guid>() ;
 
 		/// <summary>
-		/// Gets the page cache object.
+		/// Maps permalink id to page id.
 		/// </summary>
-		private static Dictionary<Guid, Page> Cache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(Page).Name] == null)
-						HttpContext.Current.Cache[typeof(Page).Name] = new Dictionary<Guid, Page>() ;
-					return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name] ;
-				}
-				return new Dictionary<Guid,Page>() ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the page cache object by permalink.
-		/// </summary>
-		private static Dictionary<string, Page> PermalinkCache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] == null)
-						HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] = new Dictionary<string, Page>() ;
-					return (Dictionary<string, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_Permalink"] ;
-				}
-				return new Dictionary<string,Page>() ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the page cache object by permalink id.
-		/// </summary>
-		private static Dictionary<Guid, Page> PermalinkIdCache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] == null)
-						HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] = new Dictionary<Guid, Page>() ;
-					return (Dictionary<Guid, Page>)HttpContext.Current.Cache[typeof(Page).Name + "_PermalinkId"] ;
-				}
-				return new Dictionary<Guid,Page>() ;
-			}
-		}
+		private static Dictionary<Guid, Guid> PermalinkIdCache = new Dictionary<Guid,Guid>() ;
 		#endregion
 
 		/// <summary>
@@ -306,16 +276,14 @@ namespace Piranha.Models
 		/// <param name="id">The page id</param>
 		/// <returns>The page</returns>
 		public static Page GetSingle(Guid id) {
-			if (!Cache.ContainsKey(id)) {
+			if (!Cache.Current.Contains(id.ToString())) {
 				Page p = Page.GetSingle("page_id = @0 AND page_draft = 0", id) ;
 				
-				if (p != null) {
-					Cache[p.Id] = p ;
-					PermalinkCache[p.Permalink] = p ;
-					PermalinkIdCache[p.PermalinkId] = p ;
-				} else return null ;
+				if (p != null)
+					AddToCache(p) ;
+				else return null ;
 			}
-			return Cache[id] ;
+			return (Page)Cache.Current[id.ToString()] ;
 		}
 
 		/// <summary>
@@ -336,14 +304,11 @@ namespace Piranha.Models
 		/// <param name="draft">Weather to get the current draft</param>
 		/// <returns>The startpage</returns>
 		public static Page GetStartpage(bool draft = false) {
-			var startpageId = Config.StartpageId ;
-
-			if (!Cache.ContainsKey(startpageId)) {
-				if (startpageId == Guid.Empty)
-					Cache[startpageId] = Page.GetSingle("page_parent_id IS NULL and page_seqno = 1 AND page_draft = @0 AND page_sitetree_id = @1", draft, Config.SiteTreeId) ;
-				else Cache[startpageId] = Page.GetSingle(startpageId, draft) ;
+			if (!Cache.Current.Contains(Guid.Empty.ToString())) {
+				Cache.Current[Guid.Empty.ToString()] = 
+					Page.GetSingle("page_parent_id IS NULL and page_seqno = 1 AND page_draft = @0 AND page_sitetree_id = @1", draft, Config.SiteTreeId) ;
 			}
-			return Cache[startpageId] ;
+			return (Page)Cache.Current[Guid.Empty.ToString()] ;
 		}
 
 		/// <summary>
@@ -357,13 +322,10 @@ namespace Piranha.Models
 				if (!PermalinkCache.ContainsKey(permalink.ToLower())) {
 					Page p = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
 
-					if (p != null) {
-						Cache[p.Id] = p ;
-						PermalinkCache[p.Permalink] = p ;
-						PermalinkIdCache[p.PermalinkId] = p ;
-					}
+					if (p != null)
+						AddToCache(p) ;
 				}
-				return PermalinkCache.ContainsKey(permalink) ? PermalinkCache[permalink.ToLower()] : null ;
+				return (Page)Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] ;
 			}
 			return Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
 		}
@@ -379,13 +341,10 @@ namespace Piranha.Models
 				if (!PermalinkIdCache.ContainsKey(permalinkid)) {
 					Page p = Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
 
-					if (p != null) {
-						Cache[p.Id] = p ;
-						PermalinkCache[p.Permalink] = p ;
-						PermalinkIdCache[p.PermalinkId] = p ;
-					}
+					if (p != null)
+						AddToCache(p) ;
 				}
-				return PermalinkIdCache.ContainsKey(permalinkid) ? PermalinkIdCache[permalinkid] : null ;
+				return (Page)Cache.Current[PermalinkIdCache[permalinkid].ToString()] ;
 			}
 			return Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
 		}
@@ -497,15 +456,15 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Page record) {
-			if (Cache.ContainsKey(record.Id))
-				Cache.Remove(record.Id) ;
+			Cache.Current.Remove(record.Id.ToString()) ;
+
 			// If we click save & publish right away the permalink is not created yet.
 			if (record.Permalink != null && PermalinkCache.ContainsKey(record.Permalink))
 				PermalinkCache.Remove(record.Permalink) ;
 			if (record.Permalink != null && PermalinkIdCache.ContainsKey(record.PermalinkId))
 				PermalinkIdCache.Remove(record.PermalinkId) ;
-			if (record.IsStartpage && Cache.ContainsKey(Guid.Empty))
-				Cache.Remove(Guid.Empty) ;
+			if (record.IsStartpage)
+				Cache.Current.Remove(Guid.Empty.ToString()) ;
 
 			// Invalidate public sitemap
 			if (!record.IsDraft)
@@ -516,8 +475,18 @@ namespace Piranha.Models
 		/// Invalidates the cache for the site startpage.
 		/// </summary>
 		public static void InvalidateStartpage() {
-			if (Cache.ContainsKey(Guid.Empty))
-				Cache.Remove(Guid.Empty) ;
+			Cache.Current.Remove(Guid.Empty.ToString()) ;
+		}
+
+		/// <summary>
+		/// Adds the given page to the cache.
+		/// </summary>
+		/// <param name="p">The page</param>
+		private static void AddToCache(Page p) {
+			Cache.Current[p.Id.ToString()] = p ;
+			PermalinkCache[p.Permalink] = p.Id ;
+			PermalinkIdCache[p.PermalinkId] = p.Id ;
+
 		}
 
 		#region Handlers

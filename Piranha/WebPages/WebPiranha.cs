@@ -40,11 +40,6 @@ namespace Piranha.WebPages
 		/// The registered hostnames.
 		/// </summary>
 		internal static Dictionary<string, Entities.SiteTree> HostNames = new Dictionary<string,Entities.SiteTree>() ;
-
-		/// <summary>
-		/// Cache wrapper.
-		/// </summary>
-		public static Web.ServerCache Cache = new Web.ServerCache() ;
 		#endregion
 
 		#region Properties
@@ -156,7 +151,8 @@ namespace Piranha.WebPages
 		/// </summary>
 		public static void RegisterDefaultHostNames() {
 			HostNames.Clear() ;
-			Page.InvalidateStartpage() ;
+			if (HttpContext.Current != null)
+				Page.InvalidateStartpage() ;
 			Config.ClearCache() ;
 
 			// We need to check version so we don't try to access the column sitetree_hostnames

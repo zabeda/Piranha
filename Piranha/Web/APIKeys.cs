@@ -13,22 +13,6 @@ namespace Piranha.Web
 	/// </summary>
 	public static class APIKeys
 	{
-		#region Members
-		/// <summary>
-		/// The internal cache object.
-		/// </summary>
-		internal static Dictionary<Guid, Guid?> Cache {
-			get {
-				if (HttpContext.Current != null) {
-					if (HttpContext.Current.Cache[typeof(APIKeys).Name] == null)
-						HttpContext.Current.Cache[typeof(APIKeys).Name] = new Dictionary<Guid, Guid?>() ;
-					return (Dictionary<Guid, Guid?>)HttpContext.Current.Cache[typeof(APIKeys).Name] ;
-				}
-				return new Dictionary<Guid, Guid?>() ;
-			}
-		}
-		#endregion
-
 		/// <summary>
 		/// Gets the user key pair for the given API-key
 		/// </summary>
@@ -46,12 +30,12 @@ namespace Piranha.Web
 					if (DateTime.Now < date.AddMinutes(30)) {
 						var apiKey = new Guid(args[0]) ;
 
-						if (!Cache.ContainsKey(apiKey)) {
+						if (!Cache.Current.Contains(apiKey.ToString())) {
 							using (var db = new DataContext()) {
-								Cache[apiKey] = db.Users.Where(u => u.APIKey == apiKey).Select(u => u.Id).SingleOrDefault() ;
+								Cache.Current[apiKey.ToString()] = db.Users.Where(u => u.APIKey == apiKey).Select(u => u.Id).SingleOrDefault() ;
 							}
 						}
-						return Cache[apiKey] ;
+						return (Guid?)Cache.Current[apiKey.ToString()] ;
 					}
 				}
 			}
@@ -128,12 +112,5 @@ namespace Piranha.Web
 
 			return UTF8Encoding.UTF8.GetString(result) ;
 	   }
-
-		/// <summary>
-		/// Clears the internal api-key cache.
-		/// </summary>
-		internal static void ClearCache() {
-			Cache.Clear() ;
-		}
 	}
 }

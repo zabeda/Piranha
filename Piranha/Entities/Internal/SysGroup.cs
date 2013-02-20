@@ -77,10 +77,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The groups</returns>
 		public static List<SysGroup> GetStructure() {
-			if (HttpContext.Current.Cache[typeof(SysGroup).Name] == null)
-				HttpContext.Current.Cache[typeof(SysGroup).Name] = 
+			if (Piranha.Cache.Current[typeof(SysGroup).Name] == null)
+				Piranha.Cache.Current[typeof(SysGroup).Name] = 
 					Sort(SysGroup.Get(new Params() { OrderBy = "sysgroup_parent_id" }), Guid.Empty) ;
-			return (List<SysGroup>)HttpContext.Current.Cache[typeof(SysGroup).Name] ;
+			return (List<SysGroup>)Piranha.Cache.Current[typeof(SysGroup).Name] ;
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace Piranha.Models
 		/// <param name="record">The record to invalidate.</param>
 		public void InvalidateRecord(SysGroup record) {
 			// Invalidate entire cache as groups are recursivly linked
-			HttpContext.Current.Cache.Remove(typeof(SysGroup).Name) ;
+			Piranha.Cache.Current.Remove(typeof(SysGroup).Name) ;
 		}
 	}
 

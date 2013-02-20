@@ -83,19 +83,7 @@ namespace Piranha.Models
 		#endregion
 
 		#region Properties
-		/// <summary>
-		/// Gets the page cache object.
-		/// </summary>
-		private static Dictionary<string, SysParam> Cache {
-			get {
-				if (HttpContext.Current != null && HttpContext.Current.Cache != null) {
-					if (HttpContext.Current.Cache[typeof(SysParam).Name] == null)
-						HttpContext.Current.Cache[typeof(SysParam).Name] = new Dictionary<string, SysParam>() ;
-					return (Dictionary<string, SysParam>)HttpContext.Current.Cache[typeof(SysParam).Name] ;
-				}
-				return new Dictionary<string, SysParam>() ;
-			}
-		}
+		private static MemCache Cache = new MemCache() ;
 		#endregion
 
 		#region Static accessors
@@ -106,11 +94,9 @@ namespace Piranha.Models
 		/// <returns>The param</returns>
 		public static SysParam GetByName(string name) {
 			try {
-				if (!Cache.ContainsKey(name.ToUpper()))
+				if (Cache[name.ToUpper()] == null)
 					Cache[name.ToUpper()] = SysParam.GetSingle("sysparam_name = @0", name) ;
-				if (!Cache.ContainsKey(name.ToUpper()))
-					return SysParam.GetSingle("sysparam_name = @0", name) ;
-				return Cache[name.ToUpper()] ;
+				return (SysParam)Cache[name.ToUpper()] ;
 			} catch {}
 			return null ;
 		}
@@ -139,8 +125,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(SysParam record) {
-			if (Cache.ContainsKey(record.Name.ToUpper()))
-				Cache.Remove(record.Name.ToUpper()) ;
+			Cache.Remove(record.Name.ToUpper()) ;
+
+			//if (Cache.ContainsKey(record.Name.ToUpper()))
+			//	Cache.Remove(record.Name.ToUpper()) ;
 		}
 
 		/// <summary>
@@ -148,8 +136,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="name">The param name.</param>
 		public static void InvalidateParam(string name) {
-			if (Cache.ContainsKey(name.ToUpper()))
-				Cache.Remove(name.ToUpper()) ;
+			Cache.Remove(name.ToUpper()) ;
+
+			//if (Cache.ContainsKey(name.ToUpper()))
+			//	Cache.Remove(name.ToUpper()) ;
 		}
 	}
 }
