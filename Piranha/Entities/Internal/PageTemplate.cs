@@ -124,9 +124,12 @@ namespace Piranha.Models
 		/// <param name="id">The template id</param>
 		/// <returns>The page</returns>
 		public static PageTemplate GetSingle(Guid id) {
-			if (!Cache.Current.Contains(id.ToString()))
-				Cache.Current[id.ToString()] = PageTemplate.GetSingle((object)id) ;
-			return (PageTemplate)Cache.Current[id.ToString()] ;
+			if (id != Guid.Empty) {
+				if (!Cache.Current.Contains(id.ToString()))
+					Cache.Current[id.ToString()] = PageTemplate.GetSingle((object)id) ;
+				return (PageTemplate)Cache.Current[id.ToString()] ;
+			}
+			return null ;
 		}
 
 		/// <summary>

@@ -82,13 +82,16 @@ namespace Piranha.Models
 		/// <param name="id">The id</param>
 		/// <returns>The permalink</returns>
 		public static Permalink GetSingle(Guid id) {
-			if (!Cache.Current.Contains(id.ToString())) {
-				var perm = GetSingle((object)id) ;
-				if (perm != null)
-					AddToCache(perm) ;
-				return perm ;
+			if (id != Guid.Empty) {
+				if (!Cache.Current.Contains(id.ToString())) {
+					var perm = GetSingle((object)id) ;
+					if (perm != null)
+						AddToCache(perm) ;
+					return perm ;
+				}
+				return (Permalink)Cache.Current[id.ToString()] ;
 			}
-			return (Permalink)Cache.Current[id.ToString()] ;
+			return null ;
 		}
 
 		/// <summary>

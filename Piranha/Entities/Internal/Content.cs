@@ -253,9 +253,12 @@ namespace Piranha.Models
 		/// <param name="id">The record id</param>
 		/// <returns>The record</returns>
 		public static Content GetSingle(Guid id) {
-			if (!Cache.Current.Contains(id.ToString()))
-				Cache.Current[id.ToString()] = Content.GetSingle((object)id) ;
-			return (Content)Cache.Current[id.ToString()] ;
+			if (id != Guid.Empty) {
+				if (!Cache.Current.Contains(id.ToString()))
+					Cache.Current[id.ToString()] = Content.GetSingle((object)id) ;
+				return (Content)Cache.Current[id.ToString()] ;
+			}
+			return null ;
 		}
 
 		/// <summary>
