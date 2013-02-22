@@ -461,41 +461,47 @@ namespace Piranha.Models.Manager.PageModels
 			}
 
 			if (Template != null) {
-				// Get regions
-				var regions = RegionTemplate.Get("regiontemplate_template_id = @0", Template.Id, new Params() { OrderBy = "regiontemplate_seqno" }) ;
-				foreach (var rt in regions) {
-					var reg = Region.GetSingle("region_regiontemplate_id = @0 AND region_page_id = @1 and region_draft = @2",
-						rt.Id, Page.Id, Page.IsDraft) ;
-					if (reg != null)
-						Regions.Add(reg) ;
-					else Regions.Add(new Region() { 
-						InternalId = rt.InternalId, 
-						Name = rt.Name, 
-						Type = rt.Type,
-						PageId = Page.Id, 
-						RegiontemplateId = rt.Id, 
-						IsDraft = Page.IsDraft, 
-						IsPageDraft = Page.IsDraft }) ;
-				}
+				// Only load regions & properties if this is an original
+				if (Page.OriginalId == Guid.Empty) {
+					// Get regions
+					var regions = RegionTemplate.Get("regiontemplate_template_id = @0", Template.Id, new Params() { OrderBy = "regiontemplate_seqno" }) ;
+					foreach (var rt in regions) {
+						var reg = Region.GetSingle("region_regiontemplate_id = @0 AND region_page_id = @1 and region_draft = @2",
+							rt.Id, Page.Id, Page.IsDraft) ;
+						if (reg != null)
+							Regions.Add(reg) ;
+						else Regions.Add(new Region() { 
+							InternalId = rt.InternalId, 
+							Name = rt.Name, 
+							Type = rt.Type,
+							PageId = Page.Id, 
+							RegiontemplateId = rt.Id, 
+							IsDraft = Page.IsDraft, 
+							IsPageDraft = Page.IsDraft }) ;
+					}
 
-				// Get Properties
-				foreach (string name in Template.Properties) {
-					Property prp = Property.GetSingle("property_name = @0 AND property_parent_id = @1 AND property_draft = @2", 
-						name, Page.Id, Page.IsDraft) ;
-					if (prp != null)
-						Properties.Add(prp) ;
-					else Properties.Add(new Property() { Name = name, ParentId = Page.Id, IsDraft = Page.IsDraft }) ;
+					// Get Properties
+					foreach (string name in Template.Properties) {
+						Property prp = Property.GetSingle("property_name = @0 AND property_parent_id = @1 AND property_draft = @2", 
+							name, Page.Id, Page.IsDraft) ;
+						if (prp != null)
+							Properties.Add(prp) ;
+						else Properties.Add(new Property() { Name = name, ParentId = Page.Id, IsDraft = Page.IsDraft }) ;
+					}
 				}
 			} else throw new ArgumentException("Could not find page template for page {" + Page.Id.ToString() + "}") ;
 
-			// Get attached content
-			if (Page.Attachments.Count > 0) {
-				// Content meta data is actually memcached, so this won't result in multiple queries
-				Page.Attachments.ForEach(a => {
-					Models.Content c = Models.Content.GetSingle(a) ;
-					if (c != null)
-						AttachedContent.Add(c) ;
-				}) ;
+			// Only load attachments if this is an original
+			if (Page.OriginalId == Guid.Empty) {
+				// Get attached content
+				if (Page.Attachments.Count > 0) {
+					// Content meta data is actually memcached, so this won't result in multiple queries
+					Page.Attachments.ForEach(a => {
+						Models.Content c = Models.Content.GetSingle(a) ;
+						if (c != null)
+							AttachedContent.Add(c) ;
+					}) ;
+				}
 			}
 
 			// Get page position
@@ -503,8 +509,11 @@ namespace Piranha.Models.Manager.PageModels
 			Parents.Insert(0, new PagePlacement() { Level = 1, IsSelected = Page.ParentId == Guid.Empty }) ;
 			Siblings = BuildSiblingPages(Page.Id, Page.ParentId, Page.Seqno, Page.ParentId, Page.SiteTreeInternalId) ;
 
-			// Get extensions
-			Extensions = Page.GetExtensions() ;
+			// Only load extensions if this is an original
+			if (Page.OriginalId == Guid.Empty) {
+				// Get extensions
+				Extensions = Page.GetExtensions() ;
+			}
 
 			// Initialize regions
 			foreach (var reg in Regions)

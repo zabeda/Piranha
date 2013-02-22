@@ -325,6 +325,8 @@ namespace Piranha.Models
 					if (p != null)
 						AddToCache(p) ;
 				}
+				if (!Cache.Current.Contains(PermalinkCache[permalink.ToLower()].ToString()))
+					Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ; 
 				return (Page)Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] ;
 			}
 			return Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
@@ -344,6 +346,8 @@ namespace Piranha.Models
 					if (p != null)
 						AddToCache(p) ;
 				}
+				if (!Cache.Current.Contains(PermalinkIdCache[permalinkid].ToString()))
+					Cache.Current[PermalinkIdCache[permalinkid].ToString()] = Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
 				return (Page)Cache.Current[PermalinkIdCache[permalinkid].ToString()] ;
 			}
 			return Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;

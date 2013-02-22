@@ -80,6 +80,11 @@ namespace Piranha.Areas.Manager.Controllers
 							filterContext.Result = RedirectToAction("index", "account") ;
 					}
 				}
+
+				// Get possible return url
+				if (!String.IsNullOrEmpty(Request["returl"]))
+					ViewBag.ReturnUrl = Request["returl"] ;
+
 				base.OnActionExecuting(filterContext) ;
 			} else {
 				filterContext.Result = RedirectToAction("index", "account") ;

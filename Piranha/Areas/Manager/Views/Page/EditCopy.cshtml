@@ -1,6 +1,7 @@
 ﻿@model Piranha.Models.Manager.PageModels.EditModel
 @using Piranha.Extend;
 @section Head {
+    <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.regions.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.media.dialog.js")"></script>
@@ -120,7 +121,7 @@
         <div class="box info" style="margin:0 0 30px;">
             <div class="inner">
                 <div class="ico"></div>
-                <p>This page is a copy. To edit the actual content of the page, please edit the original <a href="@Url.Action("edit", new { @id = Model.Page.OriginalId })">here</a>.</p>
+                <p>This page is a copy. To edit the actual content of the page, please edit the original <a href="@Url.Action("edit", new { @id = Model.Page.OriginalId, @returl = Model.Page.Id })">here</a>.</p>
             </div>
         </div>
     </div>
@@ -239,6 +240,14 @@
                                 <a href="#" data-id="pnl-comments">@Piranha.Resources.Global.Comments</a>
                             </li>
                             }
+                            @foreach (var ext in Model.Extensions) {
+                            <li>
+                                <a href="#"@(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@ExtensionManager.GetInternalIdByType(ext.Type).ToLower()">
+                                    @ExtensionManager.GetExtensionNameByType(ext.Type)
+                                </a>
+                            </li>
+                            }
                         </ul>
                     </td>
                     <td>
@@ -273,6 +282,7 @@
                             </div>
                         </div>
                         }
+                        @Html.EditorFor(m => m.Extensions)
                     </td>
                 </tr>
             </table>

@@ -12,7 +12,7 @@
         @foreach (var c in Model.AttachedContent) {
         <tr data-id="@c.Id">
             <td><img src="@Url.Content("~/thumb/" + c.Id + "/50")" /></td>
-            <td>@c.DisplayName</td>
+            <td><a href="@Url.Action("edit", "content", new { @id = c.Id, @returl = Url.Action("edit", "page") })">@c.DisplayName</a></td>
             <td>@c.Type</td>
             <td class="buttons three">
                 <a class="icon up marg"></a>

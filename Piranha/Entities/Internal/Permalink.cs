@@ -89,6 +89,8 @@ namespace Piranha.Models
 						AddToCache(perm) ;
 					return perm ;
 				}
+				if (!Cache.Current.Contains(id.ToString()))
+					Cache.Current[id.ToString()] = GetSingle((object)id) ;
 				return (Permalink)Cache.Current[id.ToString()] ;
 			}
 			return null ;
@@ -119,6 +121,8 @@ namespace Piranha.Models
 				}
 				return null ;
 			}
+			if (!Cache.Current.Contains(NamespaceCache[namespaceid][name].ToString()))
+				Cache.Current[NamespaceCache[namespaceid][name].ToString()] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
 			return (Permalink)Cache.Current[NamespaceCache[namespaceid][name].ToString()] ;
 		}
 		#endregion

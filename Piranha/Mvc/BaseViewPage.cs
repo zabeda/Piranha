@@ -19,6 +19,11 @@ namespace Piranha.Mvc
 		public PiranhaHelper UI { get ; private set ; }
 
 		/// <summary>
+		/// Gets the optional return url.
+		/// </summary>
+		public string ReturnUrl { get { return ViewBag.ReturnUrl ; } }
+
+		/// <summary>
 		/// Default constructor. Creates a new view page.
 		/// </summary>
 		public BaseViewPage() : base() {
