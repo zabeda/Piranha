@@ -29,6 +29,7 @@ namespace Piranha.Entities.Maps
 			Property(t => t.CreatedById).HasColumnName("pagetemplate_created_by") ;
 			Property(t => t.UpdatedById).HasColumnName("pagetemplate_updated_by") ;
 
+			HasMany(t => t.RegionTemplates).WithRequired().HasForeignKey(rt => rt.TemplateId) ;
 			HasRequired(t => t.CreatedBy) ;
 			HasRequired(t => t.UpdatedBy) ;
 		}

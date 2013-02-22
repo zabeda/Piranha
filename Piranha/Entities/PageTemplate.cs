@@ -60,9 +60,9 @@ namespace Piranha.Entities
 
 		#region Navigation properties
 		/// <summary>
-		/// Gets/sets the pages who have this page type.
+		/// Gets/sets the available region templates.
 		/// </summary>
-		//IList<Page> Pages { get ; set ; }
+		public IList<RegionTemplate> RegionTemplates { get ; set ; }
 		#endregion
 
 		#region Internal properties

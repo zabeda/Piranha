@@ -177,11 +177,13 @@
     <Compile Include="Entities\Media.cs" />
     <Compile Include="Entities\Namespace.cs" />
     <Compile Include="Entities\Page.cs" />
+    <Compile Include="Entities\PageModel.cs" />
     <Compile Include="Entities\PageTemplate.cs" />
     <Compile Include="Entities\Param.cs" />
     <Compile Include="Entities\Permalink.cs" />
     <Compile Include="Entities\Permission.cs" />
     <Compile Include="Entities\Post.cs" />
+    <Compile Include="Entities\PostModel.cs" />
     <Compile Include="Entities\PostTemplate.cs" />
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\Region.cs" />
