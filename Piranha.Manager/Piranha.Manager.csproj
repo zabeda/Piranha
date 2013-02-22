@@ -92,11 +92,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Comment\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Extensions.cs" />
     <Compile Include="Framework\Menu.cs" />
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
     <Compile Include="Framework\Models\CategoryEditModel.cs" />
     <Compile Include="Framework\Models\CategoryListModel.cs" />
+    <Compile Include="Framework\Models\CommentListModel.cs" />
     <Compile Include="Framework\Models\PostTypeListModel.cs" />
     <Compile Include="Framework\Models\PageListModel.cs" />
     <Compile Include="Framework\Models\PageTypeEditModel.cs" />
@@ -163,6 +169,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Category.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Comment.Designer.cs">
+      <DependentUpon>Comment.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\PageType.Designer.cs">
       <DependentUpon>PageType.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -187,6 +198,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Toolbar.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.resx</DependentUpon>
     </Compile>
     <Compile Include="Shared\Menu.generated.cs">
       <AutoGen>True</AutoGen>
@@ -242,6 +258,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
     </None>
+    <None Include="Comment\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
     <EmbeddedResource Include="Resources\Category.resx">
@@ -249,6 +269,11 @@
       <LastGenOutput>Category.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Comment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
     <EmbeddedResource Include="Resources\PageType.sv-SE.resx" />
     <EmbeddedResource Include="Resources\PageType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -274,6 +299,11 @@
       <LastGenOutput>Toolbar.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Toolbar.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\User.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\User.sv-SE.resx" />
     <EmbeddedResource Include="Shared\_Layout.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>_Layout.generated.cs</LastGenOutput>

@@ -56,15 +56,15 @@ WriteLiteral("\r\n\r\n");
             
             #line 5 "..\..\User\Index.cshtml"
   
-    Page.Title = @Piranha.Resources.Settings.ListTitleUsers ;
+    Page.Title = @Piranha.Manager.Resources.User.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
     
     var msg = Request["msg"] ;
     if (!String.IsNullOrEmpty(msg)) {
         if (msg.ToLower() == "deleted") {
-            this.SuccessMessage(Piranha.Resources.Settings.MessageUserDeleted) ;
+            this.SuccessMessage(Piranha.Manager.Resources.User.MessageDeleted) ;
         } else if (msg.ToLower() == "notdeleted") {
-            this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+            this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
         }
     }
 
@@ -83,7 +83,7 @@ WriteLiteral(@"
                 searchId: 'search',
                 valueNames: ['login', 'name', 'group', 'updated', 'created']
             };
-            var list = new List('list', options);
+            new List('list', options);
         });
     </script>
 ");
@@ -112,7 +112,7 @@ WriteLiteral("\" class=\"add\">");
 
             
             #line 34 "..\..\User\Index.cshtml"
-                                                                       Write(Piranha.Resources.Global.ToolbarAdd);
+                                                                       Write(Piranha.Manager.Resources.Toolbar.Add);
 
             
             #line default
@@ -132,7 +132,7 @@ WriteLiteral("\" class=\"refresh\">");
 
             
             #line 35 "..\..\User\Index.cshtml"
-                                                             Write(Piranha.Resources.Global.ToolbarReload);
+                                                             Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
             #line default
@@ -159,7 +159,7 @@ WriteLiteral("\r\n\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"
 
             
             #line 48 "..\..\User\Index.cshtml"
-                                                        Write(Piranha.Resources.Global.Username);
+                                                        Write(Piranha.Manager.Resources.Global.Username);
 
             
             #line default
@@ -169,7 +169,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
             
             #line 49 "..\..\User\Index.cshtml"
-                                                   Write(Piranha.Resources.Global.Name);
+                                                   Write(Piranha.Manager.Resources.Global.Name);
 
             
             #line default
@@ -179,7 +179,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
             
             #line 50 "..\..\User\Index.cshtml"
-                                                    Write(Piranha.Resources.Global.Group);
+                                                    Write(Piranha.Manager.Resources.Global.Group);
 
             
             #line default
@@ -190,7 +190,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
             
             #line 51 "..\..\User\Index.cshtml"
-                                                                   Write(Piranha.Resources.Global.Updated);
+                                                                   Write(Piranha.Manager.Resources.Global.Updated);
 
             
             #line default
@@ -201,7 +201,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
             
             #line 52 "..\..\User\Index.cshtml"
-                                                                   Write(Piranha.Resources.Global.Created);
+                                                                   Write(Piranha.Manager.Resources.Global.Created);
 
             
             #line default
@@ -378,6 +378,16 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
             
             #line 77 "..\..\User\Index.cshtml"
                                             Write(Href("~/manager/user/edit/delete/" + user.Id + "/true"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" title=\"");
+
+
+            
+            #line 77 "..\..\User\Index.cshtml"
+                                                                                                             Write(Piranha.Manager.Resources.User.Delete);
 
             
             #line default

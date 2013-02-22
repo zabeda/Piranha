@@ -22,14 +22,14 @@ namespace Piranha.Manager.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Global {
+    public class User {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Global() {
+        internal User() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Piranha.Manager.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Piranha.Manager.Resources.Global", typeof(Global).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Piranha.Manager.Resources.User", typeof(User).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,101 +61,38 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced.
+        ///   Looks up a localized string similar to Delete user.
         /// </summary>
-        public static string Advanced {
+        public static string Delete {
             get {
-                return ResourceManager.GetString("Advanced", resourceCulture);
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created.
+        ///   Looks up a localized string similar to Users.
         /// </summary>
-        public static string Created {
+        public static string ListTitle {
             get {
-                return ResourceManager.GetString("Created", resourceCulture);
+                return ResourceManager.GetString("ListTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to The user has been deleted..
         /// </summary>
-        public static string Description {
+        public static string MessageDeleted {
             get {
-                return ResourceManager.GetString("Description", resourceCulture);
+                return ResourceManager.GetString("MessageDeleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Group.
+        ///   Looks up a localized string similar to An error occurred while deleting the user..
         /// </summary>
-        public static string Group {
+        public static string MessageNotDeleted {
             get {
-                return ResourceManager.GetString("Group", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Information.
-        /// </summary>
-        public static string Information {
-            get {
-                return ResourceManager.GetString("Information", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Permalink.
-        /// </summary>
-        public static string Permalink {
-            get {
-                return ResourceManager.GetString("Permalink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status.
-        /// </summary>
-        public static string Status {
-            get {
-                return ResourceManager.GetString("Status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Title.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Updated.
-        /// </summary>
-        public static string Updated {
-            get {
-                return ResourceManager.GetString("Updated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username.
-        /// </summary>
-        public static string Username {
-            get {
-                return ResourceManager.GetString("Username", resourceCulture);
+                return ResourceManager.GetString("MessageNotDeleted", resourceCulture);
             }
         }
     }
