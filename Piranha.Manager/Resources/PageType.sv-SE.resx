@@ -124,7 +124,7 @@
     <value>Sidtyper</value>
   </data>
   <data name="MessageDeleteConfirm" xml:space="preserve">
-    <value>Vill ta bort sidtypen?</value>
+    <value>Vill ta bort den valda sidtypen?</value>
   </data>
   <data name="Preview" xml:space="preserve">
     <value>Html-tumnagel</value>

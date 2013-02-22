@@ -72,6 +72,19 @@ namespace Piranha.Manager
 					.ForMember(p => p.CreatedById, o => o.Ignore())
 					.ForMember(p => p.Updated, o => o.Ignore())
 					.ForMember(p => p.UpdatedBy, o => o.Ignore()) ;
+				Mapper.CreateMap<Entities.Category, Entities.Category>()
+					.ForMember(c => c.Id, o => o.Ignore())
+					.ForMember(c => c.Created, o => o.Ignore())
+					.ForMember(c => c.CreatedById, o => o.Ignore())
+					.ForMember(c => c.Updated, o => o.Ignore())
+					.ForMember(c => c.UpdatedById, o => o.Ignore()) ;
+				Mapper.CreateMap<Entities.Permalink, Entities.Permalink>()
+					.ForMember(p => p.Id, o => o.Ignore())
+					.ForMember(p => p.Type, o => o.Ignore())
+					.ForMember(p => p.Created, o => o.Ignore())
+					.ForMember(p => p.CreatedById, o => o.Ignore())
+					.ForMember(p => p.Updated, o => o.Ignore())
+					.ForMember(p => p.UpdatedById, o => o.Ignore()) ;
 				Mapper.CreateMap<Entities.Post, Manager.Models.PostListModel.PostModel>()
 					.ForMember(p => p.NavigationTitle, o => o.Ignore())
 					.ForMember(p => p.TemplateName, o => o.ResolveUsing(p => p.Template.Name))

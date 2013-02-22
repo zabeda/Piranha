@@ -117,25 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Advanced" xml:space="preserve">
-    <value>Avancerat</value>
+  <data name="DescriptionLength" xml:space="preserve">
+    <value>The description has a maximum length of 255 characters.</value>
   </data>
-  <data name="Created" xml:space="preserve">
-    <value>Skapad</value>
+  <data name="EditTitleExisting" xml:space="preserve">
+    <value>Edit category</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Beskrivning</value>
+  <data name="EditTitleNew" xml:space="preserve">
+    <value>Add new category</value>
   </data>
-  <data name="Information" xml:space="preserve">
-    <value>Information</value>
+  <data name="ListTitle" xml:space="preserve">
+    <value>Categories</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Namn</value>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete the selected category?</value>
   </data>
-  <data name="Permalink" xml:space="preserve">
-    <value>Permalänk</value>
+  <data name="MessageNotSaved" xml:space="preserve">
+    <value>An error occurred while saving the category.</value>
   </data>
-  <data name="Updated" xml:space="preserve">
-    <value>Ändrad</value>
+  <data name="MessageSaved" xml:space="preserve">
+    <value>The category has been saved.</value>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>The name has a maximum length of 64 characters.</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>The name is required.</value>
+  </data>
+  <data name="PermalinkDescription" xml:space="preserve">
+    <value>The permalink will be created automatically when the category is created</value>
   </data>
 </root>

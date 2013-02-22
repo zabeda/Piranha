@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Advanced" xml:space="preserve">
-    <value>Avancerat</value>
+  <data name="EditTitleExisting" xml:space="preserve">
+    <value>Ändra kategori</value>
   </data>
-  <data name="Created" xml:space="preserve">
-    <value>Skapad</value>
+  <data name="EditTitleNew" xml:space="preserve">
+    <value>Lägg till kategori</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Beskrivning</value>
+  <data name="ListTitle" xml:space="preserve">
+    <value>Kategorier</value>
   </data>
-  <data name="Information" xml:space="preserve">
-    <value>Information</value>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Vill ta bort den valda kategorin?</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Namn</value>
+  <data name="MessageNotSaved" xml:space="preserve">
+    <value>Ett fel har inträffat. Kategorin kunde inte sparas.</value>
   </data>
-  <data name="Permalink" xml:space="preserve">
-    <value>Permalänk</value>
+  <data name="MessageSaved" xml:space="preserve">
+    <value>Kategorin har sparats.</value>
   </data>
-  <data name="Updated" xml:space="preserve">
-    <value>Ändrad</value>
+  <data name="PermalinkDescription" xml:space="preserve">
+    <value>Din permalänk skapas automatiskt när du sparar kategorin första gången</value>
   </data>
 </root>

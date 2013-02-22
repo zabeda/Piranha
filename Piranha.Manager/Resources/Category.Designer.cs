@@ -22,14 +22,14 @@ namespace Piranha.Manager.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Global {
+    public class Category {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Global() {
+        internal Category() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Piranha.Manager.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Piranha.Manager.Resources.Global", typeof(Global).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Piranha.Manager.Resources.Category", typeof(Category).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,92 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced.
+        ///   Looks up a localized string similar to The description has a maximum length of 255 characters..
         /// </summary>
-        public static string Advanced {
+        public static string DescriptionLength {
             get {
-                return ResourceManager.GetString("Advanced", resourceCulture);
+                return ResourceManager.GetString("DescriptionLength", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created.
+        ///   Looks up a localized string similar to Edit category.
         /// </summary>
-        public static string Created {
+        public static string EditTitleExisting {
             get {
-                return ResourceManager.GetString("Created", resourceCulture);
+                return ResourceManager.GetString("EditTitleExisting", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to Add new category.
         /// </summary>
-        public static string Description {
+        public static string EditTitleNew {
             get {
-                return ResourceManager.GetString("Description", resourceCulture);
+                return ResourceManager.GetString("EditTitleNew", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information.
+        ///   Looks up a localized string similar to Categories.
         /// </summary>
-        public static string Information {
+        public static string ListTitle {
             get {
-                return ResourceManager.GetString("Information", resourceCulture);
+                return ResourceManager.GetString("ListTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected category?.
         /// </summary>
-        public static string Name {
+        public static string MessageDeleteConfirm {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("MessageDeleteConfirm", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Permalink.
+        ///   Looks up a localized string similar to An error occurred while saving the category..
         /// </summary>
-        public static string Permalink {
+        public static string MessageNotSaved {
             get {
-                return ResourceManager.GetString("Permalink", resourceCulture);
+                return ResourceManager.GetString("MessageNotSaved", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Updated.
+        ///   Looks up a localized string similar to The category has been saved..
         /// </summary>
-        public static string Updated {
+        public static string MessageSaved {
             get {
-                return ResourceManager.GetString("Updated", resourceCulture);
+                return ResourceManager.GetString("MessageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name has a maximum length of 64 characters..
+        /// </summary>
+        public static string NameLength {
+            get {
+                return ResourceManager.GetString("NameLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name is required..
+        /// </summary>
+        public static string NameRequired {
+            get {
+                return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The permalink will be created automatically when the category is created.
+        /// </summary>
+        public static string PermalinkDescription {
+            get {
+                return ResourceManager.GetString("PermalinkDescription", resourceCulture);
             }
         }
     }

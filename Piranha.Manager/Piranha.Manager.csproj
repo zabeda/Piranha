@@ -82,9 +82,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>index.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Category\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Category\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Extensions.cs" />
     <Compile Include="Framework\Menu.cs" />
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
+    <Compile Include="Framework\Models\CategoryEditModel.cs" />
+    <Compile Include="Framework\Models\CategoryListModel.cs" />
     <Compile Include="Framework\Models\PostTypeListModel.cs" />
     <Compile Include="Framework\Models\PageListModel.cs" />
     <Compile Include="Framework\Models\PageTypeEditModel.cs" />
@@ -93,6 +105,7 @@
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
     <Compile Include="Framework\Models\PostListModel.cs" />
+    <Compile Include="Framework\Templates\CategoryEdit.cs" />
     <Compile Include="Framework\Templates\PostList.cs" />
     <Compile Include="Framework\Templates\PageList.cs" />
     <Compile Include="Framework\Templates\PageTypeEdit.cs" />
@@ -144,6 +157,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Category.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\PageType.Designer.cs">
       <DependentUpon>PageType.resx</DependentUpon>
@@ -216,8 +234,21 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>index.generated.cs</LastGenOutput>
     </None>
+    <None Include="Category\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Category\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
     <None Include="LICENSE.md" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\Category.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Category.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
     <EmbeddedResource Include="Resources\PageType.sv-SE.resx" />
     <EmbeddedResource Include="Resources\PageType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

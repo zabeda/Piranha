@@ -124,6 +124,6 @@
     <value>Artikeltyper</value>
   </data>
   <data name="MessageDeleteConfirm" xml:space="preserve">
-    <value>Vill ta bort artikeltypen?</value>
+    <value>Vill ta bort den valda artikeltypen?</value>
   </data>
 </root>

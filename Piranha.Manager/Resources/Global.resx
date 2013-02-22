@@ -130,7 +130,10 @@
     <value>Information</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Namn</value>
+    <value>Name</value>
+  </data>
+  <data name="Permalink" xml:space="preserve">
+    <value>Permalink</value>
   </data>
   <data name="Updated" xml:space="preserve">
     <value>Updated</value>
