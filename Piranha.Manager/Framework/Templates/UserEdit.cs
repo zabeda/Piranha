@@ -22,10 +22,10 @@ namespace Piranha.Manager.Templates
 		protected override void ExecutePage() {
 			if (!IsPost) {
 				if (UrlData.Count > 0) {
-					Page.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
+					Page.Title = Piranha.Manager.Resources.User.EditTitleExisting ;
 					Model = UserEditModel.GetById(new Guid(UrlData[0])) ;
 				} else {
-					Page.Title = Piranha.Resources.Settings.EditTitleNewUser ;
+					Page.Title = Piranha.Manager.Resources.User.EditTitleNew ;
 					Model = new UserEditModel() ;
 				}
 			}
@@ -38,16 +38,16 @@ namespace Piranha.Manager.Templates
 		[HttpPost()]
 		public void Save(UserEditModel m) {
 			Model = m ;
-			Page.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
+			Page.Title = Piranha.Manager.Resources.User.EditTitleExisting ;
 
 			try {
 				if (ModelState.IsValid) {
 					if (m.Save())
-						this.SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
-					else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
+						this.SuccessMessage(Piranha.Manager.Resources.User.MessageSaved) ;
+					else this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotSaved) ;
 				}
 			} catch {
-				this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotSaved) ;
+				this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotSaved) ;
 			}
 		}
 
@@ -65,12 +65,12 @@ namespace Piranha.Manager.Templates
 				} else { 
 					if (fromList)
 						Response.Redirect("~/manager/user?msg=notdeleted") ;
-					else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+					else this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
 				}
 			} catch {
 				if (fromList)
 					Response.Redirect("~/manager/user?msg=notdeleted") ;
-				else this.ErrorMessage(Piranha.Resources.Settings.MessageUserNotDeleted) ;
+				else this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
 			}
 		}
 	}

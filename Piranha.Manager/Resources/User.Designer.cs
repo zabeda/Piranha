@@ -61,6 +61,15 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete user.
         /// </summary>
         public static string Delete {
@@ -70,11 +79,74 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit user.
+        /// </summary>
+        public static string EditTitleExisting {
+            get {
+                return ResourceManager.GetString("EditTitleExisting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new user.
+        /// </summary>
+        public static string EditTitleNew {
+            get {
+                return ResourceManager.GetString("EditTitleNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firstname.
+        /// </summary>
+        public static string Firstname {
+            get {
+                return ResourceManager.GetString("Firstname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         public static string ListTitle {
             get {
                 return ResourceManager.GetString("ListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock.
+        /// </summary>
+        public static string Lock {
+            get {
+                return ResourceManager.GetString("Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weather the user should be unable to log in.
+        /// </summary>
+        public static string LockInfo {
+            get {
+                return ResourceManager.GetString("LockInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lock until.
+        /// </summary>
+        public static string LockUntil {
+            get {
+                return ResourceManager.GetString("LockUntil", resourceCulture);
             }
         }
         
@@ -93,6 +165,51 @@ namespace Piranha.Manager.Resources {
         public static string MessageNotDeleted {
             get {
                 return ResourceManager.GetString("MessageNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while saving the user..
+        /// </summary>
+        public static string MessageNotSaved {
+            get {
+                return ResourceManager.GetString("MessageNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user has been saved..
+        /// </summary>
+        public static string MessageSaved {
+            get {
+                return ResourceManager.GetString("MessageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string PasswordChange {
+            get {
+                return ResourceManager.GetString("PasswordChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create password.
+        /// </summary>
+        public static string PasswordCreate {
+            get {
+                return ResourceManager.GetString("PasswordCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        public static string Surname {
+            get {
+                return ResourceManager.GetString("Surname", resourceCulture);
             }
         }
     }

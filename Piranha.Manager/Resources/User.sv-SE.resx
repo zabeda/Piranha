@@ -117,16 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Användarkonto</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Ta bort användaren</value>
   </data>
+  <data name="EditTitleExisting" xml:space="preserve">
+    <value>Ändra användare</value>
+  </data>
+  <data name="EditTitleNew" xml:space="preserve">
+    <value>Lägg till ny användare</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-post</value>
+  </data>
+  <data name="Firstname" xml:space="preserve">
+    <value>Förnamn</value>
+  </data>
   <data name="ListTitle" xml:space="preserve">
     <value>Användare</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Spärra</value>
+  </data>
+  <data name="LockInfo" xml:space="preserve">
+    <value>Om användaren ska vara spärrad från att logga in</value>
+  </data>
+  <data name="LockUntil" xml:space="preserve">
+    <value>Spärra till</value>
   </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>Användaren har raderats.</value>
   </data>
   <data name="MessageNotDeleted" xml:space="preserve">
     <value>Ett fel har inträffat. Användaren kunde inte raderas.</value>
+  </data>
+  <data name="MessageNotSaved" xml:space="preserve">
+    <value>Ett fel har inträffat. Användaren kunde inte sparas.</value>
+  </data>
+  <data name="MessageSaved" xml:space="preserve">
+    <value>Användaren har sparats.</value>
+  </data>
+  <data name="PasswordChange" xml:space="preserve">
+    <value>Ändra lösenord</value>
+  </data>
+  <data name="PasswordCreate" xml:space="preserve">
+    <value>Ange lösenord</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Efternamn</value>
   </data>
 </root>

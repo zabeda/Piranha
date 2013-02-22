@@ -120,6 +120,9 @@
   <data name="Advanced" xml:space="preserve">
     <value>Avancerat</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Bekräfta</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>Skapad</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Namn</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Lösenord</value>
   </data>
   <data name="Permalink" xml:space="preserve">
     <value>Permalänk</value>

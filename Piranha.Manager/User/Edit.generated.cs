@@ -64,7 +64,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
             
             #line 11 "..\..\User\Edit.cshtml"
-                                  Write(Piranha.Resources.Global.ToolbarSave);
+                                  Write(Piranha.Manager.Resources.Toolbar.Save);
 
             
             #line default
@@ -94,7 +94,7 @@ WriteLiteral("\" class=\"delete\">");
 
             
             #line 13 "..\..\User\Edit.cshtml"
-                                                                                         Write(Piranha.Resources.Global.ToolbarDelete);
+                                                                                         Write(Piranha.Manager.Resources.Toolbar.Delete);
 
             
             #line default
@@ -124,7 +124,7 @@ WriteLiteral("\" class=\"back\">");
 
             
             #line 15 "..\..\User\Edit.cshtml"
-                                                          Write(Piranha.Resources.Global.ToolbarBack);
+                                                          Write(Piranha.Manager.Resources.Toolbar.Back);
 
             
             #line default
@@ -154,7 +154,7 @@ WriteLiteral("\" class=\"refresh\">");
 
             
             #line 17 "..\..\User\Edit.cshtml"
-                                                                                   Write(Piranha.Resources.Global.ToolbarReload);
+                                                                                   Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
             #line default
@@ -192,17 +192,17 @@ WriteLiteral("\r\n    <script type=\"text/javascript\" src=\"");
 WriteLiteral(@"""></script>
     <script type=""text/javascript"">
         function disableLockedUntil() {
-            $('#User_LockedUntil').val('').attr('disabled', true);
+            $('#m_User_LockedUntil').val('').attr('disabled', true);
         }
         function enableLockedUntil() {
-            $('#User_LockedUntil').val('').removeAttr('disabled');
+            $('#m_User_LockedUntil').val('').removeAttr('disabled');
         }
 
         $(document).ready(function () {
-            if (!$('#User_IsLocked').is(':checked')) {
+            if (!$('#m_User_IsLocked').is(':checked')) {
                 disableLockedUntil();
             }
-            $('#User_IsLocked').click(function () {
+            $('#m_User_IsLocked').click(function () {
                 if (!$(this).is(':checked'))
                     disableLockedUntil();
                 else enableLockedUntil();
@@ -242,7 +242,7 @@ WriteLiteral("\r\n<div class=\"grid_9\">\r\n    <div class=\"box\">\r\n        <
 
             
             #line 54 "..\..\User\Edit.cshtml"
-                          Write(Piranha.Resources.Settings.UserInfo);
+                          Write(Piranha.Manager.Resources.Global.Information);
 
             
             #line default
@@ -253,7 +253,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
             
             #line 58 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.Login, @Piranha.Resources.Settings.Login));
+               Write(Form.LabelFor(m => m.User.Login, @Piranha.Manager.Resources.Global.Username));
 
             
             #line default
@@ -283,7 +283,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 64 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.Firstname, @Piranha.Resources.Settings.Firstname));
+               Write(Form.LabelFor(m => m.User.Firstname, @Piranha.Manager.Resources.User.Firstname));
 
             
             #line default
@@ -313,7 +313,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 70 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.Surname, @Piranha.Resources.Settings.Surname));
+               Write(Form.LabelFor(m => m.User.Surname, @Piranha.Manager.Resources.User.Surname));
 
             
             #line default
@@ -343,7 +343,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 76 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.Email, @Piranha.Resources.Settings.Email));
+               Write(Form.LabelFor(m => m.User.Email, @Piranha.Manager.Resources.User.Email));
 
             
             #line default
@@ -373,7 +373,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
             
             #line 82 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.Group, @Piranha.Resources.Settings.GroupName));
+               Write(Form.LabelFor(m => m.User.Group, @Piranha.Manager.Resources.Global.Group));
 
             
             #line default
@@ -383,7 +383,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
             
             #line 84 "..\..\User\Edit.cshtml"
-                   Write(Form.DropDownListFor(m => m.User.Group, Model.Groups, Model.User.GroupId));
+                   Write(Form.DropDownListFor(m => m.User.GroupId, Model.Groups, Model.User.GroupId));
 
             
             #line default
@@ -394,7 +394,7 @@ WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </
 
             
             #line 90 "..\..\User\Edit.cshtml"
-                          Write(Piranha.Resources.Settings.Account);
+                          Write(Piranha.Manager.Resources.User.Account);
 
             
             #line default
@@ -405,7 +405,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
             
             #line 93 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.IsLocked, @Piranha.Resources.Settings.Locked));
+               Write(Form.LabelFor(m => m.User.IsLocked, @Piranha.Manager.Resources.User.Lock));
 
             
             #line default
@@ -425,16 +425,33 @@ WriteLiteral(" (");
 
             
             #line 94 "..\..\User\Edit.cshtml"
-                                                           Write(Piranha.Resources.Settings.LockedInfo);
+                                                           Write(Piranha.Manager.Resources.User.LockInfo);
 
             
             #line default
             #line hidden
-WriteLiteral(")</p>\r\n                </li>\r\n                ");
+WriteLiteral(")</p>\r\n                </li>\r\n                <li>");
 
 
+            
+            #line 96 "..\..\User\Edit.cshtml"
+               Write(Html.Label(@Piranha.Manager.Resources.User.LockUntil));
 
-WriteLiteral("\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    ");
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                    <div class=\"input datepicker\">\r\n                        ");
+
+
+            
+            #line 98 "..\..\User\Edit.cshtml"
+                   Write(Form.TextBoxFor(m => m.User.LockedUntil));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n   " +
+" ");
 
 
 
@@ -444,7 +461,7 @@ WriteLiteral("\r\n</div>\r\n<div class=\"grid_3\">\r\n    <div class=\"box\">\r\
 
             
             #line 109 "..\..\User\Edit.cshtml"
-                           Write(Model.User.Id == Guid.Empty ? @Piranha.Resources.Settings.CreatePassword : @Piranha.Resources.Settings.ChangePassword);
+                           Write(Model.User.Id == Guid.Empty ? @Piranha.Manager.Resources.User.PasswordCreate : @Piranha.Manager.Resources.User.PasswordChange);
 
             
             #line default
@@ -455,7 +472,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
             
             #line 113 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.User.Password, @Piranha.Resources.Global.Password));
+               Write(Form.LabelFor(m => m.User.Password, @Piranha.Manager.Resources.Global.Password));
 
             
             #line default
@@ -475,7 +492,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n       
 
             
             #line 118 "..\..\User\Edit.cshtml"
-               Write(Form.LabelFor(m => m.ConfirmPassword, @Piranha.Resources.Global.Confirm));
+               Write(Form.LabelFor(m => m.ConfirmPassword, @Piranha.Manager.Resources.Global.Confirm));
 
             
             #line default

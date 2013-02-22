@@ -8,13 +8,13 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
+            <li><a class="save submit">@Piranha.Manager.Resources.Toolbar.Save</a></li>
             @if (Model.User.Id != Guid.Empty) {
-            <li><a href="@Href("~/manager/user/edit/delete/" + Model.User.Id)" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a href="@Href("~/manager/user/edit/delete/" + Model.User.Id)" class="delete">@Piranha.Manager.Resources.Toolbar.Delete</a></li>
             }
-            <li><a href="@Href("~/manager/user")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@Href("~/manager/user")" class="back">@Piranha.Manager.Resources.Toolbar.Back</a></li>
             @if (Model.User.Id != Guid.Empty) {
-            <li><a href="@Href("~/manager/user/edit/" + Model.User.Id)" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            <li><a href="@Href("~/manager/user/edit/" + Model.User.Id)" class="refresh">@Piranha.Manager.Resources.Toolbar.Reload</a></li>
             }
         </ul>
         <div class="clear"></div>
@@ -25,17 +25,17 @@
     <script type="text/javascript" src="@Href("~/manager/content/js/ext/jquery-ui-1.9.2.custom.min.js")"></script>
     <script type="text/javascript">
         function disableLockedUntil() {
-            $('#User_LockedUntil').val('').attr('disabled', true);
+            $('#m_User_LockedUntil').val('').attr('disabled', true);
         }
         function enableLockedUntil() {
-            $('#User_LockedUntil').val('').removeAttr('disabled');
+            $('#m_User_LockedUntil').val('').removeAttr('disabled');
         }
 
         $(document).ready(function () {
-            if (!$('#User_IsLocked').is(':checked')) {
+            if (!$('#m_User_IsLocked').is(':checked')) {
                 disableLockedUntil();
             }
-            $('#User_IsLocked').click(function () {
+            $('#m_User_IsLocked').click(function () {
                 if (!$(this).is(':checked'))
                     disableLockedUntil();
                 else enableLockedUntil();
@@ -51,52 +51,52 @@
 @Html.Hidden("m.User.Id", Model.User.Id)
 <div class="grid_9">
     <div class="box">
-        <div class="title"><h2>@Piranha.Resources.Settings.UserInfo</h2></div>
+        <div class="title"><h2>@Piranha.Manager.Resources.Global.Information</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>
-                    @Form.LabelFor(m => m.User.Login, @Piranha.Resources.Settings.Login)
+                    @Form.LabelFor(m => m.User.Login, @Piranha.Manager.Resources.Global.Username)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Login)</div>
                     @Form.ValidationMessageFor(m => m.User.Login)
                 </li>
                 <li>
-                    @Form.LabelFor(m => m.User.Firstname, @Piranha.Resources.Settings.Firstname)
+                    @Form.LabelFor(m => m.User.Firstname, @Piranha.Manager.Resources.User.Firstname)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Firstname)</div>
                     @Form.ValidationMessageFor(m => m.User.Firstname)
                 </li>
                 <li>
-                    @Form.LabelFor(m => m.User.Surname, @Piranha.Resources.Settings.Surname)
+                    @Form.LabelFor(m => m.User.Surname, @Piranha.Manager.Resources.User.Surname)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Surname)</div>
                     @Form.ValidationMessageFor(m => m.User.Surname)
                 </li>
                 <li>
-                    @Form.LabelFor(m => m.User.Email, @Piranha.Resources.Settings.Email)
+                    @Form.LabelFor(m => m.User.Email, @Piranha.Manager.Resources.User.Email)
                     <div class="input">
                         @Form.TextBoxFor(m => m.User.Email)</div>
                     @Form.ValidationMessageFor(m => m.User.Email)
                 </li>
                 <li>
-                    @Form.LabelFor(m => m.User.Group, @Piranha.Resources.Settings.GroupName)
+                    @Form.LabelFor(m => m.User.Group, @Piranha.Manager.Resources.Global.Group)
                     <div class="input">
-                        @Form.DropDownListFor(m => m.User.Group, Model.Groups, Model.User.GroupId)</div>
+                        @Form.DropDownListFor(m => m.User.GroupId, Model.Groups, Model.User.GroupId)</div>
                 </li>
             </ul>
         </div>
     </div>
     <div class="box">
-        <div class="title"><h2>@Piranha.Resources.Settings.Account</h2></div>
+        <div class="title"><h2>@Piranha.Manager.Resources.User.Account</h2></div>
         <div class="inner">
             <ul class="form">
-                <li>@Form.LabelFor(m => m.User.IsLocked, @Piranha.Resources.Settings.Locked)
-                    <p>@Form.CheckBoxFor(m => m.User.IsLocked) (@Piranha.Resources.Settings.LockedInfo)</p>
+                <li>@Form.LabelFor(m => m.User.IsLocked, @Piranha.Manager.Resources.User.Lock)
+                    <p>@Form.CheckBoxFor(m => m.User.IsLocked) (@Piranha.Manager.Resources.User.LockInfo)</p>
                 </li>
-                @*<li>@Html.Label(@Piranha.Resources.Settings.LockedUntil)
+                <li>@Html.Label(@Piranha.Manager.Resources.User.LockUntil)
                     <div class="input datepicker">
-                        @Html.TextBox("m.User.LockedUntil", ModelState["m.User.LockedUntil"].Value)</div>
-                </li>*@
+                        @Form.TextBoxFor(m => m.User.LockedUntil)</div>
+                </li>
             </ul>
         </div>
     </div>
@@ -106,16 +106,16 @@
 </div>
 <div class="grid_3">
     <div class="box">
-        <div class="title"><h2>@(Model.User.Id == Guid.Empty ? @Piranha.Resources.Settings.CreatePassword : @Piranha.Resources.Settings.ChangePassword)</h2></div>
+        <div class="title"><h2>@(Model.User.Id == Guid.Empty ? @Piranha.Manager.Resources.User.PasswordCreate : @Piranha.Manager.Resources.User.PasswordChange)</h2></div>
         <div class="inner">
             <ul class="form">
                 <li>
-                    @Form.LabelFor(m => m.User.Password, @Piranha.Resources.Global.Password)
+                    @Form.LabelFor(m => m.User.Password, @Piranha.Manager.Resources.Global.Password)
                     <div class="input">
                         @Form.PasswordFor(m => m.User.Password)</div>
                 </li>
                 <li>
-                    @Form.LabelFor(m => m.ConfirmPassword, @Piranha.Resources.Global.Confirm)
+                    @Form.LabelFor(m => m.ConfirmPassword, @Piranha.Manager.Resources.Global.Confirm)
                     <div class="input">
                         @Form.PasswordFor(m => m.ConfirmPassword)</div>
                     @Form.ValidationMessageFor(m => m.ConfirmPassword)

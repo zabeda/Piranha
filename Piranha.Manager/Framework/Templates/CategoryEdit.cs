@@ -38,15 +38,15 @@ namespace Piranha.Manager.Templates
 			Model = m ;
 			Page.Title = Piranha.Manager.Resources.Category.EditTitleExisting ;
 
-			//try {
+			try {
 				if (ModelState.IsValid) {
 					if (m.Save())
 						this.SuccessMessage(Piranha.Manager.Resources.Category.MessageSaved) ;
 					else this.ErrorMessage(Piranha.Manager.Resources.Category.MessageNotSaved) ;
 				}
-			//} catch {
-			//	this.ErrorMessage(Piranha.Manager.Resources.Category.MessageNotSaved) ;
-			//}
+			} catch {
+				this.ErrorMessage(Piranha.Manager.Resources.Category.MessageNotSaved) ;
+			}
 		}
 	}
 }

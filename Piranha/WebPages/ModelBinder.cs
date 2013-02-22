@@ -75,11 +75,11 @@ namespace Piranha.WebPages
 					try {
 						return Convert.ToDouble(form[prefix + name]) ;
 					} catch { return 0.0 ; }
-				} else if (typeof(DateTime).IsAssignableFrom(type)) {
+				} else if (typeof(DateTime).IsAssignableFrom(type) || typeof(DateTime?).IsAssignableFrom(type)) {
 					try {
 						return Convert.ToDateTime(form[prefix + name]) ;
 					} catch { return null ; }
-				} 
+				}
 				return Convert.ChangeType(form[prefix + name], type) ;
 			} else {
 				var subform = new NameValueCollection() ;
