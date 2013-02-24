@@ -148,7 +148,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The select list</returns>
  		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList) {
-			return Page.Html.DropDownList(expr.Body.ToString(), selectList) ;
+			return Page.Html.DropDownList(expr.Body.ToString(), "", selectList, GetValue(expr), null) ;
 		}
 
 		/// <summary>
@@ -159,7 +159,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The select list</returns>
 		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList, object htmlAttributes) {
-			return Page.Html.DropDownList(expr.Body.ToString(), selectList, htmlAttributes) ;
+			return Page.Html.DropDownList(expr.Body.ToString(), "", selectList, GetValue(expr), htmlAttributes) ;
 		}
 
 		/// <summary>
