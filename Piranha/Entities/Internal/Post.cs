@@ -11,7 +11,7 @@ using Piranha.Data;
 namespace Piranha.Models
 {
 	/// <summary>
-	/// Active record for a page.
+	/// Active record for a post.
 	/// 
 	/// Changes made to records of this type are logged.
 	/// </summary>
@@ -153,6 +153,19 @@ namespace Piranha.Models
 		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
+		#region Cache
+		/// <summary>
+		/// Maps permalink to post id.
+		/// </summary>
+		private static Dictionary<string, Guid> PermalinkCache = new Dictionary<string,Guid>() ;
+
+		/// <summary>
+		/// Maps permalink id to post id.
+		/// </summary>
+		private static Dictionary<Guid, Guid> PermalinkIdCache = new Dictionary<Guid,Guid>() ;
+		#endregion
+
+
 		/// <summary>
 		/// Default constructor. Creates a new post.
 		/// </summary>
@@ -164,6 +177,22 @@ namespace Piranha.Models
 		}
 
 		#region Static accessors
+		/// <summary>
+		/// Gets a single post.
+		/// </summary>
+		/// <param name="id">The post id</param>
+		/// <returns>The post</returns>
+		public static Post GetSingle(Guid id) {
+			if (!Cache.Current.Contains(id.ToString())) {
+				var p = Post.GetSingle("post_id = @0 AND post_draft = 0", id) ;
+				
+				if (p != null)
+					AddToCache(p) ;
+				else return null ;
+			}
+			return (Post)Cache.Current[id.ToString()] ;
+		}
+
 		/// <summary>
 		/// Gets a single post from the database.
 		/// </summary>
@@ -182,6 +211,17 @@ namespace Piranha.Models
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The post</returns>
 		public static Post GetByPermalink(string permalink, bool draft = false) {
+			if (!draft) {
+				if (!PermalinkCache.ContainsKey(permalink.ToLower())) {
+					var p = Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ;
+
+					if (p != null)
+						AddToCache(p) ;
+				}
+				if (!Cache.Current.Contains(PermalinkCache[permalink.ToLower()].ToString()))
+					Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] = Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ; 
+				return (Post)Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] ;
+			}
 			return Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ;
 		}
 
@@ -192,6 +232,17 @@ namespace Piranha.Models
 		/// <param name="draft">Weather to get the draft or not</param>
 		/// <returns>The post</returns>
 		public static Post GetByPermalinkId(Guid permalinkid, bool draft = false) {
+			if (!draft) {
+				if (!PermalinkIdCache.ContainsKey(permalinkid)) {
+					var p = Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
+
+					if (p != null)
+						AddToCache(p) ;
+				}
+				if (!Cache.Current.Contains(PermalinkIdCache[permalinkid].ToString()))
+					Cache.Current[PermalinkIdCache[permalinkid].ToString()] = Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
+				return (Post)Cache.Current[PermalinkIdCache[permalinkid].ToString()] ;
+			}
 			return Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
 		}
 
@@ -231,6 +282,17 @@ namespace Piranha.Models
 			return Post.Get("post_draft = 0 AND post_template_id = @0", id) ;
 		}
 		#endregion
+
+		/// <summary>
+		/// Adds the given post to the cache.
+		/// </summary>
+		/// <param name="p">The post</param>
+		private static void AddToCache(Post p) {
+			Cache.Current[p.Id.ToString()] = p ;
+			PermalinkCache[p.Permalink] = p.Id ;
+			PermalinkIdCache[p.PermalinkId] = p.Id ;
+
+		}
 
 		#region Handlers
 		/// <summary>
