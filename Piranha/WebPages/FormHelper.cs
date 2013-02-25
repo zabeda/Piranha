@@ -107,7 +107,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The checkbox</returns>
 		public IHtmlString CheckBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.CheckBox(expr.Body.ToString(), GetValue(expr)) ;
+			return Page.Html.CheckBox(expr.Body.ToString(), (bool)GetValue(expr), new { @value = "true" }) ;
 		}
 
 		/// <summary>
@@ -118,6 +118,17 @@ namespace Piranha.WebPages
 		/// <returns>The password</returns>
 		public IHtmlString PasswordFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
 			return Page.Html.Password(expr.Body.ToString()) ;
+		}
+
+		/// <summary>
+		/// Gets a password for the specified model property.
+		/// </summary>
+		/// <typeparam name="TProperty">The property type</typeparam>
+		/// <param name="expr">The model expression</param>
+		/// <param name="htmlAttributes">Additional html attributes</param>
+		/// <returns>The password</returns>
+		public IHtmlString PasswordFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
+			return Page.Html.Password(expr.Body.ToString(), null, htmlAttributes) ;
 		}
 
 		/// <summary>
