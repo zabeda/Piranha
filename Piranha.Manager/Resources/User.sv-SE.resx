@@ -154,10 +154,13 @@
     <value>Ett fel har inträffat. Användaren kunde inte raderas.</value>
   </data>
   <data name="MessageNotSaved" xml:space="preserve">
-    <value>Ett fel har inträffat. Användaren kunde inte sparas.</value>
+    <value>Användaren har inte uppdaterats.</value>
   </data>
   <data name="MessageSaved" xml:space="preserve">
     <value>Användaren har sparats.</value>
+  </data>
+  <data name="MessageSaveError" xml:space="preserve">
+    <value>Ett fel har inträffat. Användaren kunde inte sparas.</value>
   </data>
   <data name="PasswordChange" xml:space="preserve">
     <value>Ändra lösenord</value>

@@ -112,12 +112,12 @@
                 <li>
                     @Form.LabelFor(m => m.User.Password, @Piranha.Manager.Resources.Global.Password)
                     <div class="input">
-                        @Form.PasswordFor(m => m.User.Password)</div>
+                        @Form.PasswordFor(m => m.User.Password, new { autocomplete = "off" })</div>
                 </li>
                 <li>
                     @Form.LabelFor(m => m.ConfirmPassword, @Piranha.Manager.Resources.Global.Confirm)
                     <div class="input">
-                        @Form.PasswordFor(m => m.ConfirmPassword)</div>
+                        @Form.PasswordFor(m => m.ConfirmPassword, new { @autocomplete = "off" })</div>
                     @Form.ValidationMessageFor(m => m.ConfirmPassword)
                 </li>
             </ul>

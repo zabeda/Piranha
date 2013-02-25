@@ -169,7 +169,7 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while saving the user..
+        ///   Looks up a localized string similar to The user hasn&apos;t been updated..
         /// </summary>
         public static string MessageNotSaved {
             get {
@@ -183,6 +183,15 @@ namespace Piranha.Manager.Resources {
         public static string MessageSaved {
             get {
                 return ResourceManager.GetString("MessageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while saving the user..
+        /// </summary>
+        public static string MessageSaveError {
+            get {
+                return ResourceManager.GetString("MessageSaveError", resourceCulture);
             }
         }
         

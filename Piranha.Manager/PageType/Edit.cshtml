@@ -5,6 +5,7 @@
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
 }
 @section Head {
+    <script type="text/javascript" src="@Href("~/manager/content/js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Href("~/manager/content/js/jquery.template.js")"></script>
     <script type="text/javascript" src="@Href("~/manager/content/js/jquery.regiontemplate.js")"></script>
     <script type="text/javascript" src="@Href("~/manager/content/js/ext/json2.js")"></script>
@@ -69,12 +70,6 @@
                                 @Form.TextAreaFor(m => m.Template.Description, 
                                     new { @placeholder = Piranha.Resources.Global.Optional })</div>
                         </li>
-                    </ul>
-                    <ul class="form optional">               
-                        <li>@Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview)
-                            <div class="input">
-                                @Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} )</div>
-                        </li>                
                     </ul>
                 </div>
             </div>
@@ -172,35 +167,47 @@
                             </div>
                             <div id="pnl-properties" class="main hidden">
                                 <div class="title"><h2>Properties</h2></div>
-                                <div class="inner">Yo</div>
+                                <div class="inner">
+                                    <table class="list">
+                                        <thead>
+                                            <tr>
+                                                <th>@Piranha.Resources.Global.Name</th>
+                                                <th>@Piranha.Resources.Global.InternalId</th>
+                                                <th>@Piranha.Resources.Global.Type</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+                                    <div id="region_data"></div>
+                                    <ul id="properties" class="list buttons">
+                                        @foreach (var property in Model.Template.Properties) {
+                                        <li><span>@property</span><button class="btn delete right remove-region"></button></li>
+                                        }
+                                    </ul>
+                                    <div class="input">
+                                        <input id="po_name" type="text" placeholder="@Piranha.Resources.Template.PropertyPlaceholder" /></div>
+                                    <button id="po_add" class="btn right">@Piranha.Resources.Global.Add</button>
+                                    <div class="clear"></div>
+                                </div>
                             </div>
                             <div id="pnl-preview" class="main hidden">
                                 <div class="title"><h2>Preview</h2></div>
-                                <div class="inner">Yo</div>
+                                <div class="inner">
+                                    <ul class="form">               
+                                        <li>@Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview)
+                                            <div class="input">
+                                                @Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} )</div>
+                                        </li>                
+                                    </ul>
+                                </div>
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
-        </div>
-    </div>
-    <div class="grid_9">
-    </div>
-    <div class="grid_3">
-        <div class="box">
-            <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>
-            <div class="inner">
-                <div id="region_data"></div>
-                <ul id="properties" class="list buttons">
-                    @foreach (var property in Model.Template.Properties) {
-                    <li><span>@property</span><button class="btn delete right remove-region"></button></li>
-                    }
-                </ul>
-                <div class="input">
-                    <input id="po_name" type="text" placeholder="@Piranha.Resources.Template.PropertyPlaceholder" /></div>
-                <button id="po_add" class="btn right">@Piranha.Resources.Global.Add</button>
-                <div class="clear"></div>
-             </div>
         </div>
     </div>
 </form>

@@ -92,6 +92,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Comment\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Comment\Index.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,7 +107,9 @@
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
     <Compile Include="Framework\Models\CategoryEditModel.cs" />
     <Compile Include="Framework\Models\CategoryListModel.cs" />
+    <Compile Include="Framework\Models\CommentEditModel.cs" />
     <Compile Include="Framework\Models\CommentListModel.cs" />
+    <Compile Include="Framework\Models\IEditModel.cs" />
     <Compile Include="Framework\Models\PostTypeListModel.cs" />
     <Compile Include="Framework\Models\PageListModel.cs" />
     <Compile Include="Framework\Models\PageTypeEditModel.cs" />
@@ -111,7 +118,10 @@
     <Compile Include="Framework\Models\ParamListModel.cs" />
     <Compile Include="Framework\Models\PermissionEditModel.cs" />
     <Compile Include="Framework\Models\PostListModel.cs" />
+    <Compile Include="Framework\Templates\Account.cs" />
     <Compile Include="Framework\Templates\CategoryEdit.cs" />
+    <Compile Include="Framework\Templates\CommentEdit.cs" />
+    <Compile Include="Framework\Templates\EditTemplate.cs" />
     <Compile Include="Framework\Templates\PostList.cs" />
     <Compile Include="Framework\Templates\PageList.cs" />
     <Compile Include="Framework\Templates\PageTypeEdit.cs" />
@@ -257,6 +267,10 @@
     <None Include="Category\Index.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </None>
+    <None Include="Comment\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
     </None>
     <None Include="Comment\Index.cshtml">
       <Generator>RazorGenerator</Generator>

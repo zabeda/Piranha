@@ -123,6 +123,9 @@
   <data name="Confirm" xml:space="preserve">
     <value>Bekräfta</value>
   </data>
+  <data name="Content" xml:space="preserve">
+    <value>Innehåll</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>Skapad</value>
   </data>

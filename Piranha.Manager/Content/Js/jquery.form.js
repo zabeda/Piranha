@@ -22,16 +22,18 @@ $(document).ready(function () {
 });
 
 $(window).bind('scroll', function (e) {
-    if ($(this).scrollTop() > posFixed.top + 20) {
-        if (!isFixed)
-            $('.mceToolbar').hide();
-        $('.mceToolbar').addClass('fixed-toolbar');
-        if (!isFixed) {
-            isFixed = true;
-            $('.mceToolbar').fadeIn('medium');
+    if (posFixed) {
+        if ($(this).scrollTop() > posFixed.top + 20) {
+            if (!isFixed)
+                $('.mceToolbar').hide();
+            $('.mceToolbar').addClass('fixed-toolbar');
+            if (!isFixed) {
+                isFixed = true;
+                $('.mceToolbar').fadeIn('medium');
+            }
+        } else {
+            $('.mceToolbar').removeClass('fixed-toolbar');
+            isFixed = false;
         }
-    } else {
-        $('.mceToolbar').removeClass('fixed-toolbar');
-        isFixed = false;
     }
 });

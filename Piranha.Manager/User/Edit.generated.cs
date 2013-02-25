@@ -482,7 +482,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
             
             #line 115 "..\..\User\Edit.cshtml"
-                   Write(Form.PasswordFor(m => m.User.Password));
+                   Write(Form.PasswordFor(m => m.User.Password, new { autocomplete = "off" }));
 
             
             #line default
@@ -502,7 +502,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n                 
 
             
             #line 120 "..\..\User\Edit.cshtml"
-                   Write(Form.PasswordFor(m => m.ConfirmPassword));
+                   Write(Form.PasswordFor(m => m.ConfirmPassword, new { @autocomplete = "off" }));
 
             
             #line default

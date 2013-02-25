@@ -120,7 +120,7 @@ WriteLiteral("\')\" href=\"");
 
             
             #line 12 "..\..\Shared\Menu.cshtml"
-                                                                                                                 Write(Href("~/account/logout"));
+                                                                                                                 Write(Href("~/manager/account/logout"));
 
             
             #line default
@@ -130,7 +130,7 @@ WriteLiteral("\">");
 
             
             #line 12 "..\..\Shared\Menu.cshtml"
-                                                                                                                                            Write(Piranha.Resources.Global.MenuLogout);
+                                                                                                                                                    Write(Piranha.Resources.Global.MenuLogout);
 
             
             #line default

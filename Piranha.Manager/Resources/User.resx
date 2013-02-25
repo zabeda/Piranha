@@ -154,10 +154,13 @@
     <value>An error occurred while deleting the user.</value>
   </data>
   <data name="MessageNotSaved" xml:space="preserve">
-    <value>An error occurred while saving the user.</value>
+    <value>The user hasn't been updated.</value>
   </data>
   <data name="MessageSaved" xml:space="preserve">
     <value>The user has been saved.</value>
+  </data>
+  <data name="MessageSaveError" xml:space="preserve">
+    <value>An error occured while saving the user.</value>
   </data>
   <data name="PasswordChange" xml:space="preserve">
     <value>Change password</value>

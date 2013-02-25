@@ -90,6 +90,13 @@ namespace Piranha.Manager
 					.ForMember(c => c.AuthorName, o => o.ResolveUsing(c => c.CreatedBy != null ? c.CreatedBy.Firstname + " " + c.CreatedBy.Surname : c.AuthorName))
 					.ForMember(c => c.AuthorEmail, o => o.ResolveUsing(c => c.CreatedBy != null ? c.CreatedBy.Email : c.AuthorEmail))
 					.ForMember(c => c.Status, o => o.ResolveUsing(c => (Entities.Comment.CommentStatus)c.InternalStatus)) ;
+				Mapper.CreateMap<Entities.Comment, Entities.Comment>()
+					.ForMember(c => c.Id, o => o.Ignore())
+					.ForMember(c => c.ParentId, o => o.Ignore())
+					.ForMember(c => c.Created, o => o.Ignore())
+					.ForMember(c => c.CreatedById, o => o.Ignore())
+					.ForMember(c => c.Updated, o => o.Ignore())
+					.ForMember(c => c.UpdatedById, o => o.Ignore()) ;
 				Mapper.CreateMap<Entities.Post, Manager.Models.PostListModel.PostModel>()
 					.ForMember(p => p.NavigationTitle, o => o.Ignore())
 					.ForMember(p => p.TemplateName, o => o.ResolveUsing(p => p.Template.Name))

@@ -1,0 +1,67 @@
+﻿@* Generator: WebPage *@
+
+@inherits Piranha.Manager.Templates.CommentEdit
+@{
+    Page.Title = @Piranha.Manager.Resources.Comment.EditTitleExisting ;
+    Layout = "~/Manager/Shared/_Layout.cshtml" ;
+}
+@section Toolbar {
+<div class="toolbar">
+    <div class="inner">
+        <ul>
+            <li><a class="save submit">@Piranha.Manager.Resources.Toolbar.Save</a></li>
+            <li><a href="@Href("~/manager/comment/edit/delete/" + Model.Comment.Id)" class="delete">@Piranha.Manager.Resources.Toolbar.Delete</a></li>
+            <li><a href="@Href("~/manager/comment")" class="back">@Piranha.Manager.Resources.Toolbar.Back</a></li>
+            <li><a href="@Href("~/manager/comment/edit/" + Model.Comment.Id)" class="refresh">@Piranha.Manager.Resources.Toolbar.Reload</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+}
+<form method="post">
+    @Form.Action("Save")
+    @Form.HiddenFor(m => m.Comment.Id)
+    @Form.HiddenFor(m => m.Comment.AuthorName)
+    @Form.HiddenFor(m => m.Comment.AuthorEmail)
+    <div class="grid_9">
+        <div class="box">
+            <div class="title"><h2>@Piranha.Manager.Resources.Global.Information</h2></div>
+            <div class="inner">
+                <ul class="form">
+                    <li>@Form.LabelFor(m => m.Comment.Title, Piranha.Manager.Resources.Global.Title)
+                        <div class="input">
+                            @Form.TextBoxFor(m => m.Comment.Title)</div>
+                        @Form.ValidationMessageFor(m => m.Comment.Title)
+                    </li>
+                    <li>@Form.LabelFor(m => m.Comment.Status, Piranha.Manager.Resources.Global.Status)
+                        <div class="input">
+                            @Form.DropDownListFor(m => m.Comment.Status, Model.Statuses)</div>
+                    </li>
+                    <li>@Form.LabelFor(m => m.Comment.Body, Piranha.Manager.Resources.Global.Content)
+                        <div class="input">
+                            @Form.TextAreaFor(m => m.Comment.Body, new { @rows = 10 })</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="grid_3">
+        <div class="box">
+            <div class="title"><h2>@Piranha.Manager.Resources.Comment.Author</h2></div>
+            <div class="inner">
+                <ul class="form">
+                    <li>@Form.LabelFor(m => m.Comment.AuthorName, Piranha.Manager.Resources.Comment.Author)
+                    @if (Model.Comment.CreatedById.HasValue) {
+                        <p><a href="@Href("~/manager/user/" + Model.Comment.CreatedById.Value)">@Model.Comment.AuthorName</a></p>
+                    } else {
+                        <p>@Model.Comment.AuthorName</p>
+                    }
+                    </li>
+                    <li>@Form.LabelFor(m => m.Comment.AuthorEmail, Piranha.Manager.Resources.User.Email)
+                        <p><a href="mailto:@Model.Comment.AuthorEmail">@Model.Comment.AuthorEmail</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>

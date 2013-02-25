@@ -26,7 +26,7 @@ namespace Piranha.Manager.Account
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Account/index.cshtml")]
-    public class index : Piranha.WebPages.ContentPage<Piranha.Manager.Models.AccountLoginModel>
+    public class index : Piranha.Manager.Templates.Account
     {
 
                 // Resolve package relative syntax

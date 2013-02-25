@@ -123,6 +123,9 @@
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>Created</value>
   </data>
