@@ -15,6 +15,11 @@ namespace Piranha.Areas.Manager.Models
 		/// Gets/sets the available sites.
 		/// </summary>
 		public IList<Entities.SiteTree> Sites { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the mappings if a site should be able to be deleted.
+		/// </summary>
+		public Dictionary<Guid, bool> CanDeleteSite { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -22,6 +27,7 @@ namespace Piranha.Areas.Manager.Models
 		/// </summary>
 		public SiteTreeListModel() {
 			Sites = new List<Entities.SiteTree>() ;
+			CanDeleteSite = new Dictionary<Guid,bool>() ;
 		}
 
 		/// <summary>
@@ -33,6 +39,11 @@ namespace Piranha.Areas.Manager.Models
 
 			using (var db = new DataContext()) {
 				m.Sites = db.SiteTrees.OrderBy(s => s.Name).ToList() ;
+
+				foreach (var site in m.Sites) {
+					m.CanDeleteSite.Add(site.Id,
+						db.PageDrafts.Where(p => p.SiteTreeId == site.Id).Count() == 0) ;
+				}
 			}
 			return m ;
 		}

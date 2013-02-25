@@ -46,7 +46,10 @@
                 <td class="updated">@site.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@site.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
-                    <a href="@Url.Action("delete", new { id = site.Id })" title="" class="icon delete"></a></td>
+                    @if (Model.CanDeleteSite[site.Id]) {
+                    <a href="@Url.Action("delete", new { id = site.Id })" title="" class="icon delete"></a>
+                    }
+                </td>
             </tr>
             }
         </tbody>

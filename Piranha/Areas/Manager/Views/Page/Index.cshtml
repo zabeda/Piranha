@@ -130,7 +130,7 @@
     @Html.Hidden("SiteTree", Model.ActiveSite)
     @Html.Hidden("OriginalId")
 
-    if (Model.SiteTrees.Count > 0) {
+    if (Model.SiteTrees.Count > 1) {
     <div>
         <ul class="sites tabs">
             @foreach (var site in Model.SiteTrees) {
