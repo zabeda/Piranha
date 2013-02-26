@@ -56,6 +56,7 @@ namespace Piranha.Rest
 					// Page data
 					Page page = new Page() {
 						Id = pm.Page.Id,
+						TemplateName = pm.Page.TemplateName,
 						Title = pm.Page.Title,
 						Permalink = pm.Page.Permalink,
 						IsHidden = ((Piranha.Models.Page)pm.Page).IsHidden,
