@@ -286,18 +286,6 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
-		/// Gets all content attached to the given parent.
-		/// </summary>
-		/// <param name="id">The parent id</param>
-		/// <param name="draft">Weather to get drafts or not</param>
-		/// <returns>A list of content elements</returns>
-		public static List<Content> GetByParentId(Guid id, bool draft = false) {
-			return Content.Get("content_id IN " +
-				"(SELECT attachment_content_id FROM attachment WHERE attachment_parent_id = @0 AND attachment_draft = @1)", 
-				id, draft) ;
-		}
-
-		/// <summary>
 		/// Gets the folder structure for the first level.
 		/// </summary>
 		/// <returns>The content</returns>

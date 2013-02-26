@@ -81,11 +81,15 @@ namespace Piranha
 		public object this[string key] {
 			get { return HttpContext.Current.Cache[key] ; }
 			set {
-				var param = Models.SysParam.GetByName("CACHE_SERVER_EXPIRES") ;
+				if (value != null) {
+					var param = Models.SysParam.GetByName("CACHE_SERVER_EXPIRES") ;
 
-				if (param == null || param.Value == "0")
-					HttpContext.Current.Cache[key] = value ;
-				else HttpContext.Current.Cache.Insert(key, value, null, DateTime.Now.AddMinutes(Convert.ToInt32(param.Value)), System.Web.Caching.Cache.NoSlidingExpiration) ; 
+					if (param == null || param.Value == "0")
+						HttpContext.Current.Cache[key] = value ;
+					else HttpContext.Current.Cache.Insert(key, value, null, DateTime.Now.AddMinutes(Convert.ToInt32(param.Value)), System.Web.Caching.Cache.NoSlidingExpiration) ; 
+				} else {
+					HttpContext.Current.Cache.Remove(key) ;
+				}
 			}
 		}
 		#endregion
