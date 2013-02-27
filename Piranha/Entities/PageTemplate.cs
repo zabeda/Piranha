@@ -28,11 +28,6 @@ namespace Piranha.Entities
 		public string Preview { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the html-regions defined. This field is NOT searchable in queries.
-		/// </summary>
-		public IList<string> Regions { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the properties defined. This field is NOT searchable in queries.
 		/// </summary>
 		public IList<string> Properties { get ; set ; }
@@ -67,11 +62,6 @@ namespace Piranha.Entities
 
 		#region Internal properties
 		/// <summary>
-		/// Gets/sets the persisted json data for the regions.
-		/// </summary>
-		internal string RegionsJson { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the persisted json data for the properties.
 		/// </summary>
 		internal string PropertiesJson { get ; set ; }
@@ -81,7 +71,6 @@ namespace Piranha.Entities
 		/// Default constructor. Creates an empty page template.
 		/// </summary>
 		public PageTemplate() {
-			Regions = new List<string>() ;
 			Properties = new List<string>() ;
 		}
 
@@ -93,7 +82,6 @@ namespace Piranha.Entities
 		public override void OnLoad(DataContext db) {
 			var js = new JavaScriptSerializer() ;
 
-			Regions = !String.IsNullOrEmpty(RegionsJson) ? js.Deserialize<List<string>>(RegionsJson) : Regions ;
 			Properties = !String.IsNullOrEmpty(PropertiesJson) ? js.Deserialize<List<string>>(PropertiesJson) : Properties ;
 
 			base.OnLoad(db) ;
@@ -107,7 +95,6 @@ namespace Piranha.Entities
 		public override void OnSave(DataContext db, System.Data.EntityState state) {
 			var js = new JavaScriptSerializer() ;
 
-			RegionsJson = js.Serialize(Regions) ;
 			PropertiesJson = js.Serialize(Properties) ;
 
 			base.OnSave(db, state);

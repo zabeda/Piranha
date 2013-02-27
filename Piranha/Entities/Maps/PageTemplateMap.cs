@@ -18,7 +18,6 @@ namespace Piranha.Entities.Maps
 			Property(t => t.Name).HasColumnName("pagetemplate_name").IsRequired().HasMaxLength(64) ;
 			Property(t => t.Description).HasColumnName("pagetemplate_description").HasMaxLength(255) ;
 			Property(t => t.Preview).HasColumnName("pagetemplate_preview") ;
-			Property(t => t.RegionsJson).HasColumnName("pagetemplate_page_regions") ;
 			Property(t => t.PropertiesJson).HasColumnName("pagetemplate_properties") ;
 			Property(t => t.ViewTemplate).HasColumnName("pagetemplate_controller").HasMaxLength(128) ;
 			Property(t => t.ShowViewTemplate).HasColumnName("pagetemplate_controller_show") ;

@@ -50,7 +50,7 @@ namespace Piranha.Models
 		/// Gets/sets the regions associated with this page.
 		/// </summary>
 		[Column(Name="pagetemplate_page_regions", Json=true)]
-		public List<string> PageRegions { get ; set ; }
+		internal List<string> PageRegions { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the associated properties.
