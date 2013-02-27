@@ -195,5 +195,101 @@ namespace Piranha.Areas.Manager.Controllers
 			} 
 			return Index() ;
 		}
+
+		/// <summary>
+		/// Creates the import folder structure from the media library.
+		/// </summary>
+		[Access(Function="ADMIN_CONTENT")]
+		public ActionResult CreateFolders() {
+			CreateFolders(Piranha.Models.Content.GetFolderStructure()) ;
+
+			InformationMessage("Successfully created the folder structure from the media library") ;
+
+			return Index() ;
+		}
+
+		[Access(Function="ADMIN_CONTENT")]
+		public ActionResult SyncFolders() {
+			var count = SyncFolders(Piranha.Models.Content.GetFolderStructure(), Guid.Empty) ;
+
+			InformationMessage("Successfully uploaded " + count + " files") ;
+
+			return Index() ;
+		}
+
+		/// <summary>
+		/// Creates the given folders in the given directory.
+		/// </summary>
+		/// <param name="folders">The folders</param>
+		/// <param name="dir">The current directory</param>
+		private void CreateFolders(IList<Piranha.Models.Content> folders, DirectoryInfo dir = null) {
+			if (dir == null) {
+				dir = new DirectoryInfo(Server.MapPath("~/App_Data/Import")) ;
+				
+				// Delete evertyhing
+				foreach (var file in dir.GetFiles())
+					file.Delete() ;
+				foreach (var directory in dir.GetDirectories())
+					directory.Delete(true) ;
+			}
+
+			foreach (var folder in folders) {
+				var name = dir.FullName + "\\" + folder.Name ;
+
+				// Create directory
+				Directory.CreateDirectory(name) ;
+
+				// Create sub directories
+				if (folder.ChildContent.Count > 0)
+					CreateFolders(folder.ChildContent, new DirectoryInfo(name)) ;
+			}
+		}
+
+		private int SyncFolders(IList<Piranha.Models.Content> folders, Guid parentId, DirectoryInfo dir = null) {
+			var updated = 0;
+
+			if (dir == null) {
+				dir = new DirectoryInfo(Server.MapPath("~/App_Data/Import")) ;
+			}
+
+			// Sync all files.
+			foreach (var file in dir.GetFiles()) {
+				var media = Piranha.Models.Content.GetSingle("content_parent_id=@0 AND content_filename=@1 AND content_folder=0",
+ 					parentId, file.Name) ;
+				Piranha.Models.Manager.ContentModels.EditModel model = null ;
+
+				if (media != null) {
+					model = Piranha.Models.Manager.ContentModels.EditModel.GetById(media.Id) ;
+				} else {
+					model = new Piranha.Models.Manager.ContentModels.EditModel() ;
+					model.Content.ParentId = parentId ;
+					model.Content.IsFolder = false ;
+				}
+				model.ServerFile = file ;
+				model.SaveAll() ;
+				file.Delete();
+
+				updated++ ;
+			}
+
+			// Now check all folders
+			foreach (var directory in dir.GetDirectories()) {
+				var folder = folders.Where(f => f.Name == directory.Name).SingleOrDefault() ;
+				if (folder == null) {
+					folder = new Piranha.Models.Content() {
+						ParentId = parentId,
+						IsFolder = true,
+						Name = directory.Name
+					};
+					folder.Save() ;
+				}
+				updated += SyncFolders(folder.ChildContent, folder.Id, directory) ;
+			}
+			/*
+			foreach (var folder in folders) {
+				updated += SyncFolders(folder.ChildContent, folder.Id, new DirectoryInfo(dir.FullName + "\\" + folder.Name)) ;
+			}*/
+			return updated ;
+		}
     }
 }
