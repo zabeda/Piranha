@@ -179,7 +179,27 @@ WriteLiteral("\r\n<form method=\"post\">\r\n");
 
             
             #line 25 "..\..\Param\Edit.cshtml"
+Write(Form.Action("Save"));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+
+            
+            #line 26 "..\..\Param\Edit.cshtml"
 Write(Form.HiddenFor(m => m.Param.Id));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+
+            
+            #line 27 "..\..\Param\Edit.cshtml"
+Write(Form.HiddenFor(m => m.Param.IsLocked));
 
             
             #line default
@@ -188,7 +208,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <div class=\"box\">\r\n        
 
 
             
-            #line 28 "..\..\Param\Edit.cshtml"
+            #line 30 "..\..\Param\Edit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -199,7 +219,7 @@ WriteLiteral("</h2></div>\r\n        <div class=\"inner\">\r\n            <ul cl
 
 
             
-            #line 32 "..\..\Param\Edit.cshtml"
+            #line 34 "..\..\Param\Edit.cshtml"
                Write(Form.LabelFor(m => m.Param.Name, Piranha.Resources.Settings.ParamName));
 
             
@@ -209,21 +229,21 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 34 "..\..\Param\Edit.cshtml"
+            #line 36 "..\..\Param\Edit.cshtml"
                          if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Param\Edit.cshtml"
+            #line 37 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Param\Edit.cshtml"
+            #line 37 "..\..\Param\Edit.cshtml"
                                                                
                         } else {
                             
@@ -231,28 +251,28 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 37 "..\..\Param\Edit.cshtml"
+            #line 39 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Name, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 37 "..\..\Param\Edit.cshtml"
+            #line 39 "..\..\Param\Edit.cshtml"
                                                                                                
                             
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Param\Edit.cshtml"
+            #line 40 "..\..\Param\Edit.cshtml"
                        Write(Form.HiddenFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Param\Edit.cshtml"
+            #line 40 "..\..\Param\Edit.cshtml"
                                                               
                         }
 
@@ -263,7 +283,7 @@ WriteLiteral("                    </div>\r\n                    ");
 
 
             
-            #line 41 "..\..\Param\Edit.cshtml"
+            #line 43 "..\..\Param\Edit.cshtml"
                Write(Form.ValidationMessageFor(m => m.Param.Name));
 
             
@@ -273,7 +293,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n             
 
 
             
-            #line 44 "..\..\Param\Edit.cshtml"
+            #line 46 "..\..\Param\Edit.cshtml"
                Write(Form.LabelFor(m => m.Param.Value, Piranha.Resources.Settings.ParamValue));
 
             
@@ -283,21 +303,21 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 46 "..\..\Param\Edit.cshtml"
+            #line 48 "..\..\Param\Edit.cshtml"
                          if (Model.Param.Name != "SITE_VERSION") {
                             
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Param\Edit.cshtml"
+            #line 49 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Value));
 
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Param\Edit.cshtml"
+            #line 49 "..\..\Param\Edit.cshtml"
                                                                 
                         } else {
                             
@@ -305,28 +325,28 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 49 "..\..\Param\Edit.cshtml"
+            #line 51 "..\..\Param\Edit.cshtml"
                        Write(Form.TextBoxFor(m => m.Param.Value, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 49 "..\..\Param\Edit.cshtml"
+            #line 51 "..\..\Param\Edit.cshtml"
                                                                                                 
                             
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Param\Edit.cshtml"
+            #line 52 "..\..\Param\Edit.cshtml"
                        Write(Form.HiddenFor(m => m.Param.Value));
 
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Param\Edit.cshtml"
+            #line 52 "..\..\Param\Edit.cshtml"
                                                                
                         } 
 
@@ -338,7 +358,7 @@ WriteLiteral("                    </div>\r\n                </li>\r\n           
 
 
             
-            #line 55 "..\..\Param\Edit.cshtml"
+            #line 57 "..\..\Param\Edit.cshtml"
                Write(Form.LabelFor(m => m.Param.Description, Piranha.Resources.Settings.ParamDescription));
 
             
@@ -348,14 +368,14 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
 
 
             
-            #line 57 "..\..\Param\Edit.cshtml"
+            #line 59 "..\..\Param\Edit.cshtml"
                          if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 58 "..\..\Param\Edit.cshtml"
+            #line 60 "..\..\Param\Edit.cshtml"
                        Write(Form.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -363,7 +383,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 59 "..\..\Param\Edit.cshtml"
+            #line 61 "..\..\Param\Edit.cshtml"
                                                                                                     
                         } else {
                             
@@ -371,7 +391,7 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 61 "..\..\Param\Edit.cshtml"
+            #line 63 "..\..\Param\Edit.cshtml"
                        Write(Form.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @disabled = "disabled", @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -379,21 +399,21 @@ WriteLiteral("\r\n                    <div class=\"input\">\r\n");
             #line default
             #line hidden
             
-            #line 62 "..\..\Param\Edit.cshtml"
+            #line 64 "..\..\Param\Edit.cshtml"
                                                                                                                             
                             
             
             #line default
             #line hidden
             
-            #line 63 "..\..\Param\Edit.cshtml"
+            #line 65 "..\..\Param\Edit.cshtml"
                        Write(Form.HiddenFor(m => m.Param.Description));
 
             
             #line default
             #line hidden
             
-            #line 63 "..\..\Param\Edit.cshtml"
+            #line 65 "..\..\Param\Edit.cshtml"
                                                                      
                         }
 

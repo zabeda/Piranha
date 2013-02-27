@@ -22,7 +22,9 @@
 </div>
 }
 <form method="post">
+@Form.Action("Save")
 @Form.HiddenFor(m => m.Param.Id)
+@Form.HiddenFor(m => m.Param.IsLocked)
 <div class="grid_12">
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>

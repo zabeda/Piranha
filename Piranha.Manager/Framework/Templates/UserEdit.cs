@@ -44,7 +44,7 @@ namespace Piranha.Manager.Templates
 				if (ModelState.IsValid) {
 					if (m.Save())
 						this.SuccessMessage(Piranha.Manager.Resources.User.MessageSaved) ;
-					else this.InformationMessage(Piranha.Manager.Resources.User.MessageNotSaved) ;
+					else this.InformationMessage(Piranha.Manager.Resources.Global.MessageNotSaved) ;
 				}
 			} catch {
 				this.ErrorMessage(Piranha.Manager.Resources.User.MessageSaveError) ;

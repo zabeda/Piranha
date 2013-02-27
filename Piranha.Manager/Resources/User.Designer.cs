@@ -169,15 +169,6 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The user hasn&apos;t been updated..
-        /// </summary>
-        public static string MessageNotSaved {
-            get {
-                return ResourceManager.GetString("MessageNotSaved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The user has been saved..
         /// </summary>
         public static string MessageSaved {

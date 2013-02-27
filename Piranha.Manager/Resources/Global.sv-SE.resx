@@ -138,6 +138,9 @@
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="MessageNotSaved" xml:space="preserve">
+    <value>Det fanns inga förändringar att spara.</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Namn</value>
   </data>

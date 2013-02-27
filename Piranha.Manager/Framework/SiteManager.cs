@@ -68,6 +68,7 @@ namespace Piranha.Manager
 					.ForMember(p => p.UpdatedById, o => o.Ignore()) ;
 				Mapper.CreateMap<Entities.Param, Entities.Param>()
 					.ForMember(p => p.Id, o => o.Ignore())
+					.ForMember(p => p.IsLocked, o => o.Ignore())
 					.ForMember(p => p.Created, o => o.Ignore())
 					.ForMember(p => p.CreatedById, o => o.Ignore())
 					.ForMember(p => p.Updated, o => o.Ignore())

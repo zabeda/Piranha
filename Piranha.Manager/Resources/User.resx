@@ -153,9 +153,6 @@
   <data name="MessageNotDeleted" xml:space="preserve">
     <value>An error occurred while deleting the user.</value>
   </data>
-  <data name="MessageNotSaved" xml:space="preserve">
-    <value>The user hasn't been updated.</value>
-  </data>
   <data name="MessageSaved" xml:space="preserve">
     <value>The user has been saved.</value>
   </data>

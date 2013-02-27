@@ -153,9 +153,6 @@
   <data name="MessageNotDeleted" xml:space="preserve">
     <value>Ett fel har inträffat. Användaren kunde inte raderas.</value>
   </data>
-  <data name="MessageNotSaved" xml:space="preserve">
-    <value>Användaren har inte uppdaterats.</value>
-  </data>
   <data name="MessageSaved" xml:space="preserve">
     <value>Användaren har sparats.</value>
   </data>

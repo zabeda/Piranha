@@ -24,6 +24,7 @@
 <form method="post">
 @UI.FormAction("Save")
 @Form.HiddenFor(m => m.Permission.Id)
+@Form.HiddenFor(m => m.Permission.IsLocked)
 <div class="grid_12">
     <div class="box">
         <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
