@@ -33,6 +33,7 @@ namespace Piranha
 		public DbSet<Entities.PageTemplate> PageTemplates { get ; set ; }
 		public DbSet<Entities.PostTemplate> PostTemplates { get ; set ; }
 		public DbSet<Entities.RegionTemplate> RegionTemplates { get ; set ; }
+		public DbSet<Entities.PropertyTemplate> PropertyTemplates { get ; set ; }
 		public DbSet<Entities.Namespace> Namespaces { get ; set ; }
 		public DbSet<Entities.SiteTree> SiteTrees { get ; set ; }
 		public DbSet<Entities.Permalink> Permalinks { get ; set ; }

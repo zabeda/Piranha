@@ -49,6 +49,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -177,6 +178,7 @@
     <Compile Include="Entities\Maps\RegionMap.cs" />
     <Compile Include="Entities\Maps\RegionTemplateMap.cs" />
     <Compile Include="Entities\Maps\SiteTreeMap.cs" />
+    <Compile Include="Entities\Maps\PropertyTemplateMap.cs" />
     <Compile Include="Entities\Maps\UploadMap.cs" />
     <Compile Include="Entities\Maps\UserMap.cs" />
     <Compile Include="Entities\Media.cs" />
@@ -193,8 +195,11 @@
     <Compile Include="Entities\RegionTemplate.cs" />
     <Compile Include="Entities\SiteTree.cs" />
     <Compile Include="Entities\StandardEntity.cs" />
+    <Compile Include="Entities\PropertyTemplate.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extend\ExtensionContainer.cs" />
+    <Compile Include="Extend\IExtensionMeta.cs" />
     <Compile Include="Extend\Module.cs" />
     <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\PostRegion.cs" />
@@ -881,6 +886,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\26.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\27.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
