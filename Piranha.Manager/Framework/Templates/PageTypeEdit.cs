@@ -26,6 +26,8 @@ namespace Piranha.Manager.Templates
 					Page.Title = Piranha.Resources.Template.EditPageTitleNew ;
 					Model = new PageTypeEditModel() ;
 				}
+				if (Hooks.PageTypeEditModelLoaded != null)
+					Hooks.PageTypeEditModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 			}
 		}
 	}

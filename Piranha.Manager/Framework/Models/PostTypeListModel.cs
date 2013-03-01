@@ -11,7 +11,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the post type list.
 	/// </summary>
-	public class PostTypeListModel
+	public sealed class PostTypeListModel
 	{
 		#region Properties
 		/// <summary>

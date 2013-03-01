@@ -19,6 +19,8 @@ namespace Piranha.Manager.Templates
 		/// </summary>
 		protected override void ExecutePage() {
 			Model = PageListModel.GetByInternalId() ;
+			if (Hooks.PageListModelLoaded != null)
+				Hooks.PageListModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 		}
 
 		/// <summary>
@@ -27,6 +29,8 @@ namespace Piranha.Manager.Templates
 		/// <param name="internalid">The internal id</param>
 		public new void Site(string internalid) {
 			Model = PageListModel.GetByInternalId(internalid.ToUpper()) ;
+			if (Hooks.PageListModelLoaded != null)
+				Hooks.PageListModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 		}
 	}
 }

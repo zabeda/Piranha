@@ -13,7 +13,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the category edit view.
 	/// </summary>
-	public class CategoryEditModel
+	public sealed class CategoryEditModel
 	{
 		#region Properties
 		/// <summary>

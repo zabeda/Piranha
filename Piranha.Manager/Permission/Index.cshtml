@@ -3,6 +3,10 @@
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.PermissionListModel>
 @using Piranha.Manager
 @{
+    if (!User.HasAccess("ADMIN_ACCESS")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Resources.Settings.ListTitleAccess ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
     
@@ -13,6 +17,10 @@
         } else if (msg.ToLower() == "notdeleted") {
             this.ErrorMessage(Piranha.Resources.Settings.MessageAccessNotDeleted) ;
         }
+    }
+    
+    if (Piranha.Manager.Hooks.PermissionListModelLoaded != null) {
+        Piranha.Manager.Hooks.PermissionListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
     }
 }
 @section Head {

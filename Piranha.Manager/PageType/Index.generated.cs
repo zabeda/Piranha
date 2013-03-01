@@ -49,8 +49,16 @@ WriteLiteral("\r\n\r\n");
             
             #line 4 "..\..\PageType\Index.cshtml"
   
+    if (!User.HasAccess("ADMIN_PAGE_TEMPLATE")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Manager.Resources.PageType.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.PageTypeListModelLoaded != null) {
+        Piranha.Manager.Hooks.PageTypeListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 
 
             
@@ -64,7 +72,7 @@ WriteLiteral("\r\n    <script type=\"text/javascript\">\r\n        $(document).r
 
 
             
-            #line 12 "..\..\PageType\Index.cshtml"
+            #line 20 "..\..\PageType\Index.cshtml"
                            Write(Piranha.Manager.Resources.PageType.MessageDeleteConfirm);
 
             
@@ -96,7 +104,7 @@ WriteLiteral(" \r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n     
 
 
             
-            #line 28 "..\..\PageType\Index.cshtml"
+            #line 36 "..\..\PageType\Index.cshtml"
                     Write(Href("~/manager/pagetype/edit"));
 
             
@@ -106,7 +114,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 28 "..\..\PageType\Index.cshtml"
+            #line 36 "..\..\PageType\Index.cshtml"
                                                                   Write(Piranha.Manager.Resources.Toolbar.Add);
 
             
@@ -116,7 +124,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 29 "..\..\PageType\Index.cshtml"
+            #line 37 "..\..\PageType\Index.cshtml"
                     Write(Href("~/manager/pagetype"));
 
             
@@ -126,7 +134,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 29 "..\..\PageType\Index.cshtml"
+            #line 37 "..\..\PageType\Index.cshtml"
                                                                  Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
@@ -136,7 +144,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\" tit
 
 
             
-            #line 31 "..\..\PageType\Index.cshtml"
+            #line 39 "..\..\PageType\Index.cshtml"
                                  Write(Piranha.Manager.Resources.Toolbar.Search);
 
             
@@ -146,7 +154,7 @@ WriteLiteral("\"></button>");
 
 
             
-            #line 31 "..\..\PageType\Index.cshtml"
+            #line 39 "..\..\PageType\Index.cshtml"
                                                                                      Write(Html.TextBox("search"));
 
             
@@ -162,7 +170,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"list
 
 
             
-            #line 40 "..\..\PageType\Index.cshtml"
+            #line 48 "..\..\PageType\Index.cshtml"
                                                        Write(Piranha.Manager.Resources.Global.Name);
 
             
@@ -172,7 +180,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 41 "..\..\PageType\Index.cshtml"
+            #line 49 "..\..\PageType\Index.cshtml"
                                                       Write(Piranha.Manager.Resources.Global.Created);
 
             
@@ -182,7 +190,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 42 "..\..\PageType\Index.cshtml"
+            #line 50 "..\..\PageType\Index.cshtml"
                                                       Write(Piranha.Manager.Resources.Global.Updated);
 
             
@@ -193,7 +201,7 @@ WriteLiteral("</span></th>\r\n                <th></th>\r\n            </tr>\r\n
 
 
             
-            #line 47 "..\..\PageType\Index.cshtml"
+            #line 55 "..\..\PageType\Index.cshtml"
              foreach (var pt in Model.Templates) {
 
             
@@ -203,7 +211,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
 
             
-            #line 49 "..\..\PageType\Index.cshtml"
+            #line 57 "..\..\PageType\Index.cshtml"
                                      Write(Href("~/manager/pagetype/edit/" + pt.Id));
 
             
@@ -213,7 +221,7 @@ WriteLiteral("\">");
 
 
             
-            #line 49 "..\..\PageType\Index.cshtml"
+            #line 57 "..\..\PageType\Index.cshtml"
                                                                                 Write(pt.Name);
 
             
@@ -223,7 +231,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"created date\">");
 
 
             
-            #line 50 "..\..\PageType\Index.cshtml"
+            #line 58 "..\..\PageType\Index.cshtml"
                                     Write(pt.Created.ToString("yyyy-MM-dd"));
 
             
@@ -233,7 +241,7 @@ WriteLiteral("</td>\r\n                <td class=\"updated date\">");
 
 
             
-            #line 51 "..\..\PageType\Index.cshtml"
+            #line 59 "..\..\PageType\Index.cshtml"
                                     Write(pt.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -244,7 +252,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons one\">\r\n           
 
 
             
-            #line 53 "..\..\PageType\Index.cshtml"
+            #line 61 "..\..\PageType\Index.cshtml"
                                              Write(Piranha.Manager.Resources.PageType.ListDelete);
 
             
@@ -254,7 +262,7 @@ WriteLiteral("\" href=\"");
 
 
             
-            #line 53 "..\..\PageType\Index.cshtml"
+            #line 61 "..\..\PageType\Index.cshtml"
                                                                                                    Write(Href("~/manager/pagetype/edit/delete/" + pt.Id));
 
             
@@ -264,7 +272,7 @@ WriteLiteral("\"></a></td>\r\n            </tr>\r\n");
 
 
             
-            #line 55 "..\..\PageType\Index.cshtml"
+            #line 63 "..\..\PageType\Index.cshtml"
             }
 
             

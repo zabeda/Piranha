@@ -2,8 +2,16 @@
 
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.CommentListModel>
 @{
+    if (!User.HasAccess("ADMIN_COMMENT")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = Piranha.Manager.Resources.Comment.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.CommentListModelLoaded != null) {
+        Piranha.Manager.Hooks.CommentListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 }
 @section Head {
     <script type="text/javascript">

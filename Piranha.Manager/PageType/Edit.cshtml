@@ -146,15 +146,15 @@
                                             <tr class="dark">
                                                 <td class="form">
                                                     <div class="input">
-                                                        <input type="text" id="newregionName" /></div>
+                                                        <input type="text" id="newregionName" placeholder="@Piranha.Resources.Global.Name" /></div>
                                                 </td>
                                                 <td class="form">
                                                     <div class="input">
-                                                        <input type="text" id="newregionInternalId" /></div>
+                                                        <input type="text" id="newregionInternalId" placeholder="@Piranha.Resources.Global.InternalId" /></div>
                                                 </td>
                                                 <td class="form">
                                                     <div class="input">
-                                                        @Html.DropDownList("newregionType", "", Model.RegionTypes)</div>
+                                                        @Html.DropDownList("newregionType", "", Model.RegionTypes, new { @placeholder = Piranha.Resources.Global.Type })</div>
                                                 </td>
                                                 <td class="buttons four">
                                                     <button id="btnAddRegion" class="btn marg-big">@Piranha.Resources.Global.Add</button>
@@ -172,24 +172,43 @@
                                         <thead>
                                             <tr>
                                                 <th>@Piranha.Resources.Global.Name</th>
-                                                <th>@Piranha.Resources.Global.InternalId</th>
                                                 <th>@Piranha.Resources.Global.Type</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="properties">
+                                            @foreach (var prop in Model.Template.Properties) {
+                                            <tr>
+                                                <td class="form"><span>@prop</span></td>
+                                                <td class="form"><span>String</span></td>
+                                                <td class="buttons three">
+                                                    <a class="icon up marg"></a>
+                                                    <a class="icon down marg"></a>
+                                                    <a class="icon delete remove-region"></a>
+                                                </td>
+                                            </tr>
+                                            }
+                                            <tr class="dark">
+                                                <td class="form" colspan="2">
+                                                    <div class="input">
+                                                        <input type="text" id="po_name" placeholder="@Piranha.Resources.Template.PropertyPlaceholder" /></div>
+                                                </td>
+                                                <td class="buttons three">
+                                                    <button id="po_add" class="btn marg-big">@Piranha.Resources.Global.Add</button>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
                                     <div id="region_data"></div>
-                                    <ul id="properties" class="list buttons">
+                                    <ul id="properties_old" class="list buttons">
                                         @foreach (var property in Model.Template.Properties) {
                                         <li><span>@property</span><button class="btn delete right remove-region"></button></li>
                                         }
                                     </ul>
                                     <div class="input">
-                                        <input id="po_name" type="text" placeholder="@Piranha.Resources.Template.PropertyPlaceholder" /></div>
-                                    <button id="po_add" class="btn right">@Piranha.Resources.Global.Add</button>
+                                        <input id="po_name_old" type="text" placeholder="@Piranha.Resources.Template.PropertyPlaceholder" /></div>
+                                    <button id="po_add_old" class="btn right">@Piranha.Resources.Global.Add</button>
                                     <div class="clear"></div>
                                 </div>
                             </div>

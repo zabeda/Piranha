@@ -2,8 +2,16 @@
 
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.PostTypeListModel>
 @{
+    if (!User.HasAccess("ADMIN_POST_TEMPLATE")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Manager.Resources.PostType.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.PostTypeListModelLoaded != null) {
+        Piranha.Manager.Hooks.PostTypeListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 }
 @section Head {
     <script type="text/javascript">

@@ -14,7 +14,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the comment edit view.
 	/// </summary>
-	public class CommentEditModel
+	public sealed class CommentEditModel
 	{
 		#region Properties
 		/// <summary>

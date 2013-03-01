@@ -49,8 +49,16 @@ WriteLiteral("\r\n\r\n");
             
             #line 4 "..\..\Comment\Index.cshtml"
   
+    if (!User.HasAccess("ADMIN_COMMENT")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = Piranha.Manager.Resources.Comment.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.CommentListModelLoaded != null) {
+        Piranha.Manager.Hooks.CommentListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 
 
             
@@ -86,7 +94,7 @@ WriteLiteral(" \r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n     
 
 
             
-            #line 25 "..\..\Comment\Index.cshtml"
+            #line 33 "..\..\Comment\Index.cshtml"
                     Write(Href("~/manager/comment"));
 
             
@@ -96,7 +104,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 25 "..\..\Comment\Index.cshtml"
+            #line 33 "..\..\Comment\Index.cshtml"
                                                                 Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
@@ -106,7 +114,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\" tit
 
 
             
-            #line 27 "..\..\Comment\Index.cshtml"
+            #line 35 "..\..\Comment\Index.cshtml"
                                  Write(Piranha.Manager.Resources.Toolbar.Search);
 
             
@@ -116,7 +124,7 @@ WriteLiteral("\"></button>");
 
 
             
-            #line 27 "..\..\Comment\Index.cshtml"
+            #line 35 "..\..\Comment\Index.cshtml"
                                                                                      Write(Html.TextBox("search"));
 
             
@@ -132,7 +140,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"list
 
 
             
-            #line 36 "..\..\Comment\Index.cshtml"
+            #line 44 "..\..\Comment\Index.cshtml"
                                                         Write(Piranha.Manager.Resources.Global.Title);
 
             
@@ -142,7 +150,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 37 "..\..\Comment\Index.cshtml"
+            #line 45 "..\..\Comment\Index.cshtml"
                                                      Write(Piranha.Manager.Resources.Comment.Author);
 
             
@@ -152,7 +160,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 38 "..\..\Comment\Index.cshtml"
+            #line 46 "..\..\Comment\Index.cshtml"
                                                      Write(Piranha.Manager.Resources.Global.Status);
 
             
@@ -163,7 +171,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 39 "..\..\Comment\Index.cshtml"
+            #line 47 "..\..\Comment\Index.cshtml"
                                                                    Write(Piranha.Manager.Resources.Global.Created);
 
             
@@ -174,7 +182,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 44 "..\..\Comment\Index.cshtml"
+            #line 52 "..\..\Comment\Index.cshtml"
              foreach (var comment in Model.Comments) {
 
             
@@ -184,7 +192,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"title\"><a href=\"
 
 
             
-            #line 46 "..\..\Comment\Index.cshtml"
+            #line 54 "..\..\Comment\Index.cshtml"
                                       Write(Href("~/manager/comment/edit/" + comment.Id));
 
             
@@ -194,7 +202,7 @@ WriteLiteral("\">");
 
 
             
-            #line 46 "..\..\Comment\Index.cshtml"
+            #line 54 "..\..\Comment\Index.cshtml"
                                                                                      Write(comment.Title);
 
             
@@ -204,7 +212,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"author\"><a href=\"mailto
 
 
             
-            #line 47 "..\..\Comment\Index.cshtml"
+            #line 55 "..\..\Comment\Index.cshtml"
                                               Write(comment.AuthorEmail);
 
             
@@ -214,7 +222,7 @@ WriteLiteral("\">");
 
 
             
-            #line 47 "..\..\Comment\Index.cshtml"
+            #line 55 "..\..\Comment\Index.cshtml"
                                                                     Write(comment.AuthorName);
 
             
@@ -224,7 +232,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"status\">");
 
 
             
-            #line 48 "..\..\Comment\Index.cshtml"
+            #line 56 "..\..\Comment\Index.cshtml"
                               Write(comment.StatusName);
 
             
@@ -234,7 +242,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 49 "..\..\Comment\Index.cshtml"
+            #line 57 "..\..\Comment\Index.cshtml"
                                Write(comment.Created.ToString("yyyy-MM-dd"));
 
             
@@ -244,7 +252,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n               
 
 
             
-            #line 51 "..\..\Comment\Index.cshtml"
+            #line 59 "..\..\Comment\Index.cshtml"
                         Write(Href("~/manager/comment/edit/delete/" + comment.Id));
 
             
@@ -254,7 +262,7 @@ WriteLiteral("\" title=\"");
 
 
             
-            #line 51 "..\..\Comment\Index.cshtml"
+            #line 59 "..\..\Comment\Index.cshtml"
                                                                                      Write(Piranha.Manager.Resources.Comment.Delete);
 
             
@@ -264,7 +272,7 @@ WriteLiteral("\" class=\"icon delete\"></a></td>\r\n            </tr>\r\n");
 
 
             
-            #line 53 "..\..\Comment\Index.cshtml"
+            #line 61 "..\..\Comment\Index.cshtml"
             }
 
             

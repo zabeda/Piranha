@@ -38,7 +38,7 @@ function bindEvents() {
     });
 
     $(".remove-region").live("click", function () {
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
         return false;
     });
 }

@@ -11,7 +11,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the page type list.
 	/// </summary>
-	public class PageTypeListModel
+	public sealed class PageTypeListModel
 	{
 		#region Properties
 		/// <summary>

@@ -12,7 +12,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the permission list.
 	/// </summary>
-	public class PermissionListModel
+	public sealed class PermissionListModel
 	{
 		#region Properties
 		/// <summary>

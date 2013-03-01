@@ -28,6 +28,8 @@ namespace Piranha.Manager.Templates
 					Page.Title = Piranha.Manager.Resources.User.EditTitleNew ;
 					Model = new UserEditModel() ;
 				}
+				if (Hooks.UserEditModelLoaded != null)
+					Hooks.UserEditModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 			}
 		}
 

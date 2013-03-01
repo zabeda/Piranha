@@ -138,11 +138,17 @@
   <data name="Information" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="InternalId" xml:space="preserve">
+    <value>Internal id</value>
+  </data>
   <data name="MessageNotSaved" xml:space="preserve">
     <value>There was nothing to update.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="Namespace" xml:space="preserve">
+    <value>Namespace</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

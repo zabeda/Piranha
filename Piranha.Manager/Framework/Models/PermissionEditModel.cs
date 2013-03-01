@@ -13,7 +13,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// Edit model for the permission view.
 	/// </summary>
-	public class PermissionEditModel
+	public sealed class PermissionEditModel
 	{
 		#region Properties
 		/// <summary>

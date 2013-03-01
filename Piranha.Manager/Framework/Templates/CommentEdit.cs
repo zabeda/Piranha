@@ -22,6 +22,8 @@ namespace Piranha.Manager.Templates
 				if (UrlData.Count > 0) {
 					Page.Title = Piranha.Manager.Resources.Comment.EditTitleExisting ;
 					Model = CommentEditModel.GetById(new Guid(UrlData[0])) ;
+					if (Hooks.CommentEditModelLoaded != null)
+						Hooks.CommentEditModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 				} else {
 					Response.Redirect("~/manager/comment") ;
 				}

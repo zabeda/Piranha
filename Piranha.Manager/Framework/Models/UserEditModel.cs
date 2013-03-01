@@ -12,9 +12,9 @@ using Piranha.Web;
 namespace Piranha.Manager.Models
 {
 	/// <summary>
-	/// Edit model for the user eidt view.
+	/// Edit model for the user edit view.
 	/// </summary>
-	public class UserEditModel
+	public sealed class UserEditModel
 	{
 		#region Properties
 		/// <summary>

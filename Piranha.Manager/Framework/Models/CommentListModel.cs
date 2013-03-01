@@ -13,7 +13,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the comment list view.
 	/// </summary>
-	public class CommentListModel
+	public sealed class CommentListModel
 	{
 		#region Inner classes
 		/// <summary>

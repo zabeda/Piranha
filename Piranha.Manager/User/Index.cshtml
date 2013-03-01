@@ -3,16 +3,25 @@
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.UserListModel>
 @using Piranha.Manager
 @{
-    Page.Title = @Piranha.Manager.Resources.User.ListTitle ;
+    
+    if (!User.HasAccess("ADMIN_USER")) {
+        Response.Redirect("~/manager/account") ;
+    }
+
+    Page.Title = Piranha.Manager.Resources.User.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
     
-    var msg = Request["msg"] ;
-    if (!String.IsNullOrEmpty(msg)) {
-        if (msg.ToLower() == "deleted") {
-            this.SuccessMessage(Piranha.Manager.Resources.User.MessageDeleted) ;
-        } else if (msg.ToLower() == "notdeleted") {
-            this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
-        }
+	var msg = Request["msg"] ;
+	if (!String.IsNullOrEmpty(msg)) {
+		if (msg.ToLower() == "deleted") {
+			this.SuccessMessage(Piranha.Manager.Resources.User.MessageDeleted) ;
+		} else if (msg.ToLower() == "notdeleted") {
+			this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
+		}
+	}
+
+    if (Piranha.Manager.Hooks.UserListModelLoaded != null) {
+        Piranha.Manager.Hooks.UserListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
     }
 }
 @section Head {

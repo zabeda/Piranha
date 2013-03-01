@@ -12,7 +12,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the login page.
 	/// </summary>B
-	public class AccountLoginModel
+	public sealed class AccountLoginModel
 	{
 		#region Properties
 		/// <summary>

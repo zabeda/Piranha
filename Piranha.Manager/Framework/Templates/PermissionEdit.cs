@@ -26,6 +26,8 @@ namespace Piranha.Manager.Templates
 					Page.Title = Piranha.Resources.Settings.EditTitleNewAccess ;
 					Model = new PermissionEditModel() ;
 				}
+				if (Hooks.PermissionEditModelLoaded != null)
+					Hooks.PermissionEditModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 			}
 		}
 

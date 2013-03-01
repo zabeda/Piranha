@@ -13,7 +13,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the page type edit view.
 	/// </summary>
-	public class PageTypeEditModel
+	public sealed class PageTypeEditModel
 	{
 		#region Properties
 		/// <summary>

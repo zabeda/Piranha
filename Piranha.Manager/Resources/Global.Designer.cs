@@ -124,6 +124,15 @@ namespace Piranha.Manager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Internal id.
+        /// </summary>
+        public static string InternalId {
+            get {
+                return ResourceManager.GetString("InternalId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was nothing to update..
         /// </summary>
         public static string MessageNotSaved {
@@ -138,6 +147,15 @@ namespace Piranha.Manager.Resources {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        public static string Namespace {
+            get {
+                return ResourceManager.GetString("Namespace", resourceCulture);
             }
         }
         

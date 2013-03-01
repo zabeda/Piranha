@@ -2,8 +2,16 @@
 
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.CategoryListModel>
 @{
+    if (!User.HasAccess("ADMIN_CATEGORY")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Manager.Resources.Category.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.CategoryListModelLoaded != null) {
+        Piranha.Manager.Hooks.CategoryListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 }
 @section Head {
     <script type="text/javascript">

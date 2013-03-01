@@ -14,7 +14,7 @@ using System.Web;
 [assembly: AssemblyCopyright("Copyright © Håkan Edling 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: PreApplicationStartMethod(typeof(Piranha.Manager.SiteManager), "Init")]
+[assembly: PreApplicationStartMethod(typeof(Piranha.Manager.Module), "Init")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

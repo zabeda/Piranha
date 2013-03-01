@@ -12,7 +12,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the user list.
 	/// </summary>
-	public class UserListModel
+	public sealed class UserListModel
 	{
 		#region Properties
 		/// <summary>
@@ -30,7 +30,7 @@ namespace Piranha.Manager.Models
 		}
 
 		/// <summary>
-		/// Loads the user list.
+		/// Loads the available Users.
 		/// </summary>
 		public void LoadUsers() {
 			using (var db = new DataContext()) {

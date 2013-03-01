@@ -3,16 +3,24 @@
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.ParamListModel>
 @using Piranha.Manager
 @{
-    Page.Title = @Piranha.Resources.Settings.ListTitleParams ;
-    Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    if (!User.HasAccess("ADMIN_PARAM")) {
+        Response.Redirect("~/manager/account") ;
+    }
     
-    var msg = Request["msg"] ;
-    if (!String.IsNullOrEmpty(msg)) {
-        if (msg.ToLower() == "deleted") {
-            this.SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
-        } else if (msg.ToLower() == "notdeleted") {
-            this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
-        }
+    Page.Title = Piranha.Resources.Settings.ListTitleParams ;
+    Layout = "~/Manager/Shared/_Layout.cshtml" ;    
+
+	var msg = Request["msg"] ;
+	if (!String.IsNullOrEmpty(msg)) {
+		if (msg.ToLower() == "deleted") {
+			this.SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
+		} else if (msg.ToLower() == "notdeleted") {
+			this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
+		}
+	}
+
+	if (Hooks.ParamListModelLoaded != null) {
+		Hooks.ParamListModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
     }
 }
 @section Head {

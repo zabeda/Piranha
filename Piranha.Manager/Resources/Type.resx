@@ -117,55 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Advanced" xml:space="preserve">
-    <value>Avancerat</value>
+  <data name="EditTitleExisting" xml:space="preserve">
+    <value>Edit content type</value>
   </data>
-  <data name="Confirm" xml:space="preserve">
-    <value>Bekräfta</value>
+  <data name="EditTitleNew" xml:space="preserve">
+    <value>Add new content type</value>
   </data>
-  <data name="Content" xml:space="preserve">
-    <value>Innehåll</value>
+  <data name="ListTitle" xml:space="preserve">
+    <value>Content types</value>
   </data>
-  <data name="Created" xml:space="preserve">
-    <value>Skapad</value>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete the selected content type?</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Beskrivning</value>
+  <data name="MessageDeleted" xml:space="preserve">
+    <value>The content type has been deleted.</value>
   </data>
-  <data name="Group" xml:space="preserve">
-    <value>Grupp</value>
+  <data name="MessageNotDeleted" xml:space="preserve">
+    <value>An error occurred while deleting the content type.</value>
   </data>
-  <data name="Information" xml:space="preserve">
-    <value>Information</value>
+  <data name="MessageSaved" xml:space="preserve">
+    <value>The content type has been saved.</value>
   </data>
-  <data name="InternalId" xml:space="preserve">
-    <value>Internt id</value>
-  </data>
-  <data name="MessageNotSaved" xml:space="preserve">
-    <value>Det fanns inga förändringar att spara.</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Namn</value>
-  </data>
-  <data name="Namespace" xml:space="preserve">
-    <value>Namnrymd</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Lösenord</value>
-  </data>
-  <data name="Permalink" xml:space="preserve">
-    <value>Permalänk</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Titel</value>
-  </data>
-  <data name="Updated" xml:space="preserve">
-    <value>Ändrad</value>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Användarnamn</value>
+  <data name="MessageSaveError" xml:space="preserve">
+    <value>An error occurred while saving the content type.</value>
   </data>
 </root>

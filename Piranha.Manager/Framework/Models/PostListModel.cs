@@ -11,7 +11,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the post list.
 	/// </summary>
-	public class PostListModel
+	public sealed class PostListModel
 	{
 		#region Inner classes
 		/// <summary>

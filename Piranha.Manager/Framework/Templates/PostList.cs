@@ -19,6 +19,8 @@ namespace Piranha.Manager.Templates
 		/// </summary>
 		protected override void ExecutePage() {
 			Model = PostListModel.Get() ;
+			if (Hooks.PostListModelLoaded != null)
+				Hooks.PostListModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
 		}
 	}
 }

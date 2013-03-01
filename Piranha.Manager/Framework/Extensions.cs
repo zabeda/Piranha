@@ -10,7 +10,7 @@ namespace Piranha.Manager
 	/// <summary>
 	/// Extension methods for the manager module.
 	/// </summary>
-	public static class Extensions
+	internal static class Extensions
 	{
 		/// <summary>
 		/// Adds a success message to the current view.

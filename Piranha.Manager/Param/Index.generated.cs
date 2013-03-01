@@ -56,16 +56,24 @@ WriteLiteral("\r\n\r\n");
             
             #line 5 "..\..\Param\Index.cshtml"
   
-    Page.Title = @Piranha.Resources.Settings.ListTitleParams ;
-    Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    if (!User.HasAccess("ADMIN_PARAM")) {
+        Response.Redirect("~/manager/account") ;
+    }
     
-    var msg = Request["msg"] ;
-    if (!String.IsNullOrEmpty(msg)) {
-        if (msg.ToLower() == "deleted") {
-            this.SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
-        } else if (msg.ToLower() == "notdeleted") {
-            this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
-        }
+    Page.Title = Piranha.Resources.Settings.ListTitleParams ;
+    Layout = "~/Manager/Shared/_Layout.cshtml" ;    
+
+	var msg = Request["msg"] ;
+	if (!String.IsNullOrEmpty(msg)) {
+		if (msg.ToLower() == "deleted") {
+			this.SuccessMessage(Piranha.Resources.Settings.MessageParamDeleted) ;
+		} else if (msg.ToLower() == "notdeleted") {
+			this.ErrorMessage(Piranha.Resources.Settings.MessageParamNotDeleted) ;
+		}
+	}
+
+	if (Hooks.ParamListModelLoaded != null) {
+		Hooks.ParamListModelLoaded(this, Menu.GetActiveMenuItem(), Model) ;
     }
 
 
@@ -103,7 +111,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 36 "..\..\Param\Index.cshtml"
+            #line 44 "..\..\Param\Index.cshtml"
                              Write(Href("~/manager/param/edit"));
 
             
@@ -113,7 +121,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 36 "..\..\Param\Index.cshtml"
+            #line 44 "..\..\Param\Index.cshtml"
                                                                         Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -123,7 +131,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 37 "..\..\Param\Index.cshtml"
+            #line 45 "..\..\Param\Index.cshtml"
                     Write(Href("~/manager/param"));
 
             
@@ -133,7 +141,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 37 "..\..\Param\Index.cshtml"
+            #line 45 "..\..\Param\Index.cshtml"
                                                               Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -143,7 +151,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\"></b
 
 
             
-            #line 39 "..\..\Param\Index.cshtml"
+            #line 47 "..\..\Param\Index.cshtml"
                                    Write(Html.TextBox("search"));
 
             
@@ -159,7 +167,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"list
 
 
             
-            #line 48 "..\..\Param\Index.cshtml"
+            #line 56 "..\..\Param\Index.cshtml"
                                                        Write(Piranha.Resources.Global.Name);
 
             
@@ -170,7 +178,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 49 "..\..\Param\Index.cshtml"
+            #line 57 "..\..\Param\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -181,7 +189,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 50 "..\..\Param\Index.cshtml"
+            #line 58 "..\..\Param\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -192,7 +200,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 55 "..\..\Param\Index.cshtml"
+            #line 63 "..\..\Param\Index.cshtml"
              foreach (var param in Model.Params) {
 
             
@@ -202,7 +210,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
 
             
-            #line 57 "..\..\Param\Index.cshtml"
+            #line 65 "..\..\Param\Index.cshtml"
                                      Write(Href("~/manager/param/edit/" + param.Id));
 
             
@@ -212,7 +220,7 @@ WriteLiteral("\">");
 
 
             
-            #line 57 "..\..\Param\Index.cshtml"
+            #line 65 "..\..\Param\Index.cshtml"
                                                                                 Write(param.Name);
 
             
@@ -222,7 +230,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 58 "..\..\Param\Index.cshtml"
+            #line 66 "..\..\Param\Index.cshtml"
                                Write(param.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -232,7 +240,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 59 "..\..\Param\Index.cshtml"
+            #line 67 "..\..\Param\Index.cshtml"
                                Write(param.Created.ToString("yyyy-MM-dd"));
 
             
@@ -242,7 +250,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n");
 
 
             
-            #line 61 "..\..\Param\Index.cshtml"
+            #line 69 "..\..\Param\Index.cshtml"
                      if (!param.IsLocked) {
 
             
@@ -252,7 +260,7 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
 
             
-            #line 62 "..\..\Param\Index.cshtml"
+            #line 70 "..\..\Param\Index.cshtml"
                                             Write(Href("~/manager/param/edit/delete/" + param.Id + "/true"));
 
             
@@ -262,7 +270,7 @@ WriteLiteral("\"></a>\r\n");
 
 
             
-            #line 63 "..\..\Param\Index.cshtml"
+            #line 71 "..\..\Param\Index.cshtml"
                     }
 
             
@@ -272,7 +280,7 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 66 "..\..\Param\Index.cshtml"
+            #line 74 "..\..\Param\Index.cshtml"
             }
 
             

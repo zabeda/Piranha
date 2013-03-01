@@ -13,7 +13,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// Edit model for the param view.
 	/// </summary>
-	public class ParamEditModel
+	public sealed class ParamEditModel
 	{
 		#region Properties
 		/// <summary>

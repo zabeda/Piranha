@@ -2,8 +2,16 @@
 
 @inherits Piranha.WebPages.ContentPage<Piranha.Manager.Models.PageTypeListModel>
 @{
+    if (!User.HasAccess("ADMIN_PAGE_TEMPLATE")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Manager.Resources.PageType.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.PageTypeListModelLoaded != null) {
+        Piranha.Manager.Hooks.PageTypeListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 }
 @section Head {
     <script type="text/javascript">

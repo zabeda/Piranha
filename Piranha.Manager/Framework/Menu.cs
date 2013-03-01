@@ -48,6 +48,21 @@ namespace Piranha.Manager
 				}
 			}
 		} ;
+
+		/// <summary>
+		/// Gets the currently active menu item.
+		/// </summary>
+		/// <returns>The menu item</returns>
+		public static MenuItem GetActiveMenuItem() {
+			foreach (var group in Items) {
+				if (group.IsActive()) {
+					foreach (var item in group.Items)
+						if (item.IsActive())
+							return item ;
+				}
+			}
+			return null ;
+		}
 	}
 
 	/// <summary>

@@ -11,7 +11,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the param list.
 	/// </summary>
-	public class ParamListModel
+	public sealed class ParamListModel
 	{
 		#region Properties
 		/// <summary>
@@ -29,7 +29,7 @@ namespace Piranha.Manager.Models
 		}
 
 		/// <summary>
-		/// Loads the param list.
+		/// Loads the available params.
 		/// </summary>
 		public void LoadParams() {
 			using (var db = new DataContext()) {

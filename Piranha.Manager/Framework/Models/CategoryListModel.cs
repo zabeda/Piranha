@@ -11,7 +11,7 @@ namespace Piranha.Manager.Models
 	/// <summary>
 	/// View model for the category list.
 	/// </summary>
-	public class CategoryListModel
+	public sealed class CategoryListModel
 	{
 		#region Properties
 		/// <summary>

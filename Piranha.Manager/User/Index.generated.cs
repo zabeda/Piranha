@@ -56,16 +56,25 @@ WriteLiteral("\r\n\r\n");
             
             #line 5 "..\..\User\Index.cshtml"
   
-    Page.Title = @Piranha.Manager.Resources.User.ListTitle ;
+    
+    if (!User.HasAccess("ADMIN_USER")) {
+        Response.Redirect("~/manager/account") ;
+    }
+
+    Page.Title = Piranha.Manager.Resources.User.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
     
-    var msg = Request["msg"] ;
-    if (!String.IsNullOrEmpty(msg)) {
-        if (msg.ToLower() == "deleted") {
-            this.SuccessMessage(Piranha.Manager.Resources.User.MessageDeleted) ;
-        } else if (msg.ToLower() == "notdeleted") {
-            this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
-        }
+	var msg = Request["msg"] ;
+	if (!String.IsNullOrEmpty(msg)) {
+		if (msg.ToLower() == "deleted") {
+			this.SuccessMessage(Piranha.Manager.Resources.User.MessageDeleted) ;
+		} else if (msg.ToLower() == "notdeleted") {
+			this.ErrorMessage(Piranha.Manager.Resources.User.MessageNotDeleted) ;
+		}
+	}
+
+    if (Piranha.Manager.Hooks.UserListModelLoaded != null) {
+        Piranha.Manager.Hooks.UserListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
     }
 
 
@@ -101,7 +110,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 34 "..\..\User\Index.cshtml"
+            #line 43 "..\..\User\Index.cshtml"
                              Write(Href("~/manager/user/edit"));
 
             
@@ -111,7 +120,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 34 "..\..\User\Index.cshtml"
+            #line 43 "..\..\User\Index.cshtml"
                                                                        Write(Piranha.Manager.Resources.Toolbar.Add);
 
             
@@ -121,7 +130,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 35 "..\..\User\Index.cshtml"
+            #line 44 "..\..\User\Index.cshtml"
                     Write(Href("~/manager/user"));
 
             
@@ -131,7 +140,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 35 "..\..\User\Index.cshtml"
+            #line 44 "..\..\User\Index.cshtml"
                                                              Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
@@ -141,7 +150,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\"></b
 
 
             
-            #line 37 "..\..\User\Index.cshtml"
+            #line 46 "..\..\User\Index.cshtml"
                                    Write(Html.TextBox("search"));
 
             
@@ -158,7 +167,7 @@ WriteLiteral("\r\n\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"
 
 
             
-            #line 48 "..\..\User\Index.cshtml"
+            #line 57 "..\..\User\Index.cshtml"
                                                         Write(Piranha.Manager.Resources.Global.Username);
 
             
@@ -168,7 +177,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 49 "..\..\User\Index.cshtml"
+            #line 58 "..\..\User\Index.cshtml"
                                                    Write(Piranha.Manager.Resources.Global.Name);
 
             
@@ -178,7 +187,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 50 "..\..\User\Index.cshtml"
+            #line 59 "..\..\User\Index.cshtml"
                                                     Write(Piranha.Manager.Resources.Global.Group);
 
             
@@ -189,7 +198,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 51 "..\..\User\Index.cshtml"
+            #line 60 "..\..\User\Index.cshtml"
                                                                    Write(Piranha.Manager.Resources.Global.Updated);
 
             
@@ -200,7 +209,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 52 "..\..\User\Index.cshtml"
+            #line 61 "..\..\User\Index.cshtml"
                                                                    Write(Piranha.Manager.Resources.Global.Created);
 
             
@@ -211,7 +220,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 57 "..\..\User\Index.cshtml"
+            #line 66 "..\..\User\Index.cshtml"
              foreach (var user in Model.Users) {
 
             
@@ -221,7 +230,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"gravatar\">\r\n");
 
 
             
-            #line 60 "..\..\User\Index.cshtml"
+            #line 69 "..\..\User\Index.cshtml"
                      if (!String.IsNullOrEmpty(user.Email)) {
 
             
@@ -231,7 +240,7 @@ WriteLiteral("                        <img src=\"");
 
 
             
-            #line 61 "..\..\User\Index.cshtml"
+            #line 70 "..\..\User\Index.cshtml"
                              Write(UI.Gravatar.Image(user.Email, 30));
 
             
@@ -241,7 +250,7 @@ WriteLiteral("\" alt=\"Gravatar for ");
 
 
             
-            #line 61 "..\..\User\Index.cshtml"
+            #line 70 "..\..\User\Index.cshtml"
                                                                                    Write(user.Email);
 
             
@@ -251,7 +260,7 @@ WriteLiteral("\" />\r\n");
 
 
             
-            #line 62 "..\..\User\Index.cshtml"
+            #line 71 "..\..\User\Index.cshtml"
                     }
 
             
@@ -261,7 +270,7 @@ WriteLiteral("                </td>\r\n                <td class=\"login\">\r\n"
 
 
             
-            #line 65 "..\..\User\Index.cshtml"
+            #line 74 "..\..\User\Index.cshtml"
                      if (User.IsMember(user.GroupId.Value)) {
 
             
@@ -271,7 +280,7 @@ WriteLiteral("                    <a href=\"");
 
 
             
-            #line 66 "..\..\User\Index.cshtml"
+            #line 75 "..\..\User\Index.cshtml"
                         Write(Href("~/manager/user/edit/" + user.Id));
 
             
@@ -281,7 +290,7 @@ WriteLiteral("\">");
 
 
             
-            #line 66 "..\..\User\Index.cshtml"
+            #line 75 "..\..\User\Index.cshtml"
                                                                  Write(user.Login);
 
             
@@ -291,21 +300,21 @@ WriteLiteral("</a>\r\n");
 
 
             
-            #line 67 "..\..\User\Index.cshtml"
+            #line 76 "..\..\User\Index.cshtml"
                     } else {
                     
             
             #line default
             #line hidden
             
-            #line 68 "..\..\User\Index.cshtml"
+            #line 77 "..\..\User\Index.cshtml"
                Write(user.Login);
 
             
             #line default
             #line hidden
             
-            #line 68 "..\..\User\Index.cshtml"
+            #line 77 "..\..\User\Index.cshtml"
                                
                     }
 
@@ -316,7 +325,7 @@ WriteLiteral("                </td>        \r\n                <td class=\"name\
 
 
             
-            #line 71 "..\..\User\Index.cshtml"
+            #line 80 "..\..\User\Index.cshtml"
                             Write(user.Firstname);
 
             
@@ -326,7 +335,7 @@ WriteLiteral(" ");
 
 
             
-            #line 71 "..\..\User\Index.cshtml"
+            #line 80 "..\..\User\Index.cshtml"
                                             Write(user.Surname);
 
             
@@ -336,7 +345,7 @@ WriteLiteral("</td>\r\n                <td class=\"group\">");
 
 
             
-            #line 72 "..\..\User\Index.cshtml"
+            #line 81 "..\..\User\Index.cshtml"
                              Write(user.Group.Name);
 
             
@@ -346,7 +355,7 @@ WriteLiteral("</td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 73 "..\..\User\Index.cshtml"
+            #line 82 "..\..\User\Index.cshtml"
                                Write(user.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -356,7 +365,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 74 "..\..\User\Index.cshtml"
+            #line 83 "..\..\User\Index.cshtml"
                                Write(user.Created.ToString("yyyy-MM-dd"));
 
             
@@ -366,7 +375,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n");
 
 
             
-            #line 76 "..\..\User\Index.cshtml"
+            #line 85 "..\..\User\Index.cshtml"
                      if (User.IsMember(user.GroupId.Value)) {
 
             
@@ -376,7 +385,7 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
 
             
-            #line 77 "..\..\User\Index.cshtml"
+            #line 86 "..\..\User\Index.cshtml"
                                             Write(Href("~/manager/user/edit/delete/" + user.Id + "/true"));
 
             
@@ -386,7 +395,7 @@ WriteLiteral("\" title=\"");
 
 
             
-            #line 77 "..\..\User\Index.cshtml"
+            #line 86 "..\..\User\Index.cshtml"
                                                                                                              Write(Piranha.Manager.Resources.User.Delete);
 
             
@@ -396,7 +405,7 @@ WriteLiteral("\"></a>\r\n");
 
 
             
-            #line 78 "..\..\User\Index.cshtml"
+            #line 87 "..\..\User\Index.cshtml"
                     }
 
             
@@ -406,7 +415,7 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 81 "..\..\User\Index.cshtml"
+            #line 90 "..\..\User\Index.cshtml"
             }
 
             

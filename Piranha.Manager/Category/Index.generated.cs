@@ -49,8 +49,16 @@ WriteLiteral("\r\n\r\n");
             
             #line 4 "..\..\Category\Index.cshtml"
   
+    if (!User.HasAccess("ADMIN_CATEGORY")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Manager.Resources.Category.ListTitle ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
+    
+    if (Piranha.Manager.Hooks.CategoryListModelLoaded != null) {
+        Piranha.Manager.Hooks.CategoryListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
+    }
 
 
             
@@ -65,7 +73,7 @@ WriteLiteral("\r\n    <script type=\"text/javascript\">\r\n        $(document).r
 
 
             
-            #line 13 "..\..\Category\Index.cshtml"
+            #line 21 "..\..\Category\Index.cshtml"
                            Write(Piranha.Resources.Category.MessageDeleteConfirm);
 
             
@@ -98,7 +106,7 @@ WriteLiteral(" \r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n     
 
 
             
-            #line 30 "..\..\Category\Index.cshtml"
+            #line 38 "..\..\Category\Index.cshtml"
                     Write(Href("~/manager/category/edit"));
 
             
@@ -108,7 +116,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 30 "..\..\Category\Index.cshtml"
+            #line 38 "..\..\Category\Index.cshtml"
                                                                   Write(Piranha.Manager.Resources.Toolbar.Add);
 
             
@@ -118,7 +126,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 31 "..\..\Category\Index.cshtml"
+            #line 39 "..\..\Category\Index.cshtml"
                     Write(Href("~/manager/category"));
 
             
@@ -128,7 +136,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 31 "..\..\Category\Index.cshtml"
+            #line 39 "..\..\Category\Index.cshtml"
                                                                  Write(Piranha.Manager.Resources.Toolbar.Reload);
 
             
@@ -138,7 +146,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\" tit
 
 
             
-            #line 33 "..\..\Category\Index.cshtml"
+            #line 41 "..\..\Category\Index.cshtml"
                                  Write(Piranha.Manager.Resources.Toolbar.Search);
 
             
@@ -148,7 +156,7 @@ WriteLiteral("\"></button>");
 
 
             
-            #line 33 "..\..\Category\Index.cshtml"
+            #line 41 "..\..\Category\Index.cshtml"
                                                                                      Write(Html.TextBox("search"));
 
             
@@ -164,7 +172,7 @@ WriteLiteral("\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"list
 
 
             
-            #line 42 "..\..\Category\Index.cshtml"
+            #line 50 "..\..\Category\Index.cshtml"
                                                        Write(Piranha.Manager.Resources.Global.Name);
 
             
@@ -175,7 +183,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 43 "..\..\Category\Index.cshtml"
+            #line 51 "..\..\Category\Index.cshtml"
                                                                    Write(Piranha.Manager.Resources.Global.Updated);
 
             
@@ -186,7 +194,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 44 "..\..\Category\Index.cshtml"
+            #line 52 "..\..\Category\Index.cshtml"
                                                                    Write(Piranha.Manager.Resources.Global.Created);
 
             
@@ -197,7 +205,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 49 "..\..\Category\Index.cshtml"
+            #line 57 "..\..\Category\Index.cshtml"
              foreach (var c in Model.Categories) {
 
             
@@ -207,7 +215,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
 
             
-            #line 51 "..\..\Category\Index.cshtml"
+            #line 59 "..\..\Category\Index.cshtml"
                                      Write(Href("~/manager/category/edit/" + c.Id));
 
             
@@ -217,7 +225,7 @@ WriteLiteral("\">");
 
 
             
-            #line 51 "..\..\Category\Index.cshtml"
+            #line 59 "..\..\Category\Index.cshtml"
                                                                                Write(c.Name);
 
             
@@ -227,7 +235,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 52 "..\..\Category\Index.cshtml"
+            #line 60 "..\..\Category\Index.cshtml"
                                Write(c.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -237,7 +245,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 53 "..\..\Category\Index.cshtml"
+            #line 61 "..\..\Category\Index.cshtml"
                                Write(c.Created.ToString("yyyy-MM-dd"));
 
             
@@ -248,7 +256,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n               
 
 
             
-            #line 55 "..\..\Category\Index.cshtml"
+            #line 63 "..\..\Category\Index.cshtml"
                                             Write(Href("~/manager/category/edit/delete/" + c.Id));
 
             
@@ -258,7 +266,7 @@ WriteLiteral("\"></a>\r\n                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 58 "..\..\Category\Index.cshtml"
+            #line 66 "..\..\Category\Index.cshtml"
             }
 
             

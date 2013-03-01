@@ -56,6 +56,10 @@ WriteLiteral("\r\n\r\n");
             
             #line 5 "..\..\Permission\Index.cshtml"
   
+    if (!User.HasAccess("ADMIN_ACCESS")) {
+        Response.Redirect("~/manager/account") ;
+    }
+    
     Page.Title = @Piranha.Resources.Settings.ListTitleAccess ;
     Layout = "~/Manager/Shared/_Layout.cshtml" ;
     
@@ -66,6 +70,10 @@ WriteLiteral("\r\n\r\n");
         } else if (msg.ToLower() == "notdeleted") {
             this.ErrorMessage(Piranha.Resources.Settings.MessageAccessNotDeleted) ;
         }
+    }
+    
+    if (Piranha.Manager.Hooks.PermissionListModelLoaded != null) {
+        Piranha.Manager.Hooks.PermissionListModelLoaded(this, Piranha.Manager.Menu.GetActiveMenuItem(), Model) ;
     }
 
 
@@ -103,7 +111,7 @@ WriteLiteral("\r\n<div class=\"toolbar\">\r\n    <div class=\"inner\">\r\n      
 
 
             
-            #line 36 "..\..\Permission\Index.cshtml"
+            #line 44 "..\..\Permission\Index.cshtml"
                              Write(Href("~/manager/permission/edit"));
 
             
@@ -113,7 +121,7 @@ WriteLiteral("\" class=\"add\">");
 
 
             
-            #line 36 "..\..\Permission\Index.cshtml"
+            #line 44 "..\..\Permission\Index.cshtml"
                                                                              Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -123,7 +131,7 @@ WriteLiteral("</a></li>\r\n            <li><a href=\"");
 
 
             
-            #line 37 "..\..\Permission\Index.cshtml"
+            #line 45 "..\..\Permission\Index.cshtml"
                     Write(Href("~/manager/permission"));
 
             
@@ -133,7 +141,7 @@ WriteLiteral("\" class=\"refresh\">");
 
 
             
-            #line 37 "..\..\Permission\Index.cshtml"
+            #line 45 "..\..\Permission\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -143,7 +151,7 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button class=\"search\"></b
 
 
             
-            #line 39 "..\..\Permission\Index.cshtml"
+            #line 47 "..\..\Permission\Index.cshtml"
                                    Write(Html.TextBox("search"));
 
             
@@ -159,7 +167,7 @@ WriteLiteral("\r\n\r\n<div class=\"grid_12\">\r\n    <table id=\"list\" class=\"
 
 
             
-            #line 49 "..\..\Permission\Index.cshtml"
+            #line 57 "..\..\Permission\Index.cshtml"
                                                        Write(Piranha.Resources.Global.Name);
 
             
@@ -169,7 +177,7 @@ WriteLiteral("</span></th>\r\n                <th><span class=\"sort\" data-sort
 
 
             
-            #line 50 "..\..\Permission\Index.cshtml"
+            #line 58 "..\..\Permission\Index.cshtml"
                                                     Write(Piranha.Resources.Global.Group);
 
             
@@ -180,7 +188,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 51 "..\..\Permission\Index.cshtml"
+            #line 59 "..\..\Permission\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -191,7 +199,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"date\"><span class=\"s
 
 
             
-            #line 52 "..\..\Permission\Index.cshtml"
+            #line 60 "..\..\Permission\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -202,7 +210,7 @@ WriteLiteral("</span></th>\r\n                <th class=\"one\"></th>\r\n       
 
 
             
-            #line 57 "..\..\Permission\Index.cshtml"
+            #line 65 "..\..\Permission\Index.cshtml"
              foreach (var permission in Model.Permissions) {
 
             
@@ -212,7 +220,7 @@ WriteLiteral("            <tr>\r\n                <td class=\"name\"><a href=\""
 
 
             
-            #line 59 "..\..\Permission\Index.cshtml"
+            #line 67 "..\..\Permission\Index.cshtml"
                                      Write(Href("~/manager/permission/edit/" + permission.Id));
 
             
@@ -222,7 +230,7 @@ WriteLiteral("\">");
 
 
             
-            #line 59 "..\..\Permission\Index.cshtml"
+            #line 67 "..\..\Permission\Index.cshtml"
                                                                                           Write(permission.Name);
 
             
@@ -232,7 +240,7 @@ WriteLiteral("</a></td>\r\n                <td class=\"group\">");
 
 
             
-            #line 60 "..\..\Permission\Index.cshtml"
+            #line 68 "..\..\Permission\Index.cshtml"
                              Write(permission.Group.Name);
 
             
@@ -242,7 +250,7 @@ WriteLiteral("</td>\r\n                <td class=\"updated\">");
 
 
             
-            #line 61 "..\..\Permission\Index.cshtml"
+            #line 69 "..\..\Permission\Index.cshtml"
                                Write(permission.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -252,7 +260,7 @@ WriteLiteral("</td>\r\n                <td class=\"created\">");
 
 
             
-            #line 62 "..\..\Permission\Index.cshtml"
+            #line 70 "..\..\Permission\Index.cshtml"
                                Write(permission.Created.ToString("yyyy-MM-dd"));
 
             
@@ -262,7 +270,7 @@ WriteLiteral("</td>\r\n                <td class=\"buttons\">\r\n");
 
 
             
-            #line 64 "..\..\Permission\Index.cshtml"
+            #line 72 "..\..\Permission\Index.cshtml"
                      if (!permission.IsLocked) {
 
             
@@ -272,7 +280,7 @@ WriteLiteral("                    <a class=\"icon delete\" href=\"");
 
 
             
-            #line 65 "..\..\Permission\Index.cshtml"
+            #line 73 "..\..\Permission\Index.cshtml"
                                             Write(Href("~/manager/permission/edit/delete/" + permission.Id + "/true"));
 
             
@@ -282,7 +290,7 @@ WriteLiteral("\"></a>\r\n");
 
 
             
-            #line 66 "..\..\Permission\Index.cshtml"
+            #line 74 "..\..\Permission\Index.cshtml"
                     }
 
             
@@ -292,7 +300,7 @@ WriteLiteral("                </td>\r\n            </tr>\r\n");
 
 
             
-            #line 69 "..\..\Permission\Index.cshtml"
+            #line 77 "..\..\Permission\Index.cshtml"
             }
 
             

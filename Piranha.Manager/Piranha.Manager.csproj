@@ -103,13 +103,15 @@
       <DependentUpon>Index.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Framework\Extensions.cs" />
+    <Compile Include="Framework\Delegates.cs" />
+    <Compile Include="Framework\Hooks.cs" />
+    <Compile Include="Framework\Mappings.cs" />
     <Compile Include="Framework\Menu.cs" />
     <Compile Include="Framework\Models\AccountLoginModel.cs" />
     <Compile Include="Framework\Models\CategoryEditModel.cs" />
     <Compile Include="Framework\Models\CategoryListModel.cs" />
     <Compile Include="Framework\Models\CommentEditModel.cs" />
     <Compile Include="Framework\Models\CommentListModel.cs" />
-    <Compile Include="Framework\Models\IEditModel.cs" />
     <Compile Include="Framework\Models\PostTypeListModel.cs" />
     <Compile Include="Framework\Models\PageListModel.cs" />
     <Compile Include="Framework\Models\PageTypeEditModel.cs" />
@@ -121,7 +123,6 @@
     <Compile Include="Framework\Templates\Account.cs" />
     <Compile Include="Framework\Templates\CategoryEdit.cs" />
     <Compile Include="Framework\Templates\CommentEdit.cs" />
-    <Compile Include="Framework\Templates\EditTemplate.cs" />
     <Compile Include="Framework\Templates\PostList.cs" />
     <Compile Include="Framework\Templates\PageList.cs" />
     <Compile Include="Framework\Templates\PageTypeEdit.cs" />
@@ -209,6 +210,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Toolbar.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Type.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Type.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\User.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -234,7 +240,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_Layout.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Framework\SiteManager.cs" />
+    <Compile Include="Framework\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\Templates\PermissionEdit.cs" />
     <Compile Include="Framework\Templates\UserEdit.cs" />
@@ -313,6 +319,10 @@
       <LastGenOutput>Toolbar.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Toolbar.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Type.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Type.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\User.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>User.Designer.cs</LastGenOutput>

@@ -591,11 +591,31 @@ WriteLiteral("\r\n                                                    </div>\r\n
 WriteLiteral(@"                                            <tr class=""dark"">
                                                 <td class=""form"">
                                                     <div class=""input"">
-                                                        <input type=""text"" id=""newregionName"" /></div>
+                                                        <input type=""text"" id=""newregionName"" placeholder=""");
+
+
+            
+            #line 149 "..\..\PageType\Edit.cshtml"
+                                                                                                      Write(Piranha.Resources.Global.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@""" /></div>
                                                 </td>
                                                 <td class=""form"">
                                                     <div class=""input"">
-                                                        <input type=""text"" id=""newregionInternalId"" /></div>
+                                                        <input type=""text"" id=""newregionInternalId"" placeholder=""");
+
+
+            
+            #line 153 "..\..\PageType\Edit.cshtml"
+                                                                                                            Write(Piranha.Resources.Global.InternalId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@""" /></div>
                                                 </td>
                                                 <td class=""form"">
                                                     <div class=""input"">
@@ -604,7 +624,7 @@ WriteLiteral(@"                                            <tr class=""dark"">
 
             
             #line 157 "..\..\PageType\Edit.cshtml"
-                                                   Write(Html.DropDownList("newregionType", "", Model.RegionTypes));
+                                                   Write(Html.DropDownList("newregionType", "", Model.RegionTypes, new { @placeholder = Piranha.Resources.Global.Type }));
 
             
             #line default
@@ -650,36 +670,90 @@ WriteLiteral("</th>\r\n                                                <th>");
 
             
             #line 175 "..\..\PageType\Edit.cshtml"
-                                               Write(Piranha.Resources.Global.InternalId);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</th>\r\n                                                <th>");
-
-
-            
-            #line 176 "..\..\PageType\Edit.cshtml"
                                                Write(Piranha.Resources.Global.Type);
 
             
             #line default
             #line hidden
-WriteLiteral(@"</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+WriteLiteral("</th>\r\n                                                <th></th>\r\n               " +
+"                             </tr>\r\n                                        </th" +
+"ead>\r\n                                        <tbody id=\"properties\">\r\n");
 
-                                    <div id=""region_data""></div>
-                                    <ul id=""properties"" class=""list buttons"">
+
+            
+            #line 180 "..\..\PageType\Edit.cshtml"
+                                             foreach (var prop in Model.Template.Properties) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                            <tr>\r\n                               " +
+"                 <td class=\"form\"><span>");
+
+
+            
+            #line 182 "..\..\PageType\Edit.cshtml"
+                                                                  Write(prop);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"</span></td>
+                                                <td class=""form""><span>String</span></td>
+                                                <td class=""buttons three"">
+                                                    <a class=""icon up marg""></a>
+                                                    <a class=""icon down marg""></a>
+                                                    <a class=""icon delete remove-region""></a>
+                                                </td>
+                                            </tr>
 ");
 
 
             
-            #line 186 "..\..\PageType\Edit.cshtml"
+            #line 190 "..\..\PageType\Edit.cshtml"
+                                            }
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"                                            <tr class=""dark"">
+                                                <td class=""form"" colspan=""2"">
+                                                    <div class=""input"">
+                                                        <input type=""text"" id=""po_name"" placeholder=""");
+
+
+            
+            #line 194 "..\..\PageType\Edit.cshtml"
+                                                                                                Write(Piranha.Resources.Template.PropertyPlaceholder);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" /></div>\r\n                                                </td>\r\n              " +
+"                                  <td class=\"buttons three\">\r\n                  " +
+"                                  <button id=\"po_add\" class=\"btn marg-big\">");
+
+
+            
+            #line 197 "..\..\PageType\Edit.cshtml"
+                                                                                        Write(Piranha.Resources.Global.Add);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div id=""region_data""></div>
+                                    <ul id=""properties_old"" class=""list buttons"">
+");
+
+
+            
+            #line 205 "..\..\PageType\Edit.cshtml"
                                          foreach (var property in Model.Template.Properties) {
 
             
@@ -689,7 +763,7 @@ WriteLiteral("                                        <li><span>");
 
 
             
-            #line 187 "..\..\PageType\Edit.cshtml"
+            #line 206 "..\..\PageType\Edit.cshtml"
                                              Write(property);
 
             
@@ -699,31 +773,31 @@ WriteLiteral("</span><button class=\"btn delete right remove-region\"></button><
 
 
             
-            #line 188 "..\..\PageType\Edit.cshtml"
+            #line 207 "..\..\PageType\Edit.cshtml"
                                         }
 
             
             #line default
             #line hidden
 WriteLiteral("                                    </ul>\r\n                                    <d" +
-"iv class=\"input\">\r\n                                        <input id=\"po_name\" t" +
-"ype=\"text\" placeholder=\"");
+"iv class=\"input\">\r\n                                        <input id=\"po_name_ol" +
+"d\" type=\"text\" placeholder=\"");
 
 
             
-            #line 191 "..\..\PageType\Edit.cshtml"
-                                                                                Write(Piranha.Resources.Template.PropertyPlaceholder);
+            #line 210 "..\..\PageType\Edit.cshtml"
+                                                                                    Write(Piranha.Resources.Template.PropertyPlaceholder);
 
             
             #line default
             #line hidden
-WriteLiteral("\" /></div>\r\n                                    <button id=\"po_add\" class=\"btn ri" +
-"ght\">");
+WriteLiteral("\" /></div>\r\n                                    <button id=\"po_add_old\" class=\"bt" +
+"n right\">");
 
 
             
-            #line 192 "..\..\PageType\Edit.cshtml"
-                                                                     Write(Piranha.Resources.Global.Add);
+            #line 211 "..\..\PageType\Edit.cshtml"
+                                                                         Write(Piranha.Resources.Global.Add);
 
             
             #line default
@@ -740,7 +814,7 @@ WriteLiteral(@"</button>
 
 
             
-            #line 200 "..\..\PageType\Edit.cshtml"
+            #line 219 "..\..\PageType\Edit.cshtml"
                                        Write(Form.LabelFor(m => m.Template.Preview, Piranha.Manager.Resources.PageType.Preview));
 
             
@@ -751,7 +825,7 @@ WriteLiteral("\r\n                                            <div class=\"input
 
 
             
-            #line 202 "..\..\PageType\Edit.cshtml"
+            #line 221 "..\..\PageType\Edit.cshtml"
                                            Write(Form.TextAreaFor(m => m.Template.Preview, new { @rows = 8} ));
 
             
