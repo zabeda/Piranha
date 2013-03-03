@@ -5,7 +5,7 @@
     <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{861A44BA-A5BC-41D4-92CE-8DEC08A0E040}</ProjectGuid>
+    <ProjectGuid>{6FD2E00F-A9B6-4144-A242-3364BCFB8733}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Piranha.Manager</RootNamespace>

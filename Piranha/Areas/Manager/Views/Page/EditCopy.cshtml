@@ -111,6 +111,7 @@
             }
             <li><a href="@Url.Action("index", new { id = Model.Page.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Url.Action("edit", new { id = Model.Page.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
         </ul>
         <div class="clear"></div>
     </div>

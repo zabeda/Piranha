@@ -25,6 +25,8 @@ namespace Piranha
 
 		public delegate void ModelLoadedHook<T>(T model) ;
 		public delegate void ManagerModelLoadedHook<T>(Controller controller, Manager.MenuItem menu, T model) ;
+
+		public delegate void ManagerToolbarRender<T>(UrlHelper url, StringBuilder str, T model) ;
 		public delegate void SendPasswordMail(Models.SysUser user, string password);
 	}
 }

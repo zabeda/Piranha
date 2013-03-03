@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Piranha.WebPages
 {
@@ -123,6 +125,34 @@ namespace Piranha.WebPages
 			/// Executed after the user edit model is loaded but before the view is called.
 			/// </summary>
 			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
+
+			public static class Toolbar {
+				public static Delegates.ManagerToolbarRender<Models.Manager.PageModels.ListModel> PageListToolbarRender ;
+				public static Delegates.ManagerToolbarRender<Models.Manager.PageModels.EditModel> PageEditToolbarRender ;
+				public static Delegates.ManagerToolbarRender<Areas.Manager.Models.PostListModel> PostListToolbarRender ;
+				public static Delegates.ManagerToolbarRender<Models.Manager.PostModels.EditModel> PostEditToolbarRender ;
+				public static Delegates.ManagerToolbarRender<Models.Manager.ContentModels.ListModel> MediaListToolbarRender ;
+				public static Delegates.ManagerToolbarRender<Models.Manager.ContentModels.EditModel> MediaEditToolbarRender ;
+
+				public static HtmlString Render(UrlHelper url, object model) {
+					StringBuilder str = new StringBuilder() ;
+
+					if (model is Models.Manager.PageModels.ListModel && PageListModelLoaded != null)
+						PageListToolbarRender(url, str, (Models.Manager.PageModels.ListModel)model) ;
+					else if (model is Models.Manager.PageModels.EditModel && PageEditToolbarRender != null)
+						PageEditToolbarRender(url, str, (Models.Manager.PageModels.EditModel)model) ;
+					else if (model is Areas.Manager.Models.PostListModel && PostListToolbarRender != null)
+						PostListToolbarRender(url, str, (Areas.Manager.Models.PostListModel)model) ;
+					else if (model is Models.Manager.PostModels.EditModel && PostEditToolbarRender != null)
+						PostEditToolbarRender(url, str, (Models.Manager.PostModels.EditModel)model) ;
+					else if (model is Models.Manager.ContentModels.ListModel && MediaListToolbarRender != null)
+						MediaListToolbarRender(url, str, (Models.Manager.ContentModels.ListModel)model) ;
+					else if (model is Models.Manager.ContentModels.EditModel && MediaEditToolbarRender != null)
+						MediaEditToolbarRender(url, str, (Models.Manager.ContentModels.EditModel)model) ;
+
+					return new HtmlString(str.ToString()) ;
+				}
+			}
 		}
 
 		public static class Mail

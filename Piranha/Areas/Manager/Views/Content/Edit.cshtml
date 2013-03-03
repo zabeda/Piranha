@@ -15,6 +15,7 @@
             @if (!Model.Content.IsNew && !Model.Content.IsFolder && !String.IsNullOrEmpty(Model.Content.OriginalUrl)) {
             <li><a href="@Url.Action("sync", new { @id = Model.Content.Id })" class="sync">@Piranha.Resources.Global.ToolbarSync</a></li>
             }
+            @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
         </ul>
         <div class="clear"></div>
     </div>
