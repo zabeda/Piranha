@@ -202,8 +202,15 @@ namespace Piranha.Models
 				foreach (var rt in regions) {
 					if (rt.Type != "Piranha.Extend.Regions.PostRegion") {
 						if (ExtensionManager.ExtensionTypes.ContainsKey(rt.Type)) {
-							((IDictionary<string, object>)Regions).Add(rt.InternalId,
-								Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type])) ;
+							// Create empty region
+							var body = Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type]) ;
+							// Initialize empty regions
+							if (body != null) {
+								var getContent = body.GetType().GetMethod("GetContent") ;
+								if (getContent != null)
+									body = getContent.Invoke(body, new object[] { this }) ;
+							}
+							((IDictionary<string, object>)Regions).Add(rt.InternalId, body) ;
 						} else {
 							((IDictionary<string, object>)Regions).Add(rt.InternalId, null) ;
 						}

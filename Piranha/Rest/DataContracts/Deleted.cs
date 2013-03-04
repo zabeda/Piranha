@@ -12,6 +12,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public List<DeletedItem> Pages { get ; set ; }
 		[DataMember()]
+		public List<DeletedItem> Posts { get ; set ; }
+		[DataMember()]
 		public List<DeletedItem> Content { get ; set ; }
 		[DataMember()]
 		public List<DeletedItem> Categories { get ; set ; }

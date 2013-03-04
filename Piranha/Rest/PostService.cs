@@ -44,6 +44,7 @@ namespace Piranha.Rest
 				if (pm != null) {
 					Post post = new Post() {
 						Id = pm.Post.Id,
+						TemplateName = pm.Post.TemplateName,
 						Title = pm.Post.Title,
 						Permalink = pm.Post.Permalink,
 						Excerpt = pm.Post.Excerpt,
