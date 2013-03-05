@@ -21,6 +21,10 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public List<Content> Content { get ; set ; }
 		[DataMember()]
+		public List<PageTemplate> PageTemplates { get ; set ; }
+		[DataMember()]
+		public List<PostTemplate> PostTemplates { get ; set ; }
+		[DataMember()]
 		public Deleted Deleted { get ; set ; }
 		[DataMember()]
 		public string Timestamp { get ; set ; }
@@ -31,6 +35,8 @@ namespace Piranha.Rest.DataContracts
 			Posts = new List<Post>() ;
 			Categories = new List<Category>() ;
 			Content = new List<Content>() ;
+			PageTemplates = new List<PageTemplate>() ;
+			PostTemplates = new List<PostTemplate>() ;
 			Deleted = new Deleted() ;
 		}
 	}
