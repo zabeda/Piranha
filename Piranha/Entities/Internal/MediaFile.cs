@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -92,7 +93,11 @@ namespace Piranha.Models
 		/// <param name="response">The http response</param>
 		public void GetMedia(HttpContext context, int? width = null, int? height = null) {
 			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
+				var compress = false ;
 				Image img = null ;
+				var param = SysParam.GetByName("COMPRESS_IMAGES") ;
+				if (param != null && param.Value == "1")
+					compress = true ;
 
 				try {
 					// Try to create image from file.
@@ -107,17 +112,17 @@ namespace Piranha.Models
 					if (File.Exists(GetCachePath(width.Value, height.Value))) {
 						// Return generated & cached resized image
 						img.Dispose() ;
-						WriteFile(context.Response, GetCachePath(width.Value, height.Value)) ;
+						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
 					} else if (File.Exists(PhysicalPath)) {
 						int orgWidth = img.Width, orgHeight = img.Height ;
 
 						var resized = Drawing.ImageUtils.Resize(img, width.Value, height.Value) ;
 						if (resized.Width != orgWidth || resized.Height != orgHeight)
-							resized.Save(GetCachePath(width.Value, height.Value), resized.RawFormat) ;
+							resized.Save(GetCachePath(width.Value, height.Value), compress ? ImageFormat.Jpeg : img.RawFormat) ;
 						img.Dispose() ;
 						resized.Dispose() ;
 
-						WriteFile(context.Response, GetCachePath(width.Value, height.Value)) ;
+						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
 					}
 				}
 				WriteFile(context.Response, PhysicalPath) ;
@@ -176,12 +181,13 @@ namespace Piranha.Models
 		/// <summary>
 		/// Writes the given file to the http response
 		/// </summary>
-		/// <param name="response"></param>
-		/// <param name="path"></param>
-		protected void WriteFile(HttpResponse response, string path) {
+		/// <param name="response">The http response to write the file to</param>
+		/// <param name="path">The path to the physical file</param>
+		/// <param name="compressed">Weather or not the file is a compressed image</param>
+		protected void WriteFile(HttpResponse response, string path, bool compressed = false) {
 			if (File.Exists(path)) {
 				response.StatusCode = 200 ;
-				response.ContentType = Type ;
+				response.ContentType = compressed ? "image/jpg" : Type ;
 				response.WriteFile(path) ;
 				response.End() ;
 			} else {

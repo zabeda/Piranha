@@ -24,82 +24,6 @@ namespace Piranha.Models
 	[PrimaryKey(Column="content_id")]
 	public class Content : MediaFile<Content>, ICacheRecord<Content>
 	{
-		#region Members
-		private Dictionary<string, string> thumbs = new Dictionary<string, string>() {
-			// Pdf 
-			{ "application/pdf", "Piranha.Areas.Manager.Content.Img.ico-pdf-64.png" },
-			// Excel
-			{ "application/vnd.ms-excel", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/msexcel", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/x-msexcel", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/x-ms-excel", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/x-excel", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/x-dos_ms_excel", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/xls", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/x-xls", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			{ "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Piranha.Areas.Manager.Content.Img.ico-excel-64.png" },
-			// Mp3
-			{ "audio/mpeg", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/x-mpeg", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/mp3", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/x-mp3", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/mpeg3", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/x-mpeg3", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/mpg", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/x-mpg", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/x-mpegaudio", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			// Wma
-			{ "audio/x-ms-wma", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			// Flac
-			{ "audio/flac", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			// Ogg
-			{ "audio/ogg", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			// M4a
-			{ "audio/mp4a-latm", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			{ "audio/mp4", "Piranha.Areas.Manager.Content.Img.ico-sound-64.png" },
-			// Avi
-			{ "video/avi", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "video/msvideo", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "video/x-msvideo", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "image/avi", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "video/xmpg2", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "application/x-troff-msvideo", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "audio/aiff", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "audio/avi", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			// Mpeg
-			{ "video/mpeg", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "video/mp4", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			// Mov
-			{ "video/quicktime", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "video/x-quicktime", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "image/mov", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "audio/x-midi", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			{ "audio/x-wav", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png" },
-			// Ppt
-			{ "application/vnd.ms-powerpoint", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/mspowerpoint", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/ms-powerpoint", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/mspowerpnt", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/vnd-mspowerpoint", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/powerpoint", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/x-powerpoint", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			{ "application/x-m", "Piranha.Areas.Manager.Content.Img.ico-ppt-64.png" },
-			// Zip
-			{ "application/zip", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			{ "application/x-zip", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			{ "application/x-zip-compressed", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			{ "application/octet-stream", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			{ "application/x-compress", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			{ "application/x-compressed", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			{ "multipart/x-zip", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" },
-			// Rar
-			{ "application/x-rar-compressed", "Piranha.Areas.Manager.Content.Img.ico-zip-64.png" }
-		};
-		private string defaultThumb = "Piranha.Areas.Manager.Content.Img.ico-doc-64.png" ;
-		private string folderThumb = "Piranha.Areas.Manager.Content.Img.ico-folder-96.png" ;
-		private string folderThumbSmall = "Piranha.Areas.Manager.Content.Img.ico-folder-32.png" ;
-		#endregion
-
 		#region Fields
 		/// <summary>
 		/// Gets/sets the id.
@@ -335,7 +259,6 @@ namespace Piranha.Models
 		/// <returns>The folder structure.</returns>
 		public static List<Content> GetFolderStructure() {
 			return SortStructure(Content.Get("content_folder = 1", new Params() { OrderBy = "content_parent_id, content_name" }), Guid.Empty) ;
-
 		}
 
 		/// <summary>
@@ -351,38 +274,72 @@ namespace Piranha.Models
 		#endregion
 
 		/// <summary>
+		/// Gets the thumbnail for the embedded resource with the given id. The thumbnail
+		/// resources are specified in Piranha.Drawing.Thumbnails.
+		/// </summary>
+		/// <param name="context">The current http context</param>
+		/// <param name="id">The resource id</param>
+		/// <param name="size">The desired size</param>
+		public static void GetResourceThumbnail(HttpContext context, Guid id, int size = 60) {
+			var content = new Content() {
+				Id = id
+			} ;
+
+			if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
+				if (File.Exists(content.GetCacheThumbPath(size))) {
+					content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
+				} else {
+					var resource = Drawing.Thumbnails.GetById(id) ;
+					if (size <= 32 && resource.Contains("ico-folder"))
+						resource = Drawing.Thumbnails.GetByType("folder-small") ;
+
+					Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) ;
+					var img = Image.FromStream(strm) ;
+					strm.Close() ;
+
+					// Generate thumbnail from image
+					using (Bitmap bmp = new Bitmap(size, size)) {
+						Graphics grp = Graphics.FromImage(bmp) ;
+
+						grp.SmoothingMode = SmoothingMode.HighQuality ;
+						grp.CompositingQuality = CompositingQuality.HighQuality ;
+						grp.InterpolationMode = InterpolationMode.High ;
+
+						// Resize and crop image
+						Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
+						grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
+							img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
+							Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
+						bmp.Save(content.GetCacheThumbPath(size), img.RawFormat) ;
+						bmp.Dispose() ;
+						grp.Dispose() ;
+					}
+					content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
+
+					img.Dispose() ;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Gets a thumbnail representing the current content file.
 		/// </summary>
 		/// <param name="response">The http response</param>
 		/// <param name="size">The desired size</param>
 		public void GetThumbnail(HttpContext context, int size = 60) {
+			bool compress = false ;
+			var param = SysParam.GetByName("COMPRESS_IMAGES") ;
+
+			if (param != null && param.Value == "1")
+				compress = true ;
+
 			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
 				if (File.Exists(GetCacheThumbPath(size))) {
 					// Return generated & cached thumbnail
-					WriteFile(context.Response, GetCacheThumbPath(size)) ;
-				} else if (File.Exists(PhysicalPath) || IsFolder) {
-					Image img = null ;
+					WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
+				} else if (File.Exists(PhysicalPath)) { // || IsFolder) {
+					var img = Image.FromFile(PhysicalPath) ;
 
-					if (IsImage) {
-						img = Image.FromFile(PhysicalPath) ;
-					} else if (IsFolder) {
-						Stream strm = null ;
-						if (size > 32)
-							strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(folderThumb) ;
-						else strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(folderThumbSmall) ;
-						img = Image.FromStream(strm) ;
-						strm.Close() ;
-					} else {
-						if (thumbs.ContainsKey(Type)) {
-							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(thumbs[Type]) ;
-							img = Image.FromStream(strm) ;
-							strm.Close() ;
-						} else {
-							Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(defaultThumb) ;
-							img = Image.FromStream(strm) ;
-							strm.Close() ;
-						}
-					}
 					if (img != null) {
 						// Generate thumbnail from image
 						using (Bitmap bmp = new Bitmap(size, size)) {
@@ -398,9 +355,9 @@ namespace Piranha.Models
 								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
 								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
 
-							bmp.Save(GetCacheThumbPath(size), img.RawFormat) ;
+							bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
 						}
-						WriteFile(context.Response, GetCacheThumbPath(size)) ;
+						WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
 					} 
 				}
 			}

@@ -46,6 +46,10 @@ namespace Piranha.WebPages.RequestHandlers
 				else content.GetThumbnail(context, Convert.ToInt32(args[1])) ;
 				
 				return true ;
+			} else {
+				if (args.Length == 1)
+					Content.GetResourceThumbnail(context, id) ;
+				else Content.GetResourceThumbnail(context, id, Convert.ToInt32(args[1])) ;
 			}
 			return false ;
 		}

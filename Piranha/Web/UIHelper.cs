@@ -229,9 +229,11 @@ namespace Piranha.Web
 			Content cnt = Models.Content.GetSingle(id) ;
 			
 			if (cnt != null) {
+				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
+
 				return new HtmlString(String.Format("<img src=\"{0}\" alt=\"{1}\" />", Url("~/" + 
 					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + 
-					id.ToString() + (size > 0 ? "/" + size.ToString() : "")), cnt.AlternateText)) ;
+					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")), cnt.AlternateText)) ;
 			} else {
 				Page page = Page.GetSingle(id) ;
 				if (page != null && page.Attachments.Count > 0) {

@@ -355,7 +355,6 @@ namespace Piranha.Models.Manager.ContentModels
 						img = Image.FromStream(mem) ;
 					}
 
-					// Image img = Image.FromStream(UploadedFile.InputStream) ;
 					try {
 						// Resize the image according to image max width
 						int max = Convert.ToInt32(SysParam.GetByName("IMAGE_MAX_WIDTH").Value) ;

@@ -47,10 +47,13 @@ namespace Piranha.Web
 		public static string GetThumbnailUrl(this UrlHelper helper, Guid id, int size = 0) {
 			Content cnt = Models.Content.GetSingle(id) ;
 			
-			if (cnt != null)
+			if (cnt != null) {
+				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
+
 				return helper.Content("~/" + 
 					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + 
-					id.ToString() + (size > 0 ? "/" + size.ToString() : "")) ;
+					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")) ;
+			}
 			return "" ;
 		}
 
