@@ -12,6 +12,8 @@
         var folderId = "";
 
         $(document).ready(function () {
+            $("#Post_Title").focus();
+
             $("#PostCategories").chosen().change(function () {
                 console.log("change");
                 var container = $(this).siblings(".chzn-container");

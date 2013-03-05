@@ -13,7 +13,7 @@
         <span class="date">@content.Created.ToString("yyyy-MM-dd")</span>
         <span class="date">@content.Updated.ToString("yyyy-MM-dd")</span>
         <span class="title">@if (content.ChildContent.Count > 0) {<span class="action"></span>}<a href="@Url.Action("edit", "content", new { id = content.Id })">
-            <img class="thumb" src="@Url.Content("~/thumb/" + content.Id + "/32")" alt="@content.AlternateText" />
+            <img class="thumb" src="@Url.GetThumbnailUrl(content.Id, 32)" alt="@content.AlternateText" />
             @content.DisplayName
         </a></span>
         @if (content.ChildContent.Count > 0) {
