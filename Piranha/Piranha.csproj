@@ -124,6 +124,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataExtensions.cs" />
+    <Compile Include="Drawing\Thumbnails.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
