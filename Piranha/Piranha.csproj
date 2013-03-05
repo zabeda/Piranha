@@ -178,7 +178,6 @@
     <Compile Include="Entities\Maps\RegionMap.cs" />
     <Compile Include="Entities\Maps\RegionTemplateMap.cs" />
     <Compile Include="Entities\Maps\SiteTreeMap.cs" />
-    <Compile Include="Entities\Maps\PropertyTemplateMap.cs" />
     <Compile Include="Entities\Maps\UploadMap.cs" />
     <Compile Include="Entities\Maps\UserMap.cs" />
     <Compile Include="Entities\Media.cs" />
@@ -197,7 +196,6 @@
     <Compile Include="Entities\RegionTemplate.cs" />
     <Compile Include="Entities\SiteTree.cs" />
     <Compile Include="Entities\StandardEntity.cs" />
-    <Compile Include="Entities\PropertyTemplate.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extend\ExtensionContainer.cs" />
@@ -892,9 +890,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\26.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\27.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
