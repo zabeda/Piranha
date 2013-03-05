@@ -222,6 +222,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SiteTree.resx</DependentUpon>
     </Compile>
+    <Compile Include="Rest\DataContracts\PostTemplate.cs" />
+    <Compile Include="Rest\DataContracts\PageTemplate.cs" />
+    <Compile Include="Rest\PageTemplateService.cs" />
+    <Compile Include="Rest\PostTemplateService.cs" />
     <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="WebPages\FormHelper.cs" />
     <Compile Include="WebPages\HttpPostAttribute.cs" />
