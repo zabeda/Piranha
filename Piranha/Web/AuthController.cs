@@ -51,24 +51,36 @@ namespace Piranha.Web
 			string returl = Request["returnurl"];
 			string failurl = Request["failureurl"];
 
-			var pwd = SysUserPassword.GetSingle("sysuser_login = @0", login);
-			var user = SysUser.GetSingle("sysuser_login = @0", login);
-			if (pwd != null) {
-
-				if (WebPages.Hooks.Mail.SendPasswordMail != null) {
-					pwd.Password = SysUserPassword.GeneratePassword();
-					pwd.Save();
-
-					WebPages.Hooks.Mail.SendPasswordMail(user, pwd.Password);
-
-					if (!String.IsNullOrEmpty(returl))
-						return Redirect(returl);
-					return Redirect("~/");
-				}
-
-				
+			var userexists = false ;
+			using (var db = new DataContext()) {
+				userexists = db.Users.Where(u => u.Login == login).Count() > 0 ;
 			}
 
+			if (userexists) {
+				if (WebPages.Hooks.Mail.SendPassword != null) {
+					using (var db = new DataContext()) {
+						var user = db.Users.Where(u => u.Login == login).Single() ;
+						user.GenerateAndSendPassword(db) ;
+
+						if (!String.IsNullOrEmpty(returl))
+							return Redirect(returl);
+						return Redirect("~/");
+					}
+				} else if (WebPages.Hooks.Mail.SendPasswordMail != null) {
+					var pwd = SysUserPassword.GetSingle("sysuser_login = @0", login);
+					var user = SysUser.GetSingle("sysuser_login = @0", login);
+					if (pwd != null) {
+						pwd.Password = SysUserPassword.GeneratePassword();
+						pwd.Save();
+
+						WebPages.Hooks.Mail.SendPasswordMail(user, pwd.Password);
+
+						if (!String.IsNullOrEmpty(returl))
+							return Redirect(returl);
+						return Redirect("~/");
+					}
+				}
+			}
 			if (!String.IsNullOrEmpty(failurl))
 				return Redirect(failurl);
 			return Redirect("~/");

@@ -119,6 +119,38 @@ namespace Piranha.Entities
 		}
 
 		/// <summary>
+		/// Generates a new password for the current user.
+		/// </summary>
+		public void GeneratePassword() {
+			Password = Models.SysUserPassword.Encrypt(CreatePassword()) ;
+		}
+
+		/// <summary>
+		/// Generates a new password for the current user and sends it to the user via email.
+		/// </summary>
+		/// <param name="context">Optional data context</param>
+		public void GenerateAndSendPassword(DataContext context = null) {
+			if (WebPages.Hooks.Mail.SendPassword != null) {
+				var password = CreatePassword() ;
+
+				Password = Models.SysUserPassword.Encrypt(password) ;
+			
+				using (var db = (context == null ? new DataContext() : null)) {
+					var dbContext = context == null ? db : context ;
+
+					if (dbContext.Users.Where(u => u.Id == Id).Count() == 0)
+						Attach(dbContext, EntityState.Added) ;
+					else Attach(dbContext, EntityState.Modified) ;
+
+					if (dbContext.SaveChanges() > 0)
+						WebPages.Hooks.Mail.SendPassword(this, password) ;
+				}
+			} else {
+				throw new Exception("You need to attach a hander for Piranha.WebPages.Hooks.Mail.SendPassword in order to send a new password.") ;
+			}
+		}
+
+		/// <summary>
 		/// Saves the current user.
 		/// </summary>
 		/// <param name="db">The db context</param>
@@ -138,5 +170,25 @@ namespace Piranha.Entities
 				}
 			} else throw new UnauthorizedAccessException("User must be logged in to save entity") ;
 		}
+
+		#region Private methods
+		/// <summary>
+		/// Generates a new unencrypted password that can be sent to the user.
+		/// </summary>
+		/// <returns>The password.</returns>
+		private string CreatePassword() {
+			Random rnd = new Random() ;
+			string sc = "!#%&/()=@$" ;
+
+			// Generate base password
+			string pw = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6) ;
+
+			// Insert two random special characters somewhere
+			pw = pw.Insert(rnd.Next() % pw.Length, sc.Substring(rnd.Next() % sc.Length, 1)) ;
+			pw = pw.Insert(rnd.Next() % pw.Length, sc.Substring(rnd.Next() % sc.Length, 1)) ;
+
+			return pw ;
+		}
+		#endregion
 	}
 }

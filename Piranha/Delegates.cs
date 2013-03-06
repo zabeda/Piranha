@@ -28,5 +28,6 @@ namespace Piranha
 
 		public delegate void ManagerToolbarRender<T>(UrlHelper url, StringBuilder str, T model) ;
 		public delegate void SendPasswordMail(Models.SysUser user, string password);
+		public delegate void SendPassword(Entities.User user, string password);
 	}
 }
