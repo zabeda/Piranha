@@ -456,8 +456,13 @@ namespace Piranha.Models.Manager.PageModels
 			Template  = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
 			Permalink = Permalink.GetSingle(Page.PermalinkId) ; 
 			if (Permalink == null) {
-				Permalink = new Permalink() { Id = Guid.NewGuid(), Type = Permalink.PermalinkType.PAGE, NamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") } ;
-				Page.PermalinkId = Permalink.Id ;
+				// Get the site tree
+				using (var db = new DataContext()) {
+					var sitetree = db.SiteTrees.Where(s => s.Id == Page.SiteTreeId).Single() ;
+
+					Permalink = new Permalink() { Id = Guid.NewGuid(), Type = Permalink.PermalinkType.PAGE, NamespaceId = sitetree.NamespaceId } ;
+					Page.PermalinkId = Permalink.Id ;
+				}
 			}
 
 			if (Template != null) {

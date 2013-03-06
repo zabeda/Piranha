@@ -107,8 +107,14 @@ namespace Piranha.Areas.Manager.Models
 				var site = db.SiteTrees.Where(s => s.Id == Id).SingleOrDefault() ;
 				if (site == null) {
 					site = new SiteTree() ;
+					site.NamespaceId = NamespaceId ;
 					db.SiteTrees.Add(site) ;
 				}
+
+				// If we've changed namespace, update all related permalinks.
+				if (site.NamespaceId != NamespaceId)
+					ChangeNamespace(db, Id, NamespaceId) ;
+
 				site.NamespaceId = NamespaceId ;
 				site.InternalId = InternalId ;
 				site.Name = Name ;
@@ -142,6 +148,10 @@ namespace Piranha.Areas.Manager.Models
 					WebPages.WebPiranha.RegisterDefaultHostNames() ;
 				return ret ;
 			}
+		}
+
+		private void ChangeNamespace(DataContext db, Guid siteid, Guid namespaceid) {
+			// TODO
 		}
 	}
 }

@@ -40,6 +40,11 @@ namespace Piranha.WebPages
 		/// The registered hostnames.
 		/// </summary>
 		internal static Dictionary<string, Entities.SiteTree> HostNames = new Dictionary<string,Entities.SiteTree>() ;
+
+		/// <summary>
+		/// The default site tree.
+		/// </summary>
+		internal static Entities.SiteTree DefaultSite = null ;
 		#endregion
 
 		#region Properties
@@ -153,7 +158,6 @@ namespace Piranha.WebPages
 			HostNames.Clear() ;
 			if (HttpContext.Current != null)
 				Page.InvalidateStartpage() ;
-			Config.ClearCache() ;
 
 			// We need to check version so we don't try to access the column sitetree_hostnames
 			// before it's been created in the database.
@@ -171,6 +175,8 @@ namespace Piranha.WebPages
 								HostNames.Add(host.ToLower(), site) ;
 							}
 						}
+						if (site.Id == new Guid("C2F87B2B-F585-4696-8A2B-3C9DF882701E"))
+							DefaultSite = site ;
 					}
 				}
 			}
@@ -304,7 +310,7 @@ namespace Piranha.WebPages
 				// If no handler was found and we are using prefixless permalinks, 
 				// route traffic to the permalink handler.
 				if (!handled && PrefixlessPermalinks) {
-					if (Permalink.GetByName(Permalink.DefaultNamespace, args[0]) != null) {
+					if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null) {
 						var handler = new PermalinkHandler() ;
 						handler.HandleRequest(context, args) ;
 					}

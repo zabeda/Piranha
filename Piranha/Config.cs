@@ -11,10 +11,6 @@ namespace Piranha
 	/// </summary>
 	public static class Config
 	{
-		#region Members
-		private static Guid? siteTreeId ;
-		#endregion
-
 		/// <summary>
 		/// Gets weather method binding is disabled. When method binding is enabled, the first UrlData
 		/// argument on a GET will be matched against the available methods in the executing page class.
@@ -37,39 +33,36 @@ namespace Piranha
 		/// the current host name is resolved. If the hostname isn't found DEFAULT_SITE is used.
 		/// </summary>
 		public static string SiteTree {
-			get {
-				// Check for configured site tree from the host name
-				if (HttpContext.Current != null && HttpContext.Current.Request != null) {
-					var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
-					if (WebPages.WebPiranha.HostNames.ContainsKey(hostname))
-						return WebPages.WebPiranha.HostNames[hostname].InternalId ;
-				}
-
-				// Nothing found, return default
-				return "DEFAULT_SITE" ;
-			}
+			get { return GetSiteTree().InternalId ; }
 		}
 
 		/// <summary>
 		/// Gets the id of the currently active site tree.
 		/// </summary>
 		public static Guid SiteTreeId {
-			get {
-				if (!siteTreeId.HasValue) {
-					using (var db = new DataContext()) {
-						var internalId = SiteTree ;
-						siteTreeId = db.SiteTrees.Where(s => s.InternalId == internalId).Select(s => s.Id).Single() ;
-					}
-				}
-				return siteTreeId.Value ;
-			}
+			get { return GetSiteTree().Id ; }
 		}
 
 		/// <summary>
-		/// Clears the internal cache of the config.
+		/// Gets the id of the namespace for the currently active site tree.
 		/// </summary>
-		public static void ClearCache() {
-			siteTreeId = null ;
+		public static Guid SiteTreeNamespaceId {
+			get { return GetSiteTree().NamespaceId ; }
+		}
+
+		/// <summary>
+		/// Gets the currently active site tree from the current host headers.
+		/// </summary>
+		/// <returns>The site tree</returns>
+		private static Entities.SiteTree GetSiteTree() {
+			// Check for configured site tree from the host name
+			if (HttpContext.Current != null && HttpContext.Current.Request != null) {
+				var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
+				if (WebPages.WebPiranha.HostNames.ContainsKey(hostname))
+					return WebPages.WebPiranha.HostNames[hostname] ;
+			}
+			// Nothing found, return default
+			return WebPages.WebPiranha.DefaultSite ;
 		}
 	}
 }

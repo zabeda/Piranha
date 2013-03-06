@@ -34,7 +34,7 @@ namespace Piranha.WebPages.RequestHandlers
                 int segments = 0;
 				// Accept permalinks with '/' in them
 				for (int n = 0; n < args.Length; n++) {
-					perm = Permalink.GetByName(Permalink.DefaultNamespace, args.Subset(0, args.Length - n).Implode("/")) ;
+					perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/")) ;
                     segments = args.Length - n;
 					if (perm != null)
 						break ;

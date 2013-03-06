@@ -120,7 +120,7 @@ namespace Piranha.Models.Manager.PostModels
 			m.Permalink = new Permalink() {
 				Id = Guid.NewGuid(),
 				Type = Permalink.PermalinkType.POST,
-				NamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03")
+				NamespaceId = Permalink.DefaultNamespace
 			} ;
 			m.Post = new Piranha.Models.Post() {
 				Id = Guid.NewGuid(),
