@@ -137,7 +137,7 @@ namespace Piranha.WebPages
 				public static HtmlString Render(UrlHelper url, object model) {
 					StringBuilder str = new StringBuilder() ;
 
-					if (model is Models.Manager.PageModels.ListModel && PageListModelLoaded != null)
+					if (model is Models.Manager.PageModels.ListModel && PageListToolbarRender != null)
 						PageListToolbarRender(url, str, (Models.Manager.PageModels.ListModel)model) ;
 					else if (model is Models.Manager.PageModels.EditModel && PageEditToolbarRender != null)
 						PageEditToolbarRender(url, str, (Models.Manager.PageModels.EditModel)model) ;
