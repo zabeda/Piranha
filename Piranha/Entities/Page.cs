@@ -39,6 +39,11 @@ namespace Piranha.Entities
 		public Guid? GroupId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the optional group ids for which this page is disabled.
+		/// </summary>
+		public IList<Guid> DisabledGroups { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional parent id.
 		/// </summary>
 		public Guid? ParentId { get ; set ; }
@@ -146,6 +151,11 @@ namespace Piranha.Entities
 		/// Gets/sets the internal json data for the attachments.
 		/// </summary>
 		internal string AttachmentsJson { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the internal json data for the disabled groups.
+		/// </summary>
+		internal string DisabledGroupsJson { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -158,6 +168,7 @@ namespace Piranha.Entities
 			Properties = new List<Property>() ;
 			Extensions = new List<Extension>() ;
 			Comments = new List<Comment>() ;
+			DisabledGroups = new List<Guid>() ;
 		}
 
 		/// <summary>
@@ -178,6 +189,7 @@ namespace Piranha.Entities
 		public override void OnLoad(DataContext db) {
 			var js = new JavaScriptSerializer() ;
 			Attachments = !String.IsNullOrEmpty(AttachmentsJson) ? js.Deserialize<List<Guid>>(AttachmentsJson) : Attachments ;
+			DisabledGroups = !String.IsNullOrEmpty(DisabledGroupsJson) ? js.Deserialize<List<Guid>>(DisabledGroupsJson) : DisabledGroups ;
 
 			base.OnLoad(db) ;
 		}
@@ -191,6 +203,7 @@ namespace Piranha.Entities
 			var js = new JavaScriptSerializer() ;
 
 			AttachmentsJson = js.Serialize(Attachments) ;
+			DisabledGroupsJson = js.Serialize(DisabledGroups) ;
 
 			base.OnSave(db, state);
 		}

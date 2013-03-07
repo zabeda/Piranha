@@ -223,11 +223,29 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The page has successfully been detached..
+        /// </summary>
+        public static string MessageDetached {
+            get {
+                return ResourceManager.GetString("MessageDetached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while deleting the page..
         /// </summary>
         public static string MessageNotDeleted {
             get {
                 return ResourceManager.GetString("MessageNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while detaching the page..
+        /// </summary>
+        public static string MessageNotDetached {
+            get {
+                return ResourceManager.GetString("MessageNotDetached", resourceCulture);
             }
         }
         

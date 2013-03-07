@@ -106,6 +106,9 @@
             @if (Model.Page.Published > DateTime.MinValue && Model.Page.Updated > Model.Page.LastPublished) {
             <li><a href="@Url.Action("revert", new { id = Model.Page.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
             }
+            @if (!Model.Page.IsNew) {
+            <li><a href="@Url.Action("detach", new { id = Model.Page.Id })" class="detach">Detach</a></li>
+            }
             @if (!Model.Page.IsNew && Model.CanDelete) {
             <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }

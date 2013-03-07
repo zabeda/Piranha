@@ -243,4 +243,10 @@
   <data name="EditSite" xml:space="preserve">
     <value>Ändra sajt</value>
   </data>
+  <data name="MessageDetached" xml:space="preserve">
+    <value>Sidan har nu kopplats loss från orginalet.</value>
+  </data>
+  <data name="MessageNotDetached" xml:space="preserve">
+    <value>Ett fel har inträffat. Sidan kunde inte kopplas loss.</value>
+  </data>
 </root>

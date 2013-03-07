@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\PageApi.cs" />
     <Compile Include="Areas\Manager\Content\Css\Style.ashx.cs">
       <DependentUpon>Style.ashx</DependentUpon>
     </Compile>

@@ -117,18 +117,35 @@ namespace Piranha.Entities
 		/// Updates the internal & external body data.
 		/// </summary>
 		private void SetBody(IExtension data) {
-			JavaScriptSerializer js = new JavaScriptSerializer() ;
+			if (RegionTemplate == null) {
+				using (var db = new DataContext()) {
+					RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single() ;
+				}
+			}
+	
+			if (!String.IsNullOrEmpty(RegionTemplate.Type)) {
+				var js = new JavaScriptSerializer() ;
+				body = data ;
 
-			body = data ;
-			InternalBody = js.Serialize(data) ;
+				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.ExtensionTypes[RegionTemplate.Type]))
+					InternalBody = ((HtmlString)data).ToString() ;
+				else InternalBody = js.Serialize(data) ;
+			}
 		}
 		#endregion
 
 		#region Events
 		public override void OnSave(DataContext db, System.Data.EntityState state) {
-			JavaScriptSerializer js = new JavaScriptSerializer() ;
-			InternalBody = js.Serialize(Body) ;
+			if (RegionTemplate == null)
+				RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single() ;
 
+			if (!String.IsNullOrEmpty(RegionTemplate.Type)) {
+				var js = new JavaScriptSerializer() ;
+
+				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.ExtensionTypes[RegionTemplate.Type]))
+					InternalBody = ((HtmlString)Body).ToString() ;
+				else InternalBody = js.Serialize(Body) ;
+			}
 			base.OnSave(db, state) ;
 		}
 		#endregion

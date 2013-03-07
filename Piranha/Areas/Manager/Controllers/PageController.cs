@@ -128,6 +128,22 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
+		/// Detaches the page with the given id from it's original.
+		/// </summary>
+		/// <param name="id">The page id</param>
+		[Access(Function="ADMIN_PAGE")]
+		public ActionResult Detach(string id) {
+			ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+			if (EditModel.Detach(new Guid(id))) {
+				SuccessMessage(@Piranha.Resources.Page.MessageDetached) ;
+				return View(@"~/Areas/Manager/Views/Page/Edit.cshtml", EditModel.GetById(new Guid(id))) ;
+			} else { 
+				ErrorMessage(@Piranha.Resources.Page.MessageNotDetached) ;
+				return View(@"~/Areas/Manager/Views/Page/EditCopy.cshtml", EditModel.GetById(new Guid(id))) ;
+			}
+		}
+
+		/// <summary>
 		/// Creates a new page.
 		/// </summary>
 		/// <param name="im">The insert model</param>

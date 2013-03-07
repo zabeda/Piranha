@@ -21,6 +21,7 @@ namespace Piranha.Entities.Maps
 			Property(p => p.OriginalId).HasColumnName("page_original_id") ;
 			Property(p => p.TemplateId).HasColumnName("page_template_id") ;
 			Property(p => p.GroupId).HasColumnName("page_group_id") ;
+			Property(p => p.DisabledGroupsJson).HasColumnName("page_group_disable_id") ;
 			Property(p => p.ParentId).HasColumnName("page_parent_id") ;
 			Property(p => p.PermalinkId).HasColumnName("page_permalink_id") ;
 			Property(p => p.Seqno).HasColumnName("page_seqno") ;
@@ -50,6 +51,7 @@ namespace Piranha.Entities.Maps
 			HasRequired(p => p.UpdatedBy) ;
 
 			Ignore(p => p.Attachments) ;
+			Ignore(p => p.DisabledGroups) ;
 		}
 	}
 }

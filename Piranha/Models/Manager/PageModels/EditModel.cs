@@ -284,6 +284,59 @@ namespace Piranha.Models.Manager.PageModels
 			page.InvalidateRecord(page) ;
 		}
 
+		public static bool Detach(Guid id) {
+			using (var tx = Database.OpenTransaction()) {
+				// Get the copied page
+				var copy = Page.GetSingle(id, true) ;
+
+				if (copy.OriginalId != Guid.Empty) {
+					// Get the original page
+					var m = GetById(copy.OriginalId, true) ;
+
+					// Copy the readonly data from the original
+					copy.OriginalId = Guid.Empty ;
+					copy.Attachments = m.Page.Attachments ;
+					copy.GroupId = m.Page.GroupId ;
+					copy.DisabledGroups = m.Page.DisabledGroups ;
+					copy.TemplateId = m.Page.TemplateId ;
+					copy.Keywords = m.Page.Keywords ;
+					copy.Description = m.Page.Description ;
+					if (!m.Template.ShowController)
+						copy.PageController = null ;
+					if (!m.Template.ShowRedirect)
+						copy.PageRedirect = null ;
+					copy.Save(tx) ;
+
+					// Update the regions
+					foreach (var reg in m.Regions) {
+						reg.Id = Guid.NewGuid() ;
+						reg.PageId = copy.Id ;
+						reg.IsNew = true ;
+						reg.Save(tx) ;
+					}
+
+					// Clone the properties
+					foreach (var prop in m.Properties) {
+						prop.Id = Guid.NewGuid() ;
+						prop.ParentId = copy.Id ;
+						prop.IsNew = true ;
+						prop.Save(tx) ;
+					}
+
+					// Clone the extensions
+					foreach (var ext in m.Extensions) {
+						ext.Id = Guid.NewGuid() ;
+						ext.ParentId = copy.Id ;
+						ext.IsNew = true ;
+						ext.Save(tx) ;
+					}
+					tx.Commit() ;
+					return true ;
+				}
+			}
+			return false ;
+		}
+
 		/// <summary>
 		/// Saves the page and all of it's related regions.
 		/// </summary>

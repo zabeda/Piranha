@@ -164,6 +164,7 @@ namespace Piranha.Areas.Manager.Models
 				var site = db.SiteTrees.Where(s => s.Id == Id).SingleOrDefault() ;
 				if (site == null) {
 					site = new SiteTree() ;
+					site.Id = Id ;
 					site.NamespaceId = NamespaceId ;
 					db.SiteTrees.Add(site) ;
 				}

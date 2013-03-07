@@ -20,7 +20,7 @@ namespace Piranha.Entities.Maps
 			Property(r => r.RegionTemplateId).HasColumnName("region_regiontemplate_id") ;
 			Property(r => r.PageId).HasColumnName("region_page_id") ;
 			Property(r => r.IsPageDraft).HasColumnName("region_page_draft") ;
-			Property(r => r.Name).HasColumnName("region_name").IsRequired().HasMaxLength(64) ;
+			Property(r => r.Name).HasColumnName("region_name").HasMaxLength(64) ;
 			Property(r => r.InternalBody).HasColumnName("region_body") ;
 			Property(r => r.Created).HasColumnName("region_created") ;
 			Property(r => r.Updated).HasColumnName("region_updated") ;
