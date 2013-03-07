@@ -240,6 +240,9 @@
   <data name="EditSite" xml:space="preserve">
     <value>Edit site</value>
   </data>
+  <data name="CreateCopy" xml:space="preserve">
+    <value>Create copy</value>
+  </data>
   <data name="MessageDetached" xml:space="preserve">
     <value>The page has successfully been detached.</value>
   </data>

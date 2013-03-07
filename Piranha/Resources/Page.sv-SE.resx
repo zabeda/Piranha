@@ -243,6 +243,9 @@
   <data name="EditSite" xml:space="preserve">
     <value>Ändra sajt</value>
   </data>
+  <data name="CreateCopy" xml:space="preserve">
+    <value>Kopiera befintlig</value>
+  </data>
   <data name="MessageDetached" xml:space="preserve">
     <value>Sidan har nu kopplats loss från orginalet.</value>
   </data>

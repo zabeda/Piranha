@@ -70,6 +70,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create copy.
+        /// </summary>
+        public static string CreateCopy {
+            get {
+                return ResourceManager.GetString("CreateCopy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Description {
