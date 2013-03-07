@@ -10,6 +10,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The core user entity.
 	/// </summary>
+	[Serializable]
 	public class User : BaseEntity
 	{
 		#region Properties

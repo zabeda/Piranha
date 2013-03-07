@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The permalink entity.
 	/// </summary>
+	[Serializable]
 	public class Permalink : StandardEntity<Permalink>
 	{
 		#region Properties

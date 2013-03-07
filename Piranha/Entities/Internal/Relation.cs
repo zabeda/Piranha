@@ -13,6 +13,7 @@ namespace Piranha.Models
 	/// each other in a fairly loosely coupled way.
 	/// </summary>
 	[PrimaryKey(Column="relation_id")]
+	[Serializable]
 	public class Relation : GuidRecord<Relation>
 	{
 		#region Inner classes

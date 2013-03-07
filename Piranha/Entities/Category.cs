@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The category entity. Categories can be attached to any entity.
 	/// </summary>
+	[Serializable]
 	public class Category : StandardEntity<Category>
 	{
 		#region Properties

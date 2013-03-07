@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The post entity.
 	/// </summary>
+	[Serializable]
 	public class Post : BaseEntity
 	{
 		#region Properties

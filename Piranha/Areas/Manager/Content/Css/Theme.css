@@ -362,6 +362,7 @@ table.list thead tr {
     }
 .tabs li { 
     float: left; 
+    position: relative;
     }
 .tabs li a {
     background: #ddd;
@@ -370,7 +371,7 @@ table.list thead tr {
     border-bottom: none;
     padding: 8px 20px 6px;
     margin-top: 2px;
-    }    
+    }
 .tabs li a.selected {
     padding: 9px 20px 6px;
     margin-top: 0;

@@ -116,6 +116,9 @@
         <ul>
             <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
             <li><a href="@Url.Action("index")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            @if (Model.SitePage[Model.ActiveSiteId] != Guid.Empty) {
+            <li><a href="@Url.Action("edit", new { @id = Model.SitePage[Model.ActiveSiteId] })" class="edit-site">@Piranha.Resources.Page.EditSite</a></li>
+            }
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
         </ul>
         <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
@@ -135,7 +138,9 @@
     <div>
         <ul class="sites tabs">
             @foreach (var site in Model.SiteTrees) {
-            <li><a href="@Url.Action("site", "page", new { @id = site.InternalId.ToLower() })" @(site.InternalId == Model.ActiveSite ? "class=selected" : "")>@site.Name</a></li>
+            <li>
+                <a href="@Url.Action("site", "page", new { @id = site.InternalId.ToLower() })" @(site.InternalId == Model.ActiveSite ? "class=selected" : "")>@site.Name</a>
+            </li>
             }
         </ul>
         <div class="clear"></div>

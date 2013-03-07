@@ -1,4 +1,4 @@
-﻿@model Piranha.Models.RegionTemplate
+﻿@model Piranha.Entities.RegionTemplate
 <tr>
     <td class="form">
         <span>@Model.Name</span>
@@ -23,15 +23,10 @@
         <a class="icon delete"></a>
         <div class="hidden">
             @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.IsNew)
             @Html.HiddenFor(m => m.TemplateId)
             @Html.HiddenFor(m => m.Seqno, new { @class = "region-seqno" })
             @Html.HiddenFor(m => m.Type)
             @Html.HiddenFor(m => m.Description)
-            @if (!Model.IsNew) {
-            @Html.HiddenFor(m => m.Created)
-            @Html.HiddenFor(m => m.CreatedBy)
-            }
         </div>
     </td> 
 </tr>

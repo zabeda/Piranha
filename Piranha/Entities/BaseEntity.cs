@@ -11,6 +11,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// Entity base class exposing some events.
 	/// </summary>
+	[Serializable]
 	public class BaseEntity
 	{
 		/// <summary>

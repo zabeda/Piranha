@@ -14,6 +14,7 @@ namespace Piranha.Models
 	/// record handled by the cms.
 	/// </summary>
 	[PrimaryKey(Column="upload_id")]
+	[Serializable]
 	public class Upload : MediaFile<Upload>
 	{
 		#region Fields

@@ -22,6 +22,11 @@ namespace Piranha.WebPages
 	{
 		#region Members
 		/// <summary>
+		/// Internal member for the host names.
+		/// </summary>
+		private static Dictionary<string, Entities.SiteTree> hostNames = null ;
+
+		/// <summary>
 		/// The different request handlers.
 		/// </summary>
 		internal static Dictionary<string, RequestHandlerRegistration> Handlers = new Dictionary<string, RequestHandlerRegistration>() ;
@@ -39,12 +44,36 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// The registered hostnames.
 		/// </summary>
-		internal static Dictionary<string, Entities.SiteTree> HostNames = new Dictionary<string,Entities.SiteTree>() ;
+		internal static Dictionary<string, Entities.SiteTree> HostNames {
+			get {
+				if (hostNames == null) {
+					hostNames = new Dictionary<string,Entities.SiteTree>() ;
+					RegisterDefaultHostNames() ;
+				}
+				return hostNames ;
+			}
+		}
 
 		/// <summary>
 		/// The default site tree.
 		/// </summary>
 		internal static Entities.SiteTree DefaultSite = null ;
+
+		/// <summary>
+		/// The current site tree.
+		/// </summary>
+		internal static Entities.SiteTree CurrentSite {
+			get {
+				// Check for configured site tree from the host name
+				if (HttpContext.Current != null && HttpContext.Current.Request != null) {
+					var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
+					if (HostNames.ContainsKey(hostname))
+						return HostNames[hostname] ;
+				}
+				// Nothing found, return default
+				return DefaultSite ;
+			}
+		}
 		#endregion
 
 		#region Properties
@@ -155,13 +184,16 @@ namespace Piranha.WebPages
 		/// Registers all of the hostnames configured in the database.
 		/// </summary>
 		public static void RegisterDefaultHostNames() {
+			if (hostNames == null)
+				hostNames = new Dictionary<string,Entities.SiteTree>() ;
+
 			HostNames.Clear() ;
 			if (HttpContext.Current != null)
 				Page.InvalidateStartpage() ;
 
 			// We need to check version so we don't try to access the column sitetree_hostnames
 			// before it's been created in the database.
-			if (Data.Database.InstalledVersion > 24) {
+			if (Data.Database.InstalledVersion > 26) {
 				using (var db = new DataContext()) {
 					var sites = db.SiteTrees.ToList() ;
 					

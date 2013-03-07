@@ -101,13 +101,13 @@
             <li><a href="http://@Request.Url.DnsSafeHost@(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : "")@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
             <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
-            @if (Model.Page.Published > DateTime.MinValue) {
+            @if (Model.Page.Published > DateTime.MinValue && !Model.IsSite) {
             <li><a href="@Url.Action("unpublish", new { id = Model.Page.Id })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>
             }
             @if (Model.Page.Published > DateTime.MinValue && Model.Page.Updated > Model.Page.LastPublished) {
             <li><a href="@Url.Action("revert", new { id = Model.Page.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
             }
-            @if (!Model.Page.IsNew && Model.CanDelete) {
+            @if (!Model.Page.IsNew && Model.CanDelete && !Model.IsSite) {
             <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
             @if (String.IsNullOrEmpty(ReturnUrl)) {
@@ -147,10 +147,17 @@
     @Html.HiddenFor(m => m.Permalink.Type)
     @Html.HiddenFor(m => m.Permalink.Created)
     @Html.HiddenFor(m => m.Permalink.CreatedBy)
+    @if (Model.IsSite) {
+    @Html.HiddenFor(m => m.Page.Title)
+    @Html.HiddenFor(m => m.Page.ParentId)
+    @Html.HiddenFor(m => m.Page.Seqno)
+    @Html.HiddenFor(m => m.Permalink.Name)
+    }
     @Html.Hidden("returl", ReturnUrl)
     <input type="hidden" id="draft" name="draft" value="true" />
     <input type="hidden" id="org_parentid" value="@Model.Page.ParentId" />
 </div>
+@if (!Model.IsSite) {
 <div class="first-row">
     <div class="grid_9">
         <div class="box">
@@ -221,6 +228,7 @@
         </div>
     </div>
 </div>
+}
 <div>
     <div class="grid_12">
         <div class="box main-content">
@@ -229,7 +237,9 @@
                     <td class="tools">
                         <ul>
                             <li class="btn-content active"><a href="#" data-id="pnl-content">@Piranha.Resources.Global.Content</a></li>
+                            @if (!Model.IsSite) {
                             <li class="btn-settings"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
+                            }
                             @if (Model.Properties.Count > 0) {
                             <li class="btn-properties"><a href="#" data-id="pnl-properties">@Piranha.Resources.Global.Properties</a></li>
                             }
@@ -274,6 +284,7 @@
                                 </div>
                             </div>
                         </div>
+                        @if (!Model.IsSite) {
                         <div id="pnl-settings" class="main hidden">
                             <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
                             <div class="inner">
@@ -320,6 +331,7 @@
                                 </ul>
                             </div>
                         </div>
+                        }
                         @if (Model.Properties.Count > 0) {
                         <div id="pnl-properties" class="main hidden">
                             <div class="title"><h2>@Piranha.Resources.Global.Properties</h2></div>

@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditTitleExisting" xml:space="preserve">
-    <value>Edit site</value>
+    <value>Ändra sajt</value>
   </data>
   <data name="EditTitleNew" xml:space="preserve">
-    <value>Add new site</value>
+    <value>Lägg till sajt</value>
   </data>
   <data name="HostNames" xml:space="preserve">
-    <value>Host names</value>
+    <value>Värdnamn</value>
   </data>
   <data name="ListTitle" xml:space="preserve">
-    <value>Sites</value>
+    <value>Sajter</value>
   </data>
   <data name="MessageDeleted" xml:space="preserve">
-    <value>The site has been deleted.</value>
+    <value>Sajten har raderats.</value>
   </data>
   <data name="MessageNotDeleted" xml:space="preserve">
-    <value>An error occurred while deleting the site.</value>
+    <value>Ett fel har inträffat. Sajten kunde inte raderas.</value>
   </data>
   <data name="MessageNotSaved" xml:space="preserve">
-    <value>An error occurred while saving the site.</value>
+    <value>Ett fel har inträffat. Sajten kunde inte sparas.</value>
   </data>
   <data name="MessageSaved" xml:space="preserve">
-    <value>The site has been saved.</value>
+    <value>Sajten har sparats.</value>
   </data>
   <data name="MetaDescription" xml:space="preserve">
-    <value>Meta description</value>
+    <value>Meta beskrivning</value>
   </data>
   <data name="MetaTitle" xml:space="preserve">
-    <value>Meta title</value>
+    <value>Meta nyckelord</value>
   </data>
   <data name="NamespaceId" xml:space="preserve">
-    <value>Namespace</value>
+    <value>Namnrymd</value>
   </data>
 </root>

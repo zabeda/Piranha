@@ -186,7 +186,7 @@ namespace Piranha.WebPages
 					Permission = "ADMIN_CATEGORY" },
 				new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Action = "settings", Controller = "comment", 
 					Permission = "ADMIN_COMMENT", SelectedActions = "settings" },
-				new MenuItem() { InternalId = "Sites", Name = "Sites", Action = "index", Controller = "sitetree",
+				new MenuItem() { InternalId = "Sites", Name = @Resources.Tabs.SettingsSites, Action = "index", Controller = "sitetree",
 					Permission = "ADMIN_SITETREE" },
 			}},
 			new MenuGroup() { InternalId = "System", Name = @Resources.Global.MenuSystem, Items = new List<MenuItem>() {

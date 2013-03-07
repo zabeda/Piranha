@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Web;
 
@@ -11,6 +13,7 @@ namespace Piranha.Entities
 	/// Base class for a standard Piranha entity owned by a system user.
 	/// </summary>
 	/// <typeparam name="T">The entity type</typeparam>
+	[Serializable]
 	public abstract class StandardEntity<T> : BaseEntity where T : StandardEntity<T>
 	{
 		#region Members
@@ -97,6 +100,16 @@ namespace Piranha.Entities
 		public override void OnDelete(DataContext db) {
 			if (db.Identity == Guid.Empty && !HttpContext.Current.User.Identity.IsAuthenticated && !AllowAnonymous)
 				throw new UnauthorizedAccessException("User must be logged in to delete entity") ;
+		}
+
+		public T Clone() {
+			using (var ms = new MemoryStream()) {
+				var formatter = new BinaryFormatter() ;
+				formatter.Serialize(ms, this) ;
+				ms.Position = 0 ;
+
+				return (T)formatter.Deserialize(ms);
+			}
 		}
 	}
 }

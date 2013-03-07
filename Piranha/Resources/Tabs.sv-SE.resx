@@ -144,6 +144,9 @@
   <data name="SettingsPostTypes" xml:space="preserve">
     <value>Artikeltyper</value>
   </data>
+  <data name="SettingsSites" xml:space="preserve">
+    <value>Sajter</value>
+  </data>
   <data name="SystemAccess" xml:space="preserve">
     <value>Behörigheter</value>
   </data>

@@ -61,7 +61,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit site tree.
+        ///   Looks up a localized string similar to Edit site.
         /// </summary>
         public static string EditTitleExisting {
             get {
@@ -70,7 +70,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add new site tree.
+        ///   Looks up a localized string similar to Add new site.
         /// </summary>
         public static string EditTitleNew {
             get {
@@ -97,7 +97,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The site tree has been deleted..
+        ///   Looks up a localized string similar to The site has been deleted..
         /// </summary>
         public static string MessageDeleted {
             get {
@@ -106,7 +106,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while deleting the site tree..
+        ///   Looks up a localized string similar to An error occurred while deleting the site..
         /// </summary>
         public static string MessageNotDeleted {
             get {
@@ -115,7 +115,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occurred while saving the site tree..
+        ///   Looks up a localized string similar to An error occurred while saving the site..
         /// </summary>
         public static string MessageNotSaved {
             get {
@@ -124,11 +124,29 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The site tree has been saved..
+        ///   Looks up a localized string similar to The site has been saved..
         /// </summary>
         public static string MessageSaved {
             get {
                 return ResourceManager.GetString("MessageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meta description.
+        /// </summary>
+        public static string MetaDescription {
+            get {
+                return ResourceManager.GetString("MetaDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meta title.
+        /// </summary>
+        public static string MetaTitle {
+            get {
+                return ResourceManager.GetString("MetaTitle", resourceCulture);
             }
         }
         

@@ -12,6 +12,7 @@ namespace Piranha.Models
 	/// Extension of Piranha record that supports drafted version.
 	/// </summary>
 	/// <typeparam name="T">The record type</typeparam>
+	[Serializable]
 	public abstract class DraftRecord<T> : PiranhaRecord<T>
 	{
 		#region Properties

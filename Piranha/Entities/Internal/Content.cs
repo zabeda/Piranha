@@ -22,6 +22,7 @@ namespace Piranha.Models
 	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="content_id")]
+	[Serializable]
 	public class Content : MediaFile<Content>, ICacheRecord<Content>
 	{
 		#region Fields

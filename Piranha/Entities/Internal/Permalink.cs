@@ -12,6 +12,7 @@ using Piranha.Data;
 namespace Piranha.Models
 {
 	[PrimaryKey(Column="permalink_id")]
+	[Serializable]
 	public class Permalink : PiranhaRecord<Permalink>, ICacheRecord<Permalink>
 	{
 		#region Inner classes
@@ -35,12 +36,13 @@ namespace Piranha.Models
 		#endregion
 
 		#region Members
+		[Obsolete("Please use Piranha.Config.DefaultNamespaceId instead")]
 		public static Guid DefaultNamespace = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
 		#endregion
 
 		#region Inner classes
 		public enum PermalinkType {
-			PAGE, POST, CATEGORY
+			PAGE, POST, CATEGORY, SITE
 		}
 		#endregion
 
@@ -102,7 +104,7 @@ namespace Piranha.Models
 		/// <param name="name">The permalink name</param>
 		/// <returns>The permalink</returns>
 		public static Permalink GetByName(string name) {
-			return GetByName(DefaultNamespace, name) ;
+			return GetByName(Config.DefaultNamespaceId, name) ;
 		}
 
 		/// <summary>

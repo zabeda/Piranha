@@ -12,6 +12,7 @@ namespace Piranha.Models
 	/// Active record for the region template.
 	/// </summary>
 	[PrimaryKey(Column="regiontemplate_id")]
+	[Serializable]
 	public class RegionTemplate : PiranhaRecord<RegionTemplate>
 	{
 		#region Fields

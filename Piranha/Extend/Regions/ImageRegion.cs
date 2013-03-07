@@ -10,6 +10,7 @@ namespace Piranha.Extend.Regions
 	/// Standard image region.
 	/// </summary>
 	[Extension(Name="Image", Type=ExtensionType.Region)]
+	[Serializable]
 	public class ImageRegion : IExtension
 	{
 		/// <summary>

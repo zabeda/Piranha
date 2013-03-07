@@ -12,6 +12,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The extension entity.
 	/// </summary>
+	[Serializable]
 	public class Extension : StandardEntity<Extension>
 	{
 		#region Members

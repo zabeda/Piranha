@@ -36,7 +36,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Saves the given edit model.
 		/// </summary>
 		/// <param name="m">The edit model</param>
-		[HttpPost()]
+		[HttpPost(), ValidateInput(false)]
 		[Access(Function="ADMIN_SITETREE")]
 		public ActionResult Edit(SiteTreeEditModel m) {
 			if (ModelState.IsValid) {

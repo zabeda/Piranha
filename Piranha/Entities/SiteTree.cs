@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// The site tree entity defines the different site tree structures available
 	/// in the current site.
 	/// </summary>
+	[Serializable]
 	public class SiteTree : StandardEntity<SiteTree>
 	{
 		#region Properties
@@ -36,6 +37,16 @@ namespace Piranha.Entities
 		/// Gets/sets the optional hostnames.
 		/// </summary>
 		public string HostNames { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the SEO meta title.
+		/// </summary>
+		public string MetaTitle { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the SEO meta description.
+		/// </summary>
+		public string MetaDescription { get ; set ; }
 		#endregion
 
 		#region Navigation properties

@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The media entity.
 	/// </summary>
+	[Serializable]
 	public class Media : StandardEntity<Media>
 	{
 		#region Properties

@@ -17,22 +17,16 @@ namespace Piranha.Web
 		/// </summary>
 		public string SiteTitle {
 			get {
-				var p = SysParam.GetByName("SITE_TITLE") ;
-				if (p != null)
-					return p.Value ;
-				return "" ;
+				return WebPages.WebPiranha.CurrentSite.MetaTitle ;
 			}
 		}
 
 		/// <summary>
-		/// GEts the site description.
+		/// Gets the site description.
 		/// </summary>
 		public string SiteDescription {
 			get {
-				var p = SysParam.GetByName("SITE_DESCRIPTION") ;
-				if (p != null)
-					return p.Value ;
-				return "" ;
+				return WebPages.WebPiranha.CurrentSite.MetaDescription ;
 			}
 		}
 	}

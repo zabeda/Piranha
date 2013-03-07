@@ -134,6 +134,36 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Gets the site page for the site with the given id.
+		/// </summary>
+		/// <param name="siteid">The site id.</param>
+		/// <returns>The site page model</returns>
+		public static PageModel GetBySite(Guid siteid) {
+			var cachename = "SITE_" + siteid.ToString() ;
+
+			if (!Cache.Current.Contains(cachename)) {
+				using (var db = new DataContext()) {
+					var id = db.Pages.Where(p => p.SiteTreeId == siteid && p.ParentId == siteid).Select(p => p.Id).SingleOrDefault() ;
+					if (id != Guid.Empty)
+						Cache.Current[cachename] = GetById(id) ;
+					else Cache.Current[cachename] = new PageModel() ;
+				}
+			}
+			return (PageModel)Cache.Current[cachename] ;
+		}
+
+		/// <summary>
+		/// Remmoves the site page model for the site with the given id.
+		/// </summary>
+		/// <param name="siteid">The site id</param>
+		internal static void RemoveSitePageFromCache(Guid siteid) {
+			var cachename = "SITE_" + siteid.ToString() ;
+
+			if (Cache.Current.Contains(cachename))
+				Cache.Current.Remove(cachename) ;
+		}
+
+		/// <summary>
 		/// Gets the page model for the current route. This method is only for MVC use.
 		/// </summary>
 		/// <typeparam name="T">The page model type</typeparam>
@@ -227,7 +257,7 @@ namespace Piranha.Models
 						object content = reg.Body ;
 
 						// Initialize region
-						var getContent = reg.Body.GetType().GetMethod("GetContent") ;
+						var getContent = ExtensionManager.ExtensionTypes[reg.Type].GetMethod("GetContent") ;
 						if (getContent != null)
 							content = getContent.Invoke(reg.Body, new object[] { this }) ;
 

@@ -87,6 +87,21 @@ namespace Piranha.Entities
 
 			m.Page = page ;
 
+			// Get Properties
+			foreach (var pt in page.Template.Properties) {
+				var val = page.Properties.Where(p => p.Name == pt).SingleOrDefault() ;
+
+				if (val != null)
+					((IDictionary<string, object>)m.Properties).Add(pt, val.Value) ;
+				else ((IDictionary<string, object>)m.Properties).Add(pt, "") ;
+			}
+			// Get Media
+			var media = db.Media.Where(med => page.Attachments.Contains(med.Id)).ToList() ;
+			foreach (var attachment in page.Attachments) {
+				var val = media.Where(med => med.Id == attachment).SingleOrDefault() ;
+				if (val != null)
+					m.Attachments.Add(val) ;
+			}
 			// Get Regions
 			foreach (var rt in page.Template.RegionTemplates) {
 				if (ExtensionManager.ExtensionTypes.ContainsKey(rt.Type)) {
@@ -99,50 +114,22 @@ namespace Piranha.Entities
 						val = reg.Body ;
 					} else val = Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type]) ;
 
+					// Initialize region
+					var method = ExtensionManager.ExtensionTypes[rt.Type].GetMethod("GetContent") ;
+					if (method != null)
+						val = method.Invoke(val, new object[] { m }) ;
+
 					((IDictionary<string, object>)m.Regions).Add(rt.InternalId, val) ;
 				} else ((IDictionary<string, object>)m.Regions).Add(rt.InternalId, null) ;
 			}
-			// Get Properties
-			foreach (var pt in page.Template.Properties) {
-				var val = page.Properties.Where(p => p.Name == pt).SingleOrDefault() ;
-
-				if (val != null)
-					((IDictionary<string, object>)m.Properties).Add(pt, val.Value) ;
-				else ((IDictionary<string, object>)m.Properties).Add(pt, "") ;
-			}
 			// Get Extensions
 			foreach (var ext in page.Extensions) {
-				if (ExtensionManager.ExtensionTypes.ContainsKey(ext.Type))
-					((IDictionary<string, object>)m.Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = ext.Body ;
-			}
-			// Get Media
-			var media = db.Media.Where(med => page.Attachments.Contains(med.Id)).ToList() ;
-			foreach (var attachment in page.Attachments) {
-				var val = media.Where(med => med.Id == attachment).SingleOrDefault() ;
-				if (val != null)
-					m.Attachments.Add(val) ;
-			}
+				object val = null ;
 
-			// Intialize regions
-			foreach (var key in ((IDictionary<string, object>)m.Regions).Keys) {
-				var val = ((IDictionary<string, object>)m.Regions)[key] ;
-
-				if (val != null) {
-					var method = val.GetType().GetMethod("GetContent") ;
-					if (method != null)
-						val = method.Invoke(val, new object[] { m }) ;
+				if (ExtensionManager.ExtensionTypes.ContainsKey(ext.Type)) {
+					val = ext.Body ;
 				}
 			}
-			// Initialize extensions
-			foreach (var key in ((IDictionary<string, object>)m.Extensions).Keys) {
-				var val = ((IDictionary<string, object>)m.Extensions)[key] ;
-
-				if (val != null) {
-					var method = val.GetType().GetMethod("Init") ;
-					if (method != null)
-						val = method.Invoke(val, new object[] { m }) ;
-				}
-			}			
 			return m ;
 		}
 	}

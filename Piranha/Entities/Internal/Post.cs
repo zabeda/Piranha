@@ -18,6 +18,7 @@ namespace Piranha.Models
 	[PrimaryKey(Column="post_id,post_draft")]
 	[Join(TableName="posttemplate", ForeignKey="post_template_id", PrimaryKey="posttemplate_id")]
 	[Join(TableName="permalink", ForeignKey="post_permalink_id", PrimaryKey="permalink_id")]
+	[Serializable]
 	public class Post : DraftRecord<Post>, IPost
 	{
 		#region Fields

@@ -15,6 +15,7 @@ namespace Piranha.Models
 	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="pagetemplate_id")]
+	[Serializable]
 	public class PageTemplate : PiranhaRecord<PageTemplate>, ICacheRecord<PageTemplate>
 	{
 		#region Fields
@@ -83,6 +84,12 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="pagetemplate_redirect_show")]
 		public bool ShowRedirect { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather this is a site template.
+		/// </summary>
+		[Column(Name="pagetemplate_site_template")]
+		public bool IsSiteTemplate { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the created date.

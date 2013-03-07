@@ -76,7 +76,9 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
-			ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+			if (!pm.IsSite)
+				ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+			else ViewBag.Title = Piranha.Resources.Global.Edit + " " + pm.SiteTree.Name.ToLower() ;
 
 			// Executes the page list loaded hook, if registered
 			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
@@ -114,9 +116,11 @@ namespace Piranha.Areas.Manager.Controllers
 			}
 			pm.Refresh();
 
-			if (pm.Page.IsNew)
-				ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
-			else ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+			if (!pm.IsSite) {
+				if (pm.Page.IsNew)
+					ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
+				else ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+			} else ViewBag.Title = Piranha.Resources.Global.Edit + " " + pm.SiteTree.Name.ToLower() ;
 
 			if (pm.Page.OriginalId != Guid.Empty)
 				return View(@"~/Areas/Manager/Views/Page/EditCopy.cshtml", pm) ;

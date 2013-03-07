@@ -9,6 +9,7 @@ namespace Piranha.Models
 	/// <summary>
 	/// Class for defining a name in both singular and plural.
 	/// </summary>
+	[Serializable]
 	public class ComplexName {
 		/// <summary>
 		/// Gets/sets the name in its singular form.

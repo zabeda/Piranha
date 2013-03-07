@@ -11,6 +11,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// Entity for a comment. A comment can be attached to any entity.
 	/// </summary>
+	[Serializable]
 	public class Comment : BaseEntity
 	{
 		#region Inner classes

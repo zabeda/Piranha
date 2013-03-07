@@ -88,14 +88,6 @@ VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '26', 'The curre
 	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('EBB65F0A-F2CA-4932-B590-C899922DE847', 'SITE_TITLE', 'My site', 'The site title.', 1,
-	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
-INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
-	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('160C9971-3D04-40AA-A2A3-B25F11D11D29', 'SITE_DESCRIPTION', 'Welcome the the template site', 'The site description', 1,
-	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
-INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
-	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
 VALUES ('CF06BF4C-C426-4047-8E5E-6E0082AAF1BF', 'SITE_LAST_MODIFIED', NOW(), 'Global last modification date.', 1,
 	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
@@ -164,6 +156,26 @@ INSERT INTO sitetree (sitetree_id, sitetree_namespace_id, sitetree_internal_id, 
 	sitetree_updated, sitetree_created_by, sitetree_updated_by)
 VALUES ('C2F87B2B-F585-4696-8A2B-3C9DF882701E', '8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'DEFAULT_SITE', 'Default site', 'This is the default site tree.',
 	NOW(), NOW(), 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC', 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC');
+
+-- Add site template and page for the default site
+INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_site_template,
+	pagetemplate_created, pagetemplate_updated, pagetemplate_created_by, pagetemplate_updated_by)
+VALUES ('C2F87B2B-F585-4696-8A2B-3C9DF882701E', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 1,
+	 NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO permalink (permalink_id, permalink_namespace_id, permalink_type, permalink_name, permalink_created,
+	permalink_updated, permalink_created_by, permalink_updated_by)
+VALUES ('2E168001-D113-4216-ACC5-03C61C2D0C21', '8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'SITE', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 
+	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO page (page_id, page_sitetree_id, page_draft, page_template_id, page_permalink_id, page_parent_id, page_seqno, page_title, 
+	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
+VALUES ('94823A5C-1E29-4BDB-84E4-9B5F636CDDB5', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 1, 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', '2E168001-D113-4216-ACC5-03C61C2D0C21', 
+	'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 1, 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', NOW(), NOW(), NOW(), NOW(),
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO page (page_id, page_sitetree_id, page_draft, page_template_id, page_permalink_id, page_parent_id, page_seqno, page_title, 
+	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
+VALUES ('94823A5C-1E29-4BDB-84E4-9B5F636CDDB5', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 0, 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', '2E168001-D113-4216-ACC5-03C61C2D0C21', 
+	'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 1, 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', NOW(), NOW(), NOW(), NOW(),
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Permalink
 INSERT INTO permalink (permalink_id, permalink_namespace_id, permalink_type, permalink_name, permalink_created,

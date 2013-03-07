@@ -237,4 +237,7 @@
   <data name="DisableGroups" xml:space="preserve">
     <value>Disable for</value>
   </data>
+  <data name="EditSite" xml:space="preserve">
+    <value>Edit site</value>
+  </data>
 </root>

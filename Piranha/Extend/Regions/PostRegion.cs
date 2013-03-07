@@ -16,6 +16,7 @@ namespace Piranha.Extend.Regions
 	/// Standard post container region.
 	/// </summary>
 	[Extension(Name="PostRegionName", InternalId="PostContainer", ResourceType=typeof(Piranha.Resources.Extensions), Type=ExtensionType.Region)]
+	[Serializable]
 	public class PostRegion : IExtension
 	{
 		#region Inner classes

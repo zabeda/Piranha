@@ -157,7 +157,7 @@
     <value>Sidor</value>
   </data>
   <data name="MessageDeleteConfirm" xml:space="preserve">
-    <value>Är du säker på att du vill ta bort sidan?</value>
+    <value>Vill du ta bort den valda sidan?</value>
   </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>Sidan har raderats.</value>
@@ -239,5 +239,8 @@
   </data>
   <data name="DisableGroups" xml:space="preserve">
     <value>Dölj för</value>
+  </data>
+  <data name="EditSite" xml:space="preserve">
+    <value>Ändra sajt</value>
   </data>
 </root>

@@ -10,6 +10,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// Entity for handling uploads from the client application.
 	/// </summary>
+	[Serializable]
 	public class Upload : StandardEntity<Upload>
 	{
 		#region Members

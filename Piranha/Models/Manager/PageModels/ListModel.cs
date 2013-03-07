@@ -40,9 +40,19 @@ namespace Piranha.Models.Manager.PageModels
 		public string ActiveSite { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the id of the active site.
+		/// </summary>
+		public Guid ActiveSiteId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the list of all pages to create copies from.
 		/// </summary>
 		public List<Sitemap> AllPages { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather the site with the given id has a site page.
+		/// </summary>
+		public Dictionary<Guid, Guid> SitePage { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -51,11 +61,16 @@ namespace Piranha.Models.Manager.PageModels
 		public ListModel() {
 			Pages = new List<Sitemap>() ;
 			Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_preview, pagetemplate_description",
-				new Params() { OrderBy = "pagetemplate_name ASC" }) ;
-			AllPages = Sitemap.GetFields("page_id, page_title, page_navigation_title, pagetemplate_name, sitetree_name", "page_draft = 1 AND page_original_id IS NULL", new Params() { OrderBy = "sitetree_name, COALESCE(page_navigation_title, page_title)" }) ;
+				"pagetemplate_site_template = 0", new Params() { OrderBy = "pagetemplate_name ASC" }) ;
+			AllPages = Sitemap.GetFields("page_id, page_title, page_navigation_title, pagetemplate_name, sitetree_name", "page_draft = 1 AND page_original_id IS NULL AND page_parent_id NOT IN (SELECT sitetree_id FROM sitetree)", 
+				new Params() { OrderBy = "sitetree_name, COALESCE(page_navigation_title, page_title)" }) ;
+			SitePage = new Dictionary<Guid, Guid>() ;
 
 			using (var db = new DataContext()) {
 				SiteTrees = db.SiteTrees.OrderBy(s => s.Name).ToList() ;
+
+				foreach (var site in SiteTrees)
+					SitePage[site.Id] = db.Pages.Where(p => p.SiteTreeId == site.Id && p.ParentId == site.Id).Select(p => p.Id).SingleOrDefault() ;
 			}
 		}
 
@@ -73,6 +88,9 @@ namespace Piranha.Models.Manager.PageModels
 			m.Pages = Sitemap.GetStructure(internalId, false).Flatten() ;
 			m.ActiveSite = internalId.ToUpper() ;
 
+			using (var db = new DataContext()) {
+				m.ActiveSiteId = db.SiteTrees.Where(s => s.InternalId == internalId).Select(s => s.Id).Single() ;
+			}
 			return m ;
 		}
 	}

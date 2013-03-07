@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// Template for defining regions for a page type.
 	/// </summary>
+	[Serializable]
 	public class RegionTemplate : StandardEntity<RegionTemplate>
 	{
 		#region Properties

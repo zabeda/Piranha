@@ -15,6 +15,7 @@ namespace Piranha.Models
 	/// Abstract base class for all media files.
 	/// </summary>
 	/// <typeparam name="T">The entity type</typeparam>
+	[Serializable]
 	public abstract class MediaFile<T> : PiranhaRecord<T>
 	{
 		#region Members

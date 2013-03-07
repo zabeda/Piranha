@@ -13,6 +13,7 @@ namespace Piranha.Models
 	/// Active record for a page region.
 	/// </summary>
 	[PrimaryKey(Column="property_id,property_draft")]
+	[Serializable]
 	public class Property : PiranhaRecord<Property>
 	{
 		#region Fields

@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The param entity.
 	/// </summary>
+	[Serializable]
 	public class Param : StandardEntity<Param>
 	{
 		#region Properties

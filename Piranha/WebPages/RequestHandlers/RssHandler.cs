@@ -23,9 +23,9 @@ namespace Piranha.WebPages.RequestHandlers
 			var top = Convert.ToInt32(SysParam.GetByName("RSS_NUM_POSTS").Value) ;
 			var posts = Post.Get("post_draft = 0 AND post_rss = 1 AND post_template_id IN (SELECT posttemplate_id FROM posttemplate WHERE posttemplate_rss = 1)", new Params() { OrderBy = "post_published DESC", Top = top }) ;
 
-			Web.RssHelper.Generate(context, 
-				SysParam.GetByName("SITE_TITLE").Value,
-				SysParam.GetByName("SITE_DESCRIPTION").Value,
+			Web.RssHelper.Generate(context,
+ 				WebPiranha.CurrentSite.MetaTitle,
+ 				WebPiranha.CurrentSite.MetaDescription,
 				posts) ;
 		}
 	}

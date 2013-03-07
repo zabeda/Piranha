@@ -33,36 +33,48 @@ namespace Piranha
 		/// the current host name is resolved. If the hostname isn't found DEFAULT_SITE is used.
 		/// </summary>
 		public static string SiteTree {
-			get { return GetSiteTree().InternalId ; }
+			get { return WebPages.WebPiranha.CurrentSite.InternalId ; }
 		}
 
 		/// <summary>
 		/// Gets the id of the currently active site tree.
 		/// </summary>
 		public static Guid SiteTreeId {
-			get { return GetSiteTree().Id ; }
+			get { return WebPages.WebPiranha.CurrentSite.Id ; }
 		}
 
 		/// <summary>
 		/// Gets the id of the namespace for the currently active site tree.
 		/// </summary>
 		public static Guid SiteTreeNamespaceId {
-			get { return GetSiteTree().NamespaceId ; }
+			get { return WebPages.WebPiranha.CurrentSite.NamespaceId ; }
 		}
 
+		/// <summary>
+		/// Gets the id of the default namespace.
+		/// </summary>
+		public static readonly Guid DefaultNamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
+
+		/// <summary>
+		/// Gets the id of the default site tree.
+		/// </summary>
+		public static readonly Guid DefaultSiteTreeId = new Guid("c2f87b2b-f585-4696-8a2b-3c9df882701e") ;
+
+		#region Private methods
 		/// <summary>
 		/// Gets the currently active site tree from the current host headers.
 		/// </summary>
 		/// <returns>The site tree</returns>
-		private static Entities.SiteTree GetSiteTree() {
-			// Check for configured site tree from the host name
-			if (HttpContext.Current != null && HttpContext.Current.Request != null) {
-				var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
-				if (WebPages.WebPiranha.HostNames.ContainsKey(hostname))
-					return WebPages.WebPiranha.HostNames[hostname] ;
-			}
-			// Nothing found, return default
-			return WebPages.WebPiranha.DefaultSite ;
-		}
+		//private static Entities.SiteTree GetSiteTree() {
+		//	// Check for configured site tree from the host name
+		//	if (HttpContext.Current != null && HttpContext.Current.Request != null) {
+		//		var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
+		//		if (WebPages.WebPiranha.HostNames.ContainsKey(hostname))
+		//			return WebPages.WebPiranha.HostNames[hostname] ;
+		//	}
+		//	// Nothing found, return default
+		//	return WebPages.WebPiranha.DefaultSite ;
+		//}
+		#endregion
 	}
 }

@@ -11,6 +11,7 @@ namespace Piranha.Models
 	/// Active record for a log entry.
 	/// </summary>
 	[PrimaryKey(Column="syslog_id")]
+	[Serializable]
 	public class SysLog : PiranhaRecord<SysLog>
 	{
 		#region Fields

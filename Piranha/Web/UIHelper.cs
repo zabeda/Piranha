@@ -85,14 +85,15 @@ namespace Piranha.Web
 			 * Open graph meta tags
 			 */
 			str.AppendLine("<meta property=\"og:site_name\" content=\"" + 
-				SysParam.GetByName("SITE_TITLE").Value + "\" />") ;
+				WebPiranha.CurrentSite.MetaTitle + "\" />") ;
 			str.AppendLine("<meta property=\"og:url\" content=\"" + 
 				"http://" + Context.Request.Url.DnsSafeHost + Context.Request.RawUrl + "\" />") ;
 
 			if (CurrentPage != null && CurrentPage.IsStartpage) {
 				str.AppendLine("<meta property=\"og:type\" content=\"website\" />") ;
 				str.AppendLine("<meta property=\"og:description\" content=\"" + 
-					SysParam.GetByName("SITE_DESCRIPTION").Value + "\" />") ;
+					WebPiranha.CurrentSite.MetaDescription + "\" />") ;
+				str.AppendLine("<meta property=\"og:title\" content=\"" + WebPiranha.CurrentSite.MetaTitle + "\" />") ;
 			} else if (CurrentPage != null || CurrentPost != null) {
 				var title = CurrentPage != null ? CurrentPage.Title : CurrentPost.Title ;
 				var description = CurrentPage != null ? CurrentPage.Description : 
@@ -109,7 +110,7 @@ namespace Piranha.Web
 			 * RSS Feeds
 			 */
 			str.AppendLine("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"" +
-				SysParam.GetByName("SITE_TITLE").Value + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
+				WebPiranha.CurrentSite.MetaTitle + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
 				WebPages.WebPiranha.GetUrlPrefixForHandlerId("rss") + "\" />") ;
 
 			/**

@@ -46,7 +46,7 @@
                 <td class="updated">@site.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@site.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
-                    @if (Model.CanDeleteSite[site.Id]) {
+                    @if (Model.CanDeleteSite[site.Id] && site.Id != Piranha.Config.DefaultSiteTreeId) {
                     <a href="@Url.Action("delete", new { id = site.Id })" title="" class="icon delete"></a>
                     }
                 </td>

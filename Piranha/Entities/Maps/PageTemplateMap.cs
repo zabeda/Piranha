@@ -23,6 +23,7 @@ namespace Piranha.Entities.Maps
 			Property(t => t.ShowViewTemplate).HasColumnName("pagetemplate_controller_show") ;
 			Property(t => t.ViewRedirect).HasColumnName("pagetemplate_redirect").HasMaxLength(128) ;
 			Property(t => t.ShowViewRedirect).HasColumnName("pagetemplate_redirect_show") ;
+			Property(t => t.IsSiteTemplate).HasColumnName("pagetemplate_site_template") ;
 			Property(t => t.Created).HasColumnName("pagetemplate_created") ;
 			Property(t => t.Updated).HasColumnName("pagetemplate_updated") ;
 			Property(t => t.CreatedById).HasColumnName("pagetemplate_created_by") ;

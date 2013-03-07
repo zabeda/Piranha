@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The namespace entity that defines the available permalink namespaces.
 	/// </summary>
+	[Serializable]
 	public class Namespace : StandardEntity<Namespace>
 	{
 		#region Properties

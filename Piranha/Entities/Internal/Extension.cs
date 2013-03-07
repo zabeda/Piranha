@@ -15,6 +15,7 @@ namespace Piranha.Models
 	/// to any entity in the database. It's body is stored as JSON.
 	/// </summary>
 	[PrimaryKey(Column="extension_id,extension_draft")]
+	[Serializable]
 	public class Extension : PiranhaRecord<Extension>
 	{
 		#region Members

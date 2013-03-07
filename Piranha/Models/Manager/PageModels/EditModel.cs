@@ -107,6 +107,11 @@ namespace Piranha.Models.Manager.PageModels
 		public bool CanDelete { get ; set ; }
 
 		/// <summary>
+		/// Gets weather this is a site page or not.
+		/// </summary>
+		public bool IsSite { get { return Permalink.Type == Models.Permalink.PermalinkType.SITE ; } }
+
+		/// <summary>
 		/// Gets/sets weather comments should be enabled.
 		/// </summary>
 		public bool EnableComments { get ; set ; }
@@ -115,6 +120,11 @@ namespace Piranha.Models.Manager.PageModels
 		/// Gets/sets the currently available comments for the current post.
 		/// </summary>
 		public List<Entities.Comment> Comments { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the site tree for the current page.
+		/// </summary>
+		public Entities.SiteTree SiteTree { get ; set ; }
 		#endregion
 
 		#region Inner classes
@@ -353,6 +363,9 @@ namespace Piranha.Models.Manager.PageModels
 					}
 
 					tx.Commit() ;
+
+					if (IsSite)
+						PageModel.RemoveSitePageFromCache(Page.SiteTreeId) ;
 				} catch { tx.Rollback() ; throw ; }
 			}
 			return true ;
@@ -439,19 +452,6 @@ namespace Piranha.Models.Manager.PageModels
 			DisableGroups = SysGroup.GetParents(Page.GroupId) ;
 			DisableGroups.Reverse() ;
 
-			// Get placement ref title
-			if (Page.ParentId != Guid.Empty || Page.Seqno > 1) {
-				Page refpage = null ;
-				if (Page.Seqno > 1) {
-					if (Page.ParentId != Guid.Empty)
-						refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1) ;
-					else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1) ;
-				} else {
-					refpage = Page.GetSingle(Page.ParentId, true) ;
-				}
-				PlaceRef = refpage.Title ;
-			}
-
 			// Get template & permalink
 			Template  = PageTemplate.GetSingle("pagetemplate_id = @0", Page.TemplateId) ;
 			Permalink = Permalink.GetSingle(Page.PermalinkId) ; 
@@ -462,6 +462,21 @@ namespace Piranha.Models.Manager.PageModels
 
 					Permalink = new Permalink() { Id = Guid.NewGuid(), Type = Permalink.PermalinkType.PAGE, NamespaceId = sitetree.NamespaceId } ;
 					Page.PermalinkId = Permalink.Id ;
+				}
+			}
+
+			// Get placement ref title
+			if (!IsSite) {
+				if (Page.ParentId != Guid.Empty || Page.Seqno > 1) {
+					Page refpage = null ;
+					if (Page.Seqno > 1) {
+						if (Page.ParentId != Guid.Empty)
+							refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1) ;
+						else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1) ;
+					} else {
+						refpage = Page.GetSingle(Page.ParentId, true) ;
+					}
+					PlaceRef = refpage.Title ;
 				}
 			}
 
@@ -536,6 +551,13 @@ namespace Piranha.Models.Manager.PageModels
 						Include("CreatedBy").
 						Where(c => c.ParentId == Page.Id && c.ParentIsDraft == false).
 						OrderByDescending(c => c.Created).ToList() ;
+				}
+			}
+
+			// Get the site if this is a site page
+			if (Permalink.Type == Models.Permalink.PermalinkType.SITE) {
+				using (var db = new DataContext()) {
+					SiteTree = db.SiteTrees.Where(s => s.Id == Page.SiteTreeId).Single() ;
 				}
 			}
 		}

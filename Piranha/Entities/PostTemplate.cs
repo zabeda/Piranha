@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The post template entity.
 	/// </summary>
+	[Serializable]
 	public class PostTemplate : StandardEntity<PostTemplate>
 	{
 		#region Properties

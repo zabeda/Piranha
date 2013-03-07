@@ -10,6 +10,7 @@ namespace Piranha.Extend.Regions
 	/// Simple text region.
 	/// </summary>
 	[Extension(Name="TextRegionName", InternalId="TextRegion", ResourceType=typeof(Piranha.Resources.Extensions), Type=ExtensionType.Region)]
+	[Serializable]
 	public class TextRegion : IExtension
 	{
 		#region Properties

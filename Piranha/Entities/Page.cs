@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// Entity for the page.
 	/// </summary>
+	[Serializable]
 	public class Page : StandardEntity<Page>
 	{
 		#region Properties
@@ -151,6 +152,7 @@ namespace Piranha.Entities
 		/// Default constructor.
 		/// </summary>
 		public Page() {
+			IsDraft = true ;
 			Attachments = new List<Guid>() ;
 			Regions = new List<Region>() ;
 			Properties = new List<Property>() ;

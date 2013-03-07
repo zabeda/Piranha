@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The permission entity.
 	/// </summary>
+	[Serializable]
 	public class Permission : StandardEntity<Permission>
 	{
 		#region Properties

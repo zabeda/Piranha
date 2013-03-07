@@ -21,6 +21,7 @@ namespace Piranha.Models
 	[Join(TableName="pagetemplate", ForeignKey="page_template_id", PrimaryKey="pagetemplate_id")]
 	[Join(TableName="permalink", ForeignKey="page_permalink_id", PrimaryKey="permalink_id")]
 	[Join(TableName="sitetree", ForeignKey="page_sitetree_id", PrimaryKey="sitetree_id")]
+	[Serializable]
 	public class Page : DraftRecord<Page>, IPage, ISitemap, ICacheRecord<Page>
 	{
 		#region Fields

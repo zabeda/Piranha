@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The group entity.
 	/// </summary>
+	[Serializable]
 	public class Group : BaseEntity
 	{
 		#region Properties

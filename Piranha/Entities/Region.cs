@@ -12,6 +12,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The region entity
 	/// </summary>
+	[Serializable]
 	public class Region : StandardEntity<Region>
 	{
 		#region Members

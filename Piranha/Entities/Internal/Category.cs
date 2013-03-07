@@ -15,6 +15,7 @@ namespace Piranha.Models
 	/// </summary>
 	[PrimaryKey(Column="category_id")]
 	[Join(TableName="permalink", ForeignKey="category_permalink_id", PrimaryKey="permalink_id")]
+	[Serializable]
 	public class Category : PiranhaRecord<Category>
 	{
 		#region Fields

@@ -144,6 +144,9 @@
   <data name="SettingsPostTypes" xml:space="preserve">
     <value>Post types</value>
   </data>
+  <data name="SettingsSites" xml:space="preserve">
+    <value>Sites</value>
+  </data>
   <data name="SystemAccess" xml:space="preserve">
     <value>Permissions</value>
   </data>

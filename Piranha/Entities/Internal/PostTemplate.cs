@@ -15,6 +15,7 @@ namespace Piranha.Models
 	/// Changes made to records of this type are logged.
 	/// </summary>
 	[PrimaryKey(Column="posttemplate_id")]
+	[Serializable]
 	public class PostTemplate : PiranhaRecord<PostTemplate>
 	{
 		#region Fields

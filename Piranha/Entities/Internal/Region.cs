@@ -16,6 +16,7 @@ namespace Piranha.Models
 	/// </summary>
 	[PrimaryKey(Column="region_id,region_draft")]
 	[Join(TableName="regiontemplate", ForeignKey="region_regiontemplate_id", PrimaryKey="regiontemplate_id")]
+	[Serializable]
 	public class Region : PiranhaRecord<Region>
 	{
 		#region Members

@@ -9,6 +9,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// The page template entity.
 	/// </summary>
+	[Serializable]
 	public class PageTemplate : StandardEntity<PageTemplate>
 	{
 		#region Properties
@@ -51,6 +52,11 @@ namespace Piranha.Entities
 		/// Gets/sets weather the page should be able to override the redirect.
 		/// </summary>
 		public bool ShowViewRedirect { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather this is a site template.
+		/// </summary>
+		public bool IsSiteTemplate { get ; set ; }
 		#endregion
 
 		#region Navigation properties
@@ -72,6 +78,7 @@ namespace Piranha.Entities
 		/// </summary>
 		public PageTemplate() {
 			Properties = new List<string>() ;
+			RegionTemplates = new List<RegionTemplate>() ;
 		}
 
 		#region Events

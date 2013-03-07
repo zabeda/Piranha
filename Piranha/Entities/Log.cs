@@ -8,6 +8,7 @@ namespace Piranha.Entities
 	/// <summary>
 	/// Entity for the system log.
 	/// </summary>
+	[Serializable]
 	public class Log : StandardEntity<Log>
 	{
 		#region Properties

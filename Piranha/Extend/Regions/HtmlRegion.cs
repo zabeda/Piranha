@@ -10,6 +10,7 @@ namespace Piranha.Extend.Regions
 	/// Standard html region.
 	/// </summary>
 	[Extension(Name="Html", Type=ExtensionType.Region)]
+	[Serializable]
 	public class HtmlRegion : HtmlString, IExtension
 	{
 		/// <summary>
