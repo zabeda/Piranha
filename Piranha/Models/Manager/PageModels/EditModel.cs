@@ -16,6 +16,17 @@ namespace Piranha.Models.Manager.PageModels
 	/// </summary>
 	public class EditModel
 	{
+		#region Inner classes
+		public enum ActionType { NORMAL, SEO }
+		#endregion
+
+		#region Members
+		/// <summary>
+		/// The current page action.
+		/// </summary>
+		public ActionType Action = ActionType.NORMAL ;
+		#endregion
+
 		#region Binder
 		public class Binder : DefaultModelBinder
 		{
@@ -417,8 +428,15 @@ namespace Piranha.Models.Manager.PageModels
 
 					tx.Commit() ;
 
-					if (IsSite)
+					if (IsSite) {
+						using (var db = new DataContext()) {
+							var site = db.SiteTrees.Where(s => s.Id == Page.SiteTreeId).Single() ;
+							site.MetaTitle = SiteTree.MetaTitle ;
+							site.MetaDescription = SiteTree.MetaDescription ;
+							db.SaveChanges() ;
+						}
 						PageModel.RemoveSitePageFromCache(Page.SiteTreeId) ;
+					}
 				} catch { tx.Rollback() ; throw ; }
 			}
 			return true ;

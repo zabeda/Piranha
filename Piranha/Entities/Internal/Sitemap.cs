@@ -74,6 +74,18 @@ namespace Piranha.Models
 		public string Title { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the meta keywords.
+		/// </summary>
+		[Column(Name="page_keywords")]
+		public string Keywords { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the meta description.
+		/// </summary>
+		[Column(Name="page_description")]
+		public string Description { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the title.
 		/// </summary>
 		[Column(Name="page_navigation_title")]

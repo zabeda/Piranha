@@ -79,6 +79,8 @@
             };
             new List('page-list', copyoptions);
 
+            @if (!Model.IsSeoList) {
+            <text>
             // Switch between list/tree
             $("#search").keyup(function () {
                 if ($(this).val() != "") {
@@ -89,6 +91,8 @@
                     $(".sitemap").show();
                 }
             });
+            </text>
+            }
         });
 
         function bindMove() {
@@ -117,7 +121,18 @@
             <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
             <li><a href="@Url.Action("index")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @if (Model.SitePage[Model.ActiveSiteId] != Guid.Empty) {
-            <li><a href="@Url.Action("edit", new { @id = Model.SitePage[Model.ActiveSiteId] })" class="edit-site">@Piranha.Resources.Page.EditSite</a></li>
+            <li>
+                <a href="@Url.Action("edit", new { @id = Model.SitePage[Model.ActiveSiteId] })" class="edit-site">@Piranha.Resources.Page.EditSite</a>
+                @if (Model.SiteWarnings[Model.ActiveSiteId] > 0) {
+                     <span class="notification">@Model.SiteWarnings[Model.ActiveSiteId]</span>
+                }
+            </li>
+            }
+            @if (Model.TotalSiteWarnings[Model.ActiveSiteId] > 0) {
+                <li>
+                    <a href="@Url.Action("seo", new { @id = Model.ActiveSite.ToLower() })" class="seo">SEO</a>
+                    <span class="notification">@Model.TotalSiteWarnings[Model.ActiveSiteId]</span>
+                </li>
             }
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
         </ul>
@@ -146,7 +161,8 @@
         <div class="clear"></div>
     </div>
     }
-    <ul class="sitemap">
+    <ul class="sitemap" @(Model.IsSeoList ? "style=display:none" : "")>
+        @if (!Model.IsSeoList) {
         <li class="header">
             <span class="buttons"></span>
             <span class="date">@Piranha.Resources.Global.Created</span>
@@ -155,9 +171,10 @@
             <span class="title">@Piranha.Resources.Global.Title</span>
         </li>
         @Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", Model.SiteMap)
+        }
     </ul>
     
-    <table id="list" class="list" style="display:none">
+    <table id="list" class="list" @(!Model.IsSeoList ? "style=display:none" : "")>
         <thead>
             <tr>
                 <th><span class="sort asc" data-sort="title">@Piranha.Resources.Global.Title</span></th>
@@ -170,11 +187,12 @@
         <tbody class="list-js">
             @foreach (var page in Model.Pages) {
             <tr@(page.Updated > page.LastPublished ? " class=draft" : "")>
-                <td class="title"><a href="@Url.Action("edit", new { id = page.Id })">
+                <td class="title"><a href="@Url.Action("edit", new { id = page.Id })@Html.Raw(Model.IsSeoList ? "?action=seo" : "")">
                     @(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)
                     <div class="list-info">
                         @Html.Raw(page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : ""))
                         @Html.Raw(page.OriginalId != Guid.Empty ? "<span class=info-copy></span>" : "")
+                        @Html.Raw(Model.IsSeoList ? "<span class=notification>" + Model.PageWarnings[page.Id].ToString() + "</span>" : "")
                     </div>
                 </a></td>
                 <td class="template">@page.TemplateName</td>

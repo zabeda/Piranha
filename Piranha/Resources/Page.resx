@@ -249,4 +249,10 @@
   <data name="MessageNotDetached" xml:space="preserve">
     <value>An error occured while detaching the page.</value>
   </data>
+  <data name="DescriptionNotification" xml:space="preserve">
+    <value>You should always provide a meta description.</value>
+  </data>
+  <data name="KeywordsNotification" xml:space="preserve">
+    <value>You should always provide meta keywords.</value>
+  </data>
 </root>

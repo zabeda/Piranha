@@ -301,7 +301,8 @@ input[type=checkbox] {
     }
 .btn.active,
 li.selected a,
-.edit table.template td.active {
+.edit table.template td.active,
+.edit table td.active {
     color: #fff;
     background: #54bd00;
     background-image: linear-gradient(bottom, #439700 25%, #54bd00 65%);
@@ -391,14 +392,17 @@ table.list thead tr {
     width: 120px;
     height: 120px;
     }
-.edit table.template {
+.edit table.template,
+.edit table {
     margin-left: 1px;
     }
-table.template td {
+table.template td,
+.edit table td {
     border: solid 4px #fff;
     background: #99d3de;
     }    
-table.template td.locked {
+table.template td.locked,
+.edit table td.locked {
     border: solid 4px #fff;
     background: #99d3de url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAI0lEQVQIW2OYefkeHP0HAwY0PpDBgMaHCiHzQUJofKgQmg0AMpJazRePtmQAAAAASUVORK5CYII=);
     }

@@ -157,12 +157,12 @@
     <input type="hidden" id="draft" name="draft" value="true" />
     <input type="hidden" id="org_parentid" value="@Model.Page.ParentId" />
 </div>
-@if (!Model.IsSite) {
 <div class="first-row">
-    <div class="grid_9">
+    <div class="@(!String.IsNullOrEmpty(Model.Template.Preview.ToString()) ? "grid_9" : "grid_12")">
         <div class="box">
             <div class="title"><h2>@Piranha.Resources.Global.Information</h2></div>
             <div class="inner">
+                @if (!Model.IsSite) {
                 <ul class="form">
                     <li>@Html.LabelFor(m => m.Page.Title)
                         <div class="input">
@@ -214,12 +214,35 @@
                         </div>
                     </li>
                 </ul>
+                } else {
+                <ul class="form">
+                    <li>
+                        @Html.LabelFor(m => m.SiteTree.MetaTitle, Piranha.Resources.SiteTree.MetaTitle)
+                        <div class="input">
+                            @Html.TextBoxFor(m => m.SiteTree.MetaTitle)
+                            @if (String.IsNullOrEmpty(Model.SiteTree.MetaTitle)) {
+                                <span class="notification">@Piranha.Resources.Page.KeywordsNotification</span>
+                            }
+                        </div>
+                    </li>
+                    <li>
+                        @Html.LabelFor(m => m.SiteTree.MetaDescription, Piranha.Resources.SiteTree.MetaDescription)
+                        <div class="input">
+                            @Html.TextAreaFor(m => m.SiteTree.MetaDescription, new { @rows = 5 })
+                            @if (String.IsNullOrEmpty(Model.SiteTree.MetaDescription)) {
+                                <span class="notification">@Piranha.Resources.Page.DescriptionNotification</span>
+                            }
+                        </div>
+                    </li>
+                </ul>
+                }
             </div>
         </div>
     </div>
+    @if (!String.IsNullOrEmpty(Model.Template.Preview.ToString())) {
     <div class="grid_3">
         <div class="box pagetemplate">
-            <div class="title"><h2>@Model.Template.Name</h2></div>
+            <div class="title"><h2>@(!Model.IsSite ? Model.Template.Name : Model.SiteTree.Name)</h2></div>
             <div class="inner">
                 <div class="edit">
                     @Model.Template.Preview
@@ -227,8 +250,8 @@
             </div>
         </div>
     </div>
+    }
 </div>
-}
 <div>
     <div class="grid_12">
         <div class="box main-content">
@@ -236,9 +259,9 @@
                 <tr>
                     <td class="tools">
                         <ul>
-                            <li class="btn-content active"><a href="#" data-id="pnl-content">@Piranha.Resources.Global.Content</a></li>
+                            <li class="btn-content @(Model.Action == Piranha.Models.Manager.PageModels.EditModel.ActionType.NORMAL ? "active" : "")"><a href="#" data-id="pnl-content">@Piranha.Resources.Global.Content</a></li>
                             @if (!Model.IsSite) {
-                            <li class="btn-settings"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
+                            <li class="btn-settings @(Model.Action == Piranha.Models.Manager.PageModels.EditModel.ActionType.SEO ? "active" : "")"><a href="#" data-id="pnl-settings">@Piranha.Resources.Global.Settings</a></li>
                             }
                             @if (Model.Properties.Count > 0) {
                             <li class="btn-properties"><a href="#" data-id="pnl-properties">@Piranha.Resources.Global.Properties</a></li>
@@ -263,7 +286,7 @@
                         </ul>
                     </td>
                     <td>
-                        <div id="pnl-content" class="main content-editor">
+                        <div id="pnl-content" class="main content-editor @(Model.Action == Piranha.Models.Manager.PageModels.EditModel.ActionType.NORMAL ? "" : "hidden")">
                             <div class="title">
                                 <div id="regionbuttons" class="buttons">
                                     @for (int n = 0; n < Model.Regions.Count; n++) {
@@ -285,7 +308,7 @@
                             </div>
                         </div>
                         @if (!Model.IsSite) {
-                        <div id="pnl-settings" class="main hidden">
+                        <div id="pnl-settings" class="main @(Model.Action == Piranha.Models.Manager.PageModels.EditModel.ActionType.SEO ? "" : "hidden")">
                             <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
                             <div class="inner">
                                 <ul class="form">
@@ -306,12 +329,20 @@
                                     </li>
                                     <li>@Html.LabelFor(m => m.Page.Keywords)
                                         <div class="input"> 
-                                            @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                                            @Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional })
+                                            @if (Model.Action == Piranha.Models.Manager.PageModels.EditModel.ActionType.SEO && String.IsNullOrEmpty(Model.Page.Keywords)) {
+                                                <span class="notification">@Piranha.Resources.Page.KeywordsNotification</span>
+                                            }
+                                        </div>
                                         @Html.ValidationMessageFor(m => m.Page.Keywords)
                                     </li>
                                     <li>@Html.LabelFor(m => m.Page.Description)
                                         <div class="input">
-                                            @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
+                                            @Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })
+                                            @if (Model.Action == Piranha.Models.Manager.PageModels.EditModel.ActionType.SEO && String.IsNullOrEmpty(Model.Page.Description)) {
+                                                <span class="notification">@Piranha.Resources.Page.DescriptionNotification</span>
+                                            }
+                                        </div>
                                         @Html.ValidationMessageFor(m => m.Page.Description)
                                     </li>
                                     @if (Model.Template.ShowController) {

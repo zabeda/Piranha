@@ -97,6 +97,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You should always provide a meta description..
+        /// </summary>
+        public static string DescriptionNotification {
+            get {
+                return ResourceManager.GetString("DescriptionNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disable for.
         /// </summary>
         public static string DisableGroups {
@@ -174,6 +183,15 @@ namespace Piranha.Resources {
         public static string KeywordsLength {
             get {
                 return ResourceManager.GetString("KeywordsLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You should always provide meta keywords..
+        /// </summary>
+        public static string KeywordsNotification {
+            get {
+                return ResourceManager.GetString("KeywordsNotification", resourceCulture);
             }
         }
         

@@ -69,12 +69,40 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
+		/// Gets the SEO list for the site tree with the given id.
+		/// </summary>
+		/// <param name="id">The internal id of the site.</param>
+		public ActionResult Seo(string id) {
+			try {
+				var param = Piranha.Models.SysParam.GetByName("SITEMAP_EXPANDED_LEVELS") ;
+				ViewBag.Levels = param != null ? Convert.ToInt32(param.Value) : 0 ;
+				ViewBag.Expanded = Guid.Empty ;
+			} catch {
+				ViewBag.Levels = 0 ;
+				ViewBag.Expanded = Guid.Empty ;
+			}
+			var m = ListModel.GetSEO(id) ;
+			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
+
+			// Executes the page list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
+				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
+		}
+
+		/// <summary>
 		/// Opens the edit view for the selected page.
 		/// </summary>
 		/// <param name="id">The page id</param>
 		[Access(Function="ADMIN_PAGE")]
 		public ActionResult Edit(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
+
+			if (!String.IsNullOrEmpty(Request["action"]) && Request["action"].ToLower() == "seo") {
+				ViewBag.ReturnUrl = Url.Action("seo", new { @id = pm.Page.SiteTreeInternalId.ToLower() }) ;
+				pm.Action = EditModel.ActionType.SEO ;
+			}
 
 			if (!pm.IsSite)
 				ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;

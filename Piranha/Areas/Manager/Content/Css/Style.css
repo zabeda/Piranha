@@ -274,6 +274,24 @@ button.full {
     right: 18px;
     box-shadow: 0 2px 2px rgba(0,0,0,0.3);
     }
+.toolbar .notification {
+    float: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    }
+.tabs li .notification {
+    float: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    }
+.input .notification {
+    float: none;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    }
     
 /** 
  * Validation messages
@@ -386,6 +404,12 @@ em     { font-style: italic; }
     }
 .toolbar .edit-site {
     background: url('../img/ico-edit-24.png') no-repeat 50% 8px ;
+    }
+.toolbar .detach {
+    background: url('../img/ico-detach-24.png') no-repeat 50% 8px ;
+    }
+.toolbar .seo {
+    background: url('../img/ico-seo-24.png') no-repeat 50% 8px ;
     }
 
 /**
@@ -932,22 +956,26 @@ ul.list .delete, ul.list .arrow-right, ul.list arrow-down {
 .grid_3 .edit, .templates .preview {
     margin-bottom: 5px;
     }
-table.template {
+table.template,
+div.edit table {
     width: 100%;
     height: 100%;
     text-align: center;
     }
-table.template td {
+table.template td,
+div.edit table td {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background: #ccc;
     border: solid 4px #fff;
     cursor: pointer;
     }
-.edit table.template td.active {
+.edit table.template td.active,
+.edit table td.active {
     background: #f68030;
     }
-table.template td.locked {
+table.template td.locked,
+.edit table td.locked {
     border: dotted 4px #fff;
     background: #ddd;
     cursor: default;

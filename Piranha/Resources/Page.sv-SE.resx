@@ -252,4 +252,10 @@
   <data name="MessageNotDetached" xml:space="preserve">
     <value>Ett fel har inträffat. Sidan kunde inte kopplas loss.</value>
   </data>
+  <data name="KeywordsDescription" xml:space="preserve">
+    <value>Du bör alltid ange en beskrivning.</value>
+  </data>
+  <data name="KeywordsNotification" xml:space="preserve">
+    <value>Du bör alltid ange nyckelord.</value>
+  </data>
 </root>

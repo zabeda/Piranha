@@ -179,8 +179,6 @@ namespace Piranha.Areas.Manager.Models
 				site.Name = Name ;
 				site.HostNames = HostNames ;
 				site.Description = Description ;
-				site.MetaTitle = MetaTitle ;
-				site.MetaDescription = MetaDescription ;
 
 				// Update the site template
 				var template = db.PageTemplates.Include(pt => pt.RegionTemplates).Where(pt => pt.Id == Id && pt.IsSiteTemplate).SingleOrDefault() ;

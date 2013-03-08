@@ -902,6 +902,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\27.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-detach-24.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

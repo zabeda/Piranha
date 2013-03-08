@@ -53,6 +53,20 @@ namespace Piranha.Models.Manager.PageModels
 		/// Gets/sets weather the site with the given id has a site page.
 		/// </summary>
 		public Dictionary<Guid, Guid> SitePage { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the number of completion warnings for the sites.
+		/// </summary>
+		public Dictionary<Guid, int> SiteWarnings { get ; set ; }
+
+		public Dictionary<Guid, int> TotalSiteWarnings { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the number of completion warnings for the pages.
+		/// </summary>
+		public Dictionary<Guid, int> PageWarnings { get ; set ; }
+
+		public bool IsSeoList { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -64,13 +78,24 @@ namespace Piranha.Models.Manager.PageModels
 				"pagetemplate_site_template = 0", new Params() { OrderBy = "pagetemplate_name ASC" }) ;
 			AllPages = Sitemap.GetFields("page_id, page_title, page_navigation_title, pagetemplate_name, sitetree_name", "page_draft = 1 AND page_original_id IS NULL AND page_parent_id NOT IN (SELECT sitetree_id FROM sitetree)", 
 				new Params() { OrderBy = "sitetree_name, COALESCE(page_navigation_title, page_title)" }) ;
+
 			SitePage = new Dictionary<Guid, Guid>() ;
+			SiteWarnings = new Dictionary<Guid,int>() ;
+			TotalSiteWarnings = new Dictionary<Guid,int>() ;
+			PageWarnings = new Dictionary<Guid,int>() ;
 
 			using (var db = new DataContext()) {
 				SiteTrees = db.SiteTrees.OrderBy(s => s.Name).ToList() ;
 
-				foreach (var site in SiteTrees)
+				foreach (var site in SiteTrees) {
 					SitePage[site.Id] = db.Pages.Where(p => p.SiteTreeId == site.Id && p.ParentId == site.Id).Select(p => p.Id).SingleOrDefault() ;
+					SiteWarnings[site.Id] = 0 + (String.IsNullOrEmpty(site.MetaTitle) ? 1 : 0) + (String.IsNullOrEmpty(site.MetaDescription) ? 1 : 0) ;
+
+					TotalSiteWarnings[site.Id] = Page.GetScalar(
+						"SELECT " +
+						"  (SELECT COUNT(*) * 2 FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_keywords IS NULL AND page_description IS NULL) + " +
+						"  (SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND (page_keywords IS NULL OR page_description IS NULL))", site.Id) ;
+				}
 			}
 		}
 
@@ -91,6 +116,37 @@ namespace Piranha.Models.Manager.PageModels
 			using (var db = new DataContext()) {
 				m.ActiveSiteId = db.SiteTrees.Where(s => s.InternalId == internalId).Select(s => s.Id).Single() ;
 			}
+
+			// Check completion warnings
+			foreach (var page in m.Pages) {
+				m.PageWarnings[page.Id] = 0 + (String.IsNullOrEmpty(page.Keywords) ? 1 : 0) + (String.IsNullOrEmpty(page.Description) ? 1 : 0) ;
+			}
+			return m ;
+		}
+
+		/// <summary>
+		/// Gets the SEO list for the given internal id.
+		/// </summary>
+		/// <param name="internalId">The internal id.</param>
+		/// <returns>The SEO list</returns>
+		public static ListModel GetSEO(string internalId = "") {
+			if (String.IsNullOrEmpty(internalId))
+				internalId = Config.SiteTree ;
+
+			ListModel m = new ListModel() ;
+			m.Pages = Sitemap.GetStructure(internalId, false).Flatten()
+				.Where(s => s.Published != DateTime.MinValue && (String.IsNullOrEmpty(s.Keywords) || String.IsNullOrEmpty(s.Description))).ToList() ;
+			m.ActiveSite = internalId.ToUpper() ;
+
+			using (var db = new DataContext()) {
+				m.ActiveSiteId = db.SiteTrees.Where(s => s.InternalId == internalId).Select(s => s.Id).Single() ;
+			}
+
+			// Check completion warnings
+			foreach (var page in m.Pages) {
+				m.PageWarnings[page.Id] = 0 + (String.IsNullOrEmpty(page.Keywords) ? 1 : 0) + (String.IsNullOrEmpty(page.Description) ? 1 : 0) ;
+			}
+			m.IsSeoList = true ;
 			return m ;
 		}
 	}
