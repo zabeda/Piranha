@@ -93,8 +93,8 @@ namespace Piranha.Models.Manager.PageModels
 
 					TotalSiteWarnings[site.Id] = Page.GetScalar(
 						"SELECT " +
-						"  (SELECT COUNT(*) * 2 FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_keywords IS NULL AND page_description IS NULL) + " +
-						"  (SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND (page_keywords IS NULL OR page_description IS NULL))", site.Id) ;
+						"  (SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_keywords IS NULL) + " +
+						"  (SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_description IS NULL)", site.Id) ;
 				}
 			}
 		}
