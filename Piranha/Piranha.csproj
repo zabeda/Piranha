@@ -120,7 +120,6 @@
     <Compile Include="Areas\Manager\Models\SiteTreeEditModel.cs" />
     <Compile Include="Areas\Manager\Models\PostListModel.cs" />
     <Compile Include="Areas\Manager\Models\SiteTreeListModel.cs" />
-    <Compile Include="Chain.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataExtensions.cs" />
