@@ -43,7 +43,7 @@
             <tr>
                 <td class="gravatar">
                     @if (!String.IsNullOrEmpty(user.Email)) {
-                        <img src="@UI.Gravatar.Image(user.Email, 30)" alt="Gravatar for @user.Email" />
+                        <img src="@Url.GetGravatarUrl(user.Email, 30)" alt="Gravatar for @user.Email" />
                     }
                 </td>
                 <td class="login">

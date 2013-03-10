@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Security;
 using Piranha.Models;
 
 namespace Piranha.Web
@@ -55,6 +55,52 @@ namespace Piranha.Web
 					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")) ;
 			}
 			return "" ;
+		}
+
+		/// <summary>
+		/// Gets the URL to the content with the given id.
+		/// </summary>
+		/// <param name="id">The content id</param>
+		/// <param name="width">Optional width</param>
+		/// <param name="height">Optional height</param>
+		/// <returns>The content url</returns>
+		public static string GetContentUrl(this UrlHelper helper, Guid id, int width = 0, int height = 0) {
+			Content cnt = Models.Content.GetSingle(id) ;
+			
+			if (cnt != null)
+				return helper.Content("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") +
+					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "") ;
+			return "" ;
+		}
+
+		/// <summary>
+		/// Gets the image URL for the gravatar with the given email
+		/// </summary>
+		/// <param name="email">The gravatar email</param>
+		/// <param name="size">Optional size</param>
+		/// <returns>The image URL</returns>
+		public static string GetGravatarUrl(this UrlHelper helper, string email, int size = 0) {
+			string hash = FormsAuthentication.HashPasswordForStoringInConfigFile(email.Trim().ToLower(), "MD5") ;
+			return "http://www.gravatar.com/avatar/" + hash.ToLower() +
+				(size > 0 ? "?s=" + size : "") ;
+		}
+
+		/// <summary>
+		/// Gets an encrypted API-key valid for 30 minutes.
+		/// </summary>
+		/// <param name="apiKey">The API-key</param>
+		/// <returns>The ecnrypted key</returns>
+		public static string APIKey(this HtmlHelper helper, Guid apiKey) {
+			return HttpUtility.UrlEncode(APIKeys.EncryptApiKey(apiKey)) ;
+		}
+
+		/// <summary>
+		/// Gets an encrypted API-key valid for 30 minutes.
+		/// </summary>
+		/// <param name="apiKey">The API-key</param>
+		/// <returns>The ecnrypted key</returns>
+		public static string APIKey(this HtmlHelper helper, string apiKey) {
+			return APIKey(helper, new Guid(apiKey)) ;
 		}
 
 		/// <summary>
