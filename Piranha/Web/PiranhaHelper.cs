@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using Piranha.Models;
 
 namespace Piranha.Web
@@ -80,7 +80,12 @@ namespace Piranha.Web
 		/// <param name="size">Optional size</param>
 		/// <returns>The image URL</returns>
 		public static string GetGravatarUrl(this UrlHelper helper, string email, int size = 0) {
-			string hash = FormsAuthentication.HashPasswordForStoringInConfigFile(email.Trim().ToLower(), "MD5") ;
+			var input = UTF8Encoding.UTF8.GetBytes(email) ;
+			var crypto = new MD5CryptoServiceProvider() ;
+
+			var hash = Convert.ToBase64String(crypto.TransformFinalBlock(input, 0, input.Length)) ;
+			crypto.Clear() ;
+
 			return "http://www.gravatar.com/avatar/" + hash.ToLower() +
 				(size > 0 ? "?s=" + size : "") ;
 		}
