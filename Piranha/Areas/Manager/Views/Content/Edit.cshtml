@@ -6,10 +6,10 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             <li><a href="@Url.Action("delete", new { id = Model.Content.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
-            @if (String.IsNullOrEmpty(ReturnUrl)) {
+            @if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {
             <li><a href="@Url.Action("index", new { id = Model.Content.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             } else {
-            <li><a href="@ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@ViewBag.ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             }
             <li><a href="@Url.Action("edit", new { id = Model.Content.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @if (!Model.Content.IsNew && !Model.Content.IsFolder && !String.IsNullOrEmpty(Model.Content.OriginalUrl)) {
@@ -34,7 +34,7 @@
 @Html.HiddenFor(m => m.Content.Height)
 @Html.HiddenFor(m => m.Content.Size)
 @Html.HiddenFor(m => m.Content.LastSynced)
-@Html.Hidden("returl", ReturnUrl)
+@Html.Hidden("returl", (string)ViewBag.ReturnUrl)
 <div class="grid_9">
     @if (!ViewBag.Folder) {
     <div class="box">

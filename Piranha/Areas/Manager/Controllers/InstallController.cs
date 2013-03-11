@@ -25,7 +25,7 @@ namespace Piranha.Areas.Manager.Controllers
 		[Required(ErrorMessage="Du måste ange ett lösenord")]
 		public string Password { get ; set ; }
 
-		[Compare("Password", ErrorMessage="Lösenorden matchar inte.")]
+		[System.Web.Mvc.Compare("Password", ErrorMessage="Lösenorden matchar inte.")]
 		public string PasswordConfirm { get ; set ; }
 
 		public string InstallType { get ; set ; }

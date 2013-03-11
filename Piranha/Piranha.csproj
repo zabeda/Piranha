@@ -490,7 +490,7 @@
     <EmbeddedResource Include="Areas\Manager\Views\Template\PostEdit.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Style.ashx" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Script.ashx" />
-    <EmbeddedResource Include="Areas\Manager\Views\Web.config" />
+    <Content Include="Areas\Manager\Views\Web.config" />
     <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Menu.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Install\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Category\Edit.cshtml" />

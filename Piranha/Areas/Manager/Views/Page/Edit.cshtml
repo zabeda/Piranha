@@ -110,10 +110,10 @@
             @if (!Model.Page.IsNew && Model.CanDelete && !Model.IsSite) {
             <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
-            @if (String.IsNullOrEmpty(ReturnUrl)) {
+            @if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {
             <li><a href="@Url.Action("index", new { id = Model.Page.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             } else {
-            <li><a href="@ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            <li><a href="@ViewBag.ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             }
             <li><a href="@Url.Action("edit", new { id = Model.Page.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
@@ -153,7 +153,7 @@
     @Html.HiddenFor(m => m.Page.Seqno)
     @Html.HiddenFor(m => m.Permalink.Name)
     }
-    @Html.Hidden("returl", ReturnUrl)
+    @Html.Hidden("returl", (string)ViewBag.ReturnUrl)
     <input type="hidden" id="draft" name="draft" value="true" />
     <input type="hidden" id="org_parentid" value="@Model.Page.ParentId" />
 </div>
