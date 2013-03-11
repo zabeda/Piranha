@@ -424,14 +424,4 @@
     <div class="box" style="min-width: 510px;min-height:260px;">
     </div>
 </div>
-   @if (false) { // (!Model.Page.IsNew) {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".toolbar .page-preview").attr("src", "http://@Request.Url.DnsSafeHost@Url.GetPreviewlink(Model.Page.Id).ToLower()");
-            $.each($(".toolbar .tooltip"), function (i, e) {
-                $(this).css({ left: -(($(this).outerWidth() - $(this).parent("li").width()) / 2) });
-            });
-        });
-    </script>
-    }
 }

@@ -86,7 +86,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -368,7 +367,6 @@
     <Compile Include="WebPages\RequestHandlers\DraftHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\IRequestHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\PermalinkHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\PreviewHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\RequestHandlerRegistration.cs" />
     <Compile Include="WebPages\RequestHandlers\RssHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\SitemapHandler.cs" />
@@ -377,7 +375,6 @@
     <Compile Include="WebPages\SinglePost.cs" />
     <Compile Include="WebPages\LayoutPage.cs" />
     <Compile Include="WebPages\ModelBinder.cs" />
-    <Compile Include="WebPages\WebThumbnail.cs" />
     <Compile Include="Web\AuthController.cs" />
     <Compile Include="Web\CultureHelper.cs" />
     <Compile Include="Web\GravatarHelper.cs" />
