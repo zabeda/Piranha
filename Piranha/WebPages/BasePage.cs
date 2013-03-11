@@ -22,7 +22,7 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Gets the helper for the piranha methods.
 		/// </summary>
-		public PiranhaHelper UI { get ; private set ; }
+		public UIHelper UI { get ; private set ; }
 
 		/// <summary>
 		/// Gets the helper for the piranha site.
@@ -34,7 +34,7 @@ namespace Piranha.WebPages
 		/// Default constructor. Creates a new page.
 		/// </summary>
 		public BasePage() : base() {
-			UI = new PiranhaHelper(this, Html) ;
+			UI = new UIHelper(this, Html) ;
 			Site = new Web.SiteHelper() ;
 		}
 

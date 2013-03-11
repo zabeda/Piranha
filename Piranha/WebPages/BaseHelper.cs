@@ -15,9 +15,9 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Gets the helper for the piranha methods.
 		/// </summary>
-		public static PiranhaHelper UI {
+		public static UIHelper UI {
 			get {
-				return new PiranhaHelper(CurrentPage, Html) ;
+				return new UIHelper(CurrentPage, Html) ;
 			}
 		}
 

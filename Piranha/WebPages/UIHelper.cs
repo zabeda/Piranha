@@ -13,7 +13,7 @@ namespace Piranha.WebPages
 	/// <summary>
 	/// View helper class.
 	/// </summary>
-	public class PiranhaHelper : Web.UIHelper
+	public class UIHelper : Web.UIHelper
 	{
 		#region Members
 		private HtmlHelper Html ;
@@ -47,7 +47,7 @@ namespace Piranha.WebPages
 		/// Default constructor.
 		/// </summary>
 		/// <param name="html"></param>
-		public PiranhaHelper(WebPageRenderingBase parent, HtmlHelper html) {
+		public UIHelper(WebPageRenderingBase parent, HtmlHelper html) {
 			Parent = parent ;
 			Html = html ;
 		}

@@ -12,7 +12,7 @@ namespace Piranha.Mvc
 	/// <summary>
 	/// View helper.
 	/// </summary>
-	public class PiranhaHelper : Web.UIHelper
+	public class UIHelper : Web.UIHelper
 	{
 		#region Members
 		private WebViewPage Parent ;
@@ -46,7 +46,7 @@ namespace Piranha.Mvc
 		/// Default constructor. Creates a new helper.
 		/// </summary>
 		/// <param name="parent">The parent view.</param>
-		public PiranhaHelper(WebViewPage parent) {
+		public UIHelper(WebViewPage parent) {
 			Parent = parent ;
 		}
 
@@ -54,7 +54,7 @@ namespace Piranha.Mvc
 		/// Default constructor. Creates a new helper.
 		/// </summary>
 		/// <param name="parent">The parent controller.</param>
-		public PiranhaHelper(SinglePageController controller) {
+		public UIHelper(SinglePageController controller) {
 			Controller = controller ;
 		}
 		

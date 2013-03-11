@@ -205,6 +205,7 @@
     <Compile Include="Extend\Regions\PostRegion.cs" />
     <Compile Include="Extend\Regions\TextRegion.cs" />
     <Compile Include="Areas\Manager\Models\CommentListModel.cs" />
+    <Compile Include="Mvc\UIHelper.cs" />
     <Compile Include="Resources\Comment.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,6 +228,7 @@
     <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="WebPages\FormHelper.cs" />
     <Compile Include="WebPages\HttpPostAttribute.cs" />
+    <Compile Include="WebPages\UIHelper.cs" />
     <Compile Include="Web\APIKeyAuthorization.cs" />
     <Compile Include="Web\APIKeys.cs" />
     <Compile Include="Web\AppCommentController.cs" />
@@ -340,7 +342,6 @@
     <Compile Include="Mvc\BaseViewPage.cs" />
     <Compile Include="Mvc\ManagerViewEngine.cs" />
     <Compile Include="Mvc\ModelBinders\IExtensionBinder.cs" />
-    <Compile Include="Mvc\PiranhaHelper.cs" />
     <Compile Include="Mvc\SinglePage.cs" />
     <Compile Include="Mvc\SinglePageController.cs" />
     <Compile Include="Rest\BaseService.cs" />
@@ -362,7 +363,6 @@
     <Compile Include="WebPages\ContentPage.cs" />
     <Compile Include="WebPages\Archive.cs" />
     <Compile Include="WebPages\Hooks.cs" />
-    <Compile Include="WebPages\PiranhaHelper.cs" />
     <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ContentHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\DraftHandler.cs" />

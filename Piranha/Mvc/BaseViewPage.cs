@@ -16,7 +16,7 @@ namespace Piranha.Mvc
 		/// <summary>
 		/// Gets the UI helper.
 		/// </summary>
-		public PiranhaHelper UI { get ; private set ; }
+		public UIHelper UI { get ; private set ; }
 
 		/// <summary>
 		/// Gets the optional return url.
@@ -27,7 +27,7 @@ namespace Piranha.Mvc
 		/// Default constructor. Creates a new view page.
 		/// </summary>
 		public BaseViewPage() : base() {
-			UI = new PiranhaHelper(this) ;
+			UI = new UIHelper(this) ;
 		}
 	}
 }
