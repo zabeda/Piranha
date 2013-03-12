@@ -121,11 +121,19 @@ namespace Piranha.Models
 						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value ;
 				});
 			}
+
 			// Attachments
 			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
+
 			// Extensions
 			foreach (var ext in ((Post)Post).GetExtensions()) {
-				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = ext.Body ;
+				object body = ext.Body ;
+				if (body != null) {
+					var getContent = body.GetType().GetMethod("GetContent") ;
+					if (getContent != null)
+						body = getContent.Invoke(body, new object[] { this }) ;
+				}
+				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = body ;
 			}
 		}
 	}
