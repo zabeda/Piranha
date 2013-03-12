@@ -93,14 +93,18 @@
             @if (!Model.Post.IsNew) {
             <li><a href="http://@Request.Url.DnsSafeHost@(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : "")@Url.GetPermalink(Model.Post.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
+            @if (User.HasAccess("ADMIN_POST_PUBLISH")) {
             <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
-            @if (Model.Post.Published > DateTime.MinValue) {
+            }
+            @if (Model.Post.Published > DateTime.MinValue && User.HasAccess("ADMIN_POST_PUBLISH")) {
             <li><a href="@Url.Action("unpublish", new { id = Model.Post.Id })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>
             }
             @if (Model.Post.Published > DateTime.MinValue && Model.Post.Updated > Model.Post.LastPublished) {
             <li><a href="@Url.Action("revert", new { id = Model.Post.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
             }
+            @if (User.HasAccess("ADMIN_POST_PUBLISH")) {
             <li><a href="@Url.Action("delete", new { id = Model.Post.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            }
             <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Url.Action("edit", new { id = Model.Post.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)

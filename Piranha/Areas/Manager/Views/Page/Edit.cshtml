@@ -100,14 +100,16 @@
             @if (!Model.Page.IsNew) {
             <li><a href="http://@Request.Url.DnsSafeHost@(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : "")@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
+            @if (User.HasAccess("ADMIN_PAGE_PUBLISH")) {
             <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
-            @if (Model.Page.Published > DateTime.MinValue && !Model.IsSite) {
+            }
+            @if (Model.Page.Published > DateTime.MinValue && !Model.IsSite && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
             <li><a href="@Url.Action("unpublish", new { id = Model.Page.Id })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>
             }
             @if (Model.Page.Published > DateTime.MinValue && Model.Page.Updated > Model.Page.LastPublished) {
             <li><a href="@Url.Action("revert", new { id = Model.Page.Id })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
             }
-            @if (!Model.Page.IsNew && Model.CanDelete && !Model.IsSite) {
+            @if (!Model.Page.IsNew && Model.CanDelete && !Model.IsSite && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
             <li><a href="@Url.Action("delete", new { id = Model.Page.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
             @if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {

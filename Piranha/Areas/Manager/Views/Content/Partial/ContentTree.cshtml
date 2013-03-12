@@ -6,7 +6,7 @@
             <a href="@Url.Action("insert", "content", new { id = content.Id })" title="@Piranha.Resources.Global.ToolbarAdd" class="icon add marg"></a>
             <a href="@Url.Action("insertfolder", "content", new { id = content.Id })" title="@Piranha.Resources.Content.ToolbarAddFolder" class="icon add-folder marg"></a>
             }
-            @if (content.ChildContent.Count == 0) {
+            @if (content.ChildContent.Count == 0 && User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
             <a href="@Url.Action("delete", "content", new { id = content.Id })" title="@Piranha.Resources.Content.ListDelete" class="icon delete"></a>
             }
         </span>

@@ -48,12 +48,12 @@ VALUES ('08d17dbf-cd1d-40a9-b558-0866210ac4ec', '8940b41a-e3a9-44f3-b564-bfd2814
 INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
 	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
 VALUES ('36fbc1ad-4e17-4767-9fdc-af92802e5ebb', '8940b41a-e3a9-44f3-b564-bfd281416141', 
-	'ADMIN_PAGE', 'Access to add, update and delete pages.', 1, GETDATE(), GETDATE(), 
+	'ADMIN_PAGE', 'Access to add and update pages.', 1, GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
 	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
 VALUES ('c8b44826-d3e6-4add-b241-8ce95429a17e', '8940b41a-e3a9-44f3-b564-bfd281416141', 
-	'ADMIN_POST', 'Access to add, update and delete posts.', 1, GETDATE(), GETDATE(), 
+	'ADMIN_POST', 'Access to add and update posts.', 1, GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
 	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
@@ -63,7 +63,7 @@ VALUES ('79ED0E9E-188C-4C5B-81BA-DB15BB9F8AD5', '8940b41a-e3a9-44f3-b564-bfd2814
 INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
 	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
 VALUES ('E08AE820-D438-4A38-B6E1-AC3ACA3CF933', '8940b41a-e3a9-44f3-b564-bfd281416141', 
-	'ADMIN_CONTENT', 'Access to add, update and delete images & documents.', 1, GETDATE(), GETDATE(), 
+	'ADMIN_CONTENT', 'Access to add and update images & documents.', 1, GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
 	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
@@ -80,11 +80,26 @@ INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sys
 VALUES ('f71ca1b9-1276-4c3e-a090-5fba6c4980ce', '8940b41a-e3a9-44f3-b564-bfd281416141', 'ADMIN_SITETREE', 
 	'Access to administrate site trees.', 1, GETDATE(), GETDATE(), 
 	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
+	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
+VALUES ('da291f10-5bb6-44a5-ae20-1c9932c870e9', '8940b41a-e3a9-44f3-b564-bfd281416141', 
+	'ADMIN_PAGE_PUBLISH', 'Access to publish, depublish and delete pages.', 1, GETDATE(), GETDATE(), 
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
+	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
+VALUES ('1bb90c7d-f3dd-43fe-aff5-985368d316e6', '8940b41a-e3a9-44f3-b564-bfd281416141', 
+	'ADMIN_POST_PUBLISH', 'Access to publish, depublish and delete posts.', 1, GETDATE(), GETDATE(), 
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+INSERT INTO sysaccess (sysaccess_id, sysaccess_group_id, sysaccess_function, sysaccess_description, sysaccess_locked,
+	sysaccess_created, sysaccess_updated, sysaccess_created_by, sysaccess_updated_by)
+VALUES ('222119de-a510-427f-92ff-3d357bdf0c2c', '8940b41a-e3a9-44f3-b564-bfd281416141', 
+	'ADMIN_CONTENT_PUBLISH', 'Access to publish, depublish and delete images & documents.', 1, GETDATE(), GETDATE(), 
+	'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default params
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)
-VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '26', 'The currently installed version of Piranha.', 1,
+VALUES ('9a14664f-806d-4a4f-9a72-e8368fb358d5', 'SITE_VERSION', '27', 'The currently installed version of Piranha.', 1,
 	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO sysparam (sysparam_id, sysparam_name, sysparam_value, sysparam_description, sysparam_locked,
 	sysparam_created, sysparam_updated, sysparam_created_by, sysparam_updated_by)

@@ -201,7 +201,7 @@
                 <td class="buttons three">
                     <button class="icon add-after marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @(page.Seqno + 1))" type="submit"></button>
                     <button class="icon add-below marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
-                    @if (page.Pages.Count == 0) {
+                    @if (page.Pages.Count == 0 && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
                     <a href="@Url.Action("delete", "page", new { id = page.Id })" title="@Piranha.Resources.Page.ListDelete" class="icon delete"></a>
                     }
                 </td>

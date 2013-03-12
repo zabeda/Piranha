@@ -69,7 +69,10 @@
                 <td class="updated">@post.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@post.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
-                    <a href="@Url.Action("delete", new { id = post.Id })" title="Ta bort artikel" class="icon delete"></a></td>
+                    @if (User.HasAccess("ADMIN_POST_PUBLISH")) {
+                    <a href="@Url.Action("delete", new { id = post.Id })" title="Ta bort artikel" class="icon delete"></a>
+                    }
+                </td>
             </tr>
             }
         </tbody>

@@ -467,6 +467,8 @@
     <EmbeddedResource Include="Data\Scripts\Drop.sql" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\28.sql" />
     <EmbeddedResource Include="Areas\Manager\Views\_ViewStart.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Account\Index.cshtml" />
     <EmbeddedResource Include="Areas\Manager\Views\Content\Edit.cshtml" />
