@@ -222,6 +222,7 @@
     </Compile>
     <Compile Include="Rest\DataContracts\PostTemplate.cs" />
     <Compile Include="Rest\DataContracts\PageTemplate.cs" />
+    <Compile Include="Rest\ExpandoObjectSerializer.cs" />
     <Compile Include="Rest\PageTemplateService.cs" />
     <Compile Include="Rest\PostTemplateService.cs" />
     <Compile Include="WebPages\BaseHelper.cs" />

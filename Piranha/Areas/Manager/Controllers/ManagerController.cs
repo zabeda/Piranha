@@ -84,7 +84,7 @@ namespace Piranha.Areas.Manager.Controllers
 				// Get possible return url
 				if (!String.IsNullOrEmpty(Request["returl"]))
 					ViewBag.ReturnUrl = Request["returl"] ;
-				ViewBag.ReturnUrl = "" ;
+				else ViewBag.ReturnUrl = "" ;
 
 				base.OnActionExecuting(filterContext) ;
 			} else {

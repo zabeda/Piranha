@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -28,6 +29,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public List<Extension> Extensions { get ; set ; }
 		[DataMember()]
+		public ExpandoObject ExpandedExtensions { get ; set ; }
+		[DataMember()]
 		public string Created { get ; set ; }
 		[DataMember()]
 		public string Updated { get ; set ; }
@@ -44,6 +47,7 @@ namespace Piranha.Rest.DataContracts
 			Properties = new List<Property>() ;
 			Attachments = new List<Attachment>() ;
 			Extensions = new List<Extension>() ;
+			ExpandedExtensions = new ExpandoObject() ;
 		}
 	}
 }

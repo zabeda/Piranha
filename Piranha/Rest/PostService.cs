@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -21,6 +22,8 @@ namespace Piranha.Rest
 	[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
 	public class PostService : BaseService
 	{
+
+
 		/// <summary>
 		/// Gets the post specified by the given id.
 		/// </summary>
@@ -76,6 +79,7 @@ namespace Piranha.Rest
 						post.Attachments.Add(new Attachment() { Id = content.Id, IsImage = content.IsImage }) ;
 
 					// Extensions
+					post.ExpandedExtensions = pm.Extensions ;
 					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys)
 						post.Extensions.Add(new Extension() { Name = key, Body =
 							((IDictionary<string, object>)pm.Extensions)[key] }) ;
