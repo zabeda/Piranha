@@ -204,6 +204,12 @@ namespace Piranha.Models
 		public override DateTime LastPublished { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the last modified date.
+		/// </summary>
+		[Column(Name="page_last_modified")]
+		public override DateTime LastModified { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the user id that created the record.
 		/// </summary>
 		[Column(Name="page_created_by")]

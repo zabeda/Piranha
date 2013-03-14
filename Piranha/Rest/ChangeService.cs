@@ -36,11 +36,11 @@ namespace Piranha.Rest
 				changes.Sitemap = new SitemapServices().Get(internalid) ;
 
 			// Get all pages last published after the given date.
-			Models.Page.GetFields("page_id", "page_last_published > @0 AND page_draft = 0 AND sitetree_internal_id = @1", latest, internalid).ForEach(p => 
+			Models.Page.GetFields("page_id", "page_last_modified > @0 AND page_draft = 0 AND sitetree_internal_id = @1", latest, internalid).ForEach(p => 
 				changes.Pages.Add(new PageService().GetInternal(p.Id.ToString()))) ;
 
 			// Get all posts last published after the given date.
-			Models.Post.GetFields("post_id", "post_last_published > @0 AND post_draft = 0", latest).ForEach(p =>
+			Models.Post.GetFields("post_id", "post_last_modified > @0 AND post_draft = 0", latest).ForEach(p =>
 				changes.Posts.Add(new PostService().GetInternal(p.Id.ToString()))) ;
 
 			// Get all categories updated after the given date.
@@ -48,7 +48,7 @@ namespace Piranha.Rest
 				Each((i, c) => changes.Categories.Add(c)) ;
 
 			// Get all content updated after the given date.
-			Models.Content.GetFields("content_id", "content_updated > @0 AND content_folder = 0", latest).ForEach(c =>
+			Models.Content.GetFields("content_id", "content_last_published > @0 AND content_draft = 0 AND content_folder = 0", latest).ForEach(c =>
 				changes.Content.Add(new ContentService().Get(c.Id.ToString()))) ;
 
 			// Get all page templates updated after the given date.

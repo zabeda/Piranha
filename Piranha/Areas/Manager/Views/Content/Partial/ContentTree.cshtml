@@ -15,7 +15,9 @@
         <span class="title">@if (content.ChildContent.Count > 0) {<span class="action"></span>}<a href="@Url.Action("edit", "content", new { id = content.Id })">
             <img class="thumb" src="@Url.GetThumbnailUrl(content.Id, 32)" alt="@content.AlternateText" />
             @content.DisplayName
-        </a></span>
+            <div class="list-info">
+                @Html.Raw(content.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (content.Updated > content.LastPublished ? "<span class=info-draft></span>" : ""))
+            </div></a></span>
         @if (content.ChildContent.Count > 0) {
         <ul>
             @Html.Partial("Partial/ContentTree", content.ChildContent)

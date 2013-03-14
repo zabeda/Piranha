@@ -16,6 +16,17 @@ namespace Piranha.Models.Manager.PostModels
 	/// </summary>
 	public class EditModel
 	{
+		#region Inner classes
+		public enum ActionType { NORMAL, SEO, ATTACHMENTS }
+		#endregion
+
+		#region Members
+		/// <summary>
+		/// The current page action.
+		/// </summary>
+		public ActionType Action = ActionType.NORMAL ;
+		#endregion
+
 		#region Binder
 		public class Binder : DefaultModelBinder
 		{

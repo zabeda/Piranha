@@ -1,5 +1,6 @@
 ﻿@model Piranha.Models.Manager.PostModels.EditModel
 @using Piranha.Extend;
+@using Piranha.Models.Manager.PostModels;
 @section Head {
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.form.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Areas/Manager/Content/Js/jquery.attachment.js")"></script>
@@ -13,6 +14,13 @@
 
         $(document).ready(function () {
             $("#Post_Title").focus();
+
+            @if (Model.Action == EditModel.ActionType.ATTACHMENTS) {
+            <text>
+            $('#btn_attachments').click();
+            </text>
+            }
+
 
             $("#PostCategories").chosen().change(function () {
                 console.log("change");
@@ -61,7 +69,7 @@
             // Add the attachment
             $(".attachments").append(
                 '<tr data-id="' + a.Id + '">' +
-                    '<td><img src="' + a.ThumbnailUrl + '/50")" /></td>' +
+                    '<td><img src="' + a.ThumbnailUrl + '/50" /></td>' +
                     '<td>' + a.Filename + '</td>' +
                     '<td>' + a.Type + '</td>' +
                     '<td class="buttons three">' +

@@ -287,10 +287,10 @@ namespace Piranha.Models.Manager.ContentModels
 			ContentCategories = new List<Guid>() ;
 			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
-			var folders = Content.GetFields("content_id, content_name", "content_folder=1", new Params() { OrderBy = "content_name" }) ;
+			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1", new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
 			Extensions = Content.GetExtensions() ;
-			Folders = SortFolders(Content.GetFolderStructure()) ;
+			Folders = SortFolders(Content.GetFolderStructure(false)) ;
 			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
 		}
 
@@ -301,11 +301,11 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <returns>The model</returns>
 		public static EditModel GetById(Guid id) {
 			EditModel em = new EditModel() ;
-			em.Content = Piranha.Models.Content.GetSingle(id) ;
+			em.Content = Piranha.Models.Content.GetSingle(id, true) ;
 			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
 			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
-			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
+			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
 			em.Extensions = em.Content.GetExtensions() ;
 
@@ -315,12 +315,11 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Saves the edit model.
 		/// </summary>
-		public bool SaveAll() {
+		public bool SaveAll(bool draft) {
 			var context = HttpContext.Current ;
 			var hasfile = UploadedFile != null || ServerFile != null ;
 			byte[] data = null ;
 			WebClient web = new WebClient() ;
-			Image img = null ;
 
 			// Check if the original URL has been updated, and if so 
 			if (!Content.IsNew && !String.IsNullOrEmpty(Content.OriginalUrl)) {
@@ -337,55 +336,36 @@ namespace Piranha.Models.Manager.ContentModels
 				Content.LastSynced = Convert.ToDateTime(web.ResponseHeaders[HttpResponseHeader.LastModified]) ;
 			}
 
-			if (hasfile || data != null) {
-				// Check if this is an image
-				try {
-					//Image img = null ;
-
-					if (hasfile) {
-						if (UploadedFile != null) {
-							img = Image.FromStream(UploadedFile.InputStream) ;
-						} else {
-							using (var stream = ServerFile.OpenRead()) {
-								img = Image.FromStream(stream) ;
-							}
-						}
-					} else {
-						MemoryStream mem = new MemoryStream(data) ;
-						img = Image.FromStream(mem) ;
-					}
-
-					try {
-						// Resize the image according to image max width
-						int max = Convert.ToInt32(SysParam.GetByName("IMAGE_MAX_WIDTH").Value) ;
-						if (max > 0)
-							img = Drawing.ImageUtils.Resize(img, max) ;
-					} catch {}
-					Content.IsImage = true ;
-					Content.Width = img.Width ;
-					Content.Height = img.Height ;
-				} catch {
-					Content.IsImage = false ;
-				}
-				if (hasfile) {
-					if (UploadedFile != null) {
-						Content.Filename = UploadedFile.FileName ;
-						Content.Type = UploadedFile.ContentType ;
-						Content.Size = UploadedFile.ContentLength ;
-					} else {
-						Content.Filename = ServerFile.Name ;
-						Content.Type = MimeType.Get(ServerFile.Name); 
-						Content.Size = Convert.ToInt32(ServerFile.Length) ;
+			var media = new MediaFileContent() ;
+			if (hasfile) {
+				if (UploadedFile != null) {
+					media.Filename = UploadedFile.FileName ;
+					media.ContentType = UploadedFile.ContentType ;					
+					using (var reader = new BinaryReader(UploadedFile.InputStream)) {
+						media.Body = reader.ReadBytes(Convert.ToInt32(UploadedFile.InputStream.Length)) ;
 					}
 				} else {
-					Content.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1) ;
-					Content.Type = web.ResponseHeaders["Content-Type"] ;
-					Content.Size = Convert.ToInt32(web.ResponseHeaders["Content-Length"]) ;
+					media.Filename = ServerFile.Name ;
+					media.ContentType = MimeType.Get(ServerFile.Name) ;
+					using (var stream = ServerFile.OpenRead()) {
+						media.Body = new byte[ServerFile.Length] ;
+						stream.Read(media.Body, 0, media.Body.Length) ;
+					}
 				}
+			} else if (data != null) {
+				media.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1) ;
+				media.ContentType = web.ResponseHeaders["Content-Type"] ;
+				media.Body = data ;
+			} else {
+				media = null ;
 			}
 
+			var saved = false ;
+			if (draft)
+				saved = Content.Save(media) ;
+			else saved = Content.SaveAndPublish(media) ;
 
-			if (Content.Save()) {
+			if (saved) {
 				// Save related information
 				Relation.DeleteByDataId(Content.Id) ;
 				List<Relation> relations = new List<Relation>() ;
@@ -398,41 +378,15 @@ namespace Piranha.Models.Manager.ContentModels
 				foreach (var ext in Extensions) {
 					ext.ParentId = Content.Id ;
 					ext.Save() ;
-				}
-
-				// Save the physical file
-				if (hasfile || data != null) {
-					string path = context.Server.MapPath("~/App_Data/content") ;
-					if (File.Exists(Content.PhysicalPath)) {
-						File.Delete(Content.PhysicalPath) ;
-						Content.DeleteCache() ;
-					}
-					if (img != null) {
-						// If we have an image, save the resized version.
-						var newImg = new Bitmap(img); 
-						newImg.Save(Content.PhysicalPath, newImg.RawFormat);
-
-						// Now update the filesize
-						var imgInfo = new FileInfo(Content.PhysicalPath) ;
-						Content.Size = (int)imgInfo.Length ;
-						Content.Save() ;
-					} else if (hasfile) {
-						if (UploadedFile != null) {
-							UploadedFile.SaveAs(Content.PhysicalPath) ;
-						} else ServerFile.CopyTo(Content.PhysicalPath, true) ;
-					} else {
-						FileStream writer = new FileStream(Content.PhysicalPath, FileMode.Create) ;
-						BinaryWriter binary = new BinaryWriter(writer) ;
-						binary.Write(data) ;
-						binary.Flush() ;
-						binary.Close() ;
+					if (!draft) {
+						if (Extension.GetScalar("SELECT COUNT(extension_id) FROM extension WHERE extension_id=@0 AND extension_draft=0", ext.Id) == 0)
+							ext.IsNew = true ;
+						ext.IsDraft = false ;
+						ext.Save() ;
 					}
 				}
 				// Reset file url
 				FileUrl = "" ;
-
-				// Delete possible old thumbnails
-				Content.DeleteCache() ;
 
 				return true ;
 			}
@@ -458,7 +412,7 @@ namespace Piranha.Models.Manager.ContentModels
 						if (lastMod != Content.LastSynced) {
 							// Update FileUrl and save the model
 							FileUrl = url ;
-							return SaveAll() ;
+							return SaveAll(true) ;
 						}
 					}
 				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.MovedPermanently) {
@@ -479,10 +433,13 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Deletes the specified content and its related file.
 		/// </summary>
 		public bool DeleteAll() {
+			var content = Content.Get("content_id = @0", Content.Id) ;
+
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
 					File.Delete(HttpContext.Current.Server.MapPath("~/App_Data/Content/" + Content.Id)) ;
-					Content.Delete(tx) ;
+					foreach (var c in content)
+						c.Delete(tx) ;
 					tx.Commit() ;
 					return true ;
 				} catch { tx.Rollback() ; }

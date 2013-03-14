@@ -89,6 +89,16 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
+		/// Sets the correct headers for no cache.
+		/// </summary>
+		/// <param name="context">The current context</param>
+		/// <returns>If the headers was written successfully</returns>
+		public static bool HandleNoCache(HttpContext context) {
+			context.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
+			return true ;
+		}
+
+		/// <summary>
 		/// Generates an unique entity tag.
 		/// </summary>
 		/// <param name="name">Object name</param>

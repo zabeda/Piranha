@@ -30,6 +30,11 @@ namespace Piranha.Models
 		/// Gets/sets the last published date.
 		/// </summary>
 		public abstract DateTime LastPublished { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the last modified date.
+		/// </summary>
+		public abstract DateTime LastModified { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -46,11 +51,11 @@ namespace Piranha.Models
 				T self = GetSelf() ;
 
 				// Set up the dates.
-				LastPublished = Updated = DateTime.Now ;
+				LastPublished = LastModified = Updated = DateTime.Now ;
 				if (IsNew)
 					Created = Updated ;
 				if (self == null)
-					Published = Updated ;
+					Published = LastModified = Updated ;
 
 				// First save an up-to-date draft
 				IsDraft = true ;

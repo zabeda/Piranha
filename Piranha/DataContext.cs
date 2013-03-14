@@ -37,7 +37,7 @@ namespace Piranha
 		public DbSet<Entities.SiteTree> SiteTrees { get ; set ; }
 		public DbSet<Entities.Permalink> Permalinks { get ; set ; }
 		public DbSet<Entities.Category> Categories { get ; set ; }
-		public DbSet<Entities.Media> Media { get ; set ; }
+		public IQueryable<Entities.Media> Media { get { return Set<Entities.Media>().Where(m => !m.IsDraft) ; } }
 		public IQueryable<Entities.Property> Properties { get { return Set<Entities.Property>().Where(p => !p.IsDraft) ; } }
 		public IQueryable<Entities.Region> Regions { get { return Set<Entities.Region>().Where(r => !r.IsDraft) ; } }
 		public IQueryable<Entities.Post> Posts { get { return Set<Entities.Post>().Where(p => !p.IsDraft) ; } }
@@ -49,6 +49,7 @@ namespace Piranha
 		// Drafts
 		public IQueryable<Entities.Page> PageDrafts { get { return Set<Entities.Page>().Where(p => p.IsDraft) ; } }
 		public IQueryable<Entities.Post> PostDrafts { get { return Set<Entities.Post>().Where(p => p.IsDraft) ; } }
+		public IQueryable<Entities.Media> MediaDraft { get { return Set<Entities.Media>().Where(m => m.IsDraft) ; } }
 		#endregion
 
 		/// <summary>

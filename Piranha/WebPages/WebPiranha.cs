@@ -174,6 +174,7 @@ namespace Piranha.WebPages
 			RegisterHandler("draft", "DRAFT", new DraftHandler()) ;
 			RegisterHandler("media", "CONTENT", new ContentHandler()) ;
 			RegisterHandler("thumb", "THUMBNAIL", new ThumbnailHandler()) ;
+			RegisterHandler("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler()) ;
 			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;
 			RegisterHandler("archive", "ARCHIVE", new ArchiveHandler()) ;
 			RegisterHandler("rss", "RSS", new RssHandler()) ;

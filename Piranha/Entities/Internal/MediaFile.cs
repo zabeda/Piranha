@@ -11,6 +11,15 @@ using Piranha.Web;
 
 namespace Piranha.Models
 {
+	public class MediaFileContent
+	{
+		#region Properties
+		public string Filename { get ; set ; }
+		public string ContentType { get ; set ; }
+		public byte[] Body { get ; set ; }
+		#endregion
+	}
+
 	/// <summary>
 	/// Abstract base class for all media files.
 	/// </summary>
@@ -41,28 +50,28 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the virtual path for the media file.
 		/// </summary>
-		public string VirtualPath { 
+		public virtual string VirtualPath { 
 			get { return BasePath + Id ; }
 		}
 
 		/// <summary>
 		/// Gets the virtual path for the cached media file.
 		/// </summary>
-		public string VirtualCachePath {
+		public virtual string VirtualCachePath {
 			get { return CachePath + Id ; }
 		}
 
 		/// <summary>
 		/// Gets the physical path for the media file.
 		/// </summary>
-		public string PhysicalPath {
+		public virtual string PhysicalPath {
 			get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
 		}
 
 		/// <summary>
 		/// Gets the physical path for the cached media file.
 		/// </summary>
-		public string PhysicalCachePath {
+		public virtual string PhysicalCachePath {
 			get { return HttpContext.Current.Server.MapPath(VirtualCachePath) ; }
 		}
 		#endregion
@@ -131,15 +140,40 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Saves the 
+		/// </summary>
+		/// <param name="file"></param>
+		/// <param name="tx"></param>
+		/// <param name="setdates"></param>
+		/// <returns></returns>
+		public virtual bool Save(MediaFileContent content, System.Data.IDbTransaction tx = null, bool setdates = true) {
+			if (content != null) {
+				// Set filename
+				if (!String.IsNullOrEmpty(content.Filename))
+					Filename = content.Filename ;
+				// Set content type
+				if (!String.IsNullOrEmpty(content.ContentType))
+					Type = content.ContentType ;
+			}
+			if (base.Save(tx) && content != null) {
+				if (File.Exists(PhysicalPath)) {
+					DeleteFile() ;
+					DeleteCache() ;
+				}
+				File.WriteAllBytes(PhysicalPath, content.Body) ;
+			}
+			return base.Save(tx, setdates);
+		}
+
+		/// <summary>
 		/// Deletes the media file record and all related files.
 		/// </summary>
 		/// <param name="tx">Optional database transaction</param>
 		/// <returns>Weather the action was a success</returns>
 		public override bool Delete(System.Data.IDbTransaction tx = null) {
 			if (base.Delete(tx)) {
-				// Delete original file
-				if (File.Exists(PhysicalPath))
-					File.Delete(PhysicalPath) ;
+				// Delete original files
+				DeleteFile() ;
 
 				// Delete Cache
 				DeleteCache() ;
@@ -147,6 +181,16 @@ namespace Piranha.Models
 				return true;
 			}
 			return false;
+		}
+
+		/// <summary>
+		/// Deletes the published and working copy of the media file.
+		/// </summary>
+		public void DeleteFile() {
+			DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(BasePath)) ;
+
+			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) 
+				file.Delete() ;
 		}
 
 		/// <summary>

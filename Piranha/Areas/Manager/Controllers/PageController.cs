@@ -99,9 +99,13 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(string id) {
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
-			if (!String.IsNullOrEmpty(Request["action"]) && Request["action"].ToLower() == "seo") {
-				ViewBag.ReturnUrl = Url.Action("seo", new { @id = pm.Page.SiteTreeInternalId.ToLower() }) ;
-				pm.Action = EditModel.ActionType.SEO ;
+			if (!String.IsNullOrEmpty(Request["action"])) {
+				if (Request["action"].ToLower() == "seo") {
+					ViewBag.ReturnUrl = Url.Action("seo", new { @id = pm.Page.SiteTreeInternalId.ToLower() }) ;
+					pm.Action = EditModel.ActionType.SEO ;
+				} else if (Request["action"].ToLower() == "attachments") {
+					pm.Action = EditModel.ActionType.ATTACHMENTS ;
+				}
 			}
 
 			if (!pm.IsSite)

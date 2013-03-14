@@ -17,7 +17,7 @@
             @if (first && content.ParentId != Guid.Empty) {
             <img class="folder" data-id="@content.Id" src="@Url.Content("~/areas/manager/content/img/ico-folder-up-96.png")" />
             } else {
-            <img@(content.IsFolder ? " class=folder" : (!content.IsImage ? " class=document" : "")) data-id="@content.Id" src="@Url.Content("~/thumb/" + content.Id + "/96")" title="@content.AlternateText" alt="@content.AlternateText" />
+            <img@(content.IsFolder ? " class=folder" : (!content.IsImage ? " class=document" : "")) data-id="@content.Id" src="@Url.GetThumbnailUrl(content.Id, 96)" title="@content.AlternateText" alt="@content.AlternateText" />
             }
             <p><small>@content.DisplayName</small></p>
         </div>

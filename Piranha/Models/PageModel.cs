@@ -281,7 +281,7 @@ namespace Piranha.Models
 			}
 			// Attachments
 			foreach (var guid in ((Models.Page)Page).Attachments) {
-				var a = Models.Content.GetSingle(guid) ;
+				var a = Models.Content.GetSingle(guid, Page.IsDraft) ;
 				if (a != null)
 					Attachments.Add(a) ;
 			}

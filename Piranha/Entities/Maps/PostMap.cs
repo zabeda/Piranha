@@ -30,6 +30,7 @@ namespace Piranha.Entities.Maps
 			Property(p => p.Updated).HasColumnName("post_updated") ;
 			Property(p => p.Published).HasColumnName("post_published") ;
 			Property(p => p.LastPublished).HasColumnName("post_last_published") ;
+			Property(p => p.LastModified).HasColumnName("post_last_modified") ;
 			Property(p => p.CreatedById).HasColumnName("post_created_by") ;
 			Property(p => p.UpdatedById).HasColumnName("post_updated_by") ;
 

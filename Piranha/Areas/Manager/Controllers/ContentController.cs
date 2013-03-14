@@ -48,7 +48,7 @@ namespace Piranha.Areas.Manager.Controllers
 				em.FileUrl = m.FileUrl ;
 				em.UploadedFile = m.UploadedFile ;
 
-				if (em.SaveAll())
+				if (em.SaveAll(false))
 					return new JsonResult() { Data = true } ;
 			}
 			return new JsonResult() { Data = false } ;
@@ -116,22 +116,29 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="m">The model</param>
 		[HttpPost()]
 		[Access(Function="ADMIN_CONTENT")]
-		public ActionResult Edit(EditModel m) {
-			if (m.SaveAll()) {
+		public ActionResult Edit(bool draft, EditModel m) {
+			if (m.SaveAll(draft)) {
 				ViewBag.Folder = m.Content.IsFolder ;
 				if (m.Content.IsImage) {
 					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
-					SuccessMessage(Piranha.Resources.Content.MessageImageSaved) ;
+					if (draft)
+						SuccessMessage(Piranha.Resources.Content.MessageImageSaved, true) ;
+					else SuccessMessage(Piranha.Resources.Content.MessageImagePublished, true) ;
 				} else if (m.Content.IsFolder) {
 					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingFolder ;
-					SuccessMessage(Piranha.Resources.Content.MessageFolderSaved) ;
+					if (draft)
+						SuccessMessage(Piranha.Resources.Content.MessageFolderSaved, true) ;
+					else SuccessMessage(Piranha.Resources.Content.MessageFolderPublished, true) ;
 				} else {
 					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
-					SuccessMessage(Piranha.Resources.Content.MessageDocumentSaved) ;
+					if (draft)
+						SuccessMessage(Piranha.Resources.Content.MessageDocumentSaved, true) ;
+					else SuccessMessage(Piranha.Resources.Content.MessageDocumentPublished, true) ;
 				}
-				ModelState.Clear() ;
-				m.Refresh() ;
-				return View("Edit", m) ;
+				// ModelState.Clear() ;
+				// m.Refresh() ;
+				// return View("Edit", m) ;
+				return RedirectToAction("edit", new { id = m.Content.Id, returl = ViewBag.ReturnUrl }) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Content.EditTitleNew ;
 				ErrorMessage(Piranha.Resources.Content.MessageNotSaved) ;
@@ -151,25 +158,25 @@ namespace Piranha.Areas.Manager.Controllers
 			try {
 				if (m.Sync()) {
 					if (m.Content.IsImage)
-						SuccessMessage(Piranha.Resources.Content.MessageImageSynced) ;
-					else SuccessMessage(Piranha.Resources.Content.MessageDocumentSynced) ;
+						SuccessMessage(Piranha.Resources.Content.MessageImageSynced, true) ;
+					else SuccessMessage(Piranha.Resources.Content.MessageDocumentSynced, true) ;
 				} else {
 					if (m.Content.IsImage)
-						InformationMessage(Piranha.Resources.Content.MessageImageNotSynced) ;
-					else InformationMessage(Piranha.Resources.Content.MessageDocumentNotSynced) ;
+						InformationMessage(Piranha.Resources.Content.MessageImageNotSynced, true) ;
+					else InformationMessage(Piranha.Resources.Content.MessageDocumentNotSynced, true) ;
 				}
 			} catch (HttpException e) {
 				if (e.GetHttpCode() == 404) {
 					if (m.Content.IsImage)
-						ErrorMessage(Piranha.Resources.Content.MessageImageNotFound) ;
-					else ErrorMessage(Piranha.Resources.Content.MessageDocumentNotFound) ;
+						ErrorMessage(Piranha.Resources.Content.MessageImageNotFound, true) ;
+					else ErrorMessage(Piranha.Resources.Content.MessageDocumentNotFound, true) ;
 				} else {
 					if (m.Content.IsImage)
-						ErrorMessage(Piranha.Resources.Content.MessageImageSyncError) ;
-					else ErrorMessage(Piranha.Resources.Content.MessageDocumentSyncError) ;
+						ErrorMessage(Piranha.Resources.Content.MessageImageSyncError, true) ;
+					else ErrorMessage(Piranha.Resources.Content.MessageDocumentSyncError, true) ;
 				}
 			}
-			return EditInternal(m) ;
+			return RedirectToAction("edit", new { id = id, returl = ViewBag.ReturnUrl }) ;
 		}
 
 		/// <summary>
@@ -182,18 +189,71 @@ namespace Piranha.Areas.Manager.Controllers
 
 			if (m.DeleteAll()) {
 				if (m.Content.IsImage)
-					SuccessMessage(Piranha.Resources.Content.MessageImageDeleted) ;
+					SuccessMessage(Piranha.Resources.Content.MessageImageDeleted, true) ;
 				else if (m.Content.IsFolder)
-					SuccessMessage(Piranha.Resources.Content.MessageFolderDeleted) ;
-				else SuccessMessage(Piranha.Resources.Content.MessageDocumentDeleted) ;
+					SuccessMessage(Piranha.Resources.Content.MessageFolderDeleted, true) ;
+				else SuccessMessage(Piranha.Resources.Content.MessageDocumentDeleted, true) ;
 			} else {
 				if (m.Content.IsImage)
-					ErrorMessage(Piranha.Resources.Content.MessageImageNotDeleted) ;
+					ErrorMessage(Piranha.Resources.Content.MessageImageNotDeleted, true) ;
 				else if (m.Content.IsFolder)
-					ErrorMessage(Piranha.Resources.Content.MessageFolderNotDeleted) ;
-				else ErrorMessage(Piranha.Resources.Content.MessageDocumentNotDeleted) ;
-			} 
-			return Index() ;
+					ErrorMessage(Piranha.Resources.Content.MessageFolderNotDeleted, true) ;
+				else ErrorMessage(Piranha.Resources.Content.MessageDocumentNotDeleted, true) ;
+			}
+			if (!String.IsNullOrEmpty(ViewBag.ReturnUrl))
+				return Redirect(ViewBag.ReturnUrl) ;
+			return RedirectToAction("index") ;
+		}
+
+		/// <summary>
+		/// Reverts to latest published verison.
+		/// </summary>
+		/// <param name="id">The page id.</param>
+		[Access(Function="ADMIN_CONTENT")]
+		public ActionResult Revert(string id) {
+			Piranha.Models.Content.Revert(new Guid(id)) ;
+
+			var content = Piranha.Models.Content.GetSingle(new Guid(id)) ;
+			if (content != null) {
+				SuccessMessage(Piranha.Resources.Content.MessageReverted, true) ;
+			} else {
+				ErrorMessage(Piranha.Resources.Content.MessageNotFound, true) ;
+			}
+			return RedirectToAction("edit", new { id = id, returl = ViewBag.ReturnUrl }) ;
+			//return Edit(id) ;
+		}
+
+		/// <summary>
+		/// Unpublishes the specified page.
+		/// </summary>
+		/// <param name="id">The page id</param>
+		[Access(Function="ADMIN_PAGE")]
+		public ActionResult Unpublish(string id) {
+			Piranha.Models.Content.Unpublish(new Guid(id)) ;
+
+			var content = Piranha.Models.Content.GetSingle(new Guid(id), true) ;
+			if (content != null) {
+				if (content.IsFolder)
+					SuccessMessage(Piranha.Resources.Content.MessageFolderUnpublished, true) ;
+				else if (content.IsImage)
+					SuccessMessage(Piranha.Resources.Content.MessageImageUnpublished, true) ;
+				else SuccessMessage(Piranha.Resources.Content.MessageDocumentUnpublished, true) ;
+			} else {
+				ErrorMessage(Piranha.Resources.Content.MessageNotFound, true) ;
+			}
+			return RedirectToAction("edit", new { id = id, returl = ViewBag.ReturlUrl }) ;
+			//return Edit(id) ;
+		}
+
+		/// <summary>
+		/// Gets the content object with the given id
+		/// </summary>
+		/// <param name="id">The content id</param>
+		[Access(Function="ADMIN_CONTENT")]
+		public JsonResult Get(string id) {
+			var service = new Rest.ContentService() ;
+
+			return Json(service.Get(new Guid(id), true), JsonRequestBehavior.AllowGet) ;
 		}
     }
 }

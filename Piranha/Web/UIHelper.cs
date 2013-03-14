@@ -202,9 +202,10 @@ namespace Piranha.Web
 		/// <returns>The content url</returns>
 		public IHtmlString Content(Guid id, int width = 0, int height = 0) {
 			Content cnt = Models.Content.GetSingle(id) ;
-			
+			var draft = (CurrentPage != null && CurrentPage.IsDraft) || (CurrentPost != null && CurrentPost.IsDraft) ;
+
 			if (cnt != null)
-				return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") +
+				return new HtmlString(Url("~/" + (!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") : WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENTDRAFT")) +
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
@@ -228,12 +229,13 @@ namespace Piranha.Web
 		/// <returns>The image html string</returns>
 		public IHtmlString Thumbnail(Guid id, int size = 0) {
 			Content cnt = Models.Content.GetSingle(id) ;
+			var draft = (CurrentPage != null && CurrentPage.IsDraft) || (CurrentPost != null && CurrentPost.IsDraft) ;
 			
 			if (cnt != null) {
 				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
 
 				return new HtmlString(String.Format("<img src=\"{0}\" alt=\"{1}\" />", Url("~/" + 
-					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + 
+					(!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") : WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAILDRAFT")) + "/" + 
 					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")), cnt.AlternateText)) ;
 			} else {
 				Page page = Page.GetSingle(id) ;

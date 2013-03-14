@@ -6,7 +6,16 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             @if (User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
-            <li><a href="@Url.Action("delete", new { id = Model.Content.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
+            }
+            @if (Model.Content.Published > DateTime.MinValue && User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
+            <li><a href="@Url.Action("unpublish", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>
+            }
+            @if (Model.Content.Published > DateTime.MinValue && Model.Content.Updated > Model.Content.LastPublished) {
+            <li><a href="@Url.Action("revert", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })" class="revert">@Piranha.Resources.Global.ToolbarRevert</a></li>
+            }
+            @if (User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
+            <li><a href="@Url.Action("delete", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
             @if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {
             <li><a href="@Url.Action("index", new { id = Model.Content.Id })" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
@@ -25,11 +34,14 @@
 }
 @{ Html.BeginForm("edit", "content", FormMethod.Post, new { enctype = "multipart/form-data" }) ; }
 @Html.HiddenFor(m => m.Content.Id)
+@Html.HiddenFor(m => m.Content.IsDraft)
 @Html.HiddenFor(m => m.Content.IsNew)
 @Html.HiddenFor(m => m.Content.IsImage)
 @Html.HiddenFor(m => m.Content.IsFolder)
 @Html.HiddenFor(m => m.Content.Created)
 @Html.HiddenFor(m => m.Content.CreatedBy)
+@Html.HiddenFor(m => m.Content.Published)
+@Html.HiddenFor(m => m.Content.LastPublished)
 @Html.HiddenFor(m => m.Content.Filename)
 @Html.HiddenFor(m => m.Content.Type)
 @Html.HiddenFor(m => m.Content.Width)
@@ -37,6 +49,7 @@
 @Html.HiddenFor(m => m.Content.Size)
 @Html.HiddenFor(m => m.Content.LastSynced)
 @Html.Hidden("returl", (string)ViewBag.ReturnUrl)
+@Html.Hidden("draft", true)
 <div class="grid_9">
     @if (!ViewBag.Folder) {
     <div class="box">
@@ -150,7 +163,7 @@
         <div class="title"><h2>@Piranha.Resources.Global.Thumbnail</h2></div>
         <div class="inner">
             @if (!Model.Content.IsNew) {
-                <img style="max-width:190px" alt="@Model.Content.AlternateText" src="@Url.Content("~/thumb/" + Model.Content.Id + "/190")" />
+                <img style="max-width:190px" alt="@Model.Content.AlternateText" src="@Url.GetThumbnailUrl(Model.Content.Id, 190)" />
             } else {
                 <p><em>@Piranha.Resources.Content.ThumbnailNewDescription</em></p>
             }

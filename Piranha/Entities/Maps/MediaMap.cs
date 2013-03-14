@@ -14,7 +14,9 @@ namespace Piranha.Entities.Maps
 		public MediaMap() {
 			ToTable("content") ;
 
+			HasKey(m => new { m.Id, m.IsDraft }) ;
 			Property(m => m.Id).HasColumnName("content_id") ;
+			Property(m => m.IsDraft).HasColumnName("content_draft") ;
 			Property(m => m.ParentId).HasColumnName("content_parent_id") ;
 			Property(m => m.Filename).HasColumnName("content_filename").HasMaxLength(128) ;
 			Property(m => m.OriginalUrl).HasColumnName("content_url").HasMaxLength(255) ;
@@ -30,13 +32,15 @@ namespace Piranha.Entities.Maps
 			Property(m => m.Description).HasColumnName("content_description").HasMaxLength(255) ;
 			Property(m => m.Created).HasColumnName("content_created") ;
 			Property(m => m.Updated).HasColumnName("content_updated") ;
+			Property(m => m.Published).HasColumnName("content_published") ;
+			Property(m => m.LastPublished).HasColumnName("content_last_published") ;
 			Property(m => m.CreatedById).HasColumnName("content_created_by") ;
 			Property(m => m.UpdatedById).HasColumnName("content_updated_by") ;
 
 			HasRequired(m => m.CreatedBy) ;
 			HasRequired(m => m.UpdatedBy) ;
-			HasMany(m => m.Extensions).WithRequired().HasForeignKey(e => e.ParentId) ;
-			HasMany(m => m.Comments).WithRequired().HasForeignKey(c => c.ParentId) ;
+			HasMany(m => m.Extensions).WithRequired().HasForeignKey(e => new { e.ParentId, e.IsDraft }) ;
+			HasMany(m => m.Comments).WithRequired().HasForeignKey(c => new { c.ParentId, c.ParentIsDraft }) ;
 		}
 	}
 }

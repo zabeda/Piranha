@@ -123,7 +123,7 @@ namespace Piranha.Models
 			}
 
 			// Attachments
-			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a))) ;
+			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a, ((Post)Post).IsDraft))) ;
 
 			// Extensions
 			foreach (var ext in ((Post)Post).GetExtensions()) {

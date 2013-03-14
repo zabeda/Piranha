@@ -228,6 +228,8 @@
     <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="WebPages\FormHelper.cs" />
     <Compile Include="WebPages\HttpPostAttribute.cs" />
+    <Compile Include="WebPages\RequestHandlers\DraftContentHandler.cs" />
+    <Compile Include="WebPages\RequestHandlers\DraftThumbnailHandler.cs" />
     <Compile Include="WebPages\UIHelper.cs" />
     <Compile Include="Web\APIKeyAuthorization.cs" />
     <Compile Include="Web\APIKeys.cs" />
@@ -468,6 +470,7 @@
     <EmbeddedResource Include="Data\Scripts\Drop.sql" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\Updates\29.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\28.sql" />
     <EmbeddedResource Include="Areas\Manager\Views\_ViewStart.cshtml" />

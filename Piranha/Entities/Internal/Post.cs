@@ -19,7 +19,7 @@ namespace Piranha.Models
 	[Join(TableName="posttemplate", ForeignKey="post_template_id", PrimaryKey="posttemplate_id")]
 	[Join(TableName="permalink", ForeignKey="post_permalink_id", PrimaryKey="permalink_id")]
 	[Serializable]
-	public class Post : DraftRecord<Post>, IPost
+	public class Post : DraftRecord<Post>, IPost, ICacheRecord<Post>
 	{
 		#region Fields
 		/// <summary>
@@ -140,6 +140,12 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="post_last_published")]
 		public override DateTime LastPublished { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the last modified date.
+		/// </summary>
+		[Column(Name="post_last_modified")]
+		public override DateTime LastModified { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the user id that created the record.
@@ -307,5 +313,19 @@ namespace Piranha.Models
 			return new List<Guid>() ;
 		}
 		#endregion
+
+		/// <summary>
+		/// Invalidates the current record from the cache.
+		/// </summary>
+		/// <param name="record">The record</param>
+		public void InvalidateRecord(Post record) {
+			Cache.Current.Remove(record.Id.ToString()) ;
+
+			// If we click save & publish right away the permalink is not created yet.
+			if (record.Permalink != null && PermalinkCache.ContainsKey(record.Permalink))
+				PermalinkCache.Remove(record.Permalink) ;
+			if (record.Permalink != null && PermalinkIdCache.ContainsKey(record.PermalinkId))
+				PermalinkIdCache.Remove(record.PermalinkId) ;
+		}
 	}
 }

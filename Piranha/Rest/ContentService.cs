@@ -28,26 +28,9 @@ namespace Piranha.Rest
 		[OperationContract()]
 		[WebGet(UriTemplate="get/{id}", ResponseFormat=WebMessageFormat.Json)]
 		public Content Get(string id = "") {
-			try {
-				Models.Content c = Models.Content.GetSingle(new Guid(id)) ;
-
-				if (c != null) {
-					return new Content() {
-						Id = c.Id,
-						ParentId = c.ParentId,
-						Filename = c.Filename,
-						Name = c.Name,
-						DisplayName = c.DisplayName,
-						Description = c.Description,
-						Type = c.Type,
-						Size = c.Size,
-						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + c.Id,
-						ContentUrl = WebPages.WebPiranha.ApplicationPath + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") + "/" + c.Id,
-						Created = c.Created.ToString(),
-						Updated = c.Updated.ToString()
-					};
-				}
-			} catch {}
+			if (!String.IsNullOrEmpty(id)) {
+				return Get(new Guid(id)) ;
+			}
 			return null ;
 		}
 
@@ -60,6 +43,40 @@ namespace Piranha.Rest
 		[WebGet(UriTemplate="get/xml/{id}", ResponseFormat=WebMessageFormat.Xml)]
 		public Content GetXml(string id) {
 			return Get(id) ;
+		}
+
+		/// <summary>
+		/// Gets the content specified by the given id.
+		/// </summary>
+		/// <param name="id">The id</param>
+		/// <param name="draft">Weather to get the draft or not</param>
+		/// <returns>The content</returns>
+		internal Content Get(Guid id, bool draft = false) {
+			try {
+				Models.Content c = Models.Content.GetSingle(id, draft) ;
+
+				if (c != null) {
+					return new Content() {
+						Id = c.Id,
+						ParentId = c.ParentId,
+						Filename = c.Filename,
+						Name = c.Name,
+						DisplayName = c.DisplayName,
+						Description = c.Description,
+						Type = c.Type,
+						Size = c.Size,
+						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + 
+							(!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") :
+							WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAILDRAFT")) + "/" + c.Id,
+						ContentUrl = WebPages.WebPiranha.ApplicationPath + 
+							(!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") :
+							WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENTDRAFT")) + "/" + c.Id,
+						Created = c.Created.ToString(),
+						Updated = c.Updated.ToString()
+					};
+				}
+			} catch {}
+			return null ;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -21,7 +22,7 @@ namespace Piranha.Models
 	/// 
 	/// Changes made to records of this type are logged.
 	/// </summary>
-	[PrimaryKey(Column="content_id")]
+	[PrimaryKey(Column="content_id,content_draft")]
 	[Serializable]
 	public class Content : MediaFile<Content>, ICacheRecord<Content>
 	{
@@ -31,6 +32,12 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="content_id")]
 		public override Guid Id { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets weather this is a draft.
+		/// </summary>
+		[Column(Name="content_draft")]
+		public bool IsDraft { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the optional parent id.
@@ -144,6 +151,18 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="content_updated_by")]
 		public override Guid UpdatedBy { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the initial publish date.
+		/// </summary>
+		[Column(Name="content_published")]
+		public DateTime Published { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the last published date.
+		/// </summary>
+		[Column(Name="content_last_published")]
+		public DateTime LastPublished { get ; set ; }
 		#endregion
 
 		#region Properties
@@ -160,6 +179,20 @@ namespace Piranha.Models
 		/// Gets/sets the possible child content if this is a folder.
 		/// </summary>
 		public List<Content> ChildContent { get ; set ; }
+
+		/// <summary>
+		/// Gets the virtual path for the media file.
+		/// </summary>
+		public override string VirtualPath { 
+			get { return base.VirtualPath + (IsDraft ? "-draft" : "") ; }
+		}
+
+		/// <summary>
+		/// Gets the virtual path for the cached media file.
+		/// </summary>
+		public override string VirtualCachePath {
+			get { return base.VirtualCachePath + (IsDraft ? "-draft" : "") ; }
+		}
 		#endregion
 
 		/// <summary>
@@ -169,6 +202,7 @@ namespace Piranha.Models
 			ExtensionType = Extend.ExtensionType.Media ;
 			ChildContent = new List<Content>() ;
 			LogChanges = true ;
+			IsDraft = true ;
 		}
 
 		#region Static accessors
@@ -176,12 +210,17 @@ namespace Piranha.Models
 		/// Gets a single record.
 		/// </summary>
 		/// <param name="id">The record id</param>
+		/// <param name="draft">Weather to get the draft or not</param>
+		/// <param name="tx">Optional transaction</param>
 		/// <returns>The record</returns>
-		public static Content GetSingle(Guid id) {
+		public static Content GetSingle(Guid id, bool draft = false, IDbTransaction tx = null) {
 			if (id != Guid.Empty) {
-				if (!Cache.Current.Contains(id.ToString()))
-					Cache.Current[id.ToString()] = Content.GetSingle((object)id) ;
-				return (Content)Cache.Current[id.ToString()] ;
+				if (!draft) {
+					if (!Cache.Current.Contains(id.ToString()))
+						Cache.Current[id.ToString()] = Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
+					return (Content)Cache.Current[id.ToString()] ;
+				}
+				return Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
 			}
 			return null ;
 		}
@@ -213,22 +252,24 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the folder structure for the first level.
 		/// </summary>
+		/// <param name="published">Weather to get the published structure or not</param>
 		/// <returns>The content</returns>
-		public static List<Content> GetStructure() {
-			return GetStructure(Guid.Empty) ;
+		public static List<Content> GetStructure(bool published = true) {
+			return GetStructure(Guid.Empty, false, published) ;
 		}
 
 		/// <summary>
 		/// Gets the folder structure for the given folder id.
 		/// </summary>
 		/// <param name="folderid">The folder id</param>
+		/// <param name="published">Weather to get the published structure or not</param>
 		/// <returns>The content</returns>
-		public static List<Content> GetStructure(Guid folderid, bool includeparent = false) {
+		public static List<Content> GetStructure(Guid folderid, bool includeparent = false, bool published = true) {
 			List<Content> ret = new List<Content>() ;
 
 			// Add parent
 			if (folderid != Guid.Empty && includeparent) {
-				var self = Content.GetSingle(folderid) ;
+				var self = Content.GetSingle(folderid, !published) ;
 				ret.Add(new Content() {
 					Id = self.ParentId,
 					ParentId = folderid,
@@ -239,16 +280,16 @@ namespace Piranha.Models
 
 			// Get the folders
 			if (folderid == Guid.Empty)
-				ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id IS NULL", 
+				ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id IS NULL AND content_draft = @0", !published,
 					new Params() { OrderBy = "content_name" })) ;
-			else ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id = @0", folderid, 
+			else ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id = @0 AND content_draft = @0", folderid, !published,
 					new Params() { OrderBy = "content_name" })) ;
 
 			// Get the content
 			if (folderid == Guid.Empty)
-				ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id IS NULL",
+				ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id IS NULL AND content_draft = @0", !published,
 					new Params() { OrderBy = "COALESCE(content_name, content_filename)" })) ;
-			else ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id = @0", folderid,
+			else ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id = @0 AND content_draft = @0", folderid, !published,
 				new Params() { OrderBy = "COALESCE(content_name, content_filename)" })) ;
 
 			return ret ;
@@ -257,22 +298,23 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the full folder structure for the media content.
 		/// </summary>
+		/// <param name="published">Weather to get the published structure or not</param>
 		/// <returns>The folder structure.</returns>
-		public static List<Content> GetFolderStructure() {
-			return SortStructure(Content.Get("content_folder = 1", new Params() { OrderBy = "content_parent_id, content_name" }), Guid.Empty) ;
+		public static List<Content> GetFolderStructure(bool published = true) {
+			return SortStructure(Content.Get("content_folder = 1 AND content_draft = @0", !published, new Params() { OrderBy = "content_parent_id, content_name" }), Guid.Empty) ;
 		}
 
 		/// <summary>
 		/// Gets the content for the given category id.
 		/// </summary>
 		/// <param name="id">The category id</param>
+		/// <param name="published">Weather to get published content or not</param>
 		/// <returns>A list of content</returns>
-		public static List<Content> GetByCategoryId(Guid id) {
+		public static List<Content> GetByCategoryId(Guid id, bool published = true) {
 			return Content.Get("content_id IN (" +
-				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = @1)",
-				Relation.RelationType.CONTENTCATEGORY, id) ;
+				"SELECT relation_data_id FROM relation WHERE relation_type = @0 AND relation_related_id = @1) AND content_draft = @2",
+				Relation.RelationType.CONTENTCATEGORY, id, !published) ;
 		}
-		#endregion
 
 		/// <summary>
 		/// Gets the thumbnail for the embedded resource with the given id. The thumbnail
@@ -286,40 +328,197 @@ namespace Piranha.Models
 				Id = id
 			} ;
 
-			if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
-				if (File.Exists(content.GetCacheThumbPath(size))) {
-					content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
-				} else {
-					var resource = Drawing.Thumbnails.GetById(id) ;
-					if (size <= 32 && resource.Contains("ico-folder"))
-						resource = Drawing.Thumbnails.GetByType("folder-small") ;
+			if (Drawing.Thumbnails.ContainsKey(id)) {
+				if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
+					if (File.Exists(content.GetCacheThumbPath(size))) {
+						content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
+					} else {
+						var resource = Drawing.Thumbnails.GetById(id) ;
+						if (size <= 32 && resource.Contains("ico-folder"))
+							resource = Drawing.Thumbnails.GetByType("folder-small") ;
 
-					Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) ;
-					var img = Image.FromStream(strm) ;
-					strm.Close() ;
+						Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) ;
+						var img = Image.FromStream(strm) ;
+						strm.Close() ;
 
-					// Generate thumbnail from image
-					using (Bitmap bmp = new Bitmap(size, size)) {
-						Graphics grp = Graphics.FromImage(bmp) ;
+						// Generate thumbnail from image
+						using (Bitmap bmp = new Bitmap(size, size)) {
+							Graphics grp = Graphics.FromImage(bmp) ;
 
-						grp.SmoothingMode = SmoothingMode.HighQuality ;
-						grp.CompositingQuality = CompositingQuality.HighQuality ;
-						grp.InterpolationMode = InterpolationMode.High ;
+							grp.SmoothingMode = SmoothingMode.HighQuality ;
+							grp.CompositingQuality = CompositingQuality.HighQuality ;
+							grp.InterpolationMode = InterpolationMode.High ;
 
-						// Resize and crop image
-						Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
-						grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
-							img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
-							Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
-						bmp.Save(content.GetCacheThumbPath(size), img.RawFormat) ;
-						bmp.Dispose() ;
-						grp.Dispose() ;
+							// Resize and crop image
+							Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
+							grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
+								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
+								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
+							bmp.Save(content.GetCacheThumbPath(size), img.RawFormat) ;
+							bmp.Dispose() ;
+							grp.Dispose() ;
+						}
+						content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
+
+						img.Dispose() ;
 					}
-					content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
-
-					img.Dispose() ;
 				}
 			}
+		}
+
+		/// <summary>
+		/// Reverts the content with the given id to it's last published state.
+		/// </summary>
+		/// <param name="id">The id</param>
+		/// <param name="tx">Optional transaction</param>
+		public static void Revert(Guid id, System.Data.IDbTransaction tx = null) {
+			// Get the published version of
+			var content = Content.GetSingle(id, tx) ;
+
+			if (content != null) {
+				// Turn it into a draft and save it.
+				content.IsDraft = true ;
+				if (content.Save(tx)) {
+					// Delete any possible draft version of the physical file.
+					if (File.Exists(content.PhysicalPath))
+						File.Delete(content.PhysicalPath) ;
+
+					// Now turn back the dates for the draft version
+					Content.Execute("UPDATE content SET content_updated = content_last_published WHERE content_id = @0 AND content_draft = 1", null, id) ;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Unpublishes the content with the given id.
+		/// </summary>
+		/// <param name="id">The content id</param>
+		/// <param name="tx">Optional transaction</param>
+		public static void Unpublish(Guid id, System.Data.IDbTransaction tx = null) {
+			using (IDbTransaction dbTx = (tx == null ? Database.OpenTransaction() : null)) {
+				// Delete the published version
+				Content.Execute("DELETE FROM content WHERE content_draft = 0 AND content_id = @0",
+					tx != null ? tx : dbTx, id) ;
+				// Remove published dates
+				Content.Execute("UPDATE content SET content_published = NULL, content_last_published = NULL WHERE content_id = @0", 
+					tx != null ? tx : dbTx, id) ;
+
+				// Now update all pages & posts which have a reference
+				// to this media object.
+				Page.Execute("UPDATE page SET page_last_modified = @0 WHERE page_attachments LIKE @1", 
+					tx != null ? tx : dbTx, DateTime.Now, "%" + id.ToString() + "%") ;
+				Post.Execute("UPDATE post SET post_last_modified = @0 WHERE post_attachments LIKE @1", 
+					tx != null ? tx : dbTx, DateTime.Now, "%" + id.ToString() + "%") ;
+
+				// Commit the transaction if it's local
+				if (dbTx != null)
+					dbTx.Commit() ;
+
+				// Take the published physical file and move it to draft mode.
+				var content = Content.GetSingle(id, true, tx) ;
+				if (content != null) {
+					var draftpath = content.PhysicalPath ;
+					// Delete the draft file
+					if (File.Exists(draftpath))
+						File.Delete(draftpath) ;
+
+					// Move published file to draft state
+					content.IsDraft = false ;
+					if (File.Exists(content.PhysicalPath))
+						File.Move(content.PhysicalPath, draftpath) ;
+					content.DeleteCache() ;
+
+					// Invalidate record
+					content.InvalidateRecord(content) ;
+				}
+
+				// Invalidate all pages & posts which have a reference
+				// to this media object.
+				Page.Get("page_attachments LIKE @1", tx, "%" + id.ToString() + "%").ForEach(p => p.InvalidateRecord(p)) ;
+				Post.Get("post_attachments LIKE @1", tx, "%" + id.ToString() + "%").ForEach(p => p.InvalidateRecord(p)) ;
+			}
+		}
+		#endregion
+
+		/// <summary>
+		/// Saves and publishes the current record.
+		/// </summary>
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Weather the operation succeeded or not</returns>
+		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
+			return SaveAndPublish(null, tx) ;
+		}
+
+		/// <summary>
+		/// Saves and publishes the current record and physical file.
+		/// </summary>
+		/// <param name="content">The physical file</param>
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Weather the operation succeeded or not</returns>
+		public virtual bool SaveAndPublish(MediaFileContent content, System.Data.IDbTransaction tx = null) {
+			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
+
+			if (Database.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
+				// Set file meta information
+				SetFileMeta(content) ;
+
+				// First get previously published record
+				var self = Content.GetSingle(Id, false, tx) ;
+
+				// Set up the dates.
+				LastPublished = Updated = DateTime.Now ;
+				if (IsNew)
+					Created = Updated ;
+				if (self == null)
+					Published = Updated ;
+
+				// First save an up-to-date draft
+				IsDraft = true ;
+				base.Save(content, tx, false) ;
+				
+				var draftpath = PhysicalPath;
+
+				// Now save a published version
+				IsDraft = false ;
+				if (self == null)
+					IsNew = true ;
+				base.Save(tx, false) ;
+
+				// Check if we have have a drafted physical file
+				if (File.Exists(draftpath)) {
+					if (File.Exists(PhysicalPath))
+						File.Delete(PhysicalPath) ;
+					File.Move(draftpath, PhysicalPath) ;
+					DeleteCache() ;
+				}
+
+				// Now update all pages & posts which have a reference
+				// to this media object.
+				Page.Execute("UPDATE page SET page_last_modified = @0 WHERE page_attachments LIKE @1", tx, 
+					DateTime.Now, "%" + Id.ToString() + "%") ;
+				Post.Execute("UPDATE post SET post_last_modified = @0 WHERE post_attachments LIKE @1", tx,
+					DateTime.Now, "%" + Id.ToString() + "%") ;
+
+				// Invalidate all pages & posts which have a reference
+				// to this media object.
+				Page.Get("page_attachments LIKE @1", tx, "%" + Id.ToString() + "%").ForEach(p => p.InvalidateRecord(p)) ;
+				Post.Get("post_attachments LIKE @1", tx, "%" + Id.ToString() + "%").ForEach(p => p.InvalidateRecord(p)) ;
+
+				return true ;
+			}
+			throw new AccessViolationException("User must be logged in to save data.") ;
+		}
+
+		/// <summary>
+		/// Saves the current record together with the given physical file.
+		/// </summary>
+		/// <param name="content">The physical content</param>
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Weather the operation succeeded or not</returns>
+		public bool Save(MediaFileContent content, System.Data.IDbTransaction tx = null) {
+			SetFileMeta(content) ;
+
+			return base.Save(content, tx);
 		}
 
 		/// <summary>
@@ -327,14 +526,14 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="response">The http response</param>
 		/// <param name="size">The desired size</param>
-		public void GetThumbnail(HttpContext context, int size = 60) {
+		public void GetThumbnail(HttpContext context, int size = 60, bool nocache = false) {
 			bool compress = false ;
 			var param = SysParam.GetByName("COMPRESS_IMAGES") ;
 
 			if (param != null && param.Value == "1")
 				compress = true ;
 
-			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
+			if ((nocache && ClientCache.HandleNoCache(context)) || !ClientCache.HandleClientCache(context, Id.ToString() + size.ToString(), Updated)) {
 				if (File.Exists(GetCacheThumbPath(size))) {
 					// Return generated & cached thumbnail
 					WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
@@ -401,6 +600,44 @@ namespace Piranha.Models
 		}
 
 		#region Private methods
+		/// <summary>
+		/// Updates the current records meta data from the given physical file.
+		/// </summary>
+		/// <param name="content">The physical content</param>
+		private void SetFileMeta(MediaFileContent content) {
+			if (content != null) {
+				try {
+					using (var mem = new MemoryStream(content.Body)) {
+						using (var img = Image.FromStream(mem)) {
+							Image resized = null ;
+
+							// Check if we need to resize the image
+							try {
+								int max = Convert.ToInt32(SysParam.GetByName("IMAGE_MAX_WIDTH").Value) ;
+								if (max > 0) {
+									resized = Drawing.ImageUtils.Resize(img, max) ;
+									using (var writer = new MemoryStream()) {
+										img.Save(writer, img.RawFormat) ;
+										content.Body = writer.ToArray() ;
+									}
+								}
+							} catch {}
+
+							IsImage = true ;
+							Width = resized != null ? resized.Width : img.Width ;
+							Height = resized != null ? resized.Height : img.Height ;
+
+							if (resized != null)
+								resized.Dispose() ;
+						}
+					}
+				} catch {
+					IsImage = false ;
+				}
+				Size = content.Body.Length ;
+			}
+		}
+
 		/// <summary>
 		/// Checks if the current entity has a child with the given id.
 		/// </summary>

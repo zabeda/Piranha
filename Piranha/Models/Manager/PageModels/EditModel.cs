@@ -17,7 +17,7 @@ namespace Piranha.Models.Manager.PageModels
 	public class EditModel
 	{
 		#region Inner classes
-		public enum ActionType { NORMAL, SEO }
+		public enum ActionType { NORMAL, SEO, ATTACHMENTS }
 		#endregion
 
 		#region Members
@@ -588,7 +588,7 @@ namespace Piranha.Models.Manager.PageModels
 				if (Page.Attachments.Count > 0) {
 					// Content meta data is actually memcached, so this won't result in multiple queries
 					Page.Attachments.ForEach(a => {
-						Models.Content c = Models.Content.GetSingle(a) ;
+						Models.Content c = Models.Content.GetSingle(a, true) ;
 						if (c != null)
 							AttachedContent.Add(c) ;
 					}) ;

@@ -33,7 +33,7 @@ namespace Piranha.Models.Manager.ContentModels
 		public static ListModel Get() {
 			ListModel lm = new ListModel() ;
 			lm.Content = GetStructure() ;
-			lm.Content.AddRange(Piranha.Models.Content.Get("content_folder = 0 AND content_parent_id IS NULL", 
+			lm.Content.AddRange(Piranha.Models.Content.Get("content_draft = 1 AND content_folder = 0 AND content_parent_id IS NULL", 
 				new Params() { OrderBy = "COALESCE(content_name, content_filename) ASC" })) ;
 			return lm ;
 		}
@@ -43,7 +43,7 @@ namespace Piranha.Models.Manager.ContentModels
 		/// </summary>
 		/// <returns></returns>
 		private static List<Content> GetStructure() {
-			var content = Piranha.Models.Content.Get("content_folder = 1 OR content_parent_id IS NOT NULL",
+			var content = Piranha.Models.Content.Get("content_draft = 1 AND (content_folder = 1 OR content_parent_id IS NOT NULL)",
 				new Params() { OrderBy = "content_parent_id, COALESCE(content_name, content_filename)" }) ;
 			return SortStructure(content, Guid.Empty) ;
 		}

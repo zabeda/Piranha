@@ -672,6 +672,9 @@ ul.sitemap li .list-info, .list-info {
     position: absolute;
     display: inline-block;
     }
+ul.media li .list-info {
+    margin-top: 8px;
+    }
 ul.sitemap li .info-unpublished, ul.sitemap li .info-draft, ul.sitemap li .info-copy,
 .info-unpublished, .info-draft, .info-copy {
     height: 16px;

@@ -50,6 +50,13 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_POST")]
 		public ActionResult Edit(string id) {
 			EditModel m = EditModel.GetById(new Guid(id)) ;
+
+			if (!String.IsNullOrEmpty(Request["action"])) {
+				if (Request["action"].ToLower() == "attachments") {
+					m.Action = EditModel.ActionType.ATTACHMENTS ;
+				}
+			}
+
 			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
 			// Executes the post edit loaded hook, if registered

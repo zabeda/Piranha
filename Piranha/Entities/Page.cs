@@ -107,6 +107,11 @@ namespace Piranha.Entities
 		/// Gets/sets the date the post was last updated.
 		/// </summary>
 		public DateTime? LastPublished { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the last modification date of the page.
+		/// </summary>
+		public DateTime? LastModified { get ; set ; }
 		#endregion
 
 		#region Navigation properties

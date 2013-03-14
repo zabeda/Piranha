@@ -20,27 +20,42 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Adds a success message to the current view.
 		/// </summary>
 		/// <param name="msg">The message</param>
-		protected void SuccessMessage(string msg) {
+		/// <param name="persist">Weather the message should be persisted in TempData</param>
+		protected void SuccessMessage(string msg, bool persist = false) {
 			ViewBag.MessageCss = "success" ;
 			ViewBag.Message = msg ;
+			if (persist) {
+				TempData["MessageCss"] = "success" ;
+				TempData["Message"] = msg ;
+			}
 		}
 
 		/// <summary>
 		/// Adds an error message to the current view.
 		/// </summary>
 		/// <param name="msg"></param>
-		protected void ErrorMessage(string msg) {
+		/// <param name="persist">Weather the message should be persisted in TempData</param>
+		protected void ErrorMessage(string msg, bool persist = false) {
 			ViewBag.MessageCss = "error" ;
 			ViewBag.Message = msg ;
+			if (persist) {
+				TempData["MessageCss"] = "error" ;
+				TempData["Message"] = msg ;
+			}
 		}
 
 		/// <summary>
 		/// Adds an information message to the current view.
 		/// </summary>
 		/// <param name="msg"></param>
-		protected void InformationMessage(string msg) {
+		/// <param name="persist">Weather the message should be persisted in TempData</param>
+		protected void InformationMessage(string msg, bool persist = false) {
 			ViewBag.MessageCss = "" ;
 			ViewBag.Message = msg ;
+			if (persist) {
+				TempData["MessageCss"] = "" ;
+				TempData["Message"] = msg ;
+			}
 		}
 
 		/// <summary>
@@ -85,6 +100,15 @@ namespace Piranha.Areas.Manager.Controllers
 				if (!String.IsNullOrEmpty(Request["returl"]))
 					ViewBag.ReturnUrl = Request["returl"] ;
 				else ViewBag.ReturnUrl = "" ;
+
+				if (TempData.ContainsKey("MessageCss")) {
+					ViewBag.MessageCss = TempData["MessageCss"] ;
+					TempData.Remove("MessageCss") ;
+				}
+				if (TempData.ContainsKey("Message")) {
+					ViewBag.Message = TempData["Message"] ;
+					TempData.Remove("Message") ;
+				}
 
 				base.OnActionExecuting(filterContext) ;
 			} else {

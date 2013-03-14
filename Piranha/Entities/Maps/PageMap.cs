@@ -37,6 +37,7 @@ namespace Piranha.Entities.Maps
 			Property(p => p.Updated).HasColumnName("page_updated") ;
 			Property(p => p.Published).HasColumnName("page_published") ;
 			Property(p => p.LastPublished).HasColumnName("page_last_published") ;
+			Property(p => p.LastModified).HasColumnName("page_last_modified") ;
 			Property(p => p.CreatedById).HasColumnName("page_created_by") ;
 			Property(p => p.UpdatedById).HasColumnName("page_updated_by") ;
 

@@ -62,8 +62,8 @@ namespace Piranha.Models.Manager.ContentModels
 			PopupModel lm = new PopupModel() ;
 
 			if (!String.IsNullOrEmpty(id))
-				lm.Content = Piranha.Models.Content.GetStructure(new Guid(id), true) ;
-			else lm.Content = Piranha.Models.Content.GetStructure() ;
+				lm.Content = Piranha.Models.Content.GetStructure(new Guid(id), true, false) ;
+			else lm.Content = Piranha.Models.Content.GetStructure(false) ;
 
 			return lm ;
 		}

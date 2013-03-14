@@ -70,7 +70,7 @@ namespace Piranha.WebPages
 		protected virtual DateTime GetLastModified() {
 			if (post == null)
 				throw new ArgumentNullException();
-			return post.Updated ;
+			return post.LastModified ;
 		}
 
 		#region Private methods

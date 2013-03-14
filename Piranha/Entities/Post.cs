@@ -89,6 +89,11 @@ namespace Piranha.Entities
 		public DateTime? LastPublished { get ; set ; }
 
 		/// <summary>
+		/// Gets/set the last modified date.
+		/// </summary>
+		public DateTime? LastModified { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the id of the user who initially created the post.
 		/// </summary>
 		public Guid CreatedById { get ; set ; }

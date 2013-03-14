@@ -246,4 +246,28 @@
   <data name="Upload" xml:space="preserve">
     <value>Från disk</value>
   </data>
+  <data name="MessageDocumentPublished" xml:space="preserve">
+    <value>Dokumentet har publicerats.</value>
+  </data>
+  <data name="MessageDocumentUnpublished" xml:space="preserve">
+    <value>Dokumentet har avpublicerats.</value>
+  </data>
+  <data name="MessageFolderPublished" xml:space="preserve">
+    <value>Mappen har publicerats.</value>
+  </data>
+  <data name="MessageFolderUnpublished" xml:space="preserve">
+    <value>Mappen har avpublicerats.</value>
+  </data>
+  <data name="MessageImagePublished" xml:space="preserve">
+    <value>Bilden har publicerats.</value>
+  </data>
+  <data name="MessageImageUnpublished" xml:space="preserve">
+    <value>Bilden har avpublicerats.</value>
+  </data>
+  <data name="MessageNotFound" xml:space="preserve">
+    <value>Ett fel har inträffat. Innehållet kunde inte hittas.</value>
+  </data>
+  <data name="MessageReverted" xml:space="preserve">
+    <value>Den senast publicerade versionen har nu återställts.</value>
+  </data>
 </root>

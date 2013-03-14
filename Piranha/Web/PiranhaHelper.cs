@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -29,29 +30,19 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
-		/// Url helper for generating the preview url for the given page id.
-		/// </summary>
-		/// <param name="helper">The url helper</param>
-		/// <param name="id">The page id</param>
-		/// <returns></returns>
-		public static string GetPreviewlink(this UrlHelper helper, Guid id) {
-			return helper.Content("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("PREVIEW") + "/" + id.ToString()) ;
-		}
-
-		/// <summary>
 		/// Generates an image tag for the specified thumbnail.
 		/// </summary>
 		/// <param name="id">The content id</param>
 		/// <param name="size">Optional size</param>
 		/// <returns>The url</returns>
 		public static string GetThumbnailUrl(this UrlHelper helper, Guid id, int size = 0) {
-			Content cnt = Models.Content.GetSingle(id) ;
+			Content cnt = Models.Content.GetSingle(id, true) ;
 			
 			if (cnt != null) {
 				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
 
 				return helper.Content("~/" + 
-					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/" + 
+					WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAILDRAFT") + "/" + 
 					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")) ;
 			}
 			return "" ;
@@ -65,7 +56,7 @@ namespace Piranha.Web
 		/// <param name="height">Optional height</param>
 		/// <returns>The content url</returns>
 		public static string GetContentUrl(this UrlHelper helper, Guid id, int width = 0, int height = 0) {
-			Content cnt = Models.Content.GetSingle(id) ;
+			Content cnt = Models.Content.GetSingle(id, true) ;
 			
 			if (cnt != null)
 				return helper.Content("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") +

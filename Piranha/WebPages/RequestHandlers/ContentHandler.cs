@@ -19,8 +19,18 @@ namespace Piranha.WebPages.RequestHandlers
 		/// <param name="context">The current context</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		public virtual void HandleRequest(HttpContext context, params string[] args) {
+			HandleRequest(context, false, args) ;
+		}
+
+		/// <summary>
+		/// Handles the current request.
+		/// </summary>
+		/// <param name="context">The current context</param>
+		/// <param name="draft">Weather to get the draft or not</param>
+		/// <param name="args">Optional url arguments passed to the handler</param>
+		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length > 0) {
-				Content content = Content.GetSingle(new Guid(args[0])) ;
+				Content content = Content.GetSingle(new Guid(args[0]), draft) ;
 
 				if (content != null) {
 					int? width = null ;
@@ -34,8 +44,8 @@ namespace Piranha.WebPages.RequestHandlers
 					if (height.HasValue)
 						content.GetMedia(context, width, height) ;
 					content.GetMedia(context, width) ;
-				}
-			}
+				} else context.Response.StatusCode = 404 ;
+			} else context.Response.StatusCode = 500 ;
 		}
 	}
 }

@@ -118,7 +118,7 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <returns></returns>
 		protected virtual DateTime GetLastModified(Models.Page page) {
-			return page.Updated ;
+			return page.LastModified ;
 		}
 
 		#region Private methods

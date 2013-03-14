@@ -13,6 +13,11 @@ namespace Piranha.Entities
 	{
 		#region Properties
 		/// <summary>
+		/// Gets/sets weather this is a draft or not.
+		/// </summary>
+		internal bool IsDraft { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional parent id.
 		/// </summary>
 		public Guid? ParentId { get ; set ; }
@@ -78,6 +83,16 @@ namespace Piranha.Entities
 		/// Gets/sets the optional description.
 		/// </summary>
 		public string Description { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the date the post was initially published.
+		/// </summary>
+		public DateTime? Published { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the date the post was last updated.
+		/// </summary>
+		public DateTime? LastPublished { get ; set ; }
 		#endregion
 
 		#region Navigation properties

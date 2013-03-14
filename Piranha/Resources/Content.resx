@@ -246,4 +246,28 @@
   <data name="Upload" xml:space="preserve">
     <value>From disc</value>
   </data>
+  <data name="MessageDocumentPublished" xml:space="preserve">
+    <value>The document has been published.</value>
+  </data>
+  <data name="MessageDocumentUnpublished" xml:space="preserve">
+    <value>The document has been unpublished.</value>
+  </data>
+  <data name="MessageFolderPublished" xml:space="preserve">
+    <value>The folder has been published.</value>
+  </data>
+  <data name="MessageFolderUnpublished" xml:space="preserve">
+    <value>The folder has been unpublished.</value>
+  </data>
+  <data name="MessageImagePublished" xml:space="preserve">
+    <value>The image has been published.</value>
+  </data>
+  <data name="MessageImageUnpublished" xml:space="preserve">
+    <value>The image has been unpublished.</value>
+  </data>
+  <data name="MessageNotFound" xml:space="preserve">
+    <value>An error occured. The specified media object could not be found.</value>
+  </data>
+  <data name="MessageReverted" xml:space="preserve">
+    <value>The latest published version has now been restored.</value>
+  </data>
 </root>
