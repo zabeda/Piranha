@@ -470,6 +470,7 @@
     <EmbeddedResource Include="Data\Scripts\Drop.sql" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\29.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\29.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\28.sql" />
