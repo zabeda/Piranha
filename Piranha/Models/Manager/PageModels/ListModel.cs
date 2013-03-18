@@ -91,10 +91,9 @@ namespace Piranha.Models.Manager.PageModels
 					SitePage[site.Id] = db.Pages.Where(p => p.SiteTreeId == site.Id && p.ParentId == site.Id).Select(p => p.Id).SingleOrDefault() ;
 					SiteWarnings[site.Id] = 0 + (String.IsNullOrEmpty(site.MetaTitle) ? 1 : 0) + (String.IsNullOrEmpty(site.MetaDescription) ? 1 : 0) ;
 
-					TotalSiteWarnings[site.Id] = Page.GetScalar(
-						"SELECT " +
-						"  (SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_keywords IS NULL) + " +
-						"  (SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_description IS NULL)", site.Id) ;
+					TotalSiteWarnings[site.Id] = 
+						Page.GetScalar("SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_keywords IS NULL", site.Id) +
+						Page.GetScalar("SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_description IS NULL", site.Id) ;
 				}
 			}
 		}

@@ -213,6 +213,7 @@ CREATE TABLE page (
 	page_updated DATETIME NOT NULL,
 	page_published DATETIME NULL,
 	page_last_published DATETIME NULL,
+	page_last_modified DATETIME NULL,
 	page_created_by CHAR(38) NOT NULL,
 	page_updated_by CHAR(38) NOT NULL,
 	CONSTRAINT pk_page_id PRIMARY KEY (page_id, page_draft),
@@ -292,6 +293,7 @@ CREATE TABLE post (
 	post_updated DATETIME NOT NULL,
 	post_published DATETIME NULL,
 	post_last_published DATETIME NULL,
+	post_last_modified DATETIME NULL,
 	post_created_by CHAR(38) NOT NULL,
 	post_updated_by CHAR(38) NOT NULL,
 	CONSTRAINT pk_post_id PRIMARY KEY (post_id, post_draft),
@@ -303,6 +305,7 @@ CREATE TABLE post (
 
 CREATE TABLE content (
 	content_id CHAR(38) NOT NULL,
+	content_draft INT NOT NULL default '1',
 	content_parent_id CHAR(38) NULL,
 	content_filename VARCHAR(128) NULL,
 	content_url VARCHAR(255) NULL,
@@ -318,9 +321,11 @@ CREATE TABLE content (
 	content_description VARCHAR(255) NULL,
 	content_created DATETIME NOT NULL,
 	content_updated DATETIME NOT NULL,
+	content_published DATETIME NULL,
+	content_last_published DATETIME NULL,
 	content_created_by CHAR(38) NOT NULL,
 	content_updated_by CHAR(38) NOT NULL,
-	CONSTRAINT pk_content_id PRIMARY KEY (content_id),
+	CONSTRAINT pk_content_id PRIMARY KEY (content_id, content_draft),
 	CONSTRAINT fk_content_created_by FOREIGN KEY (content_created_by) REFERENCES sysuser (sysuser_id),
 	CONSTRAINT fk_content_updated_by FOREIGN KEY (content_updated_by) REFERENCES sysuser (sysuser_id)
 );
