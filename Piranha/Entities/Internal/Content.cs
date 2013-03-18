@@ -282,14 +282,14 @@ namespace Piranha.Models
 			if (folderid == Guid.Empty)
 				ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id IS NULL AND content_draft = @0", !published,
 					new Params() { OrderBy = "content_name" })) ;
-			else ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id = @0 AND content_draft = @0", folderid, !published,
+			else ret.AddRange(Content.Get("content_folder = 1 AND content_parent_id = @0 AND content_draft = @1", folderid, !published,
 					new Params() { OrderBy = "content_name" })) ;
 
 			// Get the content
 			if (folderid == Guid.Empty)
 				ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id IS NULL AND content_draft = @0", !published,
 					new Params() { OrderBy = "COALESCE(content_name, content_filename)" })) ;
-			else ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id = @0 AND content_draft = @0", folderid, !published,
+			else ret.AddRange(Content.Get("content_folder = 0 AND content_parent_id = @0 AND content_draft = @1", folderid, !published,
 				new Params() { OrderBy = "COALESCE(content_name, content_filename)" })) ;
 
 			return ret ;
