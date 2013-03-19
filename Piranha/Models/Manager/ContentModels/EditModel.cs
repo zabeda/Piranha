@@ -324,8 +324,10 @@ namespace Piranha.Models.Manager.ContentModels
 			// Check if the original URL has been updated, and if so 
 			if (!Content.IsNew && !String.IsNullOrEmpty(Content.OriginalUrl)) {
 				var old = Content.GetSingle(Content.Id) ;
-				if (Content.OriginalUrl != old.OriginalUrl) {
-					FileUrl = Content.OriginalUrl ;
+				if (old != null) {
+					if (Content.OriginalUrl != old.OriginalUrl) {
+						FileUrl = Content.OriginalUrl ;
+					}
 				}
 			}
 
