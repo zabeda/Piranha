@@ -185,31 +185,35 @@ namespace Piranha.WebPages
 		/// Registers all of the hostnames configured in the database.
 		/// </summary>
 		public static void RegisterDefaultHostNames() {
-			if (hostNames == null)
-				hostNames = new Dictionary<string,Entities.SiteTree>() ;
+			// Make sure we don't try to register the host names before
+			// the database has been installed.
+			if (SysParam.GetByName("SITE_VERSION") != null) {
+				if (hostNames == null)
+					hostNames = new Dictionary<string,Entities.SiteTree>() ;
 
-			HostNames.Clear() ;
-			if (HttpContext.Current != null)
-				Page.InvalidateStartpage() ;
+				HostNames.Clear() ;
+				if (HttpContext.Current != null)
+					Page.InvalidateStartpage() ;
 
-			// We need to check version so we don't try to access the column sitetree_hostnames
-			// before it's been created in the database.
-			if (Data.Database.InstalledVersion > 26) {
-				using (var db = new DataContext()) {
-					var sites = db.SiteTrees.ToList() ;
+				// We need to check version so we don't try to access the column sitetree_hostnames
+				// before it's been created in the database.
+				if (Data.Database.InstalledVersion > 26) {
+					using (var db = new DataContext()) {
+						var sites = db.SiteTrees.ToList() ;
 					
-					foreach (var site in sites) {
-						if (!String.IsNullOrEmpty(site.HostNames)) {
-							var hostnames = site.HostNames.Split(new char[] { ',' }) ;
+						foreach (var site in sites) {
+							if (!String.IsNullOrEmpty(site.HostNames)) {
+								var hostnames = site.HostNames.Split(new char[] { ',' }) ;
 
-							foreach (var host in hostnames) {
-								if (HostNames.ContainsKey(host))
-									throw new Exception("Duplicates of the hostname [" + host + "] was found configured") ;
-								HostNames.Add(host.ToLower(), site) ;
+								foreach (var host in hostnames) {
+									if (HostNames.ContainsKey(host))
+										throw new Exception("Duplicates of the hostname [" + host + "] was found configured") ;
+									HostNames.Add(host.ToLower(), site) ;
+								}
 							}
+							if (site.Id == Config.DefaultSiteTreeId)
+								DefaultSite = site ;
 						}
-						if (site.Id == new Guid("C2F87B2B-F585-4696-8A2B-3C9DF882701E"))
-							DefaultSite = site ;
 					}
 				}
 			}
