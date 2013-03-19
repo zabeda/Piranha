@@ -53,7 +53,7 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Saves the access and all related information.
 		/// </summary>
-		/// <returns>Weather the action succeeded or not.</returns>
+		/// <returns>Whether the action succeeded or not.</returns>
 		public virtual bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
@@ -67,7 +67,7 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Deletes the access and all related information.
 		/// </summary>
-		/// <returns>Weather the action succeeded or not.</returns>
+		/// <returns>Whether the action succeeded or not.</returns>
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {

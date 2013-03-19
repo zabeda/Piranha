@@ -29,7 +29,7 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a draft.
+		/// Gets/sets whether this is a draft.
 		/// </summary>
 		[Column(Name="post_draft")]
 		public override bool IsDraft { get ; set ; }
@@ -47,7 +47,7 @@ namespace Piranha.Models
 		public Guid PermalinkId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this post should be included in rss feeds.
+		/// Gets/sets if this post should be included in rss feeds.
 		/// </summary>
 		[Column(Name="post_rss")]
 		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="AllowRss")]
@@ -204,7 +204,7 @@ namespace Piranha.Models
 		/// Gets a single post from the database.
 		/// </summary>
 		/// <param name="id">The post id</param>
-		/// <param name="draft">Weather to get the draft</param>
+		/// <param name="draft">Whether to get the draft or not</param>
 		/// <returns>The post</returns>
 		public static Post GetSingle(Guid id, bool draft) {
 			if (!draft)
@@ -236,7 +236,7 @@ namespace Piranha.Models
 		/// Gets the post specified by the given permalink id.
 		/// </summary>
 		/// <param name="permalinkid">The permalink id</param>
-		/// <param name="draft">Weather to get the draft or not</param>
+		/// <param name="draft">Whether to get the draft or not</param>
 		/// <returns>The post</returns>
 		public static Post GetByPermalinkId(Guid permalinkid, bool draft = false) {
 			if (!draft) {

@@ -15,7 +15,7 @@ namespace Piranha.Models
 		Guid Id { get ; }
 
 		/// <summary>
-		/// Gets weather this is a draft.
+		/// Gets whether this is a draft.
 		/// </summary>
 		bool IsDraft { get ; }
 

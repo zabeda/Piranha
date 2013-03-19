@@ -28,7 +28,7 @@ namespace Piranha.Entities
 		public string Description { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this permission can be removed or not.
+		/// Gets/sets whether this permission can be removed or not.
 		/// </summary>
 		public bool IsLocked { get ; set ; }
 		#endregion

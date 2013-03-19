@@ -32,7 +32,7 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
-		/// Gets weather the current ui culture is the default culture.
+		/// Gets whether the current ui culture is the default culture.
 		/// </summary>
 		public bool IsDefaultCulture {
 			get {

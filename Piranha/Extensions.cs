@@ -177,7 +177,7 @@ public static class PiranhaApp
 	/// </summary>
 	/// <param name="p">The principal</param>
 	/// <param name="function">The function to check</param>
-	/// <returns>Weather the user has access</returns>
+	/// <returns>If the user has access</returns>
 	public static bool HasAccess(this IPrincipal p, string function) {
 		if (p.Identity.IsAuthenticated) {
 			Dictionary<string, SysAccess> access = SysAccess.GetAccessList() ;
@@ -196,7 +196,7 @@ public static class PiranhaApp
 	/// </summary>
 	/// <param name="p">The principal</param>
 	/// <param name="groupid">The group</param>
-	/// <returns>Weather the user is a member</returns>
+	/// <returns>If the user is a member</returns>
 	public static bool IsMember(this IPrincipal p, Guid groupid) {
 		if (p.Identity.IsAuthenticated) {
 			if (groupid != Guid.Empty) {
@@ -214,7 +214,7 @@ public static class PiranhaApp
 	/// </summary>
 	/// <param name="p">The principal</param>
 	/// <param name="groupname">The group</param>
-	/// <returns>Weather the user is a member</returns>
+	/// <returns>If the user is a member</returns>
 	public static bool IsMember(this IPrincipal p, string groupname) {
 		SysGroup g = SysGroup.GetSingle("sysgroup_name = @0", groupname) ;
 		if (g != null)

@@ -30,7 +30,7 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a draft or not.
+		/// Gets/sets whether this is a draft or not.
 		/// </summary>
 		[Column(Name="extension_draft")]
 		public bool IsDraft { get ; set ; }

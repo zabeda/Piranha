@@ -54,7 +54,7 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Checks if the current user has access to the group.
 			/// </summary>
-			/// <returns>Weather the current user has access.</returns>
+			/// <returns>Whether the current user has access.</returns>
 			public bool HasAccess() {
 				return ItemsForUser().Count > 0 ;
 			}
@@ -62,7 +62,7 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Checks if the current group is active.
 			/// </summary>
-			/// <returns>Weather the group is active</returns>
+			/// <returns>Whether the group is active</returns>
 			public bool IsActive() {
 				var controller = ControllerName ;
 				var action = ActionName ;
@@ -140,9 +140,9 @@ namespace Piranha.WebPages
 			}
 
 			/// <summary>
-			/// Gets weather this menu item is currently active.
+			/// Gets whether this menu item is currently active.
 			/// </summary>
-			/// <returns>Weather the item is active</returns>
+			/// <returns>Whether the item is active</returns>
 			public bool IsActive() {
 				var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
 				var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();

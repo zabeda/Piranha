@@ -50,7 +50,7 @@ namespace Piranha.Models
 		public Guid OriginalId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a draft.
+		/// Gets/sets whether this is a draft or not.
 		/// </summary>
 		[Column(Name="page_draft")]
 		public override bool IsDraft { get ; set ; }
@@ -120,7 +120,7 @@ namespace Piranha.Models
 		public string Permalink { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the page should be visible in menus or not.
+		/// Gets/sets whether the page should be visible in menus or not.
 		/// </summary>
 		[Column(Name="page_is_hidden")]
 		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Hidden")]
@@ -238,14 +238,14 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
-		/// Gets weather the page is published or not.
+		/// Gets whether the page is published or not.
 		/// </summary>
 		public bool IsPublished {
 			get { return Published != DateTime.MinValue && Published < DateTime.Now ; }
 		}
 
 		/// <summary>
-		/// Gets weather the page is the site startpage.
+		/// Gets if the current page is the site startpage.
 		/// </summary>
 		public bool IsStartpage {
 			get { return ParentId == Guid.Empty && Seqno == 1 ; }
@@ -308,7 +308,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the site startpage
 		/// </summary>
-		/// <param name="draft">Weather to get the current draft</param>
+		/// <param name="draft">Whether to get the current draft or not</param>
 		/// <returns>The startpage</returns>
 		public static Page GetStartpage(bool draft = false) {
 			if (!Cache.Current.Contains(Guid.Empty.ToString())) {
@@ -322,7 +322,7 @@ namespace Piranha.Models
 		/// Gets the page specified by the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
-		/// <param name="draft">Weather to get the current draft</param>
+		/// <param name="draft">Whether to get the current draft or not</param>
 		/// <returns>The page</returns>
 		public static Page GetByPermalink(string permalink, bool draft = false) {
 			if (!draft) {
@@ -343,7 +343,7 @@ namespace Piranha.Models
 		/// Gets the page specified by the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
-		/// <param name="draft">Weather to get the current draft</param>
+		/// <param name="draft">Whether to get the current draft or not</param>
 		/// <returns>The page</returns>
 		public static Page GetByPermalinkId(Guid permalinkid, bool draft = false) {
 			if (!draft) {
@@ -397,7 +397,7 @@ namespace Piranha.Models
 		/// Saves and publishes the current record.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation was successful</returns>
+		/// <returns>Whether the operation was successful</returns>
 		public override bool SaveAndPublish(IDbTransaction tx = null) {
 			// Move seqno & save, we need a transaction for this
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
@@ -421,7 +421,7 @@ namespace Piranha.Models
 		/// Deletes the current page.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation was successful</returns>
+		/// <returns>Whether the operation was successful</returns>
 		public override bool Delete(IDbTransaction tx = null) {
 			// Move seqno & delete. We need a transaction for this
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction() ;
@@ -453,7 +453,7 @@ namespace Piranha.Models
 		/// <param name="sitetreeid">The site tree id</param>
 		/// <param name="parentid">The parent id</param>
 		/// <param name="seqno">The seqno</param>
-		/// <param name="inc">Weather to increase or decrease</param>
+		/// <param name="inc">Whether to increase or decrease</param>
 		internal static void MoveSeqno(Guid sitetreeid, Guid pageid, Guid parentid, int seqno, bool inc, IDbTransaction tx = null) {
 			if (parentid != Guid.Empty)
 				Execute("UPDATE page SET page_seqno = page_seqno " + (inc ? "+ 1" : "- 1") +

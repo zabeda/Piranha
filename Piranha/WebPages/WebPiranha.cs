@@ -90,7 +90,7 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// Gets/sets weather to use prefixless permalinks.
+		/// Gets/sets whether to use prefixless permalinks.
 		/// </summary>
 		public static bool PrefixlessPermalinks { get ; set ; }
 		#endregion

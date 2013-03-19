@@ -26,7 +26,7 @@ namespace Piranha.WebPages.RequestHandlers
 		/// Handles the current request.
 		/// </summary>
 		/// <param name="context">The current context</param>
-		/// <param name="draft">Weather to get the draft or not</param>
+		/// <param name="draft">Whether to get the draft or not</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length > 0) {

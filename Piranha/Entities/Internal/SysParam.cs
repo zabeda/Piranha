@@ -51,7 +51,7 @@ namespace Piranha.Models
 		public string Description { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the param is locked or not. This field can not be set through
+		/// Gets/sets whether the param is locked or not. This field can not be set through
 		/// the admin interface.
 		/// </summary>
 		[Column(Name="sysparam_locked")]
@@ -113,7 +113,7 @@ namespace Piranha.Models
 		/// Saves the current record.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the action was successful</returns>
+		/// <returns>Whether the action was successful</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			if (Name != null)
 				Name = Name.ToUpper() ;

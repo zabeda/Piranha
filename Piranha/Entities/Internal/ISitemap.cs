@@ -42,7 +42,7 @@ namespace Piranha.Models
 		string NavigationTitle { get ; }
 
 		/// <summary>
-		/// Gets weather the page should be visible in menus or not.
+		/// Gets whether the page should be visible in menus or not.
 		/// </summary>
 		bool IsHidden { get ; }
 
@@ -99,7 +99,7 @@ namespace Piranha.Models
 		string Redirect { get ; }
 
 		/// <summary>
-		/// Gets weather the page is the site startpage.
+		/// Gets whether the page is the site startpage.
 		/// </summary>
 		bool IsStartpage { get ; }
 		#endregion

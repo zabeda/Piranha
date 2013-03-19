@@ -50,7 +50,7 @@ namespace Piranha.Models
 		/// Saves the current record to the database.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <param name="setdates">Weather to automatically set the dates</param>
+		/// <param name="setdates">Whether to automatically set the dates</param>
 		/// <returns>Wether the operation was successful</returns>
 		protected bool Save(System.Data.IDbTransaction tx = null, bool setdates = true) {
 			var user = HttpContext.Current != null ? HttpContext.Current.User : null;

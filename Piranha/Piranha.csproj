@@ -438,6 +438,7 @@
     <EmbeddedResource Include="Resources\Post.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Post.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Regions.resx">
@@ -448,6 +449,7 @@
     <EmbeddedResource Include="Resources\Settings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
     <EmbeddedResource Include="Resources\SiteTree.resx">

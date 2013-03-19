@@ -12,7 +12,7 @@ namespace Piranha
 	public static class Config
 	{
 		/// <summary>
-		/// Gets weather method binding is disabled. When method binding is enabled, the first UrlData
+		/// Gets if method binding is disabled. When method binding is enabled, the first UrlData
 		/// argument on a GET will be matched against the available methods in the executing page class.
 		/// If a matching method is found this method will be executed instead of the usual ExecutePage.
 		/// </summary>
@@ -21,7 +21,7 @@ namespace Piranha
 		}
 
 		/// <summary>
-		/// Gets weather model state binding is disabled. When model state binding is enabled, values
+		/// Gets if model state binding is disabled. When model state binding is enabled, values
 		/// mapped by the ModelBinder is automatically stored into the model state of the current page.
 		/// </summary>
 		public static bool DisableModelStateBinding {

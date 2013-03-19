@@ -26,7 +26,7 @@ namespace Piranha.Extend
 		public IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions;
 
 		/// <summary>
-		/// Gets/sets weather the container is ready.
+		/// Gets/sets if the container is ready.
 		/// </summary>
 		public bool IsReady { get ; private set ; }
 		#endregion

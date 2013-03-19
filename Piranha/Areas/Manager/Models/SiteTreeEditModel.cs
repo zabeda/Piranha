@@ -79,7 +79,7 @@ namespace Piranha.Areas.Manager.Models
 		public List<dynamic> RegionTypes { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the site tree can be deleted.
+		/// Gets/sets whether the site tree can be deleted.
 		/// </summary>
 		public bool CanDelete { get ; set ; }
 		#endregion
@@ -158,7 +158,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Saves the current edit model.
 		/// </summary>
-		/// <returns>Weather the entity was updated or not</returns>
+		/// <returns>Whether the entity was updated or not</returns>
 		public bool Save() {
 			using (var db = new DataContext()) {
 				var site = db.SiteTrees.Where(s => s.Id == Id).SingleOrDefault() ;
@@ -261,7 +261,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Deletes the current comment.
 		/// </summary>
-		/// <returns>Weather the entity was removed or not</returns>
+		/// <returns>Whether the entity was removed or not</returns>
 		public bool Delete() {
 			using (var db = new DataContext()) {
 				var site = db.SiteTrees.Where(s => s.Id == Id).Single() ;

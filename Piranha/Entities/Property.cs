@@ -13,7 +13,7 @@ namespace Piranha.Entities
 	{
 		#region Properties
 		/// <summary>
-		/// Gets/sets weather this property instance is a draft.
+		/// Gets/sets whether this property instance is a draft or not.
 		/// </summary>
 		internal bool IsDraft { get ; set ; }
 

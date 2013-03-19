@@ -95,7 +95,7 @@ namespace Piranha.Models
 		public DateTime PreviousLogin { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the user account is locked or not.
+		/// Gets/sets whether the user account is locked or not.
 		/// </summary>
 		[Column(Name="sysuser_locked")]
 		[Display(ResourceType=typeof(Piranha.Resources.Settings), Name="Locked")]
@@ -182,7 +182,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="login">The login</param>
 		/// <param name="password">The password</param>
-		/// <param name="persistent">Weather the cookie should be persistent</param>
+		/// <param name="persistent">Whether the cookie should be persistent</param>
 		/// <returns>If the user was successfully logged in</returns>
 		public static bool LoginUser(string login, string password, bool persistent = false) {
 			SysUser user = Authenticate(login, password) ;

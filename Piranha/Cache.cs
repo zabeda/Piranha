@@ -63,7 +63,7 @@ namespace Piranha
 		/// Checks if an object exists for the given key.
 		/// </summary>
 		/// <param name="key">The key</param>
-		/// <returns>Weather an object with the given key exists.</returns>
+		/// <returns>Whether an object with the given key exists.</returns>
 		bool Contains(string key) ;
 	}
 
@@ -106,7 +106,7 @@ namespace Piranha
 		/// Checks if an object exists for the given key.
 		/// </summary>
 		/// <param name="key">The key</param>
-		/// <returns>Weather an object with the given key exists.</returns>
+		/// <returns>Whether an object with the given key exists.</returns>
 		public bool Contains(string key) {
 			return HttpContext.Current.Cache[key] != null ;
 		}
@@ -146,7 +146,7 @@ namespace Piranha
 		/// Checks if an object exists for the given key.
 		/// </summary>
 		/// <param name="key">The key</param>
-		/// <returns>Weather an object with the given key exists.</returns>
+		/// <returns>Whether an object with the given key exists.</returns>
 		public bool Contains(string key) {
 			return Cache.ContainsKey(key) ;
 		}

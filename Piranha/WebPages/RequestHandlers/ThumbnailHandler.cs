@@ -24,7 +24,7 @@ namespace Piranha.WebPages.RequestHandlers
 		/// Handles the current request.
 		/// </summary>
 		/// <param name="context">The current context</param>
-		/// <param name="draft">Weather to get the draft thumbnail or not</param>
+		/// <param name="draft">Whether to get the draft thumbnail or not</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length > 1) {
@@ -47,7 +47,7 @@ namespace Piranha.WebPages.RequestHandlers
 		/// <param name="context">The current http context.</param>
 		/// <param name="args">The args</param>
 		/// <param name="id">The content id</param>
-		/// <returns>Weather a content record was found with the given id</returns>
+		/// <returns>Whether a content record was found with the given id</returns>
 		private bool GetThumbnail(HttpContext context, bool draft, string[] args, Guid id) {
 			Content content = Content.GetSingle(id, draft) ;
 

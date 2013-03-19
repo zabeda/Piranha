@@ -24,7 +24,7 @@ namespace Piranha.Models
 		public string Password { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the cookie should be persistant.
+		/// Gets/sets if the cookie should be persistant.
 		/// </summary>
 		public bool RememberMe { get ; set ; }
 

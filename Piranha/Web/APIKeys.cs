@@ -46,7 +46,7 @@ namespace Piranha.Web
 		/// Checks if the given API-key is valid.
 		/// </summary>
 		/// <param name="apiKey">The API-key</param>
-		/// <returns>Weather the given key is valid</returns>
+		/// <returns>Whether the given key is valid</returns>
 		public static bool IsValidKey(string apiKey) {
 			if (!String.IsNullOrEmpty(apiKey))
 				return GetUserId(apiKey) != null ;

@@ -21,7 +21,7 @@ namespace Piranha.Areas.Manager.Controllers
 
 		/// <summary>
 		/// Opens the insert or edit view for the template depending on
-		/// weather a template id was passed to the action.
+		/// whether a template id was passed to the action or not.
 		/// </summary>
 		/// <param name="id">The template id</param>
 		[Access(Function="ADMIN_PAGE_TEMPLATE")]
@@ -84,7 +84,7 @@ namespace Piranha.Areas.Manager.Controllers
 
 		/// <summary>
 		/// Opens the insert or edit view for the template depending on
-		/// weather a template id was passed to the action.
+		/// whether a template id was passed to the action or not.
 		/// </summary>
 		/// <param name="id">The template id</param>
 		[Access(Function="ADMIN_POST_TEMPLATE")]

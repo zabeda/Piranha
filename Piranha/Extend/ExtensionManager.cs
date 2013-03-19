@@ -132,7 +132,7 @@ namespace Piranha.Extend
 		/// Gets the extensions available for the given type.
 		/// </summary>
 		/// <param name="type">The extension type</param>
-		/// <param name="draft">Weather the entity is draft or not</param>
+		/// <param name="draft">Whether the entity is a draft or not</param>
 		/// <returns>A list of extensions</returns>
 		public static List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
 			var ext = new List<Models.Extension>() ;
@@ -152,7 +152,7 @@ namespace Piranha.Extend
 		/// </summary>
 		/// <param name="type">The extension type</param>
 		/// <param name="id">The entity id</param>
-		/// <param name="draft">Weather the entity is draft or not</param>
+		/// <param name="draft">Whether the entity is a draft or not</param>
 		/// <returns>A list of extensions</returns>
 		public static List<Models.Extension> GetByTypeAndEntity(ExtensionType type, Guid id, bool draft) {
 			var ret = new List<Models.Extension>() ;

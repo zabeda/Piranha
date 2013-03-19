@@ -101,7 +101,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Saves the current edit model.
 		/// </summary>
-		/// <returns>Weather the entity was updated or not</returns>
+		/// <returns>Whether the entity was updated or not</returns>
 		public bool Save() {
 			using (var db = new DataContext()) {
 				var comment = db.Comments.Where(c => c.Id == Id).SingleOrDefault() ;
@@ -122,7 +122,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Deletes the current comment.
 		/// </summary>
-		/// <returns>Weather the entity was removed or not</returns>
+		/// <returns>Whether the entity was removed or not</returns>
 		public bool Delete() {
 			using (var db = new DataContext()) {
 				var comment = db.Comments.Where(c => c.Id == Id).SingleOrDefault() ;

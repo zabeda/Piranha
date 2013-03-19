@@ -52,7 +52,7 @@ namespace Piranha.Entities
 		public Guid ParentId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the comment is attached to a draft.
+		/// Gets/sets whether the comment is attached to a draft.
 		/// </summary>
 		public bool ParentIsDraft { get ; set ; }
 

@@ -41,7 +41,7 @@ namespace Piranha.Web
 
 		/// <summary>
 		/// Checks request headers against the given etag and last modification data and
-		/// sets the correct response headers. Returns weather the file is client cached 
+		/// sets the correct response headers. Returns whether the file is client cached 
 		/// or should be loaded/rendered.
 		/// </summary>
 		/// <param name="context">The current context</param>

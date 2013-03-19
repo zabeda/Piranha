@@ -39,7 +39,7 @@ namespace Piranha.Models
 		public string PasswordConfirm { get ; set ; }
 
 		/// <summary>
-		/// Checks weather the password is set and can be saved.
+		/// Checks if the password is set and can be saved.
 		/// </summary>
 		public bool IsSet { get { return !String.IsNullOrEmpty(Password) ; } }
 		#endregion
@@ -66,7 +66,7 @@ namespace Piranha.Models
 		/// Saves the record to the database. Checks so empty passwords don't get saved.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			if (IsSet)
 				return base.Save(tx);

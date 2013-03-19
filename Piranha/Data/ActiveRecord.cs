@@ -46,7 +46,7 @@ namespace Piranha.Data
 		public string Table { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the field is read only.
+		/// Gets/sets whether the field is read only.
 		/// </summary>
 		public bool ReadOnly { get ; set ; }
 		
@@ -61,7 +61,7 @@ namespace Piranha.Data
 		public string OnSave { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the property should be persisted as json.
+		/// Gets/sets whether the property should be persisted as json.
 		/// </summary>
 		public bool Json { get ; set ; }
 		#endregion

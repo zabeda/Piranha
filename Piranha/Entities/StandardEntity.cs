@@ -18,7 +18,7 @@ namespace Piranha.Entities
 	{
 		#region Members
 		/// <summary>
-		/// Weather not authenticated users should be able to save and delete.
+		/// Whether not authenticated users should be able to save and delete.
 		/// </summary>
 		protected bool AllowAnonymous = false ;
 		#endregion

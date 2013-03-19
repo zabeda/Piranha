@@ -54,25 +54,25 @@ namespace Piranha.Extend.Regions
 		public int Cache { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the user who created the post should be included.
+		/// Gets/sets if the user who created the post should be included.
 		/// </summary>
 		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeCreatedBy")]		
 		public bool IncludeCreatedBy { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the user who last updated the post should be included.
+		/// Gets/sets if the user who last updated the post should be included.
 		/// </summary>
 		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeUpdatedBy")]		
 		public bool IncludeUpdatedBy { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the categories should be included.
+		/// Gets/sets if the categories should be included.
 		/// </summary>
 		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeCategories")]		
 		public bool IncludeCategories { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the template should be included.
+		/// Gets/sets if the template should be included.
 		/// </summary>
 		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeTemplate")]		
 		public bool IncludeTemplate { get ; set ; }

@@ -80,7 +80,7 @@ namespace Piranha.Models
 		public bool ShowArchiveController { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather posts of this type should be exported as rss.
+		/// Gets/sets if posts of this type should be exported as rss.
 		/// </summary>
 		[Column(Name="posttemplate_rss")]
 		[Display(ResourceType=typeof(Piranha.Resources.Template), Name="AllowRss")]

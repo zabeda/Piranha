@@ -23,27 +23,27 @@ namespace Piranha.Areas.Manager.Models
 
 		#region Properties
 		/// <summary>
-		/// Gets/sets weather comments should be enabled for pages.
+		/// Gets/sets whether comments should be enabled for pages.
 		/// </summary>
 		public bool EnablePages { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather comments should be enabled for posts.
+		/// Gets/sets whether comments should be enabled for posts.
 		/// </summary>
 		public bool EnablePosts { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather comments should be enabled for media.
+		/// Gets/sets whether comments should be enabled for media.
 		/// </summary>
 		public bool EnableMedia { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather comments should be enabled for uploads.
+		/// Gets/sets whether comments should be enabled for uploads.
 		/// </summary>
 		public bool EnableUploads { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather comments should be enabled by anonymous users.
+		/// Gets/sets whether comments should be enabled by anonymous users.
 		/// </summary>
 		public bool EnableAnonymous { get ; set ; }
 

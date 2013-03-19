@@ -113,17 +113,17 @@ namespace Piranha.Models.Manager.PageModels
 		public List<Extension> Extensions { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this page can be removed.
+		/// Gets/sets whether this page can be removed or not.
 		/// </summary>
 		public bool CanDelete { get ; set ; }
 
 		/// <summary>
-		/// Gets weather this is a site page or not.
+		/// Gets whether this is a site page or not.
 		/// </summary>
 		public bool IsSite { get { return Permalink.Type == Models.Permalink.PermalinkType.SITE ; } }
 
 		/// <summary>
-		/// Gets/sets weather comments should be enabled.
+		/// Gets/sets whether comments should be enabled or not.
 		/// </summary>
 		public bool EnableComments { get ; set ; }
 
@@ -171,7 +171,7 @@ namespace Piranha.Models.Manager.PageModels
 		/// Gets the model for the page specified by the given id.
 		/// </summary>
 		/// <param name="id">The page id</param>
-		/// <param name="draft">Weather to get the draft or not.</param>
+		/// <param name="draft">Whether to get the draft or not.</param>
 		/// <returns>The model</returns>
 		public static EditModel GetById(Guid id, bool draft = true) {
 			EditModel m = new EditModel() ;
@@ -351,8 +351,8 @@ namespace Piranha.Models.Manager.PageModels
 		/// <summary>
 		/// Saves the page and all of it's related regions.
 		/// </summary>
-		/// <param name="publish">Weather the page should be published</param>
-		/// <returns>Weather the operation succeeded</returns>
+		/// <param name="publish">If the page should be published</param>
+		/// <returns>If the operation succeeded</returns>
 		public virtual bool SaveAll(bool draft = true) {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
@@ -614,7 +614,7 @@ namespace Piranha.Models.Manager.PageModels
 						m.Invoke(reg.Body, new object[] { this }) ;
 				}
 
-			// Get weather comments should be enabled
+			// Get whether comments should be enabled
 			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePages ;
 			if (!Page.IsNew && EnableComments) {
 				using (var db = new DataContext()) {

@@ -32,7 +32,7 @@ namespace Piranha.Web
 		public string OnLoad { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather property should be populated on POST requests. Default value is true.
+		/// Gets/sets whether property should be populated on POST requests. Default value is true.
 		/// </summary>
 		public bool LoadOnPost { get ; set ; }
 

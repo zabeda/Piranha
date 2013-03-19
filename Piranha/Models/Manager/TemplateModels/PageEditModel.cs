@@ -82,7 +82,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Saves the model.
 		/// </summary>
-		/// <returns>Weather the operation succeeded</returns>
+		/// <returns>Whether the operation succeeded</returns>
 		public bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				List<object> args = new List<object>() ;
@@ -135,7 +135,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Deletes the page template and all pages associated with it.
 		/// </summary>
-		/// <returns>Weather the operation succeeded</returns>
+		/// <returns>Whether the operation succeeded</returns>
 		public bool DeleteAll() {
 			List<Piranha.Models.Page> pages = Piranha.Models.Page.Get("page_template_id = @0", Template.Id) ;
 

@@ -20,7 +20,7 @@ namespace Piranha.Web
 		/// Checks that the given API-key is valid.
 		/// </summary>
 		/// <param name="context">The current service context</param>
-		/// <returns>Weather the api key is valid or not.</returns>
+		/// <returns>Whether the api key is valid or not.</returns>
 		protected override bool CheckAccessCore(OperationContext context) {
 			return APIKeys.IsValidKey(GetAPIKey(context)) ;
 		}

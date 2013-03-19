@@ -39,7 +39,7 @@ namespace Piranha.Entities
 		public string ViewTemplate { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the page should be able to override the template.
+		/// Gets/sets if the page should be able to override the template.
 		/// </summary>
 		public bool ShowViewTemplate { get ; set ; }
 
@@ -49,12 +49,12 @@ namespace Piranha.Entities
 		public string ViewRedirect { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the page should be able to override the redirect.
+		/// Gets/sets if the page should be able to override the redirect.
 		/// </summary>
 		public bool ShowViewRedirect { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a site template.
+		/// Gets/sets if this is a site template.
 		/// </summary>
 		public bool IsSiteTemplate { get ; set ; }
 		#endregion

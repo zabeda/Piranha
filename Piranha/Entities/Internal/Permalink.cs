@@ -133,7 +133,7 @@ namespace Piranha.Models
 		/// Saves the current entity.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			// Check for duplicates 
 			if (Permalink.GetSingle("permalink_name = @0 AND permalink_namespace_id = @2" + (!IsNew ? " AND permalink_id != @1" : ""), Name, Id, NamespaceId) != null)

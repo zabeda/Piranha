@@ -31,7 +31,7 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a draft.
+		/// Gets/sets whether this is a draft.
 		/// </summary>
 		[Column(Name="region_draft")]
 		public bool IsDraft { get ; set ; }
@@ -43,7 +43,7 @@ namespace Piranha.Models
 		public Guid PageId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a page draft.
+		/// Gets/sets whether this is a page draft.
 		/// </summary>
 		[Column(Name="region_page_draft")]
 		public bool IsPageDraft { get ; set ; }
@@ -123,7 +123,7 @@ namespace Piranha.Models
 		/// Gets all regions associated with the given page id of the given state.
 		/// </summary>
 		/// <param name="id">The page id</param>
-		/// <param name="draft">Weather this is a draft</param>
+		/// <param name="draft">Whether this is a draft</param>
 		/// <returns>The regions</returns>
 		public static List<Region> GetByPageId(Guid id, bool draft = false) {
 			return Get("region_page_id = @0 AND region_draft = @1", id, draft) ;
@@ -134,7 +134,7 @@ namespace Piranha.Models
 		/// id of the given state.
 		/// </summary>
 		/// <param name="id">The page id</param>
-		/// <param name="draft">Weather this is a draft</param>
+		/// <param name="draft">Whether this is a draft</param>
 		/// <returns>The regions</returns>
 		public static List<Region> GetContentByPageId(Guid id, bool draft = false) {
 			return GetFields("regiontemplate_internal_id, regiontemplate_type, region_body", "region_page_id = @0 AND region_draft = @1", id, draft) ;

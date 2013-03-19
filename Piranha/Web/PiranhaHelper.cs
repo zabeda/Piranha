@@ -20,7 +20,7 @@ namespace Piranha.Web
 		/// </summary>
 		/// <param name="helper">The url helper</param>
 		/// <param name="permalink">The permalink</param>
-		/// <param name="draft">Weather to generate a link to the draft</param>
+		/// <param name="draft">Whether to generate a link to the draft</param>
 		/// <returns>An action url</returns>
 		public static string GetPermalink(this UrlHelper helper, string permalink, bool draft = false) {
 			if (draft)

@@ -15,7 +15,7 @@ namespace Piranha.Web
 	public class ResourceHandler : IHttpHandler
 	{
 		/// <summary>
-		/// Gets weather this handler is reusable or not.
+		/// Gets whether this handler is reusable or not.
 		/// </summary>
 		public bool IsReusable { 
 			get { return false ; } 

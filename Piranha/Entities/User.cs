@@ -70,7 +70,7 @@ namespace Piranha.Entities
 		public DateTime? PreviousLogin { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the user account is locked or not.
+		/// Gets/sets whether the user account is locked or not.
 		/// </summary>
 		public bool IsLocked { get ; set ; }
 

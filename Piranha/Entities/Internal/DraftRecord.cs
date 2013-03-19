@@ -17,7 +17,7 @@ namespace Piranha.Models
 	{
 		#region Properties
 		/// <summary>
-		/// Gets/sets weather this is a draft.
+		/// Gets/sets whether this is a draft.
 		/// </summary>
 		public abstract bool IsDraft { get ; set ; }
 
@@ -41,7 +41,7 @@ namespace Piranha.Models
 		/// Saves and publishes the current record
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
 			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 

@@ -66,7 +66,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Saves the model.
 		/// </summary>
-		/// <returns>Weather the operation succeeded</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public bool SaveAll() {
 			try {
 				return Template.Save() ;
@@ -76,7 +76,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Deletes the post template and all posts associated with it.
 		/// </summary>
-		/// <returns>Weather the operation succeeded</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public bool DeleteAll() {
 			List<Post> posts = Post.Get("post_template_id = @0", Template.Id) ;
 

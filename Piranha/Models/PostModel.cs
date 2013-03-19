@@ -69,7 +69,7 @@ namespace Piranha.Models
 		/// Gets the post model for the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
-		/// <param name="draft">Weather to load the draft</param>
+		/// <param name="draft">Whether to load the draft or not</param>
 		/// <returns>The model</returns>
 		public static PostModel GetByPermalink(string permalink, bool draft = false) {
 			return GetByPermalink<PostModel>(permalink, draft) ;
@@ -79,7 +79,7 @@ namespace Piranha.Models
 		/// Gets the post model for the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
-		/// <param name="draft">Weather to load the draft</param>
+		/// <param name="draft">Whether to load the draft or not</param>
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
 		public static T GetByPermalink<T>(string permalink, bool draft = false) where T : PostModel {

@@ -94,7 +94,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Insert or update of a media object.
 		/// </summary>
 		/// <param name="m">The new or existing model</param>
-		/// <param name="insert">Weather to insert or update</param>
+		/// <param name="insert">Whether to insert or update</param>
 		/// <returns></returns>
 		private ActionResult EditInternal(EditModel m, bool insert = false) {
 			ViewBag.Folder = m.Content.IsFolder ;

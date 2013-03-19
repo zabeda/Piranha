@@ -421,7 +421,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Weather the user should be unable to log in.
+        ///   Looks up a localized string similar to Whether the user should be unable to log in.
         /// </summary>
         public static string LockedInfo {
             get {

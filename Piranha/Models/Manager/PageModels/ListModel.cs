@@ -50,7 +50,7 @@ namespace Piranha.Models.Manager.PageModels
 		public List<Sitemap> AllPages { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the site with the given id has a site page.
+		/// Gets/sets if the site with the given id has a site page.
 		/// </summary>
 		public Dictionary<Guid, Guid> SitePage { get ; set ; }
 

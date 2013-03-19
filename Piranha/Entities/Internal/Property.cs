@@ -24,7 +24,7 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a draft.
+		/// Gets/sets whether this is a draft or not.
 		/// </summary>
 		[Column(Name="property_draft")]
 		public bool IsDraft { get ; set ; }
@@ -76,7 +76,7 @@ namespace Piranha.Models
 		/// Gets all properties associated with the given parent id of the given state.
 		/// </summary>
 		/// <param name="id">The parent id</param>
-		/// <param name="draft">Weather to get the draft version.</param>
+		/// <param name="draft">Whether to get the draft version or not</param>
 		/// <returns>The properties</returns>
 		public static List<Property> GetByParentId(Guid id, bool draft = false) {
 			return Get("property_parent_id = @0 AND property_draft = @1", id, draft) ;
@@ -96,7 +96,7 @@ namespace Piranha.Models
 		/// id of the given state.
 		/// </summary>
 		/// <param name="id">The parent id</param>
-		/// <param name="draft">Weather to get the draft version.</param>
+		/// <param name="draft">Whether to get the draft version or not</param>
 		/// <returns>The properties</returns>
 		public static List<Property> GetContentByParentId(Guid id, bool draft = false) {
 			return GetFields("property_name, property_value", "property_parent_id = @0 AND property_draft = @1", id, draft) ;

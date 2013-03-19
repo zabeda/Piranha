@@ -20,7 +20,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Adds a success message to the current view.
 		/// </summary>
 		/// <param name="msg">The message</param>
-		/// <param name="persist">Weather the message should be persisted in TempData</param>
+		/// <param name="persist">If the message should be persisted in TempData</param>
 		protected void SuccessMessage(string msg, bool persist = false) {
 			ViewBag.MessageCss = "success" ;
 			ViewBag.Message = msg ;
@@ -34,7 +34,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Adds an error message to the current view.
 		/// </summary>
 		/// <param name="msg"></param>
-		/// <param name="persist">Weather the message should be persisted in TempData</param>
+		/// <param name="persist">If the message should be persisted in TempData</param>
 		protected void ErrorMessage(string msg, bool persist = false) {
 			ViewBag.MessageCss = "error" ;
 			ViewBag.Message = msg ;
@@ -48,7 +48,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Adds an information message to the current view.
 		/// </summary>
 		/// <param name="msg"></param>
-		/// <param name="persist">Weather the message should be persisted in TempData</param>
+		/// <param name="persist">If the message should be persisted in TempData</param>
 		protected void InformationMessage(string msg, bool persist = false) {
 			ViewBag.MessageCss = "" ;
 			ViewBag.Message = msg ;

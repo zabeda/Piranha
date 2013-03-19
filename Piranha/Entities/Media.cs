@@ -13,7 +13,7 @@ namespace Piranha.Entities
 	{
 		#region Properties
 		/// <summary>
-		/// Gets/sets weather this is a draft or not.
+		/// Gets/sets whether this is a draft or not.
 		/// </summary>
 		internal bool IsDraft { get ; set ; }
 
@@ -50,12 +50,12 @@ namespace Piranha.Entities
 		public int Size { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is an image.
+		/// Gets/sets whether this is an image or not.
 		/// </summary>
 		public bool IsImage { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a folder.
+		/// Gets/sets whether this is a folder or not.
 		/// </summary>
 		public bool IsFolder { get ; set ; }
 

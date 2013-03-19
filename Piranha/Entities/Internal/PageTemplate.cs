@@ -86,7 +86,7 @@ namespace Piranha.Models
 		public bool ShowRedirect { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a site template.
+		/// Gets/sets if this is a site template.
 		/// </summary>
 		[Column(Name="pagetemplate_site_template")]
 		public bool IsSiteTemplate { get ; set ; }

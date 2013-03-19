@@ -24,7 +24,7 @@ namespace Piranha.Entities
 		public Guid? OriginalId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this page instance is a draft.
+		/// Gets/sets if this page instance is a draft.
 		/// </summary>
 		internal bool IsDraft { get ; set ; }
 
@@ -69,7 +69,7 @@ namespace Piranha.Entities
 		public string NavigationTitle { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this page should be hidden in the navigation.
+		/// Gets/sets if the page should be hidden in the navigation.
 		/// </summary>
 		public bool IsHidden { get ; set ; }
 

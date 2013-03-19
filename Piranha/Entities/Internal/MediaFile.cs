@@ -169,7 +169,7 @@ namespace Piranha.Models
 		/// Deletes the media file record and all related files.
 		/// </summary>
 		/// <param name="tx">Optional database transaction</param>
-		/// <returns>Weather the action was a success</returns>
+		/// <returns>Whether the action was a success</returns>
 		public override bool Delete(System.Data.IDbTransaction tx = null) {
 			if (base.Delete(tx)) {
 				// Delete original files
@@ -228,7 +228,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="response">The http response to write the file to</param>
 		/// <param name="path">The path to the physical file</param>
-		/// <param name="compressed">Weather or not the file is a compressed image</param>
+		/// <param name="compressed">Whether or not the file is a compressed image</param>
 		protected void WriteFile(HttpResponse response, string path, bool compressed = false) {
 			if (File.Exists(path)) {
 				response.StatusCode = 200 ;

@@ -121,7 +121,7 @@
     <value>Include in RSS</value>
   </data>
   <data name="AllowRssDescription" xml:space="preserve">
-    <value>Weather this post should be included in RSS feeds</value>
+    <value>Whether this post should be included in RSS feeds</value>
   </data>
   <data name="ArchiveTemplate" xml:space="preserve">
     <value>Archive template</value>

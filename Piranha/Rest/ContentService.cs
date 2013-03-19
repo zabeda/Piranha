@@ -49,7 +49,7 @@ namespace Piranha.Rest
 		/// Gets the content specified by the given id.
 		/// </summary>
 		/// <param name="id">The id</param>
-		/// <param name="draft">Weather to get the draft or not</param>
+		/// <param name="draft">Whether to get the draft or not</param>
 		/// <returns>The content</returns>
 		internal Content Get(Guid id, bool draft = false) {
 			try {

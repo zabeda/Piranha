@@ -65,7 +65,7 @@ namespace Piranha
 		/// </summary>
 		/// <param name="login">The username</param>
 		/// <param name="password">The password</param>
-		/// <returns>Weather the login was successful</returns>
+		/// <returns>Whether the login was successful</returns>
 		public bool Login(string login, string password) {
 			var usr = Models.SysUser.Authenticate(login, password) ;
 
@@ -80,7 +80,7 @@ namespace Piranha
 		/// Logs in the user with the given encrypted api key to the current data context.
 		/// </summary>
 		/// <param name="apiKey">The encrypted api key</param>
-		/// <returns>Weather the login was successful</returns>
+		/// <returns>Whether the login was successful</returns>
 		public bool Login(string apiKey) {
 			var id = Web.APIKeys.GetUserId(apiKey) ;
 

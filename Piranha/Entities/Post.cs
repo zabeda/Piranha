@@ -19,7 +19,7 @@ namespace Piranha.Entities
 		public Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this post instance is a draft.
+		/// Gets/sets whether this post instance is a draft or not.
 		/// </summary>
 		internal bool IsDraft { get ; set ; }
 
@@ -34,7 +34,7 @@ namespace Piranha.Entities
 		public Guid PermalinkId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather to include this post in rss feeds.
+		/// Gets/sets whether to include this post in rss feeds.
 		/// </summary>
 		public bool AllowRss { get ; set ; }
 

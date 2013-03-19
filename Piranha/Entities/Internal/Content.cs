@@ -34,7 +34,7 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a draft.
+		/// Gets/sets whether this is a draft.
 		/// </summary>
 		[Column(Name="content_draft")]
 		public bool IsDraft { get ; set ; }
@@ -84,13 +84,13 @@ namespace Piranha.Models
 		public int Size { get ; set ; }
 
 		/// <summary>
-		/// Get/sets weather the content is an image or not.
+		/// Get/sets whether the content is an image or not.
 		/// </summary>
 		[Column(Name="content_image")]
 		public bool IsImage { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather this is a content folder or not.
+		/// Gets/sets whether this is a content folder or not.
 		/// </summary>
 		[Column(Name="content_folder")]
 		public bool IsFolder { get ; set ; }
@@ -210,7 +210,7 @@ namespace Piranha.Models
 		/// Gets a single record.
 		/// </summary>
 		/// <param name="id">The record id</param>
-		/// <param name="draft">Weather to get the draft or not</param>
+		/// <param name="draft">Whether to get the draft or not</param>
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>The record</returns>
 		public static Content GetSingle(Guid id, bool draft = false, IDbTransaction tx = null) {
@@ -252,7 +252,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the folder structure for the first level.
 		/// </summary>
-		/// <param name="published">Weather to get the published structure or not</param>
+		/// <param name="published">Whether to get the published structure or not</param>
 		/// <returns>The content</returns>
 		public static List<Content> GetStructure(bool published = true) {
 			return GetStructure(Guid.Empty, false, published) ;
@@ -262,7 +262,7 @@ namespace Piranha.Models
 		/// Gets the folder structure for the given folder id.
 		/// </summary>
 		/// <param name="folderid">The folder id</param>
-		/// <param name="published">Weather to get the published structure or not</param>
+		/// <param name="published">Whether to get the published structure or not</param>
 		/// <returns>The content</returns>
 		public static List<Content> GetStructure(Guid folderid, bool includeparent = false, bool published = true) {
 			List<Content> ret = new List<Content>() ;
@@ -298,7 +298,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the full folder structure for the media content.
 		/// </summary>
-		/// <param name="published">Weather to get the published structure or not</param>
+		/// <param name="published">Whether to get the published structure or not</param>
 		/// <returns>The folder structure.</returns>
 		public static List<Content> GetFolderStructure(bool published = true) {
 			return SortStructure(Content.Get("content_folder = 1 AND content_draft = @0", !published, new Params() { OrderBy = "content_parent_id, content_name" }), Guid.Empty) ;
@@ -308,7 +308,7 @@ namespace Piranha.Models
 		/// Gets the content for the given category id.
 		/// </summary>
 		/// <param name="id">The category id</param>
-		/// <param name="published">Weather to get published content or not</param>
+		/// <param name="published">Whether to get published content or not</param>
 		/// <returns>A list of content</returns>
 		public static List<Content> GetByCategoryId(Guid id, bool published = true) {
 			return Content.Get("content_id IN (" +
@@ -444,7 +444,7 @@ namespace Piranha.Models
 		/// Saves and publishes the current record.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
 			return SaveAndPublish(null, tx) ;
 		}
@@ -454,7 +454,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="content">The physical file</param>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public virtual bool SaveAndPublish(MediaFileContent content, System.Data.IDbTransaction tx = null) {
 			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
@@ -514,7 +514,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="content">The physical content</param>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the operation succeeded or not</returns>
+		/// <returns>Whether the operation succeeded or not</returns>
 		public bool Save(MediaFileContent content, System.Data.IDbTransaction tx = null) {
 			SetFileMeta(content) ;
 
@@ -589,7 +589,7 @@ namespace Piranha.Models
 		/// Checks if the current entity has a child with the given id.
 		/// </summary>
 		/// <param name="id">The content id</param>
-		/// <returns>Weather the child was found</returns>
+		/// <returns>Whether the child was found</returns>
 		public bool HasChild(Guid id) {
 			if (ChildContent != null) {
 				foreach (var c in ChildContent)
@@ -643,7 +643,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="content">The content</param>
 		/// <param name="id">The content id</param>
-		/// <returns>Weather the child was found</returns>
+		/// <returns>Whether the child was found</returns>
 		private bool HasChild(Content content, Guid id) {
 			if (content.Id == id)
 				return true ;

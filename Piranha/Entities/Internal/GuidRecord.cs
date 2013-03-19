@@ -19,7 +19,7 @@ namespace Piranha.Models
 	{
 		#region Members
 		/// <summary>
-		/// Gets/sets weather to log changes made to this entity.
+		/// Gets/sets whether to log changes made to this entity.
 		/// </summary>
 		public bool LogChanges = false ;
 

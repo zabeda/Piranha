@@ -21,7 +21,7 @@ namespace Piranha.Entities
 
 		#region Properties
 		/// <summary>
-		/// Gets/sets weather this is a draft or not
+		/// Gets/sets whether this is a draft or not.
 		/// </summary>
 		public bool IsDraft { get ; set ; }
 
@@ -36,7 +36,7 @@ namespace Piranha.Entities
 		public Guid PageId { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the page is a draft or not.
+		/// Gets/sets whether the page is a draft or not.
 		/// </summary>
 		public bool IsPageDraft { get ; set ; }
 

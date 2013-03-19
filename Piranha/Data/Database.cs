@@ -53,14 +53,14 @@ namespace Piranha.Data
 		}
 
 		/// <summary>
-		/// Gets weather the current provider is SqlServer.
+		/// Gets whether the current provider is SqlServer.
 		/// </summary>
 		public static bool IsSqlServer {
 			get { return ProviderName.ToLower() == "system.data.sqlclient" ; }
 		}
 
 		/// <summary>
-		/// Gets weather the current provider is MySql.
+		/// Gets whether the current provider is MySql.
 		/// </summary>
 		public static bool IsMySql {
 			get { return ProviderName.ToLower() == "mysql.data.mysqlclient" ; }

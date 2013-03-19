@@ -18,22 +18,22 @@ namespace Piranha.Drawing
 		#endregion
 
 		/// <summary>
-		/// Gets weather the current thumbnail collection contains a
+		/// Gets whether the current thumbnail collection contains a
 		/// thumbnail for the given mime-type.
 		/// </summary>
 		/// <param name="type">The mime-type</param>
-		/// <returns>Weather the key exists</returns>
+		/// <returns>Whether the key exists</returns>
 		public static bool ContainsKey(string type) {
 			Ensure() ;
 			return typeToThumb.ContainsKey(type) ;
 		}
 
 		/// <summary>
-		/// Gets weather the current thumbnail collection contains a
+		/// Gets whether the current thumbnail collection contains a
 		/// thumbnail for the given thumbnail id.
 		/// </summary>
 		/// <param name="id">The id</param>
-		/// <returns>Weather the key exists</returns>
+		/// <returns>Whether the key exists</returns>
 		public static bool ContainsKey(Guid id) {
 			Ensure() ;
 			return guidToThumb.ContainsKey(id) ;

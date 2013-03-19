@@ -92,7 +92,7 @@ namespace Piranha.Models
 		public string NavigationTitle { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the page should be visible in menus or not.
+		/// Gets/sets whether the page should be visible in menus or not.
 		/// </summary>
 		[Column(Name="page_is_hidden")]
 		public bool IsHidden { get ; set ; }
@@ -192,14 +192,14 @@ namespace Piranha.Models
 		public int Level { get ; private set ; }
 
 		/// <summary>
-		/// Gets weather the page is published or not.
+		/// Gets whether the page is published or not.
 		/// </summary>
 		public bool IsPublished {
 			get { return Published != DateTime.MinValue && Published < DateTime.Now ; }
 		}
 
 		/// <summary>
-		/// Gets weather the page is the site startpage.
+		/// Gets if the current the page is the site startpage.
 		/// </summary>
 		public bool IsStartpage {
 			get { return ParentId == Guid.Empty && Seqno == 1 ; }
@@ -221,7 +221,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the sorted sitemap structure.
 		/// </summary>
-		/// <param name="published">Weather only published pages should be included.</param>
+		/// <param name="published">Whether only published pages should be included.</param>
 		/// <returns>The site structure</returns>
 		public static List<Sitemap> GetStructure(bool published = true) {
 			return GetStructure(Config.SiteTree, published) ;
@@ -231,7 +231,7 @@ namespace Piranha.Models
 		/// Gets the sorted sitemap structure for the site tree with the given internal id.
 		/// </summary>
 		/// <param name="internalId">The internal id of the site tree</param>
-		/// <param name="published">Weather to only get published pages.</param>
+		/// <param name="published">Whether to only get published pages.</param>
 		/// <returns>The sitemap</returns>
 		public static List<Sitemap> GetStructure(string internalId, bool published = true) {
 			if (published) {

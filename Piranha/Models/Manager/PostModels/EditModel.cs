@@ -96,7 +96,7 @@ namespace Piranha.Models.Manager.PostModels
 		public List<Extension> Extensions { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather comments should be enabled.
+		/// Gets/sets whether comments should be enabled or not.
 		/// </summary>
 		public bool EnableComments { get ; set ; }
 
@@ -200,7 +200,7 @@ namespace Piranha.Models.Manager.PostModels
 		/// <summary>
 		/// Saves the model.
 		/// </summary>
-		/// <returns>Weather the action was successful</returns>
+		/// <returns>Whether the action was successful or not</returns>
 		public bool SaveAll(bool draft = true) {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
@@ -333,7 +333,7 @@ namespace Piranha.Models.Manager.PostModels
 			// Get extensions
 			Extensions = Post.GetExtensions() ;
 
-			// Get weather comments should be enabled
+			// Get whether comments should be enabled
 			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePosts ;
 			if (!Post.IsNew && EnableComments) {
 				using (var db = new DataContext()) {

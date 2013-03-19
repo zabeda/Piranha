@@ -78,7 +78,7 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Saves the user and all related information.
 		/// </summary>
-		/// <returns>Weather the action succeeded or not.</returns>
+		/// <returns>Whether the action succeeded or not.</returns>
 		public virtual bool SaveAll() {
 			Guid uid = new Guid("4037dc45-90d2-4adc-84aa-593be867c29d") ;
 			
@@ -104,7 +104,7 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Deletes the user and all related information.
 		/// </summary>
-		/// <returns>Weather the action succeeded or not.</returns>
+		/// <returns>Whether the action succeeded or not.</returns>
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {

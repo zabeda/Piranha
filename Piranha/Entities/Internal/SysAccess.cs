@@ -58,7 +58,7 @@ namespace Piranha.Models
 		public string Description { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the access rule is locked.
+		/// Gets/sets whether the access rule is locked.
 		/// </summary>
 		[Column(Name="sysaccess_locked")]
 		public bool IsLocked { get ; set ; }
@@ -114,7 +114,7 @@ namespace Piranha.Models
 		/// Saves the current record.
 		/// </summary>
 		/// <param name="tx">Optional transaction</param>
-		/// <returns>Weather the action was successful</returns>
+		/// <returns>Whether the action was successful</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			if (Function != null)
 				Function = Function.ToUpper() ;

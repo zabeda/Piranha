@@ -39,7 +39,7 @@ namespace Piranha.Entities
 		public string ViewTemplate { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the post should be able to override the template.
+		/// Gets/sets if the post should be able to override the template.
 		/// </summary>
 		public bool ShowViewTemplate { get ; set ; }
 
@@ -49,12 +49,12 @@ namespace Piranha.Entities
 		public string ViewArchiveTemplate { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather the post should be able to override the archive template.
+		/// Gets/sets if the post should be able to override the archive template.
 		/// </summary>
 		public bool ShowViewArchiveTemplate { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets weather to include post in rss feeds.
+		/// Gets/sets whether to include post in rss feeds.
 		/// </summary>
 		public bool AllowRss { get ; set ; }
 		#endregion

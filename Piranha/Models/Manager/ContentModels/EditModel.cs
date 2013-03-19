@@ -281,7 +281,7 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
-		/// <param name="isfolder">Weather this is a folder or not.</param>
+		/// <param name="isfolder">Whether this is a folder or not.</param>
 		public EditModel(bool isfolder, Guid parentid) {
 			Content = new Piranha.Models.Content() { IsFolder = isfolder, ParentId = parentid } ;
 			ContentCategories = new List<Guid>() ;
