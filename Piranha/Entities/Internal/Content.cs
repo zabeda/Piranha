@@ -617,7 +617,7 @@ namespace Piranha.Models
 								if (max > 0) {
 									resized = Drawing.ImageUtils.Resize(img, max) ;
 									using (var writer = new MemoryStream()) {
-										img.Save(writer, img.RawFormat) ;
+										resized.Save(writer, img.RawFormat) ;
 										content.Body = writer.ToArray() ;
 									}
 								}
