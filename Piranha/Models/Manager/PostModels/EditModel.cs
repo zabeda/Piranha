@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
 using Piranha.Data;
+using Piranha.Extend;
 
 namespace Piranha.Models.Manager.PostModels
 {
@@ -44,6 +45,14 @@ namespace Piranha.Models.Manager.PostModels
 				model.Post.Body = 
 					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Post.Body").AttemptedValue) ;
 
+				// Allow HtmlString extensions
+				model.Extensions.Each((i, m) => {
+					if (m.Body is HtmlString) {
+						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
+						m.Body = (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[m.Type],
+ 							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
+					}
+				}) ;
 				return model ;
 			}
 		}

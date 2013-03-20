@@ -68,12 +68,13 @@ namespace Piranha.Rest
 
 					// Regions
 					foreach (var key in ((IDictionary<string, object>)pm.Regions).Keys) {
-						if (((IDictionary<string, object>)pm.Regions)[key] is HtmlString)
+						if (((IDictionary<string, object>)pm.Regions)[key] is HtmlString) {
 							page.Regions.Add(new Region() { Name = key, Body = 
 								((HtmlString)((IDictionary<string, object>)pm.Regions)[key]).ToHtmlString() }) ;
-						else
+						} else {
 							page.Regions.Add(new Region() { Name = key, Body = 
 								((IDictionary<string, object>)pm.Regions)[key] }) ;
+						}
 					}
 
 					// Properties
@@ -87,9 +88,15 @@ namespace Piranha.Rest
 
 					// Extensions
 					page.ExpandedExtensions = pm.Extensions ;
-					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys)
-						page.Extensions.Add(new Extension() { Name = key, Body =
-							((IDictionary<string, object>)pm.Extensions)[key] }) ;
+					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys) {
+						if (((IDictionary<string, object>)pm.Extensions)[key] is HtmlString) {
+							page.Extensions.Add(new Extension() { Name = key, Body = 
+								((HtmlString)((IDictionary<string, object>)pm.Extensions)[key]).ToHtmlString() }) ;
+						} else {
+							page.Extensions.Add(new Extension() { Name = key, Body =
+								((IDictionary<string, object>)pm.Extensions)[key] }) ;
+						}
+					}
 					return page ;
 				}
 			} catch {}

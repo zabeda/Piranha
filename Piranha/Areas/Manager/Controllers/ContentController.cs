@@ -114,7 +114,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Saves the current edit model.
 		/// </summary>
 		/// <param name="m">The model</param>
-		[HttpPost()]
+		[HttpPost(), ValidateInput(false)]
 		[Access(Function="ADMIN_CONTENT")]
 		public ActionResult Edit(bool draft, EditModel m) {
 			if (m.SaveAll(draft)) {

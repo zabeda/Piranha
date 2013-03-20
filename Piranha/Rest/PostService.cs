@@ -80,9 +80,15 @@ namespace Piranha.Rest
 
 					// Extensions
 					post.ExpandedExtensions = pm.Extensions ;
-					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys)
-						post.Extensions.Add(new Extension() { Name = key, Body =
-							((IDictionary<string, object>)pm.Extensions)[key] }) ;
+					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys) {
+						if (((IDictionary<string, object>)pm.Extensions)[key] is HtmlString) {
+							post.Extensions.Add(new Extension() { Name = key, Body = 
+								((HtmlString)((IDictionary<string, object>)pm.Extensions)[key]).ToHtmlString() }) ;
+						} else {
+							post.Extensions.Add(new Extension() { Name = key, Body =
+								((IDictionary<string, object>)pm.Extensions)[key] }) ;
+						}
+					}
 					return post ;
 				}
 			} catch {}

@@ -43,7 +43,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="m">The model</param>
 		/// <returns></returns>
-		[HttpPost()]
+		[HttpPost(), ValidateInput(false)]
 		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Edit(EditModel m) {
 			if (ModelState.IsValid) {

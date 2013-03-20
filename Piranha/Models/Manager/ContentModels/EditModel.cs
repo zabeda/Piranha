@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Piranha.Data;
+using Piranha.Extend;
 
 namespace Piranha.Models.Manager.ContentModels
 {
@@ -19,6 +20,31 @@ namespace Piranha.Models.Manager.ContentModels
 	/// </summary>
 	public class EditModel
 	{
+		#region Binder
+		public class Binder : DefaultModelBinder
+		{
+			/// <summary>
+			/// Extend the default binder so that html strings can be fetched from the post.
+			/// </summary>
+			/// <param name="controllerContext">Controller context</param>
+			/// <param name="bindingContext">Binding context</param>
+			/// <returns>The page edit model</returns>
+			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
+				EditModel model = (EditModel)base.BindModel(controllerContext, bindingContext) ;
+
+				// Allow HtmlString extensions
+				model.Extensions.Each((i, m) => {
+					if (m.Body is HtmlString) {
+						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
+						m.Body = (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[m.Type],
+ 							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
+					}
+				}) ;
+				return model ;
+			}
+		}
+		#endregion
+
 		#region Mimetypes
 		/// <summary>
 		/// Gets the mime type for the given filename

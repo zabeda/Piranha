@@ -59,7 +59,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Saves the model
 		/// </summary>
 		/// <param name="em">The model</param>
-		[HttpPost()]
+		[HttpPost(), ValidateInput(false)]
 		[Access(Function="ADMIN_USER")]
 		public new ActionResult User(UserEditModel um) {
 			if (um.User.IsNew)
@@ -141,7 +141,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Saves the group
 		/// </summary>
 		/// <param name="gd">The model</param>
-		[HttpPost()]
+		[HttpPost(), ValidateInput(false)]
 		[Access(Function="ADMIN_GROUP")]
 		public ActionResult Group(GroupEditModel gm) {
 			if (gm.Group.IsNew)

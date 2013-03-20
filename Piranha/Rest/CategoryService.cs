@@ -18,7 +18,7 @@ namespace Piranha.Rest
 	/// </summary>
 	[ServiceContract()]
 	[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-	public class CategoryService
+	public class CategoryService : BaseService
 	{
 		/// <summary>
 		/// Gets the available contracts.
@@ -29,15 +29,24 @@ namespace Piranha.Rest
 		public List<Category> Get() {
 			List<Category> categories = new List<Category>() ;
 
-			Models.Category.Get(new Params() { OrderBy = "category_name" }).ForEach(c => 
-				categories.Add(new Category() {
+			Models.Category.Get(new Params() { OrderBy = "category_name" }).ForEach(c => {
+				var category = new Category() {
 					Id = c.Id,
 					Name = c.Name,
 					Permalink = c.Permalink,
 					Description = c.Description,
 					Created = c.Created.ToString(),
 					Updated = c.Updated.ToString()
-				}));
+				} ;
+				foreach (var ext in c.GetExtensions()) {
+					var internalId = Extend.ExtensionManager.GetInternalIdByType(ext.Type) ;
+
+					if (ext.Body is HtmlString)
+						category.Extensions.Add(new Extension() { Name = internalId, Body = ((HtmlString)ext.Body).ToHtmlString() }) ;
+					else category.Extensions.Add(new Extension() { Name = internalId, Body = ext.Body }) ;
+				}
+				categories.Add(category) ;
+			});
 			return categories ;
 		}
 

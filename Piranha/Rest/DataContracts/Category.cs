@@ -18,8 +18,14 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string Description { get ; set ; }
 		[DataMember()]
+		public List<Extension> Extensions { get ; set ; }
+		[DataMember()]
 		public string Created { get ; set ; }
 		[DataMember()]
 		public string Updated { get ; set ; }
+
+		public Category() {
+			Extensions = new List<Extension>() ;
+		}
 	}
 }
