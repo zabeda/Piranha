@@ -148,6 +148,10 @@ namespace Piranha.Areas.Manager.Controllers
 			}
 			pm.Refresh();
 
+			// Executes the page list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
+				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+
 			if (!pm.IsSite) {
 				if (pm.Page.IsNew)
 					ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;

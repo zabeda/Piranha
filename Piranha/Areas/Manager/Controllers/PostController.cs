@@ -83,6 +83,10 @@ namespace Piranha.Areas.Manager.Controllers
 			}
 			m.Refresh() ;
 
+			// Executes the post edit loaded hook, if registered
+			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
+				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 			if (m.Post.IsNew)
 				ViewBag.Title = Piranha.Resources.Post.EditTitleNew + m.Template.Name.ToLower() ;
 			else ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
