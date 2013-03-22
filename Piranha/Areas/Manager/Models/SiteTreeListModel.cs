@@ -42,7 +42,7 @@ namespace Piranha.Areas.Manager.Models
 
 				foreach (var site in m.Sites) {
 					m.CanDeleteSite.Add(site.Id,
-						db.PageDrafts.Where(p => p.SiteTreeId == site.Id && p.ParentId != site.Id).Count() == 0) ;
+						db.PageDrafts.Where(p => p.SiteTreeId == site.Id && (!p.ParentId.HasValue || p.ParentId.Value != site.Id)).Count() == 0) ;
 				}
 			}
 			return m ;

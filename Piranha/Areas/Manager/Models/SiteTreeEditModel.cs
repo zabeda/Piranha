@@ -138,7 +138,7 @@ namespace Piranha.Areas.Manager.Models
 					Description = site.Description,
 					MetaTitle = site.MetaTitle,
 					MetaDescription = site.MetaDescription,
-					CanDelete = db.PageDrafts.Where(s => s.SiteTreeId == id && s.ParentId != id).Count() == 0,
+					CanDelete = db.PageDrafts.Where(p => p.SiteTreeId == site.Id && (!p.ParentId.HasValue || p.ParentId.Value != site.Id)).Count() == 0,
 					Template = db.PageTemplates.Include(pt => pt.RegionTemplates).Where(pt => pt.Id == site.Id && pt.IsSiteTemplate).SingleOrDefault()
 				} ;
 				if (model.Template == null) {
