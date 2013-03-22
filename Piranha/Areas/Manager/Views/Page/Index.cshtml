@@ -119,7 +119,11 @@
     <div class="inner">
         <ul>
             <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            @if (Model.ActiveSite != "DEFAULT_SITE") {
+            <li><a href="@Url.Action("site", new { id = Model.ActiveSite.ToLower() })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            } else {
             <li><a href="@Url.Action("index")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
+            }
             @if (Model.SitePage[Model.ActiveSiteId] != Guid.Empty) {
             <li>
                 <a href="@Url.Action("edit", new { @id = Model.SitePage[Model.ActiveSiteId] })" class="edit-site">@Piranha.Resources.Page.EditSite</a>

@@ -113,9 +113,15 @@ namespace Piranha.Models.Manager.PageModels
 		public List<Extension> Extensions { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets whether this page can be removed or not.
+		/// Gets/sets whether or not the page can be removed.
 		/// </summary>
 		public bool CanDelete { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets whether or not the page can be published. Pages that are copies
+		/// can't be published if the original is unpublished.
+		/// </summary>
+		public bool CanPublish { get ; set ; }
 
 		/// <summary>
 		/// Gets whether this is a site page or not.
@@ -159,6 +165,7 @@ namespace Piranha.Models.Manager.PageModels
 			DisableGroups = SysGroup.GetParents(Guid.Empty) ;
 			DisableGroups.Reverse() ;
 			CanDelete = true ;
+			CanPublish = true ;
 			Comments = new List<Entities.Comment>() ;
 
 			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
@@ -630,6 +637,11 @@ namespace Piranha.Models.Manager.PageModels
 				using (var db = new DataContext()) {
 					SiteTree = db.SiteTrees.Where(s => s.Id == Page.SiteTreeId).Single() ;
 				}
+			}
+
+			// Check if the page can be published
+			if (Page.OriginalId != Guid.Empty) {
+				CanPublish = Page.GetScalar("SELECT count(*) FROM page WHERE page_id=@0 AND page_draft=0", Page.OriginalId) > 0 ;
 			}
 		}
 

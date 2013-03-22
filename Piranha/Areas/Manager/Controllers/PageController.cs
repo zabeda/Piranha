@@ -23,7 +23,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Levels = param != null ? Convert.ToInt32(param.Value) : 0 ;
 
 				if (!String.IsNullOrEmpty(id)) {
-					var p = Page.GetSingle(new Guid(id)) ;
+					var p = Page.GetSingle(new Guid(id), true) ;
 					if (p != null)
 						internalId = p.SiteTreeInternalId ;
 
@@ -213,13 +213,16 @@ namespace Piranha.Areas.Manager.Controllers
 
 			try {
 				if (pm.DeleteAll())
-					SuccessMessage(Piranha.Resources.Page.MessageDeleted) ;
-				else ErrorMessage(Piranha.Resources.Page.MessageNotDeleted) ;
+					SuccessMessage(Piranha.Resources.Page.MessageDeleted, true) ;
+				else ErrorMessage(Piranha.Resources.Page.MessageNotDeleted, true) ;
 			} catch (Exception e) {
-				ErrorMessage(e.ToString()) ;
+				ErrorMessage(e.ToString(), true) ;
 			}
-
-			return Index() ;
+			// Get the site page for the deleted page so we position ourselves correctly
+			var p = Page.GetSingle("page_parent_id=@0", pm.Page.SiteTreeId) ;
+			if (p != null)
+				return RedirectToAction("index", new { id = p.Id }) ;
+			return RedirectToAction("index") ;
 		}
 
 		/// <summary>
