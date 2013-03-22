@@ -18,11 +18,12 @@ namespace Piranha.Web
 		/// <param name="size">Optional size</param>
 		/// <returns>The image URL</returns>
 		public IHtmlString Image(string email, int size = 0) {
-			var input = UTF8Encoding.UTF8.GetBytes(email) ;
-			var crypto = new MD5CryptoServiceProvider() ;
+			var crypto = MD5.Create();
+			var data = crypto.ComputeHash(Encoding.UTF8.GetBytes(email));
+			var hash = "" ;
 
-			var hash = Convert.ToBase64String(crypto.TransformFinalBlock(input, 0, input.Length)) ;
-			crypto.Clear() ;
+			foreach (var b in data)
+				hash += b.ToString("x2") ;
 
 			return new HtmlString("http://www.gravatar.com/avatar/" + hash.ToLower() +
 				(size > 0 ? "?s=" + size : "")) ;
