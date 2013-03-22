@@ -28,6 +28,7 @@
 }
 @{ Html.BeginForm() ; }
 @Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.NamespaceId)
 @Html.HiddenFor(m => m.CanDelete)
 <div class="grid_12">
     <div class="box">
@@ -75,18 +76,6 @@
                         <div class="title"><h2>@Piranha.Resources.Global.Settings</h2></div>
                         <div class="inner">
                             <ul class="form">
-                                <li>
-                                    @Html.LabelFor(m => m.NamespaceId, Piranha.Resources.SiteTree.NamespaceId)
-                                    <div class="input">
-                                        @if (Model.Id != Piranha.Config.DefaultSiteTreeId) {
-                                            @Html.DropDownListFor(m => m.NamespaceId, Model.Namespaces)
-                                        } else {
-                                            @Html.HiddenFor(m => m.NamespaceId)
-                                            @Html.DropDownListFor(m => m.NamespaceId, Model.Namespaces, new { @disabled = true })
-                                        }
-                                    </div>
-                                    @Html.ValidationMessageFor(m => m.NamespaceId)
-                                </li>
                                 <li>
                                     @Html.LabelFor(m => m.HostNames, Piranha.Resources.SiteTree.HostNames)
                                     <div class="input">

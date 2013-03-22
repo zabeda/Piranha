@@ -161,12 +161,25 @@ namespace Piranha.Areas.Manager.Models
 		/// <returns>Whether the entity was updated or not</returns>
 		public bool Save() {
 			using (var db = new DataContext()) {
+				InternalId = (!String.IsNullOrEmpty(InternalId) ? InternalId.Replace(" ", "") : Name.Replace(" ", "")).ToUpper() ;
+
 				var site = db.SiteTrees.Where(s => s.Id == Id).SingleOrDefault() ;
 				if (site == null) {
+					// Create new dedicated namespace
+					var name = new Namespace() {
+						Id = Guid.NewGuid(),
+						Name = "Site namespace",
+						InternalId = InternalId,
+						Description = "Namespace for the site " + InternalId,
+					} ;
+					db.Namespaces.Add(name) ;
+
+					// Create site
 					site = new SiteTree() ;
 					site.Id = Id ;
-					site.NamespaceId = NamespaceId ;
+					site.NamespaceId = NamespaceId = name.Id ;
 					db.SiteTrees.Add(site) ;
+
 				}
 
 				// If we've changed namespace, update all related permalinks.
@@ -175,7 +188,7 @@ namespace Piranha.Areas.Manager.Models
 
 				// Update the site tree
 				site.NamespaceId = NamespaceId ;
-				site.InternalId = InternalId = !String.IsNullOrEmpty(InternalId) ? InternalId.Replace(" ", "") : Name.Replace(" ", "") ;
+				site.InternalId = InternalId ;
 				site.Name = Name ;
 				site.HostNames = HostNames ;
 				site.Description = Description ;
@@ -264,20 +277,32 @@ namespace Piranha.Areas.Manager.Models
 		/// <returns>Whether the entity was removed or not</returns>
 		public bool Delete() {
 			using (var db = new DataContext()) {
-				var site = db.SiteTrees.Where(s => s.Id == Id).Single() ;
-				var template = db.PageTemplates.Where(p => p.Id == Id).SingleOrDefault() ;
+				// Only delete empy site trees
+				if (db.Pages.Where(p => p.SiteTreeId == Id).Count() == 0) {
+					var site = db.SiteTrees.Where(s => s.Id == Id).Single() ;
+					var template = db.PageTemplates.Where(p => p.Id == Id).SingleOrDefault() ;
 
-				db.SiteTrees.Remove(site) ;
-				if (template != null)
-					db.PageTemplates.Remove(template) ;
-				db.Database.ExecuteSqlCommand("DELETE FROM page WHERE page_sitetree_id={0} AND page_parent_id={0}", Id) ;
-				db.Database.ExecuteSqlCommand("DELETE FROM permalink WHERE permalink_type='SITE' AND permalink_id NOT IN (SELECT page_permalink_id FROM page)") ;
+					db.SiteTrees.Remove(site) ;
+					if (template != null)
+						db.PageTemplates.Remove(template) ;
+					db.Database.ExecuteSqlCommand("DELETE FROM page WHERE page_sitetree_id={0} AND page_parent_id={0}", Id) ;
+					db.Database.ExecuteSqlCommand("DELETE FROM permalink WHERE permalink_type='SITE' AND permalink_id NOT IN (SELECT page_permalink_id FROM page)") ;
 
-				var ret = db.SaveChanges() > 0 ;
-				// Refresh host name configuration
-				if (ret)
-					WebPages.WebPiranha.RegisterDefaultHostNames() ;
-				return ret ;
+					// Check if the namespace is empty
+					if (db.Permalinks.Where(p => p.NamespaceId == site.NamespaceId).Count() == 0) {
+						// Delete namespace
+						var ns = db.Namespaces.Where(n => n.Id == site.NamespaceId).SingleOrDefault() ;
+						if (ns != null)
+							db.Namespaces.Remove(ns) ;
+					}
+
+					var ret = db.SaveChanges() > 0 ;
+					// Refresh host name configuration
+					if (ret)
+						WebPages.WebPiranha.RegisterDefaultHostNames() ;
+					return ret ;
+				}
+				return false ;
 			}
 		}
 
