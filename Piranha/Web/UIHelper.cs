@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 
@@ -64,7 +66,8 @@ namespace Piranha.Web
 		public IHtmlString Head() {
 			StringBuilder str = new StringBuilder() ;
 
-			str.AppendLine("<meta name=\"generator\" content=\"Piranha\" />") ;
+			str.AppendLine("<meta name=\"generator\" content=\"Piranha CMS " +
+				FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion + "\" />") ;
 	        str.AppendLine("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />") ;
 
 			/**
