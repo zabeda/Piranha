@@ -167,10 +167,10 @@ INSERT INTO namespace (namespace_id, namespace_internal_id, namespace_name, name
 		NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 
 -- Default site tree
-INSERT INTO sitetree (sitetree_id, sitetree_namespace_id, sitetree_internal_id, sitetree_name, sitetree_description, sitetree_created,
-	sitetree_updated, sitetree_created_by, sitetree_updated_by)
+INSERT INTO sitetree (sitetree_id, sitetree_namespace_id, sitetree_internal_id, sitetree_name, sitetree_description, sitetree_meta_title,
+	sitetree_meta_description, sitetree_created, sitetree_updated, sitetree_created_by, sitetree_updated_by)
 VALUES ('C2F87B2B-F585-4696-8A2B-3C9DF882701E', '8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'DEFAULT_SITE', 'Default site', 'This is the default site tree.',
-	NOW(), NOW(), 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC', 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC');
+	'My site', 'Welcome the the template site', NOW(), NOW(), 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC', 'CA19D4E7-92F0-42F6-926A-68413BBDAFBC');
 
 -- Add site template and page for the default site
 INSERT INTO pagetemplate (pagetemplate_id, pagetemplate_name, pagetemplate_site_template,

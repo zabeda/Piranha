@@ -147,7 +147,7 @@ namespace Piranha.Models
 		/// <param name="str">The string</param>
 		/// <returns>A permalink</returns>
 		public static string Generate(string str) {
-			return Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o"),
+			return Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o").Replace("--", "-"),
 				@"[^a-z0-9-]", "") ;
 		}
 
