@@ -442,7 +442,10 @@ namespace Piranha.Models.Manager.PageModels
 							site.MetaDescription = SiteTree.MetaDescription ;
 							db.SaveChanges() ;
 						}
-						PageModel.RemoveSitePageFromCache(Page.SiteTreeId) ;
+						if (!draft) {
+							PageModel.RemoveSitePageFromCache(Page.SiteTreeId) ;
+							WebPages.WebPiranha.RegisterDefaultHostNames() ;
+						}
 					}
 				} catch { tx.Rollback() ; throw ; }
 			}
