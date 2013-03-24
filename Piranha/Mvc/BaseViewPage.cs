@@ -18,6 +18,8 @@ namespace Piranha.Mvc
 		/// </summary>
 		public UIHelper UI { get ; private set ; }
 
+		public Piranha.Web.SiteHelper Site { get; private set; }
+
 		/// <summary>
 		/// Gets the optional return url.
 		/// </summary>
@@ -28,6 +30,7 @@ namespace Piranha.Mvc
 		/// </summary>
 		public BaseViewPage() : base() {
 			UI = new UIHelper(this) ;
+			Site = new Piranha.Web.SiteHelper();
 		}
 	}
 }

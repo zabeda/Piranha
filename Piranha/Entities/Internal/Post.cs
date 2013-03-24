@@ -90,7 +90,7 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="post_excerpt")]
 		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Excerpt")]
-		[StringLength(512, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="ExcerptLength")]
+		[StringLength(255, ErrorMessageResourceType = typeof(Piranha.Resources.Post), ErrorMessageResourceName = "ExcerptLength")]
 		public string Excerpt { get ; set ; }
 
 		/// <summary>
