@@ -926,6 +926,10 @@ ul.list .delete, ul.list .arrow-right, ul.list arrow-down {
     width: 145px;
     height: 160px;
     }
+.templates.one {
+    width: 270px;
+    height: 210px;
+    }
 .templates .preview {
     width: 120px;
     height: 120px;
@@ -934,6 +938,10 @@ ul.list .delete, ul.list .arrow-right, ul.list arrow-down {
 .templates.compressed .preview {
     width: 100px;
     height: 100px;
+    }
+.templates.one .preview {
+    width: 140px;
+    height: 140px;
     }
 .templates h3 {
     display: block;

@@ -147,8 +147,15 @@ namespace Piranha.Models
 		/// <param name="str">The string</param>
 		/// <returns>A permalink</returns>
 		public static string Generate(string str) {
-			return Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o").Replace("--", "-"),
-				@"[^a-z0-9-]", "") ;
+			var perm = Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o"),
+				@"[^a-z0-9-]", "").Replace("--", "-") ;
+
+			if (perm.EndsWith("-"))
+				perm = perm.Substring(0, perm.LastIndexOf("-")) ;
+			if (perm.StartsWith("-"))
+				perm = perm.Substring(Math.Min(perm.IndexOf("-") + 1, perm.Length)) ;
+
+			return perm ;
 		}
 
 		/// <summary>

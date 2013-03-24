@@ -236,7 +236,7 @@
         </div>
         <div id="create-new" class="inner">
             @foreach (var template in Model.Templates) {
-            <div class="templates @(Model.Templates.Count > 6 ? "compressed" : "") left" data-templateid="@template.Id">
+            <div class="templates @(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")) left" data-templateid="@template.Id">
                 <h3>@template.Name</h3>
                 <div class="preview">
                     @template.Preview
