@@ -18,6 +18,9 @@ namespace Piranha.Mvc
 		/// </summary>
 		public UIHelper UI { get ; private set ; }
 
+		/// <summary>
+		/// Gets the Site helper.
+		/// </summary>
 		public Piranha.Web.SiteHelper Site { get; private set; }
 
 		/// <summary>
