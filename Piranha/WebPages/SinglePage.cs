@@ -71,8 +71,8 @@ namespace Piranha.WebPages
 					else Response.Redirect("~/") ;
 				}
 				Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
-			} else {
-				// Only cache public pages
+			} else if (!draft) {
+				// Only cache public non drafts
 				DateTime mod = GetLastModified(page) ;
 				if (page.OriginalId != Guid.Empty) {
 					var orgMod = GetLastModified(org) ;
