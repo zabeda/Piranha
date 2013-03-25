@@ -1,12 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha", "Piranha\Piranha.csproj", "{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "TemplateSite\", "{4F94EA08-A2AB-4AC6-A581-460A2F79300F}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{7e07dd4f-41ed-4faf-8407-62196aae0d0f}|Piranha.dll;"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{73b6e71e-3255-40a1-93ef-5416dc71e940}|Piranha.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/TemplateSite"
 		Debug.AspNetCompiler.PhysicalPath = "TemplateSite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\TemplateSite\"
@@ -37,20 +35,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B9B2FF
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha", "Piranha\Piranha.csproj", "{73B6E71E-3255-40A1-93EF-5416DC71E940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F94EA08-A2AB-4AC6-A581-460A2F79300F}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{73B6E71E-3255-40A1-93EF-5416DC71E940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B6E71E-3255-40A1-93EF-5416DC71E940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B6E71E-3255-40A1-93EF-5416DC71E940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B6E71E-3255-40A1-93EF-5416DC71E940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

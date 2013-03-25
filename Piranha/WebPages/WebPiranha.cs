@@ -223,28 +223,6 @@ namespace Piranha.WebPages
 		/// Initializes the webb app.
 		/// </summary>
 		public static void Init() {
-			// Register virtual path provider for the manager area. This part includes a nasty hack for 
-			// precompiled sites due to Microsofts implementation in the .NET framework. See
-			//
-			// http://sunali.com/2008/01/09/virtualpathprovider-in-precompiled-web-sites/
-			//
-			// for more information on the issue
-			//
-			PropertyInfo pc = typeof(BuildManager).GetProperty("IsPrecompiledApp", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static) ;
-			if (pc != null && (bool)pc.GetValue(null, null)) {
-				// This is a precompiled application, bend the framework a bit.
-				HostingEnvironment instance = (HostingEnvironment)typeof(HostingEnvironment).InvokeMember("_theHostingEnvironment", 
-					BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetField, null, null, null) ;
-				if (instance == null)
-					throw new NullReferenceException("Can't get the current hosting environment") ;
-				MethodInfo m = typeof(HostingEnvironment).GetMethod("RegisterVirtualPathProviderInternal", BindingFlags.NonPublic | BindingFlags.Static) ;
-				if (m == null)
-					throw new NullReferenceException("Can't get the RegisterVirtualPathProviderInternal method") ;
-				m.Invoke(instance, new object[] { (VirtualPathProvider)new Piranha.Web.ResourcePathProvider() });
-			} else {
-				HostingEnvironment.RegisterVirtualPathProvider(new Piranha.Web.ResourcePathProvider()) ;
-			}
-
 			// Register the basic account route
 			RouteTable.Routes.MapRoute("Account", "account/{action}", new { controller = "auth", action = "index" }, new string[] { "Piranha.Web" }) ;
 
@@ -268,25 +246,6 @@ namespace Piranha.WebPages
 
 			// Add the new view engine
 			ViewEngines.Engines.Add(new Mvc.ManagerViewEngine());
-		}
-
-		/// <summary>
-		/// Initializes the manager app.
-		/// </summary>
-		/// <param name="context"></param>
-		public static void InitManager(AreaRegistrationContext context) {
-			// Register manager routing
-			if (context.Routes["Manager"] == null) {
-				context.MapRoute(
-					"Manager",
-					"manager/{controller}/{action}/{id}",
-					new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional }
-				) ;
-			}
-
-			// Register filters & binders
-			RegisterGlobalFilters(GlobalFilters.Filters) ;
-			RegisterBinders() ;
 		}
 
 		/// <summary>
@@ -374,45 +333,5 @@ namespace Piranha.WebPages
 						new System.Globalization.CultureInfo((string)context.Session["lang"]) ;
 			} catch {}
 		}
-
-		#region Private methods
-		/// <summary>
-		/// Registers all global filters.
-		/// </summary>
-		/// <param name="filters">The current filter collection</param>
-		private static void RegisterGlobalFilters(GlobalFilterCollection filters) {
-			filters.Add(new HandleErrorAttribute());
-		}
-
-		/// <summary>
-		/// Registers all custom binders.
-		/// </summary>
-		private static void RegisterBinders() {
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.PageModels.EditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.PageModels.EditModel), 
-					new Piranha.Models.Manager.PageModels.EditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.PostModels.EditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.PostModels.EditModel), 
-					new Piranha.Models.Manager.PostModels.EditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.TemplateModels.PageEditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PageEditModel),
-					new Piranha.Models.Manager.TemplateModels.PageEditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.TemplateModels.PostEditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.TemplateModels.PostEditModel),
-					new Piranha.Models.Manager.TemplateModels.PostEditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.CategoryModels.EditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.CategoryModels.EditModel),
-					new Piranha.Models.Manager.CategoryModels.EditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.SettingModels.UserEditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.SettingModels.UserEditModel),
-					new Piranha.Models.Manager.SettingModels.UserEditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Models.Manager.ContentModels.EditModel)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Models.Manager.ContentModels.EditModel),
-					new Piranha.Models.Manager.ContentModels.EditModel.Binder()) ;
-			if (ModelBinders.Binders[typeof(Piranha.Extend.IExtension)] == null)
-				ModelBinders.Binders.Add(typeof(Piranha.Extend.IExtension),
-					new Piranha.Mvc.ModelBinders.IExtensionBinder()) ;
-		}
-		#endregion
 	}
 }

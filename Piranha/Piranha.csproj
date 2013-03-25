@@ -1,18 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
+    <ProductVersion>
+    </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7E07DD4F-41ED-4FAF-8407-62196AAE0D0F}</ProjectGuid>
+    <ProjectGuid>{73B6E71E-3255-40A1-93EF-5416DC71E940}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Piranha</RootNamespace>
     <AssemblyName>Piranha</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -20,7 +27,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +35,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -37,77 +44,103 @@
     <Reference Include="EcmaScript.NET">
       <HintPath>..\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RazorGenerator.Mvc">
+      <HintPath>..\packages\RazorGenerator.Mvc.1.5.5.0\lib\net40\RazorGenerator.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.1.0.20105.408\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
-    <Reference Include="Yahoo.Yui.Compressor, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.1\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Yahoo.Yui.Compressor">
       <HintPath>..\packages\YUICompressor.NET.2.2.0.0\lib\NET20\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\Manager\Content\Css\Style.ashx.cs">
-      <DependentUpon>Style.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Manager\Content\Js\Script.ashx.cs">
-      <DependentUpon>Script.ashx</DependentUpon>
-    </Compile>
+    <Compile Include="AccessAttribute.cs" />
     <Compile Include="Areas\Manager\Controllers\AccountController.cs" />
     <Compile Include="Areas\Manager\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Manager\Controllers\CommentController.cs" />
     <Compile Include="Areas\Manager\Controllers\ContentController.cs" />
     <Compile Include="Areas\Manager\Controllers\InstallController.cs" />
+    <Compile Include="Areas\Manager\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\PageController.cs" />
     <Compile Include="Areas\Manager\Controllers\PostController.cs" />
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />
@@ -115,13 +148,281 @@
     <Compile Include="Areas\Manager\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Manager\Controllers\UploadController.cs" />
     <Compile Include="Areas\Manager\Models\CommentEditModel.cs" />
+    <Compile Include="Areas\Manager\Models\CommentListModel.cs" />
     <Compile Include="Areas\Manager\Models\CommentSettingsModel.cs" />
-    <Compile Include="Areas\Manager\Models\SiteTreeEditModel.cs" />
     <Compile Include="Areas\Manager\Models\PostListModel.cs" />
+    <Compile Include="Areas\Manager\Models\SiteTreeEditModel.cs" />
     <Compile Include="Areas\Manager\Models\SiteTreeListModel.cs" />
+    <Compile Include="Areas\Manager\Views\Account\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Category\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Category\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Comment\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Comment\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Comment\List.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Comment\Settings.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Content\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Content\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Content\Partial\ContentTree.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContentTree.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Content\Popup.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Popup.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Content\Uploads.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Uploads.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\HtmlRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HtmlRegion.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\ImageRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImageRegion.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\PostRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostRegion.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\TextRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextRegion.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Install\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Install\Update.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Update.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Page\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Page\EditCopy.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditCopy.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Page\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Page\Partial\SiteTree.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteTree.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Page\Siblings.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Siblings.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Post\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Post\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\Access.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Access.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\AccessList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccessList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\ExternalList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExternalList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\Group.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Group.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\GroupList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\Param.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Param.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\ParamList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ParamList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\User.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Settings\UserList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extension.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\EditorTemplates\Region.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Region.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegionTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\Partial\Attachments.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Attachments.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\Partial\GroupList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GroupList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\Partial\Menu.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Menu.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\Partial\Tabs.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabs.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\Partial\TinyMCE.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TinyMCE.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Shared\_Layout.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\SiteTree\Edit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Edit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\SiteTree\EditorTemplates\RegionTemplate.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegionTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\SiteTree\Index.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Template\PageEdit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageEdit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Template\PageList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PageList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Template\PostEdit.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostEdit.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Template\PostList.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostList.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Template\Region.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Region.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\_ViewStart.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ViewStart.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Cache.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataExtensions.cs" />
+    <Compile Include="Data\ActiveRecord.cs" />
+    <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\Updates\IUpdate.cs" />
+    <Compile Include="Data\Updates\Update13.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Drawing\Thumbnails.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Category.cs" />
@@ -197,155 +498,74 @@
     <Compile Include="Entities\StandardEntity.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Extend\ExtensionContainer.cs" />
-    <Compile Include="Extend\IExtensionMeta.cs" />
-    <Compile Include="Extend\Module.cs" />
-    <Compile Include="Extend\ModuleAttribute.cs" />
-    <Compile Include="Extend\Regions\PostRegion.cs" />
-    <Compile Include="Extend\Regions\TextRegion.cs" />
-    <Compile Include="Areas\Manager\Models\CommentListModel.cs" />
-    <Compile Include="Mvc\UIHelper.cs" />
-    <Compile Include="Resources\Comment.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Comment.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Extensions.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Extensions.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\SiteTree.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SiteTree.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Rest\DataContracts\PostTemplate.cs" />
-    <Compile Include="Rest\DataContracts\PageTemplate.cs" />
-    <Compile Include="Rest\ExpandoObjectSerializer.cs" />
-    <Compile Include="Rest\PageTemplateService.cs" />
-    <Compile Include="Rest\PostTemplateService.cs" />
-    <Compile Include="WebPages\BaseHelper.cs" />
-    <Compile Include="WebPages\FormHelper.cs" />
-    <Compile Include="WebPages\HttpPostAttribute.cs" />
-    <Compile Include="WebPages\RequestHandlers\DraftContentHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\DraftThumbnailHandler.cs" />
-    <Compile Include="WebPages\UIHelper.cs" />
-    <Compile Include="Web\APIKeyAuthorization.cs" />
-    <Compile Include="Web\APIKeys.cs" />
-    <Compile Include="Web\AppCommentController.cs" />
-    <Compile Include="Web\ModelPropertyAttribute.cs" />
-    <Compile Include="Data\Updates\IUpdate.cs" />
-    <Compile Include="Data\Updates\Update13.cs" />
-    <Compile Include="Delegates.cs" />
-    <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Extend\Extension.cs" />
     <Compile Include="Extend\ExtensionAttribute.cs" />
+    <Compile Include="Extend\ExtensionContainer.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IExtension.cs" />
-    <Compile Include="Models\Manager\Placement.cs" />
-    <Compile Include="Models\Manager\UploadModels\EditModel.cs" />
-    <Compile Include="Resources\Account.Designer.cs">
-      <DependentUpon>Account.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Category.Designer.cs">
-      <DependentUpon>Category.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Content.Designer.cs">
-      <DependentUpon>Content.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Global.Designer.cs">
-      <DependentUpon>Global.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Page.Designer.cs">
-      <DependentUpon>Page.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Post.Designer.cs">
-      <DependentUpon>Post.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Regions.Designer.cs">
-      <DependentUpon>Regions.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Settings.Designer.cs">
-      <DependentUpon>Settings.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Tabs.Designer.cs">
-      <DependentUpon>Tabs.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Template.Designer.cs">
-      <DependentUpon>Template.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Rest\DataContracts\Extension.cs" />
-    <Compile Include="Rest\DataContracts\Post.cs" />
-    <Compile Include="Rest\PostService.cs" />
-    <Compile Include="WebPages\Manager.cs" />
+    <Compile Include="Extend\IExtensionMeta.cs" />
+    <Compile Include="Extend\Module.cs" />
+    <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
+    <Compile Include="Extend\Regions\PostRegion.cs" />
+    <Compile Include="Extend\Regions\TextRegion.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Manager\ManagerModule.cs" />
+    <Compile Include="Manager\ManagerRegistration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\ListModel.cs" />
-    <Compile Include="Models\Manager\ContentModels\FileModel.cs" />
-    <Compile Include="Models\Manager\ContentModels\PopupModel.cs" />
     <Compile Include="Models\Manager\ContentModels\EditModel.cs" />
+    <Compile Include="Models\Manager\ContentModels\FileModel.cs" />
     <Compile Include="Models\Manager\ContentModels\ListModel.cs" />
+    <Compile Include="Models\Manager\ContentModels\PopupModel.cs" />
     <Compile Include="Models\Manager\PageModels\EditModel.cs" />
     <Compile Include="Models\Manager\PageModels\GroupListModel.cs" />
     <Compile Include="Models\Manager\PageModels\InsertModel.cs" />
     <Compile Include="Models\Manager\PageModels\ListModel.cs" />
+    <Compile Include="Models\Manager\Placement.cs" />
     <Compile Include="Models\Manager\PostModels\EditModel.cs" />
     <Compile Include="Models\Manager\PostModels\InsertModel.cs" />
     <Compile Include="Models\Manager\SettingModels\AccessEditModel.cs" />
     <Compile Include="Models\Manager\SettingModels\AccessListModel.cs" />
-    <Compile Include="Models\Manager\SettingModels\ParamListModel.cs" />
-    <Compile Include="Models\Manager\SettingModels\GroupListModel.cs" />
-    <Compile Include="Models\Manager\SettingModels\UserListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\GroupEditModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\GroupListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\ParamEditModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\ParamListModel.cs" />
     <Compile Include="Models\Manager\SettingModels\UserEditModel.cs" />
-    <Compile Include="Models\Manager\TemplateModels\PageListModel.cs" />
+    <Compile Include="Models\Manager\SettingModels\UserListModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\PageEditModel.cs" />
+    <Compile Include="Models\Manager\TemplateModels\PageListModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\PostEditModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\PostListModel.cs" />
     <Compile Include="Models\Manager\TemplateModels\RegionInsertModel.cs" />
+    <Compile Include="Models\Manager\UploadModels\EditModel.cs" />
     <Compile Include="Models\PageModel.cs" />
-    <Compile Include="Data\ActiveRecord.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Data\Database.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Areas\Manager\Controllers\ManagerController.cs" />
     <Compile Include="Models\PostArchive.cs" />
     <Compile Include="Models\PostModel.cs" />
-    <Compile Include="AccessAttribute.cs" />
     <Compile Include="Mvc\BaseViewPage.cs" />
     <Compile Include="Mvc\ManagerViewEngine.cs" />
     <Compile Include="Mvc\ModelBinders\IExtensionBinder.cs" />
     <Compile Include="Mvc\SinglePage.cs" />
     <Compile Include="Mvc\SinglePageController.cs" />
+    <Compile Include="Mvc\UIHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Account.Designer.cs" />
+    <Compile Include="Resources\Category.Designer.cs" />
+    <Compile Include="Resources\Comment.Designer.cs" />
+    <Compile Include="Resources\Content.Designer.cs" />
+    <Compile Include="Resources\Extensions.Designer.cs" />
+    <Compile Include="Resources\Global.Designer.cs" />
+    <Compile Include="Resources\Page.Designer.cs" />
+    <Compile Include="Resources\Post.Designer.cs" />
+    <Compile Include="Resources\Regions.Designer.cs" />
+    <Compile Include="Resources\Settings.Designer.cs" />
+    <Compile Include="Resources\SiteTree.Designer.cs" />
+    <Compile Include="Resources\Tabs.Designer.cs" />
+    <Compile Include="Resources\Template.Designer.cs" />
     <Compile Include="Rest\BaseService.cs" />
     <Compile Include="Rest\CategoryService.cs" />
     <Compile Include="Rest\ChangeService.cs" />
@@ -355,19 +575,35 @@
     <Compile Include="Rest\DataContracts\Changes.cs" />
     <Compile Include="Rest\DataContracts\Content.cs" />
     <Compile Include="Rest\DataContracts\Deleted.cs" />
+    <Compile Include="Rest\DataContracts\Extension.cs" />
     <Compile Include="Rest\DataContracts\Page.cs" />
+    <Compile Include="Rest\DataContracts\PageTemplate.cs" />
+    <Compile Include="Rest\DataContracts\Post.cs" />
+    <Compile Include="Rest\DataContracts\PostTemplate.cs" />
     <Compile Include="Rest\DataContracts\Property.cs" />
     <Compile Include="Rest\DataContracts\Region.cs" />
     <Compile Include="Rest\DataContracts\Sitemap.cs" />
+    <Compile Include="Rest\ExpandoObjectSerializer.cs" />
     <Compile Include="Rest\PageService.cs" />
+    <Compile Include="Rest\PageTemplateService.cs" />
+    <Compile Include="Rest\PostService.cs" />
+    <Compile Include="Rest\PostTemplateService.cs" />
     <Compile Include="Rest\SitemapServices.cs" />
+    <Compile Include="WebPages\Archive.cs" />
+    <Compile Include="WebPages\BaseHelper.cs" />
     <Compile Include="WebPages\BasePage.cs" />
     <Compile Include="WebPages\ContentPage.cs" />
-    <Compile Include="WebPages\Archive.cs" />
+    <Compile Include="WebPages\FormHelper.cs" />
     <Compile Include="WebPages\Hooks.cs" />
+    <Compile Include="WebPages\HttpPostAttribute.cs" />
+    <Compile Include="WebPages\LayoutPage.cs" />
+    <Compile Include="WebPages\Manager.cs" />
+    <Compile Include="WebPages\ModelBinder.cs" />
     <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ContentHandler.cs" />
+    <Compile Include="WebPages\RequestHandlers\DraftContentHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\DraftHandler.cs" />
+    <Compile Include="WebPages\RequestHandlers\DraftThumbnailHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\IRequestHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\PermalinkHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\RequestHandlerRegistration.cs" />
@@ -375,175 +611,100 @@
     <Compile Include="WebPages\RequestHandlers\SitemapHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ThumbnailHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\UploadHandler.cs" />
+    <Compile Include="WebPages\SinglePage.cs" />
     <Compile Include="WebPages\SinglePost.cs" />
-    <Compile Include="WebPages\LayoutPage.cs" />
-    <Compile Include="WebPages\ModelBinder.cs" />
+    <Compile Include="WebPages\UIHelper.cs" />
+    <Compile Include="WebPages\WebPiranha.cs" />
+    <Compile Include="Web\APIKeyAuthorization.cs" />
+    <Compile Include="Web\APIKeys.cs" />
+    <Compile Include="Web\AppCommentController.cs" />
     <Compile Include="Web\AuthController.cs" />
+    <Compile Include="Web\ClientCache.cs" />
     <Compile Include="Web\CultureHelper.cs" />
     <Compile Include="Web\GravatarHelper.cs" />
-    <Compile Include="Web\ResourceHandler.cs" />
-    <Compile Include="Web\ResourcePathProvider.cs" />
-    <Compile Include="WebPages\SinglePage.cs" />
+    <Compile Include="Web\ModelPropertyAttribute.cs" />
     <Compile Include="Web\PiranhaHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebPages\WebPiranha.cs" />
     <Compile Include="Web\RssHelper.cs" />
-    <Compile Include="Cache.cs" />
     <Compile Include="Web\SiteHelper.cs" />
     <Compile Include="Web\TemplateCache.cs" />
     <Compile Include="Web\UIHelper.cs" />
-    <Compile Include="Web\ClientCache.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen-sprite.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\jquery-ui-1.9.2.custom.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_flat_10_000000_40x100.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_glass_65_ffffff_1x400.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_222222_256x240.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_228ef1_256x240.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ef8c08_256x240.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffd27a_256x240.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffffff_256x240.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.reset.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Style.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Theme.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-after-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-below-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-folder-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-folder-24.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-arrow-down-16.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-arrow-up-16.png" />
-    <EmbeddedResource Include="Data\Scripts\Updates\3.sql" />
-    <EmbeddedResource Include="Data\Scripts\Create.sql" />
-    <EmbeddedResource Include="Resources\Account.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Account.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Category.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Category.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Comment.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Comment.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Content.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Content.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Extensions.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Extensions.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Global.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Global.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Page.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Page.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Post.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Post.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Regions.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Regions.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Settings.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\SiteTree.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SiteTree.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Tabs.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Tabs.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Template.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Template.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Drop.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\29.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\29.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\28.sql" />
-    <EmbeddedResource Include="Areas\Manager\Views\_ViewStart.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Account\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Content\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Content\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Region.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Attachments.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Post\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Post\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\Access.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\Group.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\Param.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\User.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Template\PageEdit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Template\PostEdit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Style.ashx" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Script.ashx" />
-    <Content Include="Areas\Manager\Views\Web.config" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Menu.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Install\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Category\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Install\Update.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Content\Popup.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Template\PageList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Template\PostList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Category\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\UserList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\GroupList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\AccessList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\ParamList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\Partial\SiteTree.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Content\Uploads.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Settings\ExternalList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\Siblings.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Content\Partial\ContentTree.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Template\Region.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\HtmlRegion.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\GroupList.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\ImageRegion.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Shared\Partial\Tabs.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\PostRegion.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Extensions\Piranha.Extend.Regions\TextRegion.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Comment\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Comment\List.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Comment\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Comment\Settings.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\Page\EditCopy.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\SiteTree\Index.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\SiteTree\Edit.cshtml" />
-    <EmbeddedResource Include="Areas\Manager\Views\SiteTree\EditorTemplates\RegionTemplate.cshtml" />
-    <None Include="LICENSE.md" />
-    <None Include="packages.config" />
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Style.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.manager.js" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-back-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-comments-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-content-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-delete-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-delete-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-detach-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-doc-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-edit-16.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-edit-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-excel-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-32.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-96.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-up-96.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-locked-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-missing-ico.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-movie-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-pdf-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-ppt-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-preview-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-properties-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-publish-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-regions-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-reload-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-revert-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-save-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-search-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-seo-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-settings-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-sound-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-sync-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unlocked-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unpublish-24.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-zip-64.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\icon.ico" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\icon.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\info-copy.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\info-draft.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\info-unpublished.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\chosen.jquery.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-1.7.2.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-ui-1.9.2.custom.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery.equalheights.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\json2.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\langs\en.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\license.txt" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\autoresize\editor_plugin.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\css\fullpage.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\editor_plugin.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\fullpage\fullpage.htm" />
@@ -575,6 +736,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\js\props.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\langs\en_dlg.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\props.htm" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\style\readme.txt" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\about.htm" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\anchor.htm" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\charmap.htm" />
@@ -585,6 +747,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\colorpicker.jpg" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\flash.gif" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\icons.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\icons.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\iframe.gif" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\pagebreak.gif" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\quicktime.gif" />
@@ -620,307 +783,352 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\utils\form_utils.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\utils\mctabs.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\utils\validate.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Data.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\1.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\chosen.jquery.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen.min.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\chosen-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Theme.css" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.attachment.js" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
-    <EmbeddedResource Include="Data\Scripts\Updates\2.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\4.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\5.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-publish-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-save-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-delete-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-back-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-reload-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-preview-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\6.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\7.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-revert-24.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unpublish-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\themes\advanced\img\icons.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\info-draft.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\info-unpublished.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-locked-24.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-unlocked-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-search-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-after-16.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-below-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-delete-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-doc-64.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-excel-64.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-movie-64.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-pdf-64.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-ppt-64.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-sound-64.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-zip-64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\10.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\11.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-16.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-folder-16.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-folder-24.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-96.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-up-96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-folder-32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\12.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\13.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-edit-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\json2.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regiontemplate.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regions.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.media.dialog.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.css" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.reset.min.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-1.7.2.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\14.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-content-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-properties-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-settings-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-seo-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\autoresize\editor_plugin.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.form.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery.equalheights.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\15.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\16.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Create.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Data.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-missing-ico.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\17.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\17.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\18.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\18.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\19.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\19.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-comments-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\20.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.comments.js" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.form.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.manager.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.media.dialog.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regions.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regiontemplate.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
+    <EmbeddedResource Include="Data\Scripts\Create.sql" />
+    <EmbeddedResource Include="Data\Scripts\Data.sql" />
+    <EmbeddedResource Include="Data\Scripts\Drop.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Create.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Data.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\17.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\18.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\19.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\20.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\21.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\21.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_diagonals-thick_18_b81900_40x40.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_diagonals-thick_20_666666_40x40.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_flat_10_000000_40x100.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_glass_100_f6f6f6_1x400.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_glass_100_fdf5ce_1x400.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_glass_65_ffffff_1x400.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_gloss-wave_35_f6a828_500x100.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_222222_256x240.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_228ef1_256x240.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ef8c08_256x240.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffd27a_256x240.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffffff_256x240.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\jquery-ui-1.9.2.custom.min.css" />
-    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\jquery-ui-1.9.2.custom.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\22.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\22.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-sync-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\23.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\23.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\24.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\24.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\25.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\25.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\info-copy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Updates\26.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\26.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-edit-24.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-regions-24.png" />
-    <EmbeddedResource Include="Data\Scripts\Updates\27.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\27.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\29.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\1.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\10.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\11.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\12.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\13.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\14.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\15.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\16.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\17.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\18.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\19.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\2.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\20.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\21.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\22.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\23.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\24.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\25.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\26.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\27.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\28.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\29.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\3.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\4.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\5.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\6.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\7.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-detach-24.png" />
+    <Content Include="Areas\Manager\Views\Web.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Account.resx" />
+    <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Category.resx" />
+    <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Comment.resx" />
+    <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Content.resx" />
+    <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Extensions.resx" />
+    <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Global.resx" />
+    <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Page.resx" />
+    <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Post.resx" />
+    <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Regions.resx" />
+    <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Settings.resx" />
+    <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Tabs.resx" />
+    <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
+    <EmbeddedResource Include="Resources\Template.resx" />
+    <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.md" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Account\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Category\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Category\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Comment\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Comment\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Comment\List.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>List.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Comment\Settings.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Settings.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Content\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Content\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Content\Partial\ContentTree.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ContentTree.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Content\Popup.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Popup.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Content\Uploads.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Uploads.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Extensions\HtmlRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HtmlRegion.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Extensions\ImageRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ImageRegion.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Extensions\PostRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PostRegion.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Extensions\TextRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TextRegion.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Install\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Install\Update.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Update.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Page\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Page\EditCopy.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>EditCopy.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Page\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Page\Partial\SiteTree.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>SiteTree.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Page\Siblings.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Siblings.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Post\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Post\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\Access.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Access.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\AccessList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>AccessList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\ExternalList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ExternalList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\Group.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Group.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\GroupList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\Param.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Param.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\ParamList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>ParamList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\User.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>User.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Settings\UserList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>UserList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Extension.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\EditorTemplates\Region.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Region.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>RegionTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\Partial\Attachments.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Attachments.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\Partial\GroupList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>GroupList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\Partial\Menu.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Menu.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\Partial\Tabs.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Tabs.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TinyMCE.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_Layout.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\SiteTree\Edit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Edit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\SiteTree\EditorTemplates\RegionTemplate.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>RegionTemplate.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\SiteTree\Index.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Index.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Template\PageEdit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PageEdit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Template\PageList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PageList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Template\PostEdit.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PostEdit.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Template\PostList.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PostList.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\Template\Region.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Region.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Manager\Views\_ViewStart.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>_ViewStart.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1206/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-  </Target>
-  -->
+  </Target> -->
 </Project>

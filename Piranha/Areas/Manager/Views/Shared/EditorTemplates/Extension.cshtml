@@ -18,6 +18,6 @@
         @Html.HiddenFor(m => m.Type)
         @Html.HiddenFor(m => m.Created)
         @Html.HiddenFor(m => m.CreatedBy)
-        @Html.PartialFor(folder + view, m => m.Body)
+        @Html.PartialFor(view, m => m.Body)
     </div>
 </div>
