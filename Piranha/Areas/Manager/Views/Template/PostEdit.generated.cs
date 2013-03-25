@@ -54,13 +54,8 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 195), Tuple.Create("\"", 277)
-            
-            #line 7 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 201), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.template.js")
-            
-            #line default
-            #line hidden
+WriteAttribute("src", Tuple.Create(" src=\"", 195), Tuple.Create("\"", 261)
+, Tuple.Create(Tuple.Create("", 201), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.template.js")
 , 201), false)
 );
 
@@ -102,14 +97,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 511), Tuple.Create("\"", 575)
+WriteAttribute("href", Tuple.Create(" href=\"", 495), Tuple.Create("\"", 559)
             
             #line 15 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 518), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepost", new { id = Model.Template.Id })
+, Tuple.Create(Tuple.Create("", 502), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepost", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 518), false)
+, 502), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -125,14 +120,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 660), Tuple.Create("\"", 690)
+WriteAttribute("href", Tuple.Create(" href=\"", 644), Tuple.Create("\"", 674)
             
             #line 16 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 667), Tuple.Create<System.Object, System.Int32>(Url.Action("postlist")
+, Tuple.Create(Tuple.Create("", 651), Tuple.Create<System.Object, System.Int32>(Url.Action("postlist")
             
             #line default
             #line hidden
-, 667), false)
+, 651), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -148,14 +143,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 771), Tuple.Create("\"", 829)
+WriteAttribute("href", Tuple.Create(" href=\"", 755), Tuple.Create("\"", 813)
             
             #line 17 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 778), Tuple.Create<System.Object, System.Int32>(Url.Action("post", new { id = Model.Template.Id })
+, Tuple.Create(Tuple.Create("", 762), Tuple.Create<System.Object, System.Int32>(Url.Action("post", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 778), false)
+, 762), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -648,14 +643,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 4677), Tuple.Create("\"", 4738)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 4661), Tuple.Create("\"", 4722)
             
             #line 105 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 4691), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 4675), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 4691), false)
+, 4675), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");

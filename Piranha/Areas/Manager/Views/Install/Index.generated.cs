@@ -63,13 +63,8 @@ WriteLiteral("/>\r\n    <title>");
             #line hidden
 WriteLiteral("</title>\r\n\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 266), Tuple.Create("\"", 340)
-            
-            #line 11 "..\..\Areas\Manager\Views\Install\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 273), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/img/icon.ico")
-            
-            #line default
-            #line hidden
+WriteAttribute("href", Tuple.Create(" href=\"", 266), Tuple.Create("\"", 324)
+, Tuple.Create(Tuple.Create("", 273), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/icon.ico")
 , 273), false)
 );
 
@@ -79,14 +74,9 @@ WriteLiteral(" type=\"image/x-icon\"");
 
 WriteLiteral(">\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 384), Tuple.Create("\"", 458)
-            
-            #line 12 "..\..\Areas\Manager\Views\Install\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 391), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/img/icon.ico")
-            
-            #line default
-            #line hidden
-, 391), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 368), Tuple.Create("\"", 426)
+, Tuple.Create(Tuple.Create("", 375), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/icon.ico")
+, 375), false)
 );
 
 WriteLiteral(" rel=\"shortcut icon\"");
@@ -95,14 +85,9 @@ WriteLiteral(" type=\"image/x-icon\"");
 
 WriteLiteral("> \r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 512), Tuple.Create("\"", 587)
-            
-            #line 13 "..\..\Areas\Manager\Views\Install\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 519), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/css/style.css")
-            
-            #line default
-            #line hidden
-, 519), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 480), Tuple.Create("\"", 539)
+, Tuple.Create(Tuple.Create("", 487), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/css/style.css")
+, 487), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -111,14 +96,9 @@ WriteLiteral(" type=\"text/css\"");
 
 WriteLiteral("/>\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 634), Tuple.Create("\"", 709)
-            
-            #line 14 "..\..\Areas\Manager\Views\Install\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 641), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/css/theme.css")
-            
-            #line default
-            #line hidden
-, 641), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 586), Tuple.Create("\"", 645)
+, Tuple.Create(Tuple.Create("", 593), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/css/theme.css")
+, 593), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -129,28 +109,18 @@ WriteLiteral("/>\r\n\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 783), Tuple.Create("\"", 870)
-            
-            #line 16 "..\..\Areas\Manager\Views\Install\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 789), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/ext/jquery-1.7.2.min.js")
-            
-            #line default
-            #line hidden
-, 789), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 719), Tuple.Create("\"", 790)
+, Tuple.Create(Tuple.Create("", 725), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/jquery-1.7.2.min.js")
+, 725), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 917), Tuple.Create("\"", 998)
-            
-            #line 17 "..\..\Areas\Manager\Views\Install\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 923), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.manager.js")
-            
-            #line default
-            #line hidden
-, 923), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 837), Tuple.Create("\"", 902)
+, Tuple.Create(Tuple.Create("", 843), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.manager.js")
+, 843), false)
 );
 
 WriteLiteral("></script>\r\n    <script");

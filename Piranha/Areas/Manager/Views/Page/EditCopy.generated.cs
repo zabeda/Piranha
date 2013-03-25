@@ -49,13 +49,8 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 127), Tuple.Create("\"", 205)
-            
-            #line 4 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 133), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.form.js")
-            
-            #line default
-            #line hidden
+WriteAttribute("src", Tuple.Create(" src=\"", 127), Tuple.Create("\"", 189)
+, Tuple.Create(Tuple.Create("", 133), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.form.js")
 , 133), false)
 );
 
@@ -63,70 +58,45 @@ WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 252), Tuple.Create("\"", 333)
-            
-            #line 5 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 258), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.regions.js")
-            
-            #line default
-            #line hidden
-, 258), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 236), Tuple.Create("\"", 301)
+, Tuple.Create(Tuple.Create("", 242), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.regions.js")
+, 242), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 380), Tuple.Create("\"", 464)
-            
-            #line 6 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 386), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.attachment.js")
-            
-            #line default
-            #line hidden
-, 386), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 348), Tuple.Create("\"", 416)
+, Tuple.Create(Tuple.Create("", 354), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.attachment.js")
+, 354), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 511), Tuple.Create("\"", 597)
-            
-            #line 7 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 517), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.media.dialog.js")
-            
-            #line default
-            #line hidden
-, 517), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 463), Tuple.Create("\"", 533)
+, Tuple.Create(Tuple.Create("", 469), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.media.dialog.js")
+, 469), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 644), Tuple.Create("\"", 726)
-            
-            #line 8 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 650), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.comments.js")
-            
-            #line default
-            #line hidden
-, 650), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 580), Tuple.Create("\"", 646)
+, Tuple.Create(Tuple.Create("", 586), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.comments.js")
+, 586), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 773), Tuple.Create("\"", 863)
-            
-            #line 9 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 779), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/ext/jquery.equalheights.js")
-            
-            #line default
-            #line hidden
-, 779), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 693), Tuple.Create("\"", 767)
+, Tuple.Create(Tuple.Create("", 699), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/jquery.equalheights.js")
+, 699), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -272,29 +242,29 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4412), Tuple.Create("\"", 4565)
-, Tuple.Create(Tuple.Create("", 4419), Tuple.Create("http://", 4419), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 4316), Tuple.Create("\"", 4469)
+, Tuple.Create(Tuple.Create("", 4323), Tuple.Create("http://", 4323), true)
             
             #line 100 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 4426), Tuple.Create<System.Object, System.Int32>(Request.Url.DnsSafeHost
+, Tuple.Create(Tuple.Create("", 4330), Tuple.Create<System.Object, System.Int32>(Request.Url.DnsSafeHost
             
             #line default
             #line hidden
-, 4426), false)
+, 4330), false)
             
             #line 100 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 4450), Tuple.Create<System.Object, System.Int32>(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : ""
+, Tuple.Create(Tuple.Create("", 4354), Tuple.Create<System.Object, System.Int32>(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : ""
             
             #line default
             #line hidden
-, 4450), false)
+, 4354), false)
             
             #line 100 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                              , Tuple.Create(Tuple.Create("", 4520), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Page.Permalink, true)
+                                              , Tuple.Create(Tuple.Create("", 4424), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Page.Permalink, true)
             
             #line default
             #line hidden
-, 4520), false)
+, 4424), false)
 );
 
 WriteLiteral(" target=\"preview\"");
@@ -361,14 +331,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4965), Tuple.Create("\"", 5024)
+WriteAttribute("href", Tuple.Create(" href=\"", 4869), Tuple.Create("\"", 4928)
             
             #line 106 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 4972), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Page.Id })
+, Tuple.Create(Tuple.Create("", 4876), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 4972), false)
+, 4876), false)
 );
 
 WriteLiteral(" class=\"unpublish\"");
@@ -402,14 +372,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5241), Tuple.Create("\"", 5297)
+WriteAttribute("href", Tuple.Create(" href=\"", 5145), Tuple.Create("\"", 5201)
             
             #line 109 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 5248), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Page.Id })
+, Tuple.Create(Tuple.Create("", 5152), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5248), false)
+, 5152), false)
 );
 
 WriteLiteral(" class=\"revert\"");
@@ -443,14 +413,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5436), Tuple.Create("\"", 5492)
+WriteAttribute("href", Tuple.Create(" href=\"", 5340), Tuple.Create("\"", 5396)
             
             #line 112 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 5443), Tuple.Create<System.Object, System.Int32>(Url.Action("detach", new { id = Model.Page.Id })
+, Tuple.Create(Tuple.Create("", 5347), Tuple.Create<System.Object, System.Int32>(Url.Action("detach", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5443), false)
+, 5347), false)
 );
 
 WriteLiteral(" class=\"detach\"");
@@ -475,14 +445,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5657), Tuple.Create("\"", 5713)
+WriteAttribute("href", Tuple.Create(" href=\"", 5561), Tuple.Create("\"", 5617)
             
             #line 115 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 5664), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Page.Id })
+, Tuple.Create(Tuple.Create("", 5568), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5664), false)
+, 5568), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -507,14 +477,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5813), Tuple.Create("\"", 5868)
+WriteAttribute("href", Tuple.Create(" href=\"", 5717), Tuple.Create("\"", 5772)
             
             #line 117 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 5820), Tuple.Create<System.Object, System.Int32>(Url.Action("index", new { id = Model.Page.Id })
+, Tuple.Create(Tuple.Create("", 5724), Tuple.Create<System.Object, System.Int32>(Url.Action("index", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5820), false)
+, 5724), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -530,14 +500,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5949), Tuple.Create("\"", 6003)
+WriteAttribute("href", Tuple.Create(" href=\"", 5853), Tuple.Create("\"", 5907)
             
             #line 118 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 5956), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Page.Id })
+, Tuple.Create(Tuple.Create("", 5860), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5956), false)
+, 5860), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -591,14 +561,14 @@ WriteLiteral(" class=\"ico\"");
 WriteLiteral("></div>\r\n                <p>This page is a copy. To edit the actual content of th" +
 "e page, please edit the original <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6501), Tuple.Create("\"", 6589)
+WriteAttribute("href", Tuple.Create(" href=\"", 6405), Tuple.Create("\"", 6493)
             
             #line 130 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                  , Tuple.Create(Tuple.Create("", 6508), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { @id = Model.Page.OriginalId, @returl = Model.Page.Id })
+                                  , Tuple.Create(Tuple.Create("", 6412), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { @id = Model.Page.OriginalId, @returl = Model.Page.Id })
             
             #line default
             #line hidden
-, 6508), false)
+, 6412), false)
 );
 
 WriteLiteral(">here</a>.</p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
@@ -867,14 +837,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"org_parentid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7843), Tuple.Create("\"", 7871)
+WriteAttribute("value", Tuple.Create(" value=\"", 7747), Tuple.Create("\"", 7775)
             
             #line 160 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 7851), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
+, Tuple.Create(Tuple.Create("", 7755), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
             
             #line default
             #line hidden
-, 7851), false)
+, 7755), false)
 );
 
 WriteLiteral(" />\r\n</div>\r\n<div");
@@ -1210,14 +1180,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10431), Tuple.Create("\"", 10444)
+WriteAttribute("value", Tuple.Create(" value=\"", 10335), Tuple.Create("\"", 10348)
             
             #line 202 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 10439), Tuple.Create<System.Object, System.Int32>(p.Id
+, Tuple.Create(Tuple.Create("", 10343), Tuple.Create<System.Object, System.Int32>(p.Id
             
             #line default
             #line hidden
-, 10439), false)
+, 10343), false)
 );
 
             
@@ -1287,14 +1257,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10990), Tuple.Create("\"", 11006)
+WriteAttribute("value", Tuple.Create(" value=\"", 10894), Tuple.Create("\"", 10910)
             
             #line 211 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 10998), Tuple.Create<System.Object, System.Int32>(s.Seqno
+, Tuple.Create(Tuple.Create("", 10902), Tuple.Create<System.Object, System.Int32>(s.Seqno
             
             #line default
             #line hidden
-, 10998), false)
+, 10902), false)
 );
 
             

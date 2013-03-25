@@ -54,13 +54,8 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 195), Tuple.Create("\"", 277)
-            
-            #line 7 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 201), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.template.js")
-            
-            #line default
-            #line hidden
+WriteAttribute("src", Tuple.Create(" src=\"", 195), Tuple.Create("\"", 261)
+, Tuple.Create(Tuple.Create("", 201), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.template.js")
 , 201), false)
 );
 
@@ -68,28 +63,18 @@ WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 324), Tuple.Create("\"", 412)
-            
-            #line 8 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 330), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/jquery.regiontemplate.js")
-            
-            #line default
-            #line hidden
-, 330), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 308), Tuple.Create("\"", 380)
+, Tuple.Create(Tuple.Create("", 314), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.regiontemplate.js")
+, 314), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 459), Tuple.Create("\"", 535)
-            
-            #line 9 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 465), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/ext/json2.js")
-            
-            #line default
-            #line hidden
-, 465), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 427), Tuple.Create("\"", 487)
+, Tuple.Create(Tuple.Create("", 433), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/json2.js")
+, 433), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -144,14 +129,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 956), Tuple.Create("\"", 1020)
+WriteAttribute("href", Tuple.Create(" href=\"", 908), Tuple.Create("\"", 972)
             
             #line 23 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 963), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepage", new { id = Model.Template.Id })
+, Tuple.Create(Tuple.Create("", 915), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepage", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 963), false)
+, 915), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -169,14 +154,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1114), Tuple.Create("\"", 1144)
+WriteAttribute("href", Tuple.Create(" href=\"", 1066), Tuple.Create("\"", 1096)
             
             #line 24 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 1121), Tuple.Create<System.Object, System.Int32>(Url.Action("pagelist")
+, Tuple.Create(Tuple.Create("", 1073), Tuple.Create<System.Object, System.Int32>(Url.Action("pagelist")
             
             #line default
             #line hidden
-, 1121), false)
+, 1073), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -192,14 +177,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1225), Tuple.Create("\"", 1283)
+WriteAttribute("href", Tuple.Create(" href=\"", 1177), Tuple.Create("\"", 1235)
             
             #line 25 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 1232), Tuple.Create<System.Object, System.Int32>(Url.Action("page", new { id = Model.Template.Id })
+, Tuple.Create(Tuple.Create("", 1184), Tuple.Create<System.Object, System.Int32>(Url.Action("page", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 1232), false)
+, 1184), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -808,14 +793,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 6482), Tuple.Create("\"", 6543)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 6434), Tuple.Create("\"", 6495)
             
             #line 143 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 6496), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 6448), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 6496), false)
+, 6448), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");

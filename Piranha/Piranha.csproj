@@ -514,6 +514,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Manager\ManagerModule.cs" />
     <Compile Include="Manager\ManagerRegistration.cs" />
+    <Compile Include="Manager\ToolbarItem.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />

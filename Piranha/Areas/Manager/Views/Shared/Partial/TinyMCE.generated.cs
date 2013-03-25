@@ -41,13 +41,8 @@ WriteLiteral("<script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 30), Tuple.Create("\"", 118)
-            
-            #line 1 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
-, Tuple.Create(Tuple.Create("", 36), Tuple.Create<System.Object, System.Int32>(Url.Content("~/r.ashx/piranha/areas/manager/content/js/ext/tiny_mce/tiny_mce.js")
-            
-            #line default
-            #line hidden
+WriteAttribute("src", Tuple.Create(" src=\"", 30), Tuple.Create("\"", 102)
+, Tuple.Create(Tuple.Create("", 36), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/tiny_mce/tiny_mce.js")
 , 36), false)
 );
 
