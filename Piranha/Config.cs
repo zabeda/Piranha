@@ -59,22 +59,5 @@ namespace Piranha
 		/// Gets the id of the default site tree.
 		/// </summary>
 		public static readonly Guid DefaultSiteTreeId = new Guid("c2f87b2b-f585-4696-8a2b-3c9df882701e") ;
-
-		#region Private methods
-		/// <summary>
-		/// Gets the currently active site tree from the current host headers.
-		/// </summary>
-		/// <returns>The site tree</returns>
-		//private static Entities.SiteTree GetSiteTree() {
-		//	// Check for configured site tree from the host name
-		//	if (HttpContext.Current != null && HttpContext.Current.Request != null) {
-		//		var hostname = HttpContext.Current.Request.Url.Host.ToLower() ;
-		//		if (WebPages.WebPiranha.HostNames.ContainsKey(hostname))
-		//			return WebPages.WebPiranha.HostNames[hostname] ;
-		//	}
-		//	// Nothing found, return default
-		//	return WebPages.WebPiranha.DefaultSite ;
-		//}
-		#endregion
 	}
 }
