@@ -133,7 +133,7 @@ namespace Piranha.Models
 					if (getContent != null)
 						body = getContent.Invoke(body, new object[] { this }) ;
 				}
-				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = body ;
+				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body ;
 			}
 		}
 	}

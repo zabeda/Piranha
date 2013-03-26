@@ -286,9 +286,9 @@
                             }
                             @foreach (var ext in Model.Extensions) {
                             <li>
-                                <a href="#"@(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@ExtensionManager.GetInternalIdByType(ext.Type).ToLower()">
-                                    @ExtensionManager.GetExtensionNameByType(ext.Type)
+                                <a href="#"@(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower()">
+                                    @ExtensionManager.Current.GetNameByType(ext.Type)
                                 </a>
                             </li>
                             }

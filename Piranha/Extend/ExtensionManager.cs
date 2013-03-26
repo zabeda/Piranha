@@ -1,131 +1,143 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
 
 namespace Piranha.Extend
 {
 	/// <summary>
-	/// The extension manager handles all regions, properties & plugins.
+	/// The extension manager handles all of the extensions, modules and regions available
+	/// for the system including the once included in the core framework.
 	/// </summary>
-	public static class ExtensionManager
+	public sealed class ExtensionManager : IPartImportsSatisfiedNotification
 	{
 		#region Members
 		/// <summary>
-		/// Gets the available extension attributes.
+		/// Static singleton instance of the extension manager.
 		/// </summary>
-		private static Dictionary<string, ExtensionAttribute> ExtensionAttributes = new Dictionary<string,ExtensionAttribute>() ;
+		public static readonly ExtensionManager Current = new ExtensionManager() ;
 
 		/// <summary>
-		/// Gets the available module attributes.
+		/// The private composition container.
 		/// </summary>
-		private static Dictionary<string, ModuleAttribute> ModuleAttributes = new Dictionary<string,ModuleAttribute>() ;
-		#endregion
-
-		#region Properties
-		/// <summary>
-		/// Gets the available extension types.
-		/// </summary>
-		public static Dictionary<string, Type> ExtensionTypes { get ; private set ; }
+		private CompositionContainer Container = null ;
 
 		/// <summary>
-		/// Gets the currently available extensions.
+		/// The currently available extensions
 		/// </summary>
-		public static List<Extension> Extensions { get ; private set ; }
-
-		/// <summary>
-		/// Gets the currently available modules.
-		/// </summary>
-		public static List<Assembly> Modules { get ; private set ; }
+		[ImportMany(AllowRecomposition=true)]
+		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions ;
 		#endregion
 
 		/// <summary>
-		/// Initializes the extension manager. This method should be invoked
-		/// on application start.
+		/// Default private constructor.
 		/// </summary>
-		internal static void Init() {
-			// Create the extension list.
-			ExtensionTypes = new Dictionary<string, Type>() ;
-			Extensions = new List<Extension>() ;
-			Modules = new List<Assembly>() ;
+		private ExtensionManager() {
+			var catalog = new AggregateCatalog() ;
+			catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly())) ;
+			Container = new CompositionContainer(catalog) ;
+			Container.ComposeParts(this) ;
+		}
 
-			// Get all loaded assemblies
-			foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
-				// Iterate all types
-				foreach (var type in assembly.GetTypes()) {
-					// Get all extensions.
-					if (typeof(IExtension).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
-						var attr = type.GetCustomAttribute<ExtensionAttribute>(false) ;
-						if (attr != null) {
-							if (attr.Type != ExtensionType.NotSet) {
-								ExtensionAttributes.Add(type.FullName, attr) ;
-								ExtensionTypes.Add(type.FullName, type) ;
-								Extensions.Add(new Extension() {
-									ExtensionType = attr.Type,
-									Name = attr.Name,
-									Type = type
-								});
-								// Check if the extension implements the ensure method
-								var m = type.GetMethod("Ensure") ;
-								if (m != null) {
-									Data.Database.LoginSys() ;
-									m.Invoke(Activator.CreateInstance(type), null) ;
-									Data.Database.Logout() ;
-								}
-							}
-						}
-					} else if (typeof(Module).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract) {
-						var attr = type.GetCustomAttribute<ModuleAttribute>(false) ;
-						if (attr != null) {
-							// Register the module
-							ModuleAttributes.Add(attr.InternalId, attr) ;
-							Modules.Add(assembly) ;
-
-							// Ensure the module
-							Module m = (Module)Activator.CreateInstance(type) ;
-							Data.Database.LoginSys() ;
-							m.Ensure() ;
-							Data.Database.Logout() ;
-						}
-					}
-				}
+		/// <summary>
+		/// Trigged when all imports are loaded. Initializes all of the extensions.
+		/// </summary>
+		public void OnImportsSatisfied() {
+			using (var db = new DataContext()) {
+				db.LoginSys() ;
+				// Run the ensure method for all extensions.
+				foreach (var ext in Extensions)
+					ext.Value.Ensure(db) ;
+				db.Logout() ;
 			}
 		}
 
 		/// <summary>
-		/// Gets the name for the given extension type.
+		/// Gets weather of not an extension of the given type exists in the extension manager.
 		/// </summary>
-		/// <param name="type">The type</param>
+		/// <param name="type">The extension type</param>
+		/// <returns>If the extension exists</returns>
+		public bool HasType(string type) {
+			return Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() != null ;
+		}
+
+		/// <summary>
+		/// Creates a new extensions of the given type.
+		/// </summary>
+		/// <param name="type">The extension type</param>
+		/// <param name="args">Optional constructor arguments</param>
+		/// <returns>The new instance</returns>
+		public IExtension CreateInstance(string type, params object[] args) {
+			if (HasType(type)) {
+				var ext = Extensions.Where(e => e.Value.GetType().FullName == type).Single() ;
+				return (IExtension)Activator.CreateInstance(ext.Value.GetType(), args) ;
+			}
+			return null ;
+		}
+
+		/// <summary>
+		/// Gets the name for the extension of the given type.
+		/// </summary>
+		/// <param name="type">The extension type</param>
 		/// <returns>The name</returns>
-		public static string GetExtensionNameByType(string type) {
-			if (ExtensionAttributes.ContainsKey(type))
-				return ExtensionAttributes[type].Name ;
+		public string GetNameByType(string type) {
+			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
+			if (ext != null) {
+				if (ext.Metadata.ResourceType != null && !String.IsNullOrEmpty(ext.Metadata.Name)) {
+					var mgr = new ResourceManager(ext.Metadata.ResourceType) ;
+					return mgr.GetString(ext.Metadata.Name) ;
+				}
+				return ext.Metadata.Name ;
+			}
 			return "" ;
 		}
 
 		/// <summary>
-		/// Gets the internal id for the given extension type.
+		/// Gets the internal id for the extension of the given type.
 		/// </summary>
-		/// <param name="type">The type</param>
+		/// <param name="type">The extension type</param>
 		/// <returns>The internal id</returns>
-		public static string GetInternalIdByType(string type) {
-			if (ExtensionAttributes.ContainsKey(type))
-				return ExtensionAttributes[type].InternalId != null ? ExtensionAttributes[type].InternalId : 
-					ExtensionAttributes[type].Name.Replace(" ", "").Replace(".", "") ;
+		public string GetInternalIdByType(string type) {
+			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
+			if (ext != null)
+				return !String.IsNullOrEmpty(ext.Metadata.InternalId) ? ext.Metadata.InternalId : 
+					ext.Metadata.Name.Replace(" ", "").Replace(".", "") ;
 			return "" ;
 		}
 
 		/// <summary>
-		/// Gets the icon path for the given extension type.
+		/// Gets the icon path for the extension of the given type.
 		/// </summary>
-		/// <param name="type">The type</param>
+		/// <param name="type">The extension type</param>
 		/// <returns>The icon path</returns>
-		public static string GetIconPathByType(string type) {
-			if (ExtensionAttributes.ContainsKey(type))
-				return !String.IsNullOrEmpty(ExtensionAttributes[type].IconPath) ? ExtensionAttributes[type].IconPath :
+		public string GetIconPathByType(string type) {
+			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
+			if (ext != null)
+				return !String.IsNullOrEmpty(ext.Metadata.IconPath) ? ext.Metadata.IconPath :
 					"~/areas/manager/content/img/ico-missing-ico.png" ;
 			return "" ;
+		}
+
+		/// <summary>
+		/// Gets the real type from its string representation.
+		/// </summary>
+		/// <param name="type">The extension type</param>
+		/// <returns>The real type</returns>
+		public Type GetType(string type) {
+			return Extensions.Where(e => e.Value.GetType().FullName == type).Select(e => e.Value.GetType()).Single() ;
+		}
+
+		/// <summary>
+		/// Gets the extensions available for the given extension type.
+		/// </summary>
+		/// <param name="type">The extension type</param>
+		/// <returns></returns>
+		public IEnumerable<Lazy<IExtension, IExtensionMeta>> GetByExtensionType(ExtensionType type) {
+			return Extensions.Where(e => e.Metadata.Type.HasFlag(type)).ToList() ;
 		}
 
 		/// <summary>
@@ -134,17 +146,17 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <param name="draft">Whether the entity is a draft or not</param>
 		/// <returns>A list of extensions</returns>
-		public static List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
-			var ext = new List<Models.Extension>() ;
+		public List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
+			var extensions = new List<Models.Extension>() ;
 
-			Extensions.Where(extension => extension.ExtensionType.HasFlag(type)).ToList().ForEach(e => {
-				ext.Add(new Models.Extension() {
+			foreach (var ext in Extensions.Where(e => e.Metadata.Type.HasFlag(type))) {
+				extensions.Add(new Models.Extension() {
 					IsDraft = draft,
-					Type = e.Type.ToString(),
-					Body = (IExtension)Activator.CreateInstance(e.Type)
+					Type = ext.Value.GetType().FullName,
+					Body = (IExtension)Activator.CreateInstance(ext.Value.GetType())
 				}) ;
-			});
-			return ext ;
+			}
+			return extensions ;
 		}
 
 		/// <summary>
@@ -154,7 +166,7 @@ namespace Piranha.Extend
 		/// <param name="id">The entity id</param>
 		/// <param name="draft">Whether the entity is a draft or not</param>
 		/// <returns>A list of extensions</returns>
-		public static List<Models.Extension> GetByTypeAndEntity(ExtensionType type, Guid id, bool draft) {
+		public List<Models.Extension> GetByTypeAndEntity(ExtensionType type, Guid id, bool draft) {
 			var ret = new List<Models.Extension>() ;
 			var tmp = GetByType(type, draft) ;
 

@@ -130,16 +130,14 @@ namespace Piranha.Models
 				List<Extension> ret = null ;
 
 				if (Id != Guid.Empty) {
-					ret = Extend.ExtensionManager.GetByTypeAndEntity(ExtensionType, Id, draft) ;
+					ret = Extend.ExtensionManager.Current.GetByTypeAndEntity(ExtensionType, Id, draft) ;
 				} else {
-					ret = Extend.ExtensionManager.GetByType(ExtensionType, draft) ;
+					ret = Extend.ExtensionManager.Current.GetByType(ExtensionType, draft) ;
 				}
 
 				foreach (var ext in ret)
-					if (Extend.ExtensionManager.ExtensionTypes.ContainsKey(ext.Type)) {
-						var m = Extend.ExtensionManager.ExtensionTypes[ext.Type].GetMethod("Init") ;
-						if (m != null)
-							m.Invoke(ext.Body, new object[] { this }) ;
+					if (Extend.ExtensionManager.Current.HasType(ext.Type)) {
+						ext.Body.Init(this) ;
 					}
 				return ret ;
 			}

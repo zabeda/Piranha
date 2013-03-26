@@ -104,7 +104,7 @@ namespace Piranha.Entities
 			}
 			// Get Regions
 			foreach (var rt in page.Template.RegionTemplates) {
-				if (ExtensionManager.ExtensionTypes.ContainsKey(rt.Type)) {
+				if (ExtensionManager.Current.HasType(rt.Type)) {
 					object val = null ;
 					var reg = page.Regions.Where(r => r.RegionTemplateId == rt.Id).SingleOrDefault() ;
 					
@@ -112,12 +112,10 @@ namespace Piranha.Entities
 						if (reg.RegionTemplate == null)
 							reg.RegionTemplate = rt ;
 						val = reg.Body ;
-					} else val = Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type]) ;
+					} else val = ExtensionManager.Current.CreateInstance(rt.Type) ;
 
 					// Initialize region
-					var method = ExtensionManager.ExtensionTypes[rt.Type].GetMethod("GetContent") ;
-					if (method != null)
-						val = method.Invoke(val, new object[] { m }) ;
+					val = ((IExtension)val).GetContent(m) ;
 
 					((IDictionary<string, object>)m.Regions).Add(rt.InternalId, val) ;
 				} else ((IDictionary<string, object>)m.Regions).Add(rt.InternalId, null) ;
@@ -126,7 +124,7 @@ namespace Piranha.Entities
 			foreach (var ext in page.Extensions) {
 				object val = null ;
 
-				if (ExtensionManager.ExtensionTypes.ContainsKey(ext.Type)) {
+				if (ExtensionManager.Current.HasType(ext.Type)) {
 					val = ext.Body ;
 				}
 			}

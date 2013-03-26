@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,13 @@ namespace Piranha.Extend.Regions
 	/// <summary>
 	/// Simple text region.
 	/// </summary>
-	[Extension(Name="TextRegionName", InternalId="TextRegion", ResourceType=typeof(Piranha.Resources.Extensions), Type=ExtensionType.Region)]
+	[Export(typeof(IExtension))]
+	[ExportMetadata("InternalId", "TextRegion")]
+	[ExportMetadata("Name", "TextRegionName")]
+	[ExportMetadata("ResourceType", typeof(Resources.Extensions))]
+	[ExportMetadata("Type", ExtensionType.Region)]
 	[Serializable]
-	public class TextRegion : IExtension
+	public class TextRegion : Extension
 	{
 		#region Properties
 		/// <summary>

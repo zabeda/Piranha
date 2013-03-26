@@ -1458,8 +1458,8 @@ WriteLiteral(" href=\"#\"");
 
             
             #line 251 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                       Write(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "");
+                                       Write(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "");
 
             
             #line default
@@ -1468,7 +1468,7 @@ WriteLiteral(" data-id=\"pnl-");
 
             
             #line 252 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                                                                                               Write(ExtensionManager.GetInternalIdByType(ext.Type).ToLower());
+                                                                                                                       Write(ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower());
 
             
             #line default
@@ -1479,7 +1479,7 @@ WriteLiteral("                                    ");
 
             
             #line 253 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                               Write(ExtensionManager.GetExtensionNameByType(ext.Type));
+                               Write(ExtensionManager.Current.GetNameByType(ext.Type));
 
             
             #line default

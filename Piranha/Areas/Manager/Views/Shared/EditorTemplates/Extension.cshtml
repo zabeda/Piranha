@@ -8,8 +8,8 @@
     var menu = Piranha.WebPages.Manager.GetActiveMenuItem() ;
     var compat = menu != null && (menu.InternalId == "Categories" || menu.InternalId == "Media" || menu.InternalId == "Users") ;
 }
-<div id="pnl-@ExtensionManager.GetInternalIdByType(Model.Type).ToLower()" class="@(!compat ? "main hidden" : "box")">
-    <div class="title"><h2>@Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Type)</h2></div>
+<div id="pnl-@ExtensionManager.Current.GetInternalIdByType(Model.Type).ToLower()" class="@(!compat ? "main hidden" : "box")">
+    <div class="title"><h2>@Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type)</h2></div>
     <div class="inner">
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.IsDraft)

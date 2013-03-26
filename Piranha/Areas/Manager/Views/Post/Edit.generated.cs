@@ -1165,8 +1165,8 @@ WriteLiteral(" href=\"#\"");
 
             
             #line 213 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-                                       Write(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "");
+                                       Write(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "");
 
             
             #line default
@@ -1175,7 +1175,7 @@ WriteLiteral(" data-id=\"pnl-");
 
             
             #line 214 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-                                                                                                               Write(ExtensionManager.GetInternalIdByType(ext.Type).ToLower());
+                                                                                                                       Write(ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower());
 
             
             #line default
@@ -1186,7 +1186,7 @@ WriteLiteral("                                    ");
 
             
             #line 215 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-                               Write(ExtensionManager.GetExtensionNameByType(ext.Type));
+                               Write(ExtensionManager.Current.GetNameByType(ext.Type));
 
             
             #line default

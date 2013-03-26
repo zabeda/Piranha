@@ -58,25 +58,25 @@ namespace Piranha.Areas.Manager.Views.Shared.EditorTemplates
             #line hidden
 WriteLiteral("\r\n<div");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 483), Tuple.Create("\"", 551)
+WriteAttribute("id", Tuple.Create(" id=\"", 483), Tuple.Create("\"", 559)
 , Tuple.Create(Tuple.Create("", 488), Tuple.Create("pnl-", 488), true)
             
             #line 11 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-, Tuple.Create(Tuple.Create("", 492), Tuple.Create<System.Object, System.Int32>(ExtensionManager.GetInternalIdByType(Model.Type).ToLower()
+, Tuple.Create(Tuple.Create("", 492), Tuple.Create<System.Object, System.Int32>(ExtensionManager.Current.GetInternalIdByType(Model.Type).ToLower()
             
             #line default
             #line hidden
 , 492), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 552), Tuple.Create("\"", 594)
+WriteAttribute("class", Tuple.Create(" class=\"", 560), Tuple.Create("\"", 602)
             
             #line 11 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-   , Tuple.Create(Tuple.Create("", 560), Tuple.Create<System.Object, System.Int32>(!compat ? "main hidden" : "box"
+           , Tuple.Create(Tuple.Create("", 568), Tuple.Create<System.Object, System.Int32>(!compat ? "main hidden" : "box"
             
             #line default
             #line hidden
-, 560), false)
+, 568), false)
 );
 
 WriteLiteral(">\r\n    <div");
@@ -87,7 +87,7 @@ WriteLiteral("><h2>");
 
             
             #line 12 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-                      Write(Piranha.Extend.ExtensionManager.GetExtensionNameByType(Model.Type));
+                      Write(Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type));
 
             
             #line default

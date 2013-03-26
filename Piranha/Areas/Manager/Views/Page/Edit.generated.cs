@@ -1855,8 +1855,8 @@ WriteLiteral(" href=\"#\"");
 
             
             #line 289 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                                       Write(ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "");
+                                       Write(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "");
 
             
             #line default
@@ -1865,7 +1865,7 @@ WriteLiteral(" data-id=\"pnl-");
 
             
             #line 290 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                                                                                                               Write(ExtensionManager.GetInternalIdByType(ext.Type).ToLower());
+                                                                                                                       Write(ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower());
 
             
             #line default
@@ -1876,7 +1876,7 @@ WriteLiteral("                                    ");
 
             
             #line 291 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                               Write(ExtensionManager.GetExtensionNameByType(ext.Type));
+                               Write(ExtensionManager.Current.GetNameByType(ext.Type));
 
             
             #line default
@@ -1895,16 +1895,16 @@ WriteLiteral("                        </ul>\r\n                    </td>\r\n    
 
 WriteLiteral(" id=\"pnl-content\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 15413), Tuple.Create("\"", 15500)
-, Tuple.Create(Tuple.Create("", 15421), Tuple.Create("main", 15421), true)
-, Tuple.Create(Tuple.Create(" ", 15425), Tuple.Create("content-editor", 15426), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 15436), Tuple.Create("\"", 15523)
+, Tuple.Create(Tuple.Create("", 15444), Tuple.Create("main", 15444), true)
+, Tuple.Create(Tuple.Create(" ", 15448), Tuple.Create("content-editor", 15449), true)
             
             #line 298 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create(" ", 15440), Tuple.Create<System.Object, System.Int32>(Model.Action != EditModel.ActionType.SEO ? "" : "hidden"
+, Tuple.Create(Tuple.Create(" ", 15463), Tuple.Create<System.Object, System.Int32>(Model.Action != EditModel.ActionType.SEO ? "" : "hidden"
             
             #line default
             #line hidden
-, 15441), false)
+, 15464), false)
 );
 
 WriteLiteral(">\r\n                            <div");
@@ -1934,26 +1934,26 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                        <button");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 15760), Tuple.Create("\"", 15812)
+WriteAttribute("id", Tuple.Create(" id=\"", 15783), Tuple.Create("\"", 15835)
             
             #line 302 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 15765), Tuple.Create<System.Object, System.Int32>(Html.Raw("btn_" + Model.Regions[n].InternalId)
+, Tuple.Create(Tuple.Create("", 15788), Tuple.Create<System.Object, System.Int32>(Html.Raw("btn_" + Model.Regions[n].InternalId)
             
             #line default
             #line hidden
-, 15765), false)
+, 15788), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 15813), Tuple.Create("\"", 15856)
-, Tuple.Create(Tuple.Create("", 15821), Tuple.Create("btn", 15821), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 15836), Tuple.Create("\"", 15879)
+, Tuple.Create(Tuple.Create("", 15844), Tuple.Create("btn", 15844), true)
             
             #line 302 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                               , Tuple.Create(Tuple.Create("", 15824), Tuple.Create<System.Object, System.Int32>(n > 0 ? "" : " active"
+                               , Tuple.Create(Tuple.Create("", 15847), Tuple.Create<System.Object, System.Int32>(n > 0 ? "" : " active"
             
             #line default
             #line hidden
-, 15824), false)
-, Tuple.Create(Tuple.Create(" ", 15849), Tuple.Create("region", 15850), true)
+, 15847), false)
+, Tuple.Create(Tuple.Create(" ", 15872), Tuple.Create("region", 15873), true)
 );
 
 WriteLiteral(">");
@@ -1978,15 +1978,15 @@ WriteLiteral("                                    <button");
 
 WriteLiteral(" id=\"btn_attachments\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 15994), Tuple.Create("\"", 16049)
-, Tuple.Create(Tuple.Create("", 16002), Tuple.Create("btn", 16002), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 16017), Tuple.Create("\"", 16072)
+, Tuple.Create(Tuple.Create("", 16025), Tuple.Create("btn", 16025), true)
             
             #line 304 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 16005), Tuple.Create<System.Object, System.Int32>(Model.Regions.Count == 0 ? " active" : ""
+, Tuple.Create(Tuple.Create("", 16028), Tuple.Create<System.Object, System.Int32>(Model.Regions.Count == 0 ? " active" : ""
             
             #line default
             #line hidden
-, 16005), false)
+, 16028), false)
 );
 
 WriteLiteral(">");
@@ -2099,15 +2099,15 @@ WriteLiteral("                        <div");
 
 WriteLiteral(" id=\"pnl-settings\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 16964), Tuple.Create("\"", 17036)
-, Tuple.Create(Tuple.Create("", 16972), Tuple.Create("main", 16972), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 16987), Tuple.Create("\"", 17059)
+, Tuple.Create(Tuple.Create("", 16995), Tuple.Create("main", 16995), true)
             
             #line 320 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create(" ", 16976), Tuple.Create<System.Object, System.Int32>(Model.Action == EditModel.ActionType.SEO ? "" : "hidden"
+, Tuple.Create(Tuple.Create(" ", 16999), Tuple.Create<System.Object, System.Int32>(Model.Action == EditModel.ActionType.SEO ? "" : "hidden"
             
             #line default
             #line hidden
-, 16977), false)
+, 17000), false)
 );
 
 WriteLiteral(">\r\n                            <div");

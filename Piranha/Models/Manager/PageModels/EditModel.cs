@@ -42,7 +42,7 @@ namespace Piranha.Models.Manager.PageModels
 				model.Regions.Each<Region>((i, m) => {
 					if (m.Body is HtmlString) {
 						bindingContext.ModelState.Remove("Regions[" + i +"].Body") ;
-						m.Body = (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[m.Type],
+						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
  							bindingContext.ValueProvider.GetUnvalidatedValue("Regions[" + i +"].Body").AttemptedValue) ;
 					}
 				}) ;
@@ -513,11 +513,7 @@ namespace Piranha.Models.Manager.PageModels
 
 					// Initialize regions
 					foreach (var reg in Regions)
-						if (Extend.ExtensionManager.ExtensionTypes.ContainsKey(reg.Type)) {
-							var m = Extend.ExtensionManager.ExtensionTypes[reg.Type].GetMethod("Init") ;
-							if (m != null)
-								m.Invoke(reg.Body, new object[] { this }) ;
-						}
+						reg.Body.Init(this) ;
 				}
 			}
 		}
@@ -618,11 +614,7 @@ namespace Piranha.Models.Manager.PageModels
 
 			// Initialize regions
 			foreach (var reg in Regions)
-				if (Extend.ExtensionManager.ExtensionTypes.ContainsKey(reg.Type)) {
-					var m = Extend.ExtensionManager.ExtensionTypes[reg.Type].GetMethod("Init") ;
-					if (m != null)
-						m.Invoke(reg.Body, new object[] { this }) ;
-				}
+				reg.Body.Init(this) ;
 
 			// Get whether comments should be enabled
 			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePages ;

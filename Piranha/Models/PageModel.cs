@@ -231,14 +231,12 @@ namespace Piranha.Models
 			if (regions.Count > 0) {
 				foreach (var rt in regions) {
 					if (rt.Type != "Piranha.Extend.Regions.PostRegion") {
-						if (ExtensionManager.ExtensionTypes.ContainsKey(rt.Type)) {
+						if (ExtensionManager.Current.HasType(rt.Type)) {
 							// Create empty region
-							var body = Activator.CreateInstance(ExtensionManager.ExtensionTypes[rt.Type]) ;
+							object body = ExtensionManager.Current.CreateInstance(rt.Type) ;
 							// Initialize empty regions
 							if (body != null) {
-								var getContent = body.GetType().GetMethod("GetContent") ;
-								if (getContent != null)
-									body = getContent.Invoke(body, new object[] { this }) ;
+								body = ((IExtension)body).GetContent(this) ;
 							}
 							((IDictionary<string, object>)Regions).Add(rt.InternalId, body) ;
 						} else {
@@ -257,9 +255,7 @@ namespace Piranha.Models
 						object content = reg.Body ;
 
 						// Initialize region
-						var getContent = ExtensionManager.ExtensionTypes[reg.Type].GetMethod("GetContent") ;
-						if (getContent != null)
-							content = getContent.Invoke(reg.Body, new object[] { this }) ;
+						content = ((IExtension)content).GetContent(this) ;
 
 						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
 							((IDictionary<string, object>)Regions)[reg.InternalId] = content ;
@@ -293,7 +289,7 @@ namespace Piranha.Models
 					if (getContent != null)
 						body = getContent.Invoke(body, new object[] { this }) ;
 				}
-				((IDictionary<string, object>)Extensions)[ExtensionManager.GetInternalIdByType(ext.Type)] = body ;
+				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body ;
 			}
 		}
 	}

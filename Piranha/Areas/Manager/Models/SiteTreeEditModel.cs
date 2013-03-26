@@ -106,8 +106,8 @@ namespace Piranha.Areas.Manager.Models
 
 			// Get the available region types
 			RegionTypes = new List<dynamic>() ;
-			ExtensionManager.Extensions.Where(e => e.ExtensionType == ExtensionType.Region).OrderBy(e => e.Name).Each((i, r) =>
-				RegionTypes.Add(new { Name = r.Name, Type = r.Type.ToString() })) ;
+			ExtensionManager.Current.GetByExtensionType(ExtensionType.Region).OrderBy(e => e.Metadata.Name).Each((i, r) =>
+				RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName })) ;
 			RegionTypes.Insert(0, new { Name = "", Type = "" }) ;
 
 			// Initialize the new site

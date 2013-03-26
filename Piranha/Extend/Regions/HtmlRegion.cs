@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -9,7 +10,11 @@ namespace Piranha.Extend.Regions
 	/// <summary>
 	/// Standard html region.
 	/// </summary>
-	[Extension(Name="Html", Type=ExtensionType.Region)]
+	[Export(typeof(IExtension))]
+	[ExportMetadata("InternalId", "HtmlRegion")]
+	[ExportMetadata("Name", "HtmlRegionName")]
+	[ExportMetadata("ResourceType", typeof(Resources.Extensions))]
+	[ExportMetadata("Type", ExtensionType.Region)]
 	[Serializable]
 	public class HtmlRegion : HtmlString, IExtension
 	{
@@ -23,5 +28,12 @@ namespace Piranha.Extend.Regions
 		/// </summary>
 		/// <param name="str">The string</param>
 		public HtmlRegion(string str) : base(str) {}
+
+		public virtual void Ensure(DataContext db) {}
+		public virtual void Init(object model) {}
+		public virtual void InitManager(object model) {}
+		public virtual object GetContent(object model) {
+			return this ;
+		}
 	}
 }

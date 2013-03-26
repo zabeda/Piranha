@@ -61,16 +61,34 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Html.
+        /// </summary>
+        public static string HtmlRegionName {
+            get {
+                return ResourceManager.GetString("HtmlRegionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        public static string ImageRegionDescription {
+        public static string ImageRegionImageDescription {
             get {
-                return ResourceManager.GetString("ImageRegionDescription", resourceCulture);
+                return ResourceManager.GetString("ImageRegionImageDescription", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ImageRegionImageName {
+            get {
+                return ResourceManager.GetString("ImageRegionImageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string ImageRegionName {
             get {

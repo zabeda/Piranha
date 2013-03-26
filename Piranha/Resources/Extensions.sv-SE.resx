@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ImageRegionDescription" xml:space="preserve">
+  <data name="HtmlRegionName" xml:space="preserve">
+    <value>Html</value>
+  </data>
+  <data name="ImageRegionImageDescription" xml:space="preserve">
     <value>Beskrivning</value>
   </data>
-  <data name="ImageRegionName" xml:space="preserve">
+  <data name="ImageRegionImageName" xml:space="preserve">
     <value>Namn</value>
+  </data>
+  <data name="ImageRegionName" xml:space="preserve">
+    <value>Bild</value>
   </data>
   <data name="PostRegionCache" xml:space="preserve">
     <value>Cache (minuter)</value>

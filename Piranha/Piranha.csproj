@@ -499,8 +499,6 @@
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Extend\Extension.cs" />
-    <Compile Include="Extend\ExtensionAttribute.cs" />
-    <Compile Include="Extend\ExtensionContainer.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IExtension.cs" />
@@ -514,7 +512,6 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Manager\ManagerModule.cs" />
     <Compile Include="Manager\ManagerRegistration.cs" />
-    <Compile Include="Manager\ToolbarItem.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />
@@ -554,19 +551,71 @@
     <Compile Include="Mvc\SinglePageController.cs" />
     <Compile Include="Mvc\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Account.Designer.cs" />
-    <Compile Include="Resources\Category.Designer.cs" />
-    <Compile Include="Resources\Comment.Designer.cs" />
-    <Compile Include="Resources\Content.Designer.cs" />
-    <Compile Include="Resources\Extensions.Designer.cs" />
-    <Compile Include="Resources\Global.Designer.cs" />
-    <Compile Include="Resources\Page.Designer.cs" />
-    <Compile Include="Resources\Post.Designer.cs" />
-    <Compile Include="Resources\Regions.Designer.cs" />
-    <Compile Include="Resources\Settings.Designer.cs" />
-    <Compile Include="Resources\SiteTree.Designer.cs" />
-    <Compile Include="Resources\Tabs.Designer.cs" />
-    <Compile Include="Resources\Template.Designer.cs" />
+    <Compile Include="Resources\Account.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Account.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Category.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Category.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Comment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Comment.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Content.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Content.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Extensions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Extensions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Global.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Page.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Page.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Post.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Post.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Regions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Regions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\SiteTree.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteTree.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Tabs.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tabs.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Template.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Template.resx</DependentUpon>
+    </Compile>
     <Compile Include="Rest\BaseService.cs" />
     <Compile Include="Rest\CategoryService.cs" />
     <Compile Include="Rest\ChangeService.cs" />
@@ -856,31 +905,70 @@
     <Content Include="Areas\Manager\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Account.resx" />
+    <EmbeddedResource Include="Resources\Account.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Account.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Category.resx" />
+    <EmbeddedResource Include="Resources\Category.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Category.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Comment.resx" />
+    <EmbeddedResource Include="Resources\Comment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Comment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Content.resx" />
+    <EmbeddedResource Include="Resources\Content.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Content.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Extensions.resx" />
+    <EmbeddedResource Include="Resources\Extensions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Extensions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Global.resx" />
+    <EmbeddedResource Include="Resources\Global.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Page.resx" />
+    <EmbeddedResource Include="Resources\Page.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Page.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Post.resx" />
+    <EmbeddedResource Include="Resources\Post.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Post.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Regions.resx" />
+    <EmbeddedResource Include="Resources\Regions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Regions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Settings.resx" />
+    <EmbeddedResource Include="Resources\Settings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\SiteTree.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteTree.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Tabs.resx" />
+    <EmbeddedResource Include="Resources\Tabs.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tabs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
-    <EmbeddedResource Include="Resources\Template.resx" />
+    <EmbeddedResource Include="Resources\Template.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
   </ItemGroup>
   <ItemGroup>

@@ -46,7 +46,7 @@ namespace Piranha.Mvc.ModelBinders
 		private Type GetBodyType(ModelBindingContext bc) {
 			var typeparam = bc.ModelName.Substring(0, bc.ModelName.LastIndexOf('.')) + ".Type" ;
 			string typename = (string)bc.ValueProvider.GetValue(typeparam).ConvertTo(typeof(string)) ;
-			return ExtensionManager.ExtensionTypes[typename] ;
+			return ExtensionManager.Current.GetType(typename) ;
 		}
 		#endregion
 	}

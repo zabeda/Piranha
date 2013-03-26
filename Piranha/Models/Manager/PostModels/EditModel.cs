@@ -49,7 +49,7 @@ namespace Piranha.Models.Manager.PostModels
 				model.Extensions.Each((i, m) => {
 					if (m.Body is HtmlString) {
 						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
-						m.Body = (IExtension)Activator.CreateInstance(ExtensionManager.ExtensionTypes[m.Type],
+						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
  							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
 					}
 				}) ;

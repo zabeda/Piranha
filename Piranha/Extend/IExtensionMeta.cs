@@ -33,6 +33,12 @@ namespace Piranha.Extend
 		string IconPath { get ; }
 
 		/// <summary>
+		/// Gets the optional resource type that should be used to resolve the resource.
+		/// </summary>
+		[DefaultValue(null)]
+		Type ResourceType { get ; }
+
+		/// <summary>
 		/// Gets the extension type.
 		/// </summary>
 		ExtensionType Type { get ; }

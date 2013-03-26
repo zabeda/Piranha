@@ -238,9 +238,6 @@ namespace Piranha.WebPages
 			// Reset template cache
 			Web.TemplateCache.Clear() ;
 
-			// Initialize the extension manager
-			Extend.ExtensionManager.Init() ;
-
 			// Register json deserialization for post data
 			ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
 

@@ -9,15 +9,20 @@ using System.Web.Mvc;
 
 using Piranha.Data;
 using Piranha.Entities;
+using System.ComponentModel.Composition;
 
 namespace Piranha.Extend.Regions
 {
 	/// <summary>
 	/// Standard post container region.
 	/// </summary>
-	[Extension(Name="PostRegionName", InternalId="PostContainer", ResourceType=typeof(Piranha.Resources.Extensions), Type=ExtensionType.Region)]
+	[Export(typeof(IExtension))]
+	[ExportMetadata("InternalId", "PostRegion")]
+	[ExportMetadata("Name", "PostRegionName")]
+	[ExportMetadata("ResourceType", typeof(Resources.Extensions))]
+	[ExportMetadata("Type", ExtensionType.Region)]
 	[Serializable]
-	public class PostRegion : IExtension
+	public class PostRegion : Extension
 	{
 		#region Inner classes
 		/// <summary>
@@ -192,7 +197,7 @@ namespace Piranha.Extend.Regions
 		/// <summary>
 		/// Initializes the region.
 		/// </summary>
-		public virtual void Init(object model) {
+		public override void InitManager(object model) {
 			// Gets all of the post templates
 			var templates = Piranha.Models.PostTemplate.GetFields("posttemplate_id, posttemplate_name", new Params() { OrderBy = "posttemplate_name" }) ;
 			templates.Insert(0, new Piranha.Models.PostTemplate()) ;
