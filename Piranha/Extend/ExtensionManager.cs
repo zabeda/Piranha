@@ -38,7 +38,10 @@ namespace Piranha.Extend
 		/// </summary>
 		private ExtensionManager() {
 			var catalog = new AggregateCatalog() ;
-			catalog.Catalogs.Add(new AssemblyCatalog(Assembly.GetExecutingAssembly())) ;
+
+			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
+			catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
+
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
 		}
