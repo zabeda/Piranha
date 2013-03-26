@@ -30,7 +30,7 @@ namespace Piranha.Extend
 		/// The currently available extensions
 		/// </summary>
 		[ImportMany(AllowRecomposition=true)]
-		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions ;
+		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions { get ; set ; }
 		#endregion
 
 		/// <summary>

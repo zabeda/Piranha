@@ -11,7 +11,6 @@ namespace Piranha.Extend
 	/// </summary>
 	public interface IExtensionMeta
 	{
-		#region Properties
 		/// <summary>
 		/// Gets the display name of the extension used in the manager.
 		/// </summary>
@@ -42,6 +41,5 @@ namespace Piranha.Extend
 		/// Gets the extension type.
 		/// </summary>
 		ExtensionType Type { get ; }
-		#endregion
 	}
 }
