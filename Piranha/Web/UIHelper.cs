@@ -371,6 +371,7 @@ namespace Piranha.Web
 		/// </summary>
 		/// <param name="action">The form action</param>
 		/// <returns>A html string</returns>
+		[Obsolete("Please use Piranha.WebPages.FormHelper.Action() instead")]
 		public virtual IHtmlString FormAction(string action) {
 			return new HtmlString(String.Format("<input type=\"hidden\" name=\"piranha_form_action\" value=\"{0}\" />",
 				action)) ;

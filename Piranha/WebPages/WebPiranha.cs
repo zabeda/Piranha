@@ -173,6 +173,7 @@ namespace Piranha.WebPages
 			RegisterHandler("home", "PERMALINK", new PermalinkHandler()) ;
 			RegisterHandler("draft", "DRAFT", new DraftHandler()) ;
 			RegisterHandler("media", "CONTENT", new ContentHandler()) ;
+			RegisterHandler("mediadraft", "CONTENTDRAFT", new DraftContentHandler()) ;
 			RegisterHandler("thumb", "THUMBNAIL", new ThumbnailHandler()) ;
 			RegisterHandler("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler()) ;
 			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;

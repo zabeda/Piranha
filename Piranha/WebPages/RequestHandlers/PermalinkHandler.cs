@@ -52,11 +52,23 @@ namespace Piranha.WebPages.RequestHandlers
 							} else if (!String.IsNullOrEmpty(page.Controller)) {
 								if (page.Controller.StartsWith("~/")) {
 									context.RewritePath(page.Controller + "/" + args.Subset(segments).Implode("/") + "?permalink=" + perm.Name, false);
-								} else context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
+								} else { 
+									var urldata = "" ;
+									if (Config.DisableMethodBinding)
+										urldata = args.Implode("/") ;
+									else urldata = args.Subset(segments).Implode("/") ;
+
+									context.RewritePath("~/templates/" + page.Controller + "/" + urldata + "?permalink=" + perm.Name +
+									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
+								}
 							} else {
-								context.RewritePath("~/page/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
+								var urldata = "" ;
+								if (Config.DisableMethodBinding)
+									urldata = args.Implode("/") ;
+								else urldata = args.Subset(segments).Implode("/") ;
+
+								context.RewritePath("~/page/" + urldata + "?permalink=" + perm.Name +
+									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
 							}
 						} else {
 							context.Response.StatusCode = 404 ;
@@ -64,13 +76,17 @@ namespace Piranha.WebPages.RequestHandlers
 					} else if (perm.Type == Permalink.PermalinkType.POST) {
 						Post post = Post.GetByPermalinkId(perm.Id, draft) ;
 
+						// Get rid of permalink from urldata if we're not trying to be backwards compatible
+						if (!Config.DisableMethodBinding)
+							args = args.Subset(segments) ;
+
 						if (post != null) {
 							if (!String.IsNullOrEmpty(post.Controller)) {
-								context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
+								context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + "?permalink=" + perm.Name +
+									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
 							} else {
-								context.RewritePath("~/post/" + args.Implode("/") + 
-									(draft ? "?draft=true" : "") + GetCultureParam(context, draft), false) ;
+								context.RewritePath("~/post/" + args.Implode("/") + "?permalink=" + perm.Name +
+									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
 							}
 						} else {
 							context.Response.StatusCode = 404 ;
