@@ -29,7 +29,7 @@ namespace Piranha.WebPages
 		/// Initializes the web page
 		/// </summary>
 		protected override void InitializePage() {
-			string permalink = UrlData.Count > 0 ? UrlData[0] : "" ;
+			string permalink = Request["permalink"] ;
 			bool   draft = false ;
 			bool   cached = false ;
 

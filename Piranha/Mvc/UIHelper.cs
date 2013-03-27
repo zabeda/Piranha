@@ -63,6 +63,7 @@ namespace Piranha.Mvc
 		/// </summary>
 		/// <param name="action">The action to execute</param>
 		/// <returns>The url</returns>
+		[Obsolete()]
 		public override IHtmlString FormAction(string action) {
 			Page page = Parent != null ? Parent.Page.Current : Controller.page ;
 

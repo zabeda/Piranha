@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -31,6 +32,9 @@ namespace Piranha.WebPages.RequestHandlers
 		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length > 0) {
 				Content content = Content.GetSingle(new Guid(args[0]), draft) ;
+
+				if (content.IsDraft && !File.Exists(content.PhysicalPath))
+					content.IsDraft = false ;
 
 				if (content != null) {
 					int? width = null ;
