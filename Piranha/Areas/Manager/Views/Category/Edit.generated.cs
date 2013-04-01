@@ -338,18 +338,18 @@ WriteLiteral("\r\n");
             
             #line default
             #line hidden
-WriteLiteral("                    <p>http://");
+WriteLiteral("                    <p>");
 
             
             #line 41 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
-                         Write(Request.Url.DnsSafeHost);
+                  Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
 
             
             #line default
             #line hidden
             
             #line 41 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
-                                                 Write(Url.GetPermalink(Model.Category.Permalink).ToLower());
+                                                           Write(Url.GetPermalink(Model.Category.Permalink).ToLower());
 
             
             #line default

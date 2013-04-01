@@ -38,7 +38,7 @@
                 <li class="protected">
                     @Html.LabelFor(m => m.Category.Permalink)
                 	@if (!Model.Category.IsNew) {
-                    <p>http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Category.Permalink).ToLower()</p>
+                    <p>@Piranha.WebPages.WebPiranha.GetSiteUrl()@Url.GetPermalink(Model.Category.Permalink).ToLower()</p>
                     } else {
                     <p><i>@Piranha.Resources.Category.PermalinkDescription</i></p>
                     }
