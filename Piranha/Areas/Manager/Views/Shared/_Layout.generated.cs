@@ -252,22 +252,14 @@ WriteLiteral(" class=\"public-site\"");
 
 WriteLiteral(" target=\"preview\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2191), Tuple.Create("\"", 2247)
-, Tuple.Create(Tuple.Create("", 2198), Tuple.Create("http://", 2198), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 2191), Tuple.Create("\"", 2239)
             
             #line 43 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2205), Tuple.Create<System.Object, System.Int32>(Request.Url.DnsSafeHost
+, Tuple.Create(Tuple.Create("", 2198), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 2205), false)
-            
-            #line 43 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-             , Tuple.Create(Tuple.Create("", 2229), Tuple.Create<System.Object, System.Int32>(Url.Content("~/")
-            
-            #line default
-            #line hidden
-, 2229), false)
+, 2198), false)
 );
 
 WriteLiteral(">\r\n");
@@ -357,15 +349,15 @@ WriteLiteral(" class=\"grid_12 sys-message\"");
 
 WriteLiteral(">\r\n                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2876), Tuple.Create("\"", 2963)
-, Tuple.Create(Tuple.Create("", 2884), Tuple.Create("box", 2884), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2868), Tuple.Create("\"", 2955)
+, Tuple.Create(Tuple.Create("", 2876), Tuple.Create("box", 2876), true)
             
             #line 61 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2887), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
+, Tuple.Create(Tuple.Create("", 2879), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
             
             #line default
             #line hidden
-, 2887), false)
+, 2879), false)
 );
 
 WriteLiteral(">\r\n                    <div");

@@ -105,7 +105,7 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             @if (!Model.Page.IsNew) {
-            <li><a href="http://@Request.Url.DnsSafeHost@(!Request.Url.IsDefaultPort ? ":" + Request.Url.Port.ToString() : "")@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
+            <li><a href="@Piranha.WebPages.WebPiranha.GetSiteUrl()@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
             @if (User.HasAccess("ADMIN_PAGE_PUBLISH")) {
             <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
@@ -185,7 +185,7 @@
                     </li>
                     <li class="protected">@Html.LabelFor(m => m.Page.Permalink)
                         @if (Model.Permalink != null && !String.IsNullOrEmpty(Model.Permalink.Name)) {
-                        <p>http://@Request.Url.DnsSafeHost@Url.GetPermalink(Model.Permalink.Name)</p>
+                        <p>@Piranha.WebPages.WebPiranha.GetSiteUrl()@Url.GetPermalink(Model.Permalink.Name)</p>
                         } else {
                         <p><i>@Piranha.Resources.Page.PermalinkDescription</i></p>
                         }
