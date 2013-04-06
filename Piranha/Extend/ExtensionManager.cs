@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Text;
+using System.Web.Compilation;
 
 namespace Piranha.Extend
 {
@@ -27,7 +28,7 @@ namespace Piranha.Extend
 		private CompositionContainer Container = null ;
 
 		/// <summary>
-		/// The currently available extensions
+		/// The currently available extensions.
 		/// </summary>
 		[ImportMany(AllowRecomposition=true)]
 		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions { get ; set ; }
@@ -40,7 +41,10 @@ namespace Piranha.Extend
 			var catalog = new AggregateCatalog() ;
 
 			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
-			catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
+			try {
+				// This feature only exists for Web Pages
+				catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
+			} catch {}
 
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;

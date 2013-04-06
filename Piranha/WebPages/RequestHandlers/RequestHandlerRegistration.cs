@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Piranha.WebPages.RequestHandlers
 {
-	internal class RequestHandlerRegistration
+	public class RequestHandlerRegistration
 	{
 		/// <summary>
 		/// Gets/sets the url prefix.

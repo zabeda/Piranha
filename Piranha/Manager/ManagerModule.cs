@@ -7,7 +7,7 @@ using System.Web.WebPages;
 
 using RazorGenerator.Mvc;
 
-[assembly: WebActivatorEx.PostApplicationStartMethod(typeof(Piranha.Manager.ManagerModule), "Init")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Piranha.Manager.ManagerModule), "Init")]
 
 namespace Piranha.Manager
 {
@@ -26,7 +26,7 @@ namespace Piranha.Manager
 		public static void Init() {
 			// Create new precompiled view engine
             var engine = new PrecompiledMvcEngine(typeof(ManagerModule).Assembly) {
-                UsePhysicalViewsIfNewer = HttpContext.Current.Request.IsLocal
+                UsePhysicalViewsIfNewer = true
             } ;
 			engine.PartialViewLocationFormats = engine.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray();
 
@@ -76,7 +76,7 @@ namespace Piranha.Manager
 					new Piranha.Models.Manager.ContentModels.EditModel.Binder()) ;
 			if (ModelBinders.Binders[typeof(Piranha.Extend.IExtension)] == null)
 				ModelBinders.Binders.Add(typeof(Piranha.Extend.IExtension),
-					new Piranha.Mvc.ModelBinders.IExtensionBinder()) ;
+					new Binders.IExtensionBinder()) ;
 		}
 		#endregion
 	}

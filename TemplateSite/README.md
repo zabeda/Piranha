@@ -1,5 +1,5 @@
-﻿PiranhaCMS template site
-========================
+﻿Piranha CMS template site
+=========================
 This is the base template for building a Piranha web application. It creates an
 empty project with an unistalled SqlCompact database.
 

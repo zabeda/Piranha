@@ -12,7 +12,7 @@ namespace Piranha.Web
 	/// The template cache keeps track on the last modification date of the
 	/// actual templates used to render the page.
 	/// </summary>
-	internal static class TemplateCache
+	public static class TemplateCache
 	{
 		#region Members
 		private static Dictionary<string, DateTime> Templates = new Dictionary<string,DateTime>() ;

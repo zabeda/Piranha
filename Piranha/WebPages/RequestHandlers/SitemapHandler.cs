@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 
 using Piranha.Models;
+using Piranha.Web;
 
 namespace Piranha.WebPages.RequestHandlers
 {
@@ -71,7 +72,7 @@ namespace Piranha.WebPages.RequestHandlers
 		/// <param name="permalink">The permalink name</param>
 		/// <returns>The url</returns>
 		private string GetPermalink(string permalink) {
-			return WebPiranha.GetSiteUrl() + "/" + (!WebPiranha.PrefixlessPermalinks ? WebPiranha.GetUrlPrefixForHandlerId("PERMALINK") + "/" : "") + permalink ;
+			return WebPiranha.GetSiteUrl() + "/" + (!WebPiranha.PrefixlessPermalinks ? Application.Current.Handlers.GetUrlPrefix("PERMALINK") + "/" : "") + permalink ;
 		}
 		#endregion
 	}

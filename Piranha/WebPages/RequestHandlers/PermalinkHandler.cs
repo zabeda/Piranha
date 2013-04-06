@@ -29,81 +29,57 @@ namespace Piranha.WebPages.RequestHandlers
 		/// <param name="draft">Whether to view the draft</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		protected virtual void HandleRequest(HttpContext context, bool draft, params string[] args) {
-			if (args != null && args.Length > 0) {
-				Permalink perm = null ;
-                int segments = 0;
-				// Accept permalinks with '/' in them
-				for (int n = 0; n < args.Length; n++) {
-					perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/")) ;
-                    segments = args.Length - n;
-					if (perm != null)
-						break ;
-				}
+			if (Web.Application.Current.RouteHandler != null) {
+				if (args != null && args.Length > 0) {
+					Permalink perm = null ;
+					int segments = 0;
+					// Accept permalinks with '/' in them
+					for (int n = 0; n < args.Length; n++) {
+						// Check if we can find a permalink in the current namespace
+						perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/")) ;
+						segments = args.Length - n;
+						if (perm != null)
+							break ;
+					}
 
-				if (perm != null) {
-					if (perm.Type == Permalink.PermalinkType.PAGE) {
-						Page page = Page.GetByPermalinkId(perm.Id, draft) ;
+					if (perm != null) {
+						if (perm.Type == Permalink.PermalinkType.PAGE) {
+							Page page = Page.GetByPermalinkId(perm.Id, draft) ;
 
-						if (page != null) {
-							if (!String.IsNullOrEmpty(page.Redirect)) {
-								if (page.Redirect.StartsWith("http://"))
-									context.Response.Redirect(page.Redirect) ;
-								else context.Response.Redirect(page.Redirect) ;
-							} else if (!String.IsNullOrEmpty(page.Controller)) {
-								if (page.Controller.StartsWith("~/")) {
-									context.RewritePath(page.Controller + "/" + args.Subset(segments).Implode("/") + "?permalink=" + perm.Name, false);
-								} else { 
-									var urldata = "" ;
-									if (Config.DisableMethodBinding)
-										urldata = args.Implode("/") ;
-									else urldata = args.Subset(segments).Implode("/") ;
-
-									context.RewritePath("~/templates/" + page.Controller + "/" + urldata + "?permalink=" + perm.Name +
-									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
+							if (page != null) {
+								if (!String.IsNullOrEmpty(page.Redirect)) {
+									if (page.Redirect.StartsWith("http://"))
+										context.Response.Redirect(page.Redirect) ;
+									else context.Response.Redirect(page.Redirect) ;
+								} else {
+									//
+									// Call the route handler to route the current page.
+									Web.Application.Current.RouteHandler.HandlePage(context, perm, page, args.Subset(segments)) ;
 								}
 							} else {
-								var urldata = "" ;
-								if (Config.DisableMethodBinding)
-									urldata = args.Implode("/") ;
-								else urldata = args.Subset(segments).Implode("/") ;
-
-								context.RewritePath("~/page/" + urldata + "?permalink=" + perm.Name +
-									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
+								context.Response.StatusCode = 404 ;
 							}
-						} else {
-							context.Response.StatusCode = 404 ;
-						}
-					} else if (perm.Type == Permalink.PermalinkType.POST) {
-						Post post = Post.GetByPermalinkId(perm.Id, draft) ;
+						} else if (perm.Type == Permalink.PermalinkType.POST) {
+							Post post = Post.GetByPermalinkId(perm.Id, draft) ;
 
-						// Get rid of permalink from urldata if we're not trying to be backwards compatible
-						if (!Config.DisableMethodBinding)
-							args = args.Subset(segments) ;
-
-						if (post != null) {
-							if (!String.IsNullOrEmpty(post.Controller)) {
-								context.RewritePath("~/templates/" + post.Controller + "/" + args.Implode("/") + "?permalink=" + perm.Name +
-									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
+							if (post != null) {
+								//
+								// Call the route handler to route the current post.
+								Web.Application.Current.RouteHandler.HandlePost(context, perm, post, args.Subset(segments)) ;
 							} else {
-								context.RewritePath("~/post/" + args.Implode("/") + "?permalink=" + perm.Name +
-									(draft ? "&draft=true" : "") + GetCultureParam(context, true), false) ;
+								context.Response.StatusCode = 404 ;
 							}
-						} else {
-							context.Response.StatusCode = 404 ;
 						}
+					} else {
+						context.Response.StatusCode = 404 ;
 					}
 				} else {
-					context.Response.StatusCode = 404 ;
+					//
+					// Call the route handler to route to the startpage.
+					Web.Application.Current.RouteHandler.HandleStartpage(context) ;
 				}
 			} else {
-				//
-				// Rewrite to current startpage
-				//
-				Page page = Page.GetStartpage() ;
-
-				if (!String.IsNullOrEmpty(page.Controller))
-					context.RewritePath("~/templates/" + page.Controller, false) ;
-				else context.RewritePath("~/page", false) ;
+				context.Response.StatusCode = 404 ;
 			}
 		}
 

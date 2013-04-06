@@ -10,6 +10,7 @@ using System.Web;
 
 using Piranha.Data;
 using Piranha.Rest.DataContracts;
+using Piranha.Web;
 
 namespace Piranha.Rest
 {
@@ -66,11 +67,11 @@ namespace Piranha.Rest
 						Type = c.Type,
 						Size = c.Size,
 						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + 
-							(!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") :
-							WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAILDRAFT")) + "/" + c.Id,
+							(!draft ? Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") :
+							Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + c.Id,
 						ContentUrl = WebPages.WebPiranha.ApplicationPath + 
-							(!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") :
-							WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENTDRAFT")) + "/" + c.Id,
+							(!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") :
+							Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
 						Created = c.Created.ToString(),
 						Updated = c.Updated.ToString()
 					};

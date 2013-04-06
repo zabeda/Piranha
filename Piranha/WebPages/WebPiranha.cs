@@ -27,11 +27,6 @@ namespace Piranha.WebPages
 		private static Dictionary<string, Entities.SiteTree> hostNames = null ;
 
 		/// <summary>
-		/// The different request handlers.
-		/// </summary>
-		internal static Dictionary<string, RequestHandlerRegistration> Handlers = new Dictionary<string, RequestHandlerRegistration>() ;
-
-		/// <summary>
 		/// The registered cultures.
 		/// </summary>
 		internal static Dictionary<string, CultureInfo> Cultures = new Dictionary<string,CultureInfo>() ;
@@ -62,7 +57,7 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// The current site tree.
 		/// </summary>
-		internal static Entities.SiteTree CurrentSite {
+		public static Entities.SiteTree CurrentSite {
 			get {
 				// Check for configured site tree from the host name
 				if (HttpContext.Current != null && HttpContext.Current.Request != null) {
@@ -101,17 +96,18 @@ namespace Piranha.WebPages
 		/// <param name="urlprefix">The url prefix</param>
 		/// <param name="id">The handler id</param>
 		/// <param name="handler">The actual handler</param>
+		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Add()")]
 		public static void RegisterHandler(string urlprefix, string id, IRequestHandler handler) {
-			Handlers.Add(id.ToUpper(), new RequestHandlerRegistration() { UrlPrefix = urlprefix, Id = id, Handler = handler }) ;
+			Web.Application.Current.Handlers.Add(urlprefix, id, handler) ;
 		}
 
 		/// <summary>
 		/// Removes the handler with the given id.
 		/// </summary>
 		/// <param name="id">The handler id</param>
+		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Remove()")]
 		public static void RemoveHandler(string id) {
-			if (Handlers.ContainsKey(id.ToUpper()))
-				Handlers.Remove(id.ToUpper()) ;
+			Web.Application.Current.Handlers.Remove(id) ;
 		}
 
 		/// <summary>
@@ -129,10 +125,9 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <param name="id">The handler id</param>
 		/// <returns>The url prefix</returns>
+		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.GetUrlPrefix()")]
 		public static string GetUrlPrefixForHandlerId(string id) {
-			if (Handlers.ContainsKey(id.ToUpper()))
-				return Handlers[id.ToUpper()].UrlPrefix ;
-			return "" ;
+			return Web.Application.Current.Handlers.GetUrlPrefix(id) ;
 		}
 
 		/// <summary>
@@ -161,25 +156,16 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Clears all of the currently registered handlers.
 		/// </summary>
+		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Reset()")]
 		public static void ResetHandlers() {
-			Handlers.Clear() ;
+			Web.Application.Current.Handlers.Clear() ;
 		}
 
 		/// <summary>
 		/// Registers all of the default request handlers.
 		/// </summary>
+		[Obsolete("The application is self initializing. This method is not used.")]
 		public static void RegisterDefaultHandlers() {
-			RegisterHandler("", "STARTPAGE", new PermalinkHandler()) ;
-			RegisterHandler("home", "PERMALINK", new PermalinkHandler()) ;
-			RegisterHandler("draft", "DRAFT", new DraftHandler()) ;
-			RegisterHandler("media", "CONTENT", new ContentHandler()) ;
-			RegisterHandler("mediadraft", "CONTENTDRAFT", new DraftContentHandler()) ;
-			RegisterHandler("thumb", "THUMBNAIL", new ThumbnailHandler()) ;
-			RegisterHandler("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler()) ;
-			RegisterHandler("upload", "UPLOAD", new UploadHandler()) ;
-			RegisterHandler("archive", "ARCHIVE", new ArchiveHandler()) ;
-			RegisterHandler("rss", "RSS", new RssHandler()) ;
-			RegisterHandler("sitemap.xml", "SITEMAP", new SitemapHandler()) ;
 		}
 
 		/// <summary>
@@ -227,12 +213,6 @@ namespace Piranha.WebPages
 			// Register the basic account route
 			RouteTable.Routes.MapRoute("Account", "account/{action}", new { controller = "auth", action = "index" }, new string[] { "Piranha.Web" }) ;
 
-			// This will trigger the manager area registration
-			AreaRegistration.RegisterAllAreas() ;
-
-			// Register handlers
-			RegisterDefaultHandlers() ;
-
 			// Register hostnames
 			RegisterDefaultHostNames() ;
 
@@ -241,9 +221,6 @@ namespace Piranha.WebPages
 
 			// Register json deserialization for post data
 			ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
-
-			// Add the new view engine
-			ViewEngines.Engines.Add(new Mvc.ManagerViewEngine());
 		}
 
 		/// <summary>
@@ -290,7 +267,8 @@ namespace Piranha.WebPages
 				var handled = false ;
 
 				// Find the correct request handler
-				foreach (RequestHandlerRegistration hr in Handlers.Values) {
+				// foreach (RequestHandlerRegistration hr in Handlers.Values) {
+				foreach (var hr in Web.Application.Current.Handlers) {
 					if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
 						if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
 							// Execute the handler

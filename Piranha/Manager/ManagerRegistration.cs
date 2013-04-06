@@ -27,7 +27,8 @@ namespace Piranha.Manager
 			context.MapRoute(
 				"Manager",
 				"manager/{controller}/{action}/{id}",
-				new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional }
+				new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional },
+				new[] { "Piranha.Areas.Manager.Controllers" }
 			) ;
 
 			// Register filters & binders

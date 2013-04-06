@@ -13,51 +13,38 @@ using Piranha.WebPages;
 namespace Piranha.Web
 {
 	/// <summary>
-	/// Abstract base class for the UI helper.
+	/// The UI helper provides methods for genering url's and html for
+	/// the web applications.
 	/// </summary>
-	public abstract class UIHelper
+	public sealed class UIHelper
 	{
 		#region Properties
 		/// <summary>
-		/// Gets the current http context.
-		/// </summary>
-		protected abstract HttpContextBase Context { get ; }
-
-		/// <summary>
 		/// Gets the current page.
 		/// </summary>
-		protected abstract Page CurrentPage { get ; }
+		private Page CurrentPage { 
+			get { return (Page)HttpContext.Current.Items["Piranha_CurrentPage"] ; }
+		}
 
 		/// <summary>
 		/// Gets the current post.
 		/// </summary>
-		protected abstract Post CurrentPost { get ; }
-
-		/// <summary>
-		/// Gets the gravatar helper.
-		/// </summary>
-		public GravatarHelper Gravatar { get ; protected set ; }
+		private Post CurrentPost {
+			get { return (Post)HttpContext.Current.Items["Piranha_CurrentPost"] ; }
+		}
 
 		/// <summary>
 		/// Gets the culture helper.
 		/// </summary>
-		public CultureHelper Culture { get ; protected set ; }
+		public CultureHelper Culture { get ; private set ; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new UI helper.
 		/// </summary>
-		protected UIHelper() {
-			Gravatar = new GravatarHelper() ;
+		public UIHelper() {
 			Culture = new CultureHelper() ;
 		}
-
-		/// <summary>
-		/// Converts the given virtual path to a relative url.
-		/// </summary>
-		/// <param name="virtualpath">The virtual path</param>
-		/// <returns>A relative url</returns>
-		protected abstract string Url(string virtualpath) ;
 
 		/// <summary>
 		/// Generates the tags appropriate for the html head.
@@ -90,7 +77,7 @@ namespace Piranha.Web
 			str.AppendLine("<meta property=\"og:site_name\" content=\"" + 
 				WebPiranha.CurrentSite.MetaTitle + "\" />") ;
 			str.AppendLine("<meta property=\"og:url\" content=\"" + 
-				"http://" + Context.Request.Url.DnsSafeHost + Context.Request.RawUrl + "\" />") ;
+				"http://" + HttpContext.Current.Request.Url.DnsSafeHost + HttpContext.Current.Request.RawUrl + "\" />") ;
 
 			if (CurrentPage != null && CurrentPage.IsStartpage) {
 				str.AppendLine("<meta property=\"og:type\" content=\"website\" />") ;
@@ -114,7 +101,7 @@ namespace Piranha.Web
 			 */
 			str.AppendLine("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"" +
 				WebPiranha.CurrentSite.MetaTitle + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
-				WebPages.WebPiranha.GetUrlPrefixForHandlerId("rss") + "\" />") ;
+				Application.Current.Handlers.GetUrlPrefix("rss") + "\" />") ;
 
 			/**
 			 * Check if hook is attached.
@@ -131,9 +118,7 @@ namespace Piranha.Web
 		/// <param name="virtualpath">The virtual path.</param>
 		/// <returns>The full site url</returns>
 		public IHtmlString SiteUrl(string virtualpath) {
-			var request = HttpContext.Current.Request ;
-
-			return new HtmlString(virtualpath.Replace("~/", request.ApplicationPath + (request.ApplicationPath != "/" ? "/" : ""))) ;
+			return new HtmlString(Url(virtualpath)) ;
 		}
 
 		/// <summary>
@@ -171,7 +156,7 @@ namespace Piranha.Web
 			if (permalink == "" && CurrentPage != null)
 				permalink = CurrentPage.Permalink ;
 			return SiteUrl("~/" + prefix + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
-				WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" : "") + permalink) ;
+				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink) ;
 		}
 
 		/// <summary>
@@ -192,7 +177,7 @@ namespace Piranha.Web
 			var perm = Models.Permalink.GetSingle(permalinkid) ;
 			if (perm != null)
 				return SiteUrl("~/" + prefix + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
-				WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" : "") + perm.Name) ;
+				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + perm.Name) ;
 			return SiteUrl("~/" + prefix) ;
 		}
 
@@ -208,7 +193,7 @@ namespace Piranha.Web
 			var draft = (CurrentPage != null && CurrentPage.IsDraft) || (CurrentPost != null && CurrentPost.IsDraft) ;
 
 			if (cnt != null)
-				return new HtmlString(Url("~/" + (!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENT") : WebPages.WebPiranha.GetUrlPrefixForHandlerId("CONTENTDRAFT")) +
+				return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") : Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) +
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
@@ -237,8 +222,8 @@ namespace Piranha.Web
 			if (cnt != null) {
 				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
 
-				return new HtmlString(String.Format("<img src=\"{0}\" alt=\"{1}\" />", Url("~/" + 
-					(!draft ? WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") : WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAILDRAFT")) + "/" + 
+				return new HtmlString(String.Format("<img src=\"{0}\" alt=\"{1}\" />", SiteUrl("~/" + 
+					(!draft ? Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") : Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + 
 					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")), cnt.AlternateText)) ;
 			} else {
 				Page page = Page.GetSingle(id) ;
@@ -274,7 +259,7 @@ namespace Piranha.Web
 			Upload ul = Models.Upload.GetSingle(id) ;
 			
 			if (ul != null)
-				return new HtmlString(Url("~/" + WebPages.WebPiranha.GetUrlPrefixForHandlerId("UPLOAD") + 
+				return new HtmlString(SiteUrl("~/" + Application.Current.Handlers.GetUrlPrefix("UPLOAD") + 
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
@@ -372,7 +357,7 @@ namespace Piranha.Web
 		/// <param name="action">The form action</param>
 		/// <returns>A html string</returns>
 		[Obsolete("Please use Piranha.WebPages.FormHelper.Action() instead")]
-		public virtual IHtmlString FormAction(string action) {
+		public IHtmlString FormAction(string action) {
 			return new HtmlString(String.Format("<input type=\"hidden\" name=\"piranha_form_action\" value=\"{0}\" />",
 				action)) ;
 		}
@@ -404,6 +389,11 @@ namespace Piranha.Web
 		}
 
 		#region Private methods
+		private string Url(string virtualpath) {
+			var request = HttpContext.Current.Request ;
+			return virtualpath.Replace("~/", request.ApplicationPath + (request.ApplicationPath != "/" ? "/" : "")) ;
+		}
+
 		/// <summary>
 		/// Gets the current start level for the sitemap.
 		/// </summary>
@@ -548,7 +538,7 @@ namespace Piranha.Web
 				if (page.IsStartpage)
 					return Url("~/") ;
 				return Url("~/" + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
-					WebPages.WebPiranha.GetUrlPrefixForHandlerId("PERMALINK").ToLower() + "/" : "") + page.Permalink.ToLower()) ;
+					Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + page.Permalink.ToLower()) ;
 			}
 			return "" ;
 		}
