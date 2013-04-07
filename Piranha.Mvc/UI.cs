@@ -137,5 +137,17 @@ namespace Piranha.Mvc
 		/// <param name="apiKey"></param>
 		/// <returns></returns>
 		public static IHtmlString APIKey(string apiKey = "") { return Helper.APIKey(apiKey) ; }
+
+		/// <summary>
+		/// Generates the correct controller name for the given permalink. The generated
+		/// controller can be used in forms and actionlinks as the controller name. If the
+		/// permalink is omitted, the permalink to the current page or post is used.
+		/// </summary>
+		/// <param name="permalink">The permalink</param>
+		/// <param name="prefix">Optional culture prefix</param>
+		/// <returns>The controller url</returns>
+		public static string Controller(string permalink = "", string prefix = "") {
+			return Permalink(permalink, prefix).ToHtmlString().Substring(1) ;
+		}
 	}
 }
