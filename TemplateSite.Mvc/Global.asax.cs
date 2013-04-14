@@ -18,12 +18,6 @@ namespace TemplateSite.Mvc
 			//WebApiConfig.Register(GlobalConfiguration.Configuration);
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
-
-			Piranha.WebPages.WebPiranha.Init() ;
-		}
-
-		protected void Application_BeginRequest(object sender, EventArgs e) {
-			Piranha.WebPages.WebPiranha.BeginRequest(Context) ;
 		}
 	}
 }

@@ -141,6 +141,7 @@
     <Content Include="Content\Css\bootstrap.min.css" />
     <Content Include="Content\Css\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -183,6 +184,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Sidebar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config.transform" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
