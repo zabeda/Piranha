@@ -154,8 +154,8 @@ WriteLiteral(" data-id=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 764), Tuple.Create("\"", 818)
-, Tuple.Create(Tuple.Create("", 770), Tuple.Create<System.Object, System.Int32>(Href("~/areas/manager/content/img/ico-folder-up-96.png")
+WriteAttribute("src", Tuple.Create(" src=\"", 764), Tuple.Create("\"", 833)
+, Tuple.Create(Tuple.Create("", 770), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/ico-folder-up-96.png")
 , 770), false)
 );
 
