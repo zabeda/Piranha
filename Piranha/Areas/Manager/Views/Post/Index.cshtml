@@ -89,7 +89,7 @@
 <div id="boxTemplates" class="floatbox">
     <div class="bg"></div>
     <div class="box">
-        <div class="title"><a class="close-btn right" data-id="boxContent"></a><h2>@Piranha.Resources.Post.PopupTypeTitle</h2></div>
+        <div class="title"><a class="close-btn right" data-id="boxTemplates"></a><h2>@Piranha.Resources.Post.PopupTypeTitle</h2></div>
         <div class="inner">
         @foreach (var template in Model.Templates) {
             <div class="templates @(Model.Templates.Count > 6 ? "compressed" : "") left" data-templateid="@template.Id">

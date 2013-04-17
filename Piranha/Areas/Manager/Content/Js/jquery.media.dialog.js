@@ -14,12 +14,14 @@ piranha.media = function (buttonId, floatboxId, callback) {
     this.btnId = buttonId;
     this.boxId = floatboxId;
     this.cb = callback;
+    this.tinymce = false;
+    this.filter = 'none';
 
     this.buttonClick = function () {
         $('#' + self.boxId + ' .box > div').remove();
         floatBox.show(self.boxId);
         $.ajax({
-            url: siteroot + 'manager/content/popup' + (piranha.folderId ? '/' + piranha.folderId : ''),
+            url: siteroot + 'manager/content/popup' + (piranha.folderId ? '/' + piranha.folderId : '') + '?tinymce=' + self.tinymce + '&filter=' + self.filter,
             success: function (data) {
                 $('#' + self.boxId + ' .box').html('');
                 $('#' + self.boxId + ' .box').append(data);
@@ -30,8 +32,7 @@ piranha.media = function (buttonId, floatboxId, callback) {
     this.mediaClick = function () {
         if (!$(this).hasClass("folder")) {
             $.ajax({
-                url: siteroot + "manager/content/get/" + $(this).attr("data-id"),
-                //url: siteroot + "rest/content/get/" + $(this).attr("data-id") + "?apikey=" + apikey,
+                url: siteroot + "manager/content/get/" + $(this).attr("data-id") + '?tinymce=' + self.tinymce,
                 dataType: "json",
                 success: function (data) {
                     if (self.cb)
@@ -45,7 +46,7 @@ piranha.media = function (buttonId, floatboxId, callback) {
         piranha.folderId = $(this).attr("data-id");
 
         $.ajax({
-            url: siteroot + "manager/content/popup/" + $(this).attr("data-id"),
+            url: siteroot + "manager/content/popup/" + $(this).attr("data-id") + '?tinymce=' + self.tinymce + '&filter=' + self.filter,
             success: function (data) {
                 $('#' + self.boxId + ' .box').html('');
                 $('#' + self.boxId + ' .box').append(data);

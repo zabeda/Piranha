@@ -41,9 +41,13 @@ namespace Piranha.WebPages.RequestHandlers
 					int? height = null ;
 
 					if (args.Length > 1)
-						width = Convert.ToInt32(args[1]) ;
+						try {
+							width = Convert.ToInt32(args[1]) ;
+						} catch {}
 					if (args.Length > 2)
-						height = Convert.ToInt32(args[2]) ;
+						try {
+							height = Convert.ToInt32(args[2]) ;
+						} catch {}
 
 					if (height.HasValue)
 						content.GetMedia(context, width, height) ;

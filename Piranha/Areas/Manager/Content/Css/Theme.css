@@ -460,3 +460,71 @@ div.edit table td.locked {
 .chzn-container-multi .chzn-choices .search-choice {
     color: #666;
     }
+
+/**
+ * Tiny MCE 4.0
+ */
+.content-editor .mce-tinymce {
+    border: none;
+}
+.content-editor .mce-container {
+    border-color: #ddd;
+}
+.content-editor .mce-panel {
+    background: #eee;
+}
+.content-editor .mce-toolbar {
+    padding: 0 10px 2px;
+}
+.content-editor .mce-menubar {
+    display: none;
+}
+.content-editor .mce-ico {
+    font-size: 13px;
+}
+.content-editor .mce-btn button {
+    font-size: 12px;
+}
+body .mce-window {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    border-width: 6px !important;
+    border-color: #fff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+body .mce-window-head {
+    background: #eee;
+    border-color: #ddd;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+body .mce-window-head .mce-title {
+    font-size: 18px;
+    font-weight: normal;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+body .mce-window-head .mce-close {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3UlEQVR42qWQQSxjURSGW0UoJhYM795q731VQtt4iCaaaCcRiUQklrOSSGzEavaEMgtKE2ywEJVYdEdpQpMZrUlEghBqMiJhFhNbSzaSM+fdeE/7zNh4yZd7zvnP+c991wQA7yIn+f2ptfcmoEz+r/k2oAzdBlu+/NPgusv3+VJxwUUjg19+b8I4fBVQQhmvEzIeGa6CzRHYXzbrBj+7/dZjjxMOORUc1dvhvP3FJNOhhI7dMmpEcNTA4cznbtMNksVWc5rT2bTTBgJs+lFnh5N2b+w02Dxy4OaQwpquyzSVrqkuefUGSactsitTSCK7jMA3vMleI4cdJonas5Zab+D5xjfQiaPJJjYKcOsGGml5XKbfV921BcZHfEVMpocxTsHA/VabIja/aRDldHyNkScEjEQ5ib9psMRpaBkbNZaeya3RBNw95hrMuRymeUbG5x0ENObUk9HtBUbDIs6GkcRCrb1IN4jUMeu0QwIDqdEmV56qhxmJTBn0MKe+nF+YkmsGJtB9wi4BnnsPfT1iWGPSQWaEhnzltsU/nX6hmywmQTkeZf1S5dgw/ZgoybcomHuw3qqCsZqzQalyZYhWrWFcgXzQb2BBD6RI24ZfMeZl2WCtNEsvVGc0g3fxF7yqHwCAJ0miAAAAAElFTkSuQmCC") no-repeat scroll 0 50%;
+    color: transparent;
+    text-shadow: none;
+}
+body .mce-foot {
+    background: #fff;
+}
+body .mce-primary,
+body .mce-primary:hover {
+    background: #666;
+    box-shadow: none;
+}
+body .mce-textbox:focus {
+    border: 1px solid #C5C5C5;
+    box-shadow: none;
+}
+body .mce-primary button {
+    color: #eee;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.floatbox {
+    z-index: 70000;
+}

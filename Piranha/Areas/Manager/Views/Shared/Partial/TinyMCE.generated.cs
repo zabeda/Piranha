@@ -41,8 +41,8 @@ WriteLiteral("<script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 30), Tuple.Create("\"", 102)
-, Tuple.Create(Tuple.Create("", 36), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/tiny_mce/tiny_mce.js")
+WriteAttribute("src", Tuple.Create(" src=\"", 30), Tuple.Create("\"", 105)
+, Tuple.Create(Tuple.Create("", 36), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/tiny_mce/tinymce.min.js")
 , 36), false)
 );
 
@@ -51,24 +51,26 @@ WriteLiteral("></script>\r\n<script");
 WriteLiteral(" type=\"text/javascript\"");
 
 WriteLiteral(@">
-    tinyMCE.init({
-        mode : ""specific_textareas"",
-        editor_selector : ""editor"",
-        theme : ""advanced"",
-        plugins: ""spellchecker,paste,inlinepopups,autoresize"", 
+    tinymce.init({
+        mode: 'specific_textareas',
+        editor_selector: ""editor"",
+        convert_urls: false,
+        plugins: [
+            ""autoresize autolink code hr paste piranhaimage link""
+        ],
         width: ""100%"",
         height: ""340"",
         autoresize_min_height: 340,
 ");
 
             
-            #line 11 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
+            #line 13 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
+            #line 13 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
          if (File.Exists(Server.MapPath("~/areas/manager/content/css/editor.css"))) {
 
             
@@ -79,7 +81,7 @@ WriteLiteral("        ");
 WriteLiteral("content_css: \"");
 
             
-            #line 12 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
+            #line 14 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
                        Write(Url.Content("~/areas/manager/content/css/editor.css"));
 
             
@@ -90,21 +92,14 @@ WriteLiteral("\",");
 WriteLiteral("\r\n");
 
             
-            #line 13 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Shared\Partial\TinyMCE.cshtml"
         }
 
             
             #line default
             #line hidden
-WriteLiteral(@"        theme_advanced_buttons1: ""bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,bullist,numlist,|,formatselect,removeformat,|,cut,copy,paste,pastetext,pasteword,|,link,unlink,|,spellchecker"",
-        theme_advanced_buttons2 : """",
-        theme_advanced_buttons3 : """",      
-        theme_advanced_toolbar_location : ""top"",
-        theme_advanced_toolbar_align : ""left"",
-        theme_advanced_blockformats : ""p,h2,h3,h4,h5,h6,blockquote,pre,code""
-    });
-</script>
-");
+WriteLiteral("        toolbar: \"bold italic underline | bullist numlist hr | formatselect remov" +
+"eformat | cut copy paste | link piranhaimage | code\",\r\n    });\r\n</script>\r\n");
 
         }
     }

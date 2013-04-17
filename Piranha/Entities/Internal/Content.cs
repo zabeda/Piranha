@@ -253,8 +253,9 @@ namespace Piranha.Models
 		/// Gets the folder structure for the first level.
 		/// </summary>
 		/// <param name="published">Whether to get the published structure or not</param>
+		/// <param name="images">Whether or not to only get images</param>
 		/// <returns>The content</returns>
-		public static List<Content> GetStructure(bool published = true) {
+		public static List<Content> GetStructure(bool published = true, bool images = false) {
 			return GetStructure(Guid.Empty, false, published) ;
 		}
 
@@ -263,8 +264,9 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="folderid">The folder id</param>
 		/// <param name="published">Whether to get the published structure or not</param>
+		/// <param name="images">Whether or not to only get images</param>
 		/// <returns>The content</returns>
-		public static List<Content> GetStructure(Guid folderid, bool includeparent = false, bool published = true) {
+		public static List<Content> GetStructure(Guid folderid, bool includeparent = false, bool published = true, bool images = false) {
 			List<Content> ret = new List<Content>() ;
 
 			// Add parent

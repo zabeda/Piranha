@@ -58,12 +58,12 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Gets all available content.
 		/// </summary>
 		/// <returns>A list of content records</returns>
-		public static PopupModel Get(string id = "") {
+		public static PopupModel Get(string id = "", bool published = false, string filter = "") {
 			PopupModel lm = new PopupModel() ;
 
 			if (!String.IsNullOrEmpty(id))
-				lm.Content = Piranha.Models.Content.GetStructure(new Guid(id), true, false) ;
-			else lm.Content = Piranha.Models.Content.GetStructure(false) ;
+				lm.Content = Piranha.Models.Content.GetStructure(new Guid(id), true, published) ;
+			else lm.Content = Piranha.Models.Content.GetStructure(published) ;
 
 			return lm ;
 		}

@@ -31,7 +31,12 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Gets the popup list.
 		/// </summary>
 		public ActionResult Popup(string id = "") {
-			return View("Popup", PopupModel.Get(id)) ;
+			var published = false ;
+			if (!String.IsNullOrEmpty(Request["tinymce"]))
+				published = Request["tinymce"] == "true" ;
+			string filter = Request["filter"] ;
+
+			return View("Popup", PopupModel.Get(id, published, filter)) ;
 		}
 
 		/// <summary>
@@ -251,9 +256,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="id">The content id</param>
 		[Access(Function="ADMIN_CONTENT")]
 		public JsonResult Get(string id) {
+			var draft = true ;
+			if (!String.IsNullOrEmpty(Request["tinymce"]))
+				draft = Request["tinymce"] != "true" ;
+
 			var service = new Rest.ContentService() ;
 
-			return Json(service.Get(new Guid(id), true), JsonRequestBehavior.AllowGet) ;
+			return Json(service.Get(new Guid(id), draft), JsonRequestBehavior.AllowGet) ;
 		}
     }
 }

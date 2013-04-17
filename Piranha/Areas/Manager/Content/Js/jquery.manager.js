@@ -716,9 +716,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 * Common JQuery code for the manager area.
 */
 
-// Create a String.endsWith function.
+// Create String.endsWith function.
 String.prototype.endsWith = function (suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
+// Create String.startsWith function.
+String.prototype.startsWith = function (prefix) {
+    return this.indexOf(prefix) == 0 ;
 };
 
 // Remove whitespaces

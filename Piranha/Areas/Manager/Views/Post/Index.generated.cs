@@ -546,13 +546,13 @@ WriteLiteral("><a");
 
 WriteLiteral(" class=\"close-btn right\"");
 
-WriteLiteral(" data-id=\"boxContent\"");
+WriteLiteral(" data-id=\"boxTemplates\"");
 
 WriteLiteral("></a><h2>");
 
             
             #line 92 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-                                                                              Write(Piranha.Resources.Post.PopupTypeTitle);
+                                                                                Write(Piranha.Resources.Post.PopupTypeTitle);
 
             
             #line default
@@ -578,16 +578,16 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 4178), Tuple.Create("\"", 4249)
-, Tuple.Create(Tuple.Create("", 4186), Tuple.Create("templates", 4186), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 4180), Tuple.Create("\"", 4251)
+, Tuple.Create(Tuple.Create("", 4188), Tuple.Create("templates", 4188), true)
             
             #line 95 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create(" ", 4195), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : ""
+, Tuple.Create(Tuple.Create(" ", 4197), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : ""
             
             #line default
             #line hidden
-, 4196), false)
-, Tuple.Create(Tuple.Create(" ", 4244), Tuple.Create("left", 4245), true)
+, 4198), false)
+, Tuple.Create(Tuple.Create(" ", 4246), Tuple.Create("left", 4247), true)
 );
 
 WriteLiteral(" data-templateid=\"");

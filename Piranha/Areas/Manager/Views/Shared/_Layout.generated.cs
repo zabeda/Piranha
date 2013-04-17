@@ -431,12 +431,30 @@ WriteLiteral(">\r\n                <p");
 
 WriteLiteral(" id=\"SysMsgBody\"");
 
-WriteLiteral("></p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
+WriteLiteral("></p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div");
+
+WriteLiteral(" id=\"boxDialog\"");
+
+WriteLiteral(" class=\"floatbox\"");
+
+WriteLiteral(">\r\n        <div");
+
+WriteLiteral(" class=\"bg\"");
+
+WriteLiteral(" style=\"background-color: transparent\"");
+
+WriteLiteral("></div>\r\n        <div");
+
+WriteLiteral(" class=\"box\"");
+
+WriteLiteral(" style=\"min-width: 510px;min-height:260px;\"");
+
+WriteLiteral(">\r\n        </div>\r\n    </div>\r\n");
 
 WriteLiteral("    ");
 
             
-            #line 82 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 87 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
 Write(RenderSection("Foot", false));
 
             

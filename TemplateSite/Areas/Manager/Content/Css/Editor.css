@@ -3,3 +3,6 @@
 html {
     margin: 14px !important;
     }
+img {
+    max-width: 100%;
+}
