@@ -1089,15 +1089,17 @@ table.list .form .hidden { display: none; }
 .content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst {
     height: 40px;
     }
-.content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst td.fixed-toolbar {
+.content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst td.fixed-toolbar,
+.content-editor .mce-toolbar.fixed-toolbar {
+    background: #fff;
+    display: inline-block;
     border-radius: 0 0 6px 6px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    left: 50%;
-    margin-left: -386px;
-    padding: 6px 10px;
+    margin-left: 4px;
+    padding: 0;
     position: fixed;
     top: 50px;
-    width: 826px;
+    width: auto;
     }
 
 /**

@@ -24,14 +24,14 @@ $(document).ready(function () {
 $(window).bind('scroll', function (e) {
     if ($(this).scrollTop() > posFixed.top + 20) {
         if (!isFixed)
-            $('.mceToolbar').hide();
-        $('.mceToolbar').addClass('fixed-toolbar');
+            $('.mce-toolbar').hide();
+        $('.mce-toolbar').addClass('fixed-toolbar');
         if (!isFixed) {
             isFixed = true;
-            $('.mceToolbar').fadeIn('medium');
+            $('.mce-toolbar').fadeIn('medium');
         }
     } else {
-        $('.mceToolbar').removeClass('fixed-toolbar');
+        $('.mce-toolbar').removeClass('fixed-toolbar');
         isFixed = false;
     }
 });
