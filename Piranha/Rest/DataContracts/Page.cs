@@ -13,6 +13,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public Guid Id { get ; set ; }
 		[DataMember()]
+		public Guid ParentId { get ; set ; }
+		[DataMember()]
 		public string TemplateName { get ; set ; }
 		[DataMember()]
 		public string Title { get ; set ; }
