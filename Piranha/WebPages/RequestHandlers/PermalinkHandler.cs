@@ -78,8 +78,6 @@ namespace Piranha.WebPages.RequestHandlers
 					// Call the route handler to route to the startpage.
 					Web.Application.Current.RouteHandler.HandleStartpage(context) ;
 				}
-			} else {
-				context.Response.StatusCode = 404 ;
 			}
 		}
 
