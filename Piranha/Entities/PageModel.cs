@@ -118,6 +118,9 @@ namespace Piranha.Entities
 					var method = ExtensionManager.ExtensionTypes[rt.Type].GetMethod("GetContent") ;
 					if (method != null)
 						val = method.Invoke(val, new object[] { m }) ;
+					// Check for post region
+					if (val is Extend.Regions.PostRegion)
+						val = ((Extend.Regions.PostRegion)val).GetMatchingPosts();
 
 					((IDictionary<string, object>)m.Regions).Add(rt.InternalId, val) ;
 				} else ((IDictionary<string, object>)m.Regions).Add(rt.InternalId, null) ;
