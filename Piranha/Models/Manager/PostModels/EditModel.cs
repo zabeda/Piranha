@@ -340,7 +340,7 @@ namespace Piranha.Models.Manager.PostModels
 			}
 
 			// Get extensions
-			Extensions = Post.GetExtensions() ;
+			Extensions = Post.GetExtensions(true) ;
 
 			// Get whether comments should be enabled
 			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePosts ;

@@ -315,7 +315,7 @@ namespace Piranha.Models.Manager.ContentModels
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
 			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1", new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
-			Extensions = Content.GetExtensions() ;
+			Extensions = Content.GetExtensions(true) ;
 			Folders = SortFolders(Content.GetFolderStructure(false)) ;
 			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
 		}
@@ -333,7 +333,7 @@ namespace Piranha.Models.Manager.ContentModels
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
 			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
 			folders.Insert(0, new Content()) ;
-			em.Extensions = em.Content.GetExtensions() ;
+			em.Extensions = em.Content.GetExtensions(true) ;
 
 			return em ;
 		}

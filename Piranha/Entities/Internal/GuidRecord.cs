@@ -122,8 +122,9 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the extensions attached to the current record.
 		/// </summary>
+		/// <param name="manager">Whether or not this is loaded by the manager</param>
 		/// <returns>The extensions</returns>
-		public virtual List<Extension> GetExtensions() {
+		public virtual List<Extension> GetExtensions(bool manager = false) {
 			if (ExtensionType != Extend.ExtensionType.NotSet) {
 				PropertyInfo prop = this.GetType().GetProperty("IsDraft") ;
 				bool draft = prop != null ? (bool)prop.GetValue(this, null) : false ;
@@ -137,7 +138,9 @@ namespace Piranha.Models
 
 				foreach (var ext in ret)
 					if (Extend.ExtensionManager.Current.HasType(ext.Type)) {
-						ext.Body.Init(this) ;
+						if (!manager)
+							ext.Body.Init(this) ;
+						else ext.Body.InitManager(this) ;
 					}
 				return ret ;
 			}

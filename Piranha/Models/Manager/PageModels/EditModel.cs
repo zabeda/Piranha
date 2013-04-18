@@ -609,7 +609,7 @@ namespace Piranha.Models.Manager.PageModels
 			// Only load extensions if this is an original
 			if (Page.OriginalId == Guid.Empty) {
 				// Get extensions
-				Extensions = Page.GetExtensions() ;
+				Extensions = Page.GetExtensions(true) ;
 			}
 
 			// Initialize regions

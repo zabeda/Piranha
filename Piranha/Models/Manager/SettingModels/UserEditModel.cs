@@ -81,7 +81,7 @@ namespace Piranha.Models.Manager.SettingModels
 			Groups = new SelectList(groups, "Id", "Name") ;
 
 			// Get extensions
-			Extensions = User.GetExtensions() ;
+			Extensions = User.GetExtensions(true) ;
 		}
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace Piranha.Models.Manager.SettingModels
 			m.Groups = new SelectList(m.groups, "Id", "Name", m.User.GroupId) ;
 
 			// Load extensions
-			m.Extensions = m.User.GetExtensions() ;
+			m.Extensions = m.User.GetExtensions(true) ;
 
 			return m ;
 		}

@@ -165,7 +165,7 @@ namespace Piranha.Models.Manager.CategoryModels
 			Categories = new SelectList(cats, "Id", "Name") ;
 
 			// Get extensions
-			Extensions = Category.GetExtensions() ;
+			Extensions = Category.GetExtensions(true) ;
 		}
 	}
 }
