@@ -116,6 +116,9 @@ namespace Piranha.Entities
 
 					// Initialize region
 					val = ((IExtension)val).GetContent(m) ;
+					// Check for post region
+					if (val is Extend.Regions.PostRegion)
+						val = ((Extend.Regions.PostRegion)val).GetMatchingPosts();
 
 					((IDictionary<string, object>)m.Regions).Add(rt.InternalId, val) ;
 				} else ((IDictionary<string, object>)m.Regions).Add(rt.InternalId, null) ;
