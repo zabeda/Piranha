@@ -42,6 +42,18 @@ namespace Piranha.WebPages.RequestHandlers
 							break ;
 					}
 
+					// If we didn't find a permalink, check for posts in the default namespace
+					if (perm == null && Config.SiteTreeNamespaceId != Config.DefaultNamespaceId) {
+						segments = 0;
+						// Accept permalinks with '/' in them
+						for (int n = 0; n < args.Length; n++) {
+							perm = Permalink.GetByName(Config.DefaultNamespaceId, args.Subset(0, args.Length - n).Implode("/")) ;
+							segments = args.Length - n;
+							if (perm != null && perm.Type == Permalink.PermalinkType.POST)
+								break ;
+						}
+					}
+
 					if (perm != null) {
 						if (perm.Type == Permalink.PermalinkType.PAGE) {
 							Page page = Page.GetByPermalinkId(perm.Id, draft) ;
