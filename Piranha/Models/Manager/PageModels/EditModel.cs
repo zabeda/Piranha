@@ -614,7 +614,7 @@ namespace Piranha.Models.Manager.PageModels
 
 			// Initialize regions
 			foreach (var reg in Regions)
-				reg.Body.Init(this) ;
+				reg.Body.InitManager(this) ;
 
 			// Get whether comments should be enabled
 			EnableComments = Areas.Manager.Models.CommentSettingsModel.Get().EnablePages ;
