@@ -40,26 +40,6 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
-		/// Uploads a new content object from the popup dialog.
-		/// </summary>
-		/// <param name="m">The popup module</param>
-		/// <returns>A json result</returns>
-		[HttpPost()]
-		[Access(Function="ADMIN_CONTENT")]
-		public JsonResult Popup(PopupModel m) {
-			if (ModelState.IsValid) {
-				EditModel em = new EditModel() ;
-				em.Content = m.NewContent ;
-				em.FileUrl = m.FileUrl ;
-				em.UploadedFile = m.UploadedFile ;
-
-				if (em.SaveAll(false))
-					return new JsonResult() { Data = true } ;
-			}
-			return new JsonResult() { Data = false } ;
-		}
-
-		/// <summary>
 		/// Gets the files list.
 		/// </summary>
 		/// <returns></returns>
@@ -140,9 +120,6 @@ namespace Piranha.Areas.Manager.Controllers
 						SuccessMessage(Piranha.Resources.Content.MessageDocumentSaved, true) ;
 					else SuccessMessage(Piranha.Resources.Content.MessageDocumentPublished, true) ;
 				}
-				// ModelState.Clear() ;
-				// m.Refresh() ;
-				// return View("Edit", m) ;
 				return RedirectToAction("edit", new { id = m.Content.Id, returl = ViewBag.ReturnUrl }) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Content.EditTitleNew ;
@@ -225,7 +202,6 @@ namespace Piranha.Areas.Manager.Controllers
 				ErrorMessage(Piranha.Resources.Content.MessageNotFound, true) ;
 			}
 			return RedirectToAction("edit", new { id = id, returl = ViewBag.ReturnUrl }) ;
-			//return Edit(id) ;
 		}
 
 		/// <summary>
@@ -247,7 +223,6 @@ namespace Piranha.Areas.Manager.Controllers
 				ErrorMessage(Piranha.Resources.Content.MessageNotFound, true) ;
 			}
 			return RedirectToAction("edit", new { id = id, returl = ViewBag.ReturlUrl }) ;
-			//return Edit(id) ;
 		}
 
 		/// <summary>
@@ -263,6 +238,52 @@ namespace Piranha.Areas.Manager.Controllers
 			var service = new Rest.ContentService() ;
 
 			return Json(service.Get(new Guid(id), draft), JsonRequestBehavior.AllowGet) ;
+		}
+
+		/// <summary>
+		/// Uploads a file using ajax.
+		/// </summary>
+		/// <returns>The status of the action</returns>
+		[HttpPost()]
+		[Access(Function="ADMIN_CONTENT")]
+		public JsonResult Upload() {
+			// Get custom headers
+			var filename = Request.Headers["X-File-Name"] ;
+			var type = Request.Headers["X-File-Type"] ;
+			var size = Convert.ToInt32(Request.Headers["X-File-Size"]) ;
+			var parentId = !String.IsNullOrEmpty(Request.Headers["X-File-ParentId"]) ? new Guid(Request.Headers["X-File-ParentId"]) : Guid.Empty ;
+			var name = Request.Headers["X-File-DisplayName"] ;
+			var alt = Request.Headers["X-File-Alt"] ;
+			var desc = Request.Headers["X-File-Desc"] ;
+
+			using (var mem = new MemoryStream()) {
+				var stream = Request.InputStream ;
+
+				stream.Seek(0, SeekOrigin.Begin) ;
+				stream.CopyTo(mem) ;
+				mem.Position = 0 ;
+
+				using (var binary = new BinaryReader(mem)) {
+					var media = new Piranha.Models.MediaFileContent() {
+						ContentType = type,
+						Filename = filename,
+						Body = binary.ReadBytes(size)
+					} ;
+					var content = new Piranha.Models.Content() {
+						Id = Guid.NewGuid(),
+						ParentId = parentId,
+						IsFolder = false,
+						Name = name,
+						AlternateText = alt,
+						Description = desc
+					} ;
+					if (content.SaveAndPublish(media))
+						return Get(content.Id.ToString()) ;
+				}
+			}
+			return Json(new {
+				Success = false
+			}) ;
 		}
     }
 }

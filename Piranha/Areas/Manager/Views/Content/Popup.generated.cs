@@ -60,15 +60,15 @@ WriteLiteral(" class=\"selected\"");
 
 WriteLiteral("><a");
 
-WriteLiteral(" href=\"#attach-existing\"");
+WriteLiteral(" class=\"btn-media-existing\"");
 
-WriteLiteral(">Choose existing</a></li>\r\n        <li");
+WriteLiteral("href=\"#attach-existing\"");
 
-WriteLiteral(" class=\"hidden\"");
-
-WriteLiteral("><a");
+WriteLiteral(">Choose existing</a></li>\r\n        <li><a");
 
 WriteLiteral(" href=\"#attach-new\"");
+
+WriteLiteral(" class=\"btn-media-new\"");
 
 WriteLiteral(">Upload new</a></li>\r\n    </ul>\r\n    <a");
 
@@ -84,16 +84,17 @@ WriteLiteral("></div>\r\n</div>\r\n<div");
 
 WriteLiteral(" id=\"attach-existing\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 438), Tuple.Create("\"", 515)
-, Tuple.Create(Tuple.Create("", 446), Tuple.Create("inner", 446), true)
-, Tuple.Create(Tuple.Create(" ", 451), Tuple.Create("gallery", 452), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 471), Tuple.Create("\"", 563)
+, Tuple.Create(Tuple.Create("", 479), Tuple.Create("inner", 479), true)
+, Tuple.Create(Tuple.Create(" ", 484), Tuple.Create("media-existing", 485), true)
+, Tuple.Create(Tuple.Create(" ", 499), Tuple.Create("gallery", 500), true)
             
             #line 14 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-, Tuple.Create(Tuple.Create(" ", 459), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "gallery-compressed" : ""
+, Tuple.Create(Tuple.Create(" ", 507), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "gallery-compressed" : ""
             
             #line default
             #line hidden
-, 460), false)
+, 508), false)
 );
 
 WriteLiteral(">\r\n");
@@ -113,15 +114,15 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("        <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 578), Tuple.Create("\"", 646)
-, Tuple.Create(Tuple.Create("", 586), Tuple.Create("gallery-item", 586), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 626), Tuple.Create("\"", 694)
+, Tuple.Create(Tuple.Create("", 634), Tuple.Create("gallery-item", 634), true)
             
             #line 16 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-, Tuple.Create(Tuple.Create(" ", 598), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "compressed" : ""
+, Tuple.Create(Tuple.Create(" ", 646), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "compressed" : ""
             
             #line default
             #line hidden
-, 599), false)
+, 647), false)
 );
 
 WriteLiteral(">\r\n");
@@ -154,9 +155,9 @@ WriteLiteral(" data-id=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 764), Tuple.Create("\"", 833)
-, Tuple.Create(Tuple.Create("", 770), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/ico-folder-up-96.png")
-, 770), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 812), Tuple.Create("\"", 881)
+, Tuple.Create(Tuple.Create("", 818), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/ico-folder-up-96.png")
+, 818), false)
 );
 
 WriteLiteral(" />\r\n");
@@ -242,6 +243,208 @@ WriteLiteral("</small></p>\r\n        </div>\r\n");
             #line default
             #line hidden
 WriteLiteral("    <div");
+
+WriteLiteral(" class=\"clear\"");
+
+WriteLiteral("></div>\r\n    <div");
+
+WriteLiteral(" class=\"loader\"");
+
+WriteLiteral("></div>\r\n</div>\r\n<div");
+
+WriteLiteral(" id=\"attach-new\"");
+
+WriteLiteral(" class=\"inner media-new hidden\"");
+
+WriteLiteral(">\r\n    <ul");
+
+WriteLiteral(" class=\"form\"");
+
+WriteLiteral(">\r\n        <li><label>");
+
+            
+            #line 31 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+              Write(Piranha.Resources.Content.Upload);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n            <div");
+
+WriteLiteral(" class=\"upload\"");
+
+WriteLiteral(">\r\n                <input");
+
+WriteLiteral(" type=\"file\"");
+
+WriteLiteral(" class=\"media-new-file\"");
+
+WriteLiteral(" id=\"new-file\"");
+
+WriteLiteral(" name=\"new-file\"");
+
+WriteLiteral(" data-id=\"upload_name\"");
+
+WriteLiteral(" />\r\n                <button");
+
+WriteLiteral(" class=\"btn blue file\"");
+
+WriteLiteral(" data-id=\"new-file\"");
+
+WriteLiteral(">");
+
+            
+            #line 34 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                                                            Write(Piranha.Resources.Global.ChooseFile);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</button>\r\n                <div");
+
+WriteLiteral(" class=\"input\"");
+
+WriteLiteral(">\r\n                    <input");
+
+WriteLiteral(" id=\"upload_name\"");
+
+WriteLiteral(" type=\"text\"");
+
+WriteLiteral(" />\r\n                </div>\r\n            </div>\r\n        </li>\r\n        <li>\r\n   " +
+"         <label>");
+
+            
+            #line 41 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+              Write(Piranha.Resources.Content.ParentId);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n            <div");
+
+WriteLiteral(" class=\"input\"");
+
+WriteLiteral(">\r\n                <select");
+
+WriteLiteral(" class=\"new-parentid\"");
+
+WriteLiteral(">\r\n");
+
+            
+            #line 44 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 44 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                     foreach (var f in Model.Folders) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <option");
+
+WriteAttribute("value", Tuple.Create(" value=\"", 2125), Tuple.Create("\"", 2141)
+            
+            #line 45 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+, Tuple.Create(Tuple.Create("", 2133), Tuple.Create<System.Object, System.Int32>(f.Value
+            
+            #line default
+            #line hidden
+, 2133), false)
+);
+
+WriteLiteral(">");
+
+            
+            #line 45 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                                        Write(Html.Raw(f.Text));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</option>\r\n");
+
+            
+            #line 46 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </select>\r\n            </div>\r\n        </li>\r\n        <li><label>" +
+"");
+
+            
+            #line 50 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+              Write(Piranha.Resources.Global.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n            <div");
+
+WriteLiteral(" class=\"input\"");
+
+WriteLiteral("><input");
+
+WriteLiteral(" type=\"text\"");
+
+WriteLiteral(" class=\"new-name\"");
+
+WriteLiteral(" /></div>\r\n        </li>\r\n        <li><label>");
+
+            
+            #line 53 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+              Write(Piranha.Resources.Content.AlternateText);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n            <div");
+
+WriteLiteral(" class=\"input\"");
+
+WriteLiteral("><input");
+
+WriteLiteral(" type=\"text\"");
+
+WriteLiteral(" class=\"new-alt\"");
+
+WriteLiteral(" /></div>\r\n        </li>\r\n        <li><label>");
+
+            
+            #line 56 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+              Write(Piranha.Resources.Global.Description);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n            <div");
+
+WriteLiteral(" class=\"input\"");
+
+WriteLiteral("><textarea");
+
+WriteLiteral(" rows=\"4\"");
+
+WriteLiteral(" class=\"new-desc\"");
+
+WriteLiteral("></textarea></div>\r\n        </li>\r\n    </ul>\r\n    <button");
+
+WriteLiteral(" class=\"btn media-new-upload right\"");
+
+WriteLiteral(">");
+
+            
+            #line 60 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                                          Write(Piranha.Resources.Global.ToolbarSave);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</button>\r\n    <div");
 
 WriteLiteral(" class=\"clear\"");
 

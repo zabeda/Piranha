@@ -877,20 +877,6 @@ function bindAjaxBoxEvents() {
     $(".floatbox .close-btn").click(function () {
         floatBox.close($(this).attr("data-id"));
     });
-    $(".box-tabs a").click(function () {
-        var id = $(this).attr("href").substring(1);
-        var pr = $(this).parent().parent().parent();
-
-        pr.siblings(".inner").addClass("hidden");
-        pr.siblings("#" + id).removeClass("hidden");
-
-        $(this).parent().siblings("li").removeClass("selected");
-        $(this).parent().addClass("selected");
-        $.each($(".floatbox .box"), function (i, e) {
-            floatBox.position($(e));
-        });
-        return false;
-    });
 }
 
 /**
@@ -940,6 +926,20 @@ var floatBox = new function () {
         });
     }
 }
+$(".box-tabs a").live('click', function () {
+    var id = $(this).attr("href").substring(1);
+    var pr = $(this).parent().parent().parent();
+
+    pr.siblings(".inner").addClass("hidden");
+    pr.siblings("#" + id).removeClass("hidden");
+
+    $(this).parent().siblings("li").removeClass("selected");
+    $(this).parent().addClass("selected");
+    $.each($(".floatbox .box"), function (i, e) {
+        floatBox.position($(e));
+    });
+    return false;
+});
 
 //
 // Window resize event

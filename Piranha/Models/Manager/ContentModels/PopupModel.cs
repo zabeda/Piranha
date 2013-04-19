@@ -29,18 +29,7 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Gets/sets the available folders.
 		/// </summary>
-		public SelectList Folders { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the optional file.
-		/// </summary>
-		public HttpPostedFileBase UploadedFile { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the url to get the file from.
-		/// </summary>
-		[Display(Name="FromUrl", ResourceType=typeof(Piranha.Resources.Content))]
-		public string FileUrl { get ; set ; }
+		public IList<Placement> Folders { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -49,9 +38,8 @@ namespace Piranha.Models.Manager.ContentModels
 		public PopupModel() {
 			Content = new List<Piranha.Models.Content>() ;
 			NewContent = new Piranha.Models.Content() ;
-			var folders = Piranha.Models.Content.GetFields("content_id, content_name", "content_folder=1", new Params() { OrderBy = "content_name" }) ;
-			folders.Insert(0, new Piranha.Models.Content()) ;
-			Folders = new SelectList(folders, "Id", "Name") ;
+			Folders = SortFolders(Models.Content.GetFolderStructure(false)) ;
+			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
 		}
 
 		/// <summary>
@@ -67,5 +55,30 @@ namespace Piranha.Models.Manager.ContentModels
 
 			return lm ;
 		}
+
+		#region Private methods
+		/// <summary>
+		/// Flattens the folder structure.
+		/// </summary>
+		/// <param name="media"></param>
+		/// <param name="level"></param>
+		/// <returns></returns>
+		private List<Placement> SortFolders(List<Content> media, int level = 1) {
+			var ret = new List<Placement>() ;
+
+			foreach (var m in media) {
+				var prefix = "" ;
+				for (int n = 1; n < level; n++)
+					prefix += "&nbsp;&nbsp;&nbsp;" ;
+				ret.Add(new Placement() {
+					Text = prefix + m.Name,
+					Value = m.Id,
+					Level = level
+				}) ;
+				ret.AddRange(SortFolders(m.ChildContent, level + 1)) ;
+			}
+			return ret ;
+		}
+		#endregion
 	}
 }

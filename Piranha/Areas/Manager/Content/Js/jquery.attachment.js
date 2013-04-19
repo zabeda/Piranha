@@ -4,12 +4,11 @@
 * 2012-04-10   @tidyui
 */
 
-function bindAttachmentEvents() {
+$(document).ready(function () {
     //
     // Event hander for switching to the attachment view.
     //
-    $("#btn_attachments").unbind();
-    $("#btn_attachments").click(function () {
+    $("#btn_attachments").live('click', function () {
         // Hide content editors
         hideEditors();
 
@@ -23,20 +22,17 @@ function bindAttachmentEvents() {
     //
     // Deletes a row from the attachment list.
     //
-    $("#attachments .delete").unbind();
-    $("#attachments .delete").click(function () {
+    $("#attachments .delete").live('click', function () {
         var row = $(this).parent().parent();
         $('#attachments input[value="' + row.attr("data-id") + '"]').remove();
         row.remove();
     });
-    $("#attachments .up").unbind();
-    $("#attachments .up").click(function () {
+    $("#attachments .up").live('click', function () {
         var row = $(this).parent().parent();
         if (row.parent().children().index(row) > 1)
             row.insertBefore(row.prev());
     });
-    $("#attachments .down").unbind();
-    $("#attachments .down").click(function () {
+    $("#attachments .down").live('click', function () {
         var row = $(this).parent().parent();
         if (row.next())
             row.insertAfter(row.next());
@@ -45,15 +41,13 @@ function bindAttachmentEvents() {
     //
     // Deletes a row from the attachment list.
     //
-    $("#attachments .delete").unbind();
-    $("#attachments .delete").click(function() {
+    $("#attachments .delete").live('click', function () {
         var row = $(this).parent().parent();
         $('#attachments input[value="' + row.attr("data-id") + '"]').remove();
         row.remove();
     });
 
-    $("form").unbind();
-    $("form").submit(function () {
+    $("form").live('submit', function () {
         // Build Attachments
         $.each($("#attachments tr"), function (index, val) {
             if (index > 0) {
@@ -61,8 +55,4 @@ function bindAttachmentEvents() {
             }
         });
     });
-}
-
-$(document).ready(function () {
-    bindAttachmentEvents();
 });
