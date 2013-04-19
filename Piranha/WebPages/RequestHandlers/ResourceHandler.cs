@@ -55,7 +55,7 @@ namespace Piranha.WebPages.RequestHandlers
 			if (!LastMod.HasValue)
 				GetLastMod(assembly) ;
 
-			if (!Web.ClientCache.HandleClientCache(context, resource, LastMod.Value)) {
+			if (!Web.ClientCache.HandleClientCache(context, resource, LastMod.Value, false, 60)) {
 				if (ResourceNames == null)
 					GetResourceNames(assembly) ;
 				if (ResourceNames.ContainsKey(resource)) {

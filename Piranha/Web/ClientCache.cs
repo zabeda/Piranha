@@ -47,20 +47,23 @@ namespace Piranha.Web
 		/// <param name="context">The current context</param>
 		/// <param name="id">The entity id</param>
 		/// <param name="modified">Last nodification</param>
+		/// <param name="noexpire">Whether to use persistent cookies or not</param>
+		/// <param name="minutes">Optional minutes to cache the resource for</param>
 		/// <returns>If the file is cached</returns>
-		public static bool HandleClientCache(HttpContext context, string id, DateTime modified, bool noexpire = false) {
+		public static bool HandleClientCache(HttpContext context, string id, DateTime modified, bool noexpire = false, int? minutes = null) {
 #if !DEBUG
 			// Get expire & maxage
 			int expires = 30, maxage = 30 ;
 			try {
-				expires = Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_EXPIRES").Value) ;
-				maxage = Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_MAXAGE").Value) ;
+				expires = !minutes.HasValue ? Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_EXPIRES").Value) : minutes.Value ;
+				maxage = !minutes.HasValue ? Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_MAXAGE").Value) : minutes.Value ;
 			} catch {}
 
 			// Handle cache
 			if (!context.Request.IsLocal && expires > 0) {
 				try {
-					modified = modified > SiteLastModified ? modified : SiteLastModified ;
+					if (!minutes.HasValue)
+						modified = modified > SiteLastModified ? modified : SiteLastModified ;
 				} catch {}
 				string etag = GenerateETag(id, modified) ;
 
