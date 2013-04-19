@@ -273,10 +273,15 @@ namespace Piranha.WebPages
 						if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
 							// Execute the handler
 							hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
-							handled = false ;
+							handled = true ;
 							break ;
 						}
 					}
+				}
+
+				if (!handled && args[pos].ToLower() == "res.ashx") {
+					Web.Application.Current.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
+					handled = true ;
 				}
 
 				// If no handler was found and we are using prefixless permalinks, 

@@ -55,8 +55,8 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 170), Tuple.Create("\"", 232)
-, Tuple.Create(Tuple.Create("", 176), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.form.js")
+WriteAttribute("src", Tuple.Create(" src=\"", 170), Tuple.Create("\"", 226)
+, Tuple.Create(Tuple.Create("", 176), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.form.js")
 , 176), false)
 );
 
@@ -64,36 +64,36 @@ WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 279), Tuple.Create("\"", 347)
-, Tuple.Create(Tuple.Create("", 285), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.attachment.js")
-, 285), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 273), Tuple.Create("\"", 335)
+, Tuple.Create(Tuple.Create("", 279), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.attachment.js")
+, 279), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 394), Tuple.Create("\"", 464)
-, Tuple.Create(Tuple.Create("", 400), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.media.dialog.js")
-, 400), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 382), Tuple.Create("\"", 446)
+, Tuple.Create(Tuple.Create("", 388), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.media.dialog.js")
+, 388), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 511), Tuple.Create("\"", 577)
-, Tuple.Create(Tuple.Create("", 517), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.comments.js")
-, 517), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 493), Tuple.Create("\"", 553)
+, Tuple.Create(Tuple.Create("", 499), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.comments.js")
+, 499), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 624), Tuple.Create("\"", 698)
-, Tuple.Create(Tuple.Create("", 630), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/jquery.equalheights.js")
-, 630), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 600), Tuple.Create("\"", 668)
+, Tuple.Create(Tuple.Create("", 606), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery.equalheights.js")
+, 606), false)
 );
 
 WriteLiteral("></script>\r\n");
@@ -249,21 +249,21 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4055), Tuple.Create("\"", 4148)
+WriteAttribute("href", Tuple.Create(" href=\"", 4025), Tuple.Create("\"", 4118)
             
             #line 96 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4062), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
+, Tuple.Create(Tuple.Create("", 4032), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 4062), false)
+, 4032), false)
             
             #line 96 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4103), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Post.Permalink, true)
+, Tuple.Create(Tuple.Create("", 4073), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Post.Permalink, true)
             
             #line default
             #line hidden
-, 4103), false)
+, 4073), false)
 );
 
 WriteLiteral(" target=\"preview\"");
@@ -330,14 +330,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4528), Tuple.Create("\"", 4587)
+WriteAttribute("href", Tuple.Create(" href=\"", 4498), Tuple.Create("\"", 4557)
             
             #line 102 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4535), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 4505), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 4535), false)
+, 4505), false)
 );
 
 WriteLiteral(" class=\"unpublish\"");
@@ -371,14 +371,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4804), Tuple.Create("\"", 4860)
+WriteAttribute("href", Tuple.Create(" href=\"", 4774), Tuple.Create("\"", 4830)
             
             #line 105 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4811), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 4781), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 4811), false)
+, 4781), false)
 );
 
 WriteLiteral(" class=\"revert\"");
@@ -412,14 +412,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5018), Tuple.Create("\"", 5074)
+WriteAttribute("href", Tuple.Create(" href=\"", 4988), Tuple.Create("\"", 5044)
             
             #line 108 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5025), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 4995), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 5025), false)
+, 4995), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -444,14 +444,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5174), Tuple.Create("\"", 5201)
+WriteAttribute("href", Tuple.Create(" href=\"", 5144), Tuple.Create("\"", 5171)
             
             #line 110 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5181), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
+, Tuple.Create(Tuple.Create("", 5151), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
             
             #line default
             #line hidden
-, 5181), false)
+, 5151), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -467,14 +467,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5282), Tuple.Create("\"", 5336)
+WriteAttribute("href", Tuple.Create(" href=\"", 5252), Tuple.Create("\"", 5306)
             
             #line 111 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5289), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 5259), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 5289), false)
+, 5259), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -521,14 +521,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"postid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 5677), Tuple.Create("\"", 5699)
+WriteAttribute("value", Tuple.Create(" value=\"", 5647), Tuple.Create("\"", 5669)
             
             #line 121 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5685), Tuple.Create<System.Object, System.Int32>(Model.Post.Id
+, Tuple.Create(Tuple.Create("", 5655), Tuple.Create<System.Object, System.Int32>(Model.Post.Id
             
             #line default
             #line hidden
-, 5685), false)
+, 5655), false)
 );
 
 WriteLiteral(" />\r\n");

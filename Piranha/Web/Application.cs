@@ -28,6 +28,11 @@ namespace Piranha.Web
 		public readonly RequestHandlerCollection Handlers = new RequestHandlerCollection() ;
 
 		/// <summary>
+		/// The manager resource handler.
+		/// </summary>
+		internal readonly ResourceHandler Resources = new ResourceHandler() ;
+
+		/// <summary>
 		/// The private composition container.
 		/// </summary>
 		private CompositionContainer Container = null ;

@@ -41,8 +41,8 @@ WriteLiteral("<script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 30), Tuple.Create("\"", 105)
-, Tuple.Create(Tuple.Create("", 36), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/tiny_mce/tinymce.min.js")
+WriteAttribute("src", Tuple.Create(" src=\"", 30), Tuple.Create("\"", 99)
+, Tuple.Create(Tuple.Create("", 36), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/tiny_mce/tinymce.min.js")
 , 36), false)
 );
 

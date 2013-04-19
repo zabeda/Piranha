@@ -71,13 +71,18 @@ namespace Piranha.Web
 		/// <param name="size">Optional size</param>
 		/// <returns>The image URL</returns>
 		public static string GetGravatarUrl(this UrlHelper helper, string email, int size = 0) {
-			var input = UTF8Encoding.UTF8.GetBytes(email) ;
-			var crypto = new MD5CryptoServiceProvider() ;
+			var md5 = new MD5CryptoServiceProvider();
 
-			var hash = Convert.ToBase64String(crypto.TransformFinalBlock(input, 0, input.Length)) ;
-			crypto.Clear() ;
+            var encoder = new UTF8Encoding();
+            var hash = new MD5CryptoServiceProvider();
+			var bytes = hash.ComputeHash(encoder.GetBytes(email));
 
-			return "http://www.gravatar.com/avatar/" + hash.ToLower() +
+            var sb = new StringBuilder(bytes.Length * 2);
+            for (int n = 0; n < bytes.Length; n++) {
+                sb.Append(bytes[n].ToString("X2"));
+            }
+	
+			return "http://www.gravatar.com/avatar/" + sb.ToString().ToLower() +
 				(size > 0 ? "?s=" + size : "") ;
 		}
 

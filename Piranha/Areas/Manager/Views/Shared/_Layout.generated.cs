@@ -60,8 +60,8 @@ WriteLiteral(">\r\n    <title>");
             #line hidden
 WriteLiteral("</title>\r\n\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 248), Tuple.Create("\"", 306)
-, Tuple.Create(Tuple.Create("", 255), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/icon.ico")
+WriteAttribute("href", Tuple.Create(" href=\"", 248), Tuple.Create("\"", 300)
+, Tuple.Create(Tuple.Create("", 255), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/img/icon.ico")
 , 255), false)
 );
 
@@ -71,9 +71,9 @@ WriteLiteral(" type=\"image/x-icon\"");
 
 WriteLiteral(">\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 350), Tuple.Create("\"", 408)
-, Tuple.Create(Tuple.Create("", 357), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/icon.ico")
-, 357), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 344), Tuple.Create("\"", 396)
+, Tuple.Create(Tuple.Create("", 351), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/img/icon.ico")
+, 351), false)
 );
 
 WriteLiteral(" rel=\"shortcut icon\"");
@@ -82,9 +82,9 @@ WriteLiteral(" type=\"image/x-icon\"");
 
 WriteLiteral("> \r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 462), Tuple.Create("\"", 530)
-, Tuple.Create(Tuple.Create("", 469), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/css/ext/chosen.min.css")
-, 469), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 450), Tuple.Create("\"", 512)
+, Tuple.Create(Tuple.Create("", 457), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/ext/chosen.min.css")
+, 457), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -93,9 +93,9 @@ WriteLiteral(" type=\"text/css\"");
 
 WriteLiteral("/>\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 577), Tuple.Create("\"", 661)
-, Tuple.Create(Tuple.Create("", 584), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/css/ext/jquery-ui-1.9.2.custom.min.css")
-, 584), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 559), Tuple.Create("\"", 637)
+, Tuple.Create(Tuple.Create("", 566), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/ext/jquery-ui-1.9.2.custom.min.css")
+, 566), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -104,9 +104,9 @@ WriteLiteral(" type=\"text/css\"");
 
 WriteLiteral(" />\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 709), Tuple.Create("\"", 768)
-, Tuple.Create(Tuple.Create("", 716), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/css/style.css")
-, 716), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 685), Tuple.Create("\"", 738)
+, Tuple.Create(Tuple.Create("", 692), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.css")
+, 692), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -115,9 +115,9 @@ WriteLiteral(" type=\"text/css\"");
 
 WriteLiteral("/>\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 815), Tuple.Create("\"", 874)
-, Tuple.Create(Tuple.Create("", 822), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/css/theme.css")
-, 822), false)
+WriteAttribute("href", Tuple.Create(" href=\"", 785), Tuple.Create("\"", 838)
+, Tuple.Create(Tuple.Create("", 792), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/theme.css")
+, 792), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -128,27 +128,27 @@ WriteLiteral("/>\r\n\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 948), Tuple.Create("\"", 1019)
-, Tuple.Create(Tuple.Create("", 954), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/jquery-1.7.2.min.js")
-, 954), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 912), Tuple.Create("\"", 977)
+, Tuple.Create(Tuple.Create("", 918), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
+, 918), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1066), Tuple.Create("\"", 1131)
-, Tuple.Create(Tuple.Create("", 1072), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.manager.js")
-, 1072), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 1024), Tuple.Create("\"", 1083)
+, Tuple.Create(Tuple.Create("", 1030), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
+, 1030), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1178), Tuple.Create("\"", 1250)
-, Tuple.Create(Tuple.Create("", 1184), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/chosen.jquery.min.js")
-, 1184), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 1130), Tuple.Create("\"", 1196)
+, Tuple.Create(Tuple.Create("", 1136), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/chosen.jquery.min.js")
+, 1136), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -236,14 +236,14 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"home\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2088), Tuple.Create("\"", 2128)
+WriteAttribute("href", Tuple.Create(" href=\"", 2034), Tuple.Create("\"", 2074)
             
             #line 42 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2095), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "dashboard")
+, Tuple.Create(Tuple.Create("", 2041), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "dashboard")
             
             #line default
             #line hidden
-, 2095), false)
+, 2041), false)
 );
 
 WriteLiteral("></a>\r\n                <a");
@@ -252,14 +252,14 @@ WriteLiteral(" class=\"public-site\"");
 
 WriteLiteral(" target=\"preview\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2191), Tuple.Create("\"", 2239)
+WriteAttribute("href", Tuple.Create(" href=\"", 2137), Tuple.Create("\"", 2185)
             
             #line 43 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2198), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
+, Tuple.Create(Tuple.Create("", 2144), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 2198), false)
+, 2144), false)
 );
 
 WriteLiteral(">\r\n");
@@ -349,15 +349,15 @@ WriteLiteral(" class=\"grid_12 sys-message\"");
 
 WriteLiteral(">\r\n                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2868), Tuple.Create("\"", 2955)
-, Tuple.Create(Tuple.Create("", 2876), Tuple.Create("box", 2876), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2814), Tuple.Create("\"", 2901)
+, Tuple.Create(Tuple.Create("", 2822), Tuple.Create("box", 2822), true)
             
             #line 61 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2879), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
+, Tuple.Create(Tuple.Create("", 2825), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
             
             #line default
             #line hidden
-, 2879), false)
+, 2825), false)
 );
 
 WriteLiteral(">\r\n                    <div");

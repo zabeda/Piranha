@@ -644,6 +644,7 @@
     <Compile Include="WebPages\RequestHandlers\IRequestHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\PermalinkHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\RequestHandlerRegistration.cs" />
+    <Compile Include="WebPages\RequestHandlers\ResourceHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\RssHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\SitemapHandler.cs" />
     <Compile Include="WebPages\RequestHandlers\ThumbnailHandler.cs" />
