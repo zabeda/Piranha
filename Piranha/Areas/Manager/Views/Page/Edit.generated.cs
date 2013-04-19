@@ -121,16 +121,17 @@ WriteLiteral("\r\n    <script");
 WriteLiteral(" type=\"text/javascript\"");
 
 WriteLiteral(">\r\n        var folderId = \"\";\r\n\r\n        $(document).ready(function () {\r\n       " +
-"     $(\"#Page_Title\").focus();\r\n\r\n");
+"     // UI Stuff\r\n            $(\"#Page_Title\").focus();\r\n            $(\'.first-r" +
+"ow .box\').equalHeights();\r\n\r\n");
 
             
-            #line 18 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 20 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 18 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 20 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (Model.Action == EditModel.ActionType.ATTACHMENTS) {
 
             
@@ -143,7 +144,7 @@ WriteLiteral("\r\n            $(\'#btn_attachments\').click();\r\n            ")
 WriteLiteral("\r\n");
 
             
-            #line 22 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 24 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -160,7 +161,7 @@ WriteLiteral(@"
                 $.get(""");
 
             
-            #line 31 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                   Write(Url.Action("siblings"));
 
             
@@ -178,7 +179,7 @@ WriteLiteral(@"?page_id="" + page_id + ""&page_parentid="" + page_parentid + ""&
                 $.get(""");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 42 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                   Write(Url.Action("grouplist"));
 
             
@@ -195,40 +196,38 @@ WriteLiteral(@"?page_id="" + page_id + ""&group_id="" + group_id, function(data)
                 return false;
             });
 
-            $('.first-row .box').equalHeights();
-
-            var c = new piranha.comment('");
+            new piranha.comment('");
 
             
             #line 53 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                                    Write(Model.Page.Id);
+                            Write(Model.Page.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("\', \'comment-notification\', \'pnl-comments .inner\');\r\n        });\r\n\r\n        //\r\n  " +
-"      // Hides all editors on the page. This callback is called from jquery.atta" +
-"chments.js\r\n        //\r\n        function hideEditors() {\r\n            $(\"#pagere" +
-"gions .input, #globalregions .input\").hide();\r\n            $(\"#regionbuttons but" +
-"ton\").removeClass(\"active\");\r\n            $(\"#attachments\").hide();\r\n\r\n         " +
-"   $(\"#regions .region-body\").hide();\r\n            $(\"#regionbuttons button\").re" +
-"moveClass(\"active\");\r\n            $(\"#attachments\").hide();\r\n        }\r\n\r\n      " +
-"  //\r\n        // This callback is called from jquery.attachments.js\r\n        //\r" +
-"\n        function addAttachment(a) {\r\n            // Store folder id so we can o" +
-"pen the same folder next time.\r\n            folderId = a.ParentId;\r\n\r\n          " +
-"  // Add the attachment\r\n            $(\".attachments\").append(\r\n                " +
-"\'<tr data-id=\"\' + a.Id + \'\">\' +\r\n                    \'<td><img src=\"\' + a.Thumbn" +
-"ailUrl + \'/50\" /></td>\' +\r\n                    \'<td>\' + a.DisplayName + \'</td>\' " +
-"+\r\n                    \'<td>\' + a.Type + \'</td>\' +\r\n                    \'<td cla" +
-"ss=\"buttons three\">\' +\r\n                        \'<a class=\"icon up marg\"></a>\' +" +
-"\r\n                        \'<a class=\"icon down marg\"></a>\' +\r\n                  " +
-"      \'<a class=\"icon delete\"></a></td>\' +\r\n                \'</tr>\') ;\r\n        " +
-"}\r\n\r\n        //\r\n        // This callback is called from jquery.attachments.js b" +
-"efore form submit.\r\n        //\r\n        function addAttachmentData(index, val) {" +
-"\r\n            $(\"#attachment_data\").append(\r\n                    \'<input id=\"Pag" +
-"e_Attachments_\' + index +\r\n                    \'_\" name=\"Page.Attachments[\' + in" +
-"dex +\r\n                    \']\" type=\"hidden\" value=\"\' + $(val).attr(\"data-id\") +" +
-" \'\" />\');\r\n        }\r\n    </script>\r\n");
+WriteLiteral("\', \'comment-notification\', \'pnl-comments .inner\');\r\n            new piranha.media" +
+"(\'btn_attach\', \'boxContent\', function (a) {\r\n                // Store folder id " +
+"so we can open the same folder next time.\r\n                folderId = a.ParentId" +
+";\r\n\r\n                // Add the attachment\r\n                $(\".attachments\").ap" +
+"pend(\r\n                    \'<tr data-id=\"\' + a.Id + \'\">\' +\r\n                    " +
+"    \'<td><img src=\"\' + a.ThumbnailUrl + \'/50\" /></td>\' +\r\n                      " +
+"  \'<td>\' + a.DisplayName + \'</td>\' +\r\n                        \'<td>\' + a.Type + " +
+"\'</td>\' +\r\n                        \'<td class=\"buttons three\">\' +\r\n             " +
+"               \'<a class=\"icon up marg\"></a>\' +\r\n                            \'<a" +
+" class=\"icon down marg\"></a>\' +\r\n                            \'<a class=\"icon del" +
+"ete\"></a></td>\' +\r\n                    \'</tr>\');\r\n            });\r\n        });\r\n" +
+"\r\n        //\r\n        // Hides all editors on the page. This callback is called " +
+"from jquery.attachments.js\r\n        //\r\n        function hideEditors() {\r\n      " +
+"      $(\"#pageregions .input, #globalregions .input\").hide();\r\n            $(\"#r" +
+"egionbuttons button\").removeClass(\"active\");\r\n            $(\"#attachments\").hide" +
+"();\r\n\r\n            $(\"#regions .region-body\").hide();\r\n            $(\"#regionbut" +
+"tons button\").removeClass(\"active\");\r\n            $(\"#attachments\").hide();\r\n   " +
+"     }\r\n\r\n        //\r\n        // This callback is called from jquery.attachments" +
+".js before form submit.\r\n        //\r\n        function addAttachmentData(index, v" +
+"al) {\r\n            $(\"#attachment_data\").append(\r\n                    \'<input id" +
+"=\"Page_Attachments_\' + index +\r\n                    \'_\" name=\"Page.Attachments[\'" +
+" + index +\r\n                    \']\" type=\"hidden\" value=\"\' + $(val).attr(\"data-i" +
+"d\") + \'\" />\');\r\n        }\r\n    </script>\r\n");
 
 });
 
@@ -239,7 +238,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral("\r\n");
 
             
-            #line 102 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 98 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -260,7 +259,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 106 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 102 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -269,13 +268,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 107 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 103 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 107 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 103 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (!Model.Page.IsNew) {
 
             
@@ -283,21 +282,21 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4603), Tuple.Create("\"", 4696)
+WriteAttribute("href", Tuple.Create(" href=\"", 4623), Tuple.Create("\"", 4716)
             
-            #line 108 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4610), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
-            
-            #line default
-            #line hidden
-, 4610), false)
-            
-            #line 108 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4651), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Page.Permalink, true)
+            #line 104 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 4630), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 4651), false)
+, 4630), false)
+            
+            #line 104 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 4671), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Page.Permalink, true)
+            
+            #line default
+            #line hidden
+, 4671), false)
 );
 
 WriteLiteral(" target=\"preview\"");
@@ -307,7 +306,7 @@ WriteLiteral(" class=\"preview\"");
 WriteLiteral(">");
 
             
-            #line 108 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 104 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                                              Write(Piranha.Resources.Global.ToolbarPreview);
 
             
@@ -316,7 +315,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 109 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 105 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -325,7 +324,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 110 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 106 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (User.HasAccess("ADMIN_PAGE_PUBLISH")) {
 
             
@@ -338,7 +337,7 @@ WriteLiteral(" class=\"publish\"");
 WriteLiteral(">");
 
             
-            #line 111 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 107 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                               Write(Piranha.Resources.Global.ToolbarPublish);
 
             
@@ -347,7 +346,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 112 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 108 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -356,7 +355,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 113 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 109 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (Model.Page.Published > DateTime.MinValue && !Model.IsSite && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
 
             
@@ -364,14 +363,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5093), Tuple.Create("\"", 5152)
+WriteAttribute("href", Tuple.Create(" href=\"", 5113), Tuple.Create("\"", 5172)
             
-            #line 114 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5100), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Page.Id })
+            #line 110 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 5120), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5100), false)
+, 5120), false)
 );
 
 WriteLiteral(" class=\"unpublish\"");
@@ -379,7 +378,7 @@ WriteLiteral(" class=\"unpublish\"");
 WriteLiteral(">");
 
             
-            #line 114 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 110 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                             Write(Piranha.Resources.Global.ToolbarUnpublish);
 
             
@@ -388,7 +387,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 115 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 111 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -397,7 +396,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 116 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 112 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (Model.Page.Published > DateTime.MinValue && Model.Page.Updated > Model.Page.LastPublished) {
 
             
@@ -405,14 +404,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5369), Tuple.Create("\"", 5425)
+WriteAttribute("href", Tuple.Create(" href=\"", 5389), Tuple.Create("\"", 5445)
             
-            #line 117 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5376), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Page.Id })
+            #line 113 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 5396), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5376), false)
+, 5396), false)
 );
 
 WriteLiteral(" class=\"revert\"");
@@ -420,7 +419,7 @@ WriteLiteral(" class=\"revert\"");
 WriteLiteral(">");
 
             
-            #line 117 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 113 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                       Write(Piranha.Resources.Global.ToolbarRevert);
 
             
@@ -429,7 +428,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 118 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 114 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -438,7 +437,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 119 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 115 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (!Model.Page.IsNew && Model.CanDelete && !Model.IsSite && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
 
             
@@ -446,14 +445,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5640), Tuple.Create("\"", 5696)
+WriteAttribute("href", Tuple.Create(" href=\"", 5660), Tuple.Create("\"", 5716)
             
-            #line 120 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5647), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Page.Id })
+            #line 116 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 5667), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5647), false)
+, 5667), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -461,7 +460,7 @@ WriteLiteral(" class=\"delete\"");
 WriteLiteral(">");
 
             
-            #line 120 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 116 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                       Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -470,7 +469,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 121 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 117 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -479,7 +478,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 122 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 118 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
              if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {
 
             
@@ -487,14 +486,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5857), Tuple.Create("\"", 5912)
+WriteAttribute("href", Tuple.Create(" href=\"", 5877), Tuple.Create("\"", 5932)
             
-            #line 123 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5864), Tuple.Create<System.Object, System.Int32>(Url.Action("index", new { id = Model.Page.Id })
+            #line 119 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 5884), Tuple.Create<System.Object, System.Int32>(Url.Action("index", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 5864), false)
+, 5884), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -502,7 +501,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 123 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 119 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                    Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -511,7 +510,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 124 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 120 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             } else {
 
             
@@ -519,14 +518,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6015), Tuple.Create("\"", 6040)
+WriteAttribute("href", Tuple.Create(" href=\"", 6035), Tuple.Create("\"", 6060)
             
-            #line 125 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 6022), Tuple.Create<System.Object, System.Int32>(ViewBag.ReturnUrl
+            #line 121 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 6042), Tuple.Create<System.Object, System.Int32>(ViewBag.ReturnUrl
             
             #line default
             #line hidden
-, 6022), false)
+, 6042), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -534,7 +533,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 125 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 121 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                      Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -543,7 +542,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 126 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 122 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
             }
 
             
@@ -551,14 +550,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6136), Tuple.Create("\"", 6190)
+WriteAttribute("href", Tuple.Create(" href=\"", 6156), Tuple.Create("\"", 6210)
             
-            #line 127 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 6143), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Page.Id })
+            #line 123 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 6163), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Page.Id })
             
             #line default
             #line hidden
-, 6143), false)
+, 6163), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -566,7 +565,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 127 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 123 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                      Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -577,7 +576,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 128 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 124 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
        Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
 
             
@@ -594,7 +593,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 135 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 131 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
    Html.BeginForm("edit", (string)ViewContext.RouteData.Values["Controller"]) ; 
             
             #line default
@@ -604,7 +603,7 @@ WriteLiteral("\r\n<div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 137 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 133 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.IsNew));
 
             
@@ -615,7 +614,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 138 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 134 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.SiteTreeId));
 
             
@@ -626,7 +625,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 139 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 135 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.SiteTreeInternalId));
 
             
@@ -637,7 +636,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 140 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 136 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.OriginalId));
 
             
@@ -648,7 +647,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 141 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 137 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Id));
 
             
@@ -659,7 +658,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 142 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 138 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.IsDraft));
 
             
@@ -670,7 +669,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 143 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 139 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Permalink));
 
             
@@ -681,7 +680,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 144 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 140 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.TemplateId));
 
             
@@ -692,7 +691,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 145 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 141 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.PermalinkId));
 
             
@@ -703,7 +702,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 146 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 142 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Permalink));
 
             
@@ -714,7 +713,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 147 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 143 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Created));
 
             
@@ -725,7 +724,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 148 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 144 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Updated));
 
             
@@ -736,7 +735,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 149 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 145 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Published));
 
             
@@ -747,7 +746,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 150 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 146 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.LastPublished));
 
             
@@ -758,7 +757,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 151 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 147 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.CreatedBy));
 
             
@@ -769,7 +768,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 152 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 148 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.UpdatedBy));
 
             
@@ -780,7 +779,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 153 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 149 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.IsNew));
 
             
@@ -791,7 +790,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 154 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 150 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Id));
 
             
@@ -802,7 +801,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 155 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 151 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.NamespaceId));
 
             
@@ -813,7 +812,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 156 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 152 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Type));
 
             
@@ -824,7 +823,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 157 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 153 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Created));
 
             
@@ -835,7 +834,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 158 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 154 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.CreatedBy));
 
             
@@ -844,69 +843,69 @@ Write(Html.HiddenFor(m => m.Permalink.CreatedBy));
 WriteLiteral("\r\n");
 
             
-            #line 159 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 155 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 155 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
      if (Model.IsSite) {
     
             
             #line default
             #line hidden
             
-            #line 160 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 156 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Title));
 
             
             #line default
             #line hidden
             
-            #line 160 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 156 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                       
     
             
             #line default
             #line hidden
             
-            #line 161 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 157 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.ParentId));
 
             
             #line default
             #line hidden
             
-            #line 161 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 157 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                          
     
             
             #line default
             #line hidden
             
-            #line 162 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 158 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Page.Seqno));
 
             
             #line default
             #line hidden
             
-            #line 162 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 158 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                       
     
             
             #line default
             #line hidden
             
-            #line 163 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 159 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Name));
 
             
             #line default
             #line hidden
             
-            #line 163 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 159 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                           
     }
 
@@ -916,7 +915,7 @@ Write(Html.HiddenFor(m => m.Permalink.Name));
 WriteLiteral("    ");
 
             
-            #line 165 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 161 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
 Write(Html.Hidden("returl", (string)ViewBag.ReturnUrl));
 
             
@@ -938,14 +937,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"org_parentid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7841), Tuple.Create("\"", 7869)
+WriteAttribute("value", Tuple.Create(" value=\"", 7861), Tuple.Create("\"", 7889)
             
-            #line 167 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 7849), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
+            #line 163 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 7869), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
             
             #line default
             #line hidden
-, 7849), false)
+, 7869), false)
 );
 
 WriteLiteral(" />\r\n</div>\r\n<div");
@@ -954,14 +953,14 @@ WriteLiteral(" class=\"first-row\"");
 
 WriteLiteral(">\r\n    <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 7916), Tuple.Create("\"", 8006)
+WriteAttribute("class", Tuple.Create(" class=\"", 7936), Tuple.Create("\"", 8026)
             
-            #line 170 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 7924), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(Model.Template.Preview.ToString()) ? "grid_9" : "grid_12"
+            #line 166 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 7944), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(Model.Template.Preview.ToString()) ? "grid_9" : "grid_12"
             
             #line default
             #line hidden
-, 7924), false)
+, 7944), false)
 );
 
 WriteLiteral(">\r\n        <div");
@@ -975,7 +974,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 172 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 168 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                               Write(Piranha.Resources.Global.Information);
 
             
@@ -988,13 +987,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 174 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 170 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 174 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 170 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                  if (!Model.IsSite) {
 
             
@@ -1007,7 +1006,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                    <li>");
 
             
-            #line 176 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 172 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.LabelFor(m => m.Page.Title));
 
             
@@ -1022,7 +1021,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 178 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 174 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.TextBoxFor(m => m.Page.Title));
 
             
@@ -1033,7 +1032,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 179 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 175 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.ValidationMessageFor(m => m.Page.Title));
 
             
@@ -1042,7 +1041,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </li>\r\n                    <li>");
 
             
-            #line 181 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 177 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.LabelFor(m => m.Page.NavigationTitle));
 
             
@@ -1057,7 +1056,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 183 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 179 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.TextBoxFor(m => m.Page.NavigationTitle, new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
@@ -1068,7 +1067,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 184 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 180 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.ValidationMessageFor(m => m.Page.NavigationTitle));
 
             
@@ -1081,7 +1080,7 @@ WriteLiteral(" class=\"protected\"");
 WriteLiteral(">");
 
             
-            #line 186 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 182 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                      Write(Html.LabelFor(m => m.Page.Permalink));
 
             
@@ -1090,13 +1089,13 @@ WriteLiteral(">");
 WriteLiteral("\r\n");
 
             
-            #line 187 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 183 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 187 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 183 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                          if (Model.Permalink != null && !String.IsNullOrEmpty(Model.Permalink.Name)) {
 
             
@@ -1105,14 +1104,14 @@ WriteLiteral("\r\n");
 WriteLiteral("                        <p>");
 
             
-            #line 188 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 184 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                       Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
 
             
             #line default
             #line hidden
             
-            #line 188 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 184 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                Write(Url.GetPermalink(Model.Permalink.Name));
 
             
@@ -1121,7 +1120,7 @@ WriteLiteral("                        <p>");
 WriteLiteral("</p>\r\n");
 
             
-            #line 189 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 185 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         } else {
 
             
@@ -1130,7 +1129,7 @@ WriteLiteral("</p>\r\n");
 WriteLiteral("                        <p><i>");
 
             
-            #line 190 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 186 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                          Write(Piranha.Resources.Page.PermalinkDescription);
 
             
@@ -1139,7 +1138,7 @@ WriteLiteral("                        <p><i>");
 WriteLiteral("</i></p>\r\n");
 
             
-            #line 191 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 187 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         }
 
             
@@ -1154,7 +1153,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 193 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 189 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.TextBoxFor(m => m.Permalink.Name));
 
             
@@ -1165,7 +1164,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 194 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 190 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.ValidationMessageFor(m => m.Permalink));
 
             
@@ -1179,7 +1178,7 @@ WriteLiteral("></a>\r\n                    </li>\r\n                    <li>\r\n
 "   <label>");
 
             
-            #line 198 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 194 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                           Write(Piranha.Resources.Global.Placement);
 
             
@@ -1194,13 +1193,13 @@ WriteLiteral(" id=\"btnMove\"");
 WriteLiteral(">Move</button>\r\n");
 
             
-            #line 200 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 196 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 200 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 196 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                          if (!Model.Page.IsStartpage) {
 
             
@@ -1209,7 +1208,7 @@ WriteLiteral(">Move</button>\r\n");
 WriteLiteral("                        <p>");
 
             
-            #line 201 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 197 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                       Write(Piranha.Resources.Global.PlacementPage);
 
             
@@ -1218,7 +1217,7 @@ WriteLiteral("                        <p>");
 WriteLiteral(" <strong>");
 
             
-            #line 201 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 197 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                        Write(Model.Page.Seqno > 1 ? @Piranha.Resources.Global.PlacementAfter : @Piranha.Resources.Global.PlacementBelow);
 
             
@@ -1227,7 +1226,7 @@ WriteLiteral(" <strong>");
 WriteLiteral("</strong> &quot;");
 
             
-            #line 201 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 197 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                                                                                                    Write(Model.PlaceRef);
 
             
@@ -1236,7 +1235,7 @@ WriteLiteral("</strong> &quot;");
 WriteLiteral("&quot;</p>\r\n");
 
             
-            #line 202 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 198 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         } else {
 
             
@@ -1245,7 +1244,7 @@ WriteLiteral("&quot;</p>\r\n");
 WriteLiteral("                        <p>");
 
             
-            #line 203 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 199 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                       Write(Piranha.Resources.Global.PlacementStart);
 
             
@@ -1254,7 +1253,7 @@ WriteLiteral("                        <p>");
 WriteLiteral("</p>\r\n");
 
             
-            #line 204 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 200 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         }
 
             
@@ -1271,7 +1270,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 206 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 202 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.LabelFor(m => m.Page.ParentId));
 
             
@@ -1290,13 +1289,13 @@ WriteLiteral(" name=\"Page.ParentId\"");
 WriteLiteral(">\r\n");
 
             
-            #line 209 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 205 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 209 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 205 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                      foreach (var p in Model.Parents) {
 
             
@@ -1304,18 +1303,18 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10554), Tuple.Create("\"", 10567)
+WriteAttribute("value", Tuple.Create(" value=\"", 10574), Tuple.Create("\"", 10587)
             
-            #line 210 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 10562), Tuple.Create<System.Object, System.Int32>(p.Id
+            #line 206 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 10582), Tuple.Create<System.Object, System.Int32>(p.Id
             
             #line default
             #line hidden
-, 10562), false)
+, 10582), false)
 );
 
             
-            #line 210 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 206 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                      Write(p.IsSelected ? " selected=selected" : "");
 
             
@@ -1326,7 +1325,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 211 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 207 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.Raw(p.Title));
 
             
@@ -1335,7 +1334,7 @@ WriteLiteral("                                        ");
 WriteLiteral("</option>\r\n");
 
             
-            #line 212 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 208 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     }
 
             
@@ -1346,7 +1345,7 @@ WriteLiteral("                                </select>\r\n                     
 WriteLiteral("                            ");
 
             
-            #line 215 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 211 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.LabelFor(m => m.Page.Seqno));
 
             
@@ -1367,13 +1366,13 @@ WriteLiteral(" name=\"Page.Seqno\"");
 WriteLiteral(">\r\n");
 
             
-            #line 218 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 214 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 218 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 214 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                  foreach (var s in Model.Siblings) {
 
             
@@ -1381,18 +1380,18 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 11113), Tuple.Create("\"", 11129)
+WriteAttribute("value", Tuple.Create(" value=\"", 11133), Tuple.Create("\"", 11149)
             
-            #line 219 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 11121), Tuple.Create<System.Object, System.Int32>(s.Seqno
+            #line 215 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 11141), Tuple.Create<System.Object, System.Int32>(s.Seqno
             
             #line default
             #line hidden
-, 11121), false)
+, 11141), false)
 );
 
             
-            #line 219 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 215 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                     Write(s.IsSelected ? " selected=selected" : "");
 
             
@@ -1401,7 +1400,7 @@ WriteAttribute("value", Tuple.Create(" value=\"", 11113), Tuple.Create("\"", 111
 WriteLiteral(">");
 
             
-            #line 219 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 215 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                Write(s.Title);
 
             
@@ -1410,7 +1409,7 @@ WriteLiteral(">");
 WriteLiteral("</option>\r\n");
 
             
-            #line 220 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 216 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 }
 
             
@@ -1421,7 +1420,7 @@ WriteLiteral("                                </select>\r\n                     
 "");
 
             
-            #line 226 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 222 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                 } else {
 
             
@@ -1436,7 +1435,7 @@ WriteLiteral(">\r\n                    <li>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 229 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 225 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.LabelFor(m => m.SiteTree.MetaTitle, Piranha.Resources.SiteTree.MetaTitle));
 
             
@@ -1451,7 +1450,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 231 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 227 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.TextBoxFor(m => m.SiteTree.MetaTitle));
 
             
@@ -1460,13 +1459,13 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n");
 
             
-            #line 232 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 228 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 232 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 228 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                              if (String.IsNullOrEmpty(Model.SiteTree.MetaTitle)) {
 
             
@@ -1479,7 +1478,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 233 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 229 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                       Write(Piranha.Resources.Page.KeywordsNotification);
 
             
@@ -1488,7 +1487,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n");
 
             
-            #line 234 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 230 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             }
 
             
@@ -1500,7 +1499,7 @@ WriteLiteral("                        </div>\r\n                    </li>\r\n   
 WriteLiteral("                        ");
 
             
-            #line 238 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 234 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.LabelFor(m => m.SiteTree.MetaDescription, Piranha.Resources.SiteTree.MetaDescription));
 
             
@@ -1515,7 +1514,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 240 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 236 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                        Write(Html.TextAreaFor(m => m.SiteTree.MetaDescription, new { @rows = 5 }));
 
             
@@ -1524,13 +1523,13 @@ WriteLiteral("                            ");
 WriteLiteral("\r\n");
 
             
-            #line 241 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 237 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 241 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 237 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                              if (String.IsNullOrEmpty(Model.SiteTree.MetaDescription)) {
 
             
@@ -1543,7 +1542,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 242 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 238 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                       Write(Piranha.Resources.Page.DescriptionNotification);
 
             
@@ -1552,7 +1551,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n");
 
             
-            #line 243 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 239 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             }
 
             
@@ -1562,7 +1561,7 @@ WriteLiteral("                        </div>\r\n                    </li>\r\n   
 "\n");
 
             
-            #line 247 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 243 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                 }
 
             
@@ -1571,13 +1570,13 @@ WriteLiteral("                        </div>\r\n                    </li>\r\n   
 WriteLiteral("            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 251 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 247 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 251 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 247 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
      if (!String.IsNullOrEmpty(Model.Template.Preview.ToString())) {
 
             
@@ -1598,7 +1597,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 254 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 250 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                Write(!Model.IsSite ? Model.Template.Name : Model.SiteTree.Name);
 
             
@@ -1617,7 +1616,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 257 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 253 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                Write(Model.Template.Preview);
 
             
@@ -1626,7 +1625,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 262 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 258 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
     }
 
             
@@ -1646,15 +1645,15 @@ WriteLiteral(" class=\"tools\"");
 
 WriteLiteral(">\r\n                        <ul>\r\n                            <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 13320), Tuple.Create("\"", 13399)
-, Tuple.Create(Tuple.Create("", 13328), Tuple.Create("btn-content", 13328), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 13340), Tuple.Create("\"", 13419)
+, Tuple.Create(Tuple.Create("", 13348), Tuple.Create("btn-content", 13348), true)
             
-            #line 271 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create(" ", 13339), Tuple.Create<System.Object, System.Int32>(Model.Action != EditModel.ActionType.SEO ? "active" : ""
+            #line 267 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create(" ", 13359), Tuple.Create<System.Object, System.Int32>(Model.Action != EditModel.ActionType.SEO ? "active" : ""
             
             #line default
             #line hidden
-, 13340), false)
+, 13360), false)
 );
 
 WriteLiteral("><a");
@@ -1666,7 +1665,7 @@ WriteLiteral(" data-id=\"pnl-content\"");
 WriteLiteral(">");
 
             
-            #line 271 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 267 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                                              Write(Piranha.Resources.Global.Content);
 
             
@@ -1675,13 +1674,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 272 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 268 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 272 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 268 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                              if (!Model.IsSite) {
 
             
@@ -1689,15 +1688,15 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("                            <li");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 13561), Tuple.Create("\"", 13641)
-, Tuple.Create(Tuple.Create("", 13569), Tuple.Create("btn-settings", 13569), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 13581), Tuple.Create("\"", 13661)
+, Tuple.Create(Tuple.Create("", 13589), Tuple.Create("btn-settings", 13589), true)
             
-            #line 273 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create(" ", 13581), Tuple.Create<System.Object, System.Int32>(Model.Action == EditModel.ActionType.SEO ? "active" : ""
+            #line 269 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create(" ", 13601), Tuple.Create<System.Object, System.Int32>(Model.Action == EditModel.ActionType.SEO ? "active" : ""
             
             #line default
             #line hidden
-, 13582), false)
+, 13602), false)
 );
 
 WriteLiteral("><a");
@@ -1709,7 +1708,7 @@ WriteLiteral(" data-id=\"pnl-settings\"");
 WriteLiteral(">");
 
             
-            #line 273 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 269 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                                                Write(Piranha.Resources.Global.Settings);
 
             
@@ -1718,7 +1717,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 274 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 270 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             }
 
             
@@ -1727,7 +1726,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 275 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 271 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                              if (Model.Properties.Count > 0) {
 
             
@@ -1746,7 +1745,7 @@ WriteLiteral(" data-id=\"pnl-properties\"");
 WriteLiteral(">");
 
             
-            #line 276 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 272 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                        Write(Piranha.Resources.Global.Properties);
 
             
@@ -1755,7 +1754,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 277 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 273 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             }
 
             
@@ -1764,7 +1763,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 278 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 274 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                              if (Model.EnableComments) {
 
             
@@ -1777,13 +1776,13 @@ WriteLiteral(" class=\"btn-comments\"");
 WriteLiteral(">\r\n");
 
             
-            #line 280 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 276 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 280 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 276 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                   
                                     var count = Model.Comments.Where(c => c.Status == Piranha.Entities.Comment.CommentStatus.New).Count() ;
                                 
@@ -1793,7 +1792,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("\r\n                                <span ");
 
             
-            #line 283 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 279 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                   Write(count == 0 ? "style=display:none" : "");
 
             
@@ -1802,7 +1801,7 @@ WriteLiteral("\r\n                                <span ");
 WriteLiteral(" id=\"comment-notification\" class=\"notification\">");
 
             
-            #line 283 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 279 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                           Write(count);
 
             
@@ -1817,7 +1816,7 @@ WriteLiteral(" data-id=\"pnl-comments\"");
 WriteLiteral(">");
 
             
-            #line 284 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 280 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                               Write(Piranha.Resources.Global.Comments);
 
             
@@ -1826,7 +1825,7 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n                            </li>\r\n");
 
             
-            #line 286 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 282 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             }
 
             
@@ -1835,7 +1834,7 @@ WriteLiteral("</a>\r\n                            </li>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 287 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 283 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                              foreach (var ext in Model.Extensions) {
 
             
@@ -1846,7 +1845,7 @@ WriteLiteral("                            <li>\r\n                              
 WriteLiteral(" href=\"#\"");
 
             
-            #line 289 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 285 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
                                 Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "");
 
@@ -1856,7 +1855,7 @@ WriteLiteral(" href=\"#\"");
 WriteLiteral(" data-id=\"pnl-");
 
             
-            #line 290 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 286 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                        Write(ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower());
 
             
@@ -1867,7 +1866,7 @@ WriteLiteral("\">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 291 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 287 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                Write(ExtensionManager.Current.GetNameByType(ext.Type));
 
             
@@ -1876,7 +1875,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </a>\r\n                            </li>\r\n");
 
             
-            #line 294 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 290 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                             }
 
             
@@ -1887,16 +1886,16 @@ WriteLiteral("                        </ul>\r\n                    </td>\r\n    
 
 WriteLiteral(" id=\"pnl-content\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 15386), Tuple.Create("\"", 15473)
-, Tuple.Create(Tuple.Create("", 15394), Tuple.Create("main", 15394), true)
-, Tuple.Create(Tuple.Create(" ", 15398), Tuple.Create("content-editor", 15399), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 15406), Tuple.Create("\"", 15493)
+, Tuple.Create(Tuple.Create("", 15414), Tuple.Create("main", 15414), true)
+, Tuple.Create(Tuple.Create(" ", 15418), Tuple.Create("content-editor", 15419), true)
             
-            #line 298 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create(" ", 15413), Tuple.Create<System.Object, System.Int32>(Model.Action != EditModel.ActionType.SEO ? "" : "hidden"
+            #line 294 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create(" ", 15433), Tuple.Create<System.Object, System.Int32>(Model.Action != EditModel.ActionType.SEO ? "" : "hidden"
             
             #line default
             #line hidden
-, 15414), false)
+, 15434), false)
 );
 
 WriteLiteral(">\r\n                            <div");
@@ -1912,13 +1911,13 @@ WriteLiteral(" class=\"buttons\"");
 WriteLiteral(">\r\n");
 
             
-            #line 301 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 297 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 301 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 297 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                      for (int n = 0; n < Model.Regions.Count; n++) {
 
             
@@ -1926,32 +1925,32 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                        <button");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 15733), Tuple.Create("\"", 15785)
+WriteAttribute("id", Tuple.Create(" id=\"", 15753), Tuple.Create("\"", 15805)
             
-            #line 302 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 15738), Tuple.Create<System.Object, System.Int32>(Html.Raw("btn_" + Model.Regions[n].InternalId)
+            #line 298 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 15758), Tuple.Create<System.Object, System.Int32>(Html.Raw("btn_" + Model.Regions[n].InternalId)
             
             #line default
             #line hidden
-, 15738), false)
+, 15758), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 15786), Tuple.Create("\"", 15829)
-, Tuple.Create(Tuple.Create("", 15794), Tuple.Create("btn", 15794), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 15806), Tuple.Create("\"", 15849)
+, Tuple.Create(Tuple.Create("", 15814), Tuple.Create("btn", 15814), true)
             
-            #line 302 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                               , Tuple.Create(Tuple.Create("", 15797), Tuple.Create<System.Object, System.Int32>(n > 0 ? "" : " active"
+            #line 298 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+                               , Tuple.Create(Tuple.Create("", 15817), Tuple.Create<System.Object, System.Int32>(n > 0 ? "" : " active"
             
             #line default
             #line hidden
-, 15797), false)
-, Tuple.Create(Tuple.Create(" ", 15822), Tuple.Create("region", 15823), true)
+, 15817), false)
+, Tuple.Create(Tuple.Create(" ", 15842), Tuple.Create("region", 15843), true)
 );
 
 WriteLiteral(">");
 
             
-            #line 302 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 298 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                                             Write(Model.Regions[n].Name);
 
             
@@ -1960,7 +1959,7 @@ WriteLiteral(">");
 WriteLiteral("</button>\r\n");
 
             
-            #line 303 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 299 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     }
 
             
@@ -1970,21 +1969,21 @@ WriteLiteral("                                    <button");
 
 WriteLiteral(" id=\"btn_attachments\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 15967), Tuple.Create("\"", 16022)
-, Tuple.Create(Tuple.Create("", 15975), Tuple.Create("btn", 15975), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 15987), Tuple.Create("\"", 16042)
+, Tuple.Create(Tuple.Create("", 15995), Tuple.Create("btn", 15995), true)
             
-            #line 304 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 15978), Tuple.Create<System.Object, System.Int32>(Model.Regions.Count == 0 ? " active" : ""
+            #line 300 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 15998), Tuple.Create<System.Object, System.Int32>(Model.Regions.Count == 0 ? " active" : ""
             
             #line default
             #line hidden
-, 15978), false)
+, 15998), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 304 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 300 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                                                     Write(Piranha.Resources.Page.Attachments);
 
             
@@ -1998,7 +1997,7 @@ WriteLiteral(" id=\"section-title\"");
 WriteLiteral(">");
 
             
-            #line 306 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 302 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                   Write(Piranha.Resources.Global.Content);
 
             
@@ -2011,13 +2010,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 309 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 305 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 309 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 305 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                  if (Model.Regions.Count > 0) {
 
             
@@ -2032,7 +2031,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 311 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 307 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                Write(Html.EditorFor(m => m.Regions));
 
             
@@ -2041,7 +2040,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </div>\r\n");
 
             
-            #line 313 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 309 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 }
 
             
@@ -2054,7 +2053,7 @@ WriteLiteral(" id=\"attachments\"");
 WriteLiteral(" ");
 
             
-            #line 314 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 310 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                   Write(Model.Regions.Count > 0 ? "style=display:none" : "");
 
             
@@ -2065,7 +2064,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 315 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 311 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                Write(Html.Partial("Partial/Attachments"));
 
             
@@ -2075,13 +2074,13 @@ WriteLiteral("\r\n                                </div>\r\n                    
 "                     </div>\r\n");
 
             
-            #line 319 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 315 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 319 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 315 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                          if (!Model.IsSite) {
 
             
@@ -2091,15 +2090,15 @@ WriteLiteral("                        <div");
 
 WriteLiteral(" id=\"pnl-settings\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 16937), Tuple.Create("\"", 17009)
-, Tuple.Create(Tuple.Create("", 16945), Tuple.Create("main", 16945), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 16957), Tuple.Create("\"", 17029)
+, Tuple.Create(Tuple.Create("", 16965), Tuple.Create("main", 16965), true)
             
-            #line 320 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-, Tuple.Create(Tuple.Create(" ", 16949), Tuple.Create<System.Object, System.Int32>(Model.Action == EditModel.ActionType.SEO ? "" : "hidden"
+            #line 316 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+, Tuple.Create(Tuple.Create(" ", 16969), Tuple.Create<System.Object, System.Int32>(Model.Action == EditModel.ActionType.SEO ? "" : "hidden"
             
             #line default
             #line hidden
-, 16950), false)
+, 16970), false)
 );
 
 WriteLiteral(">\r\n                            <div");
@@ -2109,7 +2108,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 321 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 317 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                               Write(Piranha.Resources.Global.Settings);
 
             
@@ -2128,7 +2127,7 @@ WriteLiteral(">\r\n                                    <li>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 325 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 321 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.GroupId));
 
             
@@ -2143,7 +2142,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 327 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 323 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.DropDownListFor(m => m.Page.GroupId, Model.Groups));
 
             
@@ -2154,7 +2153,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 328 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 324 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.DisabledGroups));
 
             
@@ -2169,13 +2168,13 @@ WriteLiteral(" class=\"block\"");
 WriteLiteral(">\r\n");
 
             
-            #line 330 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 326 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 330 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 326 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                var dGroups = Model.Groups.Where(g => g.Value != Guid.Empty.ToString()).ToList() ; 
             
             #line default
@@ -2185,7 +2184,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 331 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 327 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.Partial("Partial/GroupList", new Piranha.Models.Manager.PageModels.GroupListModel() { 
                                                 Groups = Model.DisableGroups, Page = Model.Page }));
 
@@ -2198,7 +2197,7 @@ WriteLiteral("\r\n                                        </div>\r\n            
 WriteLiteral("                                        ");
 
             
-            #line 336 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 332 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.IsHidden));
 
             
@@ -2207,7 +2206,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                        <p>");
 
             
-            #line 337 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 333 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                       Write(Html.CheckBoxFor(m => m.Page.IsHidden));
 
             
@@ -2216,7 +2215,7 @@ WriteLiteral("\r\n                                        <p>");
 WriteLiteral(" (");
 
             
-            #line 337 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 333 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                                Write(Piranha.Resources.Page.HiddenDescription);
 
             
@@ -2226,7 +2225,7 @@ WriteLiteral(")</p>\r\n                                    </li>\r\n            
 "     <li>");
 
             
-            #line 339 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 335 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.Keywords));
 
             
@@ -2241,7 +2240,7 @@ WriteLiteral("> \r\n");
 WriteLiteral("                                            ");
 
             
-            #line 341 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 337 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.TextBoxFor(m => m.Page.Keywords, new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
@@ -2250,13 +2249,13 @@ WriteLiteral("                                            ");
 WriteLiteral("\r\n");
 
             
-            #line 342 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 338 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 342 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 338 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                              if (Model.Action == EditModel.ActionType.SEO && String.IsNullOrEmpty(Model.Page.Keywords)) {
 
             
@@ -2269,7 +2268,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 343 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 339 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                       Write(Piranha.Resources.Page.KeywordsNotification);
 
             
@@ -2278,7 +2277,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n");
 
             
-            #line 344 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 340 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                             }
 
             
@@ -2289,7 +2288,7 @@ WriteLiteral("                                        </div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 346 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 342 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.Keywords));
 
             
@@ -2299,7 +2298,7 @@ WriteLiteral("\r\n                                    </li>\r\n                 
 "<li>");
 
             
-            #line 348 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 344 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.Description));
 
             
@@ -2314,7 +2313,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 350 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 346 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.TextAreaFor(m => m.Page.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
             
@@ -2323,13 +2322,13 @@ WriteLiteral("                                            ");
 WriteLiteral("\r\n");
 
             
-            #line 351 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 347 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                             
             
             #line default
             #line hidden
             
-            #line 351 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 347 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                              if (Model.Action == EditModel.ActionType.SEO && String.IsNullOrEmpty(Model.Page.Description)) {
 
             
@@ -2342,7 +2341,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 352 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 348 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                       Write(Piranha.Resources.Page.DescriptionNotification);
 
             
@@ -2351,7 +2350,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n");
 
             
-            #line 353 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 349 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                             }
 
             
@@ -2362,7 +2361,7 @@ WriteLiteral("                                        </div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 355 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 351 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.Description));
 
             
@@ -2371,13 +2370,13 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </li>\r\n");
 
             
-            #line 357 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 353 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 357 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 353 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                      if (Model.Template.ShowController) {
 
             
@@ -2386,7 +2385,7 @@ WriteLiteral("\r\n                                    </li>\r\n");
 WriteLiteral("                                    <li>");
 
             
-            #line 358 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 354 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageController));
 
             
@@ -2401,7 +2400,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 360 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 356 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional }));
 
             
@@ -2412,7 +2411,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 361 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 357 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.PageController));
 
             
@@ -2421,7 +2420,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </li>\r\n");
 
             
-            #line 363 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 359 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     }
 
             
@@ -2430,7 +2429,7 @@ WriteLiteral("\r\n                                    </li>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 364 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 360 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                      if (Model.Template.ShowRedirect) {
 
             
@@ -2439,7 +2438,7 @@ WriteLiteral("                                    ");
 WriteLiteral("                                    <li>");
 
             
-            #line 365 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 361 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageRedirect));
 
             
@@ -2454,7 +2453,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 367 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 363 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.TextBoxFor(m => m.Page.PageRedirect, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Redirect) ? Model.Template.Redirect : Piranha.Resources.Global.Optional }));
 
             
@@ -2465,7 +2464,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 368 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 364 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.PageRedirect));
 
             
@@ -2474,7 +2473,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </li>\r\n");
 
             
-            #line 370 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 366 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                     }
 
             
@@ -2484,7 +2483,7 @@ WriteLiteral("                                </ul>\r\n                         
 "                  </div>\r\n");
 
             
-            #line 374 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 370 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         }
 
             
@@ -2493,7 +2492,7 @@ WriteLiteral("                                </ul>\r\n                         
 WriteLiteral("                        ");
 
             
-            #line 375 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 371 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                          if (Model.Properties.Count > 0) {
 
             
@@ -2512,7 +2511,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 377 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 373 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                               Write(Piranha.Resources.Global.Properties);
 
             
@@ -2529,13 +2528,13 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n");
 
             
-            #line 380 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 376 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 380 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 376 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                  for (int n = 0; n < Model.Properties.Count; n++) {
 
             
@@ -2544,7 +2543,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    <li>");
 
             
-            #line 381 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 377 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name));
 
             
@@ -2555,7 +2554,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 382 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 378 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].Id));
 
             
@@ -2566,7 +2565,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 383 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 379 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].IsDraft));
 
             
@@ -2577,7 +2576,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 384 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 380 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].ParentId));
 
             
@@ -2588,7 +2587,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 385 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 381 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].Name));
 
             
@@ -2599,7 +2598,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 386 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 382 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].Created));
 
             
@@ -2610,7 +2609,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 387 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 383 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].CreatedBy));
 
             
@@ -2621,7 +2620,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 388 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 384 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].IsNew));
 
             
@@ -2636,7 +2635,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 390 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 386 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                        Write(Html.TextBoxFor(m => m.Properties[n].Value));
 
             
@@ -2645,7 +2644,7 @@ WriteLiteral("                                            ");
 WriteLiteral("</div>\r\n                                    </li>\r\n");
 
             
-            #line 392 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 388 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                 }
 
             
@@ -2655,7 +2654,7 @@ WriteLiteral("                                </ul>\r\n                         
 "                  </div>\r\n");
 
             
-            #line 396 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 392 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         }
 
             
@@ -2664,7 +2663,7 @@ WriteLiteral("                                </ul>\r\n                         
 WriteLiteral("                        ");
 
             
-            #line 397 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 393 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                          if (Model.EnableComments) {
 
             
@@ -2683,7 +2682,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 399 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 395 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                               Write(Piranha.Resources.Global.Comments);
 
             
@@ -2698,7 +2697,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 401 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 397 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                            Write(Html.Partial("~/Areas/Manager/Views/Comment/List.cshtml", Model.Comments));
 
             
@@ -2707,7 +2706,7 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                            </div>\r\n                        </div>\r\n");
 
             
-            #line 404 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 400 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                         }
 
             
@@ -2716,7 +2715,7 @@ WriteLiteral("\r\n                            </div>\r\n                        
 WriteLiteral("                        ");
 
             
-            #line 405 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 401 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                    Write(Html.EditorFor(m => m.Extensions));
 
             
@@ -2730,13 +2729,13 @@ WriteLiteral(" class=\"grid_3 hidden\"");
 WriteLiteral(">\r\n");
 
             
-            #line 413 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 409 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 413 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 409 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
      if (!Model.Page.IsNew) {
 
             
@@ -2753,7 +2752,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 415 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 411 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                           Write(Piranha.Resources.Global.Versioning);
 
             
@@ -2770,7 +2769,7 @@ WriteLiteral(" class=\"list\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 418 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 414 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                Write(Piranha.Resources.Global.LastPublished);
 
             
@@ -2785,7 +2784,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 419 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 415 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                 Write(Model.Page.LastPublished > DateTime.MinValue ? Model.Page.LastPublished.ToShortDateString() : "");
 
             
@@ -2794,7 +2793,7 @@ WriteLiteral("                    ");
 WriteLiteral("</small></li>\r\n                <li>");
 
             
-            #line 420 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 416 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                Write(Piranha.Resources.Global.Published);
 
             
@@ -2809,7 +2808,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 421 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 417 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                 Write(Model.Page.Published > DateTime.MinValue ? Model.Page.Published.ToShortDateString() : "");
 
             
@@ -2818,7 +2817,7 @@ WriteLiteral("                    ");
 WriteLiteral("</small></li>\r\n                <li>");
 
             
-            #line 422 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 418 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                Write(Piranha.Resources.Global.Updated);
 
             
@@ -2831,7 +2830,7 @@ WriteLiteral(" class=\"right\"");
 WriteLiteral(">");
 
             
-            #line 422 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 418 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                       Write(Model.Page.Updated.ToShortDateString());
 
             
@@ -2840,7 +2839,7 @@ WriteLiteral(">");
 WriteLiteral("</small></li>\r\n                <li>");
 
             
-            #line 423 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 419 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                Write(Piranha.Resources.Global.Created);
 
             
@@ -2853,7 +2852,7 @@ WriteLiteral(" class=\"right\"");
 WriteLiteral(">");
 
             
-            #line 423 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 419 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                                                       Write(Model.Page.Created.ToShortDateString());
 
             
@@ -2862,7 +2861,7 @@ WriteLiteral(">");
 WriteLiteral("</small></li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 427 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 423 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
     }
 
             
@@ -2871,7 +2870,7 @@ WriteLiteral("</small></li>\r\n            </ul>\r\n        </div>\r\n    </div>
 WriteLiteral("</div>\r\n");
 
             
-            #line 429 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
+            #line 425 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
    Html.EndForm() ; 
             
             #line default

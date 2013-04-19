@@ -245,6 +245,10 @@ WriteLiteral("    <div");
 
 WriteLiteral(" class=\"clear\"");
 
+WriteLiteral("></div>\r\n    <div");
+
+WriteLiteral(" class=\"loader\"");
+
 WriteLiteral("></div>\r\n</div>");
 
         }

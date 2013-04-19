@@ -43,63 +43,6 @@ function bindAttachmentEvents() {
     });
 
     //
-    // Opens the content popup in a floatbox with ajax.
-    //
-    $("#btn_attach").unbind();
-    $("#btn_attach").click(function () {
-        $("#boxContent .box > div").remove();
-        floatBox.show("boxContent");
-        $.ajax({
-            url: siteroot + "manager/content/popup" + (folderId ? "/" + folderId : ""),
-            success: function(data) {
-                $("#boxContent .box").append(data) ;
-                floatBox.position($("#boxContent .box"));
-                bindAjaxBoxEvents();
-                bindAttachmentEvents();
-            }
-        });
-    });
-
-    //
-    // Handles a click in the attachments panel and
-    // calls "addAtachment" to add the file.
-    $(".gallery-item img").unbind();
-    $(".gallery-item img").click(function () {
-        if (!$(this).hasClass("folder")) {
-            $.ajax({
-                url: siteroot + "manager/content/get/" + $(this).attr("data-id"),
-                // url: siteroot + "rest/content/get/" + $(this).attr("data-id") + "?apikey=" + apikey,
-                dataType: "json",
-                success: function (data) {
-                    addAttachment(data);
-                    floatBox.close("boxContent");
-                    bindAttachmentEvents();
-                }
-            });
-        }
-    });
-
-    $("#btnContentPopup").live("click", function () {
-
-    });
-
-    //
-    // Reloads the media browser for the selected folder
-    $(".gallery-item img.folder").unbind();
-    $(".gallery-item img.folder").click(function () {
-        $.ajax({
-            url: siteroot + "manager/content/popup/" + $(this).attr("data-id"),
-            success: function (data) {
-                $("#boxContent .box").html("");
-                $("#boxContent .box").append(data);
-                floatBox.position($("#boxContent .box"));
-                bindAjaxBoxEvents();
-                bindAttachmentEvents();
-            }
-        });
-    });
-
-    //
     // Deletes a row from the attachment list.
     //
     $("#attachments .delete").unbind();

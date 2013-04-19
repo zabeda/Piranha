@@ -30,28 +30,36 @@ piranha.media = function (buttonId, floatboxId, callback) {
         });
     };
     this.mediaClick = function () {
+        var that = this;
+
         if (!$(this).hasClass("folder")) {
-            $.ajax({
-                url: siteroot + "manager/content/get/" + $(this).attr("data-id") + '?tinymce=' + self.tinymce,
-                dataType: "json",
-                success: function (data) {
-                    if (self.cb)
-                        self.cb(data);
-                    floatBox.close(self.boxId);
-                }
+            $('#' + self.boxId + ' .inner .loader').fadeIn('fast', function () {
+                $.ajax({
+                    url: siteroot + "manager/content/get/" + $(that).attr("data-id") + '?tinymce=' + self.tinymce,
+                    dataType: "json",
+                    success: function (data) {
+                        if (self.cb)
+                            self.cb(data);
+                        floatBox.close(self.boxId);
+                    }
+                });
             });
         }
     };
     this.folderClick = function () {
+        var that = this;
+
         piranha.folderId = $(this).attr("data-id");
 
-        $.ajax({
-            url: siteroot + "manager/content/popup/" + $(this).attr("data-id") + '?tinymce=' + self.tinymce + '&filter=' + self.filter,
-            success: function (data) {
-                $('#' + self.boxId + ' .box').html('');
-                $('#' + self.boxId + ' .box').append(data);
-                floatBox.position($('#' + self.boxId + ' .box'));
-            }
+        $('#' + self.boxId + ' .inner .loader').fadeIn('fast', function () {
+            $.ajax({
+                url: siteroot + "manager/content/popup/" + $(that).attr("data-id") + '?tinymce=' + self.tinymce + '&filter=' + self.filter,
+                success: function (data) {
+                    $('#' + self.boxId + ' .box').html('');
+                    $('#' + self.boxId + ' .box').append(data);
+                    floatBox.position($('#' + self.boxId + ' .box'));
+                }
+            });
         });
     };
     this.boxClose = function () {

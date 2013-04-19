@@ -795,6 +795,7 @@
     <EmbeddedResource Include="Data\Scripts\Updates\7.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-loader.gif" />
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\license.txt" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\tinymce.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\content.min.css" />
