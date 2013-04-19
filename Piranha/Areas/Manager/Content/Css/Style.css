@@ -1084,7 +1084,7 @@ table.list .form .hidden { display: none; }
 .content-editor .region-body .defaultSkin table.mceLayout tr.mceLast td { border-width: 0px }
 .content-editor table.list tbody tr:first-child { background: #eee; }
 .content-editor .defaultSkin table.mceToolbar { padding-bottom: 6px; }
-.content-editor .defaultSkin .mceListBox .mceText { font-family: "Helvetica Neue",Helvetica,Arial; font-size: 12px; line-height: 25px; height: 24px; margin-top: 1px; }
+.content-editor .defaultSkin .mceListBox .mceText { font-family: Arial; font-size: 12px; line-height: 25px; height: 24px; margin-top: 1px; }
 .content-editor .defaultSkin .mceListBox .mceOpen { height: 24px; background-position: -741px 3px; margin-top: 1px; }
 .content-editor .region-body .defaultSkin table.mceLayout tr.mceFirst {
     height: 40px;
@@ -1106,7 +1106,7 @@ table.list .form .hidden { display: none; }
  * Datepicker
  */
 .ui-widget {
-    font: 14px "Helvetica Neue",Helvetica,Arial;
+    font: 14px Arial;
     }
 .ui-widget-header {
     background: #ddd;
