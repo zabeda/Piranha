@@ -235,6 +235,16 @@ namespace Piranha.Areas.Manager.Controllers
 			if (!String.IsNullOrEmpty(Request["tinymce"]))
 				draft = Request["tinymce"] != "true" ;
 
+			return Get(id, draft) ;
+		}
+
+		/// <summary>
+		/// Gets the content object with the given id
+		/// </summary>
+		/// <param name="id">The content id</param>
+		/// <param name="draft">Whether or not to get the draft</param>
+		[Access(Function="ADMIN_CONTENT")]
+		public JsonResult Get(string id, bool draft) {
 			var service = new Rest.ContentService() ;
 
 			return Json(service.Get(new Guid(id), draft), JsonRequestBehavior.AllowGet) ;
@@ -278,7 +288,7 @@ namespace Piranha.Areas.Manager.Controllers
 						Description = desc
 					} ;
 					if (content.SaveAndPublish(media))
-						return Get(content.Id.ToString()) ;
+						return Get(content.Id.ToString(), false) ;
 				}
 			}
 			return Json(new {
