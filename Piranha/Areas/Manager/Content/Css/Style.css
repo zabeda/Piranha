@@ -1011,6 +1011,8 @@ table.template td.locked,
     }
 .floatbox .box .title {
     background-image: none;
+    position: relative;
+    z-index: 100;
     }
 .floatbox .box .inner {
     padding: 14px;

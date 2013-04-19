@@ -165,7 +165,7 @@ table.tabbed,
     display: block;
     width: 16px;
     height: 16px;
-    margin: 4px 9px;
+    margin: 4px 9px 3px;
     cursor: pointer;
     }
 .floatbox .box .inner {
