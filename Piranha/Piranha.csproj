@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EcmaScript.NET">
       <HintPath>..\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
     </Reference>
@@ -687,8 +690,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffffff_256x240.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.reset.min.css" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Style.css" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Theme.css" />
+    <Content Include="Areas\Manager\Content\Css\Less\Attachments.less" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-16.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-24.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-after-16.png" />
@@ -797,6 +799,13 @@
     <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-loader.gif" />
+    <Content Include="Areas\Manager\Content\Css\Less\Style.less" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\logo.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-content.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-logout.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-settings.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-system.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Css\Style.min.css" />
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\license.txt" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\tinymce.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\content.min.css" />
@@ -1126,6 +1135,54 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\icomoon.woff" />
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Toolbars.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Mixins.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Forms.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Variables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Boxes.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Floatbox.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Tabs.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Lists.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\General.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Sitemap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Icons.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\External.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Preview.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Responsive.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Login.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\Less\Notifications.less" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1155,6 +1212,9 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(SolutionDir)packages\dotless.1.3.1.0\tool\dotless.compiler.exe" "$(ProjectDir)areas\manager\content\css\less\style.less" "$(ProjectDir)areas\manager\content\css\style.min.css" -m</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

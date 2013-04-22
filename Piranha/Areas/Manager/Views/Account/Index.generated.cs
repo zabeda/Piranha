@@ -85,20 +85,9 @@ WriteLiteral(" type=\"image/x-icon\"");
 
 WriteLiteral("> \r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 437), Tuple.Create("\"", 490)
-, Tuple.Create(Tuple.Create("", 444), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.css")
+WriteAttribute("href", Tuple.Create(" href=\"", 437), Tuple.Create("\"", 494)
+, Tuple.Create(Tuple.Create("", 444), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.min.css")
 , 444), false)
-);
-
-WriteLiteral(" rel=\"stylesheet\"");
-
-WriteLiteral(" type=\"text/css\"");
-
-WriteLiteral("/>\r\n    <link");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 537), Tuple.Create("\"", 590)
-, Tuple.Create(Tuple.Create("", 544), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/theme.css")
-, 544), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -109,18 +98,18 @@ WriteLiteral("/>\r\n\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 664), Tuple.Create("\"", 729)
-, Tuple.Create(Tuple.Create("", 670), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
-, 670), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 568), Tuple.Create("\"", 633)
+, Tuple.Create(Tuple.Create("", 574), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
+, 574), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 776), Tuple.Create("\"", 835)
-, Tuple.Create(Tuple.Create("", 782), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
-, 782), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 680), Tuple.Create("\"", 739)
+, Tuple.Create(Tuple.Create("", 686), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
+, 686), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -155,7 +144,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><small>");
 
             
-            #line 33 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 32 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                                   Write("v" + ViewBag.Version);
 
             
@@ -164,7 +153,7 @@ WriteLiteral("><small>");
 WriteLiteral("</small><h2>");
 
             
-            #line 33 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 32 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                                                                      Write(Piranha.Resources.Account.Title);
 
             
@@ -177,13 +166,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 35 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 34 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 34 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                    Html.BeginForm("login", "account") ; 
             
             #line default
@@ -193,7 +182,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 36 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\Account\Index.cshtml"
            Write(Html.Hidden("returnaction", "index"));
 
             
@@ -204,7 +193,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 37 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 36 "..\..\Areas\Manager\Views\Account\Index.cshtml"
            Write(Html.Hidden("returncontroller", "page"));
 
             
@@ -217,7 +206,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                    <li><label>");
 
             
-            #line 39 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 38 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                           Write(Piranha.Resources.Account.Username);
 
             
@@ -238,7 +227,7 @@ WriteLiteral(" type=\"text\"");
 WriteLiteral(" /></div></li>\r\n                    <li><label>");
 
             
-            #line 41 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                           Write(Piranha.Resources.Account.Password);
 
             
@@ -263,7 +252,7 @@ WriteLiteral(" class=\"btn right\"");
 WriteLiteral(">");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                                                    Write(Piranha.Resources.Account.Login);
 
             
@@ -272,13 +261,13 @@ WriteLiteral(">");
 WriteLiteral("</button>\r\n");
 
             
-            #line 45 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 44 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 44 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                    Html.EndForm() ; 
             
             #line default
@@ -308,7 +297,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 53 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 52 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                               Write(Piranha.Resources.Global.PopupMessageTitle);
 
             
@@ -327,7 +316,7 @@ WriteLiteral(" id=\"sysMsg\"");
 WriteLiteral(">");
 
             
-            #line 55 "..\..\Areas\Manager\Views\Account\Index.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Account\Index.cshtml"
                           Write(ViewBag.Message);
 
             

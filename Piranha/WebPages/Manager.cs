@@ -30,6 +30,11 @@ namespace Piranha.WebPages
 			public IList<MenuItem> Items { get ; set ; }
 
 			/// <summary>
+			/// The optional css class of the group.
+			/// </summary>
+			public string CssClass { get ; set ; }
+
+			/// <summary>
 			/// Gets the name of the current controller.
 			/// </summary>
 			private string ControllerName {
@@ -167,9 +172,9 @@ namespace Piranha.WebPages
 		/// The default manager menu.
 		/// </summary>
 		public static List<MenuGroup> Menu = new List<MenuGroup>() {
-			new MenuGroup() { InternalId = "Content", Name = @Resources.Global.MenuContent, Items = new List<MenuItem>() {
+			new MenuGroup() { InternalId = "Content", Name = @Resources.Global.MenuContent, CssClass = "ico content", Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "Pages", Name = @Resources.Tabs.ContentPages, Action = "index", Controller = "page", 
-					Permission = "ADMIN_PAGE" },
+					Permission = "ADMIN_PAGE", },
 				new MenuItem() { InternalId = "Posts", Name = @Resources.Tabs.ContentPosts, Action = "index", Controller = "post", 
 					Permission = "ADMIN_POST" },
 				new MenuItem() { InternalId = "Media", Name = @Resources.Tabs.ContentMedia, Action = "index", Controller = "content", 
@@ -177,7 +182,7 @@ namespace Piranha.WebPages
 				new MenuItem() { InternalId = "Comments", Name = @Resources.Tabs.SettingsComments, Action = "index", Controller = "comment", 
 					Permission = "ADMIN_COMMENT", SelectedActions = "index, delete, edit" },
 			}},
-			new MenuGroup() { InternalId = "Settings", Name = @Resources.Global.MenuSettings, Items = new List<MenuItem>() {
+			new MenuGroup() { InternalId = "Settings", Name = @Resources.Global.MenuSettings, CssClass = "ico settings", Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "PageTypes", Name = @Resources.Tabs.SettingsPageTypes, Action = "pagelist", Controller = "template", 
 					Permission = "ADMIN_PAGE_TEMPLATE", SelectedActions = "pagelist, page" },
 				new MenuItem() { InternalId = "PostTypes", Name = @Resources.Tabs.SettingsPostTypes, Action = "postlist", Controller = "template", 
@@ -189,7 +194,7 @@ namespace Piranha.WebPages
 				new MenuItem() { InternalId = "Sites", Name = @Resources.Tabs.SettingsSites, Action = "index", Controller = "sitetree",
 					Permission = "ADMIN_SITETREE" },
 			}},
-			new MenuGroup() { InternalId = "System", Name = @Resources.Global.MenuSystem, Items = new List<MenuItem>() {
+			new MenuGroup() { InternalId = "System", Name = @Resources.Global.MenuSystem, CssClass = "ico system", Items = new List<MenuItem>() {
 				new MenuItem() { InternalId = "Users", Name = @Resources.Tabs.SystemUsers, Action = "userlist", Controller = "settings", 
 					Permission = "ADMIN_USER", SelectedActions = "userlist, user, deleteuser" },
 				new MenuItem() { InternalId = "Groups", Name = @Resources.Tabs.SystemGroups, Action = "grouplist", Controller = "settings", 

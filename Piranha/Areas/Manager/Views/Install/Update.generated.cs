@@ -87,20 +87,9 @@ WriteLiteral(" type=\"image/x-icon\"");
 
 WriteLiteral("> \r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 540), Tuple.Create("\"", 593)
-, Tuple.Create(Tuple.Create("", 547), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.css")
+WriteAttribute("href", Tuple.Create(" href=\"", 540), Tuple.Create("\"", 597)
+, Tuple.Create(Tuple.Create("", 547), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.min.css")
 , 547), false)
-);
-
-WriteLiteral(" rel=\"stylesheet\"");
-
-WriteLiteral(" type=\"text/css\"");
-
-WriteLiteral("/>\r\n    <link");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 640), Tuple.Create("\"", 693)
-, Tuple.Create(Tuple.Create("", 647), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/theme.css")
-, 647), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -111,18 +100,18 @@ WriteLiteral("/>\r\n\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 767), Tuple.Create("\"", 832)
-, Tuple.Create(Tuple.Create("", 773), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
-, 773), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 671), Tuple.Create("\"", 736)
+, Tuple.Create(Tuple.Create("", 677), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
+, 677), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 879), Tuple.Create("\"", 938)
-, Tuple.Create(Tuple.Create("", 885), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
-, 885), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 783), Tuple.Create("\"", 842)
+, Tuple.Create(Tuple.Create("", 789), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
+, 789), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -156,7 +145,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 34 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                               Write(Piranha.Resources.Account.UpdateTitle);
 
             
@@ -169,7 +158,7 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n                <p>");
 
             
-            #line 36 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\Install\Update.cshtml"
               Write(Html.Raw(String.Format(Piranha.Resources.Account.UpdateMessage, Piranha.Data.Database.InstalledVersion, Piranha.Data.Database.CurrentVersion)));
 
             
@@ -178,13 +167,13 @@ WriteLiteral(">\r\n                <p>");
 WriteLiteral("</p>\r\n                <br />\r\n");
 
             
-            #line 38 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 37 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 38 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 37 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                    Html.BeginForm("runupdate", "install") ; 
             
             #line default
@@ -196,7 +185,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                    <li><label>");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                           Write(Piranha.Resources.Account.Username);
 
             
@@ -217,7 +206,7 @@ WriteLiteral(" type=\"text\"");
 WriteLiteral(" /></div></li>\r\n                    <li><label>");
 
             
-            #line 42 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                           Write(Piranha.Resources.Account.Password);
 
             
@@ -246,7 +235,7 @@ WriteLiteral(" type=\"submit\"");
 WriteLiteral(">");
 
             
-            #line 46 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                                                       Write(Piranha.Resources.Account.Update);
 
             
@@ -255,13 +244,13 @@ WriteLiteral(">");
 WriteLiteral("</button>\r\n");
 
             
-            #line 47 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                    Html.EndForm() ; 
             
             #line default
@@ -291,7 +280,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 55 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                               Write(Piranha.Resources.Global.PopupMessageTitle);
 
             
@@ -310,7 +299,7 @@ WriteLiteral(" id=\"sysMsg\"");
 WriteLiteral(">");
 
             
-            #line 57 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 56 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                           Write(ViewBag.Message);
 
             

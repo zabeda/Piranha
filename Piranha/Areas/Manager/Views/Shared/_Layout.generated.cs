@@ -104,20 +104,9 @@ WriteLiteral(" type=\"text/css\"");
 
 WriteLiteral(" />\r\n    <link");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 685), Tuple.Create("\"", 738)
-, Tuple.Create(Tuple.Create("", 692), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.css")
+WriteAttribute("href", Tuple.Create(" href=\"", 685), Tuple.Create("\"", 742)
+, Tuple.Create(Tuple.Create("", 692), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/style.min.css")
 , 692), false)
-);
-
-WriteLiteral(" rel=\"stylesheet\"");
-
-WriteLiteral(" type=\"text/css\"");
-
-WriteLiteral("/>\r\n    <link");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 785), Tuple.Create("\"", 838)
-, Tuple.Create(Tuple.Create("", 792), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/css/theme.css")
-, 792), false)
 );
 
 WriteLiteral(" rel=\"stylesheet\"");
@@ -128,27 +117,27 @@ WriteLiteral("/>\r\n\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 912), Tuple.Create("\"", 977)
-, Tuple.Create(Tuple.Create("", 918), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
-, 918), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 816), Tuple.Create("\"", 881)
+, Tuple.Create(Tuple.Create("", 822), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-1.7.2.min.js")
+, 822), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1024), Tuple.Create("\"", 1083)
-, Tuple.Create(Tuple.Create("", 1030), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
-, 1030), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 928), Tuple.Create("\"", 987)
+, Tuple.Create(Tuple.Create("", 934), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.manager.js")
+, 934), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1130), Tuple.Create("\"", 1196)
-, Tuple.Create(Tuple.Create("", 1136), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/chosen.jquery.min.js")
-, 1136), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 1034), Tuple.Create("\"", 1100)
+, Tuple.Create(Tuple.Create("", 1040), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/chosen.jquery.min.js")
+, 1040), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -158,7 +147,7 @@ WriteLiteral(" type=\"text/javascript\"");
 WriteLiteral(">\r\n        var siteroot = \"");
 
             
-            #line 19 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 18 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                    Write(Url.Content("~/"));
 
             
@@ -167,7 +156,7 @@ WriteLiteral(">\r\n        var siteroot = \"");
 WriteLiteral("\";\r\n        var apikey = \"");
 
             
-            #line 20 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 19 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                  Write(Html.APIKey("FE868D4F-797C-4E60-B876-64E6FC2424AA"));
 
             
@@ -185,13 +174,13 @@ WriteLiteral(@""";
 ");
 
             
-            #line 29 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 29 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
      if (!String.IsNullOrEmpty(ViewBag.Message)) {
 
             
@@ -205,7 +194,7 @@ WriteLiteral(">\r\n        setTimeout(function () {\r\n            $(\".sys-mess
 "      }, 2000);\r\n    </script>\r\n");
 
             
-            #line 35 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 34 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
     }
 
             
@@ -214,7 +203,7 @@ WriteLiteral(">\r\n        setTimeout(function () {\r\n            $(\".sys-mess
 WriteLiteral("    ");
 
             
-            #line 36 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
 Write(RenderSection("Head", false));
 
             
@@ -236,14 +225,14 @@ WriteLiteral(">\r\n                <a");
 
 WriteLiteral(" class=\"home\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2034), Tuple.Create("\"", 2074)
+WriteAttribute("href", Tuple.Create(" href=\"", 1938), Tuple.Create("\"", 1978)
             
-            #line 42 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2041), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "dashboard")
+            #line 41 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 1945), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "dashboard")
             
             #line default
             #line hidden
-, 2041), false)
+, 1945), false)
 );
 
 WriteLiteral("></a>\r\n                <a");
@@ -252,14 +241,14 @@ WriteLiteral(" class=\"public-site\"");
 
 WriteLiteral(" target=\"preview\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2137), Tuple.Create("\"", 2185)
+WriteAttribute("href", Tuple.Create(" href=\"", 2041), Tuple.Create("\"", 2089)
             
-            #line 43 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2144), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
+            #line 42 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 2048), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 2144), false)
+, 2048), false)
 );
 
 WriteLiteral(">\r\n");
@@ -267,7 +256,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
 
             
@@ -278,7 +267,7 @@ WriteLiteral("</a>\r\n");
 WriteLiteral("                ");
 
             
-            #line 45 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 44 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
            Write(Html.Partial("Partial/Menu"));
 
             
@@ -299,7 +288,7 @@ WriteLiteral(" class=\"grid_12\"");
 WriteLiteral("><h1>");
 
             
-            #line 51 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 50 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                                 Write(ViewBag.Title);
 
             
@@ -322,7 +311,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 57 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 56 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
            Write(RenderSection("Toolbar", false));
 
             
@@ -331,13 +320,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n");
 
             
-            #line 59 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 59 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
              if (!String.IsNullOrEmpty(ViewBag.Message)) {
 
             
@@ -349,15 +338,15 @@ WriteLiteral(" class=\"grid_12 sys-message\"");
 
 WriteLiteral(">\r\n                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2814), Tuple.Create("\"", 2901)
-, Tuple.Create(Tuple.Create("", 2822), Tuple.Create("box", 2822), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2718), Tuple.Create("\"", 2805)
+, Tuple.Create(Tuple.Create("", 2726), Tuple.Create("box", 2726), true)
             
-            #line 61 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2825), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
+            #line 60 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 2729), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
             
             #line default
             #line hidden
-, 2825), false)
+, 2729), false)
 );
 
 WriteLiteral(">\r\n                    <div");
@@ -371,7 +360,7 @@ WriteLiteral(" class=\"ico\"");
 WriteLiteral("></div><p>");
 
             
-            #line 63 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                                              Write(ViewBag.Message);
 
             
@@ -380,7 +369,7 @@ WriteLiteral("></div><p>");
 WriteLiteral("</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 67 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 66 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
             }
 
             
@@ -395,7 +384,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 69 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
            Write(RenderBody());
 
             
@@ -454,7 +443,7 @@ WriteLiteral(">\r\n        </div>\r\n    </div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 87 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 86 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
 Write(RenderSection("Foot", false));
 
             
