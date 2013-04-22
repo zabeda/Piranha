@@ -688,8 +688,8 @@
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ef8c08_256x240.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffd27a_256x240.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffffff_256x240.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.css" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\yui.reset.min.css" />
+    <Content Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.less.css" />
+    <Content Include="Areas\Manager\Content\Css\Ext\yui.reset.min.less.css" />
     <Content Include="Areas\Manager\Content\Css\Less\Attachments.less" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-16.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-24.png" />
