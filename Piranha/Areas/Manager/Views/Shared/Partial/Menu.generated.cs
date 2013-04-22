@@ -66,30 +66,40 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <li");
 
+WriteAttribute("class", Tuple.Create(" class=\"", 186), Tuple.Create("\"", 304)
             
             #line 6 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
-           Write(group.IsActive() ? " class=selected" : "");
-
+, Tuple.Create(Tuple.Create("", 194), Tuple.Create<System.Object, System.Int32>(group.IsActive() ? "selected" : ""
             
             #line default
             #line hidden
-WriteLiteral("><a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 233), Tuple.Create("\"", 289)
+, 194), false)
             
             #line 6 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
-, Tuple.Create(Tuple.Create("", 240), Tuple.Create<System.Object, System.Int32>(Url.Action(items[0].Action, items[0].Controller)
+, Tuple.Create(Tuple.Create(" ", 231), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(group.CssClass) ? "icon " + group.CssClass : ""
             
             #line default
             #line hidden
-, 240), false)
+, 232), false)
+);
+
+WriteLiteral(">\r\n                <a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 326), Tuple.Create("\"", 382)
+            
+            #line 7 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
+, Tuple.Create(Tuple.Create("", 333), Tuple.Create<System.Object, System.Int32>(Url.Action(items[0].Action, items[0].Controller)
+            
+            #line default
+            #line hidden
+, 333), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 6 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
-                                                                                                                   Write(group.Name);
+            #line 7 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
+                                                                       Write(group.Name);
 
             
             #line default
@@ -97,30 +107,34 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 7 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
+            #line 8 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
         }
     }
 
             
             #line default
             #line hidden
-WriteLiteral("    <li><a");
+WriteLiteral("    <li");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 341), Tuple.Create("\"", 380)
+WriteLiteral(" class=\"icon logout\"");
+
+WriteLiteral("><a");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 454), Tuple.Create("\"", 493)
             
-            #line 9 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
-, Tuple.Create(Tuple.Create("", 348), Tuple.Create<System.Object, System.Int32>(Url.Action("logout", "account")
+            #line 10 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
+, Tuple.Create(Tuple.Create("", 461), Tuple.Create<System.Object, System.Int32>(Url.Action("logout", "account")
             
             #line default
             #line hidden
-, 348), false)
+, 461), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 9 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
-                                              Write(Piranha.Resources.Global.MenuLogout);
+            #line 10 "..\..\Areas\Manager\Views\Shared\Partial\Menu.cshtml"
+                                                                  Write(Piranha.Resources.Global.MenuLogout);
 
             
             #line default

@@ -38,7 +38,8 @@
     <div class="top">
         <div class="container_12">
             <div class="grid_12 header">
-                <a class="home" href="@Url.Action("index", "dashboard")"></a>
+                <a class="home" href="@Url.Action("index", "page")">
+                    <img src="~/res.ashx/areas/manager/content/img/logo.png" alt="Piranha CMS" /></a>
                 <a class="public-site" target="preview" href="@Piranha.WebPages.WebPiranha.GetSiteUrl()">
                     @Piranha.WebPages.WebPiranha.GetSiteUrl()</a>
                 @Html.Partial("Partial/Menu")

@@ -4,6 +4,8 @@
  * Håkan Edling     @tidyui 
  */
 
+@import-once "variables.less";
+
 ul.sitemap {
     background: #eee;
     clear: both;
@@ -99,7 +101,7 @@ ul.sitemap {
     .title {
         float: none;
         padding-left: 10px;
-        border-bottom: solid 1px #ddd;
+        border-bottom: solid 1px @primay-border-color;
 
         a {
             display: block;
@@ -109,7 +111,7 @@ ul.sitemap {
 
     .header .title {
         padding-left: 30px;
-        border-bottom: solid 4px #ddd;
+        border-bottom: solid 4px @primay-border-color;
     }
 
     img.thumb {

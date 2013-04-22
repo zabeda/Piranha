@@ -42,17 +42,24 @@ em     { font-style: italic; }
  * Header
  */
 .top {
-    background: #2d2d2d;
+    background: #222;
+    background-image: linear-gradient(bottom, rgb(19,19,20) 19%, rgb(58,58,58) 80%);
+    background-image: -o-linear-gradient(bottom, rgb(19,19,20) 19%, rgb(58,58,58) 80%);
+    background-image: -moz-linear-gradient(bottom, rgb(19,19,20) 19%, rgb(58,58,58) 80%);
+    background-image: -webkit-linear-gradient(bottom, rgb(19,19,20) 19%, rgb(58,58,58) 80%);
+    background-image: -ms-linear-gradient(bottom, rgb(19,19,20) 19%, rgb(58,58,58) 80%);
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.19, rgb(19,19,20)), color-stop(0.8, rgb(58,58,58)));
     padding-bottom: 10px;
     box-shadow: 0 0 8px rgba(0,0,0,0.5);
     position: fixed;
     z-index: 1000;
     width: 100%;
-    height: 40px;
+    height: 43px;
     top: 0;
 
     .home {
-        display: none;
+        float: left;
+        margin-right: 10px;
     }
     .public-site {
         display: block;
@@ -60,7 +67,7 @@ em     { font-style: italic; }
         color: #6acaf2;
         text-decoration: none;
         font-size: 13px;
-        margin: 16px 0 0;
+        margin: 20px 0 0;
 
         &.public-site:hover {
             text-decoration: underline;
@@ -81,21 +88,57 @@ em     { font-style: italic; }
 
         a {
             display: block;
-            height: 24px;
-            line-height: 24px;
+            height: 30px;
+            line-height: 30px;
             text-decoration: none;
+            text-transform: uppercase;
             padding: 0 12px;
             font-size: 13px;
             margin: 0 0 0 4px;
             border: solid 1px #282828;
-            background: #444;
-            color: #ccc;
-            border-radius: 3px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            background: @color-btn;
+            color: #fff;
+            .border-radius(3px);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+        }
+
+        &.icon {
+            width: auto;
+            height: auto;
+
+            a {
+                padding-left: 36px;
+                background-position: 6px 50%;
+                background-repeat: no-repeat;
+            }
+        }
+
+        &.content {
+            a {
+                background-image: url('../img/ico-menu-content.png');
+            }
+        }
+
+        &.settings {
+            a {
+                background-image: url('../img/ico-menu-settings.png');
+            }
+        }
+
+        &.system {
+            a {
+                background-image: url('../img/ico-menu-system.png');
+            }
+        }
+
+        &.logout {
+            a {
+                background-image: url('../img/ico-menu-logout.png');
+            }
         }
 
         &.selected a {
-            .active();
+            background-color: @color-active;
         }
     }
 }
