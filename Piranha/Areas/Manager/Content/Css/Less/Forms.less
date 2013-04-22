@@ -13,19 +13,23 @@ input, select, textarea {
 input[type=checkbox] {
     -webkit-appearance: checkbox;
 }
+
 .input input:focus,
 .input select:focus,
 .input textarea:focus {
     outline: none;
 }
+
 input[type="checkbox"],
 input[type="radio"] {
     margin: 8px;
-    }
+}
+
 p input[type="checkbox"],
 p input[type="radio"] {
     margin: 0;
-    }
+}
+
 .input {
     background: #fff;
     border: 1px solid @secondary-border-color;
@@ -42,36 +46,12 @@ p input[type="radio"] {
         max-width: 100%;
     }
 }
-.upload {
-    position: relative;
 
-    .input {
-        margin-right: 90px;
-    }
-    input[type="file"] {
-        position: absolute; 
-        
-        top: 0;
-        right: 0;
-        height: 24px;
-        width: 480px;
-	    filter: ~"alpha(opacity: 0)";
-	    opacity: 0;
-    }
-    .upload button {
-        float: right;
-        width: 90px;
-        height: 30px;
-        border-radius: 1px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        margin: 0 0 0 10px;
-    }
-}
 .title input[type="checkbox"],
 .title input[type="radio"] {
     margin: 4px 8px 8px;
-    }
+}
+
 .btn {
     background: #666;
     color: #eee;
@@ -169,6 +149,37 @@ p input[type="radio"] {
         top: -16px;
         cursor: pointer;
     }
+}
+
+.upload {
+    position: relative;
+
+    .input {
+        margin-right: 90px;
+    }
+    input[type="file"] {
+        position: absolute; 
+        
+        top: 0;
+        right: 0;
+        height: 24px;
+        width: 480px;
+	    filter: ~"alpha(opacity: 0)";
+	    opacity: 0;
+    }
+    button {
+        float: right;
+        width: 90px;
+        height: 30px;
+        border-radius: 1px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin: 0 0 0 10px;
+    }
+}
+
+.content-editor .form {
+    padding: 14px;
 }
 
 button.full {
