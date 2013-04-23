@@ -33,6 +33,12 @@ namespace Piranha.WebPages.RequestHandlers
 
 		#region Members
 		/// <summary>
+		/// Mutexes
+		/// </summary>
+		private object LastModMutex = new object() ;
+		private object ResourceMutex = new object() ;
+
+		/// <summary>
 		/// The last modification date of the assembly.
 		/// </summary>
 		private DateTime? LastMod = null ;
@@ -52,12 +58,12 @@ namespace Piranha.WebPages.RequestHandlers
 			var resource = args.Implode(".").ToLower() ;
 			var assembly = Assembly.GetExecutingAssembly() ;
 
-			if (!LastMod.HasValue)
-				GetLastMod(assembly) ;
+			//if (!LastMod.HasValue)
+				EnsureLastMod(assembly) ;
 
 			if (!Web.ClientCache.HandleClientCache(context, resource, LastMod.Value, false, 60)) {
-				if (ResourceNames == null)
-					GetResourceNames(assembly) ;
+				//if (ResourceNames == null)
+					EnsureResourceNames(assembly) ;
 				if (ResourceNames.ContainsKey(resource)) {
 					var res = ResourceNames[resource] ;
 
@@ -81,21 +87,28 @@ namespace Piranha.WebPages.RequestHandlers
 		/// Gets the last modification date from the assembly.
 		/// </summary>
 		/// <param name="assembly">The assembly</param>
-		private void GetLastMod(Assembly assembly) {
-			LastMod = new FileInfo(assembly.Location).LastWriteTime ;
+		private void EnsureLastMod(Assembly assembly) {
+			lock (LastModMutex) {
+				if (!LastMod.HasValue)
+					LastMod = new FileInfo(assembly.Location).LastWriteTime ;
+			}
 		}
 
 		/// <summary>
 		/// Gets the currently available resources from the assembly.
 		/// </summary>
 		/// <param name="assembly">The assembly</param>
-		private void GetResourceNames(Assembly assembly) {
-			ResourceNames = new Dictionary<string, Resource>() ;
+		private void EnsureResourceNames(Assembly assembly) {
+			lock (ResourceMutex) {
+				if (ResourceNames == null) {
+					ResourceNames = new Dictionary<string, Resource>() ;
 
-			foreach (var name in assembly.GetManifestResourceNames()) {
-				ResourceNames.Add(name.Replace("Piranha.", "").ToLower(), new Resource() {
-					Name = name, ContentType = GetContentType(name)
-				}) ;
+					foreach (var name in assembly.GetManifestResourceNames()) {
+						ResourceNames.Add(name.Replace("Piranha.", "").ToLower(), new Resource() {
+							Name = name, ContentType = GetContentType(name)
+						}) ;
+					}
+				}
 			}
 		}
 
