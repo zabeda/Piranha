@@ -258,4 +258,7 @@
   <data name="KeywordsNotification" xml:space="preserve">
     <value>Du bör alltid ange nyckelord.</value>
   </data>
+  <data name="AttachmentDescription" xml:space="preserve">
+    <value>Klicka här för att ladda upp en ny, eller att välja en befintlig bild eller dokument.</value>
+  </data>
 </root>

@@ -2,14 +2,14 @@
     var controller = Piranha.WebPages.Manager.GetActiveMenuItem().Controller ;
 }
 <div id="attachment_data"></div>
-<table class="list attachments">
+<table id="tbl-attachments" class="list attachments">
     <tbody>
         <tr>
             <td class="thumb">
                 <a id="btn_attach" class="add"></a>
             </td>
             <td colspan="4">
-                <p><i>Click to upload a new, or to choose an existing image or document.</i></p>
+                <p><i>@Piranha.Resources.Page.AttachmentDescription</i></p>
             </td>
         </tr>
         @foreach (var c in Model.AttachedContent) {

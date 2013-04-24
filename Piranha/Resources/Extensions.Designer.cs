@@ -61,6 +61,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Media.
+        /// </summary>
+        public static string AttachmentRegionName {
+            get {
+                return ResourceManager.GetString("AttachmentRegionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Html.
         /// </summary>
         public static string HtmlRegionName {

@@ -243,8 +243,7 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="id">The content id</param>
 		/// <param name="draft">Whether or not to get the draft</param>
-		[Access(Function="ADMIN_CONTENT")]
-		public JsonResult Get(string id, bool draft) {
+		private JsonResult Get(string id, bool draft) {
 			var service = new Rest.ContentService() ;
 
 			return Json(service.Get(new Guid(id), draft), JsonRequestBehavior.AllowGet) ;

@@ -57,7 +57,7 @@
                 folderId = a.ParentId;
 
                 // Add the attachment
-                $(".attachments").append(
+                $("#tbl-attachments").append(
                     '<tr data-id="' + a.Id + '">' +
                         '<td><img src="' + a.ThumbnailUrl + '/50" /></td>' +
                         '<td>' + a.DisplayName + '</td>' +
@@ -193,7 +193,7 @@
                     </li>
                     <li>
                         <label>@Piranha.Resources.Global.Placement</label>
-                        <button class="btn right" id="btnMove">Move</button>
+                        <button class="btn right" id="btnMove">@Piranha.Resources.Global.Move</button>
                         @if (!Model.Page.IsStartpage) {
                         <p>@Piranha.Resources.Global.PlacementPage <strong>@(Model.Page.Seqno > 1 ? @Piranha.Resources.Global.PlacementAfter : @Piranha.Resources.Global.PlacementBelow)</strong> &quot;@Model.PlaceRef&quot;</p>
                         } else {

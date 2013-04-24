@@ -70,6 +70,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose existing.
+        /// </summary>
+        public static string ChooseExisting {
+            get {
+                return ResourceManager.GetString("ChooseExisting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload file.
         /// </summary>
         public static string ChooseFile {
@@ -516,6 +525,15 @@ namespace Piranha.Resources {
         public static string Upload {
             get {
                 return ResourceManager.GetString("Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload new.
+        /// </summary>
+        public static string UploadNew {
+            get {
+                return ResourceManager.GetString("UploadNew", resourceCulture);
             }
         }
     }

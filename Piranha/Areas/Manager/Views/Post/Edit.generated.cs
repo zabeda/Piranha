@@ -178,23 +178,23 @@ WriteLiteral(@"
 WriteLiteral("\', \'comment-notification\', \'pnl-comments .inner\');\r\n            new piranha.media" +
 "(\'btn_attach\', \'boxContent\', function (a) {\r\n                // Store folder id " +
 "so we can open the same folder next time.\r\n                folderId = a.ParentId" +
-";\r\n\r\n                // Add the attachment\r\n                $(\".attachments\").ap" +
-"pend(\r\n                    \'<tr data-id=\"\' + a.Id + \'\">\' +\r\n                    " +
-"    \'<td><img src=\"\' + a.ThumbnailUrl + \'/50\" /></td>\' +\r\n                      " +
-"  \'<td>\' + a.DisplayName + \'</td>\' +\r\n                        \'<td>\' + a.Type + " +
-"\'</td>\' +\r\n                        \'<td class=\"buttons three\">\' +\r\n             " +
-"               \'<a class=\"icon up marg\"></a>\' +\r\n                            \'<a" +
-" class=\"icon down marg\"></a>\' +\r\n                            \'<a class=\"icon del" +
-"ete\"></a></td>\' +\r\n                    \'</tr>\');\r\n            });\r\n        });\r\n" +
-"\r\n        //\r\n        // Hides all editors on the page. This callback is called " +
-"from jquery.attachments.js\r\n        //\r\n        function hideEditors() {\r\n      " +
-"      $(\"#btn_content\").removeClass(\"active\");\r\n            $(\"#body\").hide();\r\n" +
-"        }\r\n\r\n        //\r\n        // This callback is called from jquery.attachme" +
-"nts.js before form submit.\r\n        //\r\n        function addAttachmentData(index" +
-", val) {\r\n            $(\"#attachment_data\").append(\r\n                    \'<input" +
-" id=\"Post_Attachments_\' + index +\r\n                    \'_\" name=\"Post.Attachment" +
-"s[\' + index +\r\n                    \']\" type=\"hidden\" value=\"\' + $(val).attr(\"dat" +
-"a-id\") + \'\" />\');\r\n        }\r\n    </script>\r\n");
+";\r\n\r\n                // Add the attachment\r\n                $(\"#tbl-attachments\"" +
+").append(\r\n                    \'<tr data-id=\"\' + a.Id + \'\">\' +\r\n                " +
+"        \'<td><img src=\"\' + a.ThumbnailUrl + \'/50\" /></td>\' +\r\n                  " +
+"      \'<td>\' + a.DisplayName + \'</td>\' +\r\n                        \'<td>\' + a.Typ" +
+"e + \'</td>\' +\r\n                        \'<td class=\"buttons three\">\' +\r\n         " +
+"                   \'<a class=\"icon up marg\"></a>\' +\r\n                           " +
+" \'<a class=\"icon down marg\"></a>\' +\r\n                            \'<a class=\"icon" +
+" delete\"></a></td>\' +\r\n                    \'</tr>\');\r\n            });\r\n        }" +
+");\r\n\r\n        //\r\n        // Hides all editors on the page. This callback is cal" +
+"led from jquery.attachments.js\r\n        //\r\n        function hideEditors() {\r\n  " +
+"          $(\"#btn_content\").removeClass(\"active\");\r\n            $(\"#body\").hide(" +
+");\r\n        }\r\n\r\n        //\r\n        // This callback is called from jquery.atta" +
+"chments.js before form submit.\r\n        //\r\n        function addAttachmentData(i" +
+"ndex, val) {\r\n            $(\"#attachment_data\").append(\r\n                    \'<i" +
+"nput id=\"Post_Attachments_\' + index +\r\n                    \'_\" name=\"Post.Attach" +
+"ments[\' + index +\r\n                    \']\" type=\"hidden\" value=\"\' + $(val).attr(" +
+"\"data-id\") + \'\" />\');\r\n        }\r\n    </script>\r\n");
 
 });
 
@@ -249,21 +249,21 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4025), Tuple.Create("\"", 4118)
+WriteAttribute("href", Tuple.Create(" href=\"", 4029), Tuple.Create("\"", 4122)
             
             #line 96 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4032), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
+, Tuple.Create(Tuple.Create("", 4036), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 4032), false)
+, 4036), false)
             
             #line 96 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4073), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Post.Permalink, true)
+, Tuple.Create(Tuple.Create("", 4077), Tuple.Create<System.Object, System.Int32>(Url.GetPermalink(Model.Post.Permalink, true)
             
             #line default
             #line hidden
-, 4073), false)
+, 4077), false)
 );
 
 WriteLiteral(" target=\"preview\"");
@@ -330,14 +330,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4498), Tuple.Create("\"", 4557)
+WriteAttribute("href", Tuple.Create(" href=\"", 4502), Tuple.Create("\"", 4561)
             
             #line 102 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4505), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 4509), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 4505), false)
+, 4509), false)
 );
 
 WriteLiteral(" class=\"unpublish\"");
@@ -371,14 +371,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4774), Tuple.Create("\"", 4830)
+WriteAttribute("href", Tuple.Create(" href=\"", 4778), Tuple.Create("\"", 4834)
             
             #line 105 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4781), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 4785), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 4781), false)
+, 4785), false)
 );
 
 WriteLiteral(" class=\"revert\"");
@@ -412,14 +412,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4988), Tuple.Create("\"", 5044)
+WriteAttribute("href", Tuple.Create(" href=\"", 4992), Tuple.Create("\"", 5048)
             
             #line 108 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 4995), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 4999), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 4995), false)
+, 4999), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -444,14 +444,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5144), Tuple.Create("\"", 5171)
+WriteAttribute("href", Tuple.Create(" href=\"", 5148), Tuple.Create("\"", 5175)
             
             #line 110 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5151), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
+, Tuple.Create(Tuple.Create("", 5155), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
             
             #line default
             #line hidden
-, 5151), false)
+, 5155), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -467,14 +467,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5252), Tuple.Create("\"", 5306)
+WriteAttribute("href", Tuple.Create(" href=\"", 5256), Tuple.Create("\"", 5310)
             
             #line 111 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5259), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Post.Id })
+, Tuple.Create(Tuple.Create("", 5263), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Post.Id })
             
             #line default
             #line hidden
-, 5259), false)
+, 5263), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -521,14 +521,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"postid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 5647), Tuple.Create("\"", 5669)
+WriteAttribute("value", Tuple.Create(" value=\"", 5651), Tuple.Create("\"", 5673)
             
             #line 121 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5655), Tuple.Create<System.Object, System.Int32>(Model.Post.Id
+, Tuple.Create(Tuple.Create("", 5659), Tuple.Create<System.Object, System.Int32>(Model.Post.Id
             
             #line default
             #line hidden
-, 5655), false)
+, 5659), false)
 );
 
 WriteLiteral(" />\r\n");

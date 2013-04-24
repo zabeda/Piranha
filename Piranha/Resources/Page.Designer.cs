@@ -61,6 +61,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to upload a new, or to choose an existing image or document..
+        /// </summary>
+        public static string AttachmentDescription {
+            get {
+                return ResourceManager.GetString("AttachmentDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attachments.
         /// </summary>
         public static string Attachments {

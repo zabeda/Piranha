@@ -270,4 +270,10 @@
   <data name="MessageReverted" xml:space="preserve">
     <value>Den senast publicerade versionen har nu återställts.</value>
   </data>
+  <data name="ChooseExisting" xml:space="preserve">
+    <value>Välj befintlig</value>
+  </data>
+  <data name="UploadNew" xml:space="preserve">
+    <value>Ladda upp ny</value>
+  </data>
 </root>

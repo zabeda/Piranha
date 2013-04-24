@@ -64,13 +64,31 @@ WriteLiteral(" class=\"btn-media-existing\"");
 
 WriteLiteral("href=\"#attach-existing\"");
 
-WriteLiteral(">Choose existing</a></li>\r\n        <li><a");
+WriteLiteral(">");
+
+            
+            #line 8 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                                                                             Write(Piranha.Resources.Content.ChooseExisting);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a></li>\r\n        <li><a");
 
 WriteLiteral(" href=\"#attach-new\"");
 
 WriteLiteral(" class=\"btn-media-new\"");
 
-WriteLiteral(">Upload new</a></li>\r\n    </ul>\r\n    <a");
+WriteLiteral(">");
+
+            
+            #line 9 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                                                   Write(Piranha.Resources.Content.UploadNew);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</a></li>\r\n    </ul>\r\n    <a");
 
 WriteLiteral(" class=\"close-btn right\"");
 
@@ -84,17 +102,17 @@ WriteLiteral("></div>\r\n</div>\r\n<div");
 
 WriteLiteral(" id=\"attach-existing\"");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 471), Tuple.Create("\"", 563)
-, Tuple.Create(Tuple.Create("", 479), Tuple.Create("inner", 479), true)
-, Tuple.Create(Tuple.Create(" ", 484), Tuple.Create("media-existing", 485), true)
-, Tuple.Create(Tuple.Create(" ", 499), Tuple.Create("gallery", 500), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 523), Tuple.Create("\"", 615)
+, Tuple.Create(Tuple.Create("", 531), Tuple.Create("inner", 531), true)
+, Tuple.Create(Tuple.Create(" ", 536), Tuple.Create("media-existing", 537), true)
+, Tuple.Create(Tuple.Create(" ", 551), Tuple.Create("gallery", 552), true)
             
             #line 14 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-, Tuple.Create(Tuple.Create(" ", 507), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "gallery-compressed" : ""
+, Tuple.Create(Tuple.Create(" ", 559), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "gallery-compressed" : ""
             
             #line default
             #line hidden
-, 508), false)
+, 560), false)
 );
 
 WriteLiteral(">\r\n");
@@ -114,15 +132,15 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("        <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 626), Tuple.Create("\"", 694)
-, Tuple.Create(Tuple.Create("", 634), Tuple.Create("gallery-item", 634), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 678), Tuple.Create("\"", 746)
+, Tuple.Create(Tuple.Create("", 686), Tuple.Create("gallery-item", 686), true)
             
             #line 16 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-, Tuple.Create(Tuple.Create(" ", 646), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "compressed" : ""
+, Tuple.Create(Tuple.Create(" ", 698), Tuple.Create<System.Object, System.Int32>(Model.Content.Count > 12 ? "compressed" : ""
             
             #line default
             #line hidden
-, 647), false)
+, 699), false)
 );
 
 WriteLiteral(">\r\n");
@@ -155,9 +173,9 @@ WriteLiteral(" data-id=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 812), Tuple.Create("\"", 881)
-, Tuple.Create(Tuple.Create("", 818), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/ico-folder-up-96.png")
-, 818), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 864), Tuple.Create("\"", 933)
+, Tuple.Create(Tuple.Create("", 870), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/ico-folder-up-96.png")
+, 870), false)
 );
 
 WriteLiteral(" />\r\n");
@@ -345,14 +363,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2125), Tuple.Create("\"", 2141)
+WriteAttribute("value", Tuple.Create(" value=\"", 2177), Tuple.Create("\"", 2193)
             
             #line 45 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-, Tuple.Create(Tuple.Create("", 2133), Tuple.Create<System.Object, System.Int32>(f.Value
+, Tuple.Create(Tuple.Create("", 2185), Tuple.Create<System.Object, System.Int32>(f.Value
             
             #line default
             #line hidden
-, 2133), false)
+, 2185), false)
 );
 
 WriteLiteral(">");

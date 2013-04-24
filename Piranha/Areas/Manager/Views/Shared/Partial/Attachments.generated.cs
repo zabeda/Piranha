@@ -51,6 +51,8 @@ WriteLiteral(" id=\"attachment_data\"");
 
 WriteLiteral("></div>\r\n<table");
 
+WriteLiteral(" id=\"tbl-attachments\"");
+
 WriteLiteral(" class=\"list attachments\"");
 
 WriteLiteral(">\r\n    <tbody>\r\n        <tr>\r\n            <td");
@@ -67,8 +69,16 @@ WriteLiteral("></a>\r\n            </td>\r\n            <td");
 
 WriteLiteral(" colspan=\"4\"");
 
-WriteLiteral(">\r\n                <p><i>Click to upload a new, or to choose an existing image or" +
-" document.</i></p>\r\n            </td>\r\n        </tr>\r\n");
+WriteLiteral(">\r\n                <p><i>");
+
+            
+            #line 12 "..\..\Areas\Manager\Views\Shared\Partial\Attachments.cshtml"
+                 Write(Piranha.Resources.Page.AttachmentDescription);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</i></p>\r\n            </td>\r\n        </tr>\r\n");
 
             
             #line 15 "..\..\Areas\Manager\Views\Shared\Partial\Attachments.cshtml"

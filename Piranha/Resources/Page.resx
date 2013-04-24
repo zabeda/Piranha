@@ -255,4 +255,7 @@
   <data name="KeywordsNotification" xml:space="preserve">
     <value>You should always provide meta keywords.</value>
   </data>
+  <data name="AttachmentDescription" xml:space="preserve">
+    <value>Click to upload a new, or to choose an existing image or document.</value>
+  </data>
 </root>
