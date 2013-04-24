@@ -178,8 +178,15 @@ p input[type="radio"] {
     }
 }
 
-.content-editor .form {
-    padding: 14px;
+.content-editor {
+    .form {
+        padding: 14px;
+    }
+
+    fieldset {
+        margin: 14px;
+        padding: 0;
+    }
 }
 
 button.full {
@@ -225,5 +232,27 @@ button.full {
 }
 .field-validation-valid {
     display: none;
-} 
+}
+fieldset {
+    background: #f8f8f8;
+    padding: 14px;
+    border: 1px solid @secondary-border-color;
+    border-radius: 2px;
+    margin-bottom: 14px;
 
+    legend {
+        font-weight: bold;
+        margin-left: 10px;
+        padding: 0 6px;
+    }
+    .buttons {
+        float: right;
+        margin: 0 14px 14px 0;
+
+        .icon {
+            width: auto;
+            padding-left: 18px;
+            margin-left: 8px;
+        }
+    }
+}
