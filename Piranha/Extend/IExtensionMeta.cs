@@ -28,7 +28,7 @@ namespace Piranha.Extend
 		/// Gets the optional virtual path to the icon that will be used in
 		/// the manager when presenting the extension.
 		/// </summary>
-		[DefaultValue("~/areas/manager/content/img/ico-missing-ico.png")]
+		[DefaultValue("~/res.ashx/areas/manager/content/img/ico-missing-ico.png")]
 		string IconPath { get ; }
 
 		/// <summary>

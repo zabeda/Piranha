@@ -41,10 +41,13 @@ namespace Piranha.Extend
 			var catalog = new AggregateCatalog() ;
 
 			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
-			try {
-				// This feature only exists for Web Pages
-				catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
-			} catch {}
+
+			if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
+				try {
+					// This feature only exists for Web Pages
+					catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
+				} catch {}
+			}
 
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
@@ -125,7 +128,7 @@ namespace Piranha.Extend
 			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
 			if (ext != null)
 				return !String.IsNullOrEmpty(ext.Metadata.IconPath) ? ext.Metadata.IconPath :
-					"~/areas/manager/content/img/ico-missing-ico.png" ;
+					"~/res.ashx/areas/manager/content/img/ico-missing-ico.png" ;
 			return "" ;
 		}
 
