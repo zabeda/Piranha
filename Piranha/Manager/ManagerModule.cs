@@ -29,9 +29,13 @@ namespace Piranha.Manager
                 UsePhysicalViewsIfNewer = true
             } ;
 			engine.PartialViewLocationFormats = engine.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray();
+			var standard = new RazorViewEngine() ;
+			standard.PartialViewLocationFormats = standard.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray() ;
 
-            ViewEngines.Engines.Add(engine) ;
-            VirtualPathFactoryManager.RegisterVirtualPathFactory(engine) ;
+			ViewEngines.Engines.Insert(0, standard) ;
+			ViewEngines.Engines.Insert(1, engine) ;
+
+			VirtualPathFactoryManager.RegisterVirtualPathFactory(engine) ;
 
 			// Register the manager area
 			var manager = new ManagerRegistration() ;
