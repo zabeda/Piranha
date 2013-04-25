@@ -57,6 +57,7 @@ namespace Piranha.Rest
 					Page page = new Page() {
 						Id = pm.Page.Id,
 						ParentId = ((Piranha.Models.Page)pm.Page).ParentId,
+						Seqno = ((Piranha.Models.Page)pm.Page).Seqno,
 						TemplateName = pm.Page.TemplateName,
 						Title = pm.Page.Title,
 						Permalink = pm.Page.Permalink,
