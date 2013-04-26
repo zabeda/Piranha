@@ -476,7 +476,7 @@ namespace Piranha.Models
 
 				// First save an up-to-date draft
 				IsDraft = true ;
-				base.Save(content, tx, false) ;
+				base.Save(content, tx, false, false) ;
 				
 				var draftpath = PhysicalPath;
 
@@ -484,7 +484,7 @@ namespace Piranha.Models
 				IsDraft = false ;
 				if (self == null)
 					IsNew = true ;
-				base.Save(tx, false) ;
+				base.Save(content, tx, false) ;
 
 				// Check if we have have a drafted physical file
 				if (File.Exists(draftpath)) {
@@ -540,27 +540,27 @@ namespace Piranha.Models
 					// Return generated & cached thumbnail
 					WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
 				} else if (File.Exists(PhysicalPath)) { // || IsFolder) {
-					var img = Image.FromFile(PhysicalPath) ;
+					using (var img = Image.FromFile(PhysicalPath)) {
+						if (img != null) {
+							// Generate thumbnail from image
+							using (Bitmap bmp = new Bitmap(size, size)) {
+								using (Graphics grp = Graphics.FromImage(bmp)) {
+									grp.SmoothingMode = SmoothingMode.HighQuality ;
+									grp.CompositingQuality = CompositingQuality.HighQuality ;
+									grp.InterpolationMode = InterpolationMode.High ;
 
-					if (img != null) {
-						// Generate thumbnail from image
-						using (Bitmap bmp = new Bitmap(size, size)) {
-							Graphics grp = Graphics.FromImage(bmp) ;
+									// Resize and crop image
+									Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
+									grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
+										img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
+										Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
 
-							grp.SmoothingMode = SmoothingMode.HighQuality ;
-							grp.CompositingQuality = CompositingQuality.HighQuality ;
-							grp.InterpolationMode = InterpolationMode.High ;
-
-							// Resize and crop image
-							Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
-							grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
-								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
-								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
-
-							bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
+									bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
+								}
+							}
+							WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
 						}
-						WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
-					} 
+					}
 				}
 			}
 		}

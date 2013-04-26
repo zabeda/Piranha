@@ -121,19 +121,17 @@ namespace Piranha.Models
 
 					if (File.Exists(GetCachePath(width.Value, height.Value))) {
 						// Return generated & cached resized image
-						img.Dispose() ;
 						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
 					} else if (File.Exists(PhysicalPath)) {
 						int orgWidth = img.Width, orgHeight = img.Height ;
 
-						var resized = Drawing.ImageUtils.Resize(img, width.Value, height.Value) ;
-						if (resized.Width != orgWidth || resized.Height != orgHeight)
-							resized.Save(GetCachePath(width.Value, height.Value), compress ? ImageFormat.Jpeg : img.RawFormat) ;
-						img.Dispose() ;
-						resized.Dispose() ;
-
+						using (var resized = Drawing.ImageUtils.Resize(img, width.Value, height.Value)) {
+							if (resized.Width != orgWidth || resized.Height != orgHeight)
+								resized.Save(GetCachePath(width.Value, height.Value), compress ? ImageFormat.Jpeg : img.RawFormat) ;
+						}
 						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
 					}
+					img.Dispose() ;
 				}
 				WriteFile(context.Response, PhysicalPath) ;
 			}
@@ -142,11 +140,12 @@ namespace Piranha.Models
 		/// <summary>
 		/// Saves the 
 		/// </summary>
-		/// <param name="file"></param>
+		/// <param name="content"></param>
 		/// <param name="tx"></param>
 		/// <param name="setdates"></param>
+		/// <param name="writefile"></param>
 		/// <returns></returns>
-		public virtual bool Save(MediaFileContent content, System.Data.IDbTransaction tx = null, bool setdates = true) {
+		public virtual bool Save(MediaFileContent content, System.Data.IDbTransaction tx = null, bool setdates = true, bool writefile = true) {
 			if (content != null) {
 				// Set filename
 				if (!String.IsNullOrEmpty(content.Filename))
@@ -160,7 +159,8 @@ namespace Piranha.Models
 					DeleteFile() ;
 					DeleteCache() ;
 				}
-				File.WriteAllBytes(PhysicalPath, content.Body) ;
+				if (writefile)
+					File.WriteAllBytes(PhysicalPath, content.Body) ;
 			}
 			return base.Save(tx, setdates);
 		}
@@ -189,7 +189,7 @@ namespace Piranha.Models
 		public void DeleteFile() {
 			DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(BasePath)) ;
 
-			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) 
+			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*"))
 				file.Delete() ;
 		}
 
