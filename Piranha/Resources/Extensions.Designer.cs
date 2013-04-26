@@ -70,6 +70,69 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string FormRegionElementName {
+            get {
+                return ResourceManager.GetString("FormRegionElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required.
+        /// </summary>
+        public static string FormRegionElementRequired {
+            get {
+                return ResourceManager.GetString("FormRegionElementRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whether or not the field is required..
+        /// </summary>
+        public static string FormRegionElementRequiredText {
+            get {
+                return ResourceManager.GetString("FormRegionElementRequiredText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string FormRegionElementType {
+            get {
+                return ResourceManager.GetString("FormRegionElementType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Button text.
+        /// </summary>
+        public static string FormRegionFormButton {
+            get {
+                return ResourceManager.GetString("FormRegionFormButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string FormRegionFormName {
+            get {
+                return ResourceManager.GetString("FormRegionFormName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form.
+        /// </summary>
+        public static string FormRegionName {
+            get {
+                return ResourceManager.GetString("FormRegionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Html.
         /// </summary>
         public static string HtmlRegionName {

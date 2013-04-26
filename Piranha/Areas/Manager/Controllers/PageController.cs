@@ -271,5 +271,14 @@ namespace Piranha.Areas.Manager.Controllers
 			return View("Partial/GroupList", new GroupListModel() { 
 				Groups = groups, Page = page }) ;
 		}
+
+		/// <summary>
+		/// Gets the page with the given id and returns it as a json object.
+		/// </summary>
+		/// <param name="id">The page id</param>
+		/// <returns>The page</returns>
+		public JsonResult Get(string id) {
+			return Json(Page.GetSingle(new Guid(id))) ;
+		}
     }
 }

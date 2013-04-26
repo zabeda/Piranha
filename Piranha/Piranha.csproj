@@ -142,6 +142,7 @@
     <Compile Include="Areas\Manager\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Manager\Controllers\CommentController.cs" />
     <Compile Include="Areas\Manager\Controllers\ContentController.cs" />
+    <Compile Include="Areas\Manager\Controllers\DialogController.cs" />
     <Compile Include="Areas\Manager\Controllers\InstallController.cs" />
     <Compile Include="Areas\Manager\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Manager\Controllers\PageController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Areas\Manager\Models\CommentEditModel.cs" />
     <Compile Include="Areas\Manager\Models\CommentListModel.cs" />
     <Compile Include="Areas\Manager\Models\CommentSettingsModel.cs" />
+    <Compile Include="Areas\Manager\Models\LinkDialogModel.cs" />
     <Compile Include="Areas\Manager\Models\PostListModel.cs" />
     <Compile Include="Areas\Manager\Models\SiteTreeEditModel.cs" />
     <Compile Include="Areas\Manager\Models\SiteTreeListModel.cs" />
@@ -216,6 +218,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Uploads.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Manager\Views\Dialog\Link.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Link.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Dialog\Partial\DialogSiteTree.generated.cs">
+      <DependentUpon>DialogSiteTree.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\AttachmentRegion.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -225,6 +237,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Attachment.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\EditorTemplates\FormElement.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormElement.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\FormRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormRegion.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\HtmlRegion.generated.cs">
       <AutoGen>True</AutoGen>
@@ -441,6 +463,8 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Extension.cs" />
+    <Compile Include="Entities\FormData.cs" />
+    <Compile Include="Entities\FormItem.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Internal\Category.cs" />
     <Compile Include="Entities\Internal\ComplexName.cs" />
@@ -519,6 +543,7 @@
     <Compile Include="Extend\Module.cs" />
     <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\AttachmentRegion.cs" />
+    <Compile Include="Extend\Regions\FormRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
     <Compile Include="Extend\Regions\PostRegion.cs" />
@@ -672,6 +697,7 @@
     <Compile Include="Web\AuthController.cs" />
     <Compile Include="Web\ClientCache.cs" />
     <Compile Include="Web\CultureHelper.cs" />
+    <Compile Include="Web\FormController.cs" />
     <Compile Include="Web\Handlers\RequestHandlerCollection.cs" />
     <Compile Include="Web\IRouteHandler.cs" />
     <Compile Include="Web\ModelPropertyAttribute.cs" />
@@ -839,6 +865,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\link\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\piranhaimage\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.link.dialog.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1204,6 +1231,30 @@
     <Content Include="Areas\Manager\Views\Extensions\EditorTemplates\Attachment.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Attachment.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Extensions\FormRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FormRegion.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Extensions\EditorTemplates\FormElement.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>FormElement.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Dialog\Link.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Link.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Dialog\Partial\DialogSiteTree.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>DialogSiteTree.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <PropertyGroup>

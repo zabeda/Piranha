@@ -1,0 +1,14 @@
+﻿@model Piranha.Extend.Regions.FormRegion
+
+@Html.HiddenFor(m => m.RegionId)
+<ul class="form" style="padding-bottom:0">
+    <li>
+        @Html.LabelFor(m => m.Name)
+        <div class="input">@Html.TextBoxFor(m => m.Name)</div>
+    </li>
+    <li>
+        @Html.LabelFor(m => m.ButtonName)
+        <div class="input">@Html.TextBoxFor(m => m.ButtonName)</div>
+    </li>
+</ul>
+@Html.EditorFor(m => m.Items)

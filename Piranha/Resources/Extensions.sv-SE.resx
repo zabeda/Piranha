@@ -120,6 +120,27 @@
   <data name="AttachmentRegionName" xml:space="preserve">
     <value>Media</value>
   </data>
+  <data name="FormRegionElementName" xml:space="preserve">
+    <value>Namn</value>
+  </data>
+  <data name="FormRegionElementRequired" xml:space="preserve">
+    <value>Obligatoriskt</value>
+  </data>
+  <data name="FormRegionElementRequiredText" xml:space="preserve">
+    <value>Om det är obligatoriskt att fylla i fältet.</value>
+  </data>
+  <data name="FormRegionElementType" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="FormRegionFormButton" xml:space="preserve">
+    <value>Knapptext</value>
+  </data>
+  <data name="FormRegionFormName" xml:space="preserve">
+    <value>Namn</value>
+  </data>
+  <data name="FormRegionName" xml:space="preserve">
+    <value>Formulär</value>
+  </data>
   <data name="HtmlRegionName" xml:space="preserve">
     <value>Html</value>
   </data>
