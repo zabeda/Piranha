@@ -30,6 +30,11 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Gets/sets the available folders.
 		/// </summary>
 		public IList<Placement> Folders { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently selected folder.
+		/// </summary>
+		public Guid SelectedFolder { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -49,9 +54,10 @@ namespace Piranha.Models.Manager.ContentModels
 		public static PopupModel Get(string id = "", bool published = false, string filter = "") {
 			PopupModel lm = new PopupModel() ;
 
-			if (!String.IsNullOrEmpty(id))
+			if (!String.IsNullOrEmpty(id)) {
+				lm.SelectedFolder = new Guid(id) ;
 				lm.Content = Piranha.Models.Content.GetStructure(new Guid(id), true, published) ;
-			else lm.Content = Piranha.Models.Content.GetStructure(published) ;
+			} else lm.Content = Piranha.Models.Content.GetStructure(published) ;
 
 			return lm ;
 		}

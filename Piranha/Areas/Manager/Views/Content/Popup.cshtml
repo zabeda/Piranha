@@ -42,7 +42,7 @@
             <div class="input">
                 <select class="new-parentid">
                     @foreach (var f in Model.Folders) {
-                    <option value="@f.Value">@Html.Raw(f.Text)</option>
+                    <option value="@f.Value" @(f.Value == Model.SelectedFolder ? "selected=true" : "")>@Html.Raw(f.Text)</option>
                     }
                 </select>
             </div>

@@ -373,11 +373,20 @@ WriteAttribute("value", Tuple.Create(" value=\"", 2177), Tuple.Create("\"", 2193
 , 2185), false)
 );
 
+WriteLiteral(" ");
+
+            
+            #line 45 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
+                                         Write(f.Value == Model.SelectedFolder ? "selected=true" : "");
+
+            
+            #line default
+            #line hidden
 WriteLiteral(">");
 
             
             #line 45 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-                                        Write(Html.Raw(f.Text));
+                                                                                                  Write(Html.Raw(f.Text));
 
             
             #line default
