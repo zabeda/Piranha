@@ -62,6 +62,35 @@ WriteLiteral(@">
             });
         }
 
+        var deleteimagemsg = '");
+
+            
+            #line 15 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+                         Write(Piranha.Resources.Content.MessageDeleteConfirmImage);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\';\r\n        var deletedocumentmsg = \'");
+
+            
+            #line 16 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+                            Write(Piranha.Resources.Content.MessageDeleteConfirmFile);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\';\r\n        var deletefoldermsg = \'");
+
+            
+            #line 17 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+                          Write(Piranha.Resources.Content.MessageDeleteConfirmFolder);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"';
+
         $(document).ready(function () {
             formatSitemap();
 
@@ -71,6 +100,14 @@ WriteLiteral(@">
                 li.toggleClass(""collapsed"");
                 li.toggleClass(""expanded"");
                 formatSitemap();
+            });
+
+            $('.sitemap .delete').click(function () {
+                if ($(this).hasClass('media-image'))
+                    return confirm(deleteimagemsg);
+                else if ($(this).hasClass('media-folder'))
+                    return confirm(deletefoldermsg);
+                else return confirm(deletedocumentmsg);
             });
         });
     </script>
@@ -83,7 +120,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral(" \r\n");
 
             
-            #line 29 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Content\Index.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -99,14 +136,14 @@ WriteLiteral(" class=\"inner\"");
 
 WriteLiteral(">\r\n        <ul>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 958), Tuple.Create("\"", 986)
+WriteAttribute("href", Tuple.Create(" href=\"", 1574), Tuple.Create("\"", 1602)
             
-            #line 33 "..\..\Areas\Manager\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 965), Tuple.Create<System.Object, System.Int32>(Url.Action("insert")
+            #line 45 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 1581), Tuple.Create<System.Object, System.Int32>(Url.Action("insert")
             
             #line default
             #line hidden
-, 965), false)
+, 1581), false)
 );
 
 WriteLiteral(" class=\"add\"");
@@ -114,7 +151,7 @@ WriteLiteral(" class=\"add\"");
 WriteLiteral(">");
 
             
-            #line 33 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                                                        Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -122,14 +159,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1065), Tuple.Create("\"", 1099)
+WriteAttribute("href", Tuple.Create(" href=\"", 1681), Tuple.Create("\"", 1715)
             
-            #line 34 "..\..\Areas\Manager\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1072), Tuple.Create<System.Object, System.Int32>(Url.Action("insertfolder")
+            #line 46 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 1688), Tuple.Create<System.Object, System.Int32>(Url.Action("insertfolder")
             
             #line default
             #line hidden
-, 1072), false)
+, 1688), false)
 );
 
 WriteLiteral(" class=\"addfolder\"");
@@ -137,7 +174,7 @@ WriteLiteral(" class=\"addfolder\"");
 WriteLiteral(">");
 
             
-            #line 34 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                                                                    Write(Piranha.Resources.Content.ToolbarAddFolder);
 
             
@@ -145,14 +182,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1191), Tuple.Create("\"", 1218)
+WriteAttribute("href", Tuple.Create(" href=\"", 1807), Tuple.Create("\"", 1834)
             
-            #line 35 "..\..\Areas\Manager\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1198), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
+            #line 47 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 1814), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
             
             #line default
             #line hidden
-, 1198), false)
+, 1814), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -160,7 +197,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 35 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 47 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                                                           Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -171,7 +208,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 36 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\Content\Index.cshtml"
        Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
 
             
@@ -181,20 +218,20 @@ WriteLiteral("\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1403), Tuple.Create("\"", 1450)
+WriteAttribute("title", Tuple.Create(" title=\"", 2019), Tuple.Create("\"", 2066)
             
-            #line 38 "..\..\Areas\Manager\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1411), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+            #line 50 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2027), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 1411), false)
+, 2027), false)
 );
 
 WriteLiteral("></button>");
 
             
-            #line 38 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 50 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                                                                                    Write(Html.TextBox("search"));
 
             
@@ -231,7 +268,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 47 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                           Write(Piranha.Resources.Global.Created);
 
             
@@ -244,7 +281,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 48 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                           Write(Piranha.Resources.Global.Updated);
 
             
@@ -257,7 +294,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral(">");
 
             
-            #line 49 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 61 "..\..\Areas\Manager\Views\Content\Index.cshtml"
                            Write(Piranha.Resources.Content.Filename);
 
             
@@ -268,7 +305,7 @@ WriteLiteral("</span>\r\n        </li>\r\n");
 WriteLiteral("        ");
 
             
-            #line 51 "..\..\Areas\Manager\Views\Content\Index.cshtml"
+            #line 63 "..\..\Areas\Manager\Views\Content\Index.cshtml"
    Write(Html.Partial("Partial/ContentTree", Model.Content));
 
             

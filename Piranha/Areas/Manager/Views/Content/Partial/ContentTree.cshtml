@@ -7,7 +7,8 @@
             <a href="@Url.Action("insertfolder", "content", new { id = content.Id })" title="@Piranha.Resources.Content.ToolbarAddFolder" class="icon add-folder marg"></a>
             }
             @if (content.ChildContent.Count == 0 && User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
-            <a href="@Url.Action("delete", "content", new { id = content.Id })" title="@Piranha.Resources.Content.ListDelete" class="icon delete"></a>
+            <a href="@Url.Action("delete", "content", new { id = content.Id })" title="@Piranha.Resources.Content.ListDelete" 
+                class="icon delete @(content.IsImage ? "media-image" : (content.IsFolder ? "media-folder" : ""))"></a>
             }
         </span>
         <span class="date">@content.Created.ToString("yyyy-MM-dd")</span>

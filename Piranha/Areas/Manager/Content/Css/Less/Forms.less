@@ -32,7 +32,7 @@ p input[type="radio"] {
 
 .input {
     background: #fff;
-    border: 1px solid @secondary-border-color;
+    border: 1px solid @form-border-color;
     padding: 6px 10px;
     margin-bottom: 10px;
     .border-radius(2px);
@@ -89,8 +89,8 @@ p input[type="radio"] {
 
     li {
         position: relative;
-        background: #eee;
-        border: 1px solid @secondary-border-color;
+        background: @form-label-color;
+        border: 1px solid @form-border-color;
         margin-bottom: 10px;
         .border-radius(2px);
         box-shadow: 0 0 4px rgba(0,0,0,0.02);
@@ -234,9 +234,9 @@ button.full {
     display: none;
 }
 fieldset {
-    background: #f8f8f8;
+    background: @form-fieldset-color;
     padding: 14px;
-    border: 1px solid @secondary-border-color;
+    border: 1px solid @form-border-color;
     border-radius: 2px;
     margin-bottom: 14px;
 

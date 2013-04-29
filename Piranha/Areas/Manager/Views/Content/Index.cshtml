@@ -12,6 +12,10 @@
             });
         }
 
+        var deleteimagemsg = '@Piranha.Resources.Content.MessageDeleteConfirmImage';
+        var deletedocumentmsg = '@Piranha.Resources.Content.MessageDeleteConfirmFile';
+        var deletefoldermsg = '@Piranha.Resources.Content.MessageDeleteConfirmFolder';
+
         $(document).ready(function () {
             formatSitemap();
 
@@ -21,6 +25,14 @@
                 li.toggleClass("collapsed");
                 li.toggleClass("expanded");
                 formatSitemap();
+            });
+
+            $('.sitemap .delete').click(function () {
+                if ($(this).hasClass('media-image'))
+                    return confirm(deleteimagemsg);
+                else if ($(this).hasClass('media-folder'))
+                    return confirm(deletefoldermsg);
+                else return confirm(deletedocumentmsg);
             });
         });
     </script>

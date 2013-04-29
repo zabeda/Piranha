@@ -165,12 +165,22 @@ WriteAttribute("title", Tuple.Create(" title=\"", 790), Tuple.Create("\"", 835)
 , 798), false)
 );
 
-WriteLiteral(" class=\"icon delete\"");
+WriteAttribute("class", Tuple.Create(" \r\n                class=\"", 836), Tuple.Create("\"", 951)
+, Tuple.Create(Tuple.Create("", 862), Tuple.Create("icon", 862), true)
+, Tuple.Create(Tuple.Create(" ", 866), Tuple.Create("delete", 867), true)
+            
+            #line 11 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+, Tuple.Create(Tuple.Create(" ", 873), Tuple.Create<System.Object, System.Int32>(content.IsImage ? "media-image" : (content.IsFolder ? "media-folder" : "")
+            
+            #line default
+            #line hidden
+, 874), false)
+);
 
 WriteLiteral("></a>\r\n");
 
             
-            #line 11 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 12 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
             }
 
             
@@ -183,7 +193,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 13 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 14 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
                       Write(content.Created.ToString("yyyy-MM-dd"));
 
             
@@ -196,7 +206,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 14 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
                       Write(content.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -209,7 +219,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral(">");
 
             
-            #line 15 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 16 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
                              if (content.ChildContent.Count > 0) {
             
             #line default
@@ -221,45 +231,45 @@ WriteLiteral(" class=\"action\"");
 WriteLiteral("></span>");
 
             
-            #line 15 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 16 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
                                                                                               }
             
             #line default
             #line hidden
 WriteLiteral("<a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1142), Tuple.Create("\"", 1204)
+WriteAttribute("href", Tuple.Create(" href=\"", 1238), Tuple.Create("\"", 1300)
             
-            #line 15 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
-                        , Tuple.Create(Tuple.Create("", 1149), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "content", new { id = content.Id })
+            #line 16 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+                        , Tuple.Create(Tuple.Create("", 1245), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "content", new { id = content.Id })
             
             #line default
             #line hidden
-, 1149), false)
+, 1245), false)
 );
 
 WriteLiteral(">\r\n            <img");
 
 WriteLiteral(" class=\"thumb\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 1238), Tuple.Create("\"", 1280)
+WriteAttribute("src", Tuple.Create(" src=\"", 1334), Tuple.Create("\"", 1376)
             
-            #line 16 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
-, Tuple.Create(Tuple.Create("", 1244), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(content.Id, 32)
+            #line 17 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+, Tuple.Create(Tuple.Create("", 1340), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(content.Id, 32)
             
             #line default
             #line hidden
-, 1244), false)
+, 1340), false)
 );
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 1281), Tuple.Create("\"", 1309)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 1377), Tuple.Create("\"", 1405)
             
-            #line 16 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
-, Tuple.Create(Tuple.Create("", 1287), Tuple.Create<System.Object, System.Int32>(content.AlternateText
+            #line 17 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+, Tuple.Create(Tuple.Create("", 1383), Tuple.Create<System.Object, System.Int32>(content.AlternateText
             
             #line default
             #line hidden
-, 1287), false)
+, 1383), false)
 );
 
 WriteLiteral(" />\r\n");
@@ -267,7 +277,7 @@ WriteLiteral(" />\r\n");
 WriteLiteral("            ");
 
             
-            #line 17 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 18 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
        Write(content.DisplayName);
 
             
@@ -282,7 +292,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 19 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 20 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
            Write(Html.Raw(content.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (content.Updated > content.LastPublished ? "<span class=info-draft></span>" : "")));
 
             
@@ -291,13 +301,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div></a></span>\r\n");
 
             
-            #line 21 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 22 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 21 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 22 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
          if (content.ChildContent.Count > 0) {
 
             
@@ -308,7 +318,7 @@ WriteLiteral("        <ul>\r\n");
 WriteLiteral("            ");
 
             
-            #line 23 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 24 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
        Write(Html.Partial("Partial/ContentTree", content.ChildContent));
 
             
@@ -317,7 +327,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </ul>\r\n");
 
             
-            #line 25 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 26 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
         }
 
             
@@ -326,7 +336,7 @@ WriteLiteral("\r\n        </ul>\r\n");
 WriteLiteral("    </li>\r\n");
 
             
-            #line 27 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Content\Partial\ContentTree.cshtml"
 }
 
             

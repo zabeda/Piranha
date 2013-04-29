@@ -232,6 +232,33 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected document?.
+        /// </summary>
+        public static string MessageDeleteConfirmFile {
+            get {
+                return ResourceManager.GetString("MessageDeleteConfirmFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected folder?.
+        /// </summary>
+        public static string MessageDeleteConfirmFolder {
+            get {
+                return ResourceManager.GetString("MessageDeleteConfirmFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected image?.
+        /// </summary>
+        public static string MessageDeleteConfirmImage {
+            get {
+                return ResourceManager.GetString("MessageDeleteConfirmImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The document has been deleted..
         /// </summary>
         public static string MessageDocumentDeleted {

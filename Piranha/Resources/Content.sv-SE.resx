@@ -276,4 +276,13 @@
   <data name="UploadNew" xml:space="preserve">
     <value>Ladda upp ny</value>
   </data>
+  <data name="MessageDeleteConfirmFile" xml:space="preserve">
+    <value>Vill du ta bort det valda dokumentet?</value>
+  </data>
+  <data name="MessageDeleteConfirmFolder" xml:space="preserve">
+    <value>Vill du ta bort den valda mappen?</value>
+  </data>
+  <data name="MessageDeleteConfirmImage" xml:space="preserve">
+    <value>Vill du ta bort den valda bilden?</value>
+  </data>
 </root>
