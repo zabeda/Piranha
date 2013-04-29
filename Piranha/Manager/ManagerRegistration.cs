@@ -11,6 +11,13 @@ namespace Piranha.Manager
 	/// </summary>
 	internal class ManagerRegistration : AreaRegistration
 	{
+		#region Members
+		/// <summary>
+		/// The manager namespace. Additional namespaces can be configured with Config.ManagerNamespaces
+		/// </summary>
+		private string[] namespaces = { "Piranha.Areas.Manager.Controllers" } ;
+		#endregion
+
 		/// <summary>
 		/// Gets the area name.
 		/// </summary>
@@ -28,7 +35,7 @@ namespace Piranha.Manager
 				"Manager",
 				"manager/{controller}/{action}/{id}",
 				new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional },
-				new[] { "Piranha.Areas.Manager.Controllers" }
+				namespaces.Union(Config.ManagerNamespaces).ToArray()
 			).DataTokens["UseNamespaceFallback"] = false ;
 
 			// Register filters & binders

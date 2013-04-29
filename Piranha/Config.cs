@@ -11,6 +11,11 @@ namespace Piranha
 	/// </summary>
 	public static class Config
 	{
+		#region Members
+		private static string[] namespaces = null;
+		private static object mutex = new object() ;
+		#endregion
+
 		/// <summary>
 		/// Gets if method binding is disabled. When method binding is enabled, the first UrlData
 		/// argument on a GET will be matched against the available methods in the executing page class.
@@ -26,6 +31,33 @@ namespace Piranha
 		/// </summary>
 		public static bool DisableModelStateBinding {
 			get { return ConfigurationManager.AppSettings["disable_modelstate_binding"] == "1" ; }
+		}
+
+		/// <summary>
+		/// Gets the additional namespaces that should be inlcuded in the manager interface.
+		/// </summary>
+		public static string[] ManagerNamespaces {
+			get {
+				if (namespaces != null)
+					return namespaces ;
+				
+				lock (mutex) {
+					if (namespaces == null) {
+						var str = ConfigurationManager.AppSettings["manager_namespaces"] ;
+
+						if (!String.IsNullOrEmpty(str)) {
+							var tmp = str.Split(new char[] {','}) ;
+
+							for (int n = 0; n < tmp.Length; n++)
+								tmp[n] = tmp[n].Trim() ;
+							namespaces = tmp ;
+						} else {
+							namespaces = new string[0] ;
+						}
+					}
+				}
+				return namespaces ;
+			}
 		}
 
 		/// <summary>
