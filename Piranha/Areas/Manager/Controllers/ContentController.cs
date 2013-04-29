@@ -184,6 +184,8 @@ namespace Piranha.Areas.Manager.Controllers
 			}
 			if (!String.IsNullOrEmpty(ViewBag.ReturnUrl))
 				return Redirect(ViewBag.ReturnUrl) ;
+			if (m.Content.ParentId != Guid.Empty)
+				return RedirectToAction("index", new { id = m.Content.ParentId }) ;
 			return RedirectToAction("index") ;
 		}
 

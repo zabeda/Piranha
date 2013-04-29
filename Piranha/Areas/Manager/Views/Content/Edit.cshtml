@@ -1,4 +1,11 @@
 ﻿@model Piranha.Models.Manager.ContentModels.EditModel
+@section Head {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Content_Name').focus();
+        });
+    </script>
+}
 @section Toolbar {
 @Html.Partial("Partial/Tabs")
 <div class="toolbar">
