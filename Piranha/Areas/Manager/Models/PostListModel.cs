@@ -100,6 +100,11 @@ namespace Piranha.Areas.Manager.Models
 		/// Gets/sets the currently available post templates.
 		/// </summary>
 		public List<TemplateModel> Templates { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently active post template.
+		/// </summary>
+		public Guid ActiveTemplate { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -115,12 +120,36 @@ namespace Piranha.Areas.Manager.Models
 		/// </summary>
 		/// <returns>The model</returns>
 		public static PostListModel Get() {
+			return Get(Guid.Empty) ;
+		}
+
+
+		/// <summary>
+		/// Gets the post list model for the given post type id.
+		/// </summary>
+		/// <param name="templateid">The post type id</param>
+		/// <returns>The model</returns>
+		public static PostListModel GetByTemplateId(Guid templateid) {
+			return Get(templateid) ;
+		}
+
+		#region Private methods
+		/// <summary>
+		/// Gets the model for the given parameters.
+		/// </summary>
+		/// <param name="templateid">The post type id</param>
+		/// <returns>The model</returns>
+		private static PostListModel Get(Guid templateid) {
 			var m = new PostListModel() ;
 
 			using (var db = new DataContext()) {
 				// Get the posts
-				m.Posts = db.PostDrafts.
-					Include(p => p.Template).
+				var query = db.PostDrafts.Include(p => p.Template) ;
+				if (templateid != Guid.Empty) {
+					query = query.Where(p => p.TemplateId == templateid) ;
+					m.ActiveTemplate = templateid ;
+				}
+				m.Posts = query.
 					OrderByDescending(p => p.Updated).ToList().
 					Select(p => new PostModel() {
 						Id = p.Id,
@@ -144,5 +173,6 @@ namespace Piranha.Areas.Manager.Models
 			}
 			return m ;
 		}
+		#endregion
 	}
 }

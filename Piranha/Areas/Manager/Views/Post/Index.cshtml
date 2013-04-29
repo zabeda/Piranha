@@ -1,6 +1,16 @@
 ﻿@model Piranha.Areas.Manager.Models.PostListModel
 @using Piranha.Areas.Manager.Models;
 @section Head {
+    <style type="text/css">
+        .content .tabs {
+            float: left;
+            margin-left: 10px;
+        }
+        .content .tabs .selected {
+            border: 0 none;
+            padding: 10px 20px 6px;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             // Set the selected template id
@@ -43,6 +53,19 @@
     @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
     @Html.Hidden("ParentId")
     @Html.Hidden("Seqno")
+    if (Model.Templates.Count > 1) {
+    <div>
+        <ul class="tabs">
+            <li><a href="@Url.Action("index", "post")" @(Model.ActiveTemplate == Guid.Empty ? "class=selected" : "")>All</a></li>
+            @foreach (var template in Model.Templates) {
+            <li>
+                <a href="@Url.Action("template", "post", new { @id = template.Id })" @(template.Id == Model.ActiveTemplate ? "class=selected" : "")>@template.Name</a>
+            </li>
+            }
+        </ul>
+        <div class="clear"></div>
+    </div>
+    }
     <table id="list" class="list">
         <thead>
             <tr>

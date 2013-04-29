@@ -26,6 +26,22 @@ namespace Piranha.Areas.Manager.Controllers
         }
 
 		/// <summary>
+		/// Gets the post list for the specified post template.
+		/// </summary>
+		/// <param name="id">The post template id</param>
+		[Access(Function="ADMIN_POST")]
+		public ActionResult Template(string id) {
+			var m = Models.PostListModel.GetByTemplateId(new Guid(id)) ;
+			ViewBag.Title = @Piranha.Resources.Post.ListTitle ;
+
+			// Executes the post list loaded hook, if registered
+			if (WebPages.Hooks.Manager.PostListModelLoaded != null)
+				WebPages.Hooks.Manager.PostListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View(@"~/Areas/Manager/Views/Post/Index.cshtml", m);
+		}
+
+		/// <summary>
 		/// Creates a new post.
 		/// </summary>
 		/// <param name="im">The insert model</param>
