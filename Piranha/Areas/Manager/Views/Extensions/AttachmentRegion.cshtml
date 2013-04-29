@@ -2,10 +2,10 @@
 @{
     Layout = "";
     
-    var btnAttach = @ViewData.TemplateInfo.GetFullHtmlFieldId("btnAttach") ;
-    var tblId = @ViewData.TemplateInfo.GetFullHtmlFieldId("tblAttachments") ;
-    var boxId = @ViewData.TemplateInfo.GetFullHtmlFieldId("box") ;
-    var thumbUrl = @Piranha.WebPages.WebPiranha.ApplicationPath + @Piranha.WebPages.WebPiranha.GetUrlPrefixForHandlerId("THUMBNAIL") + "/";
+    var btnAttach = ViewData.TemplateInfo.GetFullHtmlFieldId("btnAttach") ;
+    var tblId = ViewData.TemplateInfo.GetFullHtmlFieldId("tblAttachments") ;
+    var boxId = ViewData.TemplateInfo.GetFullHtmlFieldId("box") ;
+    var thumbUrl = Piranha.WebPages.WebPiranha.ApplicationPath + Piranha.Web.Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") + "/";
 
     var varObj = @ViewData.TemplateInfo.GetFullHtmlFieldId("obj") ;
 }
