@@ -244,39 +244,52 @@ WriteAttribute("src", Tuple.Create(" src=\"", 2001), Tuple.Create("\"", 2052)
 
 WriteLiteral(" alt=\"Piranha CMS\"");
 
-WriteLiteral(" /></a>\r\n                <a");
+WriteLiteral(" /></a>\r\n                <div");
+
+WriteLiteral(" class=\"site-title\"");
+
+WriteLiteral(">\r\n                    <span>");
+
+            
+            #line 44 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+                     Write(Piranha.WebPages.WebPiranha.CurrentSite.MetaTitle);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n                    <a");
 
 WriteLiteral(" class=\"public-site\"");
 
 WriteLiteral(" target=\"preview\"");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2135), Tuple.Create("\"", 2183)
+WriteAttribute("href", Tuple.Create(" href=\"", 2266), Tuple.Create("\"", 2314)
             
-            #line 43 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2142), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
+            #line 45 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 2273), Tuple.Create<System.Object, System.Int32>(Piranha.WebPages.WebPiranha.GetSiteUrl()
             
             #line default
             #line hidden
-, 2142), false)
+, 2273), false)
 );
 
 WriteLiteral(">\r\n");
 
-WriteLiteral("                    ");
+WriteLiteral("                        ");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-               Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
+            #line 46 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+                   Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
 
             
             #line default
             #line hidden
-WriteLiteral("</a>\r\n");
+WriteLiteral("</a>\r\n                </div>\r\n");
 
 WriteLiteral("                ");
 
             
-            #line 45 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
            Write(Html.Partial("Partial/Menu"));
 
             
@@ -297,7 +310,7 @@ WriteLiteral(" class=\"grid_12\"");
 WriteLiteral("><h1>");
 
             
-            #line 51 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                                 Write(ViewBag.Title);
 
             
@@ -320,7 +333,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 57 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
            Write(RenderSection("Toolbar", false));
 
             
@@ -329,13 +342,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n");
 
             
-            #line 59 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 59 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
              if (!String.IsNullOrEmpty(ViewBag.Message)) {
 
             
@@ -347,15 +360,15 @@ WriteLiteral(" class=\"grid_12 sys-message\"");
 
 WriteLiteral(">\r\n                <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 2812), Tuple.Create("\"", 2899)
-, Tuple.Create(Tuple.Create("", 2820), Tuple.Create("box", 2820), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 2971), Tuple.Create("\"", 3058)
+, Tuple.Create(Tuple.Create("", 2979), Tuple.Create("box", 2979), true)
             
-            #line 61 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
-, Tuple.Create(Tuple.Create("", 2823), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
+            #line 64 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+, Tuple.Create(Tuple.Create("", 2982), Tuple.Create<System.Object, System.Int32>(!String.IsNullOrEmpty(ViewBag.MessageCss) ? " " + ViewBag.MessageCss : ""
             
             #line default
             #line hidden
-, 2823), false)
+, 2982), false)
 );
 
 WriteLiteral(">\r\n                    <div");
@@ -369,7 +382,7 @@ WriteLiteral(" class=\"ico\"");
 WriteLiteral("></div><p>");
 
             
-            #line 63 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 66 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
                                              Write(ViewBag.Message);
 
             
@@ -378,7 +391,7 @@ WriteLiteral("></div><p>");
 WriteLiteral("</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n");
 
             
-            #line 67 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 70 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
             }
 
             
@@ -393,7 +406,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 69 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 72 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
            Write(RenderBody());
 
             
@@ -452,7 +465,7 @@ WriteLiteral(">\r\n        </div>\r\n    </div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 87 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
+            #line 90 "..\..\Areas\Manager\Views\Shared\_Layout.cshtml"
 Write(RenderSection("Foot", false));
 
             

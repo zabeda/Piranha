@@ -40,8 +40,11 @@
             <div class="grid_12 header">
                 <a class="home" href="@Url.Action("index", "page")">
                     <img src="~/res.ashx/areas/manager/content/img/logo.png" alt="Piranha CMS" /></a>
-                <a class="public-site" target="preview" href="@Piranha.WebPages.WebPiranha.GetSiteUrl()">
-                    @Piranha.WebPages.WebPiranha.GetSiteUrl()</a>
+                <div class="site-title">
+                    <span>@Piranha.WebPages.WebPiranha.CurrentSite.MetaTitle</span>
+                    <a class="public-site" target="preview" href="@Piranha.WebPages.WebPiranha.GetSiteUrl()">
+                        @Piranha.WebPages.WebPiranha.GetSiteUrl()</a>
+                </div>
                 @Html.Partial("Partial/Menu")
             </div>
         </div>
