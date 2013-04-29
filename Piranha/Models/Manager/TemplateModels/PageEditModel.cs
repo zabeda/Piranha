@@ -57,7 +57,13 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// Default constructor, creates a new model.
 		/// </summary>
 		public PageEditModel() {
-			Template = new PageTemplate() ;
+			Template = new PageTemplate() {
+				Preview = new HtmlString(
+					"<table class=\"template\">" +
+					"<tr><td></td></tr>" +
+					"</table>"
+					)
+			};
 			Regions = new List<RegionTemplate>() ;
 			RegionTypes = new List<dynamic>() ;
 

@@ -46,7 +46,13 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		public PostEditModel() {
-			Template = new PostTemplate() ;
+			Template = new PostTemplate() {
+				Preview = new HtmlString(
+					"<table class=\"template\">" +
+					"<tr><td></td></tr>" +
+					"</table>"
+					)
+			} ;
 		}
 
 		/// <summary>
