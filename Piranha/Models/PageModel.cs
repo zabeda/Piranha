@@ -162,36 +162,6 @@ namespace Piranha.Models
 			if (Cache.Current.Contains(cachename))
 				Cache.Current.Remove(cachename) ;
 		}
-
-		/// <summary>
-		/// Gets the page model for the current route. This method is only for MVC use.
-		/// </summary>
-		/// <typeparam name="T">The page model type</typeparam>
-		/// <param name="route">Optional route. Overrides RouteData if provided</param>
-		/// <returns>The model</returns>
-		public static T GetByRoute<T>(string route = "") where T : PageModel {
-			RouteData rd = RouteTable.Routes.GetRouteData(new HttpContextWrapper(HttpContext.Current)) ;
-
-			string controller = (string)rd.Values["controller"] ;
-			string action     = (string)rd.Values["action"] ;
-
-			if (route == "")
-				route = controller + (action.ToLower() != "index" ? "/" + action : "") ;
-
-			if (controller.ToLower() != "home") {
-				T m = Activator.CreateInstance<T>() ;
-				m.Page = Models.Page.GetSingle("page_controller = @0 OR (page_controller is NULL AND pagetemplate_controller = @0)", route) ;
-
-				if (m.Page.GroupId != Guid.Empty) {
-					if (!HttpContext.Current.User.Identity.IsAuthenticated || !HttpContext.Current.User.IsMember(m.Page.GroupId))
-						throw new UnauthorizedAccessException("The current user doesn't have access to the requested page.") ;
-				}
-
-				m.Init() ;
-				return m ;
-			}
-			throw new InvalidOperationException("GetByRoute() is only applicable for custom controllers.") ;
-		}
 		#endregion
 
 		#region Helper methods
