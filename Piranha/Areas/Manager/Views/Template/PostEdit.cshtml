@@ -60,18 +60,18 @@
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.Template.Controller)
-                    <div class="right">
-                        @Html.CheckBoxFor(m => m.Template.ShowController)</div>
-                    <div class="input short">
+                    <div class="input">
                         @Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                    <label>&nbsp;</label>
+                    <p>@Html.CheckBoxFor(m => m.Template.ShowController) @Piranha.Resources.Template.PostTemplateOverride</p>
                 </li>
                 <li>@Html.LabelFor(m => m.Template.ArchiveController)
-                    <div class="right">
-                        @Html.CheckBoxFor(m => m.Template.ShowArchiveController)</div>
-                    <div class="input short">
+                    <div class="input">
                         @Html.TextBoxFor(m => m.Template.ArchiveController, 
                             new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                    <label>&nbsp;</label>
+                    <p>@Html.CheckBoxFor(m => m.Template.ShowArchiveController) @Piranha.Resources.Template.PostRedirectOverride</p>
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Template.AllowRss)

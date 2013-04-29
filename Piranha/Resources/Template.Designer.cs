@@ -232,6 +232,42 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow pages to change the redirect url..
+        /// </summary>
+        public static string PageRedirectOverride {
+            get {
+                return ResourceManager.GetString("PageRedirectOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow pages to change the template..
+        /// </summary>
+        public static string PageTemplateOverride {
+            get {
+                return ResourceManager.GetString("PageTemplateOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow posts the change the redirect url..
+        /// </summary>
+        public static string PostRedirectOverride {
+            get {
+                return ResourceManager.GetString("PostRedirectOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow posts to change the template..
+        /// </summary>
+        public static string PostTemplateOverride {
+            get {
+                return ResourceManager.GetString("PostTemplateOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New property.
         /// </summary>
         public static string PropertyPlaceholder {
@@ -246,6 +282,15 @@ namespace Piranha.Resources {
         public static string RegionPlaceholder {
             get {
                 return ResourceManager.GetString("RegionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

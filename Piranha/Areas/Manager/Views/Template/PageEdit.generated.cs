@@ -581,7 +581,7 @@ WriteLiteral(">\r\n                <li>");
             #line hidden
 WriteLiteral("\r\n                    <div");
 
-WriteLiteral(" class=\"right\"");
+WriteLiteral(" class=\"input\"");
 
 WriteLiteral(">\r\n");
 
@@ -589,28 +589,31 @@ WriteLiteral("                        ");
 
             
             #line 106 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-                   Write(Html.CheckBoxFor(m => m.Template.ShowController));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    <div");
-
-WriteLiteral(" class=\"input short\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 108 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                </li>\r\n                <li>");
+WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
+
+            
+            #line 109 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+                  Write(Html.CheckBoxFor(m => m.Template.ShowController));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 109 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+                                                                    Write(Piranha.Resources.Template.PageTemplateOverride);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 
             
             #line 111 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
@@ -621,7 +624,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>");
             #line hidden
 WriteLiteral("\r\n                    <div");
 
-WriteLiteral(" class=\"right\"");
+WriteLiteral(" class=\"input\"");
 
 WriteLiteral(">\r\n");
 
@@ -629,29 +632,32 @@ WriteLiteral("                        ");
 
             
             #line 113 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-                   Write(Html.CheckBoxFor(m => m.Template.ShowRedirect));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    <div");
-
-WriteLiteral(" class=\"input short\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 115 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Redirect, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</d" +
-"iv>\r\n<div");
+WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
+
+            
+            #line 116 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+                  Write(Html.CheckBoxFor(m => m.Template.ShowRedirect));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 116 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+                                                                  Write(Piranha.Resources.Template.PageRedirectOverride);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div" +
+">\r\n<div");
 
 WriteLiteral(" class=\"grid_3\"");
 
@@ -793,14 +799,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 6434), Tuple.Create("\"", 6495)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 6518), Tuple.Create("\"", 6579)
             
             #line 143 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 6448), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 6532), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 6448), false)
+, 6532), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");

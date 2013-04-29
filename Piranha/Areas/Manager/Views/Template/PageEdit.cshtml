@@ -102,18 +102,18 @@
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.Template.Controller)
-                    <div class="right">
-                        @Html.CheckBoxFor(m => m.Template.ShowController)</div>
-                    <div class="input short">
+                    <div class="input">
                         @Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                    <label>&nbsp;</label>
+                    <p>@Html.CheckBoxFor(m => m.Template.ShowController) @Piranha.Resources.Template.PageTemplateOverride</p>
                 </li>
                 <li>@Html.LabelFor(m => m.Template.Redirect)
-                    <div class="right">
-                        @Html.CheckBoxFor(m => m.Template.ShowRedirect)</div>
-                    <div class="input short">
+                    <div class="input">
                         @Html.TextBoxFor(m => m.Template.Redirect, 
                             new { @placeholder = Piranha.Resources.Global.Optional })</div>
+                    <label>&nbsp;</label>
+                    <p>@Html.CheckBoxFor(m => m.Template.ShowRedirect) @Piranha.Resources.Template.PageRedirectOverride</p>
                 </li>
             </ul>
         </div>

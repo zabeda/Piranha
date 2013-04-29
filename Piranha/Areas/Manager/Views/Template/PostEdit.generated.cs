@@ -402,7 +402,7 @@ WriteLiteral(">\r\n                <li>");
             #line hidden
 WriteLiteral("\r\n                    <div");
 
-WriteLiteral(" class=\"right\"");
+WriteLiteral(" class=\"input\"");
 
 WriteLiteral(">\r\n");
 
@@ -410,28 +410,31 @@ WriteLiteral("                        ");
 
             
             #line 64 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-                   Write(Html.CheckBoxFor(m => m.Template.ShowController));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    <div");
-
-WriteLiteral(" class=\"input short\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 66 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                </li>\r\n                <li>");
+WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
+
+            
+            #line 67 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+                  Write(Html.CheckBoxFor(m => m.Template.ShowController));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 67 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+                                                                    Write(Piranha.Resources.Template.PostTemplateOverride);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 
             
             #line 69 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
@@ -442,7 +445,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>");
             #line hidden
 WriteLiteral("\r\n                    <div");
 
-WriteLiteral(" class=\"right\"");
+WriteLiteral(" class=\"input\"");
 
 WriteLiteral(">\r\n");
 
@@ -450,28 +453,31 @@ WriteLiteral("                        ");
 
             
             #line 71 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-                   Write(Html.CheckBoxFor(m => m.Template.ShowArchiveController));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</div>\r\n                    <div");
-
-WriteLiteral(" class=\"input short\"");
-
-WriteLiteral(">\r\n");
-
-WriteLiteral("                        ");
-
-            
-            #line 73 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.ArchiveController, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n");
+WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
+
+            
+            #line 74 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+                  Write(Html.CheckBoxFor(m => m.Template.ShowArchiveController));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 74 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+                                                                           Write(Piranha.Resources.Template.PostRedirectOverride);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</p>\r\n                </li>\r\n                <li>\r\n");
 
 WriteLiteral("                    ");
 
@@ -643,14 +649,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 4661), Tuple.Create("\"", 4722)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 4745), Tuple.Create("\"", 4806)
             
             #line 105 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 4675), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 4759), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 4675), false)
+, 4759), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");
