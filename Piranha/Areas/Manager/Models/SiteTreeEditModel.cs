@@ -278,15 +278,15 @@ namespace Piranha.Areas.Manager.Models
 		public bool Delete() {
 			using (var db = new DataContext()) {
 				// Only delete empy site trees
-				if (db.Pages.Where(p => p.SiteTreeId == Id).Count() == 0) {
+				if (db.Pages.Where(p => p.SiteTreeId == Id && (p.ParentId == null || p.ParentId != p.SiteTreeId)).Count() == 0) {
 					var site = db.SiteTrees.Where(s => s.Id == Id).Single() ;
 					var template = db.PageTemplates.Where(p => p.Id == Id).SingleOrDefault() ;
 
-					db.SiteTrees.Remove(site) ;
-					if (template != null)
-						db.PageTemplates.Remove(template) ;
 					db.Database.ExecuteSqlCommand("DELETE FROM page WHERE page_sitetree_id={0} AND page_parent_id={0}", Id) ;
 					db.Database.ExecuteSqlCommand("DELETE FROM permalink WHERE permalink_type='SITE' AND permalink_id NOT IN (SELECT page_permalink_id FROM page)") ;
+					if (template != null)
+						db.PageTemplates.Remove(template) ;
+					db.SiteTrees.Remove(site) ;
 
 					// Check if the namespace is empty
 					if (db.Permalinks.Where(p => p.NamespaceId == site.NamespaceId).Count() == 0) {
