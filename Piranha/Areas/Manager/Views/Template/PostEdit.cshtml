@@ -5,6 +5,11 @@
 }
 @section Head {
     <script type="text/javascript" src="~/r.ashx/piranha/areas/manager/content/js/jquery.template.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Template_Name').focus();
+        });
+    </script>
 }
 @section Toolbar {
 @Html.Partial("Partial/Tabs")

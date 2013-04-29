@@ -1,4 +1,11 @@
 ﻿@model Piranha.Models.Manager.SettingModels.AccessEditModel
+@section Head {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Access_Function').focus();
+        });
+    </script>
+}
 @section Toolbar {
 @Html.Partial("Partial/Tabs")
 <div class="toolbar">

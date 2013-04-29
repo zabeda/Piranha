@@ -37,12 +37,23 @@ namespace Piranha.Areas.Manager.Views.Settings
         }
         public override void Execute()
         {
+DefineSection("Head", () => {
+
+WriteLiteral("\r\n    <script");
+
+WriteLiteral(" type=\"text/javascript\"");
+
+WriteLiteral(">\r\n        $(document).ready(function () {\r\n            $(\'#Group_Name\').focus();" +
+"\r\n        });\r\n    </script>\r\n");
+
+});
+
 DefineSection("Toolbar", () => {
 
 WriteLiteral("\r\n");
 
             
-            #line 3 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 10 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -63,7 +74,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 7 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 14 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -71,14 +82,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 278), Tuple.Create("\"", 340)
+WriteAttribute("href", Tuple.Create(" href=\"", 443), Tuple.Create("\"", 505)
             
-            #line 8 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
-, Tuple.Create(Tuple.Create("", 285), Tuple.Create<System.Object, System.Int32>(Url.Action("deletegroup", new { id = Model.Group.Id })
+            #line 15 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+, Tuple.Create(Tuple.Create("", 450), Tuple.Create<System.Object, System.Int32>(Url.Action("deletegroup", new { id = Model.Group.Id })
             
             #line default
             #line hidden
-, 285), false)
+, 450), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -86,7 +97,7 @@ WriteLiteral(" class=\"delete\"");
 WriteLiteral(">");
 
             
-            #line 8 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                                                                                             Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -94,14 +105,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 425), Tuple.Create("\"", 456)
+WriteAttribute("href", Tuple.Create(" href=\"", 590), Tuple.Create("\"", 621)
             
-            #line 9 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
-, Tuple.Create(Tuple.Create("", 432), Tuple.Create<System.Object, System.Int32>(Url.Action("grouplist")
+            #line 16 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+, Tuple.Create(Tuple.Create("", 597), Tuple.Create<System.Object, System.Int32>(Url.Action("grouplist")
             
             #line default
             #line hidden
-, 432), false)
+, 597), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -109,7 +120,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 9 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 16 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                                                            Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -117,14 +128,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 537), Tuple.Create("\"", 593)
+WriteAttribute("href", Tuple.Create(" href=\"", 702), Tuple.Create("\"", 758)
             
-            #line 10 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
-, Tuple.Create(Tuple.Create("", 544), Tuple.Create<System.Object, System.Int32>(Url.Action("group", new { id = Model.Group.Id })
+            #line 17 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+, Tuple.Create(Tuple.Create("", 709), Tuple.Create<System.Object, System.Int32>(Url.Action("group", new { id = Model.Group.Id })
             
             #line default
             #line hidden
-, 544), false)
+, 709), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -132,7 +143,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 10 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 17 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                                                                                        Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -147,7 +158,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 });
 
             
-            #line 16 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 23 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
    Html.BeginForm() ; 
             
             #line default
@@ -155,7 +166,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 17 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 24 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
 Write(Html.HiddenFor(m => m.Group.Id));
 
             
@@ -164,7 +175,7 @@ Write(Html.HiddenFor(m => m.Group.Id));
 WriteLiteral("\r\n");
 
             
-            #line 18 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 25 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
 Write(Html.HiddenFor(m => m.Group.IsNew));
 
             
@@ -173,7 +184,7 @@ Write(Html.HiddenFor(m => m.Group.IsNew));
 WriteLiteral("\r\n");
 
             
-            #line 19 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 26 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
 Write(Html.HiddenFor(m => m.Group.Created));
 
             
@@ -194,7 +205,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 22 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 29 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -213,7 +224,7 @@ WriteLiteral(">\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 26 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                Write(Html.LabelFor(m => m.Group.Name));
 
             
@@ -228,7 +239,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 28 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                    Write(Html.TextBoxFor(m => m.Group.Name));
 
             
@@ -239,7 +250,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 29 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 36 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                Write(Html.ValidationMessageFor(m => m.Group.Name));
 
             
@@ -250,7 +261,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 32 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                Write(Html.LabelFor(m => m.Group.Description));
 
             
@@ -265,7 +276,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 34 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                    Write(Html.TextAreaFor(m => m.Group.Description, 
                             new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -277,7 +288,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 38 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                Write(Html.LabelFor(m => m.Group.ParentId));
 
             
@@ -292,7 +303,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 47 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                    Write(Html.DropDownListFor(m => m.Group.ParentId, Model.Groups));
 
             
@@ -314,7 +325,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 48 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                           Write(Piranha.Resources.Settings.GroupMembers);
 
             
@@ -327,13 +338,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 50 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
              if (!Model.Group.IsNew) {
 
             
@@ -346,13 +357,13 @@ WriteLiteral(" class=\"list\"");
 WriteLiteral(">\r\n");
 
             
-            #line 52 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 52 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                  foreach (var user in Model.Members) {
 
             
@@ -360,20 +371,20 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2249), Tuple.Create("\"", 2297)
+WriteAttribute("href", Tuple.Create(" href=\"", 2414), Tuple.Create("\"", 2462)
             
-            #line 53 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
-, Tuple.Create(Tuple.Create("", 2256), Tuple.Create<System.Object, System.Int32>(Url.Action("user", new { id = user.Id })
+            #line 60 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+, Tuple.Create(Tuple.Create("", 2421), Tuple.Create<System.Object, System.Int32>(Url.Action("user", new { id = user.Id })
             
             #line default
             #line hidden
-, 2256), false)
+, 2421), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 53 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                                                                     Write(!String.IsNullOrEmpty(user.Name) ? user.Name : user.Login);
 
             
@@ -382,7 +393,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 54 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 61 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                 }
 
             
@@ -391,7 +402,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            </ul>\r\n");
 
             
-            #line 56 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 63 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
             } else {
 
             
@@ -400,7 +411,7 @@ WriteLiteral("            </ul>\r\n");
 WriteLiteral("                <p><em>");
 
             
-            #line 57 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 64 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
                   Write(Piranha.Resources.Settings.GroupMembersNew);
 
             
@@ -409,7 +420,7 @@ WriteLiteral("                <p><em>");
 WriteLiteral("</em></p>\r\n");
 
             
-            #line 58 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 65 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
             }
 
             
@@ -418,7 +429,7 @@ WriteLiteral("</em></p>\r\n");
 WriteLiteral("        </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 62 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
+            #line 69 "..\..\Areas\Manager\Views\Settings\Group.cshtml"
    Html.EndForm() ; 
             
             #line default

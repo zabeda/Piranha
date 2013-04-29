@@ -1,4 +1,11 @@
 ﻿@model Piranha.Models.Manager.SettingModels.ParamEditModel
+@section Head {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Param_Name').focus();
+        });
+    </script>
+}
 @section Toolbar {
 @Html.Partial("Partial/Tabs")
 <div class="toolbar">

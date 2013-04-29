@@ -59,7 +59,12 @@ WriteAttribute("src", Tuple.Create(" src=\"", 195), Tuple.Create("\"", 261)
 , 201), false)
 );
 
-WriteLiteral("></script>\r\n");
+WriteLiteral("></script>\r\n    <script");
+
+WriteLiteral(" type=\"text/javascript\"");
+
+WriteLiteral(">\r\n        $(document).ready(function () {\r\n            $(\'#Template_Name\').focus" +
+"();\r\n        });\r\n    </script>\r\n");
 
 });
 
@@ -68,7 +73,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral("\r\n");
 
             
-            #line 10 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -89,7 +94,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 14 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 19 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -97,14 +102,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 495), Tuple.Create("\"", 559)
+WriteAttribute("href", Tuple.Create(" href=\"", 643), Tuple.Create("\"", 707)
             
-            #line 15 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 502), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepost", new { id = Model.Template.Id })
+            #line 20 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 650), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepost", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 502), false)
+, 650), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -112,7 +117,7 @@ WriteLiteral(" class=\"delete\"");
 WriteLiteral(">");
 
             
-            #line 15 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 20 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                                                                               Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -120,14 +125,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 644), Tuple.Create("\"", 674)
+WriteAttribute("href", Tuple.Create(" href=\"", 792), Tuple.Create("\"", 822)
             
-            #line 16 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 651), Tuple.Create<System.Object, System.Int32>(Url.Action("postlist")
+            #line 21 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 799), Tuple.Create<System.Object, System.Int32>(Url.Action("postlist")
             
             #line default
             #line hidden
-, 651), false)
+, 799), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -135,7 +140,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 16 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 21 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                                           Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -143,14 +148,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 755), Tuple.Create("\"", 813)
+WriteAttribute("href", Tuple.Create(" href=\"", 903), Tuple.Create("\"", 961)
             
-            #line 17 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 762), Tuple.Create<System.Object, System.Int32>(Url.Action("post", new { id = Model.Template.Id })
+            #line 22 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 910), Tuple.Create<System.Object, System.Int32>(Url.Action("post", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 762), false)
+, 910), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -158,7 +163,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 17 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 22 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                                                                          Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -173,7 +178,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 });
 
             
-            #line 23 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
    Html.BeginForm("post", "template") ; 
             
             #line default
@@ -183,7 +188,7 @@ WriteLiteral("\r\n<div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 25 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 30 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Id));
 
             
@@ -194,7 +199,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 26 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 31 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.IsNew));
 
             
@@ -205,7 +210,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 27 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 32 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Created));
 
             
@@ -216,7 +221,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 28 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Updated));
 
             
@@ -227,7 +232,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 29 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 34 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.CreatedBy));
 
             
@@ -238,7 +243,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 30 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.UpdatedBy));
 
             
@@ -259,7 +264,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 34 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -278,7 +283,7 @@ WriteLiteral(">\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 38 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Name));
 
             
@@ -293,7 +298,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Name));
 
             
@@ -304,7 +309,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 41 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.ValidationMessageFor(m => m.Template.Name));
 
             
@@ -315,7 +320,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 49 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Description));
 
             
@@ -330,7 +335,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 46 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextAreaFor(m => m.Template.Description, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -344,7 +349,7 @@ WriteLiteral(" class=\"form optional\"");
 WriteLiteral(">               \r\n                <li>");
 
             
-            #line 51 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 56 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Preview));
 
             
@@ -359,7 +364,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 53 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextAreaFor(m => m.Template.Preview, new { @rows = 8} ));
 
             
@@ -377,7 +382,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 59 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 64 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                           Write(Piranha.Resources.Global.Advanced);
 
             
@@ -394,7 +399,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 62 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 67 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Controller));
 
             
@@ -409,7 +414,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 64 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 69 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -419,7 +424,7 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
 
             
-            #line 67 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 72 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                   Write(Html.CheckBoxFor(m => m.Template.ShowController));
 
             
@@ -428,7 +433,7 @@ WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n           
 WriteLiteral(" ");
 
             
-            #line 67 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 72 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                                                     Write(Piranha.Resources.Template.PostTemplateOverride);
 
             
@@ -437,7 +442,7 @@ WriteLiteral(" ");
 WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 
             
-            #line 69 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 74 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.ArchiveController));
 
             
@@ -452,7 +457,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 71 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 76 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.ArchiveController, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -462,7 +467,7 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
 
             
-            #line 74 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 79 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                   Write(Html.CheckBoxFor(m => m.Template.ShowArchiveController));
 
             
@@ -471,7 +476,7 @@ WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n           
 WriteLiteral(" ");
 
             
-            #line 74 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 79 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                                                            Write(Piranha.Resources.Template.PostRedirectOverride);
 
             
@@ -482,7 +487,7 @@ WriteLiteral("</p>\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 77 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 82 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.AllowRss));
 
             
@@ -491,7 +496,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                    <p>");
 
             
-            #line 78 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 83 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                   Write(Html.CheckBoxFor(m => m.Template.AllowRss));
 
             
@@ -500,7 +505,7 @@ WriteLiteral("\r\n                    <p>");
 WriteLiteral(" (");
 
             
-            #line 78 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 83 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                                                Write(Piranha.Resources.Template.AllowRssDescription);
 
             
@@ -514,13 +519,13 @@ WriteLiteral(" class=\"grid_3\"");
 WriteLiteral(">\r\n");
 
             
-            #line 85 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 90 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 85 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 90 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
      if (!Model.Template.IsNew && !String.IsNullOrEmpty(Model.Template.Preview.ToHtmlString())) {
 
             
@@ -537,7 +542,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 87 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 92 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                           Write(Piranha.Resources.Page.HtmlPreview);
 
             
@@ -556,7 +561,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 90 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 95 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
            Write(Model.Template.Preview);
 
             
@@ -565,7 +570,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 94 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 99 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
     }
 
             
@@ -582,7 +587,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 96 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 101 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                           Write(Piranha.Resources.Global.Properties);
 
             
@@ -605,13 +610,13 @@ WriteLiteral(" class=\"list buttons\"");
 WriteLiteral(">\r\n");
 
             
-            #line 100 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 105 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 100 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 105 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                  foreach (var property in Model.Template.Properties) {
 
             
@@ -620,7 +625,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                <li><span>");
 
             
-            #line 101 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 106 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                      Write(property);
 
             
@@ -633,7 +638,7 @@ WriteLiteral(" class=\"btn delete right remove-region\"");
 WriteLiteral("></button></li>\r\n");
 
             
-            #line 102 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 107 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                 }
 
             
@@ -649,14 +654,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 4745), Tuple.Create("\"", 4806)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 4893), Tuple.Create("\"", 4954)
             
-            #line 105 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 4759), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+            #line 110 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 4907), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 4759), false)
+, 4907), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");
@@ -668,7 +673,7 @@ WriteLiteral(" class=\"btn right\"");
 WriteLiteral(">");
 
             
-            #line 106 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 111 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                                              Write(Piranha.Resources.Global.Add);
 
             
@@ -681,7 +686,7 @@ WriteLiteral(" class=\"clear\"");
 WriteLiteral("></div>\r\n         </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 111 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
+            #line 116 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
    Html.EndForm() ; 
             
             #line default

@@ -133,7 +133,7 @@
     <value>Members</value>
   </data>
   <data name="AccessMembersNew" xml:space="preserve">
-    <value>When the access rules has been created you can see who has access to it.</value>
+    <value>When the permission has been created you can see who has access to it.</value>
   </data>
   <data name="AccessName" xml:space="preserve">
     <value>Name</value>

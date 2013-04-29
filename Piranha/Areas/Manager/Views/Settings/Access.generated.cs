@@ -37,12 +37,23 @@ namespace Piranha.Areas.Manager.Views.Settings
         }
         public override void Execute()
         {
+DefineSection("Head", () => {
+
+WriteLiteral("\r\n    <script");
+
+WriteLiteral(" type=\"text/javascript\"");
+
+WriteLiteral(">\r\n        $(document).ready(function () {\r\n            $(\'#Access_Function\').foc" +
+"us();\r\n        });\r\n    </script>\r\n");
+
+});
+
 DefineSection("Toolbar", () => {
 
 WriteLiteral("\r\n");
 
             
-            #line 3 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 10 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -63,7 +74,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 7 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 14 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -72,13 +83,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 8 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 8 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
              if (!Model.Access.IsLocked) {
 
             
@@ -86,14 +97,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 323), Tuple.Create("\"", 387)
+WriteAttribute("href", Tuple.Create(" href=\"", 493), Tuple.Create("\"", 557)
             
-            #line 9 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
-, Tuple.Create(Tuple.Create("", 330), Tuple.Create<System.Object, System.Int32>(Url.Action("deleteaccess", new { id = Model.Access.Id })
+            #line 16 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+, Tuple.Create(Tuple.Create("", 500), Tuple.Create<System.Object, System.Int32>(Url.Action("deleteaccess", new { id = Model.Access.Id })
             
             #line default
             #line hidden
-, 330), false)
+, 500), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -101,7 +112,7 @@ WriteLiteral(" class=\"delete\"");
 WriteLiteral(">");
 
             
-            #line 9 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 16 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                                               Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -110,7 +121,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 10 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 17 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
             }
 
             
@@ -118,14 +129,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 487), Tuple.Create("\"", 519)
+WriteAttribute("href", Tuple.Create(" href=\"", 657), Tuple.Create("\"", 689)
             
-            #line 11 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
-, Tuple.Create(Tuple.Create("", 494), Tuple.Create<System.Object, System.Int32>(Url.Action("accesslist")
+            #line 18 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+, Tuple.Create(Tuple.Create("", 664), Tuple.Create<System.Object, System.Int32>(Url.Action("accesslist")
             
             #line default
             #line hidden
-, 494), false)
+, 664), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -133,7 +144,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 11 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 18 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                             Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -141,14 +152,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 600), Tuple.Create("\"", 658)
+WriteAttribute("href", Tuple.Create(" href=\"", 770), Tuple.Create("\"", 828)
             
-            #line 12 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
-, Tuple.Create(Tuple.Create("", 607), Tuple.Create<System.Object, System.Int32>(Url.Action("access", new { id = Model.Access.Id })
+            #line 19 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+, Tuple.Create(Tuple.Create("", 777), Tuple.Create<System.Object, System.Int32>(Url.Action("access", new { id = Model.Access.Id })
             
             #line default
             #line hidden
-, 607), false)
+, 777), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -156,7 +167,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 12 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 19 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                                          Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -171,7 +182,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 });
 
             
-            #line 18 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 25 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
    Html.BeginForm() ; 
             
             #line default
@@ -179,7 +190,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 19 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 26 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
 Write(Html.HiddenFor(m => m.Access.Id));
 
             
@@ -188,7 +199,7 @@ Write(Html.HiddenFor(m => m.Access.Id));
 WriteLiteral("\r\n");
 
             
-            #line 20 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 27 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
 Write(Html.HiddenFor(m => m.Access.IsNew));
 
             
@@ -197,7 +208,7 @@ Write(Html.HiddenFor(m => m.Access.IsNew));
 WriteLiteral("\r\n");
 
             
-            #line 21 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
 Write(Html.HiddenFor(m => m.Access.IsLocked));
 
             
@@ -206,7 +217,7 @@ Write(Html.HiddenFor(m => m.Access.IsLocked));
 WriteLiteral("\r\n");
 
             
-            #line 22 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 29 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
 Write(Html.HiddenFor(m => m.Access.Created));
 
             
@@ -215,7 +226,7 @@ Write(Html.HiddenFor(m => m.Access.Created));
 WriteLiteral("\r\n");
 
             
-            #line 23 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 30 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
 Write(Html.HiddenFor(m => m.Access.CreatedBy));
 
             
@@ -236,7 +247,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 26 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -255,7 +266,7 @@ WriteLiteral(">\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 30 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 37 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                Write(Html.LabelFor(m => m.Access.Function));
 
             
@@ -268,27 +279,27 @@ WriteLiteral(" class=\"input\"");
 WriteLiteral(">\r\n");
 
             
-            #line 32 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 32 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                          if (!Model.Access.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                        Write(Html.TextBoxFor(m => m.Access.Function));
 
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                     
                         } else {
                             
@@ -296,28 +307,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 35 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 42 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                        Write(Html.TextBoxFor(m => m.Access.Function, new { disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 42 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                                                    
                             
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                        Write(Html.HiddenFor(m => m.Access.Function));
 
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                    
                         }
 
@@ -329,7 +340,7 @@ WriteLiteral("                    </div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 39 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                Write(Html.ValidationMessageFor(m => m.Access.Function));
 
             
@@ -340,7 +351,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 42 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 49 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                Write(Html.LabelFor(m => m.Access.GroupId));
 
             
@@ -355,7 +366,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                    Write(Html.DropDownListFor(m => m.Access.GroupId, Model.Groups));
 
             
@@ -366,7 +377,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 45 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 52 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                Write(Html.ValidationMessageFor(m => m.Access.GroupId));
 
             
@@ -377,7 +388,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 48 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                Write(Html.LabelFor(m => m.Access.Description));
 
             
@@ -390,20 +401,20 @@ WriteLiteral(" class=\"input\"");
 WriteLiteral(">\r\n");
 
             
-            #line 50 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                          if (!Model.Access.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 51 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                        Write(Html.TextAreaFor(m => m.Access.Description, 
                                 new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -411,7 +422,7 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 52 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                                                     
                         } else {
                             
@@ -419,7 +430,7 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 54 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 61 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                        Write(Html.TextAreaFor(m => m.Access.Description, 
                                 new { @rows = 3, @disabled = "disabled", @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -427,21 +438,21 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 55 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                                                                             
                             
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 63 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                        Write(Html.HiddenFor(m => m.Access.Description));
 
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 63 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                                                                       
                         }
 
@@ -464,7 +475,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 66 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 73 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                           Write(Piranha.Resources.Settings.AccessMembers);
 
             
@@ -477,13 +488,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 68 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 75 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 68 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 75 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
              if (!Model.Access.IsNew) {
 
             
@@ -492,7 +503,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            <ul>\r\n                <li>Todo</li>\r\n            </ul>\r\n");
 
             
-            #line 72 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 79 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
             } else {
 
             
@@ -501,7 +512,7 @@ WriteLiteral("            <ul>\r\n                <li>Todo</li>\r\n            <
 WriteLiteral("                <p><em>");
 
             
-            #line 73 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 80 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
                   Write(Piranha.Resources.Settings.AccessMembersNew);
 
             
@@ -510,7 +521,7 @@ WriteLiteral("                <p><em>");
 WriteLiteral("</em></p>\r\n");
 
             
-            #line 74 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 81 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
             }
 
             
@@ -519,7 +530,7 @@ WriteLiteral("</em></p>\r\n");
 WriteLiteral("        </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 78 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
+            #line 85 "..\..\Areas\Manager\Views\Settings\Access.cshtml"
    Html.EndForm() ; 
             
             #line default

@@ -80,7 +80,8 @@ WriteLiteral(">\r\n        /**\r\n         * This var is needed by the regiontem
             
             #line default
             #line hidden
-WriteLiteral("\';\r\n    </script>\r\n");
+WriteLiteral("\';\r\n\r\n        $(document).ready(function () {\r\n            $(\'#InternalId\').focus" +
+"();\r\n        });\r\n    </script>\r\n");
 
 });
 
@@ -89,7 +90,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral("\r\n");
 
             
-            #line 14 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 18 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -110,7 +111,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 18 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 22 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -119,13 +120,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 19 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 23 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 19 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 23 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
              if (Model.CanDelete && Model.Id != Piranha.Config.DefaultSiteTreeId) {
 
             
@@ -133,14 +134,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 900), Tuple.Create("\"", 951)
+WriteAttribute("href", Tuple.Create(" href=\"", 995), Tuple.Create("\"", 1046)
             
-            #line 20 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 907), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Id })
+            #line 24 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 1002), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Id })
             
             #line default
             #line hidden
-, 907), false)
+, 1002), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -148,7 +149,7 @@ WriteLiteral(" class=\"delete\"");
 WriteLiteral(">");
 
             
-            #line 20 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 24 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                                  Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -157,7 +158,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 21 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 25 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
             }
 
             
@@ -165,14 +166,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1051), Tuple.Create("\"", 1090)
+WriteAttribute("href", Tuple.Create(" href=\"", 1146), Tuple.Create("\"", 1185)
             
-            #line 22 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1058), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "sitetree")
+            #line 26 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 1153), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "sitetree")
             
             #line default
             #line hidden
-, 1058), false)
+, 1153), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -180,7 +181,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 22 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 26 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                    Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -188,14 +189,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1171), Tuple.Create("\"", 1220)
+WriteAttribute("href", Tuple.Create(" href=\"", 1266), Tuple.Create("\"", 1315)
             
-            #line 23 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1178), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Id })
+            #line 27 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 1273), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Id })
             
             #line default
             #line hidden
-, 1178), false)
+, 1273), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -203,7 +204,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 23 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 27 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                                 Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -218,7 +219,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 });
 
             
-            #line 29 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
    Html.BeginForm() ; 
             
             #line default
@@ -226,7 +227,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 30 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 34 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Id));
 
             
@@ -235,7 +236,7 @@ Write(Html.HiddenFor(m => m.Id));
 WriteLiteral("\r\n");
 
             
-            #line 31 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
 Write(Html.HiddenFor(m => m.NamespaceId));
 
             
@@ -244,7 +245,7 @@ Write(Html.HiddenFor(m => m.NamespaceId));
 WriteLiteral("\r\n");
 
             
-            #line 32 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 36 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
 Write(Html.HiddenFor(m => m.CanDelete));
 
             
@@ -265,7 +266,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 35 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -284,7 +285,7 @@ WriteLiteral(">\r\n                <li>\r\n\r\n");
 WriteLiteral("                    ");
 
             
-            #line 40 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 44 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                Write(Html.LabelFor(m => m.InternalId, Piranha.Resources.Global.InternalId));
 
             
@@ -297,27 +298,27 @@ WriteLiteral(" class=\"input\"");
 WriteLiteral(">\r\n");
 
             
-            #line 42 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 42 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                          if (Model.Id != Piranha.Config.DefaultSiteTreeId) {
                         
             
             #line default
             #line hidden
             
-            #line 43 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 47 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                    Write(Html.TextBoxFor(m => m.InternalId));
 
             
             #line default
             #line hidden
             
-            #line 43 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 47 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                            
                         } else {
                         
@@ -325,28 +326,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 45 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 49 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                    Write(Html.TextBoxFor(m => m.InternalId, new { @disabled = true }));
 
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 49 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                                      
                         
             
             #line default
             #line hidden
             
-            #line 46 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 50 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                    Write(Html.HiddenFor(m => m.InternalId));
 
             
             #line default
             #line hidden
             
-            #line 46 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 50 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                           
                         }
 
@@ -358,7 +359,7 @@ WriteLiteral("                    </div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 49 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 53 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                Write(Html.ValidationMessageFor(m => m.InternalId));
 
             
@@ -369,7 +370,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 52 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 56 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                Write(Html.LabelFor(m => m.Name, Piranha.Resources.Global.Name));
 
             
@@ -384,7 +385,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 54 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                    Write(Html.TextBoxFor(m => m.Name));
 
             
@@ -395,7 +396,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 55 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                Write(Html.ValidationMessageFor(m => m.Name));
 
             
@@ -406,7 +407,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 58 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                Write(Html.LabelFor(m => m.Description, Piranha.Resources.Global.Description));
 
             
@@ -421,7 +422,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 60 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 64 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                    Write(Html.TextAreaFor(m => m.Description));
 
             
@@ -449,7 +450,7 @@ WriteLiteral(" data-id=\"pnl-settings\"");
 WriteLiteral(">");
 
             
-            #line 70 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 74 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                                       Write(Piranha.Resources.Global.Settings);
 
             
@@ -468,7 +469,7 @@ WriteLiteral(" data-id=\"pnl-regions\"");
 WriteLiteral(">");
 
             
-            #line 71 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 75 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                              Write(Piranha.Resources.Global.Regions);
 
             
@@ -488,7 +489,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 76 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 80 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                           Write(Piranha.Resources.Global.Settings);
 
             
@@ -507,7 +508,7 @@ WriteLiteral(">\r\n                                <li>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 80 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 84 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                Write(Html.LabelFor(m => m.HostNames, Piranha.Resources.SiteTree.HostNames));
 
             
@@ -522,7 +523,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 82 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 86 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                    Write(Html.TextBoxFor(m => m.HostNames));
 
             
@@ -534,7 +535,7 @@ WriteLiteral("</div>\r\n                                </li>\r\n               
 WriteLiteral("                                    ");
 
             
-            #line 85 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 89 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                Write(Html.LabelFor(m => m.Template.Preview, Piranha.Resources.Page.HtmlPreview));
 
             
@@ -549,7 +550,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 87 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 91 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                    Write(Html.TextAreaFor(m => m.Template.Preview, new { @rows = 6 }));
 
             
@@ -570,7 +571,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 93 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 97 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                           Write(Piranha.Resources.Global.Regions);
 
             
@@ -588,7 +589,7 @@ WriteLiteral(">\r\n                                <tbody>\r\n                  
 "tr>\r\n                                        <th>");
 
             
-            #line 98 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 102 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                        Write(Piranha.Resources.Global.Name);
 
             
@@ -597,7 +598,7 @@ WriteLiteral(">\r\n                                <tbody>\r\n                  
 WriteLiteral("</th>\r\n                                        <th>");
 
             
-            #line 99 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 103 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                        Write(Piranha.Resources.Global.InternalId);
 
             
@@ -606,7 +607,7 @@ WriteLiteral("</th>\r\n                                        <th>");
 WriteLiteral("</th>\r\n                                        <th>");
 
             
-            #line 100 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 104 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                        Write(Piranha.Resources.Global.Type);
 
             
@@ -618,7 +619,7 @@ WriteLiteral("</th>\r\n                                        <th></th>\r\n    
 WriteLiteral("                                    ");
 
             
-            #line 103 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 107 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                Write(Html.EditorFor(m => m.Regions));
 
             
@@ -671,7 +672,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                                ");
 
             
-            #line 115 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 119 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                            Write(Html.DropDownList("newregionType",
                                                     new SelectList(Model.RegionTypes, "Type", "Name")));
 
@@ -692,7 +693,7 @@ WriteLiteral(" class=\"btn marg-big\"");
 WriteLiteral(">");
 
             
-            #line 119 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 123 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
                                                                                       Write(Piranha.Resources.Global.Add);
 
             
@@ -713,7 +714,7 @@ WriteLiteral(@"</button>
 ");
 
             
-            #line 131 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
+            #line 135 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
    Html.EndForm() ; 
             
             #line default

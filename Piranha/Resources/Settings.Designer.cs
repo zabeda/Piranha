@@ -106,7 +106,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When the access rules has been created you can see who has access to it..
+        ///   Looks up a localized string similar to When the permission has been created you can see who has access to it..
         /// </summary>
         public static string AccessMembersNew {
             get {

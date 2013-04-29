@@ -1,4 +1,11 @@
 ﻿@model Piranha.Models.Manager.SettingModels.GroupEditModel
+@section Head {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Group_Name').focus();
+        });
+    </script>
+}
 @section Toolbar {
 @Html.Partial("Partial/Tabs")
 <div class="toolbar">

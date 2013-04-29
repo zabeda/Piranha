@@ -37,12 +37,23 @@ namespace Piranha.Areas.Manager.Views.Settings
         }
         public override void Execute()
         {
+DefineSection("Head", () => {
+
+WriteLiteral("\r\n    <script");
+
+WriteLiteral(" type=\"text/javascript\"");
+
+WriteLiteral(">\r\n        $(document).ready(function () {\r\n            $(\'#Param_Name\').focus();" +
+"\r\n        });\r\n    </script>\r\n");
+
+});
+
 DefineSection("Toolbar", () => {
 
 WriteLiteral("\r\n");
 
             
-            #line 3 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 10 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -63,7 +74,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 7 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 14 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -72,13 +83,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 8 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 8 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 15 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
              if (!Model.Param.IsLocked) {
 
             
@@ -86,14 +97,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 321), Tuple.Create("\"", 383)
+WriteAttribute("href", Tuple.Create(" href=\"", 486), Tuple.Create("\"", 548)
             
-            #line 9 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
-, Tuple.Create(Tuple.Create("", 328), Tuple.Create<System.Object, System.Int32>(Url.Action("deleteparam", new { id = Model.Param.Id })
+            #line 16 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+, Tuple.Create(Tuple.Create("", 493), Tuple.Create<System.Object, System.Int32>(Url.Action("deleteparam", new { id = Model.Param.Id })
             
             #line default
             #line hidden
-, 328), false)
+, 493), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -101,7 +112,7 @@ WriteLiteral(" class=\"delete\"");
 WriteLiteral(">");
 
             
-            #line 9 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 16 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                                             Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -110,7 +121,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 10 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 17 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
             }
 
             
@@ -118,14 +129,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 483), Tuple.Create("\"", 514)
+WriteAttribute("href", Tuple.Create(" href=\"", 648), Tuple.Create("\"", 679)
             
-            #line 11 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
-, Tuple.Create(Tuple.Create("", 490), Tuple.Create<System.Object, System.Int32>(Url.Action("paramlist")
+            #line 18 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+, Tuple.Create(Tuple.Create("", 655), Tuple.Create<System.Object, System.Int32>(Url.Action("paramlist")
             
             #line default
             #line hidden
-, 490), false)
+, 655), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -133,7 +144,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 11 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 18 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                            Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -141,14 +152,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 595), Tuple.Create("\"", 651)
+WriteAttribute("href", Tuple.Create(" href=\"", 760), Tuple.Create("\"", 816)
             
-            #line 12 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
-, Tuple.Create(Tuple.Create("", 602), Tuple.Create<System.Object, System.Int32>(Url.Action("param", new { id = Model.Param.Id })
+            #line 19 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+, Tuple.Create(Tuple.Create("", 767), Tuple.Create<System.Object, System.Int32>(Url.Action("param", new { id = Model.Param.Id })
             
             #line default
             #line hidden
-, 602), false)
+, 767), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -156,7 +167,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 12 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 19 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                                        Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -171,7 +182,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 });
 
             
-            #line 18 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 25 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
    Html.BeginForm() ; 
             
             #line default
@@ -179,7 +190,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 19 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 26 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
 Write(Html.HiddenFor(m => m.Param.Id));
 
             
@@ -188,7 +199,7 @@ Write(Html.HiddenFor(m => m.Param.Id));
 WriteLiteral("\r\n");
 
             
-            #line 20 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 27 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
 Write(Html.HiddenFor(m => m.Param.IsNew));
 
             
@@ -197,7 +208,7 @@ Write(Html.HiddenFor(m => m.Param.IsNew));
 WriteLiteral("\r\n");
 
             
-            #line 21 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
 Write(Html.HiddenFor(m => m.Param.IsLocked));
 
             
@@ -206,7 +217,7 @@ Write(Html.HiddenFor(m => m.Param.IsLocked));
 WriteLiteral("\r\n");
 
             
-            #line 22 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 29 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
 Write(Html.HiddenFor(m => m.Param.Created));
 
             
@@ -215,7 +226,7 @@ Write(Html.HiddenFor(m => m.Param.Created));
 WriteLiteral("\r\n");
 
             
-            #line 23 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 30 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
 Write(Html.HiddenFor(m => m.Param.CreatedBy));
 
             
@@ -246,7 +257,7 @@ WriteLiteral(">\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 30 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 37 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                Write(Html.LabelFor(m => m.Param.Name));
 
             
@@ -259,27 +270,27 @@ WriteLiteral(" class=\"input\"");
 WriteLiteral(">\r\n");
 
             
-            #line 32 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 32 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                          if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.TextBoxFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 33 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                
                         } else {
                             
@@ -287,28 +298,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 35 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 42 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.TextBoxFor(m => m.Param.Name, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 35 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 42 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                                                
                             
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.HiddenFor(m => m.Param.Name));
 
             
             #line default
             #line hidden
             
-            #line 36 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                               
                         }
 
@@ -320,7 +331,7 @@ WriteLiteral("                    </div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 39 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                Write(Html.ValidationMessageFor(m => m.Param.Name));
 
             
@@ -331,7 +342,7 @@ WriteLiteral("\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 42 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 49 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                Write(Html.LabelFor(m => m.Param.Value));
 
             
@@ -344,27 +355,27 @@ WriteLiteral(" class=\"input\"");
 WriteLiteral(">\r\n");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 44 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                          if (Model.Param.Name != "SITE_VERSION") {
                             
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 52 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.TextBoxFor(m => m.Param.Value));
 
             
             #line default
             #line hidden
             
-            #line 45 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 52 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                 
                         } else {
                             
@@ -372,28 +383,28 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 47 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.TextBoxFor(m => m.Param.Value, new { @disabled = "disabled" }));
 
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                                                 
                             
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.HiddenFor(m => m.Param.Value));
 
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                
                         } 
 
@@ -405,7 +416,7 @@ WriteLiteral("                    </div>\r\n                </li>\r\n           
 WriteLiteral("                    ");
 
             
-            #line 53 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                Write(Html.LabelFor(m => m.Param.Description));
 
             
@@ -418,20 +429,20 @@ WriteLiteral(" class=\"input\"");
 WriteLiteral(">\r\n");
 
             
-            #line 55 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 55 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                          if (!Model.Param.IsLocked) {
                             
             
             #line default
             #line hidden
             
-            #line 56 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 63 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -439,7 +450,7 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 57 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 64 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                                                     
                         } else {
                             
@@ -447,7 +458,7 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 59 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 66 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.TextAreaFor(m => m.Param.Description, 
                                 new { @rows = 3, @disabled = "disabled", @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -455,21 +466,21 @@ WriteLiteral(">\r\n");
             #line default
             #line hidden
             
-            #line 60 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 67 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                                                                             
                             
             
             #line default
             #line hidden
             
-            #line 61 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                        Write(Html.HiddenFor(m => m.Param.Description));
 
             
             #line default
             #line hidden
             
-            #line 61 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
                                                                      
                         }
 
@@ -480,7 +491,7 @@ WriteLiteral("                    </div>\r\n                </li>\r\n           
 "iv>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 69 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
+            #line 76 "..\..\Areas\Manager\Views\Settings\Param.cshtml"
    Html.EndForm() ; 
             
             #line default

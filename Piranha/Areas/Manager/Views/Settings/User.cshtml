@@ -24,6 +24,8 @@
         }
 
         $(document).ready(function () {
+            $('#User_Login').focus();
+
             if (!$('#User_IsLocked').is(':checked')) {
                 disableLockedUntil();
             }

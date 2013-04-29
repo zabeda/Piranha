@@ -106,6 +106,9 @@ $(document).ready(function () {
                     $('#newregionName').val('');
                     $('#newregionInternalId').val('');
                     $('#newregionType').val('');
+
+                    // Reset focus
+                    $('#newregionName').focus();
                 }
             });
         }
