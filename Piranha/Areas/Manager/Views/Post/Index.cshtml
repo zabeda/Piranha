@@ -12,6 +12,14 @@
         }
     </style>
     <script type="text/javascript">
+        function addPost() {
+            @if (Model.ActiveTemplate == Guid.Empty) {
+                <text>floatBox.show('boxTemplates');</text>
+            } else {
+                <text>$('form').submit();</text>
+            }
+        }
+
         $(document).ready(function () {
             // Set the selected template id
             $(".templates").click(function () {
@@ -39,7 +47,7 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a onclick="addPost()" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
             <li><a href="" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
         </ul>
@@ -50,9 +58,10 @@
 }
 <div class="grid_12">
 @using (Html.BeginForm("insert", (string)ViewContext.RouteData.Values["Controller"])) {
-    @Html.Hidden("TemplateId", "906761ea-6c04-4f4b-9365-f2c350ff4372")
-    @Html.Hidden("ParentId")
-    @Html.Hidden("Seqno")
+    @Html.Hidden("TemplateId", @Model.ActiveTemplate)
+    @if (Model.ActiveTemplate != Guid.Empty) {
+    <text>@Html.Hidden("returl", Url.Action("template", "post", new { id = Model.ActiveTemplate}))</text>
+    }
     if (Model.Templates.Count > 1) {
     <div>
         <ul class="tabs">

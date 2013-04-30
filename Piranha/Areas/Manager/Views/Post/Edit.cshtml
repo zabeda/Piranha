@@ -107,7 +107,11 @@
             @if (User.HasAccess("ADMIN_POST_PUBLISH")) {
             <li><a href="@Url.Action("delete", new { id = Model.Post.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
             }
+            @if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {
             <li><a href="@Url.Action("index")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            } else {
+            <li><a href="@ViewBag.ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            }
             <li><a href="@Url.Action("edit", new { id = Model.Post.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
         </ul>
