@@ -93,8 +93,10 @@ namespace Piranha.Areas.Manager.Controllers
 				if (m.SaveAll(draft)) {
 					ModelState.Clear() ;
 					if (!draft)
-						SuccessMessage(Piranha.Resources.Post.MessagePublished) ;
-					else SuccessMessage(Piranha.Resources.Post.MessageSaved) ;
+						SuccessMessage(Piranha.Resources.Post.MessagePublished, true) ;
+					else SuccessMessage(Piranha.Resources.Post.MessageSaved, true) ;
+
+					return RedirectToAction("edit", new { id = m.Post.Id }) ;
 				} else ErrorMessage(Piranha.Resources.Post.MessageNotSaved) ;
 			}
 			m.Refresh() ;
@@ -119,10 +121,10 @@ namespace Piranha.Areas.Manager.Controllers
 			EditModel pm = EditModel.GetById(new Guid(id)) ;
 
 			if (pm.DeleteAll())
-				SuccessMessage(Piranha.Resources.Post.MessageDeleted) ;
-			else ErrorMessage(Piranha.Resources.Post.MessageNotDeleted) ;
+				SuccessMessage(Piranha.Resources.Post.MessageDeleted, true) ;
+			else ErrorMessage(Piranha.Resources.Post.MessageNotDeleted, true) ;
 
-			return Index() ;
+			return RedirectToAction("index") ;
 		}
 
 		/// <summary>

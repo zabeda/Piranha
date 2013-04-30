@@ -126,6 +126,8 @@ namespace Piranha.Models.Manager.PostModels
 			AttachedContent = new List<Piranha.Models.Content>() ;
 			Content = Piranha.Models.Content.Get() ;
 			Comments = new List<Entities.Comment>() ;
+			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
+				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
 		}
 
 		/// <summary>
@@ -148,8 +150,6 @@ namespace Piranha.Models.Manager.PostModels
 				PermalinkId = m.Permalink.Id
 			} ;
 			m.Template = PostTemplate.GetSingle(templateId) ;
-			m.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
-				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
 			m.GetRelated() ;
 
 			return m ;
@@ -328,6 +328,11 @@ namespace Piranha.Models.Manager.PostModels
 					else Properties.Add(new Property() { Name = name, ParentId = Post.Id, IsDraft = Post.IsDraft }) ;
 				}
 			}
+
+			// Get selected categories
+			if (PostCategories.Count > 0)
+				Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
+					new Params() { OrderBy = "category_name" }), "Id", "Name", PostCategories) ;
 
 			// Get attached content
 			if (Post.Attachments.Count > 0) {
