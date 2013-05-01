@@ -194,6 +194,22 @@ namespace Piranha.Models
 		/// Gets the associated regions for the current page
 		/// </summary>
 		protected void Init() {
+			var id = Page.Id ;
+
+			// Handle page copies
+			if (((Models.Page)Page).OriginalId != Guid.Empty) {
+				var copy = (Models.Page)Page ;
+				var org = Models.Page.GetSingle(copy.OriginalId, copy.IsDraft) ;
+
+				copy.Id = org.Id ;
+				copy.GroupId = org.GroupId ;
+				copy.DisabledGroups = org.DisabledGroups ;
+				copy.Keywords = org.Keywords ;
+				copy.Description = org.Description ;
+				copy.LastModified = copy.LastModified > org.LastModified ? copy.LastModified : org.LastModified ;
+			}
+
+			// Get the page template
 			PageTemplate pt = PageTemplate.GetSingle(((Page)Page).TemplateId) ;
 
 			// Regions
@@ -261,6 +277,8 @@ namespace Piranha.Models
 				}
 				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body ;
 			}
+			// Reset the page id if we changed it to load a copy
+			((Models.Page)Page).Id = id ;
 		}
 	}
 }

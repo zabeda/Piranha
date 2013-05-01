@@ -22,7 +22,6 @@ namespace Piranha.WebPages
 	{
 		#region Members
 		private Models.Page page = null ;
-		private Models.Page org = null ;
 		#endregion
 
 		/// <summary>
@@ -58,13 +57,9 @@ namespace Piranha.WebPages
 				page = Models.Page.GetByPermalink(permalink, draft) ;
 			else page = Models.Page.GetStartpage(draft) ;
 
-			if (page.OriginalId != Guid.Empty)
-				org = Models.Page.GetSingle(page.OriginalId) ;
-			else org = page ;
-
 			// Check permissions
-			if (org.GroupId != Guid.Empty) {
-				if (!User.IsMember(org.GroupId)) {
+			if (page.GroupId != Guid.Empty) {
+				if (!User.IsMember(page.GroupId)) {
 					SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
 					if (param != null)
 						Response.Redirect(param.Value) ;
@@ -74,18 +69,13 @@ namespace Piranha.WebPages
 			} else if (!draft) {
 				// Only cache public non drafts
 				DateTime mod = GetLastModified(page) ;
-				if (page.OriginalId != Guid.Empty) {
-					var orgMod = GetLastModified(org) ;
-					if (orgMod > mod)
-						mod = orgMod ;
-				}
 				DateTime tmod = TemplateCache.GetLastModified(!String.IsNullOrEmpty(page.Controller) ?
 					page.Controller : "~/page.cshtml") ;
 				mod = tmod > mod ? tmod : mod ;
 				cached = ClientCache.HandleClientCache(HttpContext.Current, WebPiranha.GetCulturePrefix() + page.Id.ToString(), mod) ;
 			}
 			// Check for disabled groups
-			if (org.DisabledGroups.Contains(User.GetProfile().GroupId)) {
+			if (page.DisabledGroups.Contains(User.GetProfile().GroupId)) {
 				SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
 				if (param != null)
 					Response.Redirect(param.Value) ;
@@ -93,18 +83,7 @@ namespace Piranha.WebPages
 			}
 			// Load the model if the page wasn't cached
 			if (!cached)
-				InitModel(PageModel.Get<T>(org)) ;
-
-			// If this is a copy, copy some information from the original to the page.
-			if (page.OriginalId != Guid.Empty) {
-				Model.Page = page ;
-				((Models.Page)Model.Page).GroupId = org.GroupId ;
-				((Models.Page)Model.Page).DisabledGroups = org.DisabledGroups ;
-				((Models.Page)Model.Page).Keywords = org.Keywords ;
-				((Models.Page)Model.Page).Description = org.Description ;
-
-				Page.Current = Model.Page ;
-			}
+				InitModel(PageModel.Get<T>(page)) ;
 
 			// Execute hook, if it exists
 			if (Hooks.Model.PageModelLoaded != null)

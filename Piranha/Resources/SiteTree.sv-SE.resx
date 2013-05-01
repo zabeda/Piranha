@@ -129,6 +129,9 @@
   <data name="ListTitle" xml:space="preserve">
     <value>Sajter</value>
   </data>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Vill du ta bort den valda sajten?</value>
+  </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>Sajten har raderats.</value>
   </data>
