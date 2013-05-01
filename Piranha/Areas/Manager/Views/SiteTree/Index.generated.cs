@@ -53,7 +53,17 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteLiteral(@">
+WriteLiteral(">\r\n        var deletemsg = \'");
+
+            
+            #line 7 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+                    Write(Piranha.Resources.SiteTree.MessageDeleteConfirm);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"';
+
         $(document).ready(function () {
             // Setup list
             var options = {
@@ -62,6 +72,10 @@ WriteLiteral(@">
                 valueNames: ['title', 'description', 'updated', 'created']
             };
             new List('list', options);
+
+            $('.list .delete').click(function () {
+                return confirm(deletemsg);
+            });
         });
     </script>
 ");
@@ -73,7 +87,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral(" \r\n");
 
             
-            #line 18 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 24 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -89,14 +103,14 @@ WriteLiteral(" class=\"inner\"");
 
 WriteLiteral(">\r\n        <ul>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 643), Tuple.Create("\"", 681)
+WriteAttribute("href", Tuple.Create(" href=\"", 837), Tuple.Create("\"", 875)
             
-            #line 22 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 650), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "sitetree")
+            #line 28 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 844), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "sitetree")
             
             #line default
             #line hidden
-, 650), false)
+, 844), false)
 );
 
 WriteLiteral(" class=\"add\"");
@@ -104,7 +118,7 @@ WriteLiteral(" class=\"add\"");
 WriteLiteral(">");
 
             
-            #line 22 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                                  Write(Piranha.Resources.Global.ToolbarAdd);
 
             
@@ -112,14 +126,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 760), Tuple.Create("\"", 787)
+WriteAttribute("href", Tuple.Create(" href=\"", 954), Tuple.Create("\"", 981)
             
-            #line 23 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 767), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
+            #line 29 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 961), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
             
             #line default
             #line hidden
-, 767), false)
+, 961), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -127,7 +141,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 23 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 29 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                           Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -137,20 +151,20 @@ WriteLiteral("</a></li>\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 900), Tuple.Create("\"", 947)
+WriteAttribute("title", Tuple.Create(" title=\"", 1094), Tuple.Create("\"", 1141)
             
-            #line 25 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 908), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+            #line 31 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 1102), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 908), false)
+, 1102), false)
 );
 
 WriteLiteral("></button>");
 
             
-            #line 25 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 31 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                                                    Write(Html.TextBox("search"));
 
             
@@ -183,7 +197,7 @@ WriteLiteral(" data-sort=\"title\"");
 WriteLiteral(">");
 
             
-            #line 34 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                         Write(Piranha.Resources.Global.Title);
 
             
@@ -198,7 +212,7 @@ WriteLiteral(" data-sort=\"description\"");
 WriteLiteral(">");
 
             
-            #line 35 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                           Write(Piranha.Resources.Global.Description);
 
             
@@ -217,7 +231,7 @@ WriteLiteral(" data-sort=\"updated\"");
 WriteLiteral(">");
 
             
-            #line 36 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 42 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -236,7 +250,7 @@ WriteLiteral(" data-sort=\"created\"");
 WriteLiteral(">");
 
             
-            #line 37 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -253,13 +267,13 @@ WriteLiteral(" class=\"list-js\"");
 WriteLiteral(">\r\n");
 
             
-            #line 42 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 42 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
              foreach (var site in Model.Sites) {
 
             
@@ -271,20 +285,20 @@ WriteLiteral(" class=\"title\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1806), Tuple.Create("\"", 1854)
+WriteAttribute("href", Tuple.Create(" href=\"", 2000), Tuple.Create("\"", 2048)
             
-            #line 44 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1813), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = site.Id })
+            #line 50 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2007), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = site.Id })
             
             #line default
             #line hidden
-, 1813), false)
+, 2007), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 44 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 50 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                                                                  Write(site.Name);
 
             
@@ -297,7 +311,7 @@ WriteLiteral(" class=\"description\"");
 WriteLiteral(">");
 
             
-            #line 45 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                    Write(site.Description);
 
             
@@ -310,7 +324,7 @@ WriteLiteral(" class=\"updated\"");
 WriteLiteral(">");
 
             
-            #line 46 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 52 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                Write(site.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -323,7 +337,7 @@ WriteLiteral(" class=\"created\"");
 WriteLiteral(">");
 
             
-            #line 47 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 53 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                                Write(site.Created.ToString("yyyy-MM-dd"));
 
             
@@ -336,13 +350,13 @@ WriteLiteral(" class=\"buttons\"");
 WriteLiteral(">\r\n");
 
             
-            #line 49 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 49 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                      if (Model.CanDeleteSite[site.Id] && site.Id != Piranha.Config.DefaultSiteTreeId) {
 
             
@@ -350,14 +364,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2264), Tuple.Create("\"", 2314)
+WriteAttribute("href", Tuple.Create(" href=\"", 2458), Tuple.Create("\"", 2508)
             
-            #line 50 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2271), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = site.Id })
+            #line 56 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2465), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = site.Id })
             
             #line default
             #line hidden
-, 2271), false)
+, 2465), false)
 );
 
 WriteLiteral(" title=\"\"");
@@ -367,7 +381,7 @@ WriteLiteral(" class=\"icon delete\"");
 WriteLiteral("></a>\r\n");
 
             
-            #line 51 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
                     }
 
             
@@ -376,7 +390,7 @@ WriteLiteral("></a>\r\n");
 WriteLiteral("                </td>\r\n            </tr>\r\n");
 
             
-            #line 54 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
             }
 
             

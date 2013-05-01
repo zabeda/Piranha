@@ -129,6 +129,9 @@
   <data name="ListTitle" xml:space="preserve">
     <value>Sites</value>
   </data>
+  <data name="MessageDeleteConfirm" xml:space="preserve">
+    <value>Are you sure you want to delete the selected site?</value>
+  </data>
   <data name="MessageDeleted" xml:space="preserve">
     <value>The site has been deleted.</value>
   </data>

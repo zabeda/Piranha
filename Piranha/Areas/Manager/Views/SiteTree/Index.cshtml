@@ -4,6 +4,8 @@
 }
 @section Head {
     <script type="text/javascript">
+        var deletemsg = '@Piranha.Resources.SiteTree.MessageDeleteConfirm';
+
         $(document).ready(function () {
             // Setup list
             var options = {
@@ -12,6 +14,10 @@
                 valueNames: ['title', 'description', 'updated', 'created']
             };
             new List('list', options);
+
+            $('.list .delete').click(function () {
+                return confirm(deletemsg);
+            });
         });
     </script>
 }@section Toolbar { 

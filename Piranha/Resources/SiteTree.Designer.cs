@@ -97,6 +97,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected site?.
+        /// </summary>
+        public static string MessageDeleteConfirm {
+            get {
+                return ResourceManager.GetString("MessageDeleteConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The site has been deleted..
         /// </summary>
         public static string MessageDeleted {
