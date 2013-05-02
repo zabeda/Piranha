@@ -57,7 +57,7 @@ namespace Piranha.Models
 		[Column(Name="permalink_type")]
 		public PermalinkType Type { get ; set ; }
 
-		[Column(Name="permalink_name")]
+		[Column(Name="permalink_name", OnSave="ValidatePermalink")]
 		public string Name { get ; set ; }
 
 		[Column(Name="permalink_created")]
@@ -75,6 +75,17 @@ namespace Piranha.Models
 
 		#region Cache
 		private static NamespaceDictionary NamespaceCache = new NamespaceDictionary() ;
+		#endregion
+
+		#region Handlers
+		/// <summary>
+		/// Validates the current permalink.
+		/// </summary>
+		/// <param name="str">The permalink name</param>
+		/// <returns>The validated name</returns>
+		protected string ValidatePermalink(string str) {
+			return Generate(str) ;
+		}
 		#endregion
 
 		#region Static accessors
@@ -148,7 +159,7 @@ namespace Piranha.Models
 		/// <returns>A permalink</returns>
 		public static string Generate(string str) {
 			var perm = Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o"),
-				@"[^a-z0-9-]", "").Replace("--", "-") ;
+				@"[^a-z0-9-/]", "").Replace("--", "-") ;
 
 			if (perm.EndsWith("-"))
 				perm = perm.Substring(0, perm.LastIndexOf("-")) ;
