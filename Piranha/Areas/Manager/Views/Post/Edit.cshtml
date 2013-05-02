@@ -257,6 +257,13 @@
                                             @Html.TextAreaFor(m => m.Post.Description, new { @rows = 3, @placeholder = Piranha.Resources.Global.Optional })</div>
                                         @Html.ValidationMessageFor(m => m.Post.Description)
                                     </li>
+                                    @if (Model.Template.ShowController) {
+                                    <li>@Html.LabelFor(m => m.Post.PostController)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Post.PostController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Post" })</div>
+                                        @Html.ValidationMessageFor(m => m.Post.PostController)
+                                    </li>
+                                    }
                                     <li>
                                         @Html.LabelFor(m => m.Post.AllowRss)
                                         <p>@Html.CheckBoxFor(m => m.Post.AllowRss) (@Piranha.Resources.Post.AllowRssDescription)</p>

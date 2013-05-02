@@ -112,10 +112,18 @@ namespace Piranha.Models
 		public List<Guid> Attachments { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the custom controller.
+		/// Gets/sets the post controller.
+		/// </summary>
+		[Column(Name="post_controller")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Template")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="TemplateLength")]
+		public string PostController { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the template controller.
 		/// </summary>
 		[Column(Name="posttemplate_controller", ReadOnly=true, Table="posttemplate")]
-		public string Controller { get ; private set ; }
+		public string TemplateController { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the created date.
@@ -160,6 +168,15 @@ namespace Piranha.Models
 		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
+		#region Properties
+		/// <summary>
+		/// Gets the controller for the post.
+		/// </summary>
+		public string Controller { 
+			get { return !String.IsNullOrEmpty(PostController) ? PostController : TemplateController ; }
+		}
+		#endregion
+
 		#region Cache
 		/// <summary>
 		/// Maps permalink to post id.
@@ -171,7 +188,6 @@ namespace Piranha.Models
 		/// </summary>
 		private static Dictionary<Guid, Guid> PermalinkIdCache = new Dictionary<Guid,Guid>() ;
 		#endregion
-
 
 		/// <summary>
 		/// Default constructor. Creates a new post.

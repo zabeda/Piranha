@@ -1508,13 +1508,71 @@ WriteLiteral("                                        ");
             
             #line default
             #line hidden
-WriteLiteral("\r\n                                    </li>\r\n                                    " +
-"<li>\r\n");
+WriteLiteral("\r\n                                    </li>\r\n");
+
+            
+            #line 260 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+                                    
+            
+            #line default
+            #line hidden
+            
+            #line 260 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+                                     if (Model.Template.ShowController) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    <li>");
+
+            
+            #line 261 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+                                   Write(Html.LabelFor(m => m.Post.PostController));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                        <div");
+
+WriteLiteral(" class=\"input\"");
+
+WriteLiteral(">\r\n");
+
+WriteLiteral("                                            ");
+
+            
+            #line 263 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+                                       Write(Html.TextBoxFor(m => m.Post.PostController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Post" }));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</div>\r\n");
 
 WriteLiteral("                                        ");
 
             
-            #line 261 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 264 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+                                   Write(Html.ValidationMessageFor(m => m.Post.PostController));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                                    </li>\r\n");
+
+            
+            #line 266 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+                                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                                    <li>\r\n");
+
+WriteLiteral("                                        ");
+
+            
+            #line 268 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Post.AllowRss));
 
             
@@ -1523,7 +1581,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                        <p>");
 
             
-            #line 262 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 269 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                       Write(Html.CheckBoxFor(m => m.Post.AllowRss));
 
             
@@ -1532,7 +1590,7 @@ WriteLiteral("\r\n                                        <p>");
 WriteLiteral(" (");
 
             
-            #line 262 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 269 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                                                                Write(Piranha.Resources.Post.AllowRssDescription);
 
             
@@ -1542,13 +1600,13 @@ WriteLiteral(")</p>\r\n                                    </li>\r\n            
 " </ul>\r\n                            </div>\r\n                        </div>\r\n");
 
             
-            #line 267 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 274 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 267 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 274 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                          if (Model.Properties.Count > 0) {
 
             
@@ -1567,7 +1625,7 @@ WriteLiteral(" class=\"title expanded\"");
 WriteLiteral("><h2>");
 
             
-            #line 269 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 276 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                                        Write(Piranha.Resources.Global.Properties);
 
             
@@ -1584,13 +1642,13 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n");
 
             
-            #line 272 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 279 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 272 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 279 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                  for (int n = 0; n < Model.Properties.Count; n++) {
 
             
@@ -1599,7 +1657,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                    <li>");
 
             
-            #line 273 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 280 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Properties[n], Model.Properties[n].Name));
 
             
@@ -1610,7 +1668,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 274 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 281 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].Id));
 
             
@@ -1621,7 +1679,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 275 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 282 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].IsDraft));
 
             
@@ -1632,7 +1690,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 276 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 283 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].ParentId));
 
             
@@ -1643,7 +1701,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 277 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 284 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].Name));
 
             
@@ -1654,7 +1712,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 278 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 285 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].Created));
 
             
@@ -1665,7 +1723,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 279 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 286 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].CreatedBy));
 
             
@@ -1676,7 +1734,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 280 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 287 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                    Write(Html.HiddenFor(m => m.Properties[n].IsNew));
 
             
@@ -1691,7 +1749,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 282 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 289 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                        Write(Html.TextBoxFor(m => m.Properties[n].Value));
 
             
@@ -1700,7 +1758,7 @@ WriteLiteral("                                            ");
 WriteLiteral("</div>\r\n                                    </li>\r\n");
 
             
-            #line 284 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 291 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                 }
 
             
@@ -1710,7 +1768,7 @@ WriteLiteral("                                </ul>\r\n                         
 "                  </div>\r\n");
 
             
-            #line 288 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 295 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                         }
 
             
@@ -1719,7 +1777,7 @@ WriteLiteral("                                </ul>\r\n                         
 WriteLiteral("                        ");
 
             
-            #line 289 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 296 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                          if (Model.EnableComments) {
 
             
@@ -1738,7 +1796,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 291 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 298 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                               Write(Piranha.Resources.Global.Comments);
 
             
@@ -1753,7 +1811,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 293 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 300 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                            Write(Html.Partial("~/Areas/Manager/Views/Comment/List.cshtml", Model.Comments));
 
             
@@ -1762,7 +1820,7 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                            </div>\r\n                        </div>\r\n");
 
             
-            #line 296 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 303 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                         }
 
             
@@ -1771,7 +1829,7 @@ WriteLiteral("\r\n                            </div>\r\n                        
 WriteLiteral("                        ");
 
             
-            #line 297 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 304 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                    Write(Html.EditorFor(m => m.Extensions));
 
             
@@ -1785,13 +1843,13 @@ WriteLiteral(" class=\"grid_3\"");
 WriteLiteral(">\r\n");
 
             
-            #line 305 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 312 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 305 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 312 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
      if (!Model.Post.IsNew) {
 
             
@@ -1808,7 +1866,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 307 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 314 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                           Write(Piranha.Resources.Global.Versioning);
 
             
@@ -1825,7 +1883,7 @@ WriteLiteral(" class=\"list\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 310 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 317 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                Write(Piranha.Resources.Global.LastPublished);
 
             
@@ -1840,7 +1898,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 311 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 318 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                 Write(Model.Post.LastPublished > DateTime.MinValue ? Model.Post.LastPublished.ToShortDateString() : "");
 
             
@@ -1849,7 +1907,7 @@ WriteLiteral("                    ");
 WriteLiteral("</small></li>\r\n                <li>");
 
             
-            #line 312 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 319 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                Write(Piranha.Resources.Global.Published);
 
             
@@ -1864,7 +1922,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 313 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 320 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                 Write(Model.Post.Published > DateTime.MinValue ? Model.Post.Published.ToShortDateString() : "");
 
             
@@ -1873,7 +1931,7 @@ WriteLiteral("                    ");
 WriteLiteral("</small></li>\r\n                <li>");
 
             
-            #line 314 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 321 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                Write(Piranha.Resources.Global.Updated);
 
             
@@ -1886,7 +1944,7 @@ WriteLiteral(" class=\"right\"");
 WriteLiteral(">");
 
             
-            #line 314 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 321 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                                                       Write(Model.Post.Updated.ToShortDateString());
 
             
@@ -1895,7 +1953,7 @@ WriteLiteral(">");
 WriteLiteral("</small></li>\r\n                <li>");
 
             
-            #line 315 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 322 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                Write(Piranha.Resources.Global.Created);
 
             
@@ -1908,7 +1966,7 @@ WriteLiteral(" class=\"right\"");
 WriteLiteral(">");
 
             
-            #line 315 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 322 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
                                                                       Write(Model.Post.Created.ToShortDateString());
 
             
@@ -1917,7 +1975,7 @@ WriteLiteral(">");
 WriteLiteral("</small></li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 319 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 326 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
     }
 
             
@@ -1926,7 +1984,7 @@ WriteLiteral("</small></li>\r\n            </ul>\r\n        </div>\r\n    </div>
 WriteLiteral("</div>\r\n");
 
             
-            #line 321 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
+            #line 328 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
    Html.EndForm() ; 
             
             #line default

@@ -267,7 +267,7 @@
                                     </li>
                                     <li>@Html.LabelFor(m => m.Page.PageController)
                                         <div class="input">
-                                            @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional })</div>
+                                            @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
                                     </li>
                                     @if (Model.Template.ShowRedirect) {

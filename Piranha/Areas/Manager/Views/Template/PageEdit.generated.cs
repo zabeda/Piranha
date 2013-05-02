@@ -591,7 +591,7 @@ WriteLiteral("                        ");
             
             #line 110 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Controller, 
-                            new { @placeholder = Piranha.Resources.Global.Optional }));
+                            new { @placeholder = "Page" }));
 
             
             #line default
@@ -800,14 +800,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 6616), Tuple.Create("\"", 6677)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 6589), Tuple.Create("\"", 6650)
             
             #line 147 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 6630), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 6603), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 6630), false)
+, 6603), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");

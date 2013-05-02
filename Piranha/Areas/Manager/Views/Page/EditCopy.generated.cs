@@ -1562,7 +1562,7 @@ WriteLiteral("                                            ");
 
             
             #line 270 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                       Write(Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : Piranha.Resources.Global.Optional }));
+                                       Write(Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" }));
 
             
             #line default
