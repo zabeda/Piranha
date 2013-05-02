@@ -256,12 +256,15 @@ namespace Piranha.WebPages
 
 				// Check for culture prefix
 				if (Cultures.ContainsKey(args[0])) {
-					System.Threading.Thread.CurrentThread.CurrentUICulture = Cultures[args[0]] ;
+					System.Threading.Thread.CurrentThread.CurrentCulture =
+						System.Threading.Thread.CurrentThread.CurrentUICulture = Cultures[args[0]] ;
 					pos = 1;
 				} else {
 					var def = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization") ;
-					if (def != null)
-						System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
+					if (def != null) {
+						System.Threading.Thread.CurrentThread.CurrentCulture = 
+							System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
+					}
 				}
 
 				var handled = false ;
