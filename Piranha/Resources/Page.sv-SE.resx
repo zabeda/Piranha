@@ -261,4 +261,16 @@
   <data name="AttachmentDescription" xml:space="preserve">
     <value>Klicka här för att ladda upp en ny, eller att välja en befintlig bild eller dokument.</value>
   </data>
+  <data name="Route" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="RouteLength" xml:space="preserve">
+    <value>Routens namn får max innehålla 128 tecken.</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Vy</value>
+  </data>
+  <data name="ViewLength" xml:space="preserve">
+    <value>Vyns namn får max innehålla 128 tecken.</value>
+  </data>
 </root>

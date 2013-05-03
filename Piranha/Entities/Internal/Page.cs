@@ -153,6 +153,11 @@ namespace Piranha.Models
 		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="TemplateLength")]
 		public string PageController { get ; set ; }
 
+		[Column(Name="page_view")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="View")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="ViewLength")]
+		public string PageView { get ; set ; }
+
 		/// <summary>
 		/// Gets/sets the custom redirect.
 		/// </summary>
@@ -166,6 +171,12 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="pagetemplate_controller", ReadOnly=true, Table="pagetemplate")]
 		public string TemplateController { get ; private set ; }
+
+		/// <summary>
+		/// Gets/sets the custom view.
+		/// </summary>
+		[Column(Name="pagetemplate_view", ReadOnly=true, Table="pagetemplate")]
+		public string TemplateView { get ; private set ; }
 
 		/// <summary>
 		/// Gets/sets the custom controller.
@@ -228,6 +239,13 @@ namespace Piranha.Models
 		/// </summary>
 		public string Controller { 
 			get { return !String.IsNullOrEmpty(PageController) ? PageController : TemplateController ; }
+		}
+
+		/// <summary>
+		/// Gets the view for the page.
+		/// </summary>
+		public string View {
+			get { return !String.IsNullOrEmpty(PageView) ? PageView : TemplateView ; }
 		}
 
 		/// <summary>

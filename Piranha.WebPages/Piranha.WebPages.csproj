@@ -73,6 +73,7 @@
     <Compile Include="Archive.cs" />
     <Compile Include="BaseHelper.cs" />
     <Compile Include="BasePage.cs" />
+    <Compile Include="ClientFramework.cs" />
     <Compile Include="ContentPage.cs" />
     <Compile Include="FormHelper.cs" />
     <Compile Include="HttpPostAttribute.cs" />

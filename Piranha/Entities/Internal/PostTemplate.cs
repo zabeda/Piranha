@@ -67,6 +67,19 @@ namespace Piranha.Models
 		public bool ShowController { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the optional view for the template.
+		/// </summary>
+		[Column(Name="posttemplate_view")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="View")]
+		public string View { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets whether the view can be overridden by the implementing page.
+		/// </summary>
+		[Column(Name="posttemplate_view_show")]
+		public bool ShowView { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the optional controller for the template.
 		/// </summary>
 		[Column(Name="posttemplate_archive_controller")]

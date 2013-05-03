@@ -44,6 +44,26 @@ namespace Piranha.Web
 		/// </summary>
 		[Import(typeof(IRouteHandler), AllowDefault=true)]
 		public IRouteHandler RouteHandler { get ; private set ; }
+
+		/// <summary>
+		/// Gets the current client framework.
+		/// </summary>
+		[Import(typeof(IClientFramework), AllowDefault=true)]
+		public IClientFramework ClientFramework { get ; private set ; }
+
+		/// <summary>
+		/// Gets if the currently installed client framework is intended for WebPages.
+		/// </summary>
+		public bool IsWebPages {
+			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.WebPages ; }
+		}
+
+		/// <summary>
+		/// Gets if the currently installed client framework is intended for MVC.
+		/// </summary>
+		public bool IsMvc {
+			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.Mvc ; }
+		}
 		#endregion
 
 		/// <summary>

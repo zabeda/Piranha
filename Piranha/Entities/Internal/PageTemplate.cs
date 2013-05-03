@@ -60,17 +60,30 @@ namespace Piranha.Models
 		public List<string> Properties { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the optional view name for the template.
+		/// Gets/sets the optional controller for the template.
 		/// </summary>
 		[Column(Name="pagetemplate_controller")]
 		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Template")]
 		public string Controller { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets wether the controller can be overridden by the implementing page.
+		/// Gets/sets whether the controller can be overridden by the implementing page.
 		/// </summary>
 		[Column(Name="pagetemplate_controller_show")]
 		public bool ShowController { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the optional view for the template.
+		/// </summary>
+		[Column(Name="pagetemplate_view")]
+		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="View")]
+		public string View { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets whether the view can be overridden by the implementing page.
+		/// </summary>
+		[Column(Name="pagetemplate_view_show")]
+		public bool ShowView { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the optional permalink of a page this sould redirect to.

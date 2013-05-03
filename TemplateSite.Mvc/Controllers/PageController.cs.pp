@@ -19,7 +19,9 @@ namespace $rootnamespace$.Controllers
 		/// </summary>
 		/// <returns>The view result</returns>
         public ActionResult Index() {
-            return View(GetModel()) ;
+			var model = GetModel() ;
+
+            return View(model.GetView(), model) ;
         }
     }
 }

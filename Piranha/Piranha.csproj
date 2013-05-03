@@ -698,7 +698,9 @@
     <Compile Include="Web\ClientCache.cs" />
     <Compile Include="Web\CultureHelper.cs" />
     <Compile Include="Web\FormController.cs" />
+    <Compile Include="Web\FrameworkType.cs" />
     <Compile Include="Web\Handlers\RequestHandlerCollection.cs" />
+    <Compile Include="Web\IClientFramework.cs" />
     <Compile Include="Web\IRouteHandler.cs" />
     <Compile Include="Web\ModelPropertyAttribute.cs" />
     <Compile Include="Web\PiranhaHelper.cs" />
@@ -866,6 +868,8 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\piranhaimage\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.link.dialog.js" />
+    <EmbeddedResource Include="Data\Scripts\Updates\30.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\30.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

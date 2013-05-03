@@ -241,11 +241,29 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow pages to change the route..
+        /// </summary>
+        public static string PageRouteOverride {
+            get {
+                return ResourceManager.GetString("PageRouteOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow pages to change the template..
         /// </summary>
         public static string PageTemplateOverride {
             get {
                 return ResourceManager.GetString("PageTemplateOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow pages to change the view..
+        /// </summary>
+        public static string PageViewOverride {
+            get {
+                return ResourceManager.GetString("PageViewOverride", resourceCulture);
             }
         }
         
@@ -259,11 +277,29 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow posts the change the route..
+        /// </summary>
+        public static string PostRouteOverride {
+            get {
+                return ResourceManager.GetString("PostRouteOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow posts to change the template..
         /// </summary>
         public static string PostTemplateOverride {
             get {
                 return ResourceManager.GetString("PostTemplateOverride", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow posts to change the view..
+        /// </summary>
+        public static string PostViewOverride {
+            get {
+                return ResourceManager.GetString("PostViewOverride", resourceCulture);
             }
         }
         
@@ -282,15 +318,6 @@ namespace Piranha.Resources {
         public static string RegionPlaceholder {
             get {
                 return ResourceManager.GetString("RegionPlaceholder", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         

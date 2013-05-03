@@ -115,7 +115,7 @@ namespace Piranha.Models
 		/// Gets/sets the post controller.
 		/// </summary>
 		[Column(Name="post_controller")]
-		[Display(ResourceType=typeof(Piranha.Resources.Page), Name="Template")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="Template")]
 		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Page), ErrorMessageResourceName="TemplateLength")]
 		public string PostController { get ; set ; }
 
@@ -125,6 +125,19 @@ namespace Piranha.Models
 		[Column(Name="posttemplate_controller", ReadOnly=true, Table="posttemplate")]
 		public string TemplateController { get ; private set ; }
 
+		/// <summary>
+		/// Gets/sets the post controller.
+		/// </summary>
+		[Column(Name="post_view")]
+		[Display(ResourceType=typeof(Piranha.Resources.Post), Name="View")]
+		[StringLength(128, ErrorMessageResourceType=typeof(Piranha.Resources.Post), ErrorMessageResourceName="ViewLength")]
+		public string PostView { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the template controller.
+		/// </summary>
+		[Column(Name="posttemplate_View", ReadOnly=true, Table="posttemplate")]
+		public string TemplateView { get ; private set ; }
 		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
@@ -174,6 +187,13 @@ namespace Piranha.Models
 		/// </summary>
 		public string Controller { 
 			get { return !String.IsNullOrEmpty(PostController) ? PostController : TemplateController ; }
+		}
+
+		/// <summary>
+		/// Gets the view for the post.
+		/// </summary>
+		public string View {
+			get { return !String.IsNullOrEmpty(PostView) ? PostView : TemplateView ; }
 		}
 		#endregion
 

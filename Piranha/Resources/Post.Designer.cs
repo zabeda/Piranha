@@ -277,6 +277,24 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Route.
+        /// </summary>
+        public static string Route {
+            get {
+                return ResourceManager.GetString("Route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The route name has a maximum length of 128 characters..
+        /// </summary>
+        public static string RouteLength {
+            get {
+                return ResourceManager.GetString("RouteLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template.
         /// </summary>
         public static string Template {
@@ -318,6 +336,24 @@ namespace Piranha.Resources {
         public static string ToolbarAdd {
             get {
                 return ResourceManager.GetString("ToolbarAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The view name has a maximum length of 128 characters..
+        /// </summary>
+        public static string ViewLength {
+            get {
+                return ResourceManager.GetString("ViewLength", resourceCulture);
             }
         }
     }

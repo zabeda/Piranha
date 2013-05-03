@@ -258,4 +258,16 @@
   <data name="AttachmentDescription" xml:space="preserve">
     <value>Click to upload a new, or to choose an existing image or document.</value>
   </data>
+  <data name="Route" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="RouteLength" xml:space="preserve">
+    <value>The route name has a maximum length of 128 characters.</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="ViewLength" xml:space="preserve">
+    <value>The view name has a maximum length of 128 characters.</value>
+  </data>
 </root>

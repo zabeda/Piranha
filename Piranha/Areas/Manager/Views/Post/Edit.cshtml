@@ -269,6 +269,13 @@
                                         @Html.ValidationMessageFor(m => m.Post.PostController)
                                     </li>
                                     }
+                                    @if (Piranha.Web.Application.Current.IsMvc && Model.Template.ShowView) {
+                                    <li>@Html.LabelFor(m => m.Post.PostView)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Post.PostView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" })</div>
+                                        @Html.ValidationMessageFor(m => m.Post.PostView)
+                                    </li>
+                                    }
                                     <li>
                                         @Html.LabelFor(m => m.Post.AllowRss)
                                         <p>@Html.CheckBoxFor(m => m.Post.AllowRss) (@Piranha.Resources.Post.AllowRssDescription)</p>

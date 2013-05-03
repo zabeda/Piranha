@@ -177,14 +177,26 @@
   <data name="PageRedirectOverride" xml:space="preserve">
     <value>Tillåt sidor att byta omdirigering.</value>
   </data>
+  <data name="PageRouteOverride" xml:space="preserve">
+    <value>Tillåt sidor att byta route.</value>
+  </data>
   <data name="PageTemplateOverride" xml:space="preserve">
     <value>Tillåt sidor att byta sidmall.</value>
+  </data>
+  <data name="PageViewOverride" xml:space="preserve">
+    <value>Tillåt sidor att byta vy.</value>
   </data>
   <data name="PostRedirectOverride" xml:space="preserve">
     <value>Tillåt inlägg att byta omdirigering.</value>
   </data>
+  <data name="PostRouteOverride" xml:space="preserve">
+    <value>Tillåt inlägg att byta route.</value>
+  </data>
   <data name="PostTemplateOverride" xml:space="preserve">
     <value>Tillåt inlägg att byta sidmall.</value>
+  </data>
+  <data name="PostViewOverride" xml:space="preserve">
+    <value>Tillåt inlägg att byta vy.</value>
   </data>
   <data name="PropertyPlaceholder" xml:space="preserve">
     <value>Ny egenskap</value>

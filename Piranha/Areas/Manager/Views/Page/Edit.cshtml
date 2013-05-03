@@ -159,6 +159,9 @@
     @Html.HiddenFor(m => m.Page.Seqno)
     @Html.HiddenFor(m => m.Permalink.Name)
     }
+    @if (!Application.Current.IsMvc) {
+    @Html.HiddenFor(m => m.Page.PageView)
+    }
     @Html.Hidden("returl", (string)ViewBag.ReturnUrl)
     <input type="hidden" id="draft" name="draft" value="true" />
     <input type="hidden" id="org_parentid" value="@Model.Page.ParentId" />
@@ -352,10 +355,18 @@
                                         @Html.ValidationMessageFor(m => m.Page.Description)
                                     </li>
                                     @if (Model.Template.ShowController) {
-                                    <li>@Html.LabelFor(m => m.Page.PageController)
+                                    <li>@Html.LabelFor(m => m.Page.PageController,
+                                            Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
+                                    </li>
+                                    }
+                                    @if (Piranha.Web.Application.Current.IsMvc && Model.Template.ShowView) {
+                                    <li>@Html.LabelFor(m => m.Page.PageView)
+                                        <div class="input">
+                                            @Html.TextBoxFor(m => m.Page.PageView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" })</div>
+                                        @Html.ValidationMessageFor(m => m.Page.PageView)
                                     </li>
                                     }
                                     @if (Model.Template.ShowRedirect) {

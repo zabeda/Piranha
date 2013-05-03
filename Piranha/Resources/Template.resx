@@ -177,23 +177,32 @@
   <data name="PageRedirectOverride" xml:space="preserve">
     <value>Allow pages to change the redirect url.</value>
   </data>
+  <data name="PageRouteOverride" xml:space="preserve">
+    <value>Allow pages to change the route.</value>
+  </data>
   <data name="PageTemplateOverride" xml:space="preserve">
     <value>Allow pages to change the template.</value>
+  </data>
+  <data name="PageViewOverride" xml:space="preserve">
+    <value>Allow pages to change the view.</value>
   </data>
   <data name="PostRedirectOverride" xml:space="preserve">
     <value>Allow posts the change the redirect url.</value>
   </data>
+  <data name="PostRouteOverride" xml:space="preserve">
+    <value>Allow posts the change the route.</value>
+  </data>
   <data name="PostTemplateOverride" xml:space="preserve">
     <value>Allow posts to change the template.</value>
+  </data>
+  <data name="PostViewOverride" xml:space="preserve">
+    <value>Allow posts to change the view.</value>
   </data>
   <data name="PropertyPlaceholder" xml:space="preserve">
     <value>New property</value>
   </data>
   <data name="RegionPlaceholder" xml:space="preserve">
     <value>New region</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolbarAddPage" xml:space="preserve">
     <value>Add new page type</value>
