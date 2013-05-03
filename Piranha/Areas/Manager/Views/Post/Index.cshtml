@@ -58,10 +58,12 @@
 }
 <div class="grid_12">
 @using (Html.BeginForm("insert", (string)ViewContext.RouteData.Values["Controller"])) {
-    @Html.Hidden("TemplateId", @Model.ActiveTemplate)
-    @if (Model.ActiveTemplate != Guid.Empty) {
-    <text>@Html.Hidden("returl", Url.Action("template", "post", new { id = Model.ActiveTemplate}))</text>
-    }
+    <div>
+        @Html.Hidden("TemplateId", @Model.ActiveTemplate)
+        @if (Model.ActiveTemplate != Guid.Empty) {
+        <text>@Html.Hidden("returl", Url.Action("template", "post", new { id = Model.ActiveTemplate}))</text>
+        }
+    </div>
     if (Model.Templates.Count > 1) {
     <div>
         <ul class="tabs">
@@ -88,7 +90,10 @@
         <tbody class="list-js">
             @foreach (var post in Model.Posts) {
             <tr@(post.Status == PostListModel.PostStatus.DRAFT || post.Status == PostListModel.PostStatus.UNPUBLISHED ? " class=draft" : "")>
-                <td class="title"><a href="@Url.Action("edit", new { id = post.Id })">
+                <td class="title">
+                    <a href="@(Model.ActiveTemplate == Guid.Empty ? 
+                        Url.Action("edit", new { id = post.Id }) : 
+                        Url.Action("edit", new { id = post.Id, returl = Url.Action("template", new { id = Model.ActiveTemplate}) }))">
                     @post.Title
                     <div class="list-info">
                         @Html.Raw(post.Status == PostListModel.PostStatus.UNPUBLISHED ? "<span class=info-unpublished></span>" : (post.Status == PostListModel.PostStatus.DRAFT ? "<span class=info-draft></span>" : ""))

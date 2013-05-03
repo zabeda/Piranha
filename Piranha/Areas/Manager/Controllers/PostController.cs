@@ -96,7 +96,7 @@ namespace Piranha.Areas.Manager.Controllers
 						SuccessMessage(Piranha.Resources.Post.MessagePublished, true) ;
 					else SuccessMessage(Piranha.Resources.Post.MessageSaved, true) ;
 
-					return RedirectToAction("edit", new { id = m.Post.Id }) ;
+					return RedirectToAction("edit", new { id = m.Post.Id, returl = ViewBag.ReturnUrl }) ;
 				} else ErrorMessage(Piranha.Resources.Post.MessageNotSaved) ;
 			}
 			m.Refresh() ;
@@ -123,7 +123,9 @@ namespace Piranha.Areas.Manager.Controllers
 			if (pm.DeleteAll())
 				SuccessMessage(Piranha.Resources.Post.MessageDeleted, true) ;
 			else ErrorMessage(Piranha.Resources.Post.MessageNotDeleted, true) ;
-
+			
+			if (!String.IsNullOrEmpty(ViewBag.ReturnUrl))
+				return Redirect(ViewBag.ReturnUrl) ;
 			return RedirectToAction("index") ;
 		}
 

@@ -232,36 +232,17 @@ WriteLiteral(">\r\n");
             
             #line 60 "..\..\Areas\Manager\Views\Post\Index.cshtml"
  using (Html.BeginForm("insert", (string)ViewContext.RouteData.Values["Controller"])) {
-    
-            
-            #line default
-            #line hidden
-            
-            #line 61 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-Write(Html.Hidden("TemplateId", @Model.ActiveTemplate));
 
             
             #line default
             #line hidden
-            
-            #line 61 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-                                                     
-    
-            
-            #line default
-            #line hidden
+WriteLiteral("    <div>\r\n");
+
+WriteLiteral("        ");
+
             
             #line 62 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-     if (Model.ActiveTemplate != Guid.Empty) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    ");
-
-            
-            #line 63 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-     Write(Html.Hidden("returl", Url.Action("template", "post", new { id = Model.ActiveTemplate})));
+   Write(Html.Hidden("TemplateId", @Model.ActiveTemplate));
 
             
             #line default
@@ -269,14 +250,40 @@ WriteLiteral("    ");
 WriteLiteral("\r\n");
 
             
-            #line 64 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-    }
+            #line 63 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+        
             
             #line default
             #line hidden
             
+            #line 63 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+         if (Model.ActiveTemplate != Guid.Empty) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        ");
+
+            
             #line 64 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-     
+         Write(Html.Hidden("returl", Url.Action("template", "post", new { id = Model.ActiveTemplate})));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n");
+
+            
+            #line 65 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </div>\r\n");
+
+            
+            #line 67 "..\..\Areas\Manager\Views\Post\Index.cshtml"
     if (Model.Templates.Count > 1) {
 
             
@@ -288,20 +295,20 @@ WriteLiteral(" class=\"tabs\"");
 
 WriteLiteral(">\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2392), Tuple.Create("\"", 2427)
+WriteAttribute("href", Tuple.Create(" href=\"", 2431), Tuple.Create("\"", 2466)
             
-            #line 68 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2399), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "post")
+            #line 70 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2438), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "post")
             
             #line default
             #line hidden
-, 2399), false)
+, 2438), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 68 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 70 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                    Write(Model.ActiveTemplate == Guid.Empty ? "class=selected" : "");
 
             
@@ -310,13 +317,13 @@ WriteLiteral(" ");
 WriteLiteral(">All</a></li>\r\n");
 
             
-            #line 69 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 71 "..\..\Areas\Manager\Views\Post\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 69 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 71 "..\..\Areas\Manager\Views\Post\Index.cshtml"
              foreach (var template in Model.Templates) {
 
             
@@ -324,20 +331,20 @@ WriteLiteral(">All</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2599), Tuple.Create("\"", 2664)
+WriteAttribute("href", Tuple.Create(" href=\"", 2638), Tuple.Create("\"", 2703)
             
-            #line 71 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2606), Tuple.Create<System.Object, System.Int32>(Url.Action("template", "post", new { @id = template.Id })
+            #line 73 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 2645), Tuple.Create<System.Object, System.Int32>(Url.Action("template", "post", new { @id = template.Id })
             
             #line default
             #line hidden
-, 2606), false)
+, 2645), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 71 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 73 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                                                  Write(template.Id == Model.ActiveTemplate ? "class=selected" : "");
 
             
@@ -346,7 +353,7 @@ WriteLiteral(" ");
 WriteLiteral(">");
 
             
-            #line 71 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 73 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                                                                                                                Write(template.Name);
 
             
@@ -355,7 +362,7 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n            </li>\r\n");
 
             
-            #line 73 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 75 "..\..\Areas\Manager\Views\Post\Index.cshtml"
             }
 
             
@@ -368,7 +375,7 @@ WriteLiteral(" class=\"clear\"");
 WriteLiteral("></div>\r\n    </div>\r\n");
 
             
-            #line 77 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 79 "..\..\Areas\Manager\Views\Post\Index.cshtml"
     }
 
             
@@ -389,7 +396,7 @@ WriteLiteral(" data-sort=\"title\"");
 WriteLiteral(">");
 
             
-            #line 81 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 83 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                         Write(Piranha.Resources.Global.Title);
 
             
@@ -404,7 +411,7 @@ WriteLiteral(" data-sort=\"template\"");
 WriteLiteral(">");
 
             
-            #line 82 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 84 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                        Write(Piranha.Resources.Global.Type);
 
             
@@ -423,7 +430,7 @@ WriteLiteral(" data-sort=\"updated\"");
 WriteLiteral(">");
 
             
-            #line 83 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 85 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -442,7 +449,7 @@ WriteLiteral(" data-sort=\"created\"");
 WriteLiteral(">");
 
             
-            #line 84 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 86 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -459,13 +466,13 @@ WriteLiteral(" class=\"list-js\"");
 WriteLiteral(">\r\n");
 
             
-            #line 89 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 91 "..\..\Areas\Manager\Views\Post\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 89 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 91 "..\..\Areas\Manager\Views\Post\Index.cshtml"
              foreach (var post in Model.Posts) {
 
             
@@ -474,7 +481,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            <tr");
 
             
-            #line 90 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 92 "..\..\Areas\Manager\Views\Post\Index.cshtml"
            Write(post.Status == PostListModel.PostStatus.DRAFT || post.Status == PostListModel.PostStatus.UNPUBLISHED ? " class=draft" : "");
 
             
@@ -484,16 +491,18 @@ WriteLiteral(">\r\n                <td");
 
 WriteLiteral(" class=\"title\"");
 
-WriteLiteral("><a");
+WriteLiteral(">\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3709), Tuple.Create("\"", 3757)
+WriteAttribute("href", Tuple.Create(" href=\"", 3770), Tuple.Create("\"", 4019)
             
-            #line 91 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3716), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = post.Id })
+            #line 94 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 3777), Tuple.Create<System.Object, System.Int32>(Model.ActiveTemplate == Guid.Empty ? 
+                        Url.Action("edit", new { id = post.Id }) : 
+                        Url.Action("edit", new { id = post.Id, returl = Url.Action("template", new { id = Model.ActiveTemplate}) })
             
             #line default
             #line hidden
-, 3716), false)
+, 3777), false)
 );
 
 WriteLiteral(">\r\n");
@@ -501,7 +510,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 92 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 97 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                Write(post.Title);
 
             
@@ -516,7 +525,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 94 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 99 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                    Write(Html.Raw(post.Status == PostListModel.PostStatus.UNPUBLISHED ? "<span class=info-unpublished></span>" : (post.Status == PostListModel.PostStatus.DRAFT ? "<span class=info-draft></span>" : "")));
 
             
@@ -525,13 +534,13 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n");
 
             
-            #line 95 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 100 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 95 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 100 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                          if (post.NewComments > 0) {
 
             
@@ -544,7 +553,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 96 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 101 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                               Write(post.NewComments);
 
             
@@ -553,7 +562,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n");
 
             
-            #line 97 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 102 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                         }
 
             
@@ -566,7 +575,7 @@ WriteLiteral(" class=\"template\"");
 WriteLiteral(">");
 
             
-            #line 100 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 105 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                 Write(post.TemplateName);
 
             
@@ -579,7 +588,7 @@ WriteLiteral(" class=\"updated\"");
 WriteLiteral(">");
 
             
-            #line 101 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 106 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                Write(post.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -592,7 +601,7 @@ WriteLiteral(" class=\"created\"");
 WriteLiteral(">");
 
             
-            #line 102 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 107 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                Write(post.Created.ToString("yyyy-MM-dd"));
 
             
@@ -605,13 +614,13 @@ WriteLiteral(" class=\"buttons\"");
 WriteLiteral(">\r\n");
 
             
-            #line 104 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 109 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 104 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 109 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                      if (User.HasAccess("ADMIN_POST_PUBLISH")) {
 
             
@@ -619,14 +628,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4617), Tuple.Create("\"", 4667)
+WriteAttribute("href", Tuple.Create(" href=\"", 4879), Tuple.Create("\"", 4929)
             
-            #line 105 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4624), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = post.Id })
+            #line 110 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 4886), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = post.Id })
             
             #line default
             #line hidden
-, 4624), false)
+, 4886), false)
 );
 
 WriteLiteral(" title=\"Ta bort artikel\"");
@@ -636,7 +645,7 @@ WriteLiteral(" class=\"icon delete\"");
 WriteLiteral("></a>\r\n");
 
             
-            #line 106 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 111 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                     }
 
             
@@ -645,7 +654,7 @@ WriteLiteral("></a>\r\n");
 WriteLiteral("                </td>\r\n            </tr>\r\n");
 
             
-            #line 109 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 114 "..\..\Areas\Manager\Views\Post\Index.cshtml"
             }
 
             
@@ -658,7 +667,7 @@ WriteLiteral(" colspan=\"5\"");
 WriteLiteral("></td>\r\n            </tr>\r\n        </tfoot>\r\n    </table>\r\n");
 
             
-            #line 117 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 122 "..\..\Areas\Manager\Views\Post\Index.cshtml"
 }
 
             
@@ -695,7 +704,7 @@ WriteLiteral(" data-id=\"boxTemplates\"");
 WriteLiteral("></a><h2>");
 
             
-            #line 124 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 129 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                                                 Write(Piranha.Resources.Post.PopupTypeTitle);
 
             
@@ -708,13 +717,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 126 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 131 "..\..\Areas\Manager\Views\Post\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 126 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 131 "..\..\Areas\Manager\Views\Post\Index.cshtml"
          foreach (var template in Model.Templates) {
 
             
@@ -722,22 +731,22 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 5300), Tuple.Create("\"", 5371)
-, Tuple.Create(Tuple.Create("", 5308), Tuple.Create("templates", 5308), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 5562), Tuple.Create("\"", 5633)
+, Tuple.Create(Tuple.Create("", 5570), Tuple.Create("templates", 5570), true)
             
-            #line 127 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create(" ", 5317), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : ""
+            #line 132 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+, Tuple.Create(Tuple.Create(" ", 5579), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : ""
             
             #line default
             #line hidden
-, 5318), false)
-, Tuple.Create(Tuple.Create(" ", 5366), Tuple.Create("left", 5367), true)
+, 5580), false)
+, Tuple.Create(Tuple.Create(" ", 5628), Tuple.Create("left", 5629), true)
 );
 
 WriteLiteral(" data-templateid=\"");
 
             
-            #line 127 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 132 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                                                                                                      Write(template.Id);
 
             
@@ -748,7 +757,7 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n                <h3>");
 
             
-            #line 128 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 133 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                Write(template.Name);
 
             
@@ -765,7 +774,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 130 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 135 "..\..\Areas\Manager\Views\Post\Index.cshtml"
                Write(template.Preview.Html());
 
             
@@ -774,7 +783,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </div>\r\n                <p>");
 
             
-            #line 132 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 137 "..\..\Areas\Manager\Views\Post\Index.cshtml"
               Write(template.Description);
 
             
@@ -783,7 +792,7 @@ WriteLiteral("\r\n                </div>\r\n                <p>");
 WriteLiteral("</p>\r\n            </div>\r\n");
 
             
-            #line 134 "..\..\Areas\Manager\Views\Post\Index.cshtml"
+            #line 139 "..\..\Areas\Manager\Views\Post\Index.cshtml"
         } 
 
             
