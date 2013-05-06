@@ -11,9 +11,9 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
+            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSaveDraft</a></li>
             @if (User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
-            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
+            <li><a class="publish">@(Model.Content.Published == DateTime.MinValue ? Piranha.Resources.Global.ToolbarPublish : Piranha.Resources.Global.ToolbarUpdate)</a></li>
             }
             @if (Model.Content.Published > DateTime.MinValue && User.HasAccess("ADMIN_CONTENT_PUBLISH")) {
             <li><a href="@Url.Action("unpublish", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>

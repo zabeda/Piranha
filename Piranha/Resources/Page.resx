@@ -270,4 +270,7 @@
   <data name="ViewLength" xml:space="preserve">
     <value>The view name has a maximum length of 128 characters.</value>
   </data>
+  <data name="MessageUpdated" xml:space="preserve">
+    <value>The published version has been updated.</value>
+  </data>
 </root>

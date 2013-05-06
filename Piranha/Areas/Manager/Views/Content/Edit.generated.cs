@@ -75,7 +75,7 @@ WriteLiteral(">");
 
             
             #line 14 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-                                  Write(Piranha.Resources.Global.ToolbarSave);
+                                  Write(Piranha.Resources.Global.ToolbarSaveDraft);
 
             
             #line default
@@ -103,7 +103,7 @@ WriteLiteral(">");
 
             
             #line 16 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-                              Write(Piranha.Resources.Global.ToolbarPublish);
+                               Write(Model.Content.Published == DateTime.MinValue ? Piranha.Resources.Global.ToolbarPublish : Piranha.Resources.Global.ToolbarUpdate);
 
             
             #line default
@@ -128,14 +128,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 710), Tuple.Create("\"", 800)
+WriteAttribute("href", Tuple.Create(" href=\"", 805), Tuple.Create("\"", 895)
             
             #line 19 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 717), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })
+, Tuple.Create(Tuple.Create("", 812), Tuple.Create<System.Object, System.Int32>(Url.Action("unpublish", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })
             
             #line default
             #line hidden
-, 717), false)
+, 812), false)
 );
 
 WriteLiteral(" class=\"unpublish\"");
@@ -169,14 +169,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1026), Tuple.Create("\"", 1113)
+WriteAttribute("href", Tuple.Create(" href=\"", 1121), Tuple.Create("\"", 1208)
             
             #line 22 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1033), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })
+, Tuple.Create(Tuple.Create("", 1128), Tuple.Create<System.Object, System.Int32>(Url.Action("revert", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })
             
             #line default
             #line hidden
-, 1033), false)
+, 1128), false)
 );
 
 WriteLiteral(" class=\"revert\"");
@@ -210,14 +210,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1274), Tuple.Create("\"", 1361)
+WriteAttribute("href", Tuple.Create(" href=\"", 1369), Tuple.Create("\"", 1456)
             
             #line 25 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1281), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })
+, Tuple.Create(Tuple.Create("", 1376), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Content.Id, returl = ViewBag.ReturnUrl })
             
             #line default
             #line hidden
-, 1281), false)
+, 1376), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -251,14 +251,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1522), Tuple.Create("\"", 1580)
+WriteAttribute("href", Tuple.Create(" href=\"", 1617), Tuple.Create("\"", 1675)
             
             #line 28 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1529), Tuple.Create<System.Object, System.Int32>(Url.Action("index", new { id = Model.Content.Id })
+, Tuple.Create(Tuple.Create("", 1624), Tuple.Create<System.Object, System.Int32>(Url.Action("index", new { id = Model.Content.Id })
             
             #line default
             #line hidden
-, 1529), false)
+, 1624), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -283,14 +283,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1683), Tuple.Create("\"", 1708)
+WriteAttribute("href", Tuple.Create(" href=\"", 1778), Tuple.Create("\"", 1803)
             
             #line 30 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1690), Tuple.Create<System.Object, System.Int32>(ViewBag.ReturnUrl
+, Tuple.Create(Tuple.Create("", 1785), Tuple.Create<System.Object, System.Int32>(ViewBag.ReturnUrl
             
             #line default
             #line hidden
-, 1690), false)
+, 1785), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -315,14 +315,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1804), Tuple.Create("\"", 1861)
+WriteAttribute("href", Tuple.Create(" href=\"", 1899), Tuple.Create("\"", 1956)
             
             #line 32 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1811), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Content.Id })
+, Tuple.Create(Tuple.Create("", 1906), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Content.Id })
             
             #line default
             #line hidden
-, 1811), false)
+, 1906), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -353,14 +353,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2068), Tuple.Create("\"", 2126)
+WriteAttribute("href", Tuple.Create(" href=\"", 2163), Tuple.Create("\"", 2221)
             
             #line 34 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 2075), Tuple.Create<System.Object, System.Int32>(Url.Action("sync", new { @id = Model.Content.Id })
+, Tuple.Create(Tuple.Create("", 2170), Tuple.Create<System.Object, System.Int32>(Url.Action("sync", new { @id = Model.Content.Id })
             
             #line default
             #line hidden
-, 2075), false)
+, 2170), false)
 );
 
 WriteLiteral(" class=\"sync\"");
@@ -843,14 +843,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                            <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 5530), Tuple.Create("\"", 5546)
+WriteAttribute("value", Tuple.Create(" value=\"", 5625), Tuple.Create("\"", 5641)
             
             #line 109 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 5538), Tuple.Create<System.Object, System.Int32>(f.Value
+, Tuple.Create(Tuple.Create("", 5633), Tuple.Create<System.Object, System.Int32>(f.Value
             
             #line default
             #line hidden
-, 5538), false)
+, 5633), false)
 );
 
             
@@ -1270,24 +1270,24 @@ WriteLiteral("                <img");
 
 WriteLiteral(" style=\"max-width:190px\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 8438), Tuple.Create("\"", 8472)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 8533), Tuple.Create("\"", 8567)
             
             #line 173 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 8444), Tuple.Create<System.Object, System.Int32>(Model.Content.AlternateText
+, Tuple.Create(Tuple.Create("", 8539), Tuple.Create<System.Object, System.Int32>(Model.Content.AlternateText
             
             #line default
             #line hidden
-, 8444), false)
+, 8539), false)
 );
 
-WriteAttribute("src", Tuple.Create(" src=\"", 8473), Tuple.Create("\"", 8522)
+WriteAttribute("src", Tuple.Create(" src=\"", 8568), Tuple.Create("\"", 8617)
             
             #line 173 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-     , Tuple.Create(Tuple.Create("", 8479), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(Model.Content.Id, 190)
+     , Tuple.Create(Tuple.Create("", 8574), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(Model.Content.Id, 190)
             
             #line default
             #line hidden
-, 8479), false)
+, 8574), false)
 );
 
 WriteLiteral(" />\r\n");

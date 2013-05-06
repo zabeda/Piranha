@@ -285,4 +285,7 @@
   <data name="MessageDeleteConfirmImage" xml:space="preserve">
     <value>Are you sure you want to delete the selected image?</value>
   </data>
+  <data name="MessageUpdated" xml:space="preserve">
+    <value>The published version has been updated.</value>
+  </data>
 </root>

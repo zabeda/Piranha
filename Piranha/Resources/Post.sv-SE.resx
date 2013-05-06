@@ -180,6 +180,9 @@
   <data name="MessageUnpublished" xml:space="preserve">
     <value>Artikeln har nu avpublicerats.</value>
   </data>
+  <data name="MessageUpdated" xml:space="preserve">
+    <value>Den publicerade versionen har uppdaterats.</value>
+  </data>
   <data name="Permalink" xml:space="preserve">
     <value>Permalänk</value>
   </data>

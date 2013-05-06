@@ -180,6 +180,9 @@
   <data name="MessageUnpublished" xml:space="preserve">
     <value>The post has been unpublished.</value>
   </data>
+  <data name="MessageUpdated" xml:space="preserve">
+    <value>The published version has been updated.</value>
+  </data>
   <data name="Permalink" xml:space="preserve">
     <value>Permalink</value>
   </data>

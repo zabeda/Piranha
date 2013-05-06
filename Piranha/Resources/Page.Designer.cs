@@ -331,6 +331,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The published version has been updated..
+        /// </summary>
+        public static string MessageUpdated {
+            get {
+                return ResourceManager.GetString("MessageUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Navigation title.
         /// </summary>
         public static string NavigationTitle {

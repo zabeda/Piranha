@@ -273,4 +273,7 @@
   <data name="ViewLength" xml:space="preserve">
     <value>Vyns namn får max innehålla 128 tecken.</value>
   </data>
+  <data name="MessageUpdated" xml:space="preserve">
+    <value>Den publicerade versionen har uppdaterats.</value>
+  </data>
 </root>

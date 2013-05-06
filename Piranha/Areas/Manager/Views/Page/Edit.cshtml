@@ -100,12 +100,12 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
+            <li><a class="save submit">@Piranha.Resources.Global.ToolbarSaveDraft</a></li>
             @if (!Model.Page.IsNew) {
             <li><a href="@Piranha.WebPages.WebPiranha.GetSiteUrl()@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
             @if (User.HasAccess("ADMIN_PAGE_PUBLISH")) {
-            <li><a class="publish">@Piranha.Resources.Global.ToolbarPublish</a></li>
+            <li><a class="publish">@(Model.Page.Published == DateTime.MinValue ? Piranha.Resources.Global.ToolbarPublish : Piranha.Resources.Global.ToolbarUpdate)</a></li>
             }
             @if (Model.Page.Published > DateTime.MinValue && !Model.IsSite && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
             <li><a href="@Url.Action("unpublish", new { id = Model.Page.Id })" class="unpublish">@Piranha.Resources.Global.ToolbarUnpublish</a></li>

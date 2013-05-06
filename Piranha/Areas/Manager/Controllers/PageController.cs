@@ -132,9 +132,11 @@ namespace Piranha.Areas.Manager.Controllers
 				try {
 					if (pm.SaveAll(draft)) {
 						ModelState.Clear() ;
-						if (!draft)
-							SuccessMessage(Piranha.Resources.Page.MessagePublished) ;
-						else SuccessMessage(Piranha.Resources.Page.MessageSaved) ;
+						if (!draft) {
+							if (pm.Page.Published == pm.Page.LastPublished)
+								SuccessMessage(Piranha.Resources.Page.MessagePublished) ;
+							else SuccessMessage(Piranha.Resources.Page.MessageUpdated) ;
+						} else SuccessMessage(Piranha.Resources.Page.MessageSaved) ;
 					} else ErrorMessage(Piranha.Resources.Page.MessageNotSaved) ;
 				} catch (DuplicatePermalinkException) {
 					// Manually set the duplicate error.

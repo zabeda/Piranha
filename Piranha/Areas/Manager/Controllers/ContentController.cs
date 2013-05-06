@@ -106,19 +106,31 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Folder = m.Content.IsFolder ;
 				if (m.Content.IsImage) {
 					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
-					if (draft)
+					if (draft) {
 						SuccessMessage(Piranha.Resources.Content.MessageImageSaved, true) ;
-					else SuccessMessage(Piranha.Resources.Content.MessageImagePublished, true) ;
+					} else {
+						if (m.Content.Published == m.Content.LastPublished)
+							SuccessMessage(Piranha.Resources.Content.MessageImagePublished, true) ;
+						else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+					}
 				} else if (m.Content.IsFolder) {
 					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingFolder ;
-					if (draft)
+					if (draft) {
 						SuccessMessage(Piranha.Resources.Content.MessageFolderSaved, true) ;
-					else SuccessMessage(Piranha.Resources.Content.MessageFolderPublished, true) ;
+					} else { 
+						if (m.Content.Published == m.Content.LastPublished)
+							SuccessMessage(Piranha.Resources.Content.MessageFolderPublished, true) ;
+						else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+					}
 				} else {
 					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
-					if (draft)
+					if (draft) {
 						SuccessMessage(Piranha.Resources.Content.MessageDocumentSaved, true) ;
-					else SuccessMessage(Piranha.Resources.Content.MessageDocumentPublished, true) ;
+					} else {
+						if (m.Content.Published == m.Content.LastPublished)
+							SuccessMessage(Piranha.Resources.Content.MessageDocumentPublished, true) ;
+						else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+					}
 				}
 				return RedirectToAction("edit", new { id = m.Content.Id, returl = ViewBag.ReturnUrl }) ;
 			} else {

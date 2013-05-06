@@ -556,6 +556,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save draft.
+        /// </summary>
+        public static string ToolbarSaveDraft {
+            get {
+                return ResourceManager.GetString("ToolbarSaveDraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string ToolbarSearch {
@@ -579,6 +588,15 @@ namespace Piranha.Resources {
         public static string ToolbarUnpublish {
             get {
                 return ResourceManager.GetString("ToolbarUnpublish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string ToolbarUpdate {
+            get {
+                return ResourceManager.GetString("ToolbarUpdate", resourceCulture);
             }
         }
         

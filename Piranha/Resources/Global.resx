@@ -282,6 +282,9 @@
   <data name="ToolbarSave" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="ToolbarSaveDraft" xml:space="preserve">
+    <value>Save draft</value>
+  </data>
   <data name="ToolbarSearch" xml:space="preserve">
     <value>Search</value>
   </data>
@@ -290,6 +293,9 @@
   </data>
   <data name="ToolbarUnpublish" xml:space="preserve">
     <value>Unpublish</value>
+  </data>
+  <data name="ToolbarUpdate" xml:space="preserve">
+    <value>Update</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>

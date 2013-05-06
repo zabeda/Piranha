@@ -92,9 +92,11 @@ namespace Piranha.Areas.Manager.Controllers
 			if (ModelState.IsValid) {
 				if (m.SaveAll(draft)) {
 					ModelState.Clear() ;
-					if (!draft)
-						SuccessMessage(Piranha.Resources.Post.MessagePublished, true) ;
-					else SuccessMessage(Piranha.Resources.Post.MessageSaved, true) ;
+					if (!draft) {
+						if (m.Post.Published == m.Post.LastPublished)
+							SuccessMessage(Piranha.Resources.Post.MessagePublished, true) ;
+						else SuccessMessage(Piranha.Resources.Post.MessageUpdated, true) ;
+					} else SuccessMessage(Piranha.Resources.Post.MessageSaved, true) ;
 
 					return RedirectToAction("edit", new { id = m.Post.Id, returl = ViewBag.ReturnUrl }) ;
 				} else ErrorMessage(Piranha.Resources.Post.MessageNotSaved) ;
