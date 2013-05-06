@@ -75,7 +75,7 @@ namespace Piranha.Rest
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 
 			// Set the timespage
-			changes.Timestamp = DateTime.Now.ToString() ;
+			changes.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") ;
 
 			return changes ;
 		}
