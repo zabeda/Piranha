@@ -149,7 +149,7 @@ namespace Piranha.Extend.Regions
 		/// </summary>
 		/// <returns>The posts</returns>
 		public virtual List<Post> GetMatchingPosts(string cachename = null, bool admin = false) {
-			if (PostTemplateId != Guid.Empty && Take > 0) {
+			if (PostTemplateId != Guid.Empty) {
 				List<Post> posts = null ;
 				if (!String.IsNullOrEmpty(cachename) && Cache > 0)
 					posts = (List<Post>)HttpContext.Current.Cache[cachename] ;
