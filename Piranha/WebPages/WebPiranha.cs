@@ -179,8 +179,6 @@ namespace Piranha.WebPages
 					hostNames = new Dictionary<string,Entities.SiteTree>() ;
 
 				HostNames.Clear() ;
-				if (HttpContext.Current != null)
-					Page.InvalidateStartpage() ;
 
 				// We need to check version so we don't try to access the column sitetree_hostnames
 				// before it's been created in the database.
@@ -189,6 +187,9 @@ namespace Piranha.WebPages
 						var sites = db.SiteTrees.ToList() ;
 					
 						foreach (var site in sites) {
+							if (HttpContext.Current != null)
+								Page.InvalidateStartpage(site.Id) ;
+
 							if (!String.IsNullOrEmpty(site.HostNames)) {
 								var hostnames = site.HostNames.Split(new char[] { ',' }) ;
 

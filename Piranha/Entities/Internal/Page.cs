@@ -329,11 +329,13 @@ namespace Piranha.Models
 		/// <param name="draft">Whether to get the current draft or not</param>
 		/// <returns>The startpage</returns>
 		public static Page GetStartpage(bool draft = false) {
-			if (!Cache.Current.Contains(Guid.Empty.ToString())) {
-				Cache.Current[Guid.Empty.ToString()] = 
+			var name = "SP_" + Config.SiteTreeId.ToString() ;
+
+			if (!Cache.Current.Contains(name)) {
+				Cache.Current[name] = 
 					Page.GetSingle("page_parent_id IS NULL and page_seqno = 1 AND page_draft = @0 AND page_sitetree_id = @1", draft, Config.SiteTreeId) ;
 			}
-			return (Page)Cache.Current[Guid.Empty.ToString()] ;
+			return (Page)Cache.Current[name] ;
 		}
 
 		/// <summary>
@@ -493,7 +495,7 @@ namespace Piranha.Models
 			if (record.Permalink != null && PermalinkIdCache.ContainsKey(record.PermalinkId))
 				PermalinkIdCache.Remove(record.PermalinkId) ;
 			if (record.IsStartpage)
-				Cache.Current.Remove(Guid.Empty.ToString()) ;
+				InvalidateStartpage(record.SiteTreeId) ;
 
 			// Invalidate public sitemap
 			if (!record.IsDraft)
@@ -503,8 +505,8 @@ namespace Piranha.Models
 		/// <summary>
 		/// Invalidates the cache for the site startpage.
 		/// </summary>
-		public static void InvalidateStartpage() {
-			Cache.Current.Remove(Guid.Empty.ToString()) ;
+		public static void InvalidateStartpage(Guid siteId) {
+			Cache.Current.Remove("SP_" + siteId.ToString()) ;
 		}
 
 		/// <summary>
