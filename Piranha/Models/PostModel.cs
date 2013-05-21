@@ -40,7 +40,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the current page.
 		/// </summary>
-		public Page Page { get { return null ; } }
+		public IPage Page { get { return null ; } }
 		#endregion
 
 		/// <summary>

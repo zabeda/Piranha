@@ -474,9 +474,6 @@
     <Compile Include="Entities\Internal\DuplicatePermalinkException.cs" />
     <Compile Include="Entities\Internal\Extension.cs" />
     <Compile Include="Entities\Internal\GuidRecord.cs" />
-    <Compile Include="Entities\Internal\IPage.cs" />
-    <Compile Include="Entities\Internal\IPost.cs" />
-    <Compile Include="Entities\Internal\ISitemap.cs" />
     <Compile Include="Entities\Internal\MediaFile.cs" />
     <Compile Include="Entities\Internal\Page.cs" />
     <Compile Include="Entities\Internal\PageTemplate.cs" />
@@ -554,6 +551,9 @@
     <Compile Include="Manager\ManagerRegistration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
+    <Compile Include="Models\IPage.cs" />
+    <Compile Include="Models\IPost.cs" />
+    <Compile Include="Models\ISitemap.cs" />
     <Compile Include="Models\Manager\CategoryModels\EditModel.cs" />
     <Compile Include="Models\Manager\CategoryModels\ListModel.cs" />
     <Compile Include="Models\Manager\ContentModels\EditModel.cs" />
