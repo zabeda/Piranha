@@ -126,14 +126,56 @@ namespace Piranha.WebPages
 			/// </summary>
 			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
 
+			/// <summary>
+			/// The different hooks available for the toolbar.
+			/// </summary>
 			public static class Toolbar {
+				/// <summary>
+				/// Executed when the manager toolbar for the page list is rendered.
+				/// </summary>
 				public static Delegates.ManagerToolbarRender<Models.Manager.PageModels.ListModel> PageListToolbarRender ;
+				
+				/// <summary>
+				/// Executed when the manager toolbar for the page edit view is rendered.
+				/// </summary>
 				public static Delegates.ManagerToolbarRender<Models.Manager.PageModels.EditModel> PageEditToolbarRender ;
+
+				/// <summary>
+				/// Executed when the manager toolbar for the post list is rendered.
+				/// </summary>
 				public static Delegates.ManagerToolbarRender<Areas.Manager.Models.PostListModel> PostListToolbarRender ;
+
+				/// <summary>
+				/// Executed when the manager toolbar for the post edit view is rendered.
+				/// </summary>
 				public static Delegates.ManagerToolbarRender<Models.Manager.PostModels.EditModel> PostEditToolbarRender ;
+
+				/// <summary>
+				/// Executed when the manager toolbar for the media list is rendered.
+				/// </summary>
 				public static Delegates.ManagerToolbarRender<Models.Manager.ContentModels.ListModel> MediaListToolbarRender ;
+
+				/// <summary>
+				/// Executed when the manager toolbar for the media edit view is rendered.
+				/// </summary>
 				public static Delegates.ManagerToolbarRender<Models.Manager.ContentModels.EditModel> MediaEditToolbarRender ;
 
+				/// <summary>
+				/// Executed when the manager toolbar for the site list is rendered.
+				/// </summary>
+				public static Delegates.ManagerToolbarRender<Areas.Manager.Models.SiteTreeListModel> SiteListToolbarRender ;
+
+				/// <summary>
+				/// Executed when the manager toolbar for the site edit view is rendered.
+				/// </summary>
+				public static Delegates.ManagerToolbarRender<Areas.Manager.Models.SiteTreeEditModel> SiteEditToolbarRender ;
+
+				/// <summary>
+				/// Renders the toolbar.
+				/// </summary>
+				/// <param name="url">The url</param>
+				/// <param name="model">The current model</param>
+				/// <returns>The rendered html</returns>
 				public static HtmlString Render(UrlHelper url, object model) {
 					StringBuilder str = new StringBuilder() ;
 
@@ -149,6 +191,10 @@ namespace Piranha.WebPages
 						MediaListToolbarRender(url, str, (Models.Manager.ContentModels.ListModel)model) ;
 					else if (model is Models.Manager.ContentModels.EditModel && MediaEditToolbarRender != null)
 						MediaEditToolbarRender(url, str, (Models.Manager.ContentModels.EditModel)model) ;
+					else if (model is Areas.Manager.Models.SiteTreeListModel && SiteListToolbarRender != null)
+						SiteListToolbarRender(url, str, (Areas.Manager.Models.SiteTreeListModel)model) ;
+					else if (model is Areas.Manager.Models.SiteTreeEditModel && SiteEditToolbarRender != null)
+						SiteEditToolbarRender(url, str, (Areas.Manager.Models.SiteTreeEditModel)model) ;
 
 					return new HtmlString(str.ToString()) ;
 				}
