@@ -29,7 +29,7 @@ VALUES ('C2F87B2B-F585-4696-8A2B-3C9DF882701E', 'C2F87B2B-F585-4696-8A2B-3C9DF88
 INSERT INTO permalink (permalink_id, permalink_namespace_id, permalink_type, permalink_name, permalink_created,
 	permalink_updated, permalink_created_by, permalink_updated_by)
 VALUES ('2E168001-D113-4216-ACC5-03C61C2D0C21', '8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03', 'SITE', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 
-	GETDATE(), GETDATE(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
+	NOW(), NOW(), 'ca19d4e7-92f0-42f6-926a-68413bbdafbc', 'ca19d4e7-92f0-42f6-926a-68413bbdafbc');
 INSERT INTO page (page_id, page_sitetree_id, page_draft, page_template_id, page_permalink_id, page_parent_id, page_seqno, page_title, 
 	page_created, page_updated, page_published, page_last_published, page_created_by, page_updated_by)
 VALUES ('94823A5C-1E29-4BDB-84E4-9B5F636CDDB5', 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', 1, 'C2F87B2B-F585-4696-8A2B-3C9DF882701E', '2E168001-D113-4216-ACC5-03C61C2D0C21', 
