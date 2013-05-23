@@ -52,8 +52,6 @@ namespace Piranha.WebPages.RequestHandlers
 			Content content = Content.GetSingle(id, draft) ;
 
 			if (content != null) {
-				if (content.IsDraft && !File.Exists(content.PhysicalPath))
-					content.IsDraft = false ;
 				if (args.Length == 1)
 					content.GetThumbnail(context, 60, draft) ;
 				else content.GetThumbnail(context, Convert.ToInt32(args[1]), draft) ;

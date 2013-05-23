@@ -28,7 +28,7 @@ namespace Piranha.Models
 	public abstract class MediaFile<T> : PiranhaRecord<T>
 	{
 		#region Members
-		protected string BasePath = "" ;
+		//protected string BasePath = "" ;
 		protected string CachePath = "" ;
 
 		private static bool VerifiedPaths = false ;
@@ -50,9 +50,9 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the virtual path for the media file.
 		/// </summary>
-		public virtual string VirtualPath { 
-			get { return BasePath + Id ; }
-		}
+		//public virtual string VirtualPath { 
+		//	get { return BasePath + Id ; }
+		//}
 
 		/// <summary>
 		/// Gets the virtual path for the cached media file.
@@ -64,9 +64,9 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the physical path for the media file.
 		/// </summary>
-		public virtual string PhysicalPath {
-			get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
-		}
+		//public virtual string PhysicalPath {
+		//	get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
+		//}
 
 		/// <summary>
 		/// Gets the physical path for the cached media file.
@@ -82,13 +82,13 @@ namespace Piranha.Models
 		/// <param name="basePath">The virtual base path.</param>
 		/// <param name="cachePath">The virtual cache path for resized media.</param>
 		protected MediaFile(string basePath, string cachePath) : base() {
-			BasePath = basePath + (!basePath.EndsWith("/") ? "/" : "") ;
+			//BasePath = basePath + (!basePath.EndsWith("/") ? "/" : "") ;
 			CachePath = cachePath + (!cachePath.EndsWith("/") ? "/" : "") ;
 
 			if (!VerifiedPaths) {
 				// Verify paths
-				if (!Directory.Exists(HttpContext.Current.Server.MapPath(BasePath)))
-					Directory.CreateDirectory(HttpContext.Current.Server.MapPath(BasePath)) ;
+				//if (!Directory.Exists(HttpContext.Current.Server.MapPath(BasePath)))
+				//	Directory.CreateDirectory(HttpContext.Current.Server.MapPath(BasePath)) ;
 				if (!Directory.Exists(HttpContext.Current.Server.MapPath(CachePath)))
 					Directory.CreateDirectory(HttpContext.Current.Server.MapPath(CachePath)) ;
 
@@ -109,12 +109,18 @@ namespace Piranha.Models
 				if (param != null && param.Value == "1")
 					compress = true ;
 
+				var data = Extend.ExtensionManager.Current.MediaProvider.Get(Id) ;
+
 				try {
 					// Try to create image from file.
-					img = Image.FromFile(PhysicalPath) ;
+					// img = Image.FromFile(PhysicalPath) ;
+					using (var mem = new MemoryStream(data)) {
+						img = Image.FromStream(mem) ;
+					}
 				} catch {}
 
 				if (img != null) {
+					// TODO: Do we really need the image for this, we have the dimensions in the database?
 					width = width.HasValue && width.Value < img.Width ? width : img.Width ;
 					if (!height.HasValue)
 						height = Convert.ToInt32(((double)width / img.Width) * img.Height) ;
@@ -122,7 +128,8 @@ namespace Piranha.Models
 					if (File.Exists(GetCachePath(width.Value, height.Value))) {
 						// Return generated & cached resized image
 						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
-					} else if (File.Exists(PhysicalPath)) {
+					} else if (Extend.ExtensionManager.Current.MediaProvider.Exists(Id)) {
+					//} else if (File.Exists(PhysicalPath)) {
 						int orgWidth = img.Width, orgHeight = img.Height ;
 
 						using (var resized = Drawing.ImageUtils.Resize(img, width.Value, height.Value)) {
@@ -133,7 +140,8 @@ namespace Piranha.Models
 					}
 					img.Dispose() ;
 				}
-				WriteFile(context.Response, PhysicalPath) ;
+				WriteFile(context.Response, data) ;
+				//WriteFile(context.Response, PhysicalPath) ;
 			}
 		}
 
@@ -155,12 +163,14 @@ namespace Piranha.Models
 					Type = content.ContentType ;
 			}
 			if (base.Save(tx) && content != null) {
-				if (File.Exists(PhysicalPath)) {
+				if (Extend.ExtensionManager.Current.MediaProvider.Exists(Id)) {
+				//if (File.Exists(PhysicalPath)) {
 					DeleteFile() ;
 					DeleteCache() ;
 				}
 				if (writefile)
-					File.WriteAllBytes(PhysicalPath, content.Body) ;
+					Extend.ExtensionManager.Current.MediaProvider.Put(Id, content.Body) ;
+					//File.WriteAllBytes(PhysicalPath, content.Body) ;
 			}
 			return base.Save(tx, setdates);
 		}
@@ -187,10 +197,12 @@ namespace Piranha.Models
 		/// Deletes the published and working copy of the media file.
 		/// </summary>
 		public void DeleteFile() {
-			DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(BasePath)) ;
+			Extend.ExtensionManager.Current.MediaProvider.DeleteDraft(Id) ;
+			Extend.ExtensionManager.Current.MediaProvider.Delete(Id) ;
 
-			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*"))
-				file.Delete() ;
+			//DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(BasePath)) ;
+			//foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*"))
+			//	file.Delete() ;
 		}
 
 		/// <summary>
@@ -234,6 +246,23 @@ namespace Piranha.Models
 				response.StatusCode = 200 ;
 				response.ContentType = compressed ? "image/jpg" : Type ;
 				response.WriteFile(path) ;
+				response.End() ;
+			} else {
+				response.StatusCode = 404 ;
+			}
+		}
+
+		/// <summary>
+		/// Writes the given file to the http response
+		/// </summary>
+		/// <param name="response">The http response to write the file to</param>
+		/// <param name="data">The data of the physical file</param>
+		/// <param name="compressed">Whether or not the file is a compressed image</param>
+		protected void WriteFile(HttpResponse response, byte[] data, bool compressed = false) {
+			if (data != null) {
+				response.StatusCode = 200 ;
+				response.ContentType = compressed ? "image/jpg" : Type ;
+				response.BinaryWrite(data) ;
 				response.End() ;
 			} else {
 				response.StatusCode = 404 ;

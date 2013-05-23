@@ -21,8 +21,12 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <returns>The file content</returns>
 		public FileResult Get(string id) {
 			var ul = Upload.GetSingle(new Guid(id)) ;
-			if (ul != null)
-				return new FileStreamResult(new FileStream(ul.PhysicalPath, FileMode.Open), ul.Type) ;
+
+			if (ul != null) {
+				var data = Extend.ExtensionManager.Current.MediaProvider.Get(ul.Id, Extend.MediaType.Upload) ;
+				if (data != null)
+					return new FileStreamResult(new MemoryStream(data), ul.Type) ;
+			}
 			throw new FileNotFoundException("Could not find the upload with the given id") ;
 		}
     }

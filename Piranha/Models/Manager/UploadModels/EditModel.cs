@@ -72,7 +72,10 @@ namespace Piranha.Models.Manager.UploadModels
 			}
 			Upload.Save() ;
 			Upload.DeleteCache() ;
-			UploadedFile.SaveAs(Upload.PhysicalPath) ;
+
+			var data = new byte[UploadedFile.ContentLength] ;
+			UploadedFile.InputStream.Read(data, 0, UploadedFile.ContentLength) ;
+			Extend.ExtensionManager.Current.MediaProvider.Put(Upload.Id, data, Extend.MediaType.Upload) ;
 		}
 
 		/// <summary>

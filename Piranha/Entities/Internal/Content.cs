@@ -183,9 +183,9 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the virtual path for the media file.
 		/// </summary>
-		public override string VirtualPath { 
-			get { return base.VirtualPath + (IsDraft ? "-draft" : "") ; }
-		}
+		//public override string VirtualPath { 
+		//	get { return base.VirtualPath + (IsDraft ? "-draft" : "") ; }
+		//}
 
 		/// <summary>
 		/// Gets the virtual path for the cached media file.
@@ -382,8 +382,7 @@ namespace Piranha.Models
 				content.IsDraft = true ;
 				if (content.Save(tx)) {
 					// Delete any possible draft version of the physical file.
-					if (File.Exists(content.PhysicalPath))
-						File.Delete(content.PhysicalPath) ;
+					Extend.ExtensionManager.Current.MediaProvider.DeleteDraft(id) ;
 
 					// Now turn back the dates for the draft version
 					Content.Execute("UPDATE content SET content_updated = content_last_published WHERE content_id = @0 AND content_draft = 1", null, id) ;
@@ -419,15 +418,7 @@ namespace Piranha.Models
 				// Take the published physical file and move it to draft mode.
 				var content = Content.GetSingle(id, true, tx) ;
 				if (content != null) {
-					var draftpath = content.PhysicalPath ;
-					// Delete the draft file
-					if (File.Exists(draftpath))
-						File.Delete(draftpath) ;
-
-					// Move published file to draft state
-					content.IsDraft = false ;
-					if (File.Exists(content.PhysicalPath))
-						File.Move(content.PhysicalPath, draftpath) ;
+					Extend.ExtensionManager.Current.MediaProvider.Unpublish(id) ;
 					content.DeleteCache() ;
 
 					// Invalidate record
@@ -478,7 +469,7 @@ namespace Piranha.Models
 				IsDraft = true ;
 				base.Save(content, tx, false, false) ;
 				
-				var draftpath = PhysicalPath;
+				//var draftpath = PhysicalPath;
 
 				// Now save a published version
 				IsDraft = false ;
@@ -487,12 +478,8 @@ namespace Piranha.Models
 				base.Save(content, tx, false) ;
 
 				// Check if we have have a drafted physical file
-				if (File.Exists(draftpath)) {
-					if (File.Exists(PhysicalPath))
-						File.Delete(PhysicalPath) ;
-					File.Move(draftpath, PhysicalPath) ;
-					DeleteCache() ;
-				}
+				Extend.ExtensionManager.Current.MediaProvider.Publish(Id) ;
+				DeleteCache() ;
 
 				// Now update all pages & posts which have a reference
 				// to this media object.
@@ -539,26 +526,36 @@ namespace Piranha.Models
 				if (File.Exists(GetCacheThumbPath(size))) {
 					// Return generated & cached thumbnail
 					WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
-				} else if (File.Exists(PhysicalPath)) { // || IsFolder) {
-					using (var img = Image.FromFile(PhysicalPath)) {
-						if (img != null) {
-							// Generate thumbnail from image
-							using (Bitmap bmp = new Bitmap(size, size)) {
-								using (Graphics grp = Graphics.FromImage(bmp)) {
-									grp.SmoothingMode = SmoothingMode.HighQuality ;
-									grp.CompositingQuality = CompositingQuality.HighQuality ;
-									grp.InterpolationMode = InterpolationMode.High ;
+				} else {
+					byte[] data = null ;
+					if (IsDraft)
+						data = Extend.ExtensionManager.Current.MediaProvider.GetDraft(Id) ;
+					if (!IsDraft || data == null)
+						data = Extend.ExtensionManager.Current.MediaProvider.Get(Id) ;
 
-									// Resize and crop image
-									Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
-									grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
-										img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
-										Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
+					if (data != null) {
+						using (var mem = new MemoryStream(data)) {
+							using (var img = Image.FromStream(mem)) {
+								if (img != null) {
+									// Generate thumbnail from image
+									using (Bitmap bmp = new Bitmap(size, size)) {
+										using (Graphics grp = Graphics.FromImage(bmp)) {
+											grp.SmoothingMode = SmoothingMode.HighQuality ;
+											grp.CompositingQuality = CompositingQuality.HighQuality ;
+											grp.InterpolationMode = InterpolationMode.High ;
 
-									bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
+											// Resize and crop image
+											Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
+											grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
+												img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
+												Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
+
+											bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
+										}
+									}
+									WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
 								}
 							}
-							WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
 						}
 					}
 				}

@@ -33,8 +33,9 @@ namespace Piranha.WebPages.RequestHandlers
 			if (args != null && args.Length > 0) {
 				Content content = Content.GetSingle(new Guid(args[0]), draft) ;
 
-				if (content.IsDraft && !File.Exists(content.PhysicalPath))
-					content.IsDraft = false ;
+				// Since we don't handle viewing image drafts right now, don't execute the overhead
+				//if (content.IsDraft && !Extend.ExtensionManager.Current.MediaProvider.ExistsDraft(content.Id))
+				//	content.IsDraft = false ;
 
 				if (content != null) {
 					int? width = null ;

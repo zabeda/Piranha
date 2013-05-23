@@ -32,12 +32,18 @@ namespace Piranha.Extend
 		/// </summary>
 		[ImportMany(AllowRecomposition=true)]
 		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions { get ; set ; }
+
+		/// <summary>
+		/// The currently configured media provider.
+		/// </summary>
+		public readonly IMediaProvider MediaProvider ;
 		#endregion
 
 		/// <summary>
 		/// Default private constructor.
 		/// </summary>
 		private ExtensionManager() {
+			// Let MEF scan for imports
 			var catalog = new AggregateCatalog() ;
 
 			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
@@ -51,6 +57,14 @@ namespace Piranha.Extend
 
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
+
+			// Get the current media provider
+			var assembly = Assembly.Load(Config.MediaProvider.AssemblyName) ;
+			if (assembly != null) {
+				var type = assembly.GetType(Config.MediaProvider.TypeName) ;
+				if (type != null)
+					MediaProvider = (IMediaProvider)Activator.CreateInstance(type) ;
+			}
 		}
 
 		/// <summary>

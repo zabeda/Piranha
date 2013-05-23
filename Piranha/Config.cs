@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace Piranha
@@ -13,7 +14,9 @@ namespace Piranha
 	{
 		#region Members
 		private static string[] namespaces = null;
-		private static object mutex = new object() ;
+		private static object nsmutex = new object() ;
+		private static ConfigProvider mediaprovider = null ;
+		private static object mpmutex = new object() ;
 		#endregion
 
 		/// <summary>
@@ -41,7 +44,7 @@ namespace Piranha
 				if (namespaces != null)
 					return namespaces ;
 				
-				lock (mutex) {
+				lock (nsmutex) {
 					if (namespaces == null) {
 						var str = ConfigurationManager.AppSettings["manager_namespaces"] ;
 
@@ -57,6 +60,37 @@ namespace Piranha
 					}
 				}
 				return namespaces ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the configuration for the media provider to use. If the media provider is not
+		/// specified the default AppDataMediaProvider is used.
+		/// </summary>
+		public static ConfigProvider MediaProvider {
+			get {
+				if (mediaprovider != null)
+					return mediaprovider ;
+
+				lock (mpmutex) {
+					if (mediaprovider == null) {
+						var str = ConfigurationManager.AppSettings["media_provider"] ;
+						if (!String.IsNullOrEmpty(str)) {
+							var vals = str.Split(new char[] { ',' }) ;
+
+							mediaprovider = new ConfigProvider() {
+								TypeName = vals[0].Trim(),
+								AssemblyName = vals[1].Trim()
+							} ;
+						} else {
+							mediaprovider = new ConfigProvider() {
+								TypeName = typeof(Extend.AppDataMediaProvider).FullName,
+								AssemblyName = Assembly.GetExecutingAssembly().FullName
+							} ;
+						}
+					}
+				}
+				return mediaprovider ;
 			}
 		}
 
