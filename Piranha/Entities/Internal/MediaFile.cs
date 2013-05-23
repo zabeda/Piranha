@@ -112,8 +112,6 @@ namespace Piranha.Models
 				var data = Extend.ExtensionManager.Current.MediaProvider.Get(Id) ;
 
 				try {
-					// Try to create image from file.
-					// img = Image.FromFile(PhysicalPath) ;
 					using (var mem = new MemoryStream(data)) {
 						img = Image.FromStream(mem) ;
 					}
@@ -128,8 +126,7 @@ namespace Piranha.Models
 					if (File.Exists(GetCachePath(width.Value, height.Value))) {
 						// Return generated & cached resized image
 						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
-					} else if (Extend.ExtensionManager.Current.MediaProvider.Exists(Id)) {
-					//} else if (File.Exists(PhysicalPath)) {
+					} else if (data != null) {
 						int orgWidth = img.Width, orgHeight = img.Height ;
 
 						using (var resized = Drawing.ImageUtils.Resize(img, width.Value, height.Value)) {
@@ -141,7 +138,6 @@ namespace Piranha.Models
 					img.Dispose() ;
 				}
 				WriteFile(context.Response, data) ;
-				//WriteFile(context.Response, PhysicalPath) ;
 			}
 		}
 
@@ -163,14 +159,13 @@ namespace Piranha.Models
 					Type = content.ContentType ;
 			}
 			if (base.Save(tx) && content != null) {
-				if (Extend.ExtensionManager.Current.MediaProvider.Exists(Id)) {
-				//if (File.Exists(PhysicalPath)) {
-					DeleteFile() ;
-					DeleteCache() ;
-				}
+				// Delete the old data
+				DeleteFile() ;
+				DeleteCache() ;
+
+				// Save the new
 				if (writefile)
 					Extend.ExtensionManager.Current.MediaProvider.Put(Id, content.Body) ;
-					//File.WriteAllBytes(PhysicalPath, content.Body) ;
 			}
 			return base.Save(tx, setdates);
 		}
