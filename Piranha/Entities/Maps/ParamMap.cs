@@ -24,8 +24,8 @@ namespace Piranha.Entities.Maps
 			Property(p => p.CreatedById).HasColumnName("sysparam_created_by") ;
 			Property(p => p.UpdatedById).HasColumnName("sysparam_updated_by") ;
 
-			HasOptional(p => p.CreatedBy).WithOptionalDependent() ;
-			HasOptional(p => p.UpdatedBy).WithOptionalDependent() ;
+			HasOptional(p => p.CreatedBy) ;
+			HasOptional(p => p.UpdatedBy) ;
 		}
 	}
 }

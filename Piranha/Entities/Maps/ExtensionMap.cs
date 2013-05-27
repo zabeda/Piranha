@@ -26,8 +26,8 @@ namespace Piranha.Entities.Maps
 
 			Ignore(e => e.Body) ;
 
-			HasRequired(e => e.CreatedBy).WithRequiredDependent() ;
-			HasRequired(e => e.UpdatedBy).WithRequiredDependent() ;
+			HasRequired(e => e.CreatedBy) ;
+			HasRequired(e => e.UpdatedBy) ;
 		}
 	}
 }

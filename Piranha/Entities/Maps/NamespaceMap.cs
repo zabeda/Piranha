@@ -24,8 +24,8 @@ namespace Piranha.Entities.Maps
 			Property(n => n.UpdatedById).HasColumnName("namespace_updated_by") ;
 
 			HasMany(n => n.Permalinks).WithRequired(p => p.Namespace) ;
-			HasRequired(n => n.CreatedBy).WithRequiredDependent() ;
-			HasRequired(n => n.UpdatedBy).WithRequiredDependent() ;
+			HasRequired(n => n.CreatedBy) ;
+			HasRequired(n => n.UpdatedBy) ;
 		}
 	}
 }

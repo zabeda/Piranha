@@ -23,8 +23,8 @@ namespace Piranha.Entities.Maps
 			Property(u => u.CreatedById).HasColumnName("upload_created_by") ;
 			Property(u => u.UpdatedById).HasColumnName("upload_updated_by") ;
 
-			HasRequired(u => u.CreatedBy).WithRequiredDependent() ;
-			HasRequired(u => u.UpdatedBy).WithRequiredDependent() ;
+			HasRequired(u => u.CreatedBy) ;
+			HasRequired(u => u.UpdatedBy) ;
 
 			HasMany(u => u.Comments).WithRequired().HasForeignKey(c => c.ParentId) ;
 

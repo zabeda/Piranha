@@ -25,8 +25,8 @@ namespace Piranha.Entities.Maps
 			Property(p => p.CreatedById).HasColumnName("property_created_by") ;
 			Property(p => p.UpdatedById).HasColumnName("property_updated_by") ;
 
-			HasRequired(p => p.CreatedBy).WithRequiredDependent() ;
-			HasRequired(p => p.UpdatedBy).WithRequiredDependent() ;
+			HasRequired(p => p.CreatedBy) ;
+			HasRequired(p => p.UpdatedBy) ;
 		}
 	}
 }

@@ -23,8 +23,8 @@ namespace Piranha.Entities.Maps
 			Property(l => l.CreatedById).HasColumnName("syslog_created_by") ;
 			Property(l => l.UpdatedById).HasColumnName("syslog_updated_by") ;
 
-			HasRequired(l => l.CreatedBy).WithRequiredDependent() ;
-			HasRequired(l => l.UpdatedBy).WithRequiredDependent() ;
+			HasRequired(l => l.CreatedBy) ;
+			HasRequired(l => l.UpdatedBy) ;
 		}
 	}
 }
