@@ -34,8 +34,8 @@ namespace Piranha.Web
 						RegionId = region.Id,
 						Created = DateTime.Now
 					} ;
-					if (User.Identity.IsAuthenticated)
-						form.CreatedById = new Guid(User.Identity.Name) ;
+					if (Application.Current.UserProvider.IsAuthenticated)
+						form.CreatedById = Application.Current.UserProvider.UserId ;
 
 					foreach (var item in body.Items) {
 						form.Items.Add(new FormItem() {

@@ -28,6 +28,12 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the external id.
+		/// </summary>
+		[Column(Name="sysuser_external_id")]
+		public string ExternalId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the API-key.
 		/// </summary>
 		[Column(Name="sysuser_apikey")]
@@ -217,13 +223,13 @@ namespace Piranha.Models
 				if (Id == Guid.Empty)
 					Id = Guid.NewGuid() ;
 				Updated = Created = DateTime.Now ;
-				if (HttpContext.Current.User.Identity.IsAuthenticated)
-					UpdatedBy = CreatedBy = new Guid(HttpContext.Current.User.Identity.Name) ;
+				if (Application.Current.UserProvider.IsAuthenticated)
+					UpdatedBy = CreatedBy = Application.Current.UserProvider.UserId ;
 				else UpdatedBy = CreatedBy = Id ;
 			} else {
 				Updated = DateTime.Now ;
-				if (HttpContext.Current.User.Identity.IsAuthenticated)
-					UpdatedBy = new Guid(HttpContext.Current.User.Identity.Name) ;
+				if (Application.Current.UserProvider.IsAuthenticated)
+					UpdatedBy = Application.Current.UserProvider.UserId ;
 			}
 			return base.Save(tx);
 		}

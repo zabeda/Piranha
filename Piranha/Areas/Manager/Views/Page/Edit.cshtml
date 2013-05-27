@@ -356,13 +356,13 @@
                                     </li>
                                     @if (Model.Template.ShowController) {
                                     <li>@Html.LabelFor(m => m.Page.PageController,
-                                            Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
+                                            Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
                                     </li>
                                     }
-                                    @if (Piranha.Web.Application.Current.IsMvc && Model.Template.ShowView) {
+                                    @if (Piranha.Application.Current.IsMvc && Model.Template.ShowView) {
                                     <li>@Html.LabelFor(m => m.Page.PageView)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" })</div>

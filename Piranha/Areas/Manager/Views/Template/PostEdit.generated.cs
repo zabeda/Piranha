@@ -259,7 +259,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 36 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-     if (!Piranha.Web.Application.Current.IsMvc) {
+     if (!Piranha.Application.Current.IsMvc) {
     
             
             #line default
@@ -445,7 +445,7 @@ WriteLiteral(">\r\n                <li>");
             
             #line 71 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Controller,
-                        Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Post.Route : Piranha.Resources.Post.Template));
+                        Piranha.Application.Current.IsMvc ? Piranha.Resources.Post.Route : Piranha.Resources.Post.Template));
 
             
             #line default
@@ -481,7 +481,7 @@ WriteLiteral("                        ");
 
             
             #line 78 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-                    Write(Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Template.PostRouteOverride : Piranha.Resources.Template.PostTemplateOverride);
+                    Write(Piranha.Application.Current.IsMvc ? Piranha.Resources.Template.PostRouteOverride : Piranha.Resources.Template.PostTemplateOverride);
 
             
             #line default
@@ -496,7 +496,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
             #line hidden
             
             #line 80 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-                 if (Piranha.Web.Application.Current.IsMvc) {
+                 if (Piranha.Application.Current.IsMvc) {
 
             
             #line default
@@ -767,14 +767,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 5724), Tuple.Create("\"", 5785)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 5708), Tuple.Create("\"", 5769)
             
             #line 124 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 5738), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 5722), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 5738), false)
+, 5722), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");

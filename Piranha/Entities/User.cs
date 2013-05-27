@@ -20,6 +20,11 @@ namespace Piranha.Entities
 		public Guid Id { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the external id of the user.
+		/// </summary>
+		public string ExternalId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the id of the group to which the user belong.
 		/// </summary>
 		public Guid? GroupId { get ; set ; }
@@ -157,17 +162,15 @@ namespace Piranha.Entities
 		/// <param name="db">The db context</param>
 		/// <param name="state">The entity state</param>
 		public override void OnSave(DataContext db, System.Data.EntityState state) {
-			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
-
-			if (db.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
+			if (db.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
 				if (state == EntityState.Added) {
 					if (Id == Guid.Empty)
 						Id = Guid.NewGuid() ;
 					Created = Updated = DateTime.Now ;
-					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
+					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
 				} else if (state == EntityState.Modified) {
 					Updated = DateTime.Now ;
-					UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
+					UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
 				}
 			} else throw new UnauthorizedAccessException("User must be logged in to save entity") ;
 		}

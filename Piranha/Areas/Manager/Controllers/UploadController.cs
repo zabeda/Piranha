@@ -23,7 +23,7 @@ namespace Piranha.Areas.Manager.Controllers
 			var ul = Upload.GetSingle(new Guid(id)) ;
 
 			if (ul != null) {
-				var data = Extend.ExtensionManager.Current.MediaProvider.Get(ul.Id, Extend.MediaType.Upload) ;
+				var data = Application.Current.MediaProvider.Get(ul.Id, IO.MediaType.Upload) ;
 				if (data != null)
 					return new FileStreamResult(new MemoryStream(data), ul.Type) ;
 			}

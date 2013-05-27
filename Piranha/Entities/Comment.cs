@@ -179,8 +179,6 @@ namespace Piranha.Entities
 		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
 		public override void OnSave(DataContext db, System.Data.EntityState state) {
-			var user = HttpContext.Current.User;
-
 			// We never connect comments to drafts.
 			ParentIsDraft = false ;
 
@@ -188,12 +186,12 @@ namespace Piranha.Entities
 				if (Id == Guid.Empty)
 					Id = Guid.NewGuid() ;
 				Created = Updated = DateTime.Now ;
-				if (user.Identity.IsAuthenticated || db.Identity != Guid.Empty)
-					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
+				if (Application.Current.UserProvider.IsAuthenticated || db.Identity != Guid.Empty)
+					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
 			} else if (state == EntityState.Modified) {
 				Updated = DateTime.Now ;
-				if (user.Identity.IsAuthenticated || db.Identity != Guid.Empty)
-					UpdatedById = db.Identity != Guid.Empty ? db.Identity : new Guid(user.Identity.Name) ;
+				if (Application.Current.UserProvider.IsAuthenticated || db.Identity != Guid.Empty)
+					UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
 			}
 			base.OnSave(db, state) ;
 		}

@@ -302,7 +302,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 45 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-     if (!Piranha.Web.Application.Current.IsMvc) {
+     if (!Piranha.Application.Current.IsMvc) {
     
             
             #line default
@@ -620,7 +620,7 @@ WriteLiteral(">\r\n                <li>");
             
             #line 112 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Controller, 
-                        Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
+                        Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
 
             
             #line default
@@ -656,7 +656,7 @@ WriteLiteral("                        ");
 
             
             #line 119 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-                    Write(Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride);
+                    Write(Piranha.Application.Current.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride);
 
             
             #line default
@@ -671,7 +671,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
             #line hidden
             
             #line 121 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-                 if (Piranha.Web.Application.Current.IsMvc) {
+                 if (Piranha.Application.Current.IsMvc) {
 
             
             #line default
@@ -913,14 +913,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 7448), Tuple.Create("\"", 7509)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 7432), Tuple.Create("\"", 7493)
             
             #line 161 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 7462), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+, Tuple.Create(Tuple.Create("", 7446), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 7462), false)
+, 7446), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");

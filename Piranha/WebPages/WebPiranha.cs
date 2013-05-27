@@ -98,7 +98,7 @@ namespace Piranha.WebPages
 		/// <param name="handler">The actual handler</param>
 		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Add()")]
 		public static void RegisterHandler(string urlprefix, string id, IRequestHandler handler) {
-			Web.Application.Current.Handlers.Add(urlprefix, id, handler) ;
+			Application.Current.Handlers.Add(urlprefix, id, handler) ;
 		}
 
 		/// <summary>
@@ -107,7 +107,7 @@ namespace Piranha.WebPages
 		/// <param name="id">The handler id</param>
 		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Remove()")]
 		public static void RemoveHandler(string id) {
-			Web.Application.Current.Handlers.Remove(id) ;
+			Application.Current.Handlers.Remove(id) ;
 		}
 
 		/// <summary>
@@ -127,7 +127,7 @@ namespace Piranha.WebPages
 		/// <returns>The url prefix</returns>
 		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.GetUrlPrefix()")]
 		public static string GetUrlPrefixForHandlerId(string id) {
-			return Web.Application.Current.Handlers.GetUrlPrefix(id) ;
+			return Application.Current.Handlers.GetUrlPrefix(id) ;
 		}
 
 		/// <summary>
@@ -158,7 +158,7 @@ namespace Piranha.WebPages
 		/// </summary>
 		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Reset()")]
 		public static void ResetHandlers() {
-			Web.Application.Current.Handlers.Clear() ;
+			Application.Current.Handlers.Clear() ;
 		}
 
 		/// <summary>
@@ -272,7 +272,7 @@ namespace Piranha.WebPages
 
 				// Find the correct request handler
 				// foreach (RequestHandlerRegistration hr in Handlers.Values) {
-				foreach (var hr in Web.Application.Current.Handlers) {
+				foreach (var hr in Application.Current.Handlers) {
 					if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
 						if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
 							// Execute the handler
@@ -284,7 +284,7 @@ namespace Piranha.WebPages
 				}
 
 				if (!handled && args[pos].ToLower() == "res.ashx") {
-					Web.Application.Current.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
+					Application.Current.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
 					handled = true ;
 				}
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Piranha.Extend
+namespace Piranha.IO
 {
 	/// <summary>
 	/// The different types of media that media provider needs to handle

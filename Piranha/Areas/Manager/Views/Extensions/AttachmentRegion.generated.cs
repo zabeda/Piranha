@@ -45,7 +45,7 @@ namespace Piranha.Areas.Manager.Views.Extensions
     var btnAttach = ViewData.TemplateInfo.GetFullHtmlFieldId("btnAttach") ;
     var tblId = ViewData.TemplateInfo.GetFullHtmlFieldId("tblAttachments") ;
     var boxId = ViewData.TemplateInfo.GetFullHtmlFieldId("box") ;
-    var thumbUrl = Piranha.WebPages.WebPiranha.ApplicationPath + Piranha.Web.Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") + "/";
+    var thumbUrl = Piranha.WebPages.WebPiranha.ApplicationPath + Piranha.Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") + "/";
 
     var varObj = @ViewData.TemplateInfo.GetFullHtmlFieldId("obj") ;
 
@@ -358,14 +358,14 @@ WriteLiteral(" .down\').live(\'click\', function() {\r\n            extensions."
 WriteLiteral(".moveDown($(this).parent().parent());\r\n            return false;\r\n        });\r\n\r\n" +
 "    });\r\n</script>\r\n<table");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 4407), Tuple.Create("\"", 4418)
+WriteAttribute("id", Tuple.Create(" id=\"", 4403), Tuple.Create("\"", 4414)
             
             #line 95 "..\..\Areas\Manager\Views\Extensions\AttachmentRegion.cshtml"
-, Tuple.Create(Tuple.Create("", 4412), Tuple.Create<System.Object, System.Int32>(tblId
+, Tuple.Create(Tuple.Create("", 4408), Tuple.Create<System.Object, System.Int32>(tblId
             
             #line default
             #line hidden
-, 4412), false)
+, 4408), false)
 );
 
 WriteLiteral(" class=\"list attachments\"");
@@ -376,14 +376,14 @@ WriteLiteral(" class=\"thumb\"");
 
 WriteLiteral(">\r\n                <a");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 4524), Tuple.Create("\"", 4539)
+WriteAttribute("id", Tuple.Create(" id=\"", 4520), Tuple.Create("\"", 4535)
             
             #line 99 "..\..\Areas\Manager\Views\Extensions\AttachmentRegion.cshtml"
-, Tuple.Create(Tuple.Create("", 4529), Tuple.Create<System.Object, System.Int32>(btnAttach
+, Tuple.Create(Tuple.Create("", 4525), Tuple.Create<System.Object, System.Int32>(btnAttach
             
             #line default
             #line hidden
-, 4529), false)
+, 4525), false)
 );
 
 WriteLiteral(" class=\"add\"");
@@ -414,14 +414,14 @@ WriteLiteral("        ");
             #line hidden
 WriteLiteral("\r\n    </tbody>\r\n</table>\r\n<div");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 4786), Tuple.Create("\"", 4797)
+WriteAttribute("id", Tuple.Create(" id=\"", 4782), Tuple.Create("\"", 4793)
             
             #line 108 "..\..\Areas\Manager\Views\Extensions\AttachmentRegion.cshtml"
-, Tuple.Create(Tuple.Create("", 4791), Tuple.Create<System.Object, System.Int32>(boxId
+, Tuple.Create(Tuple.Create("", 4787), Tuple.Create<System.Object, System.Int32>(boxId
             
             #line default
             #line hidden
-, 4791), false)
+, 4787), false)
 );
 
 WriteLiteral(" class=\"floatbox\"");

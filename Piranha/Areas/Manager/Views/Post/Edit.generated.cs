@@ -1616,7 +1616,7 @@ WriteLiteral("                                    ");
 
             
             #line 272 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-                                     if (Piranha.Web.Application.Current.IsMvc && Model.Template.ShowView) {
+                                     if (Piranha.Application.Current.IsMvc && Model.Template.ShowView) {
 
             
             #line default

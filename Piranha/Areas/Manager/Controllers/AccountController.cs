@@ -30,7 +30,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion ;
 
 				// Check if user is logged in and has permissions to the manager
-				if (User.Identity.IsAuthenticated && User.HasAccess("ADMIN")) {
+				if (Application.Current.UserProvider.IsAuthenticated && User.HasAccess("ADMIN")) {
 					var startpage = WebPages.Manager.Menu[0].Items[0] ;
 					return RedirectToAction(startpage.Action, startpage.Controller) ;
 				}

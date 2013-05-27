@@ -29,7 +29,7 @@ namespace Piranha.WebPages.RequestHandlers
 		/// <param name="draft">Whether to view the draft</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		protected virtual void HandleRequest(HttpContext context, bool draft, params string[] args) {
-			if (Web.Application.Current.RouteHandler != null) {
+			if (Application.Current.RouteHandler != null) {
 				if (args != null && args.Length > 0) {
 					Permalink perm = null ;
 					int segments = 0;
@@ -66,7 +66,7 @@ namespace Piranha.WebPages.RequestHandlers
 								} else {
 									//
 									// Call the route handler to route the current page.
-									Web.Application.Current.RouteHandler.HandlePage(context, perm, page, args.Subset(segments)) ;
+									Application.Current.RouteHandler.HandlePage(context, perm, page, args.Subset(segments)) ;
 								}
 							} else {
 								context.Response.StatusCode = 404 ;
@@ -77,7 +77,7 @@ namespace Piranha.WebPages.RequestHandlers
 							if (post != null) {
 								//
 								// Call the route handler to route the current post.
-								Web.Application.Current.RouteHandler.HandlePost(context, perm, post, args.Subset(segments)) ;
+								Application.Current.RouteHandler.HandlePost(context, perm, post, args.Subset(segments)) ;
 							} else {
 								context.Response.StatusCode = 404 ;
 							}
@@ -88,7 +88,7 @@ namespace Piranha.WebPages.RequestHandlers
 				} else {
 					//
 					// Call the route handler to route to the startpage.
-					Web.Application.Current.RouteHandler.HandleStartpage(context) ;
+					Application.Current.RouteHandler.HandleStartpage(context) ;
 				}
 			}
 		}

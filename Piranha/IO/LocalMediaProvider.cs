@@ -2,12 +2,12 @@
 using System.IO;
 using System.Web;
 
-namespace Piranha.Extend
+namespace Piranha.IO
 {
 	/// <summary>
 	/// Media provider for storing data on the local disc in the App_Data folder.
 	/// </summary>
-	public sealed class AppDataMediaProvider : IMediaProvider
+	public sealed class LocalMediaProvider : IMediaProvider
 	{
 		#region Members
 		/// <summary>
@@ -24,7 +24,7 @@ namespace Piranha.Extend
 		/// <summary>
 		/// Default constructor, creates a new local media provider.
 		/// </summary>
-		public AppDataMediaProvider() {
+		public LocalMediaProvider() {
 			if (!Directory.Exists(BasePath))
 				Directory.CreateDirectory(BasePath) ;
 			if (!Directory.Exists(UploadPath))

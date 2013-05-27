@@ -37,8 +37,8 @@ namespace Piranha.Entities.Maps
 			Property(m => m.CreatedById).HasColumnName("content_created_by") ;
 			Property(m => m.UpdatedById).HasColumnName("content_updated_by") ;
 
-			HasRequired(m => m.CreatedBy) ;
-			HasRequired(m => m.UpdatedBy) ;
+			HasRequired(m => m.CreatedBy).WithRequiredDependent() ;
+			HasRequired(m => m.UpdatedBy).WithRequiredDependent() ;
 			HasMany(m => m.Extensions).WithRequired().HasForeignKey(e => new { e.ParentId, e.IsDraft }) ;
 			HasMany(m => m.Comments).WithRequired().HasForeignKey(c => new { c.ParentId, c.ParentIsDraft }) ;
 		}

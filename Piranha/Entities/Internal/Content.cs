@@ -382,7 +382,7 @@ namespace Piranha.Models
 				content.IsDraft = true ;
 				if (content.Save(tx)) {
 					// Delete any possible draft version of the physical file.
-					Extend.ExtensionManager.Current.MediaProvider.DeleteDraft(id) ;
+					Application.Current.MediaProvider.DeleteDraft(id) ;
 
 					// Now turn back the dates for the draft version
 					Content.Execute("UPDATE content SET content_updated = content_last_published WHERE content_id = @0 AND content_draft = 1", null, id) ;
@@ -418,7 +418,7 @@ namespace Piranha.Models
 				// Take the published physical file and move it to draft mode.
 				var content = Content.GetSingle(id, true, tx) ;
 				if (content != null) {
-					Extend.ExtensionManager.Current.MediaProvider.Unpublish(id) ;
+					Application.Current.MediaProvider.Unpublish(id) ;
 					content.DeleteCache() ;
 
 					// Invalidate record
@@ -449,9 +449,9 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Whether the operation succeeded or not</returns>
 		public virtual bool SaveAndPublish(MediaFileContent content, System.Data.IDbTransaction tx = null) {
-			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
+			//var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (Database.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
+			if (Database.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
 				// Set file meta information
 				SetFileMeta(content) ;
 
@@ -478,7 +478,7 @@ namespace Piranha.Models
 				base.Save(content, tx, false) ;
 
 				// Check if we have have a drafted physical file
-				Extend.ExtensionManager.Current.MediaProvider.Publish(Id) ;
+				Application.Current.MediaProvider.Publish(Id) ;
 				DeleteCache() ;
 
 				// Now update all pages & posts which have a reference
@@ -529,9 +529,9 @@ namespace Piranha.Models
 				} else {
 					byte[] data = null ;
 					if (IsDraft)
-						data = Extend.ExtensionManager.Current.MediaProvider.GetDraft(Id) ;
+						data = Application.Current.MediaProvider.GetDraft(Id) ;
 					if (!IsDraft || data == null)
-						data = Extend.ExtensionManager.Current.MediaProvider.Get(Id) ;
+						data = Application.Current.MediaProvider.Get(Id) ;
 
 					if (data != null) {
 						using (var mem = new MemoryStream(data)) {

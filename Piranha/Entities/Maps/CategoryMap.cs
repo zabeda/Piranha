@@ -27,8 +27,8 @@ namespace Piranha.Entities.Maps
 			HasOptional(c => c.Parent) ;
 			HasRequired(c => c.Permalink) ;
 			HasMany(c => c.Extensions).WithRequired().HasForeignKey(e => e.ParentId) ;
-			HasRequired(c => c.CreatedBy) ;
-			HasRequired(c => c.UpdatedBy) ;
+			HasRequired(c => c.CreatedBy).WithRequiredDependent() ;
+			HasRequired(c => c.UpdatedBy).WithRequiredDependent() ;
 		}
 	}
 }

@@ -269,12 +269,12 @@
                                         <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (@Piranha.Resources.Page.HiddenDescription)</p>
                                     </li>
                                     <li>@Html.LabelFor(m => m.Page.PageController,
-                                            Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
+                                            Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
                                     </li>
-                                    @if (Piranha.Web.Application.Current.IsMvc) {
+                                    @if (Piranha.Application.Current.IsMvc) {
                                     <li>@Html.LabelFor(m => m.Page.PageView)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" })</div>

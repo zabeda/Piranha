@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
-using Piranha.WebPages.RequestHandlers;
+using Piranha.Web;
 using Piranha.Web.Handlers;
+using Piranha.WebPages.RequestHandlers;
 
-namespace Piranha.Web
+namespace Piranha
 {
 	/// <summary>
 	/// The application class contains the main state and configuration
@@ -26,6 +28,16 @@ namespace Piranha.Web
 		/// The collection of registered request handlers.
 		/// </summary>
 		public readonly RequestHandlerCollection Handlers = new RequestHandlerCollection() ;
+
+		/// <summary>
+		/// The currently active media provider.
+		/// </summary>
+		public readonly IO.IMediaProvider MediaProvider = new IO.LocalMediaProvider() ;
+
+		/// <summary>
+		/// The currently active user provider.
+		/// </summary>
+		internal readonly Security.IUserProvider UserProvider = new Security.LocalUserProvider() ;
 
 		/// <summary>
 		/// The manager resource handler.
@@ -72,9 +84,18 @@ namespace Piranha.Web
 		private Application() {
 			var catalog = new AggregateCatalog() ;
 
+			// Compose parts
 			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
+
+			// Get the current media provider
+			var assembly = Assembly.Load(Config.MediaProvider.AssemblyName) ;
+			if (assembly != null) {
+				var type = assembly.GetType(Config.MediaProvider.TypeName) ;
+				if (type != null)
+					MediaProvider = (IO.IMediaProvider)Activator.CreateInstance(type) ;
+			}
 
 			RegisterHandlers() ;
 		}

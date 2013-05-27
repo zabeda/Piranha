@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Security;
 
 using Piranha.Models;
 
@@ -162,11 +163,11 @@ public static class PiranhaApp
 	/// <param name="p">The security principal</param>
 	/// <returns>The current user</returns>
 	public static SysUser GetProfile(this IPrincipal p) {
-		if (p.Identity.IsAuthenticated) {
+		if (Piranha.Application.Current.UserProvider.IsAuthenticated) {
 			// Reload user if session has been dropped
 			if (HttpContext.Current.Session[USER] == null)
 				HttpContext.Current.Session[USER] = 
-					SysUser.GetSingle(new Guid(p.Identity.Name)) ;
+					SysUser.GetSingle(Piranha.Application.Current.UserProvider.UserId) ;
 			return (SysUser)HttpContext.Current.Session[USER] ;
 		}
 		return new SysUser() ;
@@ -179,7 +180,7 @@ public static class PiranhaApp
 	/// <param name="function">The function to check</param>
 	/// <returns>If the user has access</returns>
 	public static bool HasAccess(this IPrincipal p, string function) {
-		if (p.Identity.IsAuthenticated) {
+		if (Piranha.Application.Current.UserProvider.IsAuthenticated) {
 			Dictionary<string, SysAccess> access = SysAccess.GetAccessList() ;
 
 			if (access.ContainsKey(function)) {
@@ -198,7 +199,7 @@ public static class PiranhaApp
 	/// <param name="groupid">The group</param>
 	/// <returns>If the user is a member</returns>
 	public static bool IsMember(this IPrincipal p, Guid groupid) {
-		if (p.Identity.IsAuthenticated) {
+		if (Piranha.Application.Current.UserProvider.IsAuthenticated) {
 			if (groupid != Guid.Empty) {
 				SysGroup g = SysGroup.GetStructure().GetGroupById(p.GetProfile().GroupId) ;
 				return g.Id == groupid || g.HasChild(groupid) ;

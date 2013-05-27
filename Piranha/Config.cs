@@ -67,7 +67,7 @@ namespace Piranha
 		/// Gets the configuration for the media provider to use. If the media provider is not
 		/// specified the default AppDataMediaProvider is used.
 		/// </summary>
-		public static ConfigProvider MediaProvider {
+		internal static ConfigProvider MediaProvider {
 			get {
 				if (mediaprovider != null)
 					return mediaprovider ;
@@ -84,7 +84,7 @@ namespace Piranha
 							} ;
 						} else {
 							mediaprovider = new ConfigProvider() {
-								TypeName = typeof(Extend.AppDataMediaProvider).FullName,
+								TypeName = typeof(IO.LocalMediaProvider).FullName,
 								AssemblyName = Assembly.GetExecutingAssembly().FullName
 							} ;
 						}

@@ -85,7 +85,7 @@ namespace Piranha.Areas.Manager.Controllers
 
 		[HttpGet()]
 		public ActionResult ExecuteUpdate() {
-			if (User.Identity.IsAuthenticated && User.HasAccess("ADMIN")) {
+			if (Application.Current.UserProvider.IsAuthenticated && User.HasAccess("ADMIN")) {
 				// Execute all incremental updates in a transaction.
 				using (IDbTransaction tx = Database.OpenTransaction()) {
 					for (int n = Data.Database.InstalledVersion + 1; n <= Data.Database.CurrentVersion; n++) {

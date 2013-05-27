@@ -69,7 +69,7 @@ namespace Piranha.Models
 			var success = base.Save(tx);
 		
 			// If the action was successful, insert a log entry.
-			if (HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated && LogChanges && success) {
+			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
 				bool draft = true ;
 				if (this is DraftRecord<T>)
 					draft = ((DraftRecord<T>)this).IsDraft ;
@@ -103,7 +103,7 @@ namespace Piranha.Models
 			}
 
 			// If the action was successful, insert a log entry.
-			if (HttpContext.Current != null && HttpContext.Current.User.Identity.IsAuthenticated && LogChanges && success) {
+			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
 				bool draft = true ;
 				if (this is DraftRecord<T>)
 					draft = ((DraftRecord<T>)this).IsDraft ;

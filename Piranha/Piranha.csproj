@@ -534,13 +534,13 @@
     <Compile Include="Entities\StandardEntity.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Extend\AppDataMediaProvider.cs" />
+    <Compile Include="IO\LocalMediaProvider.cs" />
     <Compile Include="Extend\Extension.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
     <Compile Include="Extend\ExtensionType.cs" />
     <Compile Include="Extend\IExtension.cs" />
     <Compile Include="Extend\IExtensionMeta.cs" />
-    <Compile Include="Extend\IMediaProvider.cs" />
+    <Compile Include="IO\IMediaProvider.cs" />
     <Compile Include="Extend\Module.cs" />
     <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\AttachmentRegion.cs" />
@@ -677,6 +677,9 @@
     <Compile Include="Rest\PostService.cs" />
     <Compile Include="Rest\PostTemplateService.cs" />
     <Compile Include="Rest\SitemapServices.cs" />
+    <Compile Include="Security\IUserProvider.cs" />
+    <Compile Include="Security\LocalUserProvider.cs" />
+    <Compile Include="Security\MembershipUserProvider.cs" />
     <Compile Include="WebPages\Hooks.cs" />
     <Compile Include="WebPages\Manager.cs" />
     <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
@@ -874,6 +877,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.link.dialog.js" />
     <EmbeddedResource Include="Data\Scripts\Updates\30.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\30.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\31.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1265,6 +1269,7 @@
       <LastGenOutput>DialogSiteTree.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

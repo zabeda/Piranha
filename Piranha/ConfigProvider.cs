@@ -8,9 +8,16 @@ namespace Piranha
 	/// <summary>
 	/// Simple class for defining a configured provider
 	/// </summary>
-	public sealed class ConfigProvider
+	internal sealed class ConfigProvider
 	{
+		/// <summary>
+		/// Get/sets the full assembly name.
+		/// </summary>
 		public string AssemblyName { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the full type name.
+		/// </summary>
 		public string TypeName { get ; set ; }
 	}
 }

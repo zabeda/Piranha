@@ -43,9 +43,9 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Whether the operation succeeded or not</returns>
 		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
-			var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
+			//var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (Database.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
+			if (Database.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
 				// First get previously published record
 				IsDraft = false ;
 				T self = GetSelf() ;

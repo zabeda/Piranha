@@ -1578,7 +1578,7 @@ WriteLiteral(")</p>\r\n                                    </li>\r\n            
             
             #line 271 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageController,
-                                            Piranha.Web.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
+                                            Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
 
             
             #line default
@@ -1619,7 +1619,7 @@ WriteLiteral("\r\n                                    </li>\r\n");
             #line hidden
             
             #line 277 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                     if (Piranha.Web.Application.Current.IsMvc) {
+                                     if (Piranha.Application.Current.IsMvc) {
 
             
             #line default

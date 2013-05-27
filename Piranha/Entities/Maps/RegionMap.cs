@@ -29,8 +29,8 @@ namespace Piranha.Entities.Maps
 
 			HasRequired(r => r.RegionTemplate) ;
 			HasRequired(r => r.Page).WithMany(p => p.Regions).HasForeignKey(fk => new { fk.PageId, fk.IsPageDraft }) ;
-			HasRequired(r => r.CreatedBy) ;
-			HasRequired(r => r.UpdatedBy) ;
+			HasRequired(r => r.CreatedBy).WithRequiredDependent() ;
+			HasRequired(r => r.UpdatedBy).WithRequiredDependent() ;
 
 			Ignore(r => r.Body) ;
 		}

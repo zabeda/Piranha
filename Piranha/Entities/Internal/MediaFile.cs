@@ -109,7 +109,7 @@ namespace Piranha.Models
 				if (param != null && param.Value == "1")
 					compress = true ;
 
-				var data = Extend.ExtensionManager.Current.MediaProvider.Get(Id) ;
+				var data = Application.Current.MediaProvider.Get(Id) ;
 
 				try {
 					using (var mem = new MemoryStream(data)) {
@@ -165,7 +165,7 @@ namespace Piranha.Models
 
 				// Save the new
 				if (writefile)
-					Extend.ExtensionManager.Current.MediaProvider.Put(Id, content.Body) ;
+					Application.Current.MediaProvider.Put(Id, content.Body) ;
 			}
 			return base.Save(tx, setdates);
 		}
@@ -192,12 +192,8 @@ namespace Piranha.Models
 		/// Deletes the published and working copy of the media file.
 		/// </summary>
 		public void DeleteFile() {
-			Extend.ExtensionManager.Current.MediaProvider.DeleteDraft(Id) ;
-			Extend.ExtensionManager.Current.MediaProvider.Delete(Id) ;
-
-			//DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(BasePath)) ;
-			//foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*"))
-			//	file.Delete() ;
+			Application.Current.MediaProvider.DeleteDraft(Id) ;
+			Application.Current.MediaProvider.Delete(Id) ;
 		}
 
 		/// <summary>

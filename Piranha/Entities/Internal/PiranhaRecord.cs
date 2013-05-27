@@ -53,17 +53,15 @@ namespace Piranha.Models
 		/// <param name="setdates">Whether to automatically set the dates</param>
 		/// <returns>Wether the operation was successful</returns>
 		protected bool Save(System.Data.IDbTransaction tx = null, bool setdates = true) {
-			var user = HttpContext.Current != null ? HttpContext.Current.User : null;
-
-			if (Database.Identity != Guid.Empty || user.Identity.IsAuthenticated) {
+			if (Database.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
 				if (IsNew) {
 					if (setdates)
 						Created = DateTime.Now ;
-					CreatedBy = user != null ? new Guid(user.Identity.Name) : Database.Identity ;
+					CreatedBy = Database.Identity != Guid.Empty ? Database.Identity : Application.Current.UserProvider.UserId ;
 				}
 				if (setdates)
 					Updated = DateTime.Now ;
-				UpdatedBy = user != null ? new Guid(user.Identity.Name) : Database.Identity ;
+				UpdatedBy = Database.Identity != Guid.Empty ? Database.Identity : Application.Current.UserProvider.UserId ;
 
 				return base.Save(tx) ;
 			}

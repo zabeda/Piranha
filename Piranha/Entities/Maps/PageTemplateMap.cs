@@ -30,8 +30,8 @@ namespace Piranha.Entities.Maps
 			Property(t => t.UpdatedById).HasColumnName("pagetemplate_updated_by") ;
 
 			HasMany(t => t.RegionTemplates).WithRequired().HasForeignKey(r => r.TemplateId) ;
-			HasRequired(t => t.CreatedBy) ;
-			HasRequired(t => t.UpdatedBy) ;
+			HasRequired(t => t.CreatedBy).WithRequiredDependent() ;
+			HasRequired(t => t.UpdatedBy).WithRequiredDependent() ;
 		}
 	}
 }

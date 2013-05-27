@@ -75,7 +75,7 @@ namespace Piranha.Models.Manager.UploadModels
 
 			var data = new byte[UploadedFile.ContentLength] ;
 			UploadedFile.InputStream.Read(data, 0, UploadedFile.ContentLength) ;
-			Extend.ExtensionManager.Current.MediaProvider.Put(Upload.Id, data, Extend.MediaType.Upload) ;
+			Application.Current.MediaProvider.Put(Upload.Id, data, IO.MediaType.Upload) ;
 		}
 
 		/// <summary>

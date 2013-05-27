@@ -381,7 +381,7 @@ namespace Piranha.Web
 			if (String.IsNullOrEmpty(apiKey)) {
 				var user = HttpContext.Current.User ;
 
-				if (user.Identity.IsAuthenticated && user.GetProfile().APIKey != Guid.Empty)
+				if (Application.Current.UserProvider.IsAuthenticated && user.GetProfile().APIKey != Guid.Empty)
 					return APIKey(user.GetProfile().APIKey) ;
 				return new HtmlString("") ;
 			}

@@ -41,15 +41,15 @@ namespace Piranha.Entities.Maps
 			Property(p => p.CreatedById).HasColumnName("page_created_by") ;
 			Property(p => p.UpdatedById).HasColumnName("page_updated_by") ;
 
-			HasRequired(p => p.SiteTree) ;
-			HasRequired(p => p.Template) ;
-			HasRequired(p => p.Permalink) ;
+			HasRequired(p => p.SiteTree).WithRequiredDependent() ;
+			HasRequired(p => p.Template).WithRequiredDependent() ;
+			HasRequired(p => p.Permalink).WithRequiredDependent() ;
 			HasMany(p => p.Regions).WithRequired(r => r.Page) ;
 			HasMany(p => p.Properties).WithRequired().HasForeignKey(pr => new { pr.ParentId, pr.IsDraft }) ;
 			HasMany(p => p.Extensions).WithRequired().HasForeignKey(e => new { e.ParentId, e.IsDraft }) ;
 			HasMany(p => p.Comments).WithRequired().HasForeignKey(c => new { c.ParentId, c.ParentIsDraft }) ;
-			HasRequired(p => p.CreatedBy) ;
-			HasRequired(p => p.UpdatedBy) ;
+			HasRequired(p => p.CreatedBy).WithRequiredDependent() ;
+			HasRequired(p => p.UpdatedBy).WithRequiredDependent() ;
 
 			Ignore(p => p.Attachments) ;
 			Ignore(p => p.DisabledGroups) ;

@@ -25,8 +25,8 @@ namespace Piranha.Entities.Maps
 			Property(p => p.UpdatedById).HasColumnName("sysaccess_updated_by") ;
 
 			HasRequired(p => p.Group) ;
-			HasOptional(p => p.CreatedBy) ;
-			HasOptional(p => p.UpdatedBy) ;
+			HasOptional(p => p.CreatedBy).WithOptionalDependent() ;
+			HasOptional(p => p.UpdatedBy).WithOptionalDependent() ;
 		}
 	}
 }
