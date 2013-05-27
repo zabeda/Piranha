@@ -28,12 +28,6 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the external id.
-		/// </summary>
-		[Column(Name="sysuser_external_id")]
-		public string ExternalId { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the API-key.
 		/// </summary>
 		[Column(Name="sysuser_apikey")]

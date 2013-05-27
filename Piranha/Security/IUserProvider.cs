@@ -22,7 +22,7 @@ namespace Piranha.Security
 		/// <summary>
 		/// Get the current user.
 		/// </summary>
-		MembershipUser User { get ; }
+		//MembershipUser User { get ; }
 
 		/// <summary>
 		/// Authenticates the user.
@@ -39,27 +39,27 @@ namespace Piranha.Security
 		/// <param name="password">The password</param>
 		/// <param name="email">The email address</param>
 		/// <returns>The provider user key for the new user</returns>
-		object Create(string username, string password, string email) ;
+		// object Create(string username, string password, string email) ;
 
 		/// <summary>
 		/// Deletes the user with the given Piranha CMS user id.
 		/// </summary>
 		/// <param name="id">The Piranha CMS user id</param>
 		/// <returns>If the user was deleted successfully</returns>
-		bool Delete(Guid id) ;
+		// bool Delete(Guid id) ;
 
 		/// <summary>
 		/// Deletes the user with the given membership provider key.
 		/// </summary>
 		/// <param name="id">The membership user id</param>
 		/// <returns>If the user was deleted successfully</returns>
-		bool Delete(object id) ;
+		// bool Delete(object id) ;
 
 		/// <summary>
 		/// Gets the user with the given Piranha CMS user id.
 		/// </summary>
 		/// <param name="id">The Piranha CMS user id</param>
 		/// <returns>The user</returns>
-		MembershipUser GetUser(Guid id) ;
+		// MembershipUser GetUser(Guid id) ;
 	}
 }

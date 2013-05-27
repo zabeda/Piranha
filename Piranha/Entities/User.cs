@@ -20,11 +20,6 @@ namespace Piranha.Entities
 		public Guid Id { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the external id of the user.
-		/// </summary>
-		public string ExternalId { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the id of the group to which the user belong.
 		/// </summary>
 		public Guid? GroupId { get ; set ; }

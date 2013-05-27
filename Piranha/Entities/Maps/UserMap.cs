@@ -15,7 +15,6 @@ namespace Piranha.Entities.Maps
 			ToTable("sysuser") ;
 
 			Property(u => u.Id).HasColumnName("sysuser_id") ;
-			Property(u => u.ExternalId).HasColumnName("sysuser_external_id").HasMaxLength(128) ;
 			Property(u => u.APIKey).HasColumnName("sysuser_apikey") ;
 			Property(u => u.Login).HasColumnName("sysuser_login").IsRequired().HasMaxLength(64) ;
 			Property(u => u.Password).HasColumnName("sysuser_password").HasMaxLength(64) ;
