@@ -27,9 +27,6 @@ namespace Piranha.Entities.Maps
 			HasRequired(u => u.UpdatedBy) ;
 
 			HasMany(u => u.Comments).WithRequired().HasForeignKey(c => c.ParentId) ;
-
-			Ignore(u => u.VirtualPath) ;
-			Ignore(u => u.PhysicalPath) ;
 		}
 	}
 }

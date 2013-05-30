@@ -33,20 +33,6 @@ namespace Piranha.Entities
 		/// Gets/sets the content type.
 		/// </summary>
 		public string Type { get ; set ; }
-
-		/// <summary>
-		/// Gets the virtual path to the file.
-		/// </summary>
-		public string VirtualPath {
-			get { return VirtualDir + Id.ToString() ; }
-		}
-
-		/// <summary>
-		/// Gets the physical path to the file.
-		/// </summary>
-		public string PhysicalPath {
-			get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
-		}
 		#endregion
 
 		#region Navigation properties
@@ -62,9 +48,7 @@ namespace Piranha.Entities
 		/// <param name="db">The db context</param>
 		public override void OnDelete(DataContext db) {
 			// Delete the main file
-			if (File.Exists(PhysicalPath))
-				File.Delete(PhysicalPath) ;
-
+			Application.Current.MediaProvider.Delete(Id, IO.MediaType.Upload) ;
 			DeleteCache() ;
 		}
 
