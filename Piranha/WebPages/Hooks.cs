@@ -117,6 +117,27 @@ namespace Piranha.WebPages
 			public static Delegates.ManagerModelLoadedHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
 
 			/// <summary>
+			/// Executed after the media list model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.ContentModels.ListModel> MediaListModelLoaded ;
+
+			/// <summary>
+			/// Executed after the media edit model is loaded but before the view is called.
+			/// </summary>
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.ContentModels.EditModel> MediaEditModelLoaded ;
+
+			/**
+			 * TODO
+			 * 
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.TemplateModels.PageListModel> PageTypeListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.TemplateModels.PageEditModel> PageTypeEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.TemplateModels.PostListModel> PostTypeListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.TemplateModels.PostEditModel> PostTypeEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Areas.Manager.Models.SiteTreeListModel> SiteListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Areas.Manager.Models.SiteTreeEditModel> SiteEditModelLoaded ;
+			 */
+
+			/// <summary>
 			/// Executed after the user list model is loaded but before the view is called.
 			/// </summary>
 			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserListModel> UserListModelLoaded ;
@@ -125,6 +146,17 @@ namespace Piranha.WebPages
 			/// Executed after the user edit model is loaded but before the view is called.
 			/// </summary>
 			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
+
+			/**
+			 * TODO
+			 * 
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.GroupListModel> GroupListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.GroupEditModel> GroupEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.AccessListModel> PermissionListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.AccessEditModel> PermissionEditModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.ParamListModel> ParamListModelLoaded ;
+			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.ParamEditModel> ParamEditModelLoaded ;
+			 */
 
 			/// <summary>
 			/// The different hooks available for the toolbar.

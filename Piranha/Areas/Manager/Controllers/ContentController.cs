@@ -16,6 +16,8 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_CONTENT")]
 		public ActionResult Index(string id = "") {
+			var m = ListModel.Get() ;
+
 			try {
 				if (!String.IsNullOrEmpty(id))
 					ViewBag.Expanded = new Guid(id) ;
@@ -23,6 +25,10 @@ namespace Piranha.Areas.Manager.Controllers
 			} catch {
 				ViewBag.Expanded = Guid.Empty ;
 			}
+
+			// Executes the media list loaded hook, if registered
+			if (WebPages.Hooks.Manager.MediaListModelLoaded != null)
+				WebPages.Hooks.Manager.MediaListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 			
             return View("Index", ListModel.Get());
         }
@@ -91,6 +97,10 @@ namespace Piranha.Areas.Manager.Controllers
 			else if (m.Content.IsFolder)
 				ViewBag.Title = Piranha.Resources.Content.EditTitleExistingFolder ;
 			else ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
+
+			// Executes the media edit loaded hook, if registered
+			if (WebPages.Hooks.Manager.MediaEditModelLoaded != null)
+				WebPages.Hooks.Manager.MediaEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View("Edit", m) ;
 		}
