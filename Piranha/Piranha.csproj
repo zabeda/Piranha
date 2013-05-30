@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessAttribute.cs" />
+    <Compile Include="Application.cs" />
     <Compile Include="Areas\Manager\Controllers\AccountController.cs" />
     <Compile Include="Areas\Manager\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Manager\Controllers\CommentController.cs" />
@@ -698,7 +699,6 @@
     <Compile Include="Web\APIKeyAuthorization.cs" />
     <Compile Include="Web\APIKeys.cs" />
     <Compile Include="Web\AppCommentController.cs" />
-    <Compile Include="Web\Application.cs" />
     <Compile Include="Web\ApplicationModule.cs" />
     <Compile Include="Web\AuthController.cs" />
     <Compile Include="Web\ClientCache.cs" />
