@@ -3,6 +3,11 @@
     <add key="webPages:Version" value="2.0.0"/>
   </appSettings>
   <system.web>
+    <compilation>
+      <assemblies>
+        <add assembly="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
+      </assemblies>
+    </compilation>
     <authentication mode="Forms">
       <forms name="PiranhaCMS" timeout="30"/>
     </authentication>
