@@ -25,6 +25,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "TemplateSit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA40878F-CA04-4707-B20A-684D26BAE621}"
 	ProjectSection(SolutionItems) = preProject
+		RazorGenerator.LICENSE.md = RazorGenerator.LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
