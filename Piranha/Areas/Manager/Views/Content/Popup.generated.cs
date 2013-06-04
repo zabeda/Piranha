@@ -173,8 +173,8 @@ WriteLiteral(" data-id=\"");
             #line hidden
 WriteLiteral("\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 864), Tuple.Create("\"", 933)
-, Tuple.Create(Tuple.Create("", 870), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/img/ico-folder-up-96.png")
+WriteAttribute("src", Tuple.Create(" src=\"", 864), Tuple.Create("\"", 927)
+, Tuple.Create(Tuple.Create("", 870), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/img/ico-folder-up-96.png")
 , 870), false)
 );
 
@@ -363,14 +363,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 2177), Tuple.Create("\"", 2193)
+WriteAttribute("value", Tuple.Create(" value=\"", 2171), Tuple.Create("\"", 2187)
             
             #line 45 "..\..\Areas\Manager\Views\Content\Popup.cshtml"
-, Tuple.Create(Tuple.Create("", 2185), Tuple.Create<System.Object, System.Int32>(f.Value
+, Tuple.Create(Tuple.Create("", 2179), Tuple.Create<System.Object, System.Int32>(f.Value
             
             #line default
             #line hidden
-, 2185), false)
+, 2179), false)
 );
 
 WriteLiteral(" ");

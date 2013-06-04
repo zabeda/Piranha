@@ -43,8 +43,8 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 106), Tuple.Create("\"", 168)
-, Tuple.Create(Tuple.Create("", 112), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.form.js")
+WriteAttribute("src", Tuple.Create(" src=\"", 106), Tuple.Create("\"", 162)
+, Tuple.Create(Tuple.Create("", 112), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.form.js")
 , 112), false)
 );
 
@@ -52,18 +52,18 @@ WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 215), Tuple.Create("\"", 287)
-, Tuple.Create(Tuple.Create("", 221), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/jquery.regiontemplate.js")
-, 221), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 209), Tuple.Create("\"", 275)
+, Tuple.Create(Tuple.Create("", 215), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/jquery.regiontemplate.js")
+, 215), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 334), Tuple.Create("\"", 394)
-, Tuple.Create(Tuple.Create("", 340), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/json2.js")
-, 340), false)
+WriteAttribute("src", Tuple.Create(" src=\"", 322), Tuple.Create("\"", 376)
+, Tuple.Create(Tuple.Create("", 328), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/json2.js")
+, 328), false)
 );
 
 WriteLiteral("></script>\r\n    <script");
@@ -134,14 +134,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 995), Tuple.Create("\"", 1046)
+WriteAttribute("href", Tuple.Create(" href=\"", 977), Tuple.Create("\"", 1028)
             
             #line 24 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1002), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Id })
+, Tuple.Create(Tuple.Create("", 984), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = Model.Id })
             
             #line default
             #line hidden
-, 1002), false)
+, 984), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -166,14 +166,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1146), Tuple.Create("\"", 1185)
+WriteAttribute("href", Tuple.Create(" href=\"", 1128), Tuple.Create("\"", 1167)
             
             #line 26 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1153), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "sitetree")
+, Tuple.Create(Tuple.Create("", 1135), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "sitetree")
             
             #line default
             #line hidden
-, 1153), false)
+, 1135), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -189,14 +189,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1266), Tuple.Create("\"", 1315)
+WriteAttribute("href", Tuple.Create(" href=\"", 1248), Tuple.Create("\"", 1297)
             
             #line 27 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 1273), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Id })
+, Tuple.Create(Tuple.Create("", 1255), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = Model.Id })
             
             #line default
             #line hidden
-, 1273), false)
+, 1255), false)
 );
 
 WriteLiteral(" class=\"refresh\"");

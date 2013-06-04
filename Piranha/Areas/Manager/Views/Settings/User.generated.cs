@@ -152,8 +152,8 @@ WriteLiteral("\r\n    <script");
 
 WriteLiteral(" type=\"text/javascript\"");
 
-WriteAttribute("src", Tuple.Create(" src=\"", 779), Tuple.Create("\"", 860)
-, Tuple.Create(Tuple.Create("", 785), Tuple.Create<System.Object, System.Int32>(Href("~/r.ashx/piranha/areas/manager/content/js/ext/jquery-ui-1.9.2.custom.min.js")
+WriteAttribute("src", Tuple.Create(" src=\"", 779), Tuple.Create("\"", 854)
+, Tuple.Create(Tuple.Create("", 785), Tuple.Create<System.Object, System.Int32>(Href("~/res.ashx/areas/manager/content/js/ext/jquery-ui-1.9.2.custom.min.js")
 , 785), false)
 );
 
@@ -653,14 +653,14 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                </li>\r\n            </ul>\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5050), Tuple.Create("\"", 5133)
+WriteAttribute("href", Tuple.Create(" href=\"", 5044), Tuple.Create("\"", 5127)
             
             #line 122 "..\..\Areas\Manager\Views\Settings\User.cshtml"
-, Tuple.Create(Tuple.Create("", 5057), Tuple.Create<System.Object, System.Int32>(Url.Action("generatepassword", "settings", new { @id = Model.Password.Id })
+, Tuple.Create(Tuple.Create("", 5051), Tuple.Create<System.Object, System.Int32>(Url.Action("generatepassword", "settings", new { @id = Model.Password.Id })
             
             #line default
             #line hidden
-, 5057), false)
+, 5051), false)
 );
 
 WriteLiteral(" class=\"btn orange hidden\"");
