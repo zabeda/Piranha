@@ -149,7 +149,7 @@
 @using (Html.BeginForm("insert", (string)ViewContext.RouteData.Values["Controller"])) {
     @Html.Hidden("TemplateId", Model.Templates.Count == 1 ? Model.Templates[0].Id : Guid.Empty)
     @Html.Hidden("ParentId")
-    @Html.Hidden("Seqno", Model.SiteMap.Count + 1)
+    @Html.Hidden("Seqno", Model.NewSeqno)
     @Html.Hidden("SiteTree", Model.ActiveSite)
     @Html.Hidden("OriginalId")
 

@@ -55,10 +55,13 @@ namespace Piranha.Models.Manager.PageModels
 		public Dictionary<Guid, Guid> SitePage { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the number of completion warnings for the sites.
+		/// Gets/sets the number of seo warnings for the sites.
 		/// </summary>
 		public Dictionary<Guid, int> SiteWarnings { get ; set ; }
 
+		/// <summary>
+		/// GEts/sets the number of total seo warnings.
+		/// </summary>
 		public Dictionary<Guid, int> TotalSiteWarnings { get ; set ; }
 
 		/// <summary>
@@ -66,7 +69,15 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		public Dictionary<Guid, int> PageWarnings { get ; set ; }
 
+		/// <summary>
+		/// Gets/sets whether this is the seo list or not.
+		/// </summary>
 		public bool IsSeoList { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the default new seqno for pages.
+		/// </summary>
+		public int NewSeqno { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -111,6 +122,7 @@ namespace Piranha.Models.Manager.PageModels
 			m.SiteMap = Sitemap.GetStructure(internalId, false) ;
 			m.Pages = Sitemap.GetStructure(internalId, false).Flatten() ;
 			m.ActiveSite = internalId.ToUpper() ;
+			m.NewSeqno = m.SiteMap.Count + 1 ;
 
 			using (var db = new DataContext()) {
 				m.ActiveSiteId = db.SiteTrees.Where(s => s.InternalId == internalId).Select(s => s.Id).Single() ;
@@ -139,6 +151,7 @@ namespace Piranha.Models.Manager.PageModels
 
 			using (var db = new DataContext()) {
 				m.ActiveSiteId = db.SiteTrees.Where(s => s.InternalId == internalId).Select(s => s.Id).Single() ;
+				m.NewSeqno = db.Pages.Where(p => p.ParentId == null).Count() + 1 ;
 			}
 
 			// Check completion warnings
