@@ -122,6 +122,16 @@ namespace Piranha
 		public static readonly Guid DefaultNamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
 
 		/// <summary>
+		/// Gets the id of the archive namespace.
+		/// </summary>
+		public static readonly Guid ArchiveNamespaceId = new Guid("C8342FB4-D38E-4EAF-BBC1-4EF3BDD7500C") ;
+
+		/// <summary>
+		/// Gets the id of the media namespace.
+		/// </summary>
+		public static readonly Guid MediaNamespaceId = new Guid("368249B1-7F9C-4974-B9E3-A55D068DD9B6") ;
+
+		/// <summary>
 		/// Gets the id of the default site tree.
 		/// </summary>
 		public static readonly Guid DefaultSiteTreeId = new Guid("c2f87b2b-f585-4696-8a2b-3c9df882701e") ;

@@ -47,6 +47,12 @@ namespace Piranha.Models
 		public Guid ParentId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		[Column(Name="content_permalink_id")]
+		public Guid PermalinkId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the filename.
 		/// </summary>
 		[Column(Name="content_filename")]
@@ -181,18 +187,18 @@ namespace Piranha.Models
 		public List<Content> ChildContent { get ; set ; }
 
 		/// <summary>
-		/// Gets the virtual path for the media file.
-		/// </summary>
-		//public override string VirtualPath { 
-		//	get { return base.VirtualPath + (IsDraft ? "-draft" : "") ; }
-		//}
-
-		/// <summary>
 		/// Gets the virtual path for the cached media file.
 		/// </summary>
 		public override string VirtualCachePath {
 			get { return base.VirtualCachePath + (IsDraft ? "-draft" : "") ; }
 		}
+		#endregion
+
+		#region Cache
+		/// <summary>
+		/// Maps permalink id to page id.
+		/// </summary>
+		private static Dictionary<Guid, Guid> PermalinkIdCache = new Dictionary<Guid,Guid>() ;
 		#endregion
 
 		/// <summary>
@@ -223,6 +229,23 @@ namespace Piranha.Models
 				return Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
 			}
 			return null ;
+		}
+
+		/// <summary>
+		/// Gets the content specified by the given permalink.
+		/// </summary>
+		/// <param name="permalinkid">The permalink id</param>
+		/// <param name="draft">Whether to get the current draft or not</param>
+		/// <returns>The content</returns>
+		public static Content GetByPermalinkId(Guid permalinkid, bool draft = false) {
+			if (!PermalinkIdCache.ContainsKey(permalinkid)) {
+				var c = Content.GetSingle("content_permalink_id = @0 AND content_draft = 1", permalinkid) ;
+
+				if (c != null) {
+					PermalinkIdCache.Add(c.PermalinkId, c.Id) ;
+				} else return null ;
+			}
+			return GetSingle(PermalinkIdCache[permalinkid], draft) ;
 		}
 
 		/// <summary>

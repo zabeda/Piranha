@@ -77,47 +77,6 @@ CREATE TABLE syslog (
 	CONSTRAINT fk_syslog_updated_by FOREIGN KEY (syslog_updated_by) REFERENCES sysuser (sysuser_id)
 );
 
-CREATE TABLE pagetemplate (
-	pagetemplate_id CHAR(38) NOT NULL,
-	pagetemplate_name VARCHAR(64) NOT NULL,
-	pagetemplate_description VARCHAR(255) NULL,
-	pagetemplate_preview TEXT NULL,
-	pagetemplate_page_regions TEXT NULL,
-	pagetemplate_properties TEXT NULL,
-	pagetemplate_controller VARCHAR(128) NULL,
-	pagetemplate_controller_show BIT NOT NULL default false,
-	pagetemplate_redirect VARCHAR(128) NULL,
-	pagetemplate_redirect_show BIT NOT NULL default false,
-	pagetemplate_site_template INT NOT NULL default '0',
-	pagetemplate_created DATETIME NOT NULL,
-	pagetemplate_updated DATETIME NOT NULL,
-	pagetemplate_created_by CHAR(38) NOT NULL,
-	pagetemplate_updated_by CHAR(38) NOT NULL,
-	CONSTRAINT pk_pagetemplate_id PRIMARY KEY (pagetemplate_id),
-	CONSTRAINT fk_pagetemplate_created_by FOREIGN KEY (pagetemplate_created_by) REFERENCES sysuser (sysuser_id),
-	CONSTRAINT fk_pagetemplate_updated_by FOREIGN KEY (pagetemplate_updated_by) REFERENCES sysuser (sysuser_id)
-);
-
-CREATE TABLE posttemplate (
-	posttemplate_id CHAR(38) NOT NULL,
-	posttemplate_name VARCHAR(64) NOT NULL,
-	posttemplate_description VARCHAR(255) NULL,
-	posttemplate_preview TEXT NULL,
-	posttemplate_properties TEXT NULL,
-	posttemplate_controller VARCHAR(128) NULL,
-	posttemplate_controller_show BIT NOT NULL default false,
-	posttemplate_archive_controller VARCHAR(128) NULL,	
-	posttemplate_archive_controller_show BIT NOT NULL default false,
-	posttemplate_rss BIT NOT NULL default true,
-	posttemplate_created DATETIME NOT NULL,
-	posttemplate_updated DATETIME NOT NULL,
-	posttemplate_created_by CHAR(38) NOT NULL,
-	posttemplate_updated_by CHAR(38) NOT NULL,
-	CONSTRAINT pk_posttemplate_id PRIMARY KEY (posttemplate_id),
-	CONSTRAINT fk_posttemplate_created_by FOREIGN KEY (posttemplate_created_by) REFERENCES sysuser (sysuser_id),
-	CONSTRAINT fk_posttemplate_updated_by FOREIGN KEY (posttemplate_updated_by) REFERENCES sysuser (sysuser_id)
-);
-
 CREATE TABLE namespace (
 	namespace_id CHAR(38) NOT NULL,
 	namespace_internal_id VARCHAR(32) NOT NULL,
@@ -164,6 +123,48 @@ CREATE TABLE permalink (
 	CONSTRAINT fk_permalink_namespace_id FOREIGN KEY (permalink_namespace_id) REFERENCES namespace (namespace_id)
 );
 CREATE UNIQUE INDEX index_permalink_name ON permalink (permalink_namespace_id, permalink_name);
+
+CREATE TABLE pagetemplate (
+	pagetemplate_id CHAR(38) NOT NULL,
+	pagetemplate_name VARCHAR(64) NOT NULL,
+	pagetemplate_description VARCHAR(255) NULL,
+	pagetemplate_preview TEXT NULL,
+	pagetemplate_page_regions TEXT NULL,
+	pagetemplate_properties TEXT NULL,
+	pagetemplate_controller VARCHAR(128) NULL,
+	pagetemplate_controller_show BIT NOT NULL default false,
+	pagetemplate_redirect VARCHAR(128) NULL,
+	pagetemplate_redirect_show BIT NOT NULL default false,
+	pagetemplate_site_template INT NOT NULL default '0',
+	pagetemplate_created DATETIME NOT NULL,
+	pagetemplate_updated DATETIME NOT NULL,
+	pagetemplate_created_by CHAR(38) NOT NULL,
+	pagetemplate_updated_by CHAR(38) NOT NULL,
+	CONSTRAINT pk_pagetemplate_id PRIMARY KEY (pagetemplate_id),
+	CONSTRAINT fk_pagetemplate_created_by FOREIGN KEY (pagetemplate_created_by) REFERENCES sysuser (sysuser_id),
+	CONSTRAINT fk_pagetemplate_updated_by FOREIGN KEY (pagetemplate_updated_by) REFERENCES sysuser (sysuser_id)
+);
+
+CREATE TABLE posttemplate (
+	posttemplate_id CHAR(38) NOT NULL,
+	posttemplate_permalink_id CHAR(38) NULL,
+	posttemplate_name VARCHAR(64) NOT NULL,
+	posttemplate_description VARCHAR(255) NULL,
+	posttemplate_preview TEXT NULL,
+	posttemplate_properties TEXT NULL,
+	posttemplate_controller VARCHAR(128) NULL,
+	posttemplate_controller_show BIT NOT NULL default false,
+	posttemplate_archive_controller VARCHAR(128) NULL,	
+	posttemplate_archive_controller_show BIT NOT NULL default false,
+	posttemplate_rss BIT NOT NULL default true,
+	posttemplate_created DATETIME NOT NULL,
+	posttemplate_updated DATETIME NOT NULL,
+	posttemplate_created_by CHAR(38) NOT NULL,
+	posttemplate_updated_by CHAR(38) NOT NULL,
+	CONSTRAINT pk_posttemplate_id PRIMARY KEY (posttemplate_id),
+	CONSTRAINT fk_posttemplate_created_by FOREIGN KEY (posttemplate_created_by) REFERENCES sysuser (sysuser_id),
+	CONSTRAINT fk_posttemplate_updated_by FOREIGN KEY (posttemplate_updated_by) REFERENCES sysuser (sysuser_id)
+);
 
 CREATE TABLE category (
 	category_id CHAR(38) NOT NULL,
@@ -307,6 +308,7 @@ CREATE TABLE content (
 	content_id CHAR(38) NOT NULL,
 	content_draft INT NOT NULL default '1',
 	content_parent_id CHAR(38) NULL,
+	content_permalink_id  CHAR(38) NULL,
 	content_filename VARCHAR(128) NULL,
 	content_url VARCHAR(255) NULL,
 	content_synced DATETIME NULL,

@@ -41,6 +41,7 @@
 }
 @{ Html.BeginForm("edit", "content", FormMethod.Post, new { enctype = "multipart/form-data" }) ; }
 @Html.HiddenFor(m => m.Content.Id)
+@Html.HiddenFor(m => m.Content.PermalinkId)
 @Html.HiddenFor(m => m.Content.IsDraft)
 @Html.HiddenFor(m => m.Content.IsNew)
 @Html.HiddenFor(m => m.Content.IsImage)
@@ -55,6 +56,11 @@
 @Html.HiddenFor(m => m.Content.Height)
 @Html.HiddenFor(m => m.Content.Size)
 @Html.HiddenFor(m => m.Content.LastSynced)
+@Html.HiddenFor(m => m.Permalink.IsNew)
+@Html.HiddenFor(m => m.Permalink.Id)
+@Html.HiddenFor(m => m.Permalink.Type)
+@Html.HiddenFor(m => m.Permalink.Created)
+@Html.HiddenFor(m => m.Permalink.CreatedBy)
 @Html.Hidden("returl", (string)ViewBag.ReturnUrl)
 @Html.Hidden("draft", true)
 <div class="grid_9">
@@ -95,6 +101,17 @@
                     <a class="locked absolute-url"></a>
                 </li>
                 }
+                <li class="protected">
+                    @Html.LabelFor(m => m.Permalink)
+                	@if (!Model.Permalink.IsNew) {
+                    <p>@Piranha.WebPages.WebPiranha.GetSiteUrl()/@(Model.HandlerPrefix)@Url.GetPermalink(Model.Permalink.Name).ToLower()</p>
+                    } else {
+                    <p><i>@Piranha.Resources.Page.PermalinkDescription</i></p>
+                    }
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Permalink.Name)</div>
+                    <a class="locked"></a>
+                </li>
                 <li>
                     @Html.LabelFor(m => m.Content.Name)
                     <div class="input">

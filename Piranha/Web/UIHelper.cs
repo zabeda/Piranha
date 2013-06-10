@@ -192,9 +192,28 @@ namespace Piranha.Web
 			Content cnt = Models.Content.GetSingle(id) ;
 			var draft = (CurrentPage != null && CurrentPage.IsDraft) || (CurrentPost != null && CurrentPost.IsDraft) ;
 
-			if (cnt != null)
+			if (cnt != null) {
+				var perm = cnt.PermalinkId != Guid.Empty ? Models.Permalink.GetSingle(cnt.PermalinkId) : null ;
+
+				if (perm != null) {
+					// Generate content url from permalink
+					var segments = perm.Name.Split(new char[] { '.' }) ;
+					var name = segments[0] ;
+					var suffix = segments.Length > 1 ? segments[1] : "" ;
+
+					if (width > 0)
+						name += "_" + width.ToString() ;
+					if (height > 0)
+						name += "_" + height.ToString() ;
+					name += "." + suffix ;
+
+				return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENTHANDLER") :
+					Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/") + name) ;
+				}
+				// Generate content url from id
 				return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") : Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) +
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
+			}
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
 

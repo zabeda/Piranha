@@ -263,6 +263,11 @@ namespace Piranha.Models.Manager.ContentModels
 		public Models.Content Content { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the permalink.
+		/// </summary>
+		public Models.Permalink Permalink { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the categories associated with the post.
 		/// </summary>
 		public List<Guid> ContentCategories { get ; set ; }
@@ -297,6 +302,11 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Gets/sets the file object if this media is updated server side.
 		/// </summary>
 		public FileInfo ServerFile { get ; set ; }
+
+		/// <summary>
+		/// Gets the current handler prefix.
+		/// </summary>
+		public string HandlerPrefix { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -309,7 +319,8 @@ namespace Piranha.Models.Manager.ContentModels
 		/// </summary>
 		/// <param name="isfolder">Whether this is a folder or not.</param>
 		public EditModel(bool isfolder, Guid parentid) {
-			Content = new Piranha.Models.Content() { IsFolder = isfolder, ParentId = parentid } ;
+			Permalink = new Models.Permalink() { Id = Guid.NewGuid(), NamespaceId = Config.MediaNamespaceId, Type = Models.Permalink.PermalinkType.MEDIA } ;
+			Content = new Piranha.Models.Content() { IsFolder = isfolder, ParentId = parentid, PermalinkId = Permalink.Id } ;
 			ContentCategories = new List<Guid>() ;
 			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
@@ -318,6 +329,7 @@ namespace Piranha.Models.Manager.ContentModels
 			Extensions = Content.GetExtensions(true) ;
 			Folders = SortFolders(Content.GetFolderStructure(false)) ;
 			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
+			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "CONTENTHANDLER").SingleOrDefault().UrlPrefix;
 		}
 
 		/// <summary>
@@ -328,6 +340,9 @@ namespace Piranha.Models.Manager.ContentModels
 		public static EditModel GetById(Guid id) {
 			EditModel em = new EditModel() ;
 			em.Content = Piranha.Models.Content.GetSingle(id, true) ;
+			if (em.Content.PermalinkId != Guid.Empty)
+				em.Permalink = Models.Permalink.GetSingle(em.Content.PermalinkId) ;
+			else em.Content.PermalinkId = em.Permalink.Id ;
 			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
 			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
@@ -389,6 +404,11 @@ namespace Piranha.Models.Manager.ContentModels
 			}
 
 			var saved = false ;
+			// Permalink
+			if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
+				Permalink.Name = Permalink.Generate(!Content.IsFolder ? Content.Filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
+			Permalink.Save() ;
+
 			if (draft)
 				saved = Content.Save(media) ;
 			else saved = Content.SaveAndPublish(media) ;

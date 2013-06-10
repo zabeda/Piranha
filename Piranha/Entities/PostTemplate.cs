@@ -57,6 +57,11 @@ namespace Piranha.Entities
 		/// Gets/sets whether to include post in rss feeds.
 		/// </summary>
 		public bool AllowRss { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		public Guid? PermalinkId { get ; set ; }
 		#endregion
 
 		#region Internal properties
@@ -64,6 +69,13 @@ namespace Piranha.Entities
 		/// Gets/sets the persisted json data for the properties.
 		/// </summary>
 		internal string PropertiesJson { get ; set ; }
+		#endregion
+
+		#region Navigation properties
+		/// <summary>
+		/// Gets/sets the associated permalink.
+		/// </summary>
+		public Permalink Permalink { get ; set ; }
 		#endregion
 
 		/// <summary>

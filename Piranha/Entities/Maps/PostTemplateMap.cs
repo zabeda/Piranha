@@ -15,6 +15,7 @@ namespace Piranha.Entities.Maps
 			ToTable("posttemplate") ;
 
 			Property(t => t.Id).HasColumnName("posttemplate_id") ;
+			Property(t => t.PermalinkId).HasColumnName("posttemplate_permalink_id") ;
 			Property(t => t.Name).HasColumnName("posttemplate_name").IsRequired().HasMaxLength(64) ;
 			Property(t => t.Description).HasColumnName("posttemplate_description").HasMaxLength(255) ;
 			Property(t => t.Preview).HasColumnName("posttemplate_preview") ;

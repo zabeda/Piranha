@@ -23,6 +23,11 @@ namespace Piranha.Entities
 		public Guid? ParentId { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		public Guid? PermalinkId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the filename.
 		/// </summary>
 		public string Filename { get ; set ; }
@@ -96,6 +101,11 @@ namespace Piranha.Entities
 		#endregion
 
 		#region Navigation properties
+		/// <summary>
+		/// Gets/sets the permalink.
+		/// </summary>
+		public Permalink Permalink { get ; set ; }
+
 		/// <summary>
 		/// Gets/sets the currently available extensions.
 		/// </summary>

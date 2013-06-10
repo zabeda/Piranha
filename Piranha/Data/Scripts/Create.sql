@@ -77,50 +77,6 @@ CREATE TABLE [syslog] (
 	CONSTRAINT fk_syslog_updated_by FOREIGN KEY ([syslog_updated_by]) REFERENCES [sysuser] ([sysuser_id])
 );
 
-CREATE TABLE [pagetemplate] (
-	[pagetemplate_id] UNIQUEIDENTIFIER NOT NULL,
-	[pagetemplate_name] NVARCHAR(64) NOT NULL,
-	[pagetemplate_description] NVARCHAR(255) NULL,
-	[pagetemplate_preview] NTEXT NULL,
-	[pagetemplate_page_regions] NTEXT NULL,
-	[pagetemplate_properties] NTEXT NULL,
-	[pagetemplate_controller] NVARCHAR(128) NULL,
-	[pagetemplate_controller_show] BIT NOT NULL default(0),
-	[pagetemplate_view] NVARCHAR(128) NULL,
-	[pagetemplate_view_show] BIT NOT NULL default(0),
-	[pagetemplate_redirect] NVARCHAR(128) NULL,
-	[pagetemplate_redirect_show] BIT NOT NULL default(0),
-	[pagetemplate_site_template] BIT NOT NULL default(0),
-	[pagetemplate_created] DATETIME NOT NULL,
-	[pagetemplate_updated] DATETIME NOT NULL,
-	[pagetemplate_created_by] UNIQUEIDENTIFIER NOT NULL,
-	[pagetemplate_updated_by] UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT pk_pagetemplate_id PRIMARY KEY ([pagetemplate_id]),
-	CONSTRAINT fk_pagetemplate_created_by FOREIGN KEY ([pagetemplate_created_by]) REFERENCES [sysuser] ([sysuser_id]),
-	CONSTRAINT fk_pagetemplate_updated_by FOREIGN KEY ([pagetemplate_updated_by]) REFERENCES [sysuser] ([sysuser_id])
-);
-
-CREATE TABLE [posttemplate] (
-	[posttemplate_id] UNIQUEIDENTIFIER NOT NULL,
-	[posttemplate_name] NVARCHAR(64) NOT NULL,
-	[posttemplate_description] NVARCHAR(255) NULL,
-	[posttemplate_preview] NTEXT NULL,
-	[posttemplate_properties] NTEXT NULL,
-	[posttemplate_controller] NVARCHAR(128) NULL,
-	[posttemplate_controller_show] BIT NOT NULL default(0),
-	[posttemplate_view] NVARCHAR(128) NULL,
-	[posttemplate_view_show] BIT NOT NULL default(0),
-	[posttemplate_archive_controller] NVARCHAR(128) NULL,	
-	[posttemplate_archive_controller_show] BIT NOT NULL default(0),
-	[posttemplate_rss] BIT NOT NULL DEFAULT(1),
-	[posttemplate_created] DATETIME NOT NULL,
-	[posttemplate_updated] DATETIME NOT NULL,
-	[posttemplate_created_by] UNIQUEIDENTIFIER NOT NULL,
-	[posttemplate_updated_by] UNIQUEIDENTIFIER NOT NULL,
-	CONSTRAINT pk_posttemplate_id PRIMARY KEY ([posttemplate_id]),
-	CONSTRAINT fk_posttemplate_created_by FOREIGN KEY ([posttemplate_created_by]) REFERENCES [sysuser] ([sysuser_id]),
-	CONSTRAINT fk_posttemplate_updated_by FOREIGN KEY ([posttemplate_updated_by]) REFERENCES [sysuser] ([sysuser_id])
-);
 
 CREATE TABLE [namespace] (
 	[namespace_id] UNIQUEIDENTIFIER NOT NULL,
@@ -168,6 +124,53 @@ CREATE TABLE [permalink] (
 	CONSTRAINT fk_permalink_namespace_id FOREIGN KEY ([permalink_namespace_id]) REFERENCES [namespace] ([namespace_id])
 );
 CREATE UNIQUE INDEX index_permalink_name ON [permalink] ([permalink_namespace_id], [permalink_name]);
+
+CREATE TABLE [pagetemplate] (
+	[pagetemplate_id] UNIQUEIDENTIFIER NOT NULL,
+	[pagetemplate_name] NVARCHAR(64) NOT NULL,
+	[pagetemplate_description] NVARCHAR(255) NULL,
+	[pagetemplate_preview] NTEXT NULL,
+	[pagetemplate_page_regions] NTEXT NULL,
+	[pagetemplate_properties] NTEXT NULL,
+	[pagetemplate_controller] NVARCHAR(128) NULL,
+	[pagetemplate_controller_show] BIT NOT NULL default(0),
+	[pagetemplate_view] NVARCHAR(128) NULL,
+	[pagetemplate_view_show] BIT NOT NULL default(0),
+	[pagetemplate_redirect] NVARCHAR(128) NULL,
+	[pagetemplate_redirect_show] BIT NOT NULL default(0),
+	[pagetemplate_site_template] BIT NOT NULL default(0),
+	[pagetemplate_created] DATETIME NOT NULL,
+	[pagetemplate_updated] DATETIME NOT NULL,
+	[pagetemplate_created_by] UNIQUEIDENTIFIER NOT NULL,
+	[pagetemplate_updated_by] UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT pk_pagetemplate_id PRIMARY KEY ([pagetemplate_id]),
+	CONSTRAINT fk_pagetemplate_created_by FOREIGN KEY ([pagetemplate_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_pagetemplate_updated_by FOREIGN KEY ([pagetemplate_updated_by]) REFERENCES [sysuser] ([sysuser_id])
+);
+
+CREATE TABLE [posttemplate] (
+	[posttemplate_id] UNIQUEIDENTIFIER NOT NULL,
+	[posttemplate_permalink_id] UNIQUEIDENTIFIER NULL,
+	[posttemplate_name] NVARCHAR(64) NOT NULL,
+	[posttemplate_description] NVARCHAR(255) NULL,
+	[posttemplate_preview] NTEXT NULL,
+	[posttemplate_properties] NTEXT NULL,
+	[posttemplate_controller] NVARCHAR(128) NULL,
+	[posttemplate_controller_show] BIT NOT NULL default(0),
+	[posttemplate_view] NVARCHAR(128) NULL,
+	[posttemplate_view_show] BIT NOT NULL default(0),
+	[posttemplate_archive_controller] NVARCHAR(128) NULL,	
+	[posttemplate_archive_controller_show] BIT NOT NULL default(0),
+	[posttemplate_rss] BIT NOT NULL DEFAULT(1),
+	[posttemplate_created] DATETIME NOT NULL,
+	[posttemplate_updated] DATETIME NOT NULL,
+	[posttemplate_created_by] UNIQUEIDENTIFIER NOT NULL,
+	[posttemplate_updated_by] UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT pk_posttemplate_id PRIMARY KEY ([posttemplate_id]),
+	CONSTRAINT fk_posttemplate_permalink_id FOREIGN KEY ([posttemplate_permalink_id]) REFERENCES [permalink] ([permalink_id]),
+	CONSTRAINT fk_posttemplate_created_by FOREIGN KEY ([posttemplate_created_by]) REFERENCES [sysuser] ([sysuser_id]),
+	CONSTRAINT fk_posttemplate_updated_by FOREIGN KEY ([posttemplate_updated_by]) REFERENCES [sysuser] ([sysuser_id])
+);
 
 CREATE TABLE [category] (
 	[category_id] UNIQUEIDENTIFIER NOT NULL,
@@ -313,6 +316,7 @@ CREATE TABLE [content] (
 	[content_id] UNIQUEIDENTIFIER NOT NULL,
 	[content_draft] BIT NOT NULL default(1),
 	[content_parent_id] UNIQUEIDENTIFIER NULL,
+	[content_permalink_id] UNIQUEIDENTIFIER NULL,
 	[content_filename] NVARCHAR(128) NULL,
 	[content_url] NVARCHAR(255) NULL,
 	[content_synced] DATETIME NULL,
@@ -332,6 +336,7 @@ CREATE TABLE [content] (
 	[content_created_by] UNIQUEIDENTIFIER NOT NULL,
 	[content_updated_by] UNIQUEIDENTIFIER NOT NULL,
 	CONSTRAINT pk_content_id PRIMARY KEY ([content_id],[content_draft]),
+	CONSTRAINT fk_content_permalink_id FOREIGN KEY ([content_permalink_id]) REFERENCES [permalink] ([permalink_id]),
 	CONSTRAINT fk_content_created_by FOREIGN KEY ([content_created_by]) REFERENCES [sysuser] ([sysuser_id]),
 	CONSTRAINT fk_content_updated_by FOREIGN KEY ([content_updated_by]) REFERENCES [sysuser] ([sysuser_id])
 );

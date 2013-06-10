@@ -28,11 +28,17 @@
 @{ Html.BeginForm("post", "template") ; }
 <div>
     @Html.HiddenFor(m => m.Template.Id)
+    @Html.HiddenFor(m => m.Template.PermalinkId)
     @Html.HiddenFor(m => m.Template.IsNew)
     @Html.HiddenFor(m => m.Template.Created)
     @Html.HiddenFor(m => m.Template.Updated)
     @Html.HiddenFor(m => m.Template.CreatedBy)
     @Html.HiddenFor(m => m.Template.UpdatedBy)
+    @Html.HiddenFor(m => m.Permalink.IsNew)
+    @Html.HiddenFor(m => m.Permalink.Id)
+    @Html.HiddenFor(m => m.Permalink.Type)
+    @Html.HiddenFor(m => m.Permalink.Created)
+    @Html.HiddenFor(m => m.Permalink.CreatedBy)
     @if (!Piranha.Application.Current.IsMvc) {
     @Html.HiddenFor(m => m.Template.View)
     @Html.HiddenFor(m => m.Template.ShowView)
@@ -48,6 +54,17 @@
                     <div class="input">
                         @Html.TextBoxFor(m => m.Template.Name)</div>
                     @Html.ValidationMessageFor(m => m.Template.Name)
+                </li>
+                <li class="protected">
+                    @Html.LabelFor(m => m.Permalink)
+                	@if (!Model.Permalink.IsNew) {
+                    <p>@Piranha.WebPages.WebPiranha.GetSiteUrl()/@(Model.HandlerPrefix)@Url.GetPermalink(Model.Permalink.Name).ToLower()</p>
+                    } else {
+                    <p><i>@Piranha.Resources.Page.PermalinkDescription</i></p>
+                    }
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Permalink.Name)</div>
+                    <a class="locked"></a>
                 </li>
                 <li>
                     @Html.LabelFor(m => m.Template.Description)

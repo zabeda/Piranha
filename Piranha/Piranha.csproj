@@ -876,6 +876,8 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.link.dialog.js" />
     <EmbeddedResource Include="Data\Scripts\Updates\30.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\30.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\31.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\31.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

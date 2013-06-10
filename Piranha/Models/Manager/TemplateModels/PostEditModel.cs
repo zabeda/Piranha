@@ -40,19 +40,38 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// Gets/sets the post template.
 		/// </summary>
 		public PostTemplate Template { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the permalink.
+		/// </summary>
+		public Permalink Permalink { get ; set ; }
+
+		/// <summary>
+		/// Gets the archive handler prefix.
+		/// </summary>
+		public string HandlerPrefix { get ; private set ; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		public PostEditModel() {
+			Permalink = new Permalink() {
+				Id = Guid.NewGuid(),
+				Type = Permalink.PermalinkType.ARCHIVE,
+				NamespaceId = Config.ArchiveNamespaceId
+			} ;
 			Template = new PostTemplate() {
+				PermalinkId = Permalink.Id,
 				Preview = new HtmlString(
-					"<table class=\"template\">" +
-					"<tr><td></td></tr>" +
+					"<table class=\"template\">\n" +
+					"  <tr>\n" +
+					"    <td></td>\n" +
+					"  </tr>\n" +
 					"</table>"
 					)
 			} ;
+			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "ARCHIVE").SingleOrDefault().UrlPrefix ;
 		}
 
 		/// <summary>
@@ -65,6 +84,9 @@ namespace Piranha.Models.Manager.TemplateModels
 			m.Template = PostTemplate.GetSingle(id) ;
 			if (m.Template.Properties == null)
 				m.Template.Properties = new List<string>() ;
+			if (m.Template.PermalinkId != Guid.Empty)
+				m.Permalink = Permalink.GetSingle(m.Template.PermalinkId) ;
+			else m.Template.PermalinkId = m.Permalink.Id ;
 
 			return m ;
 		}
@@ -75,7 +97,17 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <returns>Whether the operation succeeded or not</returns>
 		public bool SaveAll() {
 			try {
-				return Template.Save() ;
+				using (var tx = Database.OpenTransaction()) {
+					// Permalink
+					if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
+						Permalink.Name = Permalink.Generate(Template.Name) ;
+					Permalink.Save(tx) ;
+					Template.Save(tx) ;
+
+					tx.Commit() ;
+
+					return true;
+				}
 			} catch { return false ; }
 		}
 

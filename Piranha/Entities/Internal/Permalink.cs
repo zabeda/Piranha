@@ -42,7 +42,7 @@ namespace Piranha.Models
 
 		#region Inner classes
 		public enum PermalinkType {
-			PAGE, POST, CATEGORY, SITE
+			PAGE, POST, CATEGORY, SITE, ARCHIVE, MEDIA
 		}
 		#endregion
 
@@ -84,7 +84,7 @@ namespace Piranha.Models
 		/// <param name="str">The permalink name</param>
 		/// <returns>The validated name</returns>
 		protected string ValidatePermalink(string str) {
-			return Generate(str) ;
+			return Generate(str, Type) ;
 		}
 		#endregion
 
@@ -156,8 +156,20 @@ namespace Piranha.Models
 		/// Converts the given string to a web safe permalink.
 		/// </summary>
 		/// <param name="str">The string</param>
+		/// <param name="type">Optional permalink type</param>
 		/// <returns>A permalink</returns>
-		public static string Generate(string str) {
+		public static string Generate(string str, PermalinkType type = PermalinkType.PAGE) {
+			var suffix = "" ;
+
+			if (type == PermalinkType.MEDIA) {
+				var segments = str.Split(new char[] { '.' }) ;
+				if (segments.Length > 1) {
+					suffix = segments[segments.Length - 1] ;
+
+					str = segments.Subset(0, segments.Length - 1).Implode(".") ;
+				}
+			}
+
 			var perm = Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o"),
 				@"[^a-z0-9-/]", "").Replace("--", "-") ;
 
@@ -166,7 +178,7 @@ namespace Piranha.Models
 			if (perm.StartsWith("-"))
 				perm = perm.Substring(Math.Min(perm.IndexOf("-") + 1, perm.Length)) ;
 
-			return perm ;
+			return perm + (!String.IsNullOrEmpty(suffix) ? "." + suffix : "") ;
 		}
 
 		/// <summary>

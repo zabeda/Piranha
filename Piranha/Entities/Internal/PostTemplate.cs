@@ -26,6 +26,12 @@ namespace Piranha.Models
 		public override Guid Id { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the permalink id.
+		/// </summary>
+		[Column(Name="posttemplate_permalink_id")]
+		public Guid PermalinkId { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the name.
 		/// </summary>
 		[Column(Name="posttemplate_name")]
