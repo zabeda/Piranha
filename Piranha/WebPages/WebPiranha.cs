@@ -291,10 +291,10 @@ namespace Piranha.WebPages
 				// If no handler was found and we are using prefixless permalinks, 
 				// route traffic to the permalink handler.
 				if (!handled && PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
-					//if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null) {
+					if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[0]) != null) {
 						var handler = new PermalinkHandler() ;
 						handler.HandleRequest(context, args) ;
-					//}
+					}
 				}
 			}
 		}
