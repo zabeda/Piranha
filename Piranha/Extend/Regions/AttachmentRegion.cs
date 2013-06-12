@@ -67,7 +67,7 @@ namespace Piranha.Extend.Regions
 			var verified = new List<Attachment>() ;
 
 			foreach (var item in Items) {
-				var media = Models.Content.GetSingle(item.Id) ;
+				var media = Models.Content.GetSingle(item.Id, true) ;
 
 				if (media != null) {
 					item.Name = media.DisplayName ;

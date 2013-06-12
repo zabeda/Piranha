@@ -405,8 +405,10 @@ namespace Piranha.Models.Manager.ContentModels
 
 			var saved = false ;
 			// Permalink
+			var filename = !String.IsNullOrEmpty(Content.Filename) ? Content.Filename : (!String.IsNullOrEmpty(media.Filename) ? media.Filename : "") ;
+
 			if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
-				Permalink.Name = Permalink.Generate(!Content.IsFolder ? Content.Filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
+				Permalink.Name = Permalink.Generate(!Content.IsFolder ? filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
 			Permalink.Save() ;
 
 			if (draft)
