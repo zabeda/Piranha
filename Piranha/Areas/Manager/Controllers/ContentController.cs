@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Piranha.Models;
 using Piranha.Models.Manager.ContentModels;
 
 namespace Piranha.Areas.Manager.Controllers
@@ -112,42 +113,52 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpPost(), ValidateInput(false)]
 		[Access(Function="ADMIN_CONTENT")]
 		public ActionResult Edit(bool draft, EditModel m) {
-			if (m.SaveAll(draft)) {
-				ViewBag.Folder = m.Content.IsFolder ;
-				if (m.Content.IsImage) {
-					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
-					if (draft) {
-						SuccessMessage(Piranha.Resources.Content.MessageImageSaved, true) ;
+			try {
+				if (m.SaveAll(draft)) {
+					ViewBag.Folder = m.Content.IsFolder ;
+					if (m.Content.IsImage) {
+						ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
+						if (draft) {
+							SuccessMessage(Piranha.Resources.Content.MessageImageSaved, true) ;
+						} else {
+							if (m.Content.Published == m.Content.LastPublished)
+								SuccessMessage(Piranha.Resources.Content.MessageImagePublished, true) ;
+							else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+						}
+					} else if (m.Content.IsFolder) {
+						ViewBag.Title = Piranha.Resources.Content.EditTitleExistingFolder ;
+						if (draft) {
+							SuccessMessage(Piranha.Resources.Content.MessageFolderSaved, true) ;
+						} else { 
+							if (m.Content.Published == m.Content.LastPublished)
+								SuccessMessage(Piranha.Resources.Content.MessageFolderPublished, true) ;
+							else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+						}
 					} else {
-						if (m.Content.Published == m.Content.LastPublished)
-							SuccessMessage(Piranha.Resources.Content.MessageImagePublished, true) ;
-						else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+						ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
+						if (draft) {
+							SuccessMessage(Piranha.Resources.Content.MessageDocumentSaved, true) ;
+						} else {
+							if (m.Content.Published == m.Content.LastPublished)
+								SuccessMessage(Piranha.Resources.Content.MessageDocumentPublished, true) ;
+							else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
+						}
 					}
-				} else if (m.Content.IsFolder) {
-					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingFolder ;
-					if (draft) {
-						SuccessMessage(Piranha.Resources.Content.MessageFolderSaved, true) ;
-					} else { 
-						if (m.Content.Published == m.Content.LastPublished)
-							SuccessMessage(Piranha.Resources.Content.MessageFolderPublished, true) ;
-						else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
-					}
+					return RedirectToAction("edit", new { id = m.Content.Id, returl = ViewBag.ReturnUrl }) ;
 				} else {
-					ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
-					if (draft) {
-						SuccessMessage(Piranha.Resources.Content.MessageDocumentSaved, true) ;
-					} else {
-						if (m.Content.Published == m.Content.LastPublished)
-							SuccessMessage(Piranha.Resources.Content.MessageDocumentPublished, true) ;
-						else SuccessMessage(Piranha.Resources.Content.MessageUpdated, true) ;
-					}
+					ViewBag.Title = Piranha.Resources.Content.EditTitleNew ;
+					ErrorMessage(Piranha.Resources.Content.MessageNotSaved) ;
+					return View("Edit", m) ;
 				}
-				return RedirectToAction("edit", new { id = m.Content.Id, returl = ViewBag.ReturnUrl }) ;
-			} else {
-				ViewBag.Title = Piranha.Resources.Content.EditTitleNew ;
-				ErrorMessage(Piranha.Resources.Content.MessageNotSaved) ;
-				return View("Edit", m) ;
+			} catch (DuplicatePermalinkException) {
+				// Manually set the duplicate error.
+				ModelState.AddModelError("Permalink", @Piranha.Resources.Global.PermalinkDuplicate) ;
+			} catch (Exception e) {
+				ErrorMessage(e.ToString()) ;
 			}
+			m.Refresh() ;
+			ViewBag.Folder = m.Content.IsFolder ;
+			return View("Edit", m) ;
 		}
 
 		/// <summary>

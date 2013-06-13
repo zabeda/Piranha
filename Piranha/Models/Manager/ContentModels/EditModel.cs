@@ -320,16 +320,10 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <param name="isfolder">Whether this is a folder or not.</param>
 		public EditModel(bool isfolder, Guid parentid) {
 			Permalink = new Models.Permalink() { Id = Guid.NewGuid(), NamespaceId = Config.MediaNamespaceId, Type = Models.Permalink.PermalinkType.MEDIA } ;
-			Content = new Piranha.Models.Content() { IsFolder = isfolder, ParentId = parentid, PermalinkId = Permalink.Id } ;
-			ContentCategories = new List<Guid>() ;
-			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
-				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
-			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1", new Params() { OrderBy = "content_name" }) ;
-			folders.Insert(0, new Content()) ;
+			Content = new Piranha.Models.Content() { Id = Guid.NewGuid(), IsFolder = isfolder, ParentId = parentid, PermalinkId = Permalink.Id } ;
 			Extensions = Content.GetExtensions(true) ;
-			Folders = SortFolders(Content.GetFolderStructure(false)) ;
-			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
-			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "CONTENTHANDLER").SingleOrDefault().UrlPrefix;
+
+			GetMetaData() ;
 		}
 
 		/// <summary>
@@ -346,8 +340,6 @@ namespace Piranha.Models.Manager.ContentModels
 			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
 			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
-			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1 AND content_id != @0", id, new Params() { OrderBy = "content_name" }) ;
-			folders.Insert(0, new Content()) ;
 			em.Extensions = em.Content.GetExtensions(true) ;
 
 			return em ;
@@ -409,7 +401,14 @@ namespace Piranha.Models.Manager.ContentModels
 
 			if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
 				Permalink.Name = Permalink.Generate(!Content.IsFolder ? filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
-			Permalink.Save() ;
+			try {
+				Permalink.Save() ;
+			} catch (DuplicatePermalinkException) {
+				if (Permalink.IsNew) {
+					Permalink.Name = Content.Id + Permalink.Name.Substring(Permalink.Name.LastIndexOf('.')) ;
+					Permalink.Save() ;
+				} else throw ;
+			}
 
 			if (draft)
 				saved = Content.Save(media) ;
@@ -484,12 +483,15 @@ namespace Piranha.Models.Manager.ContentModels
 		/// </summary>
 		public bool DeleteAll() {
 			var content = Content.Get("content_id = @0", Content.Id) ;
+			var permalinks = Permalink.Get("permalink_id = @0", Content.PermalinkId) ;
 
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
 					File.Delete(HttpContext.Current.Server.MapPath("~/App_Data/Content/" + Content.Id)) ;
 					foreach (var c in content)
 						c.Delete(tx) ;
+					foreach (var p in permalinks)
+						p.Delete(tx) ;
 					tx.Commit() ;
 					return true ;
 				} catch { tx.Rollback() ; }
@@ -501,6 +503,8 @@ namespace Piranha.Models.Manager.ContentModels
 		/// Refreshes the current object.
 		/// </summary>
 		public void Refresh() {
+			GetMetaData() ;
+
 			if (!Content.IsNew) {
 				Relation.GetFieldsByDataId("relation_related_id", Content.Id).ForEach(r => ContentCategories.Add(r.RelatedId)) ;
 				Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
@@ -509,6 +513,20 @@ namespace Piranha.Models.Manager.ContentModels
 		}
 
 		#region Private methods
+		private void GetMetaData() {
+			ContentCategories = new List<Guid>() ;
+			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
+				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
+
+			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1", new Params() { OrderBy = "content_name" }) ;
+			folders.Insert(0, new Content()) ;
+	
+			Folders = SortFolders(Content.GetFolderStructure(false)) ;
+			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
+			
+			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "CONTENTHANDLER").SingleOrDefault().UrlPrefix;
+		}
+
 		/// <summary>
 		/// Flattens the folder structure.
 		/// </summary>
