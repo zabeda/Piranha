@@ -580,6 +580,7 @@
     <Compile Include="Models\PageModel.cs" />
     <Compile Include="Models\PostArchive.cs" />
     <Compile Include="Models\PostModel.cs" />
+    <Compile Include="ConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Account.Designer.cs">
       <AutoGen>True</AutoGen>

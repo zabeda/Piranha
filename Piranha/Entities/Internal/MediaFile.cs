@@ -48,25 +48,11 @@ namespace Piranha.Models
 
 		#region Properties
 		/// <summary>
-		/// Gets the virtual path for the media file.
-		/// </summary>
-		//public virtual string VirtualPath { 
-		//	get { return BasePath + Id ; }
-		//}
-
-		/// <summary>
 		/// Gets the virtual path for the cached media file.
 		/// </summary>
 		public virtual string VirtualCachePath {
 			get { return CachePath + Id ; }
 		}
-
-		/// <summary>
-		/// Gets the physical path for the media file.
-		/// </summary>
-		//public virtual string PhysicalPath {
-		//	get { return HttpContext.Current.Server.MapPath(VirtualPath) ; }
-		//}
 
 		/// <summary>
 		/// Gets the physical path for the cached media file.
@@ -82,13 +68,10 @@ namespace Piranha.Models
 		/// <param name="basePath">The virtual base path.</param>
 		/// <param name="cachePath">The virtual cache path for resized media.</param>
 		protected MediaFile(string basePath, string cachePath) : base() {
-			//BasePath = basePath + (!basePath.EndsWith("/") ? "/" : "") ;
 			CachePath = cachePath + (!cachePath.EndsWith("/") ? "/" : "") ;
 
 			if (!VerifiedPaths) {
 				// Verify paths
-				//if (!Directory.Exists(HttpContext.Current.Server.MapPath(BasePath)))
-				//	Directory.CreateDirectory(HttpContext.Current.Server.MapPath(BasePath)) ;
 				if (!Directory.Exists(HttpContext.Current.Server.MapPath(CachePath)))
 					Directory.CreateDirectory(HttpContext.Current.Server.MapPath(CachePath)) ;
 
@@ -160,12 +143,17 @@ namespace Piranha.Models
 			}
 			if (base.Save(tx) && content != null) {
 				// Delete the old data
-				DeleteFile() ;
+				if (!(this is Content) || !((Content)(object)this).IsDraft)
+					DeleteFile() ;
 				DeleteCache() ;
 
 				// Save the new
-				if (writefile)
-					Application.Current.MediaProvider.Put(Id, content.Body) ;
+				if (writefile) {
+					// TODO: Dirty double cast, redesign!
+					if (this is Content && ((Content)(object)this).IsDraft)
+						Application.Current.MediaProvider.PutDraft(Id, content.Body) ;
+					else Application.Current.MediaProvider.Put(Id, content.Body) ;
+				}
 			}
 			return base.Save(tx, setdates);
 		}

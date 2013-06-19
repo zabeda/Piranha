@@ -17,6 +17,7 @@ namespace Piranha
 		private static object nsmutex = new object() ;
 		private static ConfigProvider mediaprovider = null ;
 		private static object mpmutex = new object() ;
+		private static readonly ConfigFile config = GetConfig() ;
 		#endregion
 
 		/// <summary>
@@ -25,7 +26,9 @@ namespace Piranha
 		/// If a matching method is found this method will be executed instead of the usual ExecutePage.
 		/// </summary>
 		public static bool DisableMethodBinding {
-			get { return ConfigurationManager.AppSettings["disable_method_binding"] == "1" ; }
+			get { 
+				return config.Settings.DisableMethodBinding.Value ;
+			}
 		}
 
 		/// <summary>
@@ -33,7 +36,9 @@ namespace Piranha
 		/// mapped by the ModelBinder is automatically stored into the model state of the current page.
 		/// </summary>
 		public static bool DisableModelStateBinding {
-			get { return ConfigurationManager.AppSettings["disable_modelstate_binding"] == "1" ; }
+			get { 
+				return config.Settings.DisableModelStateBinding.Value ;
+			}
 		}
 
 		/// <summary>
@@ -46,7 +51,7 @@ namespace Piranha
 				
 				lock (nsmutex) {
 					if (namespaces == null) {
-						var str = ConfigurationManager.AppSettings["manager_namespaces"] ;
+						var str = config.Settings.ManagerNamespaces.Value ;
 
 						if (!String.IsNullOrEmpty(str)) {
 							var tmp = str.Split(new char[] {','}) ;
@@ -74,7 +79,7 @@ namespace Piranha
 
 				lock (mpmutex) {
 					if (mediaprovider == null) {
-						var str = ConfigurationManager.AppSettings["media_provider"] ;
+						var str = config.Providers.MediaProvider.Value ;
 						if (!String.IsNullOrEmpty(str)) {
 							var vals = str.Split(new char[] { ',' }) ;
 
@@ -134,6 +139,20 @@ namespace Piranha
 		/// <summary>
 		/// Gets the id of the default site tree.
 		/// </summary>
-		public static readonly Guid DefaultSiteTreeId = new Guid("c2f87b2b-f585-4696-8a2b-3c9df882701e") ;
+		public static readonly Guid DefaultSiteTreeId = new Guid("c2f87b2b-f585-4696-8a2b-3c9df882701e");
+
+		#region Private methods
+		/// <summary>
+		/// Gets the configuration section from the Web.config.
+		/// </summary>
+		/// <returns></returns>
+		private static ConfigFile GetConfig() {
+			var section = (ConfigFile)ConfigurationManager.GetSection("piranha") ;
+
+			if (section == null)
+				section = new ConfigFile() ;
+			return section ;
+		}
+		#endregion
 	}
 }
