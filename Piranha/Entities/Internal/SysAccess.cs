@@ -94,12 +94,12 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The access list</returns>
 		public static Dictionary<string, SysAccess> GetAccessList() {
-			if (Piranha.Cache.Current[typeof(SysAccess).Name] == null) {
-				Piranha.Cache.Current[typeof(SysAccess).Name] = new Dictionary<string, SysAccess>() ;
+			if (Application.Current.CacheProvider[typeof(SysAccess).Name] == null) {
+				Application.Current.CacheProvider[typeof(SysAccess).Name] = new Dictionary<string, SysAccess>() ;
 				SysAccess.Get().ForEach((e) => 
-					((Dictionary<string, SysAccess>)Piranha.Cache.Current[typeof(SysAccess).Name]).Add(e.Function, e)) ;
+					((Dictionary<string, SysAccess>)Application.Current.CacheProvider[typeof(SysAccess).Name]).Add(e.Function, e)) ;
 			}
-			return (Dictionary<string, SysAccess>)Piranha.Cache.Current[typeof(SysAccess).Name] ;
+			return (Dictionary<string, SysAccess>)Application.Current.CacheProvider[typeof(SysAccess).Name] ;
 		}
 		#endregion
 
@@ -126,7 +126,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(SysAccess record) {
-			Piranha.Cache.Current.Remove(typeof(SysAccess).Name) ;
+			Application.Current.CacheProvider.Remove(typeof(SysAccess).Name) ;
 		}
 	}
 }

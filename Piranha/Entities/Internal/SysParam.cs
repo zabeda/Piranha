@@ -82,8 +82,8 @@ namespace Piranha.Models
 		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
-		#region Properties
-		private static MemCache Cache = new MemCache() ;
+		#region Members
+		private static Cache.MemCacheProvider Cache = new Cache.MemCacheProvider() ;
 		#endregion
 
 		#region Static accessors
@@ -94,7 +94,7 @@ namespace Piranha.Models
 		/// <returns>The param</returns>
 		public static SysParam GetByName(string name) {
 			try {
-				if (Cache[name.ToUpper()] == null)
+				if (!Cache.Contains(name.ToUpper()))
 					Cache[name.ToUpper()] = SysParam.GetSingle("sysparam_name = @0", name) ;
 				return (SysParam)Cache[name.ToUpper()] ;
 			} catch {}

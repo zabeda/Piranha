@@ -145,9 +145,9 @@ namespace Piranha.Models
 		/// <returns>The page</returns>
 		public static PageTemplate GetSingle(Guid id) {
 			if (id != Guid.Empty) {
-				if (!Cache.Current.Contains(id.ToString()))
-					Cache.Current[id.ToString()] = PageTemplate.GetSingle((object)id) ;
-				return (PageTemplate)Cache.Current[id.ToString()] ;
+				if (!Application.Current.CacheProvider.Contains(id.ToString()))
+					Application.Current.CacheProvider[id.ToString()] = PageTemplate.GetSingle((object)id) ;
+				return (PageTemplate)Application.Current.CacheProvider[id.ToString()] ;
 			}
 			return null ;
 		}
@@ -157,7 +157,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record.</param>
 		public void InvalidateRecord(PageTemplate record) {
-			Cache.Current.Remove(record.Id.ToString()) ;
+			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
 		}
 	}
 }

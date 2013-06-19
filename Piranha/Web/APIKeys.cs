@@ -30,12 +30,12 @@ namespace Piranha.Web
 					if (DateTime.Now < date.AddMinutes(30)) {
 						var apiKey = new Guid(args[0]) ;
 
-						if (!Cache.Current.Contains(apiKey.ToString())) {
+						if (!Application.Current.CacheProvider.Contains(apiKey.ToString())) {
 							using (var db = new DataContext()) {
-								Cache.Current[apiKey.ToString()] = db.Users.Where(u => u.APIKey == apiKey).Select(u => u.Id).SingleOrDefault() ;
+								Application.Current.CacheProvider[apiKey.ToString()] = db.Users.Where(u => u.APIKey == apiKey).Select(u => u.Id).SingleOrDefault() ;
 							}
 						}
-						return (Guid?)Cache.Current[apiKey.ToString()] ;
+						return (Guid?)Application.Current.CacheProvider[apiKey.ToString()] ;
 					}
 				}
 			}

@@ -95,6 +95,7 @@ namespace Piranha
 	{
 		#region Members
 		private const string MEDIA_PROVIDER = "mediaProvider" ;
+		private const string CACHE_PROVIDER = "cacheProvider" ;
 		#endregion
 
 		/// <summary>
@@ -107,10 +108,20 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets/sets the current configured cache provider.
+		/// </summary>
+		[ConfigurationProperty(CACHE_PROVIDER, IsRequired=false)]
+		public StringElement CacheProvider {
+			get { return (StringElement)this[CACHE_PROVIDER] ; }
+			set { this[CACHE_PROVIDER] = value ; }
+		}
+
+		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public ProviderElement() {
 			MediaProvider = new StringElement() ;
+			CacheProvider = new StringElement() ;
 		}
 	}
 

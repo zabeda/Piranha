@@ -222,9 +222,9 @@ namespace Piranha.Models
 		public static Content GetSingle(Guid id, bool draft = false, IDbTransaction tx = null) {
 			if (id != Guid.Empty) {
 				if (!draft) {
-					if (!Cache.Current.Contains(id.ToString()))
-						Cache.Current[id.ToString()] = Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
-					return (Content)Cache.Current[id.ToString()] ;
+					if (!Application.Current.CacheProvider.Contains(id.ToString()))
+						Application.Current.CacheProvider[id.ToString()] = Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
+					return (Content)Application.Current.CacheProvider[id.ToString()] ;
 				}
 				return Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
 			}
@@ -604,7 +604,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Content record) {
-			Cache.Current.Remove(record.Id.ToString()) ;
+			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
 		}
 
 		/// <summary>

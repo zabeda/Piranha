@@ -301,14 +301,14 @@ namespace Piranha.Models
 		/// <param name="id">The page id</param>
 		/// <returns>The page</returns>
 		public static Page GetSingle(Guid id) {
-			if (!Cache.Current.Contains(id.ToString())) {
+			if (!Application.Current.CacheProvider.Contains(id.ToString())) {
 				Page p = Page.GetSingle("page_id = @0 AND page_draft = 0", id) ;
 				
 				if (p != null)
 					AddToCache(p) ;
 				else return null ;
 			}
-			return (Page)Cache.Current[id.ToString()] ;
+			return (Page)Application.Current.CacheProvider[id.ToString()] ;
 		}
 
 		/// <summary>
@@ -331,11 +331,11 @@ namespace Piranha.Models
 		public static Page GetStartpage(bool draft = false) {
 			var name = "SP_" + Config.SiteTreeId.ToString() ;
 
-			if (!Cache.Current.Contains(name)) {
-				Cache.Current[name] = 
+			if (!Application.Current.CacheProvider.Contains(name)) {
+				Application.Current.CacheProvider[name] = 
 					Page.GetSingle("page_parent_id IS NULL and page_seqno = 1 AND page_draft = @0 AND page_sitetree_id = @1", draft, Config.SiteTreeId) ;
 			}
-			return (Page)Cache.Current[name] ;
+			return (Page)Application.Current.CacheProvider[name] ;
 		}
 
 		/// <summary>
@@ -352,9 +352,9 @@ namespace Piranha.Models
 					if (p != null)
 						AddToCache(p) ;
 				}
-				if (!Cache.Current.Contains(PermalinkCache[permalink.ToLower()].ToString()))
-					Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ; 
-				return (Page)Cache.Current[PermalinkCache[permalink.ToLower()].ToString()] ;
+				if (!Application.Current.CacheProvider.Contains(PermalinkCache[permalink.ToLower()].ToString()))
+					Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ; 
+				return (Page)Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] ;
 			}
 			return Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
 		}
@@ -373,9 +373,9 @@ namespace Piranha.Models
 					if (p != null)
 						AddToCache(p) ;
 				}
-				if (!Cache.Current.Contains(PermalinkIdCache[permalinkid].ToString()))
-					Cache.Current[PermalinkIdCache[permalinkid].ToString()] = Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
-				return (Page)Cache.Current[PermalinkIdCache[permalinkid].ToString()] ;
+				if (!Application.Current.CacheProvider.Contains(PermalinkIdCache[permalinkid].ToString()))
+					Application.Current.CacheProvider[PermalinkIdCache[permalinkid].ToString()] = Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
+				return (Page)Application.Current.CacheProvider[PermalinkIdCache[permalinkid].ToString()] ;
 			}
 			return Page.GetSingle("page_permalink_id = @0 AND page_draft = @1", permalinkid, draft) ;
 		}
@@ -487,7 +487,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Page record) {
-			Cache.Current.Remove(record.Id.ToString()) ;
+			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
 
 			// If we click save & publish right away the permalink is not created yet.
 			if (record.Permalink != null && PermalinkCache.ContainsKey(record.Permalink))
@@ -506,7 +506,7 @@ namespace Piranha.Models
 		/// Invalidates the cache for the site startpage.
 		/// </summary>
 		public static void InvalidateStartpage(Guid siteId) {
-			Cache.Current.Remove("SP_" + siteId.ToString()) ;
+			Application.Current.CacheProvider.Remove("SP_" + siteId.ToString()) ;
 		}
 
 		/// <summary>
@@ -514,7 +514,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="p">The page</param>
 		private static void AddToCache(Page p) {
-			Cache.Current[p.Id.ToString()] = p ;
+			Application.Current.CacheProvider[p.Id.ToString()] = p ;
 			PermalinkCache[p.Permalink] = p.Id ;
 			PermalinkIdCache[p.PermalinkId] = p.Id ;
 

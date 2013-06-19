@@ -16,7 +16,9 @@ namespace Piranha
 		private static string[] namespaces = null;
 		private static object nsmutex = new object() ;
 		private static ConfigProvider mediaprovider = null ;
+		private static ConfigProvider cacheProvider = null ;
 		private static object mpmutex = new object() ;
+		private static object cpmutex = new object() ;
 		private static readonly ConfigFile config = GetConfig() ;
 		#endregion
 
@@ -70,7 +72,7 @@ namespace Piranha
 
 		/// <summary>
 		/// Gets the configuration for the media provider to use. If the media provider is not
-		/// specified the default AppDataMediaProvider is used.
+		/// specified the default LocalMediaProvider is used.
 		/// </summary>
 		internal static ConfigProvider MediaProvider {
 			get {
@@ -96,6 +98,37 @@ namespace Piranha
 					}
 				}
 				return mediaprovider ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the configuration for the cache provider to use. If the cache provider is not
+		/// specified the default WebCacheProvider is used.
+		/// </summary>
+		internal static ConfigProvider CacheProvider {
+			get {
+				if (cacheProvider != null)
+					return cacheProvider ;
+
+				lock (cpmutex) {
+					if (cacheProvider == null) {
+						var str = config.Providers.CacheProvider.Value ;
+						if (!String.IsNullOrEmpty(str)) {
+							var vals = str.Split(new char[] { ',' }) ;
+
+							cacheProvider = new ConfigProvider() {
+								TypeName = vals[0].Trim(),
+								AssemblyName = vals[1].Trim()
+							} ;
+						} else {
+							cacheProvider = new ConfigProvider() {
+								TypeName = typeof(Cache.WebCacheProvider).FullName,
+								AssemblyName = Assembly.GetExecutingAssembly().FullName
+							} ;
+						}
+					}
+				}
+				return cacheProvider ;
 			}
 		}
 

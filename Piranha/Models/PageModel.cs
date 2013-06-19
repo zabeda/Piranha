@@ -141,15 +141,15 @@ namespace Piranha.Models
 		public static PageModel GetBySite(Guid siteid) {
 			var cachename = "SITE_" + siteid.ToString() ;
 
-			if (!Cache.Current.Contains(cachename)) {
+			if (!Application.Current.CacheProvider.Contains(cachename)) {
 				using (var db = new DataContext()) {
 					var id = db.Pages.Where(p => p.SiteTreeId == siteid && p.ParentId == siteid).Select(p => p.Id).SingleOrDefault() ;
 					if (id != Guid.Empty)
-						Cache.Current[cachename] = GetById(id) ;
-					else Cache.Current[cachename] = new PageModel() ;
+						Application.Current.CacheProvider[cachename] = GetById(id) ;
+					else Application.Current.CacheProvider[cachename] = new PageModel() ;
 				}
 			}
-			return (PageModel)Cache.Current[cachename] ;
+			return (PageModel)Application.Current.CacheProvider[cachename] ;
 		}
 
 		/// <summary>
@@ -159,8 +159,8 @@ namespace Piranha.Models
 		internal static void RemoveSitePageFromCache(Guid siteid) {
 			var cachename = "SITE_" + siteid.ToString() ;
 
-			if (Cache.Current.Contains(cachename))
-				Cache.Current.Remove(cachename) ;
+			if (Application.Current.CacheProvider.Contains(cachename))
+				Application.Current.CacheProvider.Remove(cachename) ;
 		}
 		#endregion
 

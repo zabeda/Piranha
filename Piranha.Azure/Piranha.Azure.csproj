@@ -75,6 +75,7 @@
     <Content Include="LICENSE.md" />
     <None Include="packages.config" />
     <Content Include="README.md" />
+    <None Include="web.config.transform" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

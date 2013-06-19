@@ -35,6 +35,11 @@ namespace Piranha
 		public readonly IO.IMediaProvider MediaProvider = new IO.LocalMediaProvider() ;
 
 		/// <summary>
+		/// The currently active cache provider.
+		/// </summary>
+		public readonly Cache.ICacheProvider CacheProvider = new Cache.WebCacheProvider() ;
+
+		/// <summary>
 		/// The currently active user provider.
 		/// </summary>
 		internal readonly Security.IUserProvider UserProvider = new Security.LocalUserProvider() ;
@@ -95,6 +100,16 @@ namespace Piranha
 				var type = assembly.GetType(Config.MediaProvider.TypeName) ;
 				if (type != null)
 					MediaProvider = (IO.IMediaProvider)Activator.CreateInstance(type) ;
+				else throw new TypeAccessException("MediaProvider " + Config.MediaProvider.TypeName + " was not found") ;
+			}
+
+			// Get the current cache provider
+			assembly = Assembly.Load(Config.CacheProvider.AssemblyName) ;
+			if (assembly != null) {
+				var type = assembly.GetType(Config.CacheProvider.TypeName) ;
+				if (type != null)
+					CacheProvider = (Cache.ICacheProvider)Activator.CreateInstance(type) ;
+				else throw new TypeAccessException("CacheProvider " + Config.CacheProvider.TypeName + " was not found") ;				
 			}
 
 			RegisterHandlers() ;
