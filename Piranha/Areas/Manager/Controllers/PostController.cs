@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Piranha.Models;
 using Piranha.Models.Manager.PostModels;
 
 namespace Piranha.Areas.Manager.Controllers
@@ -90,16 +90,26 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_POST")]
 		public ActionResult Edit(bool draft, EditModel m) {
 			if (ModelState.IsValid) {
-				if (m.SaveAll(draft)) {
-					ModelState.Clear() ;
-					if (!draft) {
-						if (m.Post.Published == m.Post.LastPublished)
-							SuccessMessage(Piranha.Resources.Post.MessagePublished, true) ;
-						else SuccessMessage(Piranha.Resources.Post.MessageUpdated, true) ;
-					} else SuccessMessage(Piranha.Resources.Post.MessageSaved, true) ;
+				try {
+					if (m.SaveAll(draft)) {
+						ModelState.Clear() ;
+						if (!draft) {
+							if (m.Post.Published == m.Post.LastPublished)
+								SuccessMessage(Piranha.Resources.Post.MessagePublished, true) ;
+							else SuccessMessage(Piranha.Resources.Post.MessageUpdated, true) ;
+						} else SuccessMessage(Piranha.Resources.Post.MessageSaved, true) ;
 
-					return RedirectToAction("edit", new { id = m.Post.Id, returl = ViewBag.ReturnUrl }) ;
-				} else ErrorMessage(Piranha.Resources.Post.MessageNotSaved) ;
+						return RedirectToAction("edit", new { id = m.Post.Id, returl = ViewBag.ReturnUrl }) ;
+					} else ErrorMessage(Piranha.Resources.Post.MessageNotSaved) ;
+				} catch (DuplicatePermalinkException) {
+					// Manually set the duplicate error.
+					ModelState.AddModelError("Permalink", @Piranha.Resources.Global.PermalinkDuplicate) ;
+					// If this is the default permalink, remove the model state so it will be shown.
+					if (Permalink.Generate(m.Post.Title) == m.Permalink.Name)
+						ModelState.Remove("Permalink.Name") ;
+				} catch (Exception e) {
+					ErrorMessage(e.ToString()) ;
+				}
 			}
 			m.Refresh() ;
 

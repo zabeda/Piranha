@@ -96,19 +96,17 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		/// <returns>Whether the operation succeeded or not</returns>
 		public bool SaveAll() {
-			try {
-				using (var tx = Database.OpenTransaction()) {
-					// Permalink
-					if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
-						Permalink.Name = Permalink.Generate(Template.Name) ;
-					Permalink.Save(tx) ;
-					Template.Save(tx) ;
+			using (var tx = Database.OpenTransaction()) {
+				// Permalink
+				if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
+					Permalink.Name = Permalink.Generate(Template.Name) ;
+				Permalink.Save(tx) ;
+				Template.Save(tx) ;
 
-					tx.Commit() ;
+				tx.Commit() ;
 
-					return true;
-				}
-			} catch { return false ; }
+				return true;
+			}
 		}
 
 		/// <summary>

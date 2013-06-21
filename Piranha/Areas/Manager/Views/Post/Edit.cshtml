@@ -167,6 +167,7 @@
                         }
                         <div class="input">
                             @Html.TextBoxFor(m => m.Permalink.Name)</div>
+                        @Html.ValidationMessageFor(m => m.Permalink)
                         <a class="locked"></a>
                     </li>
                     <li>

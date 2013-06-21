@@ -10,7 +10,7 @@
         var templateid = '@Model.Template.Id';
 
         $(document).ready(function () {
-            $('#InternalId').focus();
+            $('#Name').focus();
         });
     </script>
 }
@@ -41,11 +41,16 @@
         <div class="inner">
             <ul class="form">
                 <li>
-
+                    @Html.LabelFor(m => m.Name, Piranha.Resources.Global.Name)
+                    <div class="input">
+                        @Html.TextBoxFor(m => m.Name)</div>
+                    @Html.ValidationMessageFor(m => m.Name)
+                </li>
+                <li>
                     @Html.LabelFor(m => m.InternalId, Piranha.Resources.Global.InternalId)
                     <div class="input">
                         @if (Model.Id != Piranha.Config.DefaultSiteTreeId) {
-                        @Html.TextBoxFor(m => m.InternalId)
+                        @Html.TextBoxFor(m => m.InternalId, new { @placeholder = Piranha.Resources.Global.Optional })
                         } else {
                         @Html.TextBoxFor(m => m.InternalId, new { @disabled = true })
                         @Html.HiddenFor(m => m.InternalId)
@@ -54,15 +59,9 @@
                     @Html.ValidationMessageFor(m => m.InternalId)
                 </li>
                 <li>
-                    @Html.LabelFor(m => m.Name, Piranha.Resources.Global.Name)
-                    <div class="input">
-                        @Html.TextBoxFor(m => m.Name)</div>
-                    @Html.ValidationMessageFor(m => m.Name)
-                </li>
-                <li>
                     @Html.LabelFor(m => m.Description, Piranha.Resources.Global.Description)
                     <div class="input">
-                        @Html.TextAreaFor(m => m.Description)</div>
+                        @Html.TextAreaFor(m => m.Description, new { @placeholder = Piranha.Resources.Global.Optional })</div>
                 </li>
             </ul>
         </div>
@@ -84,7 +83,7 @@
                                 <li>
                                     @Html.LabelFor(m => m.HostNames, Piranha.Resources.SiteTree.HostNames)
                                     <div class="input">
-                                        @Html.TextBoxFor(m => m.HostNames)</div>
+                                        @Html.TextBoxFor(m => m.HostNames, new { @placeholder = Piranha.Resources.Global.Optional })</div>
                                 </li>
                                 <li>
                                     @Html.LabelFor(m => m.Template.Preview, Piranha.Resources.Page.HtmlPreview)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Piranha.Models;
 using Piranha.Models.Manager.TemplateModels;
 
 namespace Piranha.Areas.Manager.Controllers
@@ -110,11 +110,21 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = Piranha.Resources.Template.EditPostTitleNew ;
 
 			if (ModelState.IsValid) {
-				if (m.SaveAll()) {
-					ModelState.Clear() ;
-					ViewBag.Title = Piranha.Resources.Template.EditPostTitleExisting ;
-					SuccessMessage(Piranha.Resources.Template.MessagePostSaved) ;
-				} else ErrorMessage(Piranha.Resources.Template.MessagePostNotSaved) ;
+				try {
+					if (m.SaveAll()) {
+						ModelState.Clear() ;
+						ViewBag.Title = Piranha.Resources.Template.EditPostTitleExisting ;
+						SuccessMessage(Piranha.Resources.Template.MessagePostSaved) ;
+					} else ErrorMessage(Piranha.Resources.Template.MessagePostNotSaved) ;
+				} catch (DuplicatePermalinkException) {
+					// Manually set the duplicate error.
+					ModelState.AddModelError("Permalink", @Piranha.Resources.Global.PermalinkDuplicate) ;
+					// If this is the default permalink, remove the model state so it will be shown.
+					if (Permalink.Generate(m.Template.Name) == m.Permalink.Name)
+						ModelState.Remove("Permalink.Name") ;
+				} catch (Exception e) {
+					ErrorMessage(e.ToString()) ;
+				}
 			}
 			return View("PostEdit", m) ;
 		}
