@@ -246,6 +246,9 @@ namespace Piranha.Models.Manager.PostModels
 
 					// Save extensions
 					foreach (var ext in Extensions) {
+						// Call OnSave
+						ext.Body.OnManagerSave(Post) ;
+
 						ext.ParentId = Post.Id ;
 						ext.Save(tx) ;
 						if (!draft) {
@@ -286,7 +289,11 @@ namespace Piranha.Models.Manager.PostModels
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				List<Relation> rel = Relation.Get("relation_data_id = @0", Post.Id) ;
 				List<Post> posts = Post.Get("post_id = @0", Post.Id) ;
-					
+				
+				// Call OnDelete for all extensions
+				Extensions.ForEach(e => e.Body.OnManagerDelete(Post)) ;
+
+				// Delete all entities
 				rel.ForEach(r => r.Delete(tx)) ;
 				posts.ForEach(p => p.Delete(tx)) ;
 				Permalink.Delete(tx) ;

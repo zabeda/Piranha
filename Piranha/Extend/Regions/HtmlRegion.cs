@@ -32,6 +32,8 @@ namespace Piranha.Extend.Regions
 		public virtual void Ensure(DataContext db) {}
 		public virtual void Init(object model) {}
 		public virtual void InitManager(object model) {}
+		public virtual void OnManagerSave(object model) {}
+		public virtual void OnManagerDelete(object model) {}
 		public virtual object GetContent(object model) {
 			return this ;
 		}

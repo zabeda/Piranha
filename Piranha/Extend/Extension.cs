@@ -32,6 +32,20 @@ namespace Piranha.Extend
 		public virtual void InitManager(object model) {}
 
 		/// <summary>
+		/// Called when the entity the extension is attached to is saved in the manager
+		/// interface.
+		/// </summary>
+		/// <param name="model">The edit model of the entity</param>
+		public virtual void OnManagerSave(object model) {}
+
+		/// <summary>
+		/// Called when the entity the extension is attached to is deleted in the manager
+		/// interface.
+		/// </summary>
+		/// <param name="model">The edit model of the entity</param>
+		public void OnManagerDelete(object model) {}
+
+		/// <summary>
 		/// This method is called when the client model tries to populate the data of it's
 		/// extensions. This is very useful when the extension data is in fact only meta 
 		/// data for retrieving other information.

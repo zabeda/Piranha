@@ -425,6 +425,9 @@ namespace Piranha.Models.Manager.ContentModels
 
 				// Save extensions
 				foreach (var ext in Extensions) {
+					// Call OnSave
+					ext.Body.OnManagerSave(Content) ;
+
 					ext.ParentId = Content.Id ;
 					ext.Save() ;
 					if (!draft) {
@@ -487,6 +490,10 @@ namespace Piranha.Models.Manager.ContentModels
 
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
+					// Call OnDelete for all extensions
+					foreach (var ext in Extensions)
+						ext.Body.OnManagerDelete(Content) ;
+
 					File.Delete(HttpContext.Current.Server.MapPath("~/App_Data/Content/" + Content.Id)) ;
 					foreach (var c in content)
 						c.Delete(tx) ;

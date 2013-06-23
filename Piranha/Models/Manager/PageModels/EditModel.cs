@@ -386,7 +386,11 @@ namespace Piranha.Models.Manager.PageModels
 
 					// Save regions & properties
 					Regions.ForEach(r => {
-						r.IsDraft = r.IsPageDraft = true ; 
+						r.IsDraft = r.IsPageDraft = true ;
+
+						// Call OnSave
+						r.Body.OnManagerSave(Page) ;
+
 						r.Save(tx) ;
 						if (!draft) {
 							if (Region.GetScalar("SELECT COUNT(region_id) FROM region WHERE region_id=@0 AND region_draft=0", r.Id) == 0)
@@ -408,6 +412,9 @@ namespace Piranha.Models.Manager.PageModels
 
 					// Save extensions
 					foreach (var ext in Extensions) {
+						// Call OnSave
+						ext.Body.OnManagerSave(Page) ;
+
 						ext.ParentId = Page.Id ;
 						ext.Save(tx) ;
 						if (!draft) {
@@ -463,6 +470,13 @@ namespace Piranha.Models.Manager.PageModels
 			List<Page> pages = Page.Get("page_id=@0", Page.Id) ;
 
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
+				// Call OnDelete for all extensions
+				Extensions.ForEach(e => e.Body.OnManagerDelete(Page)) ;
+
+				// Call OnDelete for all regions
+				Regions.ForEach(r => r.Body.OnManagerDelete(Page)) ;
+
+				// Delete all entities
 				regions.ForEach(r => r.Delete(tx)) ;
 				properties.ForEach(p => p.Delete(tx)) ;
 				pages.ForEach(p => p.Delete(tx)) ;
@@ -472,11 +486,6 @@ namespace Piranha.Models.Manager.PageModels
 				Web.ClientCache.SetSiteLastModified(tx) ;
 
 				tx.Commit() ;
-
-				try {
-					// Delete page preview
-					// WebPages.WebThumb.RemovePagePreview(Page.Id) ;
-				} catch {}
 			}
 			return true ;
 		}

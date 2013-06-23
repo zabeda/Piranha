@@ -99,6 +99,9 @@ namespace Piranha.Models.Manager.CategoryModels
 					Permalink.Save(tx) ;
 					Category.Save(tx) ;
 					foreach (var ext in Extensions) {
+						// Call OnSave
+						ext.Body.OnManagerSave(Category) ;
+
 						ext.ParentId = Category.Id ;
 						ext.Save(tx) ;
 					}
@@ -116,6 +119,9 @@ namespace Piranha.Models.Manager.CategoryModels
 		public bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
+					// Call OnDelete for all extensions
+					Extensions.ForEach(e => e.Body.OnManagerDelete(Category)) ;
+
 					// Delete all relations to the current category
 					List<Relation> pc = Relation.GetByTypeAndRelatedId(Relation.RelationType.POSTCATEGORY, Category.Id) ;
 					pc.ForEach((r) => r.Delete(tx)) ;

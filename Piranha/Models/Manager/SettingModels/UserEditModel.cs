@@ -108,7 +108,7 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool SaveAll() {
 			Guid uid = new Guid("4037dc45-90d2-4adc-84aa-593be867c29d") ;
 			
-			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
+			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
 					User.UpdatedBy = uid ;
 					User.Save(tx) ;
@@ -118,6 +118,9 @@ namespace Piranha.Models.Manager.SettingModels
 						Password.Save(tx) ;
 					}
 					foreach (var ext in Extensions) {
+						// Call OnSave
+						ext.Body.OnManagerSave(User) ;
+
 						ext.ParentId = User.Id ;
 						ext.Save(tx) ;
 					}
@@ -134,6 +137,11 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
+					// Call OnDelete for all extensions
+					foreach (var ext in Extensions)
+						ext.Body.OnManagerDelete(User) ;
+
+					// Delete entities
 					User.Delete(tx) ;
 					tx.Commit() ;
 				} catch { tx.Rollback() ; return false ; }
