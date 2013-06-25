@@ -111,6 +111,15 @@ namespace Piranha.Areas.Manager.Controllers
 
 			return User(id) ;
 		}
+
+		/// <summary>
+		/// Generates a new random API-key.
+		/// </summary>
+		/// <returns>The api key</returns>
+		[Access(Function="ADMIN_USER")]
+		public ActionResult ApiKey() {
+			return Json(new { Key = Guid.NewGuid().ToString() }, JsonRequestBehavior.AllowGet) ;
+		}
 		#endregion
 
 		#region Group actions

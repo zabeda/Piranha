@@ -147,6 +147,9 @@
   <data name="Account" xml:space="preserve">
     <value>Användarkonto</value>
   </data>
+  <data name="APIKey" xml:space="preserve">
+    <value>API-nyckel</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Ändra lösenord</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="FirstnameRequired" xml:space="preserve">
     <value>Du måste ange ett förnamn.</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generera</value>
   </data>
   <data name="GroupDescription" xml:space="preserve">
     <value>Beskrivning</value>

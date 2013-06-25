@@ -147,6 +147,9 @@
   <data name="Account" xml:space="preserve">
     <value>User account</value>
   </data>
+  <data name="APIKey" xml:space="preserve">
+    <value>API Key</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="FirstnameRequired" xml:space="preserve">
     <value>The firstname is required.</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
   </data>
   <data name="GroupDescription" xml:space="preserve">
     <value>Description</value>

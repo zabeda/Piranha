@@ -37,6 +37,13 @@
             $('.datepicker input').datepicker({
                 dateFormat: "yy-mm-dd"
             });
+            $('#btnGenerate').click(function () {
+                $.getJSON(siteroot + "manager/settings/apikey", function (data) {
+                    $('#User_APIKey').val(data.Key);
+                    $('.apikey').text(data.Key);
+                });
+                return false;
+            });
         });
     </script>
 }
@@ -88,6 +95,11 @@
         <div class="title"><h2>@Piranha.Resources.Settings.Account</h2></div>
         <div class="inner">
             <ul class="form">
+                <li>@Html.Label(Piranha.Resources.Settings.APIKey)
+                    @Html.HiddenFor(m => m.User.APIKey)
+                    <button id="btnGenerate" class="btn right">@Piranha.Resources.Settings.Generate</button>
+                    <p class="apikey">@Html.Raw(Model.User.APIKey != Guid.Empty ? Model.User.APIKey.ToString() : "&nbsp;")</p>
+                </li>
                 <li>@Html.LabelFor(m => m.User.IsLocked)
                     <p>@Html.CheckBoxFor(m => m.User.IsLocked) (@Piranha.Resources.Settings.LockedInfo)</p>
                 </li>
