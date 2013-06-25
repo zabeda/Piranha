@@ -32,7 +32,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <returns>The model.</returns>
 		public static PageListModel Get() {
 			PageListModel m = new PageListModel() ;
-			m.Templates = PageTemplate.GetFields("pagetemplate_id,pagetemplate_name,pagetemplate_created,pagetemplate_updated",
+			m.Templates = PageTemplate.GetFields("pagetemplate_id,pagetemplate_name,pagetemplate_type,pagetemplate_created,pagetemplate_updated",
 				"pagetemplate_site_template = 0", new Params() { OrderBy = "pagetemplate_name ASC" }) ;
 			return m ;
 		}

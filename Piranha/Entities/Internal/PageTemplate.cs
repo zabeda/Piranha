@@ -105,6 +105,12 @@ namespace Piranha.Models
 		public bool IsSiteTemplate { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the type that created this template if it was create by code.
+		/// </summary>
+		[Column(Name="pagetemplate_type")]
+		public string Type { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name="pagetemplate_created")]
@@ -127,6 +133,19 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="pagetemplate_updated_by")]
 		public override Guid UpdatedBy { get ; set ; }
+		#endregion
+
+		#region Properties
+		/// <summary>
+		/// Gets if the template is locked from editing in the manager interface.
+		/// </summary>
+		public bool IsLocked { 
+			get { 
+				if (!String.IsNullOrEmpty(Type))
+					return Extend.ExtensionManager.Current.PageTypes.Where(pt => pt.GetType().FullName == Type).SingleOrDefault() != null ;
+				return false ;
+			} 
+		}
 		#endregion
 
 		/// <summary>

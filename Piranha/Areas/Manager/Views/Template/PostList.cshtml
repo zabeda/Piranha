@@ -51,7 +51,10 @@
                 <td class="updated">@pt.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="created">@pt.Created.ToString("yyyy-MM-dd")</td>
                 <td class="buttons">
-                    <a class="icon delete" href="@Url.Action("deletepost", new { id = pt.Id })"></a></td>
+                    @if (!pt.IsLocked) {
+                    <a class="icon delete" href="@Url.Action("deletepost", new { id = pt.Id })"></a>
+                    }
+                </td>
             </tr>
             }
         </tbody>

@@ -62,6 +62,11 @@ namespace Piranha.Entities
 		/// Gets/sets the permalink id.
 		/// </summary>
 		public Guid? PermalinkId { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the type that created this template if it was create by code.
+		/// </summary>
+		public string Type { get ; set ; }
 		#endregion
 
 		#region Internal properties

@@ -57,6 +57,11 @@ namespace Piranha.Entities
 		/// Gets/sets if this is a site template.
 		/// </summary>
 		public bool IsSiteTemplate { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the type that created this template if it was create by code.
+		/// </summary>
+		public string Type { get ; set ; }
 		#endregion
 
 		#region Navigation properties

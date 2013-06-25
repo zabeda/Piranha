@@ -529,6 +529,12 @@
     <Compile Include="Entities\StandardEntity.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extend\PostType.cs" />
+    <Compile Include="Extend\IPageType.cs" />
+    <Compile Include="Extend\IPostType.cs" />
+    <Compile Include="Extend\IType.cs" />
+    <Compile Include="Extend\PageType.cs" />
+    <Compile Include="Extend\RegionType.cs" />
     <Compile Include="IO\LocalMediaProvider.cs" />
     <Compile Include="Extend\Extension.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
@@ -873,6 +879,8 @@
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\30.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\31.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\31.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\32.sql" />
+    <EmbeddedResource Include="Data\Scripts\MySql\Updates\32.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

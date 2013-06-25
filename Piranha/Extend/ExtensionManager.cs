@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Text;
+using System.Web;
 using System.Web.Compilation;
 
 namespace Piranha.Extend
@@ -32,6 +33,23 @@ namespace Piranha.Extend
 		/// </summary>
 		[ImportMany(AllowRecomposition=true)]
 		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions { get ; set ; }
+
+		/// <summary>
+		/// The currently code-defined page types.
+		/// </summary>
+		[ImportMany(AllowRecomposition=true)]
+		internal IEnumerable<IPageType> PageTypes { get ; set ; }
+
+		/// <summary>
+		/// The currently code-defined post types.
+		/// </summary>
+		[ImportMany(AllowRecomposition=true)]
+		internal IEnumerable<IPostType> PostTypes { get ; set ; }
+
+		/// <summary>
+		/// Gets whether or not the extension manager has been initialized.
+		/// </summary>
+		public bool IsInitialized { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -65,6 +83,14 @@ namespace Piranha.Extend
 					ext.Value.Ensure(db) ;
 				db.Logout() ;
 			}
+			// Ensure page types
+			EnsurePageTypes() ;
+
+			// Ensure post types
+			EnsurePostTypes() ;
+
+			// Set initialized to true
+			IsInitialized = true ;
 		}
 
 		/// <summary>
@@ -189,6 +215,99 @@ namespace Piranha.Extend
 				else ret.Add(e) ;
 			}
 			return ret ;
+		}
+
+		/// <summary>
+		/// Creates and updates all page types defined by code.
+		/// </summary>
+		private void EnsurePageTypes() {
+			foreach (var type in PageTypes) {
+				var pt = Models.PageTemplate.Get("pagetemplate_type=@0", type.GetType().FullName).SingleOrDefault() ;
+				
+				Models.Manager.TemplateModels.PageEditModel m = null ;
+
+				// Get or create the page type
+				if (pt != null)
+					m = Models.Manager.TemplateModels.PageEditModel.GetById(pt.Id, false) ;
+				else m = new Models.Manager.TemplateModels.PageEditModel(false) ;
+
+				// Set all meta data
+				if (m.Template.IsNew)
+					m.Template.Id = Guid.NewGuid() ;
+				m.Template.Name = type.Name ;
+				m.Template.Description = type.Description ;
+				m.Template.Preview = new HtmlString(type.Preview) ;
+				m.Template.Controller = type.Controller ;
+				m.Template.ShowController = type.ShowController ;
+				m.Template.View = type.View ;
+				m.Template.ShowView = type.ShowView ;
+				m.Template.Properties.Clear() ;
+				m.Template.Properties.AddRange(type.Properties) ;
+				m.Template.Type = type.GetType().FullName ;
+
+				var old = m.Regions ;
+
+				// Create region templates
+				for (int n = 1; n <= type.Regions.Count; n++) {
+					var reg = type.Regions[n - 1] ;
+
+					var rt = old.Where(r => r.InternalId == reg.InternalId && r.Type == reg.Type.FullName).SingleOrDefault() ;
+					if (rt == null)
+						rt = new Models.RegionTemplate() ;
+
+					rt.TemplateId = m.Template.Id ;
+					rt.InternalId = reg.InternalId ;
+					rt.Name = reg.Name ;
+					rt.Type = reg.Type.FullName ;
+					rt.Seqno = n ;
+				
+					m.Regions.Add(rt) ;
+				}
+				// Delete removed region templates
+				var removed = old.Where(r => m.Regions.Contains(r)) ;
+
+				// Save Template
+				Data.Database.LoginSys() ;
+				foreach (var rem in removed)
+					rem.Delete() ;
+				m.SaveAll() ;
+				Data.Database.Logout() ;
+			}
+		}
+
+		/// <summary>
+		/// Creates and updates all post types defined by code.
+		/// </summary>
+		private void EnsurePostTypes() {
+			foreach (var type in PostTypes) {
+				var pt = Models.PostTemplate.Get("posttemplate_type=@0", type.GetType().FullName).SingleOrDefault() ;
+				
+				Models.Manager.TemplateModels.PostEditModel m = null ;
+
+				// Get or create the page type
+				if (pt != null)
+					m = Models.Manager.TemplateModels.PostEditModel.GetById(pt.Id) ;
+				else m = new Models.Manager.TemplateModels.PostEditModel() ;
+
+				// Set all meta data
+				if (m.Template.IsNew)
+					m.Template.Id = Guid.NewGuid() ;
+				m.Template.Name = type.Name ;
+				m.Template.Description = type.Description ;
+				m.Template.Preview = new HtmlString(type.Preview) ;
+				m.Template.Controller = type.Controller ;
+				m.Template.ShowController = type.ShowController ;
+				m.Template.View = type.View ;
+				m.Template.ShowView = type.ShowView ;
+				m.Template.Properties.Clear() ;
+				m.Template.Properties.AddRange(type.Properties) ;
+				m.Template.Type = type.GetType().FullName ;
+
+				// Save Template
+				Data.Database.LoginSys() ;
+				m.SaveAll() ;
+				Data.Database.Logout() ;
+			}
 		}
 	}
 }

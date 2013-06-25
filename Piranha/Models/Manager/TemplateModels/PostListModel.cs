@@ -31,7 +31,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		public static PostListModel Get() {
 			PostListModel m = new PostListModel() ;
-			m.Templates = PostTemplate.GetFields("posttemplate_id,posttemplate_name,posttemplate_created,posttemplate_updated",
+			m.Templates = PostTemplate.GetFields("posttemplate_id,posttemplate_name,posttemplate_type,posttemplate_created,posttemplate_updated",
 				new Params() { OrderBy = "posttemplate_name" }) ;
 			return m ;
 		}

@@ -56,7 +56,13 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Default constructor, creates a new model.
 		/// </summary>
-		public PageEditModel() {
+		public PageEditModel() : this(true) {}
+
+		/// <summary>
+		/// Creates a new model.
+		/// </summary>
+		/// <param name="loadRegionTypes">If the region types should be loaded</param>
+		internal PageEditModel(bool loadRegionTypes = true) {
 			Template = new PageTemplate() {
 				Preview = new HtmlString(
 					"<table class=\"template\">" +
@@ -67,18 +73,21 @@ namespace Piranha.Models.Manager.TemplateModels
 			Regions = new List<RegionTemplate>() ;
 			RegionTypes = new List<dynamic>() ;
 
-			ExtensionManager.Current.GetByExtensionType(ExtensionType.Region).OrderBy(e => e.Metadata.Name).Each((i, r) =>
-				RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName })) ;
-			RegionTypes.Insert(0, new { Name = "", Type = "" }) ;
+			if (loadRegionTypes) {
+				ExtensionManager.Current.GetByExtensionType(ExtensionType.Region).OrderBy(e => e.Metadata.Name).Each((i, r) =>
+					RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName })) ;
+				RegionTypes.Insert(0, new { Name = "", Type = "" }) ;
+			}	
 		}
 
 		/// <summary>
 		/// Gets the model for the template specified by the given id.
 		/// </summary>
 		/// <param name="id">The template id</param>
+		/// <param name="loadRegionTypes">If the region types should be loaded</param>
 		/// <returns>The model</returns>
-		public static PageEditModel GetById(Guid id) {
-			PageEditModel m = new PageEditModel() ;
+		public static PageEditModel GetById(Guid id, bool loadRegionTypes = true) {
+			PageEditModel m = new PageEditModel(loadRegionTypes) ;
 			m.Template = PageTemplate.GetSingle(id) ;
 			m.Regions = RegionTemplate.Get("regiontemplate_template_id = @0", id, new Params() { OrderBy = "regiontemplate_seqno" }) ;
 

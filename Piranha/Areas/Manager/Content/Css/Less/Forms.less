@@ -69,7 +69,8 @@ p input[type="radio"] {
         height: 40px;
     }
     &.active {
-        .active();
+        background: @color-active;
+        color: #fff;
     }
     &a {
         text-decoration: none;
@@ -83,9 +84,10 @@ p input[type="radio"] {
         margin-right: 34px;
         clear: none;
     }
+
     .protected .input {
         display: none;
-        }
+    }
 
     li {
         position: relative;
@@ -98,20 +100,24 @@ p input[type="radio"] {
         .btn {
             margin: 3px 8px 0 0;
         }
+
         .file {
             margin: 0;
         }
+
         .upload button {
             float: right;
             margin: 0 0 0 10px;
         }
     }
+
     label {
         float: left;
         text-indent: 10px;
         margin-top: 7px;
         color: #666;
     }
+
     p {
         display: block;
         color: #666;
@@ -119,24 +125,30 @@ p input[type="radio"] {
         padding: 6px 0 6px 10px;
         border: none;
     }
+
     .input {
         margin: 0 0 0 130px;
         border: none;
     }
+
     .half p {
         margin-left: 0;
     }
+
     .checkbox label {
         float: none;
         margin: 0;
     }
+
     .short {
         margin-right: 30px;
     }
+
     .block {
         margin-left: 130px;
         overflow: hidden;
     }
+
     .field-validation-error {
         background: #2d2d2d;
         color: #ccc;

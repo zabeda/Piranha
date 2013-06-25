@@ -16,8 +16,10 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
+            @if (!Model.Template.IsLocked) {
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             <li><a href="@Url.Action("deletepost", new { id = Model.Template.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            }
             <li><a href="@Url.Action("postlist")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             <li><a href="@Url.Action("post", new { id = Model.Template.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
@@ -30,6 +32,7 @@
     @Html.HiddenFor(m => m.Template.Id)
     @Html.HiddenFor(m => m.Template.PermalinkId)
     @Html.HiddenFor(m => m.Template.IsNew)
+    @Html.HiddenFor(m => m.Template.Type)
     @Html.HiddenFor(m => m.Template.Created)
     @Html.HiddenFor(m => m.Template.Updated)
     @Html.HiddenFor(m => m.Template.CreatedBy)

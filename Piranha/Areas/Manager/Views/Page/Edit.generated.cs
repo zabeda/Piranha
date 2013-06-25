@@ -40,7 +40,7 @@ namespace Piranha.Areas.Manager.Views.Page
     #line hidden
     using Piranha.Web;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.4.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Manager/Views/Page/Edit.cshtml")]
     public partial class Edit : System.Web.Mvc.WebViewPage<Piranha.Models.Manager.PageModels.EditModel>
     {

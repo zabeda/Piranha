@@ -50,7 +50,10 @@
                 <td class="created date">@pt.Created.ToString("yyyy-MM-dd")</td>
                 <td class="updated date">@pt.Updated.ToString("yyyy-MM-dd")</td>
                 <td class="buttons one">
-                    <a class="icon delete" title="@Piranha.Resources.Template.ListDeletePage" href="@Url.Action("deletepage", new { id = pt.Id })"></a></td>
+                    @if (!pt.IsLocked) {
+                    <a class="icon delete" title="@Piranha.Resources.Template.ListDeletePage" href="@Url.Action("deletepage", new { id = pt.Id })"></a>
+                    }
+                </td>
             </tr>
             }
         </tbody>

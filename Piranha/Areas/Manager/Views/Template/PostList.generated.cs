@@ -28,7 +28,7 @@ namespace Piranha.Areas.Manager.Views.Template
     using System.Web.WebPages;
     using Piranha.Web;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.4.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Manager/Views/Template/PostList.cshtml")]
     public partial class PostList : System.Web.Mvc.WebViewPage<Piranha.Models.Manager.TemplateModels.PostListModel>
     {
@@ -310,24 +310,48 @@ WriteLiteral("</td>\r\n                <td");
 
 WriteLiteral(" class=\"buttons\"");
 
-WriteLiteral(">\r\n                    <a");
+WriteLiteral(">\r\n");
 
-WriteLiteral(" class=\"icon delete\"");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 2206), Tuple.Create("\"", 2258)
             
             #line 54 "..\..\Areas\Manager\Views\Template\PostList.cshtml"
-, Tuple.Create(Tuple.Create("", 2213), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepost", new { id = pt.Id })
+                    
             
             #line default
             #line hidden
-, 2213), false)
+            
+            #line 54 "..\..\Areas\Manager\Views\Template\PostList.cshtml"
+                     if (!pt.IsLocked) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <a");
+
+WriteLiteral(" class=\"icon delete\"");
+
+WriteAttribute("href", Tuple.Create(" href=\"", 2248), Tuple.Create("\"", 2300)
+            
+            #line 55 "..\..\Areas\Manager\Views\Template\PostList.cshtml"
+, Tuple.Create(Tuple.Create("", 2255), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepost", new { id = pt.Id })
+            
+            #line default
+            #line hidden
+, 2255), false)
 );
 
-WriteLiteral("></a></td>\r\n            </tr>\r\n");
+WriteLiteral("></a>\r\n");
 
             
             #line 56 "..\..\Areas\Manager\Views\Template\PostList.cshtml"
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </td>\r\n            </tr>\r\n");
+
+            
+            #line 59 "..\..\Areas\Manager\Views\Template\PostList.cshtml"
             }
 
             

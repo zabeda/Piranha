@@ -28,7 +28,7 @@ namespace Piranha.Areas.Manager.Views.Template
     using System.Web.WebPages;
     using Piranha.Web;
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.4.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Manager/Views/Template/PageList.cshtml")]
     public partial class PageList : System.Web.Mvc.WebViewPage<Piranha.Models.Manager.TemplateModels.PageListModel>
     {
@@ -298,34 +298,58 @@ WriteLiteral("</td>\r\n                <td");
 
 WriteLiteral(" class=\"buttons one\"");
 
-WriteLiteral(">\r\n                    <a");
+WriteLiteral(">\r\n");
+
+            
+            #line 53 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
+                    
+            
+            #line default
+            #line hidden
+            
+            #line 53 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
+                     if (!pt.IsLocked) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                    <a");
 
 WriteLiteral(" class=\"icon delete\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2146), Tuple.Create("\"", 2196)
+WriteAttribute("title", Tuple.Create(" title=\"", 2188), Tuple.Create("\"", 2238)
             
-            #line 53 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
-, Tuple.Create(Tuple.Create("", 2154), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.ListDeletePage
-            
-            #line default
-            #line hidden
-, 2154), false)
-);
-
-WriteAttribute("href", Tuple.Create(" href=\"", 2197), Tuple.Create("\"", 2249)
-            
-            #line 53 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
-                    , Tuple.Create(Tuple.Create("", 2204), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepage", new { id = pt.Id })
+            #line 54 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
+, Tuple.Create(Tuple.Create("", 2196), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.ListDeletePage
             
             #line default
             #line hidden
-, 2204), false)
+, 2196), false)
 );
 
-WriteLiteral("></a></td>\r\n            </tr>\r\n");
+WriteAttribute("href", Tuple.Create(" href=\"", 2239), Tuple.Create("\"", 2291)
+            
+            #line 54 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
+                    , Tuple.Create(Tuple.Create("", 2246), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepage", new { id = pt.Id })
+            
+            #line default
+            #line hidden
+, 2246), false)
+);
+
+WriteLiteral("></a>\r\n");
 
             
             #line 55 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
+                    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("                </td>\r\n            </tr>\r\n");
+
+            
+            #line 58 "..\..\Areas\Manager\Views\Template\PageList.cshtml"
             }
 
             
