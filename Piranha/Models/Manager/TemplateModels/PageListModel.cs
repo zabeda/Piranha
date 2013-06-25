@@ -24,6 +24,7 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		public PageListModel() {
 			Templates = new List<PageTemplate>() ;
+			Extend.ExtensionManager.Current.ForceInit() ;
 		}
 
 		/// <summary>

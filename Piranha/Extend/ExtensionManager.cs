@@ -45,11 +45,6 @@ namespace Piranha.Extend
 		/// </summary>
 		[ImportMany(AllowRecomposition=true)]
 		internal IEnumerable<IPostType> PostTypes { get ; set ; }
-
-		/// <summary>
-		/// Gets whether or not the extension manager has been initialized.
-		/// </summary>
-		public bool IsInitialized { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -88,9 +83,6 @@ namespace Piranha.Extend
 
 			// Ensure post types
 			EnsurePostTypes() ;
-
-			// Set initialized to true
-			IsInitialized = true ;
 		}
 
 		/// <summary>
@@ -216,6 +208,11 @@ namespace Piranha.Extend
 			}
 			return ret ;
 		}
+
+		/// <summary>
+		/// Empty stub that just forces the initialization of the extension manager.
+		/// </summary>
+		internal void ForceInit() {}
 
 		/// <summary>
 		/// Creates and updates all page types defined by code.
