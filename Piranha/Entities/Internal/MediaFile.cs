@@ -92,7 +92,7 @@ namespace Piranha.Models
 				if (param != null && param.Value == "1")
 					compress = true ;
 
-				var data = Application.Current.MediaProvider.Get(Id) ;
+				var data = Application.Current.MediaProvider.Get(Id, (this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media)) ;
 
 				try {
 					using (var mem = new MemoryStream(data)) {
