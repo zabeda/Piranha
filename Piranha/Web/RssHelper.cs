@@ -73,7 +73,7 @@ namespace Piranha.Web
 		/// <returns>The public link</returns>
 		private static string PublicLink(HttpRequest request, string permalink) {
 			return WebPages.WebPiranha.GetSiteUrl() + "/" +
-				Application.Current.Handlers.GetUrlPrefix("PERMALINK") + "/" + permalink ;
+				(!WebPages.WebPiranha.PrefixlessPermalinks ? Application.Current.Handlers.GetUrlPrefix("PERMALINK") + "/" : "") + permalink ;
 		}
 
 		/// <summary>
