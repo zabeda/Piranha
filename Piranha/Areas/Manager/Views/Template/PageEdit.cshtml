@@ -17,6 +17,16 @@
             $('#Template_Name').focus();
         });
     </script>
+    @if (Model.Template.IsLocked) {
+    <style type="text/css">
+        .region-editor .icon {
+            display: none;
+        }
+        .region-editor tr.dark {
+            display: none;
+        }
+    </style>
+    }
 }
 @section Toolbar {
 @Html.Partial("Partial/Tabs")

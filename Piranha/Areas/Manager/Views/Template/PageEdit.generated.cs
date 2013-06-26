@@ -94,6 +94,34 @@ WriteLiteral(">\r\n        /**\r\n         * This var is needed by the regiontem
 WriteLiteral("\';\r\n\r\n        $(document).ready(function () {\r\n            $(\'#Template_Name\').fo" +
 "cus();\r\n        });\r\n    </script>\r\n");
 
+            
+            #line 20 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+    
+            
+            #line default
+            #line hidden
+            
+            #line 20 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+     if (Model.Template.IsLocked) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <style");
+
+WriteLiteral(" type=\"text/css\"");
+
+WriteLiteral(">\r\n        .region-editor .icon {\r\n            display: none;\r\n        }\r\n       " +
+" .region-editor tr.dark {\r\n            display: none;\r\n        }\r\n    </style>\r\n" +
+"");
+
+            
+            #line 29 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
 });
 
 DefineSection("Toolbar", () => {
@@ -101,7 +129,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral("\r\n");
 
             
-            #line 22 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 32 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -118,13 +146,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n        <ul>\r\n");
 
             
-            #line 26 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 36 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 26 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 36 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
              if (!Model.Template.IsLocked) {
 
             
@@ -137,7 +165,7 @@ WriteLiteral(" class=\"save submit\"");
 WriteLiteral(">");
 
             
-            #line 27 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 37 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                   Write(Piranha.Resources.Global.ToolbarSave);
 
             
@@ -147,14 +175,14 @@ WriteLiteral("</a></li>\r\n");
 
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1034), Tuple.Create("\"", 1098)
+WriteAttribute("href", Tuple.Create(" href=\"", 1265), Tuple.Create("\"", 1329)
             
-            #line 28 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 1041), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepage", new { id = Model.Template.Id })
+            #line 38 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 1272), Tuple.Create<System.Object, System.Int32>(Url.Action("deletepage", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 1041), false)
+, 1272), false)
 );
 
 WriteLiteral(" class=\"delete\"");
@@ -164,7 +192,7 @@ WriteLiteral(" title=\"\"");
 WriteLiteral(">");
 
             
-            #line 28 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 38 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                                                                                        Write(Piranha.Resources.Global.ToolbarDelete);
 
             
@@ -173,7 +201,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 29 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
             }
 
             
@@ -181,14 +209,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1207), Tuple.Create("\"", 1237)
+WriteAttribute("href", Tuple.Create(" href=\"", 1438), Tuple.Create("\"", 1468)
             
-            #line 30 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 1214), Tuple.Create<System.Object, System.Int32>(Url.Action("pagelist")
+            #line 40 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 1445), Tuple.Create<System.Object, System.Int32>(Url.Action("pagelist")
             
             #line default
             #line hidden
-, 1214), false)
+, 1445), false)
 );
 
 WriteLiteral(" class=\"back\"");
@@ -196,7 +224,7 @@ WriteLiteral(" class=\"back\"");
 WriteLiteral(">");
 
             
-            #line 30 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                                           Write(Piranha.Resources.Global.ToolbarBack);
 
             
@@ -204,14 +232,14 @@ WriteLiteral(">");
             #line hidden
 WriteLiteral("</a></li>\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1318), Tuple.Create("\"", 1376)
+WriteAttribute("href", Tuple.Create(" href=\"", 1549), Tuple.Create("\"", 1607)
             
-            #line 31 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 1325), Tuple.Create<System.Object, System.Int32>(Url.Action("page", new { id = Model.Template.Id })
+            #line 41 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 1556), Tuple.Create<System.Object, System.Int32>(Url.Action("page", new { id = Model.Template.Id })
             
             #line default
             #line hidden
-, 1325), false)
+, 1556), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -219,7 +247,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 31 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                                                                          Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -236,7 +264,7 @@ WriteLiteral("></div>\r\n    </div>\r\n</div>\r\n");
 WriteLiteral("\r\n");
 
             
-            #line 38 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
    Html.BeginForm("page", "template") ; 
             
             #line default
@@ -246,7 +274,7 @@ WriteLiteral("\r\n<div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 50 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Id));
 
             
@@ -257,7 +285,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 41 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.IsNew));
 
             
@@ -268,7 +296,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 42 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 52 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.IsSiteTemplate));
 
             
@@ -279,7 +307,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 43 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 53 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Type));
 
             
@@ -290,7 +318,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 44 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Created));
 
             
@@ -301,7 +329,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 45 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.Updated));
 
             
@@ -312,7 +340,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 46 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 56 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.CreatedBy));
 
             
@@ -323,7 +351,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 47 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.UpdatedBy));
 
             
@@ -332,41 +360,41 @@ Write(Html.HiddenFor(m => m.Template.UpdatedBy));
 WriteLiteral("\r\n");
 
             
-            #line 48 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 58 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
      if (!Piranha.Application.Current.IsMvc) {
     
             
             #line default
             #line hidden
             
-            #line 49 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.View));
 
             
             #line default
             #line hidden
             
-            #line 49 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 59 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                          
     
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
 Write(Html.HiddenFor(m => m.Template.ShowView));
 
             
             #line default
             #line hidden
             
-            #line 50 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                              
     }
 
@@ -388,7 +416,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 55 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 65 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -405,7 +433,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 58 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Name));
 
             
@@ -420,7 +448,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 60 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 70 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Name));
 
             
@@ -431,7 +459,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 61 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 71 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.ValidationMessageFor(m => m.Template.Name));
 
             
@@ -440,7 +468,7 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n                </li>\r\n                <li>");
 
             
-            #line 63 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 73 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Description));
 
             
@@ -455,7 +483,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 65 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 75 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextAreaFor(m => m.Template.Description, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -469,7 +497,7 @@ WriteLiteral(" class=\"form optional\"");
 WriteLiteral(">               \r\n                <li>");
 
             
-            #line 70 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 80 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Preview));
 
             
@@ -484,7 +512,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 72 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 82 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextAreaFor(m => m.Template.Preview, new { @rows = 8} ));
 
             
@@ -502,7 +530,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 78 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 88 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                           Write(Piranha.Resources.Global.Regions);
 
             
@@ -520,7 +548,7 @@ WriteLiteral(">\r\n                <tbody>\r\n                    <tr>\r\n      
 ">");
 
             
-            #line 83 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 93 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                        Write(Piranha.Resources.Global.Name);
 
             
@@ -529,7 +557,7 @@ WriteLiteral(">\r\n                <tbody>\r\n                    <tr>\r\n      
 WriteLiteral("</th>\r\n                        <th>");
 
             
-            #line 84 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 94 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                        Write(Piranha.Resources.Global.InternalId);
 
             
@@ -538,7 +566,7 @@ WriteLiteral("</th>\r\n                        <th>");
 WriteLiteral("</th>\r\n                        <th>");
 
             
-            #line 85 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 95 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                        Write(Piranha.Resources.Global.Type);
 
             
@@ -549,7 +577,7 @@ WriteLiteral("</th>\r\n                        <th></th>\r\n                    
 WriteLiteral("                    ");
 
             
-            #line 88 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 98 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.EditorFor(m => m.Regions));
 
             
@@ -600,7 +628,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 100 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 110 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                            Write(Html.DropDownList("newregionType",
                                     new SelectList(Model.RegionTypes, "Type", "Name")));
 
@@ -620,7 +648,7 @@ WriteLiteral(" class=\"btn marg-big\"");
 WriteLiteral(">");
 
             
-            #line 104 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 114 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                                                       Write(Piranha.Resources.Global.Add);
 
             
@@ -638,7 +666,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 112 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 122 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                           Write(Piranha.Resources.Global.Advanced);
 
             
@@ -655,7 +683,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 115 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 125 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Controller, 
                         Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
 
@@ -671,7 +699,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 118 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 128 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = "Page" }));
 
@@ -681,7 +709,7 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
 
             
-            #line 121 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 131 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                   Write(Html.CheckBoxFor(m => m.Template.ShowController));
 
             
@@ -692,7 +720,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 122 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 132 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                     Write(Piranha.Application.Current.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride);
 
             
@@ -701,13 +729,13 @@ WriteLiteral("                        ");
 WriteLiteral("</p>\r\n                </li>\r\n");
 
             
-            #line 124 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 134 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 124 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 134 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                  if (Piranha.Application.Current.IsMvc) {
 
             
@@ -716,7 +744,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
 WriteLiteral("                <li>");
 
             
-            #line 125 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 135 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.View));
 
             
@@ -731,7 +759,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 127 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 137 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.View, new { @placeholder = "Index" }));
 
             
@@ -740,7 +768,7 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
 
             
-            #line 129 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 139 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                   Write(Html.CheckBoxFor(m => m.Template.ShowView));
 
             
@@ -749,7 +777,7 @@ WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n           
 WriteLiteral(" ");
 
             
-            #line 129 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 139 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                                               Write(Piranha.Resources.Template.PageViewOverride);
 
             
@@ -758,7 +786,7 @@ WriteLiteral(" ");
 WriteLiteral("</p>\r\n                </li>\r\n");
 
             
-            #line 131 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 141 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                 }
 
             
@@ -767,7 +795,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
 WriteLiteral("                <li>");
 
             
-            #line 132 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 142 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Redirect));
 
             
@@ -782,7 +810,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 134 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 144 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                    Write(Html.TextBoxFor(m => m.Template.Redirect, 
                             new { @placeholder = Piranha.Resources.Global.Optional }));
 
@@ -792,7 +820,7 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n                    <p>");
 
             
-            #line 137 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 147 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                   Write(Html.CheckBoxFor(m => m.Template.ShowRedirect));
 
             
@@ -801,7 +829,7 @@ WriteLiteral("</div>\r\n                    <label>&nbsp;</label>\r\n           
 WriteLiteral(" ");
 
             
-            #line 137 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 147 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                                                   Write(Piranha.Resources.Template.PageRedirectOverride);
 
             
@@ -815,13 +843,13 @@ WriteLiteral(" class=\"grid_3\"");
 WriteLiteral(">\r\n");
 
             
-            #line 144 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 154 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 144 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 154 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
      if (!Model.Template.IsNew && !String.IsNullOrEmpty(Model.Template.Preview.ToHtmlString())) {
 
             
@@ -838,7 +866,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 146 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 156 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                           Write(Piranha.Resources.Page.HtmlPreview);
 
             
@@ -857,7 +885,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 149 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 159 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
            Write(Model.Template.Preview);
 
             
@@ -866,7 +894,7 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 153 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 163 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
     }
 
             
@@ -883,7 +911,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 155 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 165 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                           Write(Piranha.Resources.Global.Properties);
 
             
@@ -906,13 +934,13 @@ WriteLiteral(" class=\"list buttons\"");
 WriteLiteral(">\r\n");
 
             
-            #line 159 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 169 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 169 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                  foreach (var property in Model.Template.Properties) {
 
             
@@ -921,7 +949,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                <li><span>");
 
             
-            #line 160 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 170 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                      Write(property);
 
             
@@ -934,7 +962,7 @@ WriteLiteral(" class=\"btn delete right remove-region\"");
 WriteLiteral("></button></li>\r\n");
 
             
-            #line 161 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 171 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                 }
 
             
@@ -950,14 +978,14 @@ WriteLiteral(" id=\"po_name\"");
 
 WriteLiteral(" type=\"text\"");
 
-WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 7518), Tuple.Create("\"", 7579)
+WriteAttribute("placeholder", Tuple.Create(" placeholder=\"", 7749), Tuple.Create("\"", 7810)
             
-            #line 164 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-, Tuple.Create(Tuple.Create("", 7532), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
+            #line 174 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+, Tuple.Create(Tuple.Create("", 7763), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Template.PropertyPlaceholder
             
             #line default
             #line hidden
-, 7532), false)
+, 7763), false)
 );
 
 WriteLiteral(" /></div>\r\n            <button");
@@ -969,7 +997,7 @@ WriteLiteral(" class=\"btn right\"");
 WriteLiteral(">");
 
             
-            #line 165 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 175 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                                              Write(Piranha.Resources.Global.Add);
 
             
@@ -982,7 +1010,7 @@ WriteLiteral(" class=\"clear\"");
 WriteLiteral("></div>\r\n         </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 170 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
+            #line 180 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
    Html.EndForm() ; 
             
             #line default
