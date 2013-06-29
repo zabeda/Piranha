@@ -108,7 +108,7 @@ namespace Piranha.Models
 
 					if (File.Exists(GetCachePath(width.Value, height.Value))) {
 						// Return generated & cached resized image
-						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
+						WriteFile(context, GetCachePath(width.Value, height.Value), compress) ;
 					} else if (data != null) {
 						int orgWidth = img.Width, orgHeight = img.Height ;
 
@@ -116,11 +116,11 @@ namespace Piranha.Models
 							if (resized.Width != orgWidth || resized.Height != orgHeight)
 								resized.Save(GetCachePath(width.Value, height.Value), compress ? ImageFormat.Jpeg : img.RawFormat) ;
 						}
-						WriteFile(context.Response, GetCachePath(width.Value, height.Value), compress) ;
+						WriteFile(context, GetCachePath(width.Value, height.Value), compress) ;
 					}
 					img.Dispose() ;
 				}
-				WriteFile(context.Response, data) ;
+				WriteFile(context, data) ;
 			}
 		}
 
@@ -217,34 +217,34 @@ namespace Piranha.Models
 		/// <summary>
 		/// Writes the given file to the http response
 		/// </summary>
-		/// <param name="response">The http response to write the file to</param>
+		/// <param name="context">The http context to write the file to</param>
 		/// <param name="path">The path to the physical file</param>
 		/// <param name="compressed">Whether or not the file is a compressed image</param>
-		protected void WriteFile(HttpResponse response, string path, bool compressed = false) {
+		protected void WriteFile(HttpContext context, string path, bool compressed = false) {
 			if (File.Exists(path)) {
-				response.StatusCode = 200 ;
-				response.ContentType = compressed ? "image/jpg" : Type ;
-				response.WriteFile(path) ;
-				response.End() ;
+				context.Response.StatusCode = 200 ;
+				context.Response.ContentType = compressed ? "image/jpg" : Type ;
+				context.Response.WriteFile(path) ;
+				context.Response.EndClean() ;
 			} else {
-				response.StatusCode = 404 ;
+				context.Response.StatusCode = 404 ;
 			}
 		}
 
 		/// <summary>
 		/// Writes the given file to the http response
 		/// </summary>
-		/// <param name="response">The http response to write the file to</param>
+		/// <param name="context">The http context to write the file to</param>
 		/// <param name="data">The data of the physical file</param>
 		/// <param name="compressed">Whether or not the file is a compressed image</param>
-		protected void WriteFile(HttpResponse response, byte[] data, bool compressed = false) {
+		protected void WriteFile(HttpContext context, byte[] data, bool compressed = false) {
 			if (data != null) {
-				response.StatusCode = 200 ;
-				response.ContentType = compressed ? "image/jpg" : Type ;
-				response.BinaryWrite(data) ;
-				response.End() ;
+				context.Response.StatusCode = 200 ;
+				context.Response.ContentType = compressed ? "image/jpg" : Type ;
+				context.Response.BinaryWrite(data) ;
+				context.Response.EndClean() ;
 			} else {
-				response.StatusCode = 404 ;
+				context.Response.StatusCode = 404 ;
 			}
 		}
 		#endregion

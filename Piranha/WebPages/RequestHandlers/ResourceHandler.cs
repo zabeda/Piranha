@@ -74,7 +74,7 @@ namespace Piranha.WebPages.RequestHandlers
 						context.Response.ContentType = res.ContentType ;
 						context.Response.BinaryWrite(bytes) ;
 						context.Response.StatusCode = 200 ;
-						context.Response.End() ;
+						context.Response.EndClean() ;
 					}
 				} else {
 					context.Response.StatusCode = 404 ;

@@ -62,8 +62,9 @@ namespace Piranha.WebPages
 				if (!User.IsMember(page.GroupId)) {
 					SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
 					if (param != null)
-						Response.Redirect(param.Value) ;
-					else Response.Redirect("~/") ;
+						Response.Redirect(param.Value, false) ;
+					else Response.Redirect("~/", false) ;
+					HttpContext.Current.Response.EndClean() ;
 				}
 				Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
 			} else if (!draft) {
@@ -78,8 +79,9 @@ namespace Piranha.WebPages
 			if (page.DisabledGroups.Contains(User.GetProfile().GroupId)) {
 				SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
 				if (param != null)
-					Response.Redirect(param.Value) ;
-				else Response.Redirect("~/") ;
+					Response.Redirect(param.Value, false) ;
+				else Response.Redirect("~/", false) ;
+				HttpContext.Current.Response.EndClean() ;
 			}
 			// Load the model if the page wasn't cached
 			if (!cached)

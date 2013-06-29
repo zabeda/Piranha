@@ -61,7 +61,7 @@ namespace Piranha.Web
 			feed.WriteEndDocument() ;
 			feed.Flush() ;
 			feed.Close() ;
-			context.Response.End() ;
+			context.Response.EndClean() ;
 		}
 
 		#region Private methods

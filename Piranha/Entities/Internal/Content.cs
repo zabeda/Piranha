@@ -356,7 +356,7 @@ namespace Piranha.Models
 			if (Drawing.Thumbnails.ContainsKey(id)) {
 				if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
 					if (File.Exists(content.GetCacheThumbPath(size))) {
-						content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
+						content.WriteFile(context, content.GetCacheThumbPath(size)) ;
 					} else {
 						var resource = Drawing.Thumbnails.GetById(id) ;
 						if (size <= 32 && resource.Contains("ico-folder"))
@@ -383,7 +383,7 @@ namespace Piranha.Models
 							bmp.Dispose() ;
 							grp.Dispose() ;
 						}
-						content.WriteFile(context.Response, content.GetCacheThumbPath(size)) ;
+						content.WriteFile(context, content.GetCacheThumbPath(size)) ;
 
 						img.Dispose() ;
 					}
@@ -548,7 +548,7 @@ namespace Piranha.Models
 			if ((nocache && ClientCache.HandleNoCache(context)) || !ClientCache.HandleClientCache(context, Id.ToString() + size.ToString(), Updated)) {
 				if (File.Exists(GetCacheThumbPath(size))) {
 					// Return generated & cached thumbnail
-					WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
+					WriteFile(context, GetCacheThumbPath(size), compress) ;
 				} else {
 					byte[] data = null ;
 					if (IsDraft)
@@ -576,7 +576,7 @@ namespace Piranha.Models
 											bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
 										}
 									}
-									WriteFile(context.Response, GetCacheThumbPath(size), compress) ;
+									WriteFile(context, GetCacheThumbPath(size), compress) ;
 								}
 							}
 						}

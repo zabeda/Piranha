@@ -79,7 +79,7 @@ namespace Piranha.Web
 				if (IsCached(context, modified, etag)) {
 					context.Response.StatusCode = 304 ;
 					context.Response.SuppressContent = true ;
-					context.Response.End() ;
+					context.Response.EndClean() ;
 					return true ;
 				}
 			} else {

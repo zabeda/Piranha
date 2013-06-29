@@ -15,6 +15,7 @@ using System.Web.Routing;
 
 using Piranha.Models;
 using Piranha.WebPages.RequestHandlers;
+using System.Threading;
 
 namespace Piranha.WebPages
 {
@@ -243,59 +244,71 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <param name="context">Http context</param>
 		public static void BeginRequest(HttpContext context) {
-			string path = context.Request.Path.Substring(context.Request.ApplicationPath.Length > 1 ? 
-				context.Request.ApplicationPath.Length : 0) ;
+			try {
+				string path = context.Request.Path.Substring(context.Request.ApplicationPath.Length > 1 ? 
+					context.Request.ApplicationPath.Length : 0) ;
 
-			string[] args = path.Split(new char[] {'/'}).Subset(1) ;
+				string[] args = path.Split(new char[] {'/'}).Subset(1) ;
 				
-			if (args.Length > 0) {
-				int pos = 0 ;
+				if (args.Length > 0) {
+					int pos = 0 ;
 
-				// Ensure database
-				if (args[0] == "" && SysParam.GetByName("SITE_VERSION") == null)
-					context.Response.Redirect("~/manager") ;
-
-				// Check for culture prefix
-				if (Cultures.ContainsKey(args[0])) {
-					System.Threading.Thread.CurrentThread.CurrentCulture =
-						System.Threading.Thread.CurrentThread.CurrentUICulture = Cultures[args[0]] ;
-					pos = 1;
-				} else {
-					var def = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization") ;
-					if (def != null) {
-						System.Threading.Thread.CurrentThread.CurrentCulture = 
-							System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
+					// Ensure database
+					if (args[0] == "" && SysParam.GetByName("SITE_VERSION") == null) {
+						context.Response.Redirect("~/manager", false) ;
+						context.Response.EndClean() ;
 					}
-				}
 
-				var handled = false ;
+					// Check for culture prefix
+					if (Cultures.ContainsKey(args[0])) {
+						System.Threading.Thread.CurrentThread.CurrentCulture =
+							System.Threading.Thread.CurrentThread.CurrentUICulture = Cultures[args[0]] ;
+						pos = 1;
+					} else {
+						var def = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization") ;
+						if (def != null) {
+							System.Threading.Thread.CurrentThread.CurrentCulture = 
+								System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
+						}
+					}
 
-				// Find the correct request handler
-				// foreach (RequestHandlerRegistration hr in Handlers.Values) {
-				foreach (var hr in Application.Current.Handlers) {
-					if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
-						if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
-							// Execute the handler
-							hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
-							handled = true ;
-							break ;
+					var handled = false ;
+
+					// Find the correct request handler
+					// foreach (RequestHandlerRegistration hr in Handlers.Values) {
+					foreach (var hr in Application.Current.Handlers) {
+						if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
+							if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
+								// Execute the handler
+								hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
+								handled = true ;
+								break ;
+							}
+						}
+					}
+
+					if (!handled && args[pos].ToLower() == "res.ashx") {
+						Application.Current.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
+						handled = true ;
+					}
+
+					// If no handler was found and we are using prefixless permalinks, 
+					// route traffic to the permalink handler.
+					if (!handled && PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
+						if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[0]) != null) {
+							var handler = new PermalinkHandler() ;
+							handler.HandleRequest(context, args) ;
 						}
 					}
 				}
-
-				if (!handled && args[pos].ToLower() == "res.ashx") {
-					Application.Current.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
-					handled = true ;
-				}
-
-				// If no handler was found and we are using prefixless permalinks, 
-				// route traffic to the permalink handler.
-				if (!handled && PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
-					if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[0]) != null) {
-						var handler = new PermalinkHandler() ;
-						handler.HandleRequest(context, args) ;
-					}
-				}
+			} catch (ThreadAbortException e) {
+				// We just want to log this exception but won't react to it.
+				Log.Current.Error("WebPiranha.BeginRequest", "ThreadAbortException", e) ;
+			} catch (Exception e) {
+				// One catch to rule them all, and in the log file bind them.
+				Log.Current.Error("WebPiranha.BeginRequest", "Unhandled exception", e) ;
+				context.Response.StatusCode = 500 ;
+				context.Response.EndClean() ;
 			}
 		}
 

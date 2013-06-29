@@ -34,7 +34,7 @@ namespace Piranha.WebPages.RequestHandlers
 			WriteNodes(context, sitemap) ;
 			WritePosts(context, posts) ;
 			context.Response.Write(xmlEnd) ;
-			context.Response.End() ;
+			context.Response.EndClean() ;
 		}
 
 		#region Private methods

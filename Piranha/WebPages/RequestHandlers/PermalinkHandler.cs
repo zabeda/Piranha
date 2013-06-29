@@ -61,8 +61,9 @@ namespace Piranha.WebPages.RequestHandlers
 							if (page != null) {
 								if (!String.IsNullOrEmpty(page.Redirect)) {
 									if (page.Redirect.StartsWith("http://"))
-										context.Response.Redirect(page.Redirect) ;
-									else context.Response.Redirect(page.Redirect) ;
+										context.Response.Redirect(page.Redirect, false) ;
+									else context.Response.Redirect(page.Redirect, false) ;
+									context.Response.EndClean() ;
 								} else {
 									//
 									// Call the route handler to route the current page.

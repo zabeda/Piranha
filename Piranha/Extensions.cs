@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Security;
-
 using Piranha.Models;
 
 /// <summary>
@@ -113,6 +113,19 @@ public static class PiranhaApp
 	/// <returns>An array of attributes</returns>
 	public static T[] GetCustomAttributes<T>(this Type type, bool inherit) {
 		return Array.ConvertAll<object, T>(type.GetCustomAttributes(typeof(T), inherit), (o) => (T)o) ;
+	}
+
+	/// <summary>
+	/// Ends the current request without throwing a ThreadAbortException
+	/// </summary>
+	/// <param name="response">The response</param>
+	public static void EndClean(this HttpResponse response) {
+		try {
+			response.End() ;
+		} catch (ThreadAbortException) {
+			// We simply swallow this exception as we don't want unhandled
+			// exceptions flying around causing the app pool to die.
+		}
 	}
 	#endregion
 
@@ -253,13 +266,14 @@ public static class PiranhaApp
 		if (access != null) {
 			if (!user.HasAccess(access.Function)) {
 				if (!String.IsNullOrEmpty(access.RedirectUrl)) {
-					HttpContext.Current.Response.Redirect(access.RedirectUrl) ;
+					HttpContext.Current.Response.Redirect(access.RedirectUrl, false) ;
 				} else {
 					SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
 					if (param != null)
-						HttpContext.Current.Response.Redirect(param.Value) ;
-					else HttpContext.Current.Response.Redirect("~/") ;
+						HttpContext.Current.Response.Redirect(param.Value, false) ;
+					else HttpContext.Current.Response.Redirect("~/", false) ;
 				}
+				HttpContext.Current.ApplicationInstance.CompleteRequest() ;
 			}
 		}
 	}
