@@ -535,6 +535,7 @@
     <Compile Include="Extend\IType.cs" />
     <Compile Include="Extend\PageType.cs" />
     <Compile Include="Extend\RegionType.cs" />
+    <Compile Include="IO\IMediaCacheProvider.cs" />
     <Compile Include="IO\LocalMediaProvider.cs" />
     <Compile Include="Extend\Extension.cs" />
     <Compile Include="Extend\ExtensionManager.cs" />
