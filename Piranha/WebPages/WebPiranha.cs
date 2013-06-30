@@ -303,10 +303,10 @@ namespace Piranha.WebPages
 				}
 			} catch (ThreadAbortException e) {
 				// We just want to log this exception but won't react to it.
-				Log.Current.Error("WebPiranha.BeginRequest", "ThreadAbortException", e) ;
+				Application.Current.LogProvider.Error("WebPiranha.BeginRequest", "ThreadAbortException", e) ;
 			} catch (Exception e) {
 				// One catch to rule them all, and in the log file bind them.
-				Log.Current.Error("WebPiranha.BeginRequest", "Unhandled exception", e) ;
+                Application.Current.LogProvider.Error("WebPiranha.BeginRequest", "Unhandled exception", e);
 				context.Response.StatusCode = 500 ;
 				context.Response.EndClean() ;
 			}

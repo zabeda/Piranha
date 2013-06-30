@@ -94,8 +94,9 @@ namespace Piranha
 	internal class ProviderElement : ConfigurationElement
 	{
 		#region Members
-		private const string MEDIA_PROVIDER = "mediaProvider" ;
-		private const string CACHE_PROVIDER = "cacheProvider" ;
+        private const string MEDIA_PROVIDER = "mediaProvider";
+        private const string CACHE_PROVIDER = "cacheProvider";
+        private const string LOG_PROVIDER = "logProvider";
 		#endregion
 
 		/// <summary>
@@ -107,21 +108,33 @@ namespace Piranha
 			set { this[MEDIA_PROVIDER] = value ; }
 		}
 
-		/// <summary>
-		/// Gets/sets the current configured cache provider.
-		/// </summary>
-		[ConfigurationProperty(CACHE_PROVIDER, IsRequired=false)]
-		public StringElement CacheProvider {
-			get { return (StringElement)this[CACHE_PROVIDER] ; }
-			set { this[CACHE_PROVIDER] = value ; }
-		}
+        /// <summary>
+        /// Gets/sets the current configured cache provider.
+        /// </summary>
+        [ConfigurationProperty(CACHE_PROVIDER, IsRequired = false)]
+        public StringElement CacheProvider
+        {
+            get { return (StringElement)this[CACHE_PROVIDER]; }
+            set { this[CACHE_PROVIDER] = value; }
+        }
+
+        /// <summary>
+        /// Gets/sets the current configured log provider.
+        /// </summary>
+        [ConfigurationProperty(LOG_PROVIDER, IsRequired = false)]
+        public StringElement LogProvider
+        {
+            get { return (StringElement)this[LOG_PROVIDER]; }
+            set { this[LOG_PROVIDER] = value; }
+        }
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public ProviderElement() {
-			MediaProvider = new StringElement() ;
-			CacheProvider = new StringElement() ;
+            MediaProvider = new StringElement();
+            CacheProvider = new StringElement();
+            LogProvider = new StringElement();
 		}
 	}
 

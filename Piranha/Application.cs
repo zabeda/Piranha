@@ -32,12 +32,17 @@ namespace Piranha
 		/// <summary>
 		/// The currently active media provider.
 		/// </summary>
-		public readonly IO.IMediaProvider MediaProvider = new IO.LocalMediaProvider() ;
+		public readonly IO.IMediaProvider MediaProvider;
 
 		/// <summary>
 		/// The currently active cache provider.
 		/// </summary>
-		public readonly Cache.ICacheProvider CacheProvider = new Cache.WebCacheProvider() ;
+        public readonly Cache.ICacheProvider CacheProvider;
+
+        /// <summary>
+        /// The currently active log provider.
+        /// </summary>
+        public readonly Log.ILogProvider LogProvider;
 
 		/// <summary>
 		/// The currently active user provider.
@@ -111,6 +116,16 @@ namespace Piranha
 					CacheProvider = (Cache.ICacheProvider)Activator.CreateInstance(type) ;
 				else throw new TypeAccessException("CacheProvider " + Config.CacheProvider.TypeName + " was not found") ;				
 			}
+
+            // Get the current log provider
+            assembly = Assembly.Load(Config.LogProvider.AssemblyName);
+            if (assembly != null)
+            {
+                var type = assembly.GetType(Config.LogProvider.TypeName);
+                if (type != null)
+                    LogProvider = (Log.ILogProvider)Activator.CreateInstance(type);
+                else throw new TypeAccessException("LogProvider " + Config.LogProvider.TypeName + " was not found");
+            }
 
 			RegisterHandlers() ;
 		}

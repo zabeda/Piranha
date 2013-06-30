@@ -551,7 +551,8 @@
     <Compile Include="Extend\Regions\PostRegion.cs" />
     <Compile Include="Extend\Regions\TextRegion.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Log.cs" />
+    <Compile Include="Log\ILogProvider.cs" />
+    <Compile Include="Log\LocalLogProvider.cs" />
     <Compile Include="Manager\Binders\IExtensionBinder.cs" />
     <Compile Include="Manager\ManagerModule.cs" />
     <Compile Include="Manager\ManagerRegistration.cs" />

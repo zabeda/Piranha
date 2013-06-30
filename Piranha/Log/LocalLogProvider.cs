@@ -2,12 +2,12 @@
 using System.IO;
 using System.Web;
 
-namespace Piranha
+namespace Piranha.Log
 {
 	/// <summary>
 	/// Class for logging error messages.
 	/// </summary>
-	internal class Log
+	internal class LocalLogProvider : ILogProvider
 	{
 		#region Member
 		/// <summary>
@@ -24,17 +24,13 @@ namespace Piranha
 		/// Mutex for keeping it thread safe.
 		/// </summary>
 		private readonly object mutex = new object() ;
-
-		/// <summary>
-		/// The current singleton instance
-		/// </summary>
-		public static readonly Log Current = new Log();
 		#endregion
 
-		/// <summary>
-		/// Private constructor.
-		/// </summary>
-		private Log() {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public LocalLogProvider()
+        {
 			// Create the log directory if it doesn't exist
 			if (!Directory.Exists(path))
 				Directory.CreateDirectory(path) ;
