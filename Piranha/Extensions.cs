@@ -127,6 +127,19 @@ public static class PiranhaApp
 			// exceptions flying around causing the app pool to die.
 		}
 	}
+
+	/// <summary>
+	/// Ends the current request without throwing a ThreadAbortException
+	/// </summary>
+	/// <param name="response">The response</param>
+	public static void EndClean(this HttpResponseBase response) {
+		try {
+			response.End() ;
+		} catch (ThreadAbortException) {
+			// We simply swallow this exception as we don't want unhandled
+			// exceptions flying around causing the app pool to die.
+		}
+	}
 	#endregion
 
 	#region MVC Extensions

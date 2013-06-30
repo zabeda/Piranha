@@ -53,5 +53,21 @@ namespace Piranha.Mvc
 
 			return m ;
 		}
+
+		/// <summary>
+		/// Check if the current user has access to the action before continuing.
+		/// </summary>
+		/// <param name="context">The current context</param>
+		protected override void OnActionExecuted(System.Web.Mvc.ActionExecutedContext filterContext) {
+			// Perform base class stuff
+			base.OnActionExecuted(filterContext) ;
+
+			var post = Post.GetByPermalink(CurrentPermalink) ;
+			if (post != null) {
+				DateTime mod = post.LastModified ;
+				Web.ClientCache.HandleClientCache(HttpContext.ApplicationInstance.Context, 
+					WebPages.WebPiranha.GetCulturePrefix() + post.Id.ToString(), mod) ;
+			}
+		}
 	}
 }

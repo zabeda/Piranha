@@ -54,5 +54,40 @@ namespace Piranha.Mvc
 
 			return m ;
 		}
+
+		/// <summary>
+		/// Check if the current user has access to the action before continuing.
+		/// </summary>
+		/// <param name="context">The current context</param>
+		protected override void OnActionExecuting(ActionExecutingContext context) {
+			// Perform base class stuff
+			base.OnActionExecuting(context) ;
+
+			// Check permissions & client cache
+			var page = Page.GetByPermalink(CurrentPermalink) ;
+			if (page != null) {
+				if (page.GroupId != Guid.Empty) {
+					if (!User.IsMember(page.GroupId)) {
+						SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
+						if (param != null)
+							context.Result = Redirect(param.Value) ;
+						else context.Result = Redirect("~/") ;
+					}
+					Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
+				} else {
+					// Only cache public non drafts
+					DateTime mod = page.LastModified ;
+					Web.ClientCache.HandleClientCache(HttpContext.ApplicationInstance.Context, 
+						WebPages.WebPiranha.GetCulturePrefix() + page.Id.ToString(), mod) ;
+				}
+				// Check for disabled groups
+				if (page.DisabledGroups.Contains(User.GetProfile().GroupId)) {
+					SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
+					if (param != null)
+						context.Result = Redirect(param.Value) ;
+					else context.Result = Redirect("~/") ;
+				}
+			}
+		}
 	}
 }
