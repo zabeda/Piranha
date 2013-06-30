@@ -29,20 +29,5 @@ namespace Piranha.Azure.Log
                 System.Diagnostics.Trace.WriteLine(details);
             }
         }
-
-        #region Private methods
-        /// <summary>
-        /// Gets the configuration section from the Web.config.
-        /// </summary>
-        /// <returns>The configuration</returns>
-        private ConfigFile GetConfig()
-        {
-            var section = (ConfigFile)ConfigurationManager.GetSection("piranha.azure");
-
-            if (section == null)
-                section = new ConfigFile();
-            return section;
-        }
-        #endregion
     }
 }
