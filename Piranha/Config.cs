@@ -15,10 +15,12 @@ namespace Piranha
 		#region Members
 		private static string[] namespaces = null;
 		private static object nsmutex = new object() ;
-		private static ConfigProvider mediaprovider = null ;
-		private static ConfigProvider cacheProvider = null ;
-		private static object mpmutex = new object() ;
-		private static object cpmutex = new object() ;
+        private static ConfigProvider mediaprovider = null;
+        private static ConfigProvider cacheProvider = null;
+        private static ConfigProvider logProvider = null;
+        private static object mpmutex = new object();
+        private static object cpmutex = new object();
+        private static object lpmutex = new object();
 		private static readonly ConfigFile config = GetConfig() ;
 		#endregion
 
@@ -123,6 +125,37 @@ namespace Piranha
 						} else {
 							cacheProvider = new ConfigProvider() {
 								TypeName = typeof(Cache.WebCacheProvider).FullName,
+								AssemblyName = Assembly.GetExecutingAssembly().FullName
+							} ;
+						}
+					}
+				}
+				return cacheProvider ;
+			}
+		}
+
+        		/// <summary>
+		/// Gets the configuration for the log provider to use. If the log provider is not
+		/// specified the default LocalLogProvider is used.
+		/// </summary>
+		internal static ConfigProvider LogProvider {
+			get {
+				if (logProvider != null)
+                    return logProvider;
+
+				lock (lpmutex) {
+                    if (logProvider == null) {
+						var str = config.Providers.LogProvider.Value ;
+						if (!String.IsNullOrEmpty(str)) {
+							var vals = str.Split(new char[] { ',' }) ;
+
+							logProvider = new ConfigProvider() {
+								TypeName = vals[0].Trim(),
+								AssemblyName = vals[1].Trim()
+							} ;
+						} else {
+							logProvider = new ConfigProvider() {
+								TypeName = typeof(Log.LocalLogProvider).FullName,
 								AssemblyName = Assembly.GetExecutingAssembly().FullName
 							} ;
 						}
