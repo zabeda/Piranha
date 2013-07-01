@@ -56,5 +56,13 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		void Delete(Guid id, MediaType type = MediaType.Media) ;
+
+        /// <summary>
+        /// Gets the total size of all items in the cache.
+        /// </summary>
+        /// <returns>
+        /// The size of the cache in bytes.
+        /// </returns>
+        long GetTotalSize() ;
 	}
 }

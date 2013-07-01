@@ -44,7 +44,7 @@ namespace Piranha.Log
 		/// <param name="details">Optional error details</param>
 		public void Error(string origin, string message, Exception details = null) {
 			lock (mutex) {
-				using (var writer = new StreamWriter(file)) {
+				using (var writer = new StreamWriter(file, true)) {
 					writer.WriteLine(String.Format(
 						"ERROR [{0}] Origin [{1}] Message [{2}]", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), origin, message)) ;
 					if (details != null)
