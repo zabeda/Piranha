@@ -301,7 +301,7 @@ namespace Piranha.WebPages
 						}
 					}
 				}
-			} catch (ThreadAbortException e) {
+			} catch (ThreadAbortException) {
 				// We simply swallow this exception as we don't want unhandled
 				// exceptions flying around causing the app pool to die.
 			} catch (Exception e) {
