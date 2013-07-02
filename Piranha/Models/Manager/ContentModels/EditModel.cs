@@ -334,9 +334,12 @@ namespace Piranha.Models.Manager.ContentModels
 		public static EditModel GetById(Guid id) {
 			EditModel em = new EditModel() ;
 			em.Content = Piranha.Models.Content.GetSingle(id, true) ;
-			if (em.Content.PermalinkId != Guid.Empty)
-				em.Permalink = Models.Permalink.GetSingle(em.Content.PermalinkId) ;
-			else em.Content.PermalinkId = em.Permalink.Id ;
+			if (!em.Content.IsFolder) {
+				// Don't get permalinks for folders
+				if (em.Content.PermalinkId != Guid.Empty)
+					em.Permalink = Models.Permalink.GetSingle(em.Content.PermalinkId) ;
+				else em.Content.PermalinkId = em.Permalink.Id ;
+			}
 			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
 			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
 				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
@@ -396,18 +399,22 @@ namespace Piranha.Models.Manager.ContentModels
 			}
 
 			var saved = false ;
-			// Permalink
-			var filename = !String.IsNullOrEmpty(Content.Filename) ? Content.Filename : (!String.IsNullOrEmpty(media.Filename) ? media.Filename : "") ;
 
-			if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
-				Permalink.Name = Permalink.Generate(!Content.IsFolder ? filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
-			try {
-				Permalink.Save() ;
-			} catch (DuplicatePermalinkException) {
-				if (Permalink.IsNew) {
-					Permalink.Name = Content.Id + Permalink.Name.Substring(Permalink.Name.LastIndexOf('.')) ;
+			if (!Content.IsFolder) {
+				// Only save permalinks for non-folders
+				var filename = !String.IsNullOrEmpty(Content.Filename) ? Content.Filename : (!String.IsNullOrEmpty(media.Filename) ? media.Filename : "") ;
+				if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
+					Permalink.Name = Permalink.Generate(!Content.IsFolder ? filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
+				try {
 					Permalink.Save() ;
-				} else throw ;
+				} catch (DuplicatePermalinkException) {
+					if (Permalink.IsNew) {
+						Permalink.Name = Content.Id + Permalink.Name.Substring(Permalink.Name.LastIndexOf('.')) ;
+						Permalink.Save() ;
+					} else throw ;
+				}
+			} else {
+				Content.PermalinkId = Guid.Empty ;
 			}
 
 			if (draft)
