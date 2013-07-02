@@ -345,7 +345,7 @@ namespace Piranha.Models.Manager.PostModels
 			if (Post.Attachments.Count > 0) {
 				// Content meta data is actually memcached, so this won't result in multiple queries
 				Post.Attachments.ForEach(a => {
-					Models.Content c = Models.Content.GetSingle(a) ;
+					Models.Content c = Models.Content.GetSingle(a, true) ;
 					if (c != null)
 						AttachedContent.Add(c) ;
 				}) ;
