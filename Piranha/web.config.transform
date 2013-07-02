@@ -9,6 +9,7 @@
     <providers>
       <mediaProvider value="Piranha.IO.LocalMediaProvider, Piranha" />
       <cacheProvider value="Piranha.Cache.WebCacheProvider, Piranha" />
+      <logProvider value="Piranha.Log.LocalLogProvider, Piranha" />
     </providers>
   </piranha>
   <system.web>
