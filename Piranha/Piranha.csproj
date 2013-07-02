@@ -47,6 +47,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\..\GitHub\tidyui\PiranhaCMS.org\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="RazorGenerator.Mvc">
       <HintPath>..\packages\RazorGenerator.Mvc.1.5.5.0\lib\net40\RazorGenerator.Mvc.dll</HintPath>
@@ -250,6 +253,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ImageRegion.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\MarkdownRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarkdownRegion.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\PostRegion.generated.cs">
       <AutoGen>True</AutoGen>
@@ -534,6 +542,7 @@
     <Compile Include="Extend\IPostType.cs" />
     <Compile Include="Extend\IType.cs" />
     <Compile Include="Extend\PageType.cs" />
+    <Compile Include="Extend\Regions\MarkdownRegion.cs" />
     <Compile Include="Extend\RegionType.cs" />
     <Compile Include="IO\IMediaCacheProvider.cs" />
     <Compile Include="IO\LocalMediaProvider.cs" />
@@ -1275,7 +1284,12 @@
       <LastGenOutput>DialogSiteTree.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Extensions\MarkdownRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>MarkdownRegion.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
