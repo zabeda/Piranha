@@ -30,16 +30,18 @@ namespace Piranha.Manager
 		/// </summary>
 		/// <param name="context">The context</param>
 		public override void RegisterArea(AreaRegistrationContext context) {
-			// Register manager routing
-			context.MapRoute(
-				"Manager",
-				"manager/{controller}/{action}/{id}",
-				new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional },
-				namespaces.Union(Config.ManagerNamespaces).ToArray()
-			).DataTokens["UseNamespaceFallback"] = false ;
+			if (!Config.DisableManager) {
+				// Register manager routing
+				context.MapRoute(
+					"Manager",
+					"manager/{controller}/{action}/{id}",
+					new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional },
+					namespaces.Union(Config.ManagerNamespaces).ToArray()
+				).DataTokens["UseNamespaceFallback"] = false ;
 
-			// Register filters & binders
-			RegisterGlobalFilters(GlobalFilters.Filters) ;
+				// Register filters & binders
+				RegisterGlobalFilters(GlobalFilters.Filters) ;
+			}
 		}
 
 		#region Private methods

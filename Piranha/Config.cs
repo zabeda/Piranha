@@ -46,6 +46,15 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets if the manager interface should be disabled for the current instance.
+		/// </summary>
+		public static bool DisableManager {
+			get {
+				return config.Settings.DisableManager.Value ;
+			}
+		}
+
+		/// <summary>
 		/// Gets the additional namespaces that should be inlcuded in the manager interface.
 		/// </summary>
 		public static string[] ManagerNamespaces {

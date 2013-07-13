@@ -48,6 +48,7 @@ namespace Piranha
 		#region Members
 		private const string DISABLE_METHOD_BINDING = "disableMethodBinding" ;
 		private const string DISABLE_MODELSTATE_BINDING = "disableModelStateBinding" ;
+		private const string DISABLE_MANAGER = "disableManager" ;
 		private const string MANAGER_NAMESPACES = "managerNamespaces" ;
 		#endregion
 
@@ -70,6 +71,15 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets/sets if the manager interface should be disabled or not.
+		/// </summary>
+		[ConfigurationProperty(DISABLE_MANAGER, IsRequired=false)]
+		public BooleanElement DisableManager {
+			get { return (BooleanElement)this[DISABLE_MANAGER] ; }
+			set { this[DISABLE_MANAGER] = value ; }
+		}
+
+		/// <summary>
 		/// Gets/sets the additional manager namespaces.
 		/// </summary>
 		[ConfigurationProperty(MANAGER_NAMESPACES, IsRequired=false)]
@@ -84,6 +94,7 @@ namespace Piranha
 		public SettingsElement() {
 			DisableMethodBinding = new BooleanElement() ;
 			DisableModelStateBinding = new BooleanElement() ;
+			DisableManager = new BooleanElement() ;
 			ManagerNamespaces = new StringElement() ;
 		}
 	}

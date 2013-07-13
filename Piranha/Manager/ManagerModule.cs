@@ -24,32 +24,34 @@ namespace Piranha.Manager
 		/// Create the view engine.
 		/// </summary>
 		public static void Init() {
-			// Create new precompiled view engine
-            var engine = new PrecompiledMvcEngine(typeof(ManagerModule).Assembly) {
-                UsePhysicalViewsIfNewer = true
-            } ;
-			engine.PartialViewLocationFormats = engine.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray();
-			var standard = new RazorViewEngine() ;
-			standard.PartialViewLocationFormats = standard.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray() ;
+			if (!Config.DisableManager) {
+				// Create new precompiled view engine
+				var engine = new PrecompiledMvcEngine(typeof(ManagerModule).Assembly) {
+					UsePhysicalViewsIfNewer = true
+				} ;
+				engine.PartialViewLocationFormats = engine.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray();
+				var standard = new RazorViewEngine() ;
+				standard.PartialViewLocationFormats = standard.PartialViewLocationFormats.Union(ExtensionsFolder).ToArray() ;
 
-			ViewEngines.Engines.Insert(0, standard) ;
-			ViewEngines.Engines.Insert(1, engine) ;
+				ViewEngines.Engines.Insert(0, standard) ;
+				ViewEngines.Engines.Insert(1, engine) ;
 
-			VirtualPathFactoryManager.RegisterVirtualPathFactory(engine) ;
+				VirtualPathFactoryManager.RegisterVirtualPathFactory(engine) ;
 
-			// Register the manager area
-			var manager = new ManagerRegistration() ;
-			var context = new AreaRegistrationContext(manager.AreaName, RouteTable.Routes) ;
-			manager.RegisterArea(context) ;
+				// Register the manager area
+				var manager = new ManagerRegistration() ;
+				var context = new AreaRegistrationContext(manager.AreaName, RouteTable.Routes) ;
+				manager.RegisterArea(context) ;
 
-			// Register custom model binders
-			RegisterBinders() ;
+				// Register custom model binders
+				RegisterBinders() ;
 
-			// Register json deserialization for post data
-			ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+				// Register json deserialization for post data
+				ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
 
-			// Register application part
-			ApplicationPart.Register(new ApplicationPart(typeof(ManagerModule).Assembly, "~/")) ;
+				// Register application part
+				ApplicationPart.Register(new ApplicationPart(typeof(ManagerModule).Assembly, "~/")) ;
+			}
 		}
 
 		#region Private methods
