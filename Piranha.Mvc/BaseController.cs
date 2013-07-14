@@ -20,6 +20,11 @@ namespace Piranha.Mvc
 		/// Gets the currently selected permalink.
 		/// </summary>
 		protected string CurrentPermalink { get ; private set ; }
+
+		/// <summary>
+		/// Gets if the user is requesting a draft.
+		/// </summary>
+		protected bool IsDraft { get ; private set ; }
 		#endregion
 
 		/// <summary>
@@ -29,6 +34,12 @@ namespace Piranha.Mvc
 		protected override void OnActionExecuting(ActionExecutingContext context) {
 			// Get the current permalink
 			CurrentPermalink = Request["permalink"] ;
+
+			try {
+				if ((this is SinglePageController && User.HasAccess("ADMIN_PAGE")) || (this is SinglePageController && User.HasAccess("ADMIN_POST")))
+					IsDraft = !String.IsNullOrEmpty(Request["draft"]) ? Convert.ToBoolean(Request["draft"]) : false ;
+				else IsDraft = false ;
+			} catch {}
 
 			// Authorize and execute
 			if (Authorize(context.ActionDescriptor.ActionName)) {

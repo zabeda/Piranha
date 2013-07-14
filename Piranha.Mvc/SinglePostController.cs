@@ -46,12 +46,18 @@ namespace Piranha.Mvc
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
 		public T GetModel<T>(string permalink) where T : PostModel {
-			var m = PostModel.GetByPermalink<T>(permalink) ;
+			// Get the model
+			var post = Post.GetByPermalink(permalink, IsDraft) ;
+			var model = PostModel.Get<T>(post) ;
 
 			HttpContext.Items["Piranha_CurrentPage"] = null ;
-			HttpContext.Items["Piranha_CurrentPost"] = m.Post ;
+			HttpContext.Items["Piranha_CurrentPost"] = model.Post ;
 
-			return m ;
+			// Execute hook, if it exists
+			if (WebPages.Hooks.Model.PostModelLoaded != null)
+				WebPages.Hooks.Model.PostModelLoaded(model) ;
+
+			return model ;
 		}
 
 		/// <summary>
@@ -62,8 +68,8 @@ namespace Piranha.Mvc
 			// Perform base class stuff
 			base.OnActionExecuted(filterContext) ;
 
-			var post = Post.GetByPermalink(CurrentPermalink) ;
-			if (post != null) {
+			var post = Post.GetByPermalink(CurrentPermalink, IsDraft) ;
+			if (post != null && !IsDraft) {
 				DateTime mod = post.LastModified ;
 				Web.ClientCache.HandleClientCache(HttpContext.ApplicationInstance.Context, 
 					WebPages.WebPiranha.GetCulturePrefix() + post.Id.ToString(), mod) ;

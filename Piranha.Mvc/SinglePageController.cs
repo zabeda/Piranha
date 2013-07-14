@@ -47,12 +47,18 @@ namespace Piranha.Mvc
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
 		public T GetModel<T>(string permalink) where T : PageModel {
-			var m = PageModel.GetByPermalink<T>(permalink) ;
+			// Get the model
+			var page = Page.GetByPermalink(permalink, IsDraft) ;
+			var model = PageModel.Get<T>(page) ;
 
-			HttpContext.Items["Piranha_CurrentPage"] = m.Page ;
+			HttpContext.Items["Piranha_CurrentPage"] = model.Page ;
 			HttpContext.Items["Piranha_CurrentPost"] = null ;
 
-			return m ;
+			// Execute hook, if it exists
+			if (WebPages.Hooks.Model.PageModelLoaded != null)
+				WebPages.Hooks.Model.PageModelLoaded(model) ;
+
+			return model ;
 		}
 
 		/// <summary>
@@ -64,7 +70,7 @@ namespace Piranha.Mvc
 			base.OnActionExecuting(context) ;
 
 			// Check permissions & client cache
-			var page = Page.GetByPermalink(CurrentPermalink) ;
+			var page = Page.GetByPermalink(CurrentPermalink, IsDraft) ;
 			if (page != null) {
 				if (page.GroupId != Guid.Empty) {
 					if (!User.IsMember(page.GroupId)) {
@@ -74,7 +80,7 @@ namespace Piranha.Mvc
 						else context.Result = Redirect("~/") ;
 					}
 					Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
-				} else {
+				} else if (!IsDraft) {
 					// Only cache public non drafts
 					DateTime mod = page.LastModified ;
 					Web.ClientCache.HandleClientCache(HttpContext.ApplicationInstance.Context, 
