@@ -34,6 +34,22 @@ namespace Piranha.Areas.Manager.Controllers
 		}
 
 		/// <summary>
+		/// Gets the list of all users for the specified group.
+		/// </summary>
+		/// <returns></returns>
+		[Access(Function="ADMIN_USER")]
+		public ActionResult UserGroup(string id) {
+			var m = UserListModel.GetByGroupId(new Guid(id)) ;
+			ViewBag.Title = @Piranha.Resources.Settings.ListTitleUsers ;
+
+			// Executes the user list loaded hook, if registered
+			if (WebPages.Hooks.Manager.UserListModelLoaded != null)
+				WebPages.Hooks.Manager.UserListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+            return View(@"~/Areas/Manager/Views/Settings/UserList.cshtml", m);
+		}
+
+		/// <summary>
 		/// Edits or creates a new user.
 		/// </summary>
 		/// <param name="id">The user id</param>

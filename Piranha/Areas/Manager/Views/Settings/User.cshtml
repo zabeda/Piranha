@@ -6,7 +6,11 @@
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
             <li><a href="@Url.Action("deleteuser", new { id = Model.User.Id })" class="delete">@Piranha.Resources.Global.ToolbarDelete</a></li>
+            @if (String.IsNullOrEmpty(ViewBag.ReturnUrl)) {
             <li><a href="@Url.Action("userlist")" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            } else {
+            <li><a href="@ViewBag.ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
+            }
             <li><a href="@Url.Action("user", new { id = Model.User.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <div class="clear"></div>

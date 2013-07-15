@@ -17,6 +17,16 @@ namespace Piranha.Models.Manager.SettingModels
 		/// Gets/sets the available users.
 		/// </summary>
 		public List<SysUser> Users { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the available groups.
+		/// </summary>
+		public List<SysGroup> Groups { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the currently active group.
+		/// </summary>
+		public Guid ActiveGroup { get ; set ; }
 		#endregion
 
 		/// <summary>
@@ -24,6 +34,7 @@ namespace Piranha.Models.Manager.SettingModels
 		/// </summary>
 		public UserListModel() {
 			Users = new List<SysUser>() ;
+			Groups = new List<SysGroup>() ;
 		}
 
 		/// <summary>
@@ -34,6 +45,22 @@ namespace Piranha.Models.Manager.SettingModels
 			UserListModel m = new UserListModel() ;
 
 			m.Users = SysUser.Get(new Params() { OrderBy = "sysuser_login" }) ;
+			m.Groups = SysGroup.GetStructure().Flatten() ;
+
+			return m ;
+		}
+
+		/// <summary>
+		/// Gets the available user for the given group.
+		/// </summary>
+		/// <param name="groupId">The group id</param>
+		/// <returns>The model</returns>
+		public static UserListModel GetByGroupId(Guid groupId) {
+			UserListModel m = new UserListModel() ;
+
+			m.Users = SysUser.Get("sysuser_group_id= @0", groupId, new Params() { OrderBy = "sysuser_login" }) ;
+			m.Groups = SysGroup.GetStructure().Flatten() ;
+			m.ActiveGroup = groupId ;
 
 			return m ;
 		}

@@ -1,5 +1,15 @@
 ﻿@model Piranha.Models.Manager.SettingModels.UserListModel
 @section Head {
+    <style type="text/css">
+        .content .tabs {
+            float: left;
+            margin-left: 10px;
+        }
+        .content .tabs .selected {
+            border: 0 none;
+            padding: 10px 20px 6px;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             var options = {
@@ -16,7 +26,9 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li id="add"><a href="@Url.Action("user")" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li id="add">
+                <a href="@Url.Action("user")" class="add">@Piranha.Resources.Global.ToolbarAdd</a>
+            </li>
             <li><a href="@Url.Action("userlist")" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
         </ul>
         <button class="search"></button>@Html.TextBox("search")
@@ -26,6 +38,19 @@
 }
 
 <div class="grid_12">
+    @if (Model.Groups.Count > 1) {
+    <div>
+        <ul class="tabs">
+            <li><a href="@Url.Action("userlist", "settings")" @(Model.ActiveGroup == Guid.Empty ? "class=selected" : "")>All</a></li>
+            @foreach (var group in Model.Groups) {
+            <li>
+                <a href="@Url.Action("usergroup", "settings", new { @id = group.Id })" @(group.Id == Model.ActiveGroup ? "class=selected" : "")>@group.Name</a>
+            </li>
+            }
+        </ul>
+        <div class="clear"></div>
+    </div>
+    }
     <table id="list" class="list">
         <thead>
             <tr>
@@ -48,7 +73,9 @@
                 </td>
                 <td class="login">
                     @if (User.IsMember(user.GroupId)) {
-                    <a href="@Url.Action("user", new { id = user.Id })">@user.Login</a>
+                    <a href="@(Model.ActiveGroup == Guid.Empty ? 
+                        Url.Action("user", new { id = user.Id }) :
+                        Url.Action("user", new { id = user.Id, returl = Url.Action("usergroup", new { id = Model.ActiveGroup }) }))">@user.Login</a>
                     } else {
                     @user.Login
                     }
