@@ -242,7 +242,9 @@ namespace Piranha.Extend
 				m.Template.Properties.AddRange(type.Properties) ;
 				m.Template.Type = type.GetType().FullName ;
 
-				var old = m.Regions ;
+				var old = new List<Models.RegionTemplate>() ;
+				m.Regions.ForEach(r => old.Add(r)) ;
+				m.Regions.Clear() ;
 
 				// Create region templates
 				for (int n = 1; n <= type.Regions.Count; n++) {
@@ -261,7 +263,7 @@ namespace Piranha.Extend
 					m.Regions.Add(rt) ;
 				}
 				// Delete removed region templates
-				var removed = old.Where(r => m.Regions.Contains(r)) ;
+				var removed = old.Where(r => !m.Regions.Contains(r)) ;
 
 				// Save Template
 				Data.Database.LoginSys() ;
