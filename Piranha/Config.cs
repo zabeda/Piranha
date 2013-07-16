@@ -82,6 +82,15 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets if the application is running in passive mode or not.
+		/// </summary>
+		public static bool PassiveMode {
+			get {
+				return config.Settings.PassiveMode.Value ;
+			}
+		}
+
+		/// <summary>
 		/// Gets the configuration for the media provider to use. If the media provider is not
 		/// specified the default LocalMediaProvider is used.
 		/// </summary>

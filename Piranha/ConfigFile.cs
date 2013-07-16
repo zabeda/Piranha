@@ -50,6 +50,7 @@ namespace Piranha
 		private const string DISABLE_MODELSTATE_BINDING = "disableModelStateBinding" ;
 		private const string DISABLE_MANAGER = "disableManager" ;
 		private const string MANAGER_NAMESPACES = "managerNamespaces" ;
+		private const string PASSIVE_MODE = "passiveMode" ;
 		#endregion
 
 		/// <summary>
@@ -86,6 +87,15 @@ namespace Piranha
 		public StringElement ManagerNamespaces {
 			get { return (StringElement)this[MANAGER_NAMESPACES] ; }
 			set { this [MANAGER_NAMESPACES] = value ; }
+		}
+
+		/// <summary>
+		/// Gets/if the application is running in passive mode.
+		/// </summary>
+		[ConfigurationProperty(PASSIVE_MODE, IsRequired=false)]
+		public BooleanElement PassiveMode {
+			get { return (BooleanElement)this[PASSIVE_MODE] ; }
+			set { this[PASSIVE_MODE] = value ; }
 		}
 
 		/// <summary>

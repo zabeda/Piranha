@@ -213,9 +213,11 @@ namespace Piranha.WebPages
 		/// </summary>
 		public static void Init() {
 			// Register the basic account route
-			try {
-				RouteTable.Routes.MapRoute("Account", "account/{action}", new { controller = "auth", action = "index" }, new string[] { "Piranha.Web" }) ;
-			} catch {}
+			if (!Config.PassiveMode) {
+				try {
+					RouteTable.Routes.MapRoute("Account", "account/{action}", new { controller = "auth", action = "index" }, new string[] { "Piranha.Web" }) ;
+				} catch {}
+			}
 
 			// Register hostnames
 			RegisterDefaultHostNames() ;
@@ -277,14 +279,16 @@ namespace Piranha.WebPages
 					var handled = false ;
 
 					// Find the correct request handler
-					// foreach (RequestHandlerRegistration hr in Handlers.Values) {
 					foreach (var hr in Application.Current.Handlers) {
 						if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
 							if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
-								// Execute the handler
-								hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
-								handled = true ;
-								break ;
+								// Don't execute permalink routing in passive mode
+								if ((hr.Id != "PERMALINK" && hr.Id != "STARTPAGE") || !Config.PassiveMode) {
+									// Execute the handler
+									hr.Handler.HandleRequest(context, args.Subset(pos + 1)) ;
+									handled = true ;
+									break ;
+								}
 							}
 						}
 					}
@@ -296,10 +300,12 @@ namespace Piranha.WebPages
 
 					// If no handler was found and we are using prefixless permalinks, 
 					// route traffic to the permalink handler.
-					if (!handled && PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
-						if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[0]) != null) {
-							var handler = new PermalinkHandler() ;
-							handler.HandleRequest(context, args) ;
+					if (!Config.PassiveMode) {
+						if (!handled && PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
+							if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[0]) != null) {
+								var handler = new PermalinkHandler() ;
+								handler.HandleRequest(context, args) ;
+							}
 						}
 					}
 				}
