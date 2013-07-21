@@ -541,8 +541,6 @@
     <Compile Include="Extend\IExtension.cs" />
     <Compile Include="Extend\IExtensionMeta.cs" />
     <Compile Include="IO\IMediaProvider.cs" />
-    <Compile Include="Extend\Module.cs" />
-    <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\AttachmentRegion.cs" />
     <Compile Include="Extend\Regions\FormRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
