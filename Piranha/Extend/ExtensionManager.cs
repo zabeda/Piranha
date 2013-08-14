@@ -56,12 +56,16 @@ namespace Piranha.Extend
 
 			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
 
+#if !NET40
 			if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
+#endif
 				try {
 					// This feature only exists for Web Pages
 					catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
 				} catch {}
+#if !NET40
 			}
+#endif
 
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
