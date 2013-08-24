@@ -95,7 +95,7 @@ namespace Piranha
 		/// Logs in the default sys user.
 		/// </summary>
 		public void LoginSys() {
-			Identity = Piranha.Data.Database.SysUserId ;
+			Identity = Config.SysUserId ;
 		}
 
 		/// <summary>
