@@ -45,6 +45,7 @@
                     @Html.LabelFor(m => m.Group.ParentId)
                     <div class="input">
                         @Html.DropDownListFor(m => m.Group.ParentId, Model.Groups)</div>
+                    @Html.ValidationMessageFor(m => m.Group.ParentId)
                 </li>
             </ul>
         </div>

@@ -211,6 +211,11 @@ namespace Piranha
 		public static readonly Guid SysUserId = new Guid("CA19D4E7-92F0-42F6-926A-68413BBDAFBC") ;
 
 		/// <summary>
+		/// Gets the id of the default sys admin group.
+		/// </summary>
+		public static readonly Guid SysAdminGroupId = new Guid("7C536B66-D292-4369-8F37-948B32229B83") ;
+
+		/// <summary>
 		/// Gets the id of the default namespace.
 		/// </summary>
 		public static readonly Guid DefaultNamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
