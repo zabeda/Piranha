@@ -82,6 +82,10 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
 			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 
+			// Check so that users are not saved without a group
+			if (um.User.GroupId == Guid.Empty)
+				ModelState.AddModelError("User.GroupId", Resources.Settings.UserGroupIdRequired) ;
+
 			if (ModelState.IsValid) {
 				try {
 					if (um.SaveAll()) {

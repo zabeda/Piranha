@@ -790,6 +790,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have to assign users to a group..
+        /// </summary>
+        public static string UserGroupIdRequired {
+            get {
+                return ResourceManager.GetString("UserGroupIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User information.
         /// </summary>
         public static string UserInfo {

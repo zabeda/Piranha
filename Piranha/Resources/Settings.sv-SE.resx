@@ -363,4 +363,7 @@
   <data name="GroupParentIdRequired" xml:space="preserve">
     <value>Du måste välja en grupp.</value>
   </data>
+  <data name="UserGroupIdRequired" xml:space="preserve">
+    <value>Du måste tilldela användare en grupp.</value>
+  </data>
 </root>
