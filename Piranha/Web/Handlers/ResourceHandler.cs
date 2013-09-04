@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 
-namespace Piranha.WebPages.RequestHandlers
+namespace Piranha.Web.Handlers
 {
 	/// <summary>
 	/// The resource handler delivers embedded resources for the manager

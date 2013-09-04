@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Piranha.WebPages.RequestHandlers
+namespace Piranha.Web.Handlers
 {
 	public class DraftContentHandler : ContentHandler
 	{

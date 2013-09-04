@@ -7,7 +7,7 @@ using System.Web;
 
 using Piranha.Models;
 
-namespace Piranha.WebPages.RequestHandlers
+namespace Piranha.Web.Handlers
 {
 	/// <summary>
 	/// Request handler for content.

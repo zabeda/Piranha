@@ -8,7 +8,6 @@ using System.Web;
 
 using Piranha.Web;
 using Piranha.Web.Handlers;
-using Piranha.WebPages.RequestHandlers;
 
 namespace Piranha
 {

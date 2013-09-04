@@ -14,7 +14,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 
 using Piranha.Models;
-using Piranha.WebPages.RequestHandlers;
+using Piranha.Web.Handlers;
 using System.Threading;
 
 namespace Piranha.WebPages
