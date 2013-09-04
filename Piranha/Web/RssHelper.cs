@@ -51,7 +51,7 @@ namespace Piranha.Web
 				else
 					feed.WriteElementString("description", post.Body.ToString()) ;
 				feed.WriteElementString("link", PublicLink(context.Request, post.Permalink)) ;
-				feed.WriteElementString("pubDate", post.Published.ToLongDateString()) ;
+				feed.WriteElementString("pubDate", post.Published.ToLongDateString() + " " + post.Published.ToLongTimeString()) ;
 				feed.WriteEndElement();
 			}
 
