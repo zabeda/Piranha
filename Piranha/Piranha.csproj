@@ -440,7 +440,6 @@
     </Compile>
     <Compile Include="Cache\ICacheProvider.cs" />
     <Compile Include="Cache\MemCacheProvider.cs" />
-    <Compile Include="Cache\NoCacheProvider.cs" />
     <Compile Include="Cache\WebCacheProvider.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConfigProvider.cs" />
