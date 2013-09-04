@@ -223,16 +223,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Attachment.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Manager\Views\Extensions\EditorTemplates\FormElement.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FormElement.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Manager\Views\Extensions\FormRegion.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FormRegion.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\HtmlRegion.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -456,8 +446,6 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Extension.cs" />
-    <Compile Include="Entities\FormData.cs" />
-    <Compile Include="Entities\FormItem.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Internal\Category.cs" />
     <Compile Include="Entities\Internal\ComplexName.cs" />
@@ -541,7 +529,6 @@
     <Compile Include="Extend\IExtensionMeta.cs" />
     <Compile Include="IO\IMediaProvider.cs" />
     <Compile Include="Extend\Regions\AttachmentRegion.cs" />
-    <Compile Include="Extend\Regions\FormRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
     <Compile Include="Extend\Regions\PostRegion.cs" />
@@ -702,7 +689,6 @@
     <Compile Include="Web\AuthController.cs" />
     <Compile Include="Web\ClientCache.cs" />
     <Compile Include="Web\CultureHelper.cs" />
-    <Compile Include="Web\FormController.cs" />
     <Compile Include="Web\FrameworkType.cs" />
     <Compile Include="Web\Handlers\RequestHandlerCollection.cs" />
     <Compile Include="Web\IClientFramework.cs" />
@@ -1246,18 +1232,6 @@
     <Content Include="Areas\Manager\Views\Extensions\EditorTemplates\Attachment.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Attachment.generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Manager\Views\Extensions\FormRegion.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>FormRegion.generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Manager\Views\Extensions\EditorTemplates\FormElement.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>FormElement.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

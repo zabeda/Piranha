@@ -27,9 +27,6 @@ namespace Piranha.Web
 
 			// Initialize Piranha CMS
 			WebPages.WebPiranha.Init() ;
-			
-			// Don't register the services automatically
-			// WebPages.WebPiranha.InitServices() ;
 		}
 
 		/// <summary>

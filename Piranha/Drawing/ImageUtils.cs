@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Piranha.Drawing
 {
 	/// <summary>
 	/// Image utils for scaling and cropping images.
 	/// </summary>
-	public class ImageUtils
+	public static class ImageUtils
 	{
 		/// <summary>
 		/// Resizes the given image to the given size. If the size is larger than the original the

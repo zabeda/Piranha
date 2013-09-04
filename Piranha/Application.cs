@@ -15,7 +15,7 @@ namespace Piranha
 	/// The application class contains the main state and configuration
 	/// for the current running web application.
 	/// </summary>
-	public class Application
+	public sealed class Application
 	{
 		#region Members
 		/// <summary>
