@@ -22,6 +22,7 @@ namespace Piranha
         private static object cpmutex = new object();
         private static object lpmutex = new object();
 		private static readonly ConfigFile config = GetConfig() ;
+		private static bool? prefixlessPermalinks = null;
 		#endregion
 
 		/// <summary>
@@ -91,6 +92,20 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets/sets whether to use prefixless permalinks or not.
+		/// </summary>
+		public static bool PrefixlessPermalinks {
+			get {
+				if (!prefixlessPermalinks.HasValue)
+					return config.Settings.PrefixlessPermalinks.Value ;
+				return prefixlessPermalinks.Value ;
+			}
+			set {
+				prefixlessPermalinks = value ;
+			}
+		}
+
+		/// <summary>
 		/// Gets the configuration for the media provider to use. If the media provider is not
 		/// specified the default LocalMediaProvider is used.
 		/// </summary>
@@ -152,7 +167,7 @@ namespace Piranha
 			}
 		}
 
-        		/// <summary>
+        /// <summary>
 		/// Gets the configuration for the log provider to use. If the log provider is not
 		/// specified the default LocalLogProvider is used.
 		/// </summary>

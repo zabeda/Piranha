@@ -51,6 +51,7 @@ namespace Piranha
 		private const string DISABLE_MANAGER = "disableManager" ;
 		private const string MANAGER_NAMESPACES = "managerNamespaces" ;
 		private const string PASSIVE_MODE = "passiveMode" ;
+		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks" ;
 		#endregion
 
 		/// <summary>
@@ -90,12 +91,21 @@ namespace Piranha
 		}
 
 		/// <summary>
-		/// Gets/if the application is running in passive mode.
+		/// Gets/sets if the application is running in passive mode.
 		/// </summary>
 		[ConfigurationProperty(PASSIVE_MODE, IsRequired=false)]
 		public BooleanElement PassiveMode {
 			get { return (BooleanElement)this[PASSIVE_MODE] ; }
 			set { this[PASSIVE_MODE] = value ; }
+		}
+
+		/// <summary>
+		/// Gets/sets if the generated permalinks should be prefixless.
+		/// </summary>
+		[ConfigurationProperty(PREFIXLESS_PERMALINKS, IsRequired=false)]
+		public BooleanElement PrefixlessPermalinks {
+			get { return (BooleanElement)this[PREFIXLESS_PERMALINKS] ; }
+			set { this[PREFIXLESS_PERMALINKS] = value ; }
 		}
 
 		/// <summary>

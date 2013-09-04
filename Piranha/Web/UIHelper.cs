@@ -155,7 +155,7 @@ namespace Piranha.Web
 				prefix += "/" ;
 			if (permalink == "" && CurrentPage != null)
 				permalink = CurrentPage.Permalink ;
-			return SiteUrl("~/" + prefix + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
+			return SiteUrl("~/" + prefix + (!Config.PrefixlessPermalinks ? 
 				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink) ;
 		}
 
@@ -176,7 +176,7 @@ namespace Piranha.Web
 				prefix += "/" ;
 			var perm = Models.Permalink.GetSingle(permalinkid) ;
 			if (perm != null)
-				return SiteUrl("~/" + prefix + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
+				return SiteUrl("~/" + prefix + (!Config.PrefixlessPermalinks ? 
 				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + perm.Name) ;
 			return SiteUrl("~/" + prefix) ;
 		}
@@ -556,7 +556,7 @@ namespace Piranha.Web
 				}
 				if (page.IsStartpage)
 					return Url("~/") ;
-				return Url("~/" + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
+				return Url("~/" + (!Config.PrefixlessPermalinks ? 
 					Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + page.Permalink.ToLower()) ;
 			}
 			return "" ;

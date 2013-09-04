@@ -88,7 +88,11 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Gets/sets whether to use prefixless permalinks.
 		/// </summary>
-		public static bool PrefixlessPermalinks { get ; set ; }
+		[Obsolete("Please refer to Piranha.Config.PrefixlessPermalinks or configure it using the appropriate section in you Web.config")]
+		public static bool PrefixlessPermalinks { 
+			get { return Config.PrefixlessPermalinks ; }
+			set { Config.PrefixlessPermalinks = value ; }
+		}
 		#endregion
 
 		/// <summary>
@@ -281,7 +285,7 @@ namespace Piranha.WebPages
 					// Find the correct request handler
 					foreach (var hr in Application.Current.Handlers) {
 						if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
-							if (hr.Id != "PERMALINK" || !PrefixlessPermalinks) {
+							if (hr.Id != "PERMALINK" || !Config.PrefixlessPermalinks) {
 								// Don't execute permalink routing in passive mode
 								if ((hr.Id != "PERMALINK" && hr.Id != "STARTPAGE") || !Config.PassiveMode) {
 									// Execute the handler
@@ -301,7 +305,7 @@ namespace Piranha.WebPages
 					// If no handler was found and we are using prefixless permalinks, 
 					// route traffic to the permalink handler.
 					if (!Config.PassiveMode) {
-						if (!handled && PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
+						if (!handled && Config.PrefixlessPermalinks && args[0].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
 							if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[0]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[0]) != null) {
 								var handler = new PermalinkHandler() ;
 								handler.HandleRequest(context, args) ;

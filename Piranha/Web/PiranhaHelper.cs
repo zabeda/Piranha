@@ -25,7 +25,7 @@ namespace Piranha.Web
 		public static string GetPermalink(this UrlHelper helper, string permalink, bool draft = false) {
 			if (draft)
 				return helper.Content("~/" + Application.Current.Handlers.GetUrlPrefix("DRAFT") + "/" + permalink.ToLower()) ;
-			return helper.Content("~/" + (!WebPages.WebPiranha.PrefixlessPermalinks ? 
+			return helper.Content("~/" + (!Config.PrefixlessPermalinks ? 
 				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink.ToLower()) ;
 		}
 

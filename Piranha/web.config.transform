@@ -7,6 +7,7 @@
       <managerNamespaces value="" />
       <disableManager value="false" />
       <passiveMode value="false" />
+      <prefixlessPermalinks value="false" />
     </settings>
     <providers>
       <mediaProvider value="Piranha.IO.LocalMediaProvider, Piranha" />
