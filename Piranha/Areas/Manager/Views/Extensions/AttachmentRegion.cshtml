@@ -40,6 +40,7 @@
             },
             delete: function(e) {
                 $(e).remove();
+                extensions.@(varObj).count--;
                 extensions.@(varObj).updateSeqnos();
             },
             updateSeqnos: function() {
