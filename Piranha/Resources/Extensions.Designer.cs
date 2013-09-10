@@ -277,7 +277,7 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text.
+        ///   Looks up a localized string similar to Body.
         /// </summary>
         public static string TextRegionBody {
             get {

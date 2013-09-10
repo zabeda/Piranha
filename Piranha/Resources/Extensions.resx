@@ -190,7 +190,7 @@
     <value>Post type</value>
   </data>
   <data name="TextRegionBody" xml:space="preserve">
-    <value>Text</value>
+    <value>Body</value>
   </data>
   <data name="TextRegionName" xml:space="preserve">
     <value>Simple text</value>
