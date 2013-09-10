@@ -51,7 +51,7 @@ namespace Piranha.Web
 				else
 					feed.WriteElementString("description", post.Body.ToString()) ;
 				feed.WriteElementString("link", PublicLink(context.Request, post.Permalink)) ;
-				feed.WriteElementString("pubDate", post.Published.ToLongDateString()) ;
+				feed.WriteElementString("pubDate", post.Published.ToLongDateString() + " " + post.Published.ToLongTimeString()) ;
 				feed.WriteEndElement();
 			}
 
@@ -73,7 +73,7 @@ namespace Piranha.Web
 		/// <returns>The public link</returns>
 		private static string PublicLink(HttpRequest request, string permalink) {
 			return WebPages.WebPiranha.GetSiteUrl() + "/" +
-				(!WebPages.WebPiranha.PrefixlessPermalinks ? Application.Current.Handlers.GetUrlPrefix("PERMALINK") + "/" : "") + permalink ;
+				(!Config.PrefixlessPermalinks ? Application.Current.Handlers.GetUrlPrefix("PERMALINK") + "/" : "") + permalink ;
 		}
 
 		/// <summary>

@@ -82,6 +82,10 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
 			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 
+			// Check so that users are not saved without a group
+			if (um.User.GroupId == Guid.Empty)
+				ModelState.AddModelError("User.GroupId", Resources.Settings.UserGroupIdRequired) ;
+
 			if (ModelState.IsValid) {
 				try {
 					if (um.SaveAll()) {
@@ -172,6 +176,10 @@ namespace Piranha.Areas.Manager.Controllers
 			if (gm.Group.IsNew)
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewGroup ;
 			else ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingGroup ;
+
+			// Check so that no groups are saved without a parent except the system administrator.
+			if (gm.Group.ParentId == Guid.Empty && gm.Group.Id != Config.SysAdminGroupId)
+				ModelState.AddModelError("Group.ParentId", Resources.Settings.GroupParentIdRequired) ;
 
 			if (ModelState.IsValid) {
 				try {

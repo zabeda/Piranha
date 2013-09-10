@@ -91,6 +91,7 @@
                     @Html.LabelFor(m => m.User.GroupId)
                     <div class="input">
                         @Html.DropDownListFor(m => m.User.GroupId, Model.Groups)</div>
+                    @Html.ValidationMessageFor(m => m.User.GroupId)
                 </li>
             </ul>
         </div>

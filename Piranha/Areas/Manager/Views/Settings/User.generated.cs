@@ -515,8 +515,18 @@ WriteLiteral("                        ");
             
             #line default
             #line hidden
-WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n   " +
-" <div");
+WriteLiteral("</div>\r\n");
+
+WriteLiteral("                    ");
+
+            
+            #line 94 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+               Write(Html.ValidationMessageFor(m => m.User.GroupId));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    <div");
 
 WriteLiteral(" class=\"box\"");
 
@@ -527,7 +537,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 99 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 100 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                           Write(Piranha.Resources.Settings.Account);
 
             
@@ -544,7 +554,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 102 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 103 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.Label(Piranha.Resources.Settings.APIKey));
 
             
@@ -555,7 +565,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                    ");
 
             
-            #line 103 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 104 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.HiddenFor(m => m.User.APIKey));
 
             
@@ -570,7 +580,7 @@ WriteLiteral(" class=\"btn right\"");
 WriteLiteral(">");
 
             
-            #line 104 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 105 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                                                           Write(Piranha.Resources.Settings.Generate);
 
             
@@ -583,7 +593,7 @@ WriteLiteral(" class=\"apikey\"");
 WriteLiteral(">");
 
             
-            #line 105 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 106 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                                  Write(Html.Raw(Model.User.APIKey != Guid.Empty ? Model.User.APIKey.ToString() : "&nbsp;"));
 
             
@@ -592,7 +602,7 @@ WriteLiteral(">");
 WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 
             
-            #line 107 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 108 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.LabelFor(m => m.User.IsLocked));
 
             
@@ -601,7 +611,7 @@ WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 WriteLiteral("\r\n                    <p>");
 
             
-            #line 108 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 109 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                   Write(Html.CheckBoxFor(m => m.User.IsLocked));
 
             
@@ -610,7 +620,7 @@ WriteLiteral("\r\n                    <p>");
 WriteLiteral(" (");
 
             
-            #line 108 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 109 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                                                            Write(Piranha.Resources.Settings.LockedInfo);
 
             
@@ -619,7 +629,7 @@ WriteLiteral(" (");
 WriteLiteral(")</p>\r\n                </li>\r\n                <li>");
 
             
-            #line 110 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 111 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.LabelFor(m => m.User.LockedUntil));
 
             
@@ -634,7 +644,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 112 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 113 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                    Write(Html.EditorFor(m => m.User.LockedUntil));
 
             
@@ -643,27 +653,27 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 117 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 118 "..\..\Areas\Manager\Views\Settings\User.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 117 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 118 "..\..\Areas\Manager\Views\Settings\User.cshtml"
      if (Model.Extensions.Count > 0) {
         
             
             #line default
             #line hidden
             
-            #line 118 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 119 "..\..\Areas\Manager\Views\Settings\User.cshtml"
    Write(Html.EditorFor(m => m.Extensions));
 
             
             #line default
             #line hidden
             
-            #line 118 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 119 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                                           
     }
 
@@ -685,7 +695,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 123 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 124 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                            Write(Model.User.IsNew ? @Piranha.Resources.Settings.CreatePassword : @Piranha.Resources.Settings.ChangePassword);
 
             
@@ -704,7 +714,7 @@ WriteLiteral(">\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 127 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 128 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.LabelFor(m => m.Password.Password));
 
             
@@ -719,7 +729,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 129 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 130 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                    Write(Html.PasswordFor(m => m.Password.Password));
 
             
@@ -730,7 +740,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 132 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 133 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.LabelFor(m => m.Password.PasswordConfirm));
 
             
@@ -745,7 +755,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 134 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 135 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                    Write(Html.PasswordFor(m => m.Password.PasswordConfirm));
 
             
@@ -756,7 +766,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 135 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 136 "..\..\Areas\Manager\Views\Settings\User.cshtml"
                Write(Html.ValidationMessageFor(m => m.Password.PasswordConfirm));
 
             
@@ -764,14 +774,14 @@ WriteLiteral("                    ");
             #line hidden
 WriteLiteral("\r\n                </li>\r\n            </ul>\r\n            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5941), Tuple.Create("\"", 6024)
+WriteAttribute("href", Tuple.Create(" href=\"", 6010), Tuple.Create("\"", 6093)
             
-            #line 138 "..\..\Areas\Manager\Views\Settings\User.cshtml"
-, Tuple.Create(Tuple.Create("", 5948), Tuple.Create<System.Object, System.Int32>(Url.Action("generatepassword", "settings", new { @id = Model.Password.Id })
+            #line 139 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+, Tuple.Create(Tuple.Create("", 6017), Tuple.Create<System.Object, System.Int32>(Url.Action("generatepassword", "settings", new { @id = Model.Password.Id })
             
             #line default
             #line hidden
-, 5948), false)
+, 6017), false)
 );
 
 WriteLiteral(" class=\"btn orange hidden\"");
@@ -779,7 +789,7 @@ WriteLiteral(" class=\"btn orange hidden\"");
 WriteLiteral(">Generera lösenord</a>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 142 "..\..\Areas\Manager\Views\Settings\User.cshtml"
+            #line 143 "..\..\Areas\Manager\Views\Settings\User.cshtml"
    Html.EndForm() ; 
             
             #line default

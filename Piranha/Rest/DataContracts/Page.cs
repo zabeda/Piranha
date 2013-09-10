@@ -21,6 +21,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string Title { get ; set ; }
 		[DataMember()]
+		public string NavigationTitle { get ; set ; }
+		[DataMember()]
 		public string Permalink { get ; set ; }
 		[DataMember()]
 		public bool IsHidden { get ; set ; }

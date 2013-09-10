@@ -139,6 +139,7 @@ namespace Piranha.Models.Manager.PostModels
 		public static EditModel CreateByTemplate(Guid templateId) {
 			EditModel m = new EditModel() ;
 
+			m.Template = PostTemplate.GetSingle(templateId) ;
 			m.Permalink = new Permalink() {
 				Id = Guid.NewGuid(),
 				Type = Permalink.PermalinkType.POST,
@@ -147,9 +148,9 @@ namespace Piranha.Models.Manager.PostModels
 			m.Post = new Piranha.Models.Post() {
 				Id = Guid.NewGuid(),
 				TemplateId = templateId,
-				PermalinkId = m.Permalink.Id
+				PermalinkId = m.Permalink.Id,
+				AllowRss = m.Template.AllowRss
 			} ;
-			m.Template = PostTemplate.GetSingle(templateId) ;
 			m.GetRelated() ;
 
 			return m ;

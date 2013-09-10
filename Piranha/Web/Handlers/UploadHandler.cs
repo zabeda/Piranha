@@ -6,7 +6,7 @@ using System.Web;
 
 using Piranha.Models;
 
-namespace Piranha.WebPages.RequestHandlers
+namespace Piranha.Web.Handlers
 {
 	public class UploadHandler : IRequestHandler
 	{

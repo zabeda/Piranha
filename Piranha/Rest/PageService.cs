@@ -60,6 +60,7 @@ namespace Piranha.Rest
 						Seqno = ((Piranha.Models.Page)pm.Page).Seqno,
 						TemplateName = pm.Page.TemplateName,
 						Title = pm.Page.Title,
+						NavigationTitle = pm.Page.NavigationTitle,
 						Permalink = pm.Page.Permalink,
 						IsHidden = ((Piranha.Models.Page)pm.Page).IsHidden,
 						Created = pm.Page.Created.ToString(),

@@ -7,7 +7,7 @@ using System.Web;
 
 using Piranha.Models;
 
-namespace Piranha.WebPages.RequestHandlers
+namespace Piranha.Web.Handlers
 {
 	/// <summary>
 	/// Request handler for content.
@@ -32,29 +32,44 @@ namespace Piranha.WebPages.RequestHandlers
 		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length > 0) {
 				Content content = null ;
-				int? width = null ;
-				int? height = null ;
+				int? width = null, height = null ;
+				Guid? id = null ;
+				string permalink = null ;
+
+				// Try to create guid from input
+				try {
+					id = new Guid(args[0]) ;
+				} catch {}
+
+				// If if wasn't a guid, try to create permalink
+				if (!id.HasValue) {
+					try {
+						permalink = GetPermalink(args[0], ref width, ref height) ;
+					} catch {}
+				}
 
 				try {
-					// Get content by id
-					content = Content.GetSingle(new Guid(args[0]), draft) ;
-					if (content != null) {
-						if (args.Length > 1)
-							try {
-								width = Convert.ToInt32(args[1]) ;
-							} catch {}
-						if (args.Length > 2)
-							try {
-								height = Convert.ToInt32(args[2]) ;
-							} catch {}
-					}
-				} catch {
-					// Get content by permalink
-					var perm = Permalink.GetByName(Config.MediaNamespaceId, GetPermalink(args[0], ref width, ref height)) ;
+					if (id.HasValue) {
+						// Get content by id
+						content = Content.GetSingle(id.Value, draft) ;
+						if (content != null) {
+							if (args.Length > 1)
+								try {
+									width = Convert.ToInt32(args[1]) ;
+								} catch {}
+							if (args.Length > 2)
+								try {
+									height = Convert.ToInt32(args[2]) ;
+								} catch {}
+						}
+					} else if (!String.IsNullOrEmpty(permalink)) {
+						// Get content by permalink
+						var perm = Permalink.GetByName(Config.MediaNamespaceId, permalink) ;
 
-					if (perm != null)
-						content = Content.GetByPermalinkId(perm.Id) ;
-				}
+						if (perm != null)
+							content = Content.GetByPermalinkId(perm.Id) ;
+					}
+				} catch {}
 
 				// Since we don't handle viewing image drafts right now, don't execute the overhead
 				// if (content.IsDraft && !Extend.ExtensionManager.Current.MediaProvider.ExistsDraft(content.Id))

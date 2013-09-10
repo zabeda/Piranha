@@ -223,16 +223,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Attachment.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Manager\Views\Extensions\EditorTemplates\FormElement.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FormElement.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Manager\Views\Extensions\FormRegion.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FormRegion.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\HtmlRegion.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -247,6 +237,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MarkdownRegion.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\PostModelRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostModelRegion.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\PostRegion.generated.cs">
       <AutoGen>True</AutoGen>
@@ -440,7 +435,6 @@
     </Compile>
     <Compile Include="Cache\ICacheProvider.cs" />
     <Compile Include="Cache\MemCacheProvider.cs" />
-    <Compile Include="Cache\NoCacheProvider.cs" />
     <Compile Include="Cache\WebCacheProvider.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConfigProvider.cs" />
@@ -457,8 +451,6 @@
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Extension.cs" />
-    <Compile Include="Entities\FormData.cs" />
-    <Compile Include="Entities\FormItem.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Internal\Category.cs" />
     <Compile Include="Entities\Internal\ComplexName.cs" />
@@ -532,6 +524,7 @@
     <Compile Include="Extend\IType.cs" />
     <Compile Include="Extend\PageType.cs" />
     <Compile Include="Extend\Regions\MarkdownRegion.cs" />
+    <Compile Include="Extend\Regions\PostModelRegion.cs" />
     <Compile Include="Extend\RegionType.cs" />
     <Compile Include="IO\IMediaCacheProvider.cs" />
     <Compile Include="IO\LocalMediaProvider.cs" />
@@ -541,10 +534,7 @@
     <Compile Include="Extend\IExtension.cs" />
     <Compile Include="Extend\IExtensionMeta.cs" />
     <Compile Include="IO\IMediaProvider.cs" />
-    <Compile Include="Extend\Module.cs" />
-    <Compile Include="Extend\ModuleAttribute.cs" />
     <Compile Include="Extend\Regions\AttachmentRegion.cs" />
-    <Compile Include="Extend\Regions\FormRegion.cs" />
     <Compile Include="Extend\Regions\HtmlRegion.cs" />
     <Compile Include="Extend\Regions\ImageRegion.cs" />
     <Compile Include="Extend\Regions\PostRegion.cs" />
@@ -684,19 +674,19 @@
     <Compile Include="Security\LocalUserProvider.cs" />
     <Compile Include="WebPages\Hooks.cs" />
     <Compile Include="WebPages\Manager.cs" />
-    <Compile Include="WebPages\RequestHandlers\ArchiveHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\ContentHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\DraftContentHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\DraftHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\DraftThumbnailHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\IRequestHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\PermalinkHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\RequestHandlerRegistration.cs" />
-    <Compile Include="WebPages\RequestHandlers\ResourceHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\RssHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\SitemapHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\ThumbnailHandler.cs" />
-    <Compile Include="WebPages\RequestHandlers\UploadHandler.cs" />
+    <Compile Include="Web\Handlers\ArchiveHandler.cs" />
+    <Compile Include="Web\Handlers\ContentHandler.cs" />
+    <Compile Include="Web\Handlers\DraftContentHandler.cs" />
+    <Compile Include="Web\Handlers\DraftHandler.cs" />
+    <Compile Include="Web\Handlers\DraftThumbnailHandler.cs" />
+    <Compile Include="Web\Handlers\IRequestHandler.cs" />
+    <Compile Include="Web\Handlers\PermalinkHandler.cs" />
+    <Compile Include="Web\Handlers\RequestHandlerRegistration.cs" />
+    <Compile Include="Web\Handlers\ResourceHandler.cs" />
+    <Compile Include="Web\Handlers\RssHandler.cs" />
+    <Compile Include="Web\Handlers\SitemapHandler.cs" />
+    <Compile Include="Web\Handlers\ThumbnailHandler.cs" />
+    <Compile Include="Web\Handlers\UploadHandler.cs" />
     <Compile Include="WebPages\WebPiranha.cs" />
     <Compile Include="Web\APIKeyAuthorization.cs" />
     <Compile Include="Web\APIKeys.cs" />
@@ -705,7 +695,6 @@
     <Compile Include="Web\AuthController.cs" />
     <Compile Include="Web\ClientCache.cs" />
     <Compile Include="Web\CultureHelper.cs" />
-    <Compile Include="Web\FormController.cs" />
     <Compile Include="Web\FrameworkType.cs" />
     <Compile Include="Web\Handlers\RequestHandlerCollection.cs" />
     <Compile Include="Web\IClientFramework.cs" />
@@ -1180,7 +1169,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config.transform" />
+    <Content Include="web.config.transform">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\langs\readme.md" />
@@ -1252,18 +1243,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Manager\Views\Extensions\FormRegion.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>FormRegion.generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Areas\Manager\Views\Extensions\EditorTemplates\FormElement.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>FormElement.generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Manager\Views\Dialog\Link.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Link.generated.cs</LastGenOutput>
@@ -1279,6 +1258,12 @@
     <Content Include="Areas\Manager\Views\Extensions\MarkdownRegion.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>MarkdownRegion.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Extensions\PostModelRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PostModelRegion.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <PropertyGroup>

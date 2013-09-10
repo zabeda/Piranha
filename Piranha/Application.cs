@@ -8,7 +8,6 @@ using System.Web;
 
 using Piranha.Web;
 using Piranha.Web.Handlers;
-using Piranha.WebPages.RequestHandlers;
 
 namespace Piranha
 {
@@ -16,7 +15,7 @@ namespace Piranha
 	/// The application class contains the main state and configuration
 	/// for the current running web application.
 	/// </summary>
-	public class Application
+	public sealed class Application
 	{
 		#region Members
 		/// <summary>

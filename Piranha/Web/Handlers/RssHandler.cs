@@ -10,7 +10,7 @@ using System.Xml;
 using Piranha.Data;
 using Piranha.Models;
 
-namespace Piranha.WebPages.RequestHandlers
+namespace Piranha.Web.Handlers
 {
 	public class RssHandler : IRequestHandler
 	{
@@ -24,8 +24,8 @@ namespace Piranha.WebPages.RequestHandlers
 			var posts = Post.Get("post_draft = 0 AND post_rss = 1 AND post_template_id IN (SELECT posttemplate_id FROM posttemplate WHERE posttemplate_rss = 1)", new Params() { OrderBy = "post_published DESC", Top = top }) ;
 
 			Web.RssHelper.Generate(context,
- 				WebPiranha.CurrentSite.MetaTitle,
- 				WebPiranha.CurrentSite.MetaDescription,
+ 				WebPages.WebPiranha.CurrentSite.MetaTitle,
+ 				WebPages.WebPiranha.CurrentSite.MetaDescription,
 				posts) ;
 		}
 	}

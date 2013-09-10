@@ -78,7 +78,8 @@ piranha.media = function (buttonId, floatboxId, callback) {
     this.boxDimension = function () {
         $('#' + self.boxId + ' .media-new').css({
             minWidth: self.width,
-            minHeight: self.height
+            minHeight: self.height,
+            maxWidth: 'none'
         });
         floatBox.position($('#' + self.boxId + ' .box'));
     };

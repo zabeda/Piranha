@@ -360,4 +360,10 @@
   <data name="UserInfo" xml:space="preserve">
     <value>User information</value>
   </data>
+  <data name="GroupParentIdRequired" xml:space="preserve">
+    <value>Parent group is required.</value>
+  </data>
+  <data name="UserGroupIdRequired" xml:space="preserve">
+    <value>You have to assign users to a group.</value>
+  </data>
 </root>
