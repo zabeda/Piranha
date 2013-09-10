@@ -238,6 +238,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MarkdownRegion.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Manager\Views\Extensions\PostModelRegion.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostModelRegion.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Manager\Views\Extensions\PostRegion.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -519,6 +524,7 @@
     <Compile Include="Extend\IType.cs" />
     <Compile Include="Extend\PageType.cs" />
     <Compile Include="Extend\Regions\MarkdownRegion.cs" />
+    <Compile Include="Extend\Regions\PostModelRegion.cs" />
     <Compile Include="Extend\RegionType.cs" />
     <Compile Include="IO\IMediaCacheProvider.cs" />
     <Compile Include="IO\LocalMediaProvider.cs" />
@@ -1163,7 +1169,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config.transform" />
+    <Content Include="web.config.transform">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\langs\readme.md" />
@@ -1250,6 +1258,12 @@
     <Content Include="Areas\Manager\Views\Extensions\MarkdownRegion.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>MarkdownRegion.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manager\Views\Extensions\PostModelRegion.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>PostModelRegion.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <PropertyGroup>

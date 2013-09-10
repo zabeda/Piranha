@@ -153,6 +153,9 @@
   <data name="ImageRegionName" xml:space="preserve">
     <value>Image</value>
   </data>
+  <data name="PostModelRegionName" xml:space="preserve">
+    <value>Post models</value>
+  </data>
   <data name="PostRegionCache" xml:space="preserve">
     <value>Cache (minutes)</value>
   </data>
