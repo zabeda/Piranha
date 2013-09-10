@@ -136,7 +136,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the template controller.
 		/// </summary>
-		[Column(Name="posttemplate_View", ReadOnly=true, Table="posttemplate")]
+		[Column(Name="posttemplate_view", ReadOnly=true, Table="posttemplate")]
 		public string TemplateView { get ; private set ; }
 		/// <summary>
 		/// Gets/sets the created date.
