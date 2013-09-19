@@ -345,18 +345,30 @@ namespace Piranha.Models
 		/// <param name="draft">Whether to get the current draft or not</param>
 		/// <returns>The page</returns>
 		public static Page GetByPermalink(string permalink, bool draft = false) {
+			return GetByPermalink(Config.SiteTreeId, permalink, draft) ;
+		}
+
+		/// <summary>
+		/// Gets the page specified by the given permalink.
+		/// </summary>
+		/// <param name="siteTreeId">The site tree id</param>
+		/// <param name="permalink">The permalink</param>
+		/// <param name="draft">Whether to get the current draft or not</param>
+		/// <returns>The page</returns>
+		public static Page GetByPermalink(Guid siteTreeId, string permalink, bool draft = false) {
 			if (!draft) {
 				if (!PermalinkCache.ContainsKey(permalink.ToLower())) {
-					Page p = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
+					Page p = Page.GetSingle("permalink_name = @0 AND page_draft = @1 AND page_sitetree_id = @2", permalink, draft, siteTreeId) ;
 
 					if (p != null)
 						AddToCache(p) ;
 				}
 				if (!Application.Current.CacheProvider.Contains(PermalinkCache[permalink.ToLower()].ToString()))
-					Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] = Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ; 
+					Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] = 
+						Page.GetSingle("permalink_name = @0 AND page_draft = @1 AND page_sitetree_id = @2", permalink, draft, siteTreeId) ; 
 				return (Page)Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] ;
 			}
-			return Page.GetSingle("permalink_name = @0 AND page_draft = @1", permalink, draft) ;
+			return Page.GetSingle("permalink_name = @0 AND page_draft = @1 AND page_sitetree_id = @2", permalink, draft, siteTreeId) ;
 		}
 
 		/// <summary>
