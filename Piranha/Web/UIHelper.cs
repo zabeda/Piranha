@@ -313,7 +313,7 @@ namespace Piranha.Web
 				if (Current == null)
 					Current = new Page() ;
 				if (RootNode != "") {
-					Permalink pr = Models.Permalink.GetSingle("permalink_name = @0", RootNode) ;
+					Permalink pr = Models.Permalink.GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", RootNode, WebPiranha.CurrentSite.NamespaceId) ;
 					if (pr != null) {
 						Page p = Page.GetByPermalinkId(pr.Id) ;
 						Sitemap page = Sitemap.GetStructure(true).GetRootNode(p.Id) ;
