@@ -75,7 +75,7 @@ namespace Piranha.Rest
 				changes.PostTemplates.Add(new PostTemplateService().Get(pt.Id.ToString()))) ;
 
 			// Set the timespage
-			changes.Timestamp = DateTime.Now.ToString() ;
+			changes.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") ;
 
 			return changes ;
 		}
