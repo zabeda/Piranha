@@ -24,6 +24,19 @@ namespace Piranha.Web.Handlers
 		#endregion
 
 		/// <summary>
+		/// Gets the request handler with the given id.
+		/// </summary>
+		/// <param name="id">The handler id</param>
+		/// <returns>The handler, null if not found</returns>
+		public IRequestHandler this[string id] {
+			get {
+				if (handlers.ContainsKey(id.ToUpper()))
+					return handlers[id.ToUpper()].Handler ;
+				return null ;
+			}
+		}
+
+		/// <summary>
 		/// Default internal constructor.
 		/// </summary>
 		internal RequestHandlerCollection() {}
