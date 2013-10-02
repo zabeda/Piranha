@@ -138,6 +138,12 @@ namespace Piranha.Models.Manager.TemplateModels
 				// Save the regions
 				foreach (var reg in Regions)
 					reg.Save(tx) ;
+
+				// Clear all implementing pages from the cache
+				var pages = Page.Get("page_template_id = @0", tx, Template.Id) ;
+				foreach (var page in pages)
+					page.InvalidateRecord(page) ;
+
 				tx.Commit() ;
 			}
 			// Reload regions

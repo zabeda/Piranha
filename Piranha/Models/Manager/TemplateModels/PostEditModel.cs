@@ -102,6 +102,11 @@ namespace Piranha.Models.Manager.TemplateModels
 					Permalink.Name = Permalink.Generate(Template.Name) ;
 				Permalink.Save(tx) ;
 				Template.Save(tx) ;
+ 
+				// Clear all implementing posts from the cache
+				var posts = Post.Get("post_template_id = @0", tx, Template.Id) ;
+				foreach (var post in posts)
+					post.InvalidateRecord(post) ;
 
 				tx.Commit() ;
 

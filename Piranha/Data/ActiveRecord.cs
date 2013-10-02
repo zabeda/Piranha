@@ -401,6 +401,7 @@ namespace Piranha.Data
 			List<T> result = new List<T>() ;
 
 			var tx = args.Count() > 0 && args[0] is IDbTransaction ? (IDbTransaction)args[0] : null ;
+			args = tx != null ? args.Subset(1) : args ;
 
 			using (IDbConnection conn = tx != null ? null : Database.OpenConnection()) {
 				using (IDbCommand cmd = Database.CreateCommand(tx != null ? tx.Connection : conn, tx, query, args)) {
