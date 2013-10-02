@@ -47,6 +47,30 @@ namespace Piranha.Rest
 		}
 
 		/// <summary>
+		/// Gets the published folders in a recursive structure.
+		/// </summary>
+		/// <returns>The media folders</returns>
+		[WebGet(UriTemplate="getfolders", ResponseFormat=WebMessageFormat.Json)]
+		public IList<MediaFolder> GetFolders() {
+			using (var db = new DataContext()) {
+				var media = db.Media
+					.Where(m => m.IsFolder == true)
+					.OrderBy(m => m.ParentId)
+					.ThenBy(m => m.Name) ;
+				return Sort(media) ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the published folders in a recursive structure.
+		/// </summary>
+		/// <returns>The media folders</returns>
+		[WebGet(UriTemplate="getfolders/xml", ResponseFormat=WebMessageFormat.Xml)]
+		public IList<MediaFolder> GetFoldersXml() {
+			return GetFolders() ;
+		}
+
+		/// <summary>
 		/// Gets the content specified by the given id.
 		/// </summary>
 		/// <param name="id">The id</param>
@@ -78,6 +102,21 @@ namespace Piranha.Rest
 				}
 			} catch {}
 			return null ;
+		}
+
+		private IList<MediaFolder> Sort(IEnumerable<Entities.Media> media, Guid? parentId = null) {
+			var folders = new List<MediaFolder>() ;
+
+			foreach (var m in media) {
+				if (m.ParentId == parentId) {
+					folders.Add(new MediaFolder() {
+						 Id = m.Id,
+						 Name = m.Name,
+						 Folders = Sort(media, m.Id)
+					}) ;
+				}
+			}
+			return folders ;
 		}
 	}
 }

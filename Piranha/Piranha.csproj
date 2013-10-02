@@ -657,6 +657,7 @@
     <Compile Include="Rest\DataContracts\Content.cs" />
     <Compile Include="Rest\DataContracts\Deleted.cs" />
     <Compile Include="Rest\DataContracts\Extension.cs" />
+    <Compile Include="Rest\DataContracts\MediaFolder.cs" />
     <Compile Include="Rest\DataContracts\Page.cs" />
     <Compile Include="Rest\DataContracts\PageTemplate.cs" />
     <Compile Include="Rest\DataContracts\Post.cs" />

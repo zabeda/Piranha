@@ -25,6 +25,8 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public List<PostTemplate> PostTemplates { get ; set ; }
 		[DataMember()]
+		public IList<MediaFolder> MediaFolders { get ; set ; }
+		[DataMember()]
 		public Deleted Deleted { get ; set ; }
 		[DataMember()]
 		public string Timestamp { get ; set ; }
@@ -37,6 +39,7 @@ namespace Piranha.Rest.DataContracts
 			Content = new List<Content>() ;
 			PageTemplates = new List<PageTemplate>() ;
 			PostTemplates = new List<PostTemplate>() ;
+			MediaFolders = new List<MediaFolder>() ;
 			Deleted = new Deleted() ;
 		}
 	}

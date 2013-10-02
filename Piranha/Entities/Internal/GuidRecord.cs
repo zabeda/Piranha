@@ -76,8 +76,7 @@ namespace Piranha.Models
 
 				var log = new SysLog() {
 					ParentId = Id,
-					ParentType = ((string)typeof(T).GetProperty("TableName", 
-						BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper(),
+					ParentType = GetRecordName(),
 					Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE")
 				} ;
 				log.Save(tx) ;
@@ -110,8 +109,7 @@ namespace Piranha.Models
 
 				var log = new SysLog() {
 					ParentId = Id,
-					ParentType = ((string)typeof(T).GetProperty("TableName", 
-						BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper(),
+					ParentType = GetRecordName(),
 					Action = !draft ? "DEPUBLISH" : "DELETE"
 				} ;
 				log.Save(tx) ;
@@ -159,5 +157,19 @@ namespace Piranha.Models
 			byte[] bytes = crypto.ComputeHash(encoder.GetBytes(str)) ;
 			return Convert.ToBase64String(bytes) ;
 		}
+
+		#region Private methods
+		/// <summary>
+		/// This is bad design. Return the table name of the current record IF IT
+		/// DOESN'T turn out to be media.
+		/// </summary>
+		/// <returns>The name</returns>
+		private string GetRecordName() {
+			if (this is Content && ((Content)(object)this).IsFolder)
+				return "MEDIAFOLDER" ;
+			else return ((string)typeof(T).GetProperty("TableName", 
+				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper() ;
+		}
+		#endregion
 	}
 }

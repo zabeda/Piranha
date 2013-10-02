@@ -21,6 +21,8 @@ namespace Piranha.Rest.DataContracts
 		public List<DeletedItem> PageTemplates { get ; set ; }
 		[DataMember()]
 		public List<DeletedItem> PostTemplates { get ; set ; }
+		[DataMember()]
+		public List<DeletedItem> MediaFolders { get ; set ; }
 	}
 
 	[DataContract()]

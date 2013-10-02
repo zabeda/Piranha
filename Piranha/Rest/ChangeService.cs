@@ -45,6 +45,8 @@ namespace Piranha.Rest
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 			changes.Deleted.PostTemplates = Piranha.Models.SysLog.Get(query, "POSTTEMPLATE", "DELETE", latest).
 				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
+			changes.Deleted.MediaFolders = Piranha.Models.SysLog.Get(query, "MEDIAFOLDER", "DELETE", latest).
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList() ;
 
 			// Check if we have deleted pages or pages publised after the given date. If so return the sitemap
 			if (changes.Deleted.Pages.Count > 0 || Models.Page.GetScalar("SELECT COUNT(page_id) FROM page JOIN sitetree ON page_sitetree_id = sitetree_id WHERE page_last_published > @0 AND sitetree_internal_id = @1", latest, internalid) > 0)
@@ -73,6 +75,10 @@ namespace Piranha.Rest
 			// Get all post templates updated after the given date.
 			Models.PostTemplate.GetFields("posttemplate_id", "posttemplate_updated > @0", latest, new Params() { OrderBy = "posttemplate_name" }).ForEach(pt =>
 				changes.PostTemplates.Add(new PostTemplateService().Get(pt.Id.ToString()))) ;
+
+			// Check if we have deleted pages or pages publised after the given date. If so return the sitemap
+			if (changes.Deleted.MediaFolders.Count > 0 || Models.Content.GetScalar("SELECT COUNT(content_id) FROM content WHERE content_last_published > @0", latest) > 0)
+				changes.MediaFolders = new ContentService().GetFolders() ;
 
 			// Set the timespage
 			changes.Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") ;
