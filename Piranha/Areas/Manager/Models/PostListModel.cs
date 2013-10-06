@@ -150,7 +150,7 @@ namespace Piranha.Areas.Manager.Models
 					m.ActiveTemplate = templateid ;
 				}
 				m.Posts = query.
-					OrderByDescending(p => p.Updated).ToList().
+					OrderBy(p => p.Title).ToList().
 					Select(p => new PostModel() {
 						Id = p.Id,
 						Title = p.Title,
