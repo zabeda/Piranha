@@ -29,7 +29,13 @@ namespace Piranha.Rest
 
 		internal Changes GetChangesInternal(string internalid, string date) {
 			Changes changes = new Changes() ;
-			DateTime latest = Convert.ToDateTime(date) ;
+			DateTime latest ;
+
+			try {
+				latest = Convert.ToDateTime(date) ;
+			} catch {
+				latest = new DateTime(2000, 1, 1) ;
+			}
 
 			// Get all deleted content
 			string query = "syslog_parent_type = @0 AND syslog_action = @1 AND syslog_created > @2" ;

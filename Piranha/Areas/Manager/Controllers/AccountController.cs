@@ -53,9 +53,12 @@ namespace Piranha.Areas.Manager.Controllers
 					HttpContext.Session[PiranhaApp.USER] = user ;
 
 					// Redirect after logon
-					var startpage = WebPages.Manager.Menu[0].Items[0] ;
+					/*
+					var startpage =  WebPages.Manager.Menu[0].Items[0] ;
 
 					return RedirectToAction(startpage.Action, startpage.Controller) ;
+					 */
+					return RedirectToAction("index", "managerstart") ;
 				} else {
 					ViewBag.Message = @Piranha.Resources.Account.MessageLoginFailed ;
 					ViewBag.MessageCss = "error" ;

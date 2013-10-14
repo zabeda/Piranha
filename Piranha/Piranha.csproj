@@ -130,6 +130,7 @@
     <Compile Include="Areas\Manager\Controllers\DialogController.cs" />
     <Compile Include="Areas\Manager\Controllers\InstallController.cs" />
     <Compile Include="Areas\Manager\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\Manager\Controllers\ManagerStartController.cs" />
     <Compile Include="Areas\Manager\Controllers\PageController.cs" />
     <Compile Include="Areas\Manager\Controllers\PostController.cs" />
     <Compile Include="Areas\Manager\Controllers\SettingsController.cs" />

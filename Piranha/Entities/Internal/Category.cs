@@ -130,6 +130,17 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Get the available categories for the given media content.
+		/// </summary>
+		/// <param name="id">The content id</param>
+		/// <returns>The categories</returns>
+		public static List<Category> GetByContentId(Guid id, bool draft = true ) {
+			return Category.Get("category_id IN (" +
+				"SELECT relation_related_id FROM relation WHERE relation_type = @0 AND relation_data_id = @1 AND relation_draft = @2)",
+				Relation.RelationType.CONTENTCATEGORY, id, draft) ;
+		}
+
+		/// <summary>
 		/// Gets the category for the given permalink.
 		/// </summary>
 		/// <param name="permalink">The permalink</param>

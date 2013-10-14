@@ -15,15 +15,21 @@
     .border-radius(3px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.04);
 
+    &.overflow {
+        overflow: visible;
+    }
+
     .inner {
         padding: 14px;
         border-top: 1px solid @primay-border-color;
     }
+
     &.content-editor .inner,
-    .content-editor .inner { 
-        border-top: 0 none !important; 
-        padding: 0; 
+    .content-editor .inner {
+        border-top: 0 none !important;
+        padding: 0;
     }
+
     .title {
         background: #eee;
         padding: 10px 14px;
@@ -35,15 +41,18 @@
             font-size: 18px;
             margin: 0;
         }
+
         small {
             float: right;
             margin-top: 4px;
             color: #999;
         }
+
         .buttons {
             float: right;
         }
     }
+
     .separator {
         background: #ddd;
         height: 1px;
@@ -51,15 +60,18 @@
         padding: 0 15px;
         margin-left: -15px;
     }
+
     hr {
         border-color: #ccc;
         background: #ccc;
         border: none 0px;
         height: 2px;
     }
+
     .optional {
         display: none;
     }
+
     .expanded + .optional {
         display: block;
     }

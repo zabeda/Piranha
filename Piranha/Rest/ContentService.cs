@@ -56,7 +56,7 @@ namespace Piranha.Rest
 				var media = db.Media
 					.Where(m => m.IsFolder == true)
 					.OrderBy(m => m.ParentId)
-					.ThenBy(m => m.Name) ;
+					.ThenBy(m => m.Name).ToList() ;
 				return Sort(media) ;
 			}
 		}
@@ -81,7 +81,7 @@ namespace Piranha.Rest
 				Models.Content c = Models.Content.GetSingle(id, draft) ;
 
 				if (c != null) {
-					return new Content() {
+					var media = new Content() {
 						Id = c.Id,
 						ParentId = c.ParentId,
 						Filename = c.Filename,
@@ -98,7 +98,18 @@ namespace Piranha.Rest
 							Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
 						Created = c.Created.ToString(),
 						Updated = c.Updated.ToString()
-					};
+					} ;
+					foreach (var cat in Models.Category.GetByContentId(c.Id, false)) {
+						media.Categories.Add(new Category() {
+							Id = cat.Id,
+							Permalink = cat.Permalink,
+							Name = cat.Name,
+							Description = cat.Description,
+							Created = cat.Created.ToString(),
+							Updated = cat.Updated.ToString()
+						}) ;
+					}
+					return media ;
 				}
 			} catch {}
 			return null ;

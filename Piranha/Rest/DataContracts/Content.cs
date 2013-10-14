@@ -30,8 +30,14 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string ContentUrl { get ; set ; }
 		[DataMember()]
+		public List<Category> Categories { get ; set ; }
+		[DataMember()]
 		public string Created { get ; set ; }
 		[DataMember()]
 		public string Updated { get ; set ; }
+
+		public Content() {
+			Categories = new List<Category>() ;
+		}
 	}
 }

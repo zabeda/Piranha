@@ -7,7 +7,7 @@ namespace Piranha.IO
 	/// <summary>
 	/// Media provider for storing data on the local disc in the App_Data folder.
 	/// </summary>
-	public sealed class LocalMediaProvider : IMediaProvider
+	public class LocalMediaProvider : IMediaProvider
 	{
 		#region Members
 		/// <summary>
@@ -37,7 +37,7 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		/// <returns>The media data, null if the data wasn't found</returns>
-		public byte[] Get(Guid id, MediaType type = MediaType.Media) {
+		public virtual byte[] Get(Guid id, MediaType type = MediaType.Media) {
 			var path = GetPath(id, false, type) ;
 
 			if (File.Exists(path))
@@ -51,7 +51,7 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		/// <returns>The draft media data, null if the data wasn't found</returns>
-		public byte[] GetDraft(Guid id, MediaType type = MediaType.Media) {
+		public virtual byte[] GetDraft(Guid id, MediaType type = MediaType.Media) {
 			var path = GetPath(id, true, type) ;
 
 			if (File.Exists(path))
@@ -65,7 +65,7 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="data">The media data</param>
 		/// <param name="type">The media type</param>
-		public void Put(Guid id, byte[] data, MediaType type = MediaType.Media) {
+		public virtual void Put(Guid id, byte[] data, MediaType type = MediaType.Media) {
 			var path = GetPath(id, false, type) ;
 			File.WriteAllBytes(path, data) ;
 		}
@@ -76,7 +76,7 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="data">The media data</param>
 		/// <param name="type">The media type</param>
-		public void PutDraft(Guid id, byte[] data, MediaType type = MediaType.Media) {
+		public virtual void PutDraft(Guid id, byte[] data, MediaType type = MediaType.Media) {
 			var path = GetPath(id, true, type) ;
 			File.WriteAllBytes(path, data) ;
 		}
@@ -86,7 +86,7 @@ namespace Piranha.IO
 		/// </summary>
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
-		public void Delete(Guid id, MediaType type = MediaType.Media) {
+		public virtual void Delete(Guid id, MediaType type = MediaType.Media) {
 			var path = GetPath(id, false, type) ;
 			if (File.Exists(path))
 				File.Delete(path) ;
@@ -97,7 +97,7 @@ namespace Piranha.IO
 		/// </summary>
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
-		public void DeleteDraft(Guid id, MediaType type = MediaType.Media) {
+		public virtual void DeleteDraft(Guid id, MediaType type = MediaType.Media) {
 			var path = GetPath(id, true, type) ;
 			if (File.Exists(path))
 				File.Delete(path) ;
@@ -109,7 +109,7 @@ namespace Piranha.IO
 		/// </summary>
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
-		public void Publish(Guid id, MediaType type = MediaType.Media) {
+		public virtual void Publish(Guid id, MediaType type = MediaType.Media) {
 			var path = GetPath(id, false, type) ;
 			var draft = GetPath(id, true, type) ;
 			
@@ -123,7 +123,7 @@ namespace Piranha.IO
 		/// </summary>
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
-		public void Unpublish(Guid id, MediaType type = MediaType.Media) {
+		public virtual void Unpublish(Guid id, MediaType type = MediaType.Media) {
 			var path = GetPath(id, false, type) ;
 			var draft = GetPath(id, true, type) ;
 

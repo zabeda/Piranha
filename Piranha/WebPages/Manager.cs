@@ -220,5 +220,18 @@ namespace Piranha.WebPages
 			}
 			return null ;
 		}
+
+		/// <summary>
+		/// Gets the startpage for the currently logged in user.
+		/// </summary>
+		/// <returns>The menu item</returns>
+		public static MenuItem GetStartpage() {
+			foreach (var group in Menu) {
+				foreach (var item in group.ItemsForUser()) {
+					return item ;
+				}
+			}
+			return null ;
+		}
 	}
 }
