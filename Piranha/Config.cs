@@ -15,14 +15,16 @@ namespace Piranha
 		#region Members
 		private static string[] namespaces = null;
 		private static object nsmutex = new object() ;
-        private static ConfigProvider mediaprovider = null;
-        private static ConfigProvider cacheProvider = null;
-        private static ConfigProvider logProvider = null;
-        private static object mpmutex = new object();
-        private static object cpmutex = new object();
-        private static object lpmutex = new object();
+        private static ConfigProvider mediaprovider = null ;
+		private static ConfigProvider mediaCacheProvider = null ; 
+		private static ConfigProvider cacheProvider = null ;
+        private static ConfigProvider logProvider = null ;
+        private static object mpmutex = new object() ;
+		private static object mcpmutex = new object() ;
+        private static object cpmutex = new object() ;
+        private static object lpmutex = new object() ;
 		private static readonly ConfigFile config = GetConfig() ;
-		private static bool? prefixlessPermalinks = null;
+		private static bool? prefixlessPermalinks = null ;
 		#endregion
 
 		/// <summary>
@@ -118,12 +120,7 @@ namespace Piranha
 					if (mediaprovider == null) {
 						var str = config.Providers.MediaProvider.Value ;
 						if (!String.IsNullOrEmpty(str)) {
-							var vals = str.Split(new char[] { ',' }) ;
-
-							mediaprovider = new ConfigProvider() {
-								TypeName = vals[0].Trim(),
-								AssemblyName = vals[1].Trim()
-							} ;
+							mediaprovider = GetProvider(str) ; 
 						} else {
 							mediaprovider = new ConfigProvider() {
 								TypeName = typeof(IO.LocalMediaProvider).FullName,
@@ -133,6 +130,32 @@ namespace Piranha
 					}
 				}
 				return mediaprovider ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the configuration for the media cache provider to use. If the provider is not
+		/// specified the default LocalMediaCacheProvider is used.
+		/// </summary>
+		internal static ConfigProvider MediaCacheProvider {
+			get {
+				if (mediaCacheProvider != null)
+					return mediaCacheProvider ;
+
+				lock (mcpmutex) {
+					if (mediaCacheProvider == null) {
+						var str = config.Providers.MediaCacheProvider.Value ;
+						if (!String.IsNullOrEmpty(str)) {
+							mediaCacheProvider = GetProvider(str) ;
+						} else {
+							mediaCacheProvider = new ConfigProvider() {
+							TypeName = typeof(IO.LocalMediaCacheProvider).FullName,
+							AssemblyName = Assembly.GetExecutingAssembly().FullName
+							} ;
+						}
+					}
+				}
+				return mediaCacheProvider ;
 			}
 		}
 
@@ -149,12 +172,7 @@ namespace Piranha
 					if (cacheProvider == null) {
 						var str = config.Providers.CacheProvider.Value ;
 						if (!String.IsNullOrEmpty(str)) {
-							var vals = str.Split(new char[] { ',' }) ;
-
-							cacheProvider = new ConfigProvider() {
-								TypeName = vals[0].Trim(),
-								AssemblyName = vals[1].Trim()
-							} ;
+							cacheProvider = GetProvider(str) ; 
 						} else {
 							cacheProvider = new ConfigProvider() {
 								TypeName = typeof(Cache.WebCacheProvider).FullName,
@@ -180,12 +198,7 @@ namespace Piranha
                     if (logProvider == null) {
 						var str = config.Providers.LogProvider.Value ;
 						if (!String.IsNullOrEmpty(str)) {
-							var vals = str.Split(new char[] { ',' }) ;
-
-							logProvider = new ConfigProvider() {
-								TypeName = vals[0].Trim(),
-								AssemblyName = vals[1].Trim()
-							} ;
+							logProvider = GetProvider(str) ; 
 						} else {
 							logProvider = new ConfigProvider() {
 								TypeName = typeof(Log.LocalLogProvider).FullName,
@@ -262,6 +275,20 @@ namespace Piranha
 				section = new ConfigFile() ;
 			return section ;
 		}
+
+		/// <summary>
+		/// Gets a provider object from the given string
+		/// </summary>
+		/// <param name="str">The provider string</param>
+		/// <returns>The parsed provider</returns>
+		private static ConfigProvider GetProvider(string str) {
+			var vals = str.Split(new char[] { ',' }) ;
+
+			return new ConfigProvider() {
+				TypeName = vals[0].Trim(),
+				AssemblyName = vals[1].Trim()
+			} ;
+		} 
 		#endregion
 	}
 }

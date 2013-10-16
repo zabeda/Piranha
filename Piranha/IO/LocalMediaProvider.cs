@@ -13,12 +13,12 @@ namespace Piranha.IO
 		/// <summary>
 		/// The local base path for all media files.
 		/// </summary>
-		private readonly string BasePath = HttpContext.Current.Server.MapPath("~/App_Data/Content") ;
+		protected readonly string BasePath = HttpContext.Current.Server.MapPath("~/App_Data/Content") ;
 
 		/// <summary>
 		/// The local base path for all media files.
 		/// </summary>
-		private readonly string UploadPath = HttpContext.Current.Server.MapPath("~/App_Data/Uploads") ;
+		protected readonly string UploadPath = HttpContext.Current.Server.MapPath("~/App_Data/Uploads") ;
 		#endregion
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace Piranha.IO
 		/// <param name="draft">Whether or not this is a draft</param>
 		/// <param name="type">The media type</param>
 		/// <returns>The local path</returns>
-		private string GetPath(Guid id, bool draft, MediaType type = MediaType.Media) {
+		protected string GetPath(Guid id, bool draft, MediaType type = MediaType.Media) {
 			return (type == MediaType.Media ? BasePath : UploadPath) + "/" + id.ToString() + (draft ? "-draft" : "") ;
 		}
 		#endregion

@@ -11,6 +11,7 @@
     </settings>
     <providers>
       <mediaProvider value="Piranha.IO.LocalMediaProvider, Piranha" />
+      <mediaCacheProvider value="Piranha.IO.LocalMediaCacheProvider, Piranha" />
       <cacheProvider value="Piranha.Cache.WebCacheProvider, Piranha" />
       <logProvider value="Piranha.Log.LocalLogProvider, Piranha" />
     </providers>

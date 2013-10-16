@@ -96,13 +96,7 @@ namespace Piranha.Models
 		/// <returns>If there exists an upload</returns>
 		public static bool ExistsForParentId(Guid id) {
 			return GetSingleByParentId(id) != null ;
-			
 		}
 		#endregion
-
-		/// <summary>
-		/// Default constructor. Creates a new upload entity.
-		/// </summary>
-		public Upload() : base("~/App_Data/Uploads/", "~/App_Data/Cache/Uploads") {}
 	}
 }

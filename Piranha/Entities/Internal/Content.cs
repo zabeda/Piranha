@@ -185,13 +185,6 @@ namespace Piranha.Models
 		/// Gets/sets the possible child content if this is a folder.
 		/// </summary>
 		public List<Content> ChildContent { get ; set ; }
-
-		/// <summary>
-		/// Gets the virtual path for the cached media file.
-		/// </summary>
-		public override string VirtualCachePath {
-			get { return base.VirtualCachePath + (IsDraft ? "-draft" : "") ; }
-		}
 		#endregion
 
 		#region Cache
@@ -204,7 +197,7 @@ namespace Piranha.Models
 		/// <summary>
 		/// Default constructor. Creates a new content object.
 		/// </summary>
-		public Content() : base("~/App_Data/Content/", "~/App_Data/Cache/Content/") {
+		public Content() {
 			ExtensionType = Extend.ExtensionType.Media ;
 			ChildContent = new List<Content>() ;
 			LogChanges = true ;
@@ -355,9 +348,9 @@ namespace Piranha.Models
 
 			if (Drawing.Thumbnails.ContainsKey(id)) {
 				if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
-					if (File.Exists(content.GetCacheThumbPath(size))) {
-						content.WriteFile(context, content.GetCacheThumbPath(size)) ;
-					} else {
+					var data = Application.Current.MediaCacheProvider.Get(id, size, size) ;
+
+					if (data == null) {
 						var resource = Drawing.Thumbnails.GetById(id) ;
 						if (size <= 32 && resource.Contains("ico-folder"))
 							resource = Drawing.Thumbnails.GetByType("folder-small") ;
@@ -379,11 +372,16 @@ namespace Piranha.Models
 							grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
 								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
 								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
-							bmp.Save(content.GetCacheThumbPath(size), img.RawFormat) ;
+
+							using (var mem = new MemoryStream()) {
+								bmp.Save(mem, img.RawFormat) ;
+								data = mem.ToArray() ;
+							}
 							bmp.Dispose() ;
 							grp.Dispose() ;
 						}
-						content.WriteFile(context, content.GetCacheThumbPath(size)) ;
+						Application.Current.MediaCacheProvider.Put(id, data, size, size) ;
+						content.WriteFile(context, data) ;
 
 						img.Dispose() ;
 					}
@@ -539,49 +537,8 @@ namespace Piranha.Models
 		/// <param name="response">The http response</param>
 		/// <param name="size">The desired size</param>
 		public void GetThumbnail(HttpContext context, int size = 60, bool nocache = false) {
-			bool compress = false ;
-			var param = SysParam.GetByName("COMPRESS_IMAGES") ;
-
-			if (param != null && param.Value == "1")
-				compress = true ;
-
 			if ((nocache && ClientCache.HandleNoCache(context)) || !ClientCache.HandleClientCache(context, Id.ToString() + size.ToString(), Updated)) {
-				if (File.Exists(GetCacheThumbPath(size))) {
-					// Return generated & cached thumbnail
-					WriteFile(context, GetCacheThumbPath(size), compress) ;
-				} else {
-					byte[] data = null ;
-					if (IsDraft)
-						data = Application.Current.MediaProvider.GetDraft(Id) ;
-					if (!IsDraft || data == null)
-						data = Application.Current.MediaProvider.Get(Id) ;
-
-					if (data != null) {
-						using (var mem = new MemoryStream(data)) {
-							using (var img = Image.FromStream(mem)) {
-								if (img != null) {
-									// Generate thumbnail from image
-									using (Bitmap bmp = new Bitmap(size, size)) {
-										using (Graphics grp = Graphics.FromImage(bmp)) {
-											grp.SmoothingMode = SmoothingMode.HighQuality ;
-											grp.CompositingQuality = CompositingQuality.HighQuality ;
-											grp.InterpolationMode = InterpolationMode.High ;
-
-											// Resize and crop image
-											Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
-											grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
-												img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
-												Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
-
-											bmp.Save(GetCacheThumbPath(size), compress ? System.Drawing.Imaging.ImageFormat.Jpeg : img.RawFormat) ;
-										}
-									}
-									WriteFile(context, GetCacheThumbPath(size), compress) ;
-								}
-							}
-						}
-					}
-				}
+				GetMedia(context, size, size) ;
 			}
 		}
 
@@ -590,13 +547,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The total size in bytes</returns>
 		public long GetTotalSize() {
-			long total = Size ;
-
-			DirectoryInfo dir = new DirectoryInfo(HttpContext.Current.Server.MapPath(CachePath)) ;
-			foreach (FileInfo file in dir.GetFiles(Id.ToString() + "*")) {
-				total += file.Length ;
-			}
-			return Math.Max(total, 1024) ;
+			return Size + Application.Current.MediaCacheProvider.GetTotalSize(Id) ;
 		}
 
 		/// <summary>

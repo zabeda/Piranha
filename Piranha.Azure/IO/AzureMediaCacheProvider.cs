@@ -144,21 +144,20 @@ namespace Piranha.Azure.IO
         /// <summary>
         /// Gets the total size of all items in the cache.
         /// </summary>
-        /// <returns>
-        /// The size of the cache in bytes.
-        /// </returns>
-        public long GetTotalSize()
+		/// <param name="id">The id</param>
+		/// <param name="type">The media type</param>
+        /// <returns>The size of the cache in bytes.</returns>
+        public long GetTotalSize(Guid id, MediaType type = MediaType.Media)
         {
             long size = 0;
-            foreach (var listing in cacheContainer.ListBlobs())
+            foreach (var listing in cacheContainer.ListBlobs(prefix: GetVirtualPrefix(type, id), useFlatBlobListing: true))
             {
                 var blob = listing as ICloudBlob;
                 if (blob != null)
                 {
                     size += blob.Properties.Length;
                 }
-
-            }
+            }            
             return size;
         }
 

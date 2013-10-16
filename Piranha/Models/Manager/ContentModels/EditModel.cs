@@ -501,7 +501,6 @@ namespace Piranha.Models.Manager.ContentModels
 					foreach (var ext in Extensions)
 						ext.Body.OnManagerDelete(Content) ;
 
-					File.Delete(HttpContext.Current.Server.MapPath("~/App_Data/Content/" + Content.Id)) ;
 					foreach (var c in content)
 						c.Delete(tx) ;
 					foreach (var p in permalinks)
