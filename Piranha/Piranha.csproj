@@ -454,7 +454,6 @@
     <Compile Include="Entities\Extension.cs" />
     <Compile Include="Entities\Group.cs" />
     <Compile Include="Entities\Internal\Category.cs" />
-    <Compile Include="Entities\Internal\ComplexName.cs" />
     <Compile Include="Entities\Internal\Content.cs" />
     <Compile Include="Entities\Internal\DraftRecord.cs" />
     <Compile Include="Entities\Internal\DuplicateLoginException.cs" />

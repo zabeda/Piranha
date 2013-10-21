@@ -350,7 +350,7 @@ namespace Piranha.Models
 				if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
 					var data = Application.Current.MediaCacheProvider.Get(id, size, size) ;
 
-					if (data == null) {
+					if (data != null) {
 						var resource = Drawing.Thumbnails.GetById(id) ;
 						if (size <= 32 && resource.Contains("ico-folder"))
 							resource = Drawing.Thumbnails.GetByType("folder-small") ;
