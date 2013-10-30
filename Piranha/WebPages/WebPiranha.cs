@@ -274,7 +274,7 @@ namespace Piranha.WebPages
 						pos = 1;
 					} else {
 						var def = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization") ;
-						if (def != null) {
+                        if (def != null && String.IsNullOrWhiteSpace(def.Culture) == false) {
 							System.Threading.Thread.CurrentThread.CurrentCulture = 
 								System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture) ;
 						}
