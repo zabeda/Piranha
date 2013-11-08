@@ -112,7 +112,7 @@ namespace Piranha.Areas.Manager.Controllers
 				ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
 			else ViewBag.Title = Piranha.Resources.Global.Edit + " " + pm.SiteTree.Name.ToLower() ;
 
-			// Executes the page list loaded hook, if registered
+			// Executes the page edit loaded hook, if registered
 			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
 				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
@@ -130,8 +130,16 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(bool draft, EditModel pm) {
 			if (ModelState.IsValid) {
 				try {
+			        // Executes the page edit before save hook, if registered
+			        if (WebPages.Hooks.Manager.PageEditModelBeforeSave != null)
+				        WebPages.Hooks.Manager.PageEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+
 					if (pm.SaveAll(draft)) {
-						ModelState.Clear() ;
+                        // Executes the page edit after save hook, if registered
+			            if (WebPages.Hooks.Manager.PageEditModelAfterSave != null)
+				            WebPages.Hooks.Manager.PageEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+                        
+                        ModelState.Clear() ;
 						if (!draft) {
 							if (pm.Page.Published == pm.Page.LastPublished)
 								SuccessMessage(Piranha.Resources.Page.MessagePublished) ;

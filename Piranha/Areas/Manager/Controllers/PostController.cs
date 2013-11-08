@@ -91,7 +91,15 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(bool draft, EditModel m) {
 			if (ModelState.IsValid) {
 				try {
+			        // Executes the post edit before save hook, if registered
+			        if (WebPages.Hooks.Manager.PostEditModelBeforeSave != null)
+				        WebPages.Hooks.Manager.PostEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 					if (m.SaveAll(draft)) {
+                        // Executes the post edit after save hook, if registered
+			            if (WebPages.Hooks.Manager.PostEditModelAfterSave != null)
+				            WebPages.Hooks.Manager.PostEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 						ModelState.Clear() ;
 						if (!draft) {
 							if (m.Post.Published == m.Post.LastPublished)

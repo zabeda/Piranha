@@ -99,32 +99,62 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Executed after the post list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Areas.Manager.Models.PostListModel> PostListModelLoaded ;
+			public static Delegates.ManagerModelHook<Areas.Manager.Models.PostListModel> PostListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the post edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.PostModels.EditModel> PostEditModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.PostModels.EditModel> PostEditModelLoaded ;
+
+            /// <summary>
+            /// Executed before the page edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.PostModels.EditModel> PostEditModelBeforeSave ;
+
+            /// <summary>
+            /// Executed after the page edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.PostModels.EditModel> PostEditModelAfterSave ;
 
 			/// <summary>
 			/// Executed after the page list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.PageModels.ListModel> PageListModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.PageModels.ListModel> PageListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the page edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.PageModels.EditModel> PageEditModelLoaded ;
+
+            /// <summary>
+            /// Executed before the page edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.PageModels.EditModel> PageEditModelBeforeSave ;
+
+            /// <summary>
+            /// Executed after the page edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.PageModels.EditModel> PageEditModelAfterSave ;
 
 			/// <summary>
 			/// Executed after the media list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.ContentModels.ListModel> MediaListModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.ContentModels.ListModel> MediaListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the media edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.ContentModels.EditModel> MediaEditModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelLoaded ;
+
+            /// <summary>
+            /// Executed before the media edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelBeforeSave ;
+
+            /// <summary>
+            /// Executed after the media edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelAfterSave ;
 
 			/**
 			 * TODO
@@ -140,13 +170,22 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Executed after the user list model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserListModel> UserListModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.SettingModels.UserListModel> UserListModelLoaded ;
 
 			/// <summary>
 			/// Executed after the user edit model is loaded but before the view is called.
 			/// </summary>
-			public static Delegates.ManagerModelLoadedHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
+			public static Delegates.ManagerModelHook<Models.Manager.SettingModels.UserEditModel> UserEditModelLoaded ;
 
+            /// <summary>
+            /// Executed before the user edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.SettingModels.UserEditModel> UserEditModelBeforeSave ;
+
+            /// <summary>
+            /// Executed after the user edit model is saved.
+            /// </summary>
+            public static Delegates.ManagerModelHook<Models.Manager.SettingModels.UserEditModel> UserEditModelAfterSave ;
 			/**
 			 * TODO
 			 * 

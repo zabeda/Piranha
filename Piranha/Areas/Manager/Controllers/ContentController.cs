@@ -114,8 +114,16 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_CONTENT")]
 		public ActionResult Edit(bool draft, EditModel m) {
 			try {
-				if (m.SaveAll(draft)) {
-					ViewBag.Folder = m.Content.IsFolder ;
+			    // Executes the media edit before save hook, if registered
+			    if (WebPages.Hooks.Manager.MediaEditModelBeforeSave != null)
+				    WebPages.Hooks.Manager.MediaEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+                if (m.SaveAll(draft)) {
+                    // Executes the media edit after save hook, if registered
+			        if (WebPages.Hooks.Manager.MediaEditModelAfterSave != null)
+				        WebPages.Hooks.Manager.MediaEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+                    ViewBag.Folder = m.Content.IsFolder ;
 					if (m.Content.IsImage) {
 						ViewBag.Title = Piranha.Resources.Content.EditTitleExistingImage ;
 						if (draft) {

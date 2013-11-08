@@ -24,7 +24,7 @@ namespace Piranha
 		public delegate void MenuLevelHook(Web.UIHelper ui, StringBuilder str, string cssclass) ;
 
 		public delegate void ModelLoadedHook<T>(T model) ;
-		public delegate void ManagerModelLoadedHook<T>(Controller controller, WebPages.Manager.MenuItem menu, T model) ;
+		public delegate void ManagerModelHook<T>(Controller controller, WebPages.Manager.MenuItem menu, T model) ;
 
 		public delegate void ManagerToolbarRender<T>(UrlHelper url, StringBuilder str, T model) ;
 		public delegate void SendPasswordMail(Models.SysUser user, string password);

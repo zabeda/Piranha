@@ -88,7 +88,15 @@ namespace Piranha.Areas.Manager.Controllers
 
 			if (ModelState.IsValid) {
 				try {
-					if (um.SaveAll()) {
+			        // Executes the user edit before save hook, if registered
+			        if (WebPages.Hooks.Manager.UserEditModelBeforeSave != null)
+				        WebPages.Hooks.Manager.UserEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), um) ;
+
+                    if (um.SaveAll()) {
+                        // Executes the user edit after save hook, if registered
+			            if (WebPages.Hooks.Manager.UserEditModelAfterSave != null)
+				            WebPages.Hooks.Manager.UserEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), um) ;
+
 						ModelState.Clear() ;
 						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 						SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;
