@@ -923,6 +923,7 @@
     <EmbeddedResource Include="Resources\Page.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Page.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Post.resx">

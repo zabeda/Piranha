@@ -10,7 +10,8 @@
     <script type="text/javascript" src="~/res.ashx/areas/manager/content/js/ext/jquery.equalheights.js"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
-        var folderId = "";
+    		var folderId = "";
+    		var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
         $(document).ready(function () {
             // UI Stuff
@@ -67,6 +68,10 @@
                             '<a class="icon down marg"></a>' +
                             '<a class="icon delete"></a></td>' +
                     '</tr>');
+            });
+
+            $(".delete").click(function () {
+            	return confirm(deletemsg);
             });
         });
 
