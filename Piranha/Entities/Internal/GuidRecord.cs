@@ -70,16 +70,28 @@ namespace Piranha.Models
 		
 			// If the action was successful, insert a log entry.
 			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
-				bool draft = true ;
-				if (this is DraftRecord<T>)
-					draft = ((DraftRecord<T>)this).IsDraft ;
+				// Check that we have a valid user id
+				bool validUser = false;
+				try {
+					var userId = Application.Current.UserProvider.UserId;
+					var user = SysUser.GetSingle(userId, tx);
+					if (user != null)
+						validUser = true;
+				} catch { }
 
-				var log = new SysLog() {
-					ParentId = Id,
-					ParentType = GetRecordName(),
-					Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE")
-				} ;
-				log.Save(tx) ;
+				// Only log if we have a valid logged in user.
+				if (validUser) {
+					bool draft = true ;
+					if (this is DraftRecord<T>)
+						draft = ((DraftRecord<T>)this).IsDraft ;
+
+					var log = new SysLog() {
+						ParentId = Id,
+						ParentType = GetRecordName(),
+						Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE")
+					} ;
+					log.Save(tx) ;
+				}
 			}
 			return success ;
 		}
