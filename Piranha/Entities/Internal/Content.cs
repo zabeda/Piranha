@@ -341,52 +341,60 @@ namespace Piranha.Models
 		/// <param name="context">The current http context</param>
 		/// <param name="id">The resource id</param>
 		/// <param name="size">The desired size</param>
-		public static void GetResourceThumbnail(HttpContext context, Guid id, int size = 60) {
+		public static bool GetResourceThumbnail(HttpContext context, Guid id, int size = 60) {
 			var content = new Content() {
 				Id = id
 			} ;
 
 			if (Drawing.Thumbnails.ContainsKey(id)) {
 				if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
-					var data = Application.Current.MediaCacheProvider.Get(id, size, size) ;
+					var data = Application.Current.MediaCacheProvider.Get(id, size, size);
 
-					if (data != null) {
-						var resource = Drawing.Thumbnails.GetById(id) ;
+					if (data == null) {
+						var resource = Drawing.Thumbnails.GetById(id);
 						if (size <= 32 && resource.Contains("ico-folder"))
-							resource = Drawing.Thumbnails.GetByType("folder-small") ;
+							resource = Drawing.Thumbnails.GetByType("folder-small");
 
-						Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource) ;
-						var img = Image.FromStream(strm) ;
-						strm.Close() ;
+						Stream strm = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource);
+						var img = Image.FromStream(strm);
+						strm.Close();
 
 						// Generate thumbnail from image
 						using (Bitmap bmp = new Bitmap(size, size)) {
-							Graphics grp = Graphics.FromImage(bmp) ;
+							Graphics grp = Graphics.FromImage(bmp);
 
-							grp.SmoothingMode = SmoothingMode.HighQuality ;
-							grp.CompositingQuality = CompositingQuality.HighQuality ;
-							grp.InterpolationMode = InterpolationMode.High ;
+							grp.SmoothingMode = SmoothingMode.HighQuality;
+							grp.CompositingQuality = CompositingQuality.HighQuality;
+							grp.InterpolationMode = InterpolationMode.High;
 
 							// Resize and crop image
-							Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
+							Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height);
 							grp.DrawImage(img, dst, img.Width > img.Height ? (img.Width - img.Height) / 2 : 0,
-								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height), 
-								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel) ;
+								img.Height > img.Width ? (img.Height - img.Width) / 2 : 0, Math.Min(img.Width, img.Height),
+								Math.Min(img.Height, img.Width), GraphicsUnit.Pixel);
 
 							using (var mem = new MemoryStream()) {
-								bmp.Save(mem, img.RawFormat) ;
-								data = mem.ToArray() ;
+								bmp.Save(mem, img.RawFormat);
+								data = mem.ToArray();
 							}
-							bmp.Dispose() ;
-							grp.Dispose() ;
+							bmp.Dispose();
+							grp.Dispose();
 						}
-						Application.Current.MediaCacheProvider.Put(id, data, size, size) ;
-						content.WriteFile(context, data) ;
+						Application.Current.MediaCacheProvider.Put(id, data, size, size);
+						content.WriteFile(context, data);
 
-						img.Dispose() ;
+						img.Dispose();
+					}
+					if (data != null) {
+						context.Response.StatusCode = 200;
+						context.Response.ContentType = "image/png";
+						context.Response.BinaryWrite(data);
+						context.Response.EndClean();
 					}
 				}
+				return true;
 			}
+			return false;
 		}
 
 		/// <summary>
