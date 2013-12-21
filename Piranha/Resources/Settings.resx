@@ -366,4 +366,7 @@
   <data name="UserGroupIdRequired" xml:space="preserve">
     <value>You have to assign users to a group.</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>The password is required.</value>
+  </data>
 </root>

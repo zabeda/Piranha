@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 
 using Piranha.Data;
 
@@ -34,8 +34,10 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the confirmation password.
 		/// </summary>
-		[System.Web.Mvc.Compare("Password", ErrorMessage="Lösenorden matchar inte.")]
 		[Display(ResourceType=typeof(Piranha.Resources.Global), Name="Confirm")]
+		[Compare("Password", 
+			ErrorMessageResourceType=typeof(Piranha.Resources.Settings), 
+			ErrorMessageResourceName="PasswordConfirmError")]
 		public string PasswordConfirm { get ; set ; }
 
 		/// <summary>

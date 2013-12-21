@@ -366,4 +366,7 @@
   <data name="UserGroupIdRequired" xml:space="preserve">
     <value>Du måste tilldela användare en grupp.</value>
   </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Du måste ange ett lösenord.</value>
+  </data>
 </root>

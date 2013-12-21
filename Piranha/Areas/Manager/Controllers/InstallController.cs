@@ -16,16 +16,18 @@ using Piranha.Models;
 namespace Piranha.Areas.Manager.Controllers
 {
 	public class InstallModel {
-		[Required(ErrorMessage="Du måste välja ett användarnamn.")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="LoginRequired")]
 		public string UserLogin { get ; set ; }
 
-		[Required(ErrorMessage="Du måste ange en e-post adress.")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="EmailRequired")]
 		public string UserEmail { get ; set ; }
 
-		[Required(ErrorMessage="Du måste ange ett lösenord")]
+		[Required(ErrorMessageResourceType=typeof(Piranha.Resources.Settings), ErrorMessageResourceName="PasswordRequired")]
 		public string Password { get ; set ; }
 
-		[System.Web.Mvc.Compare("Password", ErrorMessage="Lösenorden matchar inte.")]
+		[System.ComponentModel.DataAnnotations.Compare("Password", 
+			ErrorMessageResourceType=typeof(Piranha.Resources.Settings), 
+			ErrorMessageResourceName="PasswordConfirmError")]
 		public string PasswordConfirm { get ; set ; }
 
 		public string InstallType { get ; set ; }
