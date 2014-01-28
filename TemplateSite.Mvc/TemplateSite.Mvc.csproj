@@ -144,7 +144,6 @@
     <Content Include="App_Data\Cache\index.html" />
     <Content Include="App_Data\Cache\Uploads\index.html" />
     <Content Include="App_Data\Content\index.html" />
-    <Content Include="App_Data\Piranha.sdf" />
     <Content Include="App_Data\Uploads\index.html" />
     <Content Include="Areas\Manager\Content\Css\Editor.css" />
     <Content Include="Areas\Manager\Views\Extensions\index.html" />
