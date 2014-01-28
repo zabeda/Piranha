@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -135,7 +136,7 @@ namespace Piranha.Entities
 		#endregion
 
 		#region Events
-		public override void OnSave(DataContext db, System.Data.EntityState state) {
+		public override void OnSave(DataContext db, EntityState state) {
 			if (RegionTemplate == null)
 				RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single() ;
 

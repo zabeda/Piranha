@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -156,7 +156,7 @@ namespace Piranha.Entities
 		/// </summary>
 		/// <param name="db">The db context</param>
 		/// <param name="state">The entity state</param>
-		public override void OnSave(DataContext db, System.Data.EntityState state) {
+		public override void OnSave(DataContext db, EntityState state) {
 			if (db.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
 				if (state == EntityState.Added) {
 					if (Id == Guid.Empty)

@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
-using System.Data.Objects;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 
@@ -57,7 +57,7 @@ namespace Piranha
 		/// </summary>
 		public DataContext() : base("Piranha") {
 			((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += 
-				new System.Data.Objects.ObjectMaterializedEventHandler(OnEntityLoad) ;
+				new ObjectMaterializedEventHandler(OnEntityLoad) ;
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace Piranha
 		/// </summary>
 		/// <param name="sender">The sender</param>
 		/// <param name="e">Event arguments</param>
-		void OnEntityLoad(object sender, System.Data.Objects.ObjectMaterializedEventArgs e) {
+		void OnEntityLoad(object sender, ObjectMaterializedEventArgs e) {
 			if (e.Entity is Entities.BaseEntity)
 				((Entities.BaseEntity)e.Entity).OnLoad(this) ;
 		}

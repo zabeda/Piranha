@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web.Script.Serialization;
@@ -104,7 +105,7 @@ namespace Piranha.Entities
 		/// </summary>
 		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
-		public override void OnSave(DataContext db, System.Data.EntityState state) {
+		public override void OnSave(DataContext db, EntityState state) {
 			var js = new JavaScriptSerializer() ;
 
 			PropertiesJson = js.Serialize(Properties) ;
