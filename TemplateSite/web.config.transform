@@ -9,19 +9,6 @@
     </settings>
   </piranha>
   <appSettings>
-    <add key="webPages:Version" value="2.0.0"/>
+    <add key="webPages:Version" value="3.0.0"/>
   </appSettings>
-  <system.web>
-    <compilation>
-      <assemblies>
-        <add assembly="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
-      </assemblies>
-    </compilation>
-  </system.web>
-  <system.data>
-    <DbProviderFactories>
-      <remove invariant="System.Data.SqlServerCe.4.0"/>
-      <add name="Microsoft SQL Server Compact Edition Client Data Provider 4.0" invariant="System.Data.SqlServerCe.4.0" description=".NET Framework Data Provider for Microsoft SQL Server Compact Edition Client 4.0" type="System.Data.SqlServerCe.SqlCeProviderFactory, System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
-    </DbProviderFactories>
-  </system.data>
 </configuration>
