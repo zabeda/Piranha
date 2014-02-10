@@ -36,7 +36,7 @@ namespace Piranha.Mvc
 			CurrentPermalink = Request["permalink"] ;
 
 			try {
-				if ((this is SinglePageController && User.HasAccess("ADMIN_PAGE")) || (this is SinglePageController && User.HasAccess("ADMIN_POST")))
+				if ((this is SinglePageController && User.HasAccess("ADMIN_PAGE")) || (this is SinglePostController && User.HasAccess("ADMIN_POST")))
 					IsDraft = !String.IsNullOrEmpty(Request["draft"]) ? Convert.ToBoolean(Request["draft"]) : false ;
 				else IsDraft = false ;
 			} catch {}
