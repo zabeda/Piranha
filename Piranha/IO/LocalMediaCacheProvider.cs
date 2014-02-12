@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using Piranha.Entities;
 
 namespace Piranha.IO
 {
@@ -10,32 +11,53 @@ namespace Piranha.IO
 	public class LocalMediaCacheProvider : IMediaCacheProvider
 	{
 		#region Members
-		protected readonly string BasePath = HttpContext.Current.Server.MapPath("~/App_Data/Cache") ;
+		protected readonly string BasePath ;
 
 		/// <summary>
 		/// The local base path for all media files.
 		/// </summary>
-		protected readonly string MediaPath = HttpContext.Current.Server.MapPath("~/App_Data/Cache/Content") ;
+		protected readonly string MediaPath ;
 
 		/// <summary>
 		/// The local base path for all media files.
 		/// </summary>
-		protected readonly string UploadPath = HttpContext.Current.Server.MapPath("~/App_Data/Cache/Uploads") ;
+		protected readonly string UploadPath ;
 		#endregion
 
 		/// <summary>
 		/// Default constructor, creates a new local media cache provider.
 		/// </summary>
-		public LocalMediaCacheProvider() {
-			if (!Directory.Exists(BasePath))
-				Directory.CreateDirectory(BasePath) ;
-			if (!Directory.Exists(MediaPath))
-				Directory.CreateDirectory(MediaPath) ;
-			if (!Directory.Exists(UploadPath))
-				Directory.CreateDirectory(UploadPath) ;
+        public LocalMediaCacheProvider()
+            : this(HttpContext.Current.Server.MapPath("~/App_Data/Cache"), HttpContext.Current.Server.MapPath("~/App_Data/Cache/Content"), HttpContext.Current.Server.MapPath("~/App_Data/Cache/Uploads")) {
+			
 		}
 
-		/// <summary>
+        /// <summary>
+        /// Creates a new local media cache provider using the specified folder paths
+        /// </summary>
+        /// <param name="baseFolderPath">The local base path for all media files</param>
+        /// <param name="mediaFolderPath">The local storage path for all media files</param>
+        /// <param name="uploadFolderPath">The local upload path for all media files</param>
+	    public LocalMediaCacheProvider(string baseFolderPath, string mediaFolderPath, string uploadFolderPath) {
+            
+            if (string.IsNullOrEmpty(baseFolderPath)) throw new ArgumentNullException("baseFolderPath");
+            if (string.IsNullOrEmpty(mediaFolderPath)) throw new ArgumentNullException("mediaFolderPath");
+            if (string.IsNullOrEmpty(uploadFolderPath)) throw new ArgumentNullException("uploadFolderPath");
+
+            this.BasePath = baseFolderPath;
+            this.MediaPath = mediaFolderPath;
+            this.UploadPath = uploadFolderPath;
+
+            if (!Directory.Exists(BasePath))
+                Directory.CreateDirectory(BasePath);
+            if (!Directory.Exists(MediaPath))
+                Directory.CreateDirectory(MediaPath);
+            if (!Directory.Exists(UploadPath))
+                Directory.CreateDirectory(UploadPath);
+           
+	    }
+
+	    /// <summary>
 		/// Gets the data for the cached image with the given dimensions. In case of
 		/// a cache miss null is returned.
 		/// </summary>
