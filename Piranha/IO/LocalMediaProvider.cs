@@ -10,26 +10,42 @@ namespace Piranha.IO
 	public class LocalMediaProvider : IMediaProvider
 	{
 		#region Members
-		/// <summary>
-		/// The local base path for all media files.
-		/// </summary>
-		protected readonly string BasePath = HttpContext.Current.Server.MapPath("~/App_Data/Content") ;
+
+	    /// <summary>
+	    /// The local base path for all media files.
+	    /// </summary>
+	    protected readonly string BasePath ;
 
 		/// <summary>
 		/// The local base path for all media files.
 		/// </summary>
-		protected readonly string UploadPath = HttpContext.Current.Server.MapPath("~/App_Data/Uploads") ;
+		protected readonly string UploadPath ;
 		#endregion
 
 		/// <summary>
 		/// Default constructor, creates a new local media provider.
 		/// </summary>
-		public LocalMediaProvider() {
-			if (!Directory.Exists(BasePath))
-				Directory.CreateDirectory(BasePath) ;
-			if (!Directory.Exists(UploadPath))
-				Directory.CreateDirectory(UploadPath) ;
+		public LocalMediaProvider() : this( HttpContext.Current.Server.MapPath("~/App_Data/Content"),HttpContext.Current.Server.MapPath("~/App_Data/Uploads")) {
+			
 		}
+
+        /// <summary>
+        /// Creates a new local media provider using the specified folder paths
+        /// </summary>
+        /// <param name="baseFolderPath">The local base path for all media files</param>
+        /// <param name="uploadFolderPath">The local base path for all uploaded files</param>
+	    public LocalMediaProvider(string baseFolderPath, string uploadFolderPath) {
+            if (string.IsNullOrEmpty(baseFolderPath)) throw new ArgumentNullException("baseFolderPath");
+            if (string.IsNullOrEmpty(uploadFolderPath)) throw new ArgumentNullException("uploadFolderPath");
+
+	        this.BasePath = baseFolderPath;
+	        this.UploadPath = uploadFolderPath;
+
+            if (!Directory.Exists(BasePath))
+                Directory.CreateDirectory(BasePath);
+            if (!Directory.Exists(UploadPath))
+                Directory.CreateDirectory(UploadPath);
+	    }
 
 		/// <summary>
 		/// Gets the data for the media entity with the given id.
