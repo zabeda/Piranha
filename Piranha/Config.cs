@@ -207,7 +207,7 @@ namespace Piranha
 						}
 					}
 				}
-				return cacheProvider ;
+                return logProvider ;
 			}
 		}
 

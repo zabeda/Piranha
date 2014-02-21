@@ -13,12 +13,12 @@ namespace Piranha.Log
 		/// <summary>
 		/// The physical path to the log folder
 		/// </summary>
-		private readonly string path = HttpContext.Current.Server.MapPath("~/App_Data/Logs") ;
+		private readonly string path ;
 
 		/// <summary>
 		/// The physical path to the log file
 		/// </summary>
-		private readonly string file = HttpContext.Current.Server.MapPath("~/App_Data/Logs/Log.txt") ;
+		private readonly string file ;
 
 		/// <summary>
 		/// Mutex for keeping it thread safe.
@@ -30,11 +30,27 @@ namespace Piranha.Log
         /// Default constructor.
         /// </summary>
         public LocalLogProvider()
-        {
-			// Create the log directory if it doesn't exist
-			if (!Directory.Exists(path))
-				Directory.CreateDirectory(path) ;
+            : this( HttpContext.Current.Server.MapPath("~/App_Data/Logs"), HttpContext.Current.Server.MapPath("~/App_Data/Logs/Log.txt")) {
+			
 		}
+
+        /// <summary>
+        /// Creates a new local log provider using the specified folder and file for output
+        /// </summary>
+        /// <param name="folderPath">The folder containing the log file</param>
+        /// <param name="filePath">The file path to the log file</param>
+	    public LocalLogProvider(string folderPath, string filePath) {
+	        
+            if (string.IsNullOrEmpty(folderPath)) throw new ArgumentNullException("folderPath");
+            if (string.IsNullOrEmpty(filePath)) throw new ArgumentNullException("filePath");
+
+	        this.path = folderPath;
+	        this.file = filePath;
+
+            // Create the log directory if it doesn't exist
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+	    }
 
 		/// <summary>
 		/// Logs an error to the log file.
