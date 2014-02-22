@@ -264,6 +264,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Update.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Manager\Views\Install\Welcome.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Welcome.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Manager\Views\Page\Edit.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -844,6 +849,7 @@
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-settings.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-system.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Style.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Img\logo-big.png" />
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\license.txt" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\tinymce.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\content.min.css" />
@@ -873,6 +879,10 @@
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\31.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\32.sql" />
     <EmbeddedResource Include="Data\Scripts\MySql\Updates\32.sql" />
+    <Content Include="Areas\Manager\Views\Install\Welcome.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Welcome.generated.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

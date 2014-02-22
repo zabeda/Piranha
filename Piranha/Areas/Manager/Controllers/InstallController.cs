@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -42,6 +43,10 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Default action
 		/// </summary>
         public ActionResult Index() {
+			// Check for no database-config
+			if (ConfigurationManager.ConnectionStrings["piranha"] == null)
+				return RedirectToAction("welcome");
+
 			// Check for existing installation.
 			try {
 				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
@@ -54,11 +59,17 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <summary>
 		/// Shows the update page.
 		/// </summary>
-		/// <returns></returns>
 		public ActionResult Update() {
 			if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
 				return View("Update") ;
 			return RedirectToAction("index", "account") ;
+		}
+
+		/// <summary>
+		/// Shows the welcome screen.
+		/// </summary>
+		public ActionResult Welcome() {
+			return View();
 		}
 
 		/// <summary>
