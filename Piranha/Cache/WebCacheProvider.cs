@@ -15,16 +15,16 @@ namespace Piranha.Cache
 		/// <param name="key">The key</param>
 		/// <returns>The cached value</returns>
 		public object this[string key] {
-			get { return HttpContext.Current.Cache[key] ; }
+			get { return HttpRuntime.Cache[key] ; }
 			set {
 				if (value != null) {
 					var param = Models.SysParam.GetByName("CACHE_SERVER_EXPIRES") ;
 
 					if (param == null || param.Value == "0")
-						HttpContext.Current.Cache[key] = value ;
-					else HttpContext.Current.Cache.Insert(key, value, null, DateTime.Now.AddMinutes(Convert.ToInt32(param.Value)), System.Web.Caching.Cache.NoSlidingExpiration) ; 
+						HttpRuntime.Cache[key] = value;
+					else HttpRuntime.Cache.Insert(key, value, null, DateTime.Now.AddMinutes(Convert.ToInt32(param.Value)), System.Web.Caching.Cache.NoSlidingExpiration) ; 
 				} else {
-					HttpContext.Current.Cache.Remove(key) ;
+					HttpRuntime.Cache.Remove(key);
 				}
 			}
 		}
@@ -35,7 +35,7 @@ namespace Piranha.Cache
 		/// </summary>
 		/// <param name="key">The key</param>
 		public void Remove(string key) {
-			HttpContext.Current.Cache.Remove(key) ;
+			HttpRuntime.Cache.Remove(key) ;
 		}
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace Piranha.Cache
 		/// <param name="key">The key</param>
 		/// <returns>Whether an object with the given key exists.</returns>
 		public bool Contains(string key) {
-			return HttpContext.Current.Cache[key] != null ;
+			return HttpRuntime.Cache[key] != null ;
 		}
 	}
 }
