@@ -19,14 +19,28 @@ namespace Piranha.Security
 		/// Gets if the current user is authenticated.
 		/// </summary>
 		public bool IsAuthenticated {
-			get { return HttpContext.Current.User.Identity.IsAuthenticated ; }
+			get {
+				if (HttpContext.Current.User.Identity.IsAuthenticated) {
+					try {
+						// Check if this user has a Guid id.
+						var id = new Guid(HttpContext.Current.User.Identity.Name);
+						return true;
+					} catch { }
+				}
+				return false;
+			}
 		}
 
 		/// <summary>
 		/// Gets the user id of the current user.
 		/// </summary>
 		public Guid UserId {
-			get { return new Guid(HttpContext.Current.User.Identity.Name) ; }
+			get {
+				try {
+					return new Guid(HttpContext.Current.User.Identity.Name) ;
+				} catch { }
+				return Guid.Empty;
+			}
 		}
 		#endregion
 
