@@ -18,19 +18,34 @@ namespace Piranha.Web
 	/// </summary>
 	public sealed class UIHelper
 	{
+		#region Members
+		private Page currentPage = null;
+		private Post currentPost = null;
+		#endregion
+
 		#region Properties
 		/// <summary>
 		/// Gets the current page.
 		/// </summary>
 		private Page CurrentPage { 
-			get { return (Page)HttpContext.Current.Items["Piranha_CurrentPage"] ; }
+			get {
+				if (currentPage != null)
+					return currentPage;
+				return (Page)HttpContext.Current.Items["Piranha_CurrentPage"] ; 
+			}
+			set { currentPage = value ; }
 		}
 
 		/// <summary>
 		/// Gets the current post.
 		/// </summary>
 		private Post CurrentPost {
-			get { return (Post)HttpContext.Current.Items["Piranha_CurrentPost"] ; }
+			get {
+				if (currentPost != null)
+					return currentPost;
+				return (Post)HttpContext.Current.Items["Piranha_CurrentPost"] ; 
+			}
+			set { currentPost = value ; }
 		}
 
 		/// <summary>
@@ -45,6 +60,26 @@ namespace Piranha.Web
 		public UIHelper() {
 			Culture = new CultureHelper() ;
 		}
+
+		/// <summary>
+		/// Sets the current page to the given value. This can be
+		/// useful when using the UI helper in passive mode and the
+		/// routing never sets the current page.
+		/// </summary>
+		/// <param name="page">The page</param>
+		public void SetCurrent(Page page) {
+			CurrentPage = page;
+		}
+
+		/// <summary>
+		/// Sets the current post to the given value. This can be
+		/// useful when using the UI helper in passive mode and the
+		/// routing never sets the current post.
+		/// </summary>
+		/// <param name="page">The page</param>
+		public void SetCurrent(Post post) {
+			CurrentPost = post;
+		} 
 
 		/// <summary>
 		/// Generates the tags appropriate for the html head.
