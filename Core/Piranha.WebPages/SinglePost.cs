@@ -57,8 +57,8 @@ namespace Piranha.WebPages
 				InitModel(PostModel.Get<T>(post)) ;
 
 			// Execute hook, if it exists
-			if (Hooks.Model.PostModelLoaded != null)
-				Hooks.Model.PostModelLoaded(Model) ;
+			if (WebPages.Hooks.Model.PostModelLoaded != null)
+				WebPages.Hooks.Model.PostModelLoaded(Model) ;
 
 			base.InitializePage() ;
 		}

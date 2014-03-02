@@ -156,7 +156,7 @@
     @Html.HiddenFor(m => m.Permalink.Type)
     @Html.HiddenFor(m => m.Permalink.Created)
     @Html.HiddenFor(m => m.Permalink.CreatedBy)
-    @if (!Application.Current.IsMvc) {
+    @if (!App.Instance.IsMvc) {
     @Html.HiddenFor(m => m.Page.PageView)
     }
     <input type="hidden" id="draft" name="draft" value="true" />
@@ -269,12 +269,12 @@
                                         <p>@Html.CheckBoxFor(m => m.Page.IsHidden) (@Piranha.Resources.Page.HiddenDescription)</p>
                                     </li>
                                     <li>@Html.LabelFor(m => m.Page.PageController,
-                                            Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
+                                            Piranha.App.Instance.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
                                     </li>
-                                    @if (Piranha.Application.Current.IsMvc) {
+                                    @if (Piranha.App.Instance.IsMvc) {
                                     <li>@Html.LabelFor(m => m.Page.PageView)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" })</div>

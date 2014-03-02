@@ -55,7 +55,7 @@
     @Html.HiddenFor(m => m.Template.Updated)
     @Html.HiddenFor(m => m.Template.CreatedBy)
     @Html.HiddenFor(m => m.Template.UpdatedBy)
-    @if (!Piranha.Application.Current.IsMvc) {
+    @if (!Piranha.App.Instance.IsMvc) {
     @Html.HiddenFor(m => m.Template.View)
     @Html.HiddenFor(m => m.Template.ShowView)
     }
@@ -123,15 +123,15 @@
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.Template.Controller, 
-                        Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
+                        Piranha.App.Instance.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
                     <div class="input">
                         @Html.TextBoxFor(m => m.Template.Controller, 
                             new { @placeholder = "Page" })</div>
                     <label>&nbsp;</label>
                     <p>@Html.CheckBoxFor(m => m.Template.ShowController)
-                        @(Piranha.Application.Current.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride)</p>
+                        @(Piranha.App.Instance.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride)</p>
                 </li>
-                @if (Piranha.Application.Current.IsMvc) {
+                @if (Piranha.App.Instance.IsMvc) {
                 <li>@Html.LabelFor(m => m.Template.View)
                     <div class="input">
                         @Html.TextBoxFor(m => m.Template.View, new { @placeholder = "Index" })</div>

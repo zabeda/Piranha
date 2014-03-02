@@ -9,12 +9,6 @@
       <passiveMode value="false" />
       <prefixlessPermalinks value="false" />
     </settings>
-    <providers>
-      <mediaProvider value="Piranha.IO.LocalMediaProvider, Piranha" />
-      <mediaCacheProvider value="Piranha.IO.LocalMediaCacheProvider, Piranha" />
-      <cacheProvider value="Piranha.Cache.WebCacheProvider, Piranha" />
-      <logProvider value="Piranha.Log.LocalLogProvider, Piranha" />
-    </providers>
   </piranha>
   <system.web>
     <authentication mode="Forms">

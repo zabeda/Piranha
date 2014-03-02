@@ -164,7 +164,7 @@
     @Html.HiddenFor(m => m.Page.Seqno)
     @Html.HiddenFor(m => m.Permalink.Name)
     }
-    @if (!Application.Current.IsMvc) {
+    @if (!Piranha.App.Instance.IsMvc) {
     @Html.HiddenFor(m => m.Page.PageView)
     }
     @Html.Hidden("returl", (string)ViewBag.ReturnUrl)
@@ -361,13 +361,13 @@
                                     </li>
                                     @if (Model.Template.ShowController) {
                                     <li>@Html.LabelFor(m => m.Page.PageController,
-                                            Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
+                                            Piranha.App.Instance.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" })</div>
                                         @Html.ValidationMessageFor(m => m.Page.PageController)
                                     </li>
                                     }
-                                    @if (Piranha.Application.Current.IsMvc && Model.Template.ShowView) {
+                                    @if (Piranha.App.Instance.IsMvc && Model.Template.ShowView) {
                                     <li>@Html.LabelFor(m => m.Page.PageView)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Page.PageView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" })</div>
@@ -421,23 +421,6 @@
             </table>
         </div>
     </div>
-</div>
-<div class="grid_3 hidden">
-    @if (!Model.Page.IsNew) {
-    <div class="box expandable">
-        <div class="title"><h2>@Piranha.Resources.Global.Versioning</h2></div>
-        <div class="inner optional">
-            <ul class="list">
-                <li>@Piranha.Resources.Global.LastPublished <small class="right">
-                    @(Model.Page.LastPublished > DateTime.MinValue ? Model.Page.LastPublished.ToShortDateString() : "")</small></li>
-                <li>@Piranha.Resources.Global.Published <small class="right">
-                    @(Model.Page.Published > DateTime.MinValue ? Model.Page.Published.ToShortDateString() : "")</small></li>
-                <li>@Piranha.Resources.Global.Updated <small class="right">@Model.Page.Updated.ToShortDateString()</small></li>
-                <li>@Piranha.Resources.Global.Created <small class="right">@Model.Page.Created.ToShortDateString()</small></li>
-            </ul>
-        </div>
-    </div>
-    }
 </div>
 @{ Html.EndForm() ; }
 @section Foot {

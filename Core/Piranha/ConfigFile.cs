@@ -23,20 +23,10 @@ namespace Piranha
 		}
 
 		/// <summary>
-		/// Gets/sets the providers.
-		/// </summary>
-		[ConfigurationProperty(PROVIDERS, IsRequired=false)]
-		public ProviderElement Providers {
-			get { return (ProviderElement)this[PROVIDERS] ; }
-			set { this[PROVIDERS] = value ; }
-		}
-
-		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public ConfigFile() {
 			Settings = new SettingsElement() ;
-			Providers = new ProviderElement() ;
 		}
 	}
 
@@ -116,66 +106,6 @@ namespace Piranha
 			DisableModelStateBinding = new BooleanElement() ;
 			DisableManager = new BooleanElement() ;
 			ManagerNamespaces = new StringElement() ;
-		}
-	}
-
-	/// <summary>
-	/// The provider element of the configuration section.
-	/// </summary>
-	internal class ProviderElement : ConfigurationElement
-	{
-		#region Members
-        private const string MEDIA_PROVIDER = "mediaProvider" ;
-		private const string MEDIA_CACHE_PROVIDER = "mediaCacheProvider" ;
-        private const string CACHE_PROVIDER = "cacheProvider" ;
-        private const string LOG_PROVIDER = "logProvider" ;
-		#endregion
-
-		/// <summary>
-		/// Gets/sets the current configured media provider.
-		/// </summary>
-		[ConfigurationProperty(MEDIA_PROVIDER, IsRequired=false)]
-		public StringElement MediaProvider {
-			get { return (StringElement)this[MEDIA_PROVIDER] ; }
-			set { this[MEDIA_PROVIDER] = value ; }
-		}
-
-		/// <summary>
-		/// Gets/sets the current configured media cache provider.
-		/// </summary>
-		[ConfigurationProperty(MEDIA_CACHE_PROVIDER, IsRequired=false)]
-		public StringElement MediaCacheProvider {
-			get { return (StringElement)this[MEDIA_CACHE_PROVIDER] ; }
-			set { this[MEDIA_CACHE_PROVIDER] = value ; }
-		} 
-
-        /// <summary>
-        /// Gets/sets the current configured cache provider.
-        /// </summary>
-        [ConfigurationProperty(CACHE_PROVIDER, IsRequired = false)]
-        public StringElement CacheProvider
-        {
-            get { return (StringElement)this[CACHE_PROVIDER]; }
-            set { this[CACHE_PROVIDER] = value; }
-        }
-
-        /// <summary>
-        /// Gets/sets the current configured log provider.
-        /// </summary>
-        [ConfigurationProperty(LOG_PROVIDER, IsRequired = false)]
-        public StringElement LogProvider
-        {
-            get { return (StringElement)this[LOG_PROVIDER]; }
-            set { this[LOG_PROVIDER] = value; }
-        }
-
-		/// <summary>
-		/// Default constructor.
-		/// </summary>
-		public ProviderElement() {
-            MediaProvider = new StringElement();
-            CacheProvider = new StringElement();
-            LogProvider = new StringElement();
 		}
 	}
 

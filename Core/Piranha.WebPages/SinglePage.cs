@@ -88,8 +88,8 @@ namespace Piranha.WebPages
 				InitModel(PageModel.Get<T>(page)) ;
 
 			// Execute hook, if it exists
-			if (Hooks.Model.PageModelLoaded != null)
-				Hooks.Model.PageModelLoaded(Model) ;
+			if (WebPages.Hooks.Model.PageModelLoaded != null)
+				WebPages.Hooks.Model.PageModelLoaded(Model) ;
 
 			base.InitializePage() ;
 		}

@@ -29,24 +29,9 @@ namespace Piranha
 		public readonly RequestHandlerCollection Handlers = new RequestHandlerCollection() ;
 
 		/// <summary>
-		/// The currently active media provider.
+		/// Gets the current IoC container.
 		/// </summary>
-		public readonly IO.IMediaProvider MediaProvider ;
-
-		/// <summary>
-		/// The currently active media cache provider.
-		/// </summary>
-		public readonly IO.IMediaCacheProvider MediaCacheProvider ;
-
-		/// <summary>
-		/// The currently active cache provider.
-		/// </summary>
-        public readonly Cache.ICacheProvider CacheProvider ;
-
-        /// <summary>
-        /// The currently active log provider.
-        /// </summary>
-        public readonly Log.ILogProvider LogProvider ;
+		public readonly IoC.IContainer IoCContainer;
 
 		/// <summary>
 		/// The currently active user provider.
@@ -65,6 +50,34 @@ namespace Piranha
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Gets the current cache provider.
+		/// </summary>
+		public Cache.ICacheProvider CacheProvider {
+			get { return IoCContainer.Resolve<Cache.ICacheProvider>(); }
+		}
+
+		/// <summary>
+		/// Gets the current log provider.
+		/// </summary>
+		public Log.ILogProvider LogProvider {
+			get { return IoCContainer.Resolve<Log.ILogProvider>(); }
+		}
+
+		/// <summary>
+		/// Get the current media provider.
+		/// </summary>
+		public IO.IMediaProvider MediaProvider {
+			get { return IoCContainer.Resolve<IO.IMediaProvider>(); }
+		}
+
+		/// <summary>
+		/// Gets the current media cache provider.
+		/// </summary>
+		public IO.IMediaCacheProvider MediaCacheProvider {
+			get { return IoCContainer.Resolve<IO.IMediaCacheProvider>(); }
+		}
+
 		/// <summary>
 		/// Gets the current route handler.
 		/// </summary>
@@ -98,47 +111,39 @@ namespace Piranha
 		private App() {
 			var catalog = new AggregateCatalog() ;
 
+			// Register IoC container
+			if (Hooks.App.Init.CreateContainer != null)
+				IoCContainer = Hooks.App.Init.CreateContainer();
+			else IoCContainer = new IoC.TinyIoCContainer();
+
+			// Register log provider
+			if (Hooks.App.Init.RegisterLog != null)
+				Hooks.App.Init.RegisterLog(IoCContainer);
+			else IoCContainer.RegisterSingleton<Log.ILogProvider, Log.LocalLogProvider>();
+
+			// Regsiter cache provider
+			if (Hooks.App.Init.RegisterCache != null)
+				Hooks.App.Init.RegisterCache(IoCContainer);
+			else IoCContainer.RegisterSingleton<Cache.ICacheProvider, Cache.WebCacheProvider>();
+
+			// Register media provider
+			if (Hooks.App.Init.RegisterMedia != null)
+				Hooks.App.Init.RegisterMedia(IoCContainer);
+			else IoCContainer.RegisterSingleton<IO.IMediaProvider, IO.LocalMediaProvider>();
+
+			// Register media cache provider
+			if (Hooks.App.Init.RegisterMediaCache != null)
+				Hooks.App.Init.RegisterMediaCache(IoCContainer);
+			else IoCContainer.RegisterSingleton<IO.IMediaCacheProvider, IO.LocalMediaCacheProvider>();
+
+			// Register additional types
+			if (Hooks.App.Init.Register != null)
+				Hooks.App.Init.Register(IoCContainer);
+
 			// Compose parts
 			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
-
-			// Get the current media provider
-			var assembly = Assembly.Load(Config.MediaProvider.AssemblyName) ;
-			if (assembly != null) {
-				var type = assembly.GetType(Config.MediaProvider.TypeName) ;
-				if (type != null)
-					MediaProvider = (IO.IMediaProvider)Activator.CreateInstance(type) ;
-				else throw new TypeAccessException("MediaProvider " + Config.MediaProvider.TypeName + " was not found") ;
-			}
-
-			// Get the current media cache provider
-			assembly = Assembly.Load(Config.MediaCacheProvider.AssemblyName) ;
-			if (assembly != null) {
-				var type = assembly.GetType(Config.MediaCacheProvider.TypeName) ;
-				if (type != null)
-					MediaCacheProvider = (IO.IMediaCacheProvider)Activator.CreateInstance(type) ;
-				else throw new TypeAccessException("MediaCacheProvider " + Config.MediaCacheProvider.TypeName + " was not found") ;
-			} 
-
-			// Get the current cache provider
-			assembly = Assembly.Load(Config.CacheProvider.AssemblyName) ;
-			if (assembly != null) {
-				var type = assembly.GetType(Config.CacheProvider.TypeName) ;
-				if (type != null)
-					CacheProvider = (Cache.ICacheProvider)Activator.CreateInstance(type) ;
-				else throw new TypeAccessException("CacheProvider " + Config.CacheProvider.TypeName + " was not found") ;				
-			}
-
-            // Get the current log provider
-            assembly = Assembly.Load(Config.LogProvider.AssemblyName);
-            if (assembly != null)
-            {
-                var type = assembly.GetType(Config.LogProvider.TypeName);
-                if (type != null)
-                    LogProvider = (Log.ILogProvider)Activator.CreateInstance(type);
-                else throw new TypeAccessException("LogProvider " + Config.LogProvider.TypeName + " was not found");
-            }
 
 			RegisterHandlers() ;
 		}

@@ -15,14 +15,6 @@ namespace Piranha
 		#region Members
 		private static string[] namespaces = null;
 		private static object nsmutex = new object() ;
-        private static ConfigProvider mediaprovider = null ;
-		private static ConfigProvider mediaCacheProvider = null ; 
-		private static ConfigProvider cacheProvider = null ;
-        private static ConfigProvider logProvider = null ;
-        private static object mpmutex = new object() ;
-		private static object mcpmutex = new object() ;
-        private static object cpmutex = new object() ;
-        private static object lpmutex = new object() ;
 		private static readonly ConfigFile config = GetConfig() ;
 		private static bool? prefixlessPermalinks = null ;
 		#endregion
@@ -104,110 +96,6 @@ namespace Piranha
 			}
 			set {
 				prefixlessPermalinks = value ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the configuration for the media provider to use. If the media provider is not
-		/// specified the default LocalMediaProvider is used.
-		/// </summary>
-		internal static ConfigProvider MediaProvider {
-			get {
-				if (mediaprovider != null)
-					return mediaprovider ;
-
-				lock (mpmutex) {
-					if (mediaprovider == null) {
-						var str = config.Providers.MediaProvider.Value ;
-						if (!String.IsNullOrEmpty(str)) {
-							mediaprovider = GetProvider(str) ; 
-						} else {
-							mediaprovider = new ConfigProvider() {
-								TypeName = typeof(IO.LocalMediaProvider).FullName,
-								AssemblyName = Assembly.GetExecutingAssembly().FullName
-							} ;
-						}
-					}
-				}
-				return mediaprovider ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the configuration for the media cache provider to use. If the provider is not
-		/// specified the default LocalMediaCacheProvider is used.
-		/// </summary>
-		internal static ConfigProvider MediaCacheProvider {
-			get {
-				if (mediaCacheProvider != null)
-					return mediaCacheProvider ;
-
-				lock (mcpmutex) {
-					if (mediaCacheProvider == null) {
-						var str = config.Providers.MediaCacheProvider.Value ;
-						if (!String.IsNullOrEmpty(str)) {
-							mediaCacheProvider = GetProvider(str) ;
-						} else {
-							mediaCacheProvider = new ConfigProvider() {
-							TypeName = typeof(IO.LocalMediaCacheProvider).FullName,
-							AssemblyName = Assembly.GetExecutingAssembly().FullName
-							} ;
-						}
-					}
-				}
-				return mediaCacheProvider ;
-			}
-		}
-
-		/// <summary>
-		/// Gets the configuration for the cache provider to use. If the cache provider is not
-		/// specified the default WebCacheProvider is used.
-		/// </summary>
-		internal static ConfigProvider CacheProvider {
-			get {
-				if (cacheProvider != null)
-					return cacheProvider ;
-
-				lock (cpmutex) {
-					if (cacheProvider == null) {
-						var str = config.Providers.CacheProvider.Value ;
-						if (!String.IsNullOrEmpty(str)) {
-							cacheProvider = GetProvider(str) ; 
-						} else {
-							cacheProvider = new ConfigProvider() {
-								TypeName = typeof(Cache.WebCacheProvider).FullName,
-								AssemblyName = Assembly.GetExecutingAssembly().FullName
-							} ;
-						}
-					}
-				}
-				return cacheProvider ;
-			}
-		}
-
-        /// <summary>
-		/// Gets the configuration for the log provider to use. If the log provider is not
-		/// specified the default LocalLogProvider is used.
-		/// </summary>
-		internal static ConfigProvider LogProvider {
-			get {
-				if (logProvider != null)
-                    return logProvider;
-
-				lock (lpmutex) {
-                    if (logProvider == null) {
-						var str = config.Providers.LogProvider.Value ;
-						if (!String.IsNullOrEmpty(str)) {
-							logProvider = GetProvider(str) ; 
-						} else {
-							logProvider = new ConfigProvider() {
-								TypeName = typeof(Log.LocalLogProvider).FullName,
-								AssemblyName = Assembly.GetExecutingAssembly().FullName
-							} ;
-						}
-					}
-				}
-                return logProvider ;
 			}
 		}
 

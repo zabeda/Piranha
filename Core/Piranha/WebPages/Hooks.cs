@@ -13,7 +13,7 @@ namespace Piranha.WebPages
 	/// </summary>
 	public static class Hooks {
 		/// <summary>
-		/// The different hooks available for the breadcrumb.
+		/// The different WebPages.Hooks available for the breadcrumb.
 		/// </summary>
 		public static class Breadcrumb {
 			/// <summary>
@@ -38,7 +38,7 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// The different hooks available for the head.
+		/// The different WebPages.Hooks available for the head.
 		/// </summary>
 		public static class Head {
 			/// <summary>
@@ -48,7 +48,7 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// The different hooks availble for the menu.
+		/// The different WebPages.Hooks availble for the menu.
 		/// </summary>
 		public static class Menu {
 			/// <summary>
@@ -78,7 +78,7 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// The different model hooks available for the application.
+		/// The different model WebPages.Hooks available for the application.
 		/// </summary>
 		public static class Model { 
 			/// <summary>
@@ -93,7 +93,7 @@ namespace Piranha.WebPages
 		}
 
 		/// <summary>
-		/// The different hooks available for the manager area.
+		/// The different WebPages.Hooks available for the manager area.
 		/// </summary>
 		public static class Manager {
 			/// <summary>
@@ -198,7 +198,7 @@ namespace Piranha.WebPages
 			 */
 
 			/// <summary>
-			/// The different hooks available for the toolbar.
+			/// The different WebPages.Hooks available for the toolbar.
 			/// </summary>
 			public static class Toolbar {
 				/// <summary>
@@ -274,7 +274,7 @@ namespace Piranha.WebPages
 
 		public static class Mail
 		{
-			[Obsolete("Please use Piranha.WebPages.Hooks.Mail.SendPassword instead")]
+			[Obsolete("Please use Piranha.WebPages.WebPages.Hooks.Mail.SendPassword instead")]
 			public static Delegates.SendPasswordMail SendPasswordMail ;
 			public static Delegates.SendPassword SendPassword ;
 		}

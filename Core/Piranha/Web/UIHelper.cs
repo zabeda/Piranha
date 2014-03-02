@@ -141,8 +141,8 @@ namespace Piranha.Web
 			/**
 			 * Check if hook is attached.
 			 */
-			if (Hooks.Head.Render != null)
-				Hooks.Head.Render(this, str, CurrentPage, CurrentPost) ;
+			if (WebPages.Hooks.Head.Render != null)
+				WebPages.Hooks.Head.Render(this, str, CurrentPage, CurrentPost) ;
 
 			return new HtmlString(str.ToString()) ;
 		}
@@ -394,11 +394,11 @@ namespace Piranha.Web
 						Current.Id, StartLevel) ;
 				}
 				if (sm != null) {
-					if (Hooks.Breadcrumb.RenderStart != null)
-						Hooks.Breadcrumb.RenderStart(this, str) ;
+					if (WebPages.Hooks.Breadcrumb.RenderStart != null)
+						WebPages.Hooks.Breadcrumb.RenderStart(this, str) ;
 					RenderBreadcrumb(Current, sm, str) ;
-					if (Hooks.Breadcrumb.RenderEnd != null)
-						Hooks.Breadcrumb.RenderEnd(this, str) ;
+					if (WebPages.Hooks.Breadcrumb.RenderEnd != null)
+						WebPages.Hooks.Breadcrumb.RenderEnd(this, str) ;
 				}
 			}
 			return new HtmlString(str.ToString()) ;
@@ -474,8 +474,8 @@ namespace Piranha.Web
 		private void RenderUL(Page curr, List<Sitemap> sm, StringBuilder str, int stoplevel, string cssclass = "") {
 			if (sm != null && sm.CountVisible() > 0 && sm[0].Level <= stoplevel) {
 				// Render level start
-				if (Hooks.Menu.RenderLevelStart != null) {
-					Hooks.Menu.RenderLevelStart(this, str, cssclass) ;
+				if (WebPages.Hooks.Menu.RenderLevelStart != null) {
+					WebPages.Hooks.Menu.RenderLevelStart(this, str, cssclass) ;
 				} else {
 					str.AppendLine("<ul class=\"" + cssclass + "\">") ;
 				}
@@ -483,8 +483,8 @@ namespace Piranha.Web
 				foreach (Sitemap page in sm)
 					if (!page.IsHidden) RenderLI(curr, page, str, stoplevel) ;
 				// Render level end
-				if (Hooks.Menu.RenderLevelEnd != null) {
-					Hooks.Menu.RenderLevelEnd(this, str, cssclass) ;
+				if (WebPages.Hooks.Menu.RenderLevelEnd != null) {
+					WebPages.Hooks.Menu.RenderLevelEnd(this, str, cssclass) ;
 				} else {
 					str.AppendLine("</ul>") ;
 				}
@@ -504,8 +504,8 @@ namespace Piranha.Web
 				var childactive = ChildActive(page, curr.Id) ;
 
 				// Render item start
-				if (Hooks.Menu.RenderItemStart != null) {
-					Hooks.Menu.RenderItemStart(this, str, page, active, childactive) ;
+				if (WebPages.Hooks.Menu.RenderItemStart != null) {
+					WebPages.Hooks.Menu.RenderItemStart(this, str, page, active, childactive) ;
 				} else {
 					var hasChild = page.Pages.Count > 0 ? " has-child" : "" ;
 					str.AppendLine("<li" + (curr.Id == page.Id ? " class=\"active" + hasChild + "\"" : 
@@ -513,8 +513,8 @@ namespace Piranha.Web
 						(page.Pages.Count > 0 ? " class=\"has-child\"" : ""))) + ">") ;
 				}
 				// Render item link
-				if (Hooks.Menu.RenderItemLink != null) {
-					Hooks.Menu.RenderItemLink(this, str, page) ;
+				if (WebPages.Hooks.Menu.RenderItemLink != null) {
+					WebPages.Hooks.Menu.RenderItemLink(this, str, page) ;
 				} else {
 					str.AppendLine(String.Format("<a href=\"{0}\">{1}</a>", GenerateUrl(page),
 						!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title)) ;
@@ -523,8 +523,8 @@ namespace Piranha.Web
 				if (page.Pages.Count > 0)
 					RenderUL(curr, page.Pages, str, stoplevel) ;
 				// Render item end
-				if (Hooks.Menu.RenderItemEnd != null) {
-					Hooks.Menu.RenderItemEnd(this, str, page, active, childactive) ;
+				if (WebPages.Hooks.Menu.RenderItemEnd != null) {
+					WebPages.Hooks.Menu.RenderItemEnd(this, str, page, active, childactive) ;
 				} else {
 					str.AppendLine("</li>") ;
 				}
@@ -541,15 +541,15 @@ namespace Piranha.Web
 			if (sm != null && sm.CountVisible() > 0) {
 				foreach (Sitemap page in sm) {
 					if (page.Id == curr.Id) {
-						if (Hooks.Breadcrumb.RenderActiveItem != null) {
-							Hooks.Breadcrumb.RenderActiveItem(this, str, page) ;
+						if (WebPages.Hooks.Breadcrumb.RenderActiveItem != null) {
+							WebPages.Hooks.Breadcrumb.RenderActiveItem(this, str, page) ;
 						} else {
 							str.Append("<span>" + page.Title + "</span>") ;
 						}
 						return ;
 					} else if (ChildActive(page, curr.Id)) {
-						if (Hooks.Breadcrumb.RenderItem != null) {
-							Hooks.Breadcrumb.RenderItem(this, str, page) ;
+						if (WebPages.Hooks.Breadcrumb.RenderItem != null) {
+							WebPages.Hooks.Breadcrumb.RenderItem(this, str, page) ;
 						} else {
 							str.Append("<span><a href=\"" + Permalink(page.Permalink).ToString() + "\">" + page.Title + "</a></span> / ") ;
 						}
