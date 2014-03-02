@@ -362,7 +362,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 45 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-     if (!Piranha.Application.Current.IsMvc) {
+     if (!Piranha.App.Instance.IsMvc) {
     
             
             #line default
@@ -660,7 +660,7 @@ WriteLiteral(">\r\n                <li>");
             
             #line 92 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Controller,
-                        Piranha.Application.Current.IsMvc ? Piranha.Resources.Post.Route : Piranha.Resources.Post.Template));
+                        Piranha.App.Instance.IsMvc ? Piranha.Resources.Post.Route : Piranha.Resources.Post.Template));
 
             
             #line default
@@ -696,7 +696,7 @@ WriteLiteral("                        ");
 
             
             #line 99 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-                    Write(Piranha.Application.Current.IsMvc ? Piranha.Resources.Template.PostRouteOverride : Piranha.Resources.Template.PostTemplateOverride);
+                    Write(Piranha.App.Instance.IsMvc ? Piranha.Resources.Template.PostRouteOverride : Piranha.Resources.Template.PostTemplateOverride);
 
             
             #line default
@@ -711,7 +711,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
             #line hidden
             
             #line 101 "..\..\Areas\Manager\Views\Template\PostEdit.cshtml"
-                 if (Piranha.Application.Current.IsMvc) {
+                 if (Piranha.App.Instance.IsMvc) {
 
             
             #line default

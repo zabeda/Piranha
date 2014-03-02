@@ -537,7 +537,7 @@ namespace Piranha.Models.Manager.ContentModels
 			Folders = SortFolders(Content.GetFolderStructure(false)) ;
 			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
 			
-			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "CONTENTHANDLER").SingleOrDefault().UrlPrefix;
+			HandlerPrefix = App.Instance.Handlers.Where(h => h.Id == "CONTENTHANDLER").SingleOrDefault().UrlPrefix;
 		}
 
 		/// <summary>

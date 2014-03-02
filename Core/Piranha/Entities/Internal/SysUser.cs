@@ -217,13 +217,13 @@ namespace Piranha.Models
 				if (Id == Guid.Empty)
 					Id = Guid.NewGuid() ;
 				Updated = Created = DateTime.Now ;
-				if (Application.Current.UserProvider.IsAuthenticated)
-					UpdatedBy = CreatedBy = Application.Current.UserProvider.UserId ;
+				if (App.Instance.UserProvider.IsAuthenticated)
+					UpdatedBy = CreatedBy = App.Instance.UserProvider.UserId ;
 				else UpdatedBy = CreatedBy = Id ;
 			} else {
 				Updated = DateTime.Now ;
-				if (Application.Current.UserProvider.IsAuthenticated)
-					UpdatedBy = Application.Current.UserProvider.UserId ;
+				if (App.Instance.UserProvider.IsAuthenticated)
+					UpdatedBy = App.Instance.UserProvider.UserId ;
 			}
 			return base.Save(tx);
 		}

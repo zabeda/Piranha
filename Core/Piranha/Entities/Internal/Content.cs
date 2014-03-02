@@ -215,9 +215,9 @@ namespace Piranha.Models
 		public static Content GetSingle(Guid id, bool draft = false, IDbTransaction tx = null) {
 			if (id != Guid.Empty) {
 				if (!draft) {
-					if (!Application.Current.CacheProvider.Contains(id.ToString()))
-						Application.Current.CacheProvider[id.ToString()] = Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
-					return (Content)Application.Current.CacheProvider[id.ToString()] ;
+					if (!App.Instance.CacheProvider.Contains(id.ToString()))
+						App.Instance.CacheProvider[id.ToString()] = Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
+					return (Content)App.Instance.CacheProvider[id.ToString()] ;
 				}
 				return Content.GetSingle("content_id=@0 AND content_draft=@1", id, draft, tx) ;
 			}
@@ -348,7 +348,7 @@ namespace Piranha.Models
 
 			if (Drawing.Thumbnails.ContainsKey(id)) {
 				if (!ClientCache.HandleClientCache(context, content.Id.ToString(), new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime)) {
-					var data = Application.Current.MediaCacheProvider.Get(id, size, size);
+					var data = App.Instance.MediaCacheProvider.Get(id, size, size);
 
 					if (data == null) {
 						var resource = Drawing.Thumbnails.GetById(id);
@@ -380,7 +380,7 @@ namespace Piranha.Models
 							bmp.Dispose();
 							grp.Dispose();
 						}
-						Application.Current.MediaCacheProvider.Put(id, data, size, size);
+						App.Instance.MediaCacheProvider.Put(id, data, size, size);
 						content.WriteFile(context, data);
 
 						img.Dispose();
@@ -411,7 +411,7 @@ namespace Piranha.Models
 				content.IsDraft = true ;
 				if (content.Save(tx)) {
 					// Delete any possible draft version of the physical file.
-					Application.Current.MediaProvider.DeleteDraft(id) ;
+					App.Instance.MediaProvider.DeleteDraft(id) ;
 
 					// Now turn back the dates for the draft version
 					Content.Execute("UPDATE content SET content_updated = content_last_published WHERE content_id = @0 AND content_draft = 1", null, id) ;
@@ -447,7 +447,7 @@ namespace Piranha.Models
 				// Take the published physical file and move it to draft mode.
 				var content = Content.GetSingle(id, true, tx) ;
 				if (content != null) {
-					Application.Current.MediaProvider.Unpublish(id) ;
+					App.Instance.MediaProvider.Unpublish(id) ;
 					content.DeleteCache() ;
 
 					// Invalidate record
@@ -480,7 +480,7 @@ namespace Piranha.Models
 		public virtual bool SaveAndPublish(MediaFileContent content, System.Data.IDbTransaction tx = null) {
 			//var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (Database.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
+			if (Database.Identity != Guid.Empty || App.Instance.UserProvider.IsAuthenticated) {
 				// Set file meta information
 				SetFileMeta(content) ;
 
@@ -507,7 +507,7 @@ namespace Piranha.Models
 				base.Save(content, tx, false) ;
 
 				// Check if we have have a drafted physical file
-				Application.Current.MediaProvider.Publish(Id) ;
+				App.Instance.MediaProvider.Publish(Id) ;
 				DeleteCache() ;
 
 				// Now update all pages & posts which have a reference
@@ -555,7 +555,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The total size in bytes</returns>
 		public long GetTotalSize() {
-			return Size + Application.Current.MediaCacheProvider.GetTotalSize(Id) ;
+			return Size + App.Instance.MediaCacheProvider.GetTotalSize(Id) ;
 		}
 
 		/// <summary>
@@ -563,7 +563,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Content record) {
-			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
+			App.Instance.CacheProvider.Remove(record.Id.ToString()) ;
 		}
 
 		/// <summary>

@@ -71,7 +71,7 @@ namespace Piranha.Models.Manager.TemplateModels
 					"</table>"
 					)
 			} ;
-			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "ARCHIVE").SingleOrDefault().UrlPrefix ;
+			HandlerPrefix = App.Instance.Handlers.Where(h => h.Id == "ARCHIVE").SingleOrDefault().UrlPrefix ;
 		}
 
 		/// <summary>

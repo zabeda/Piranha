@@ -101,18 +101,18 @@ namespace Piranha.WebPages
 		/// <param name="urlprefix">The url prefix</param>
 		/// <param name="id">The handler id</param>
 		/// <param name="handler">The actual handler</param>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Add()")]
+		[Obsolete("Please refer to Piranha.Web.Application.Instance.Handlers.Add()")]
 		public static void RegisterHandler(string urlprefix, string id, IRequestHandler handler) {
-			Application.Current.Handlers.Add(urlprefix, id, handler) ;
+			App.Instance.Handlers.Add(urlprefix, id, handler) ;
 		}
 
 		/// <summary>
 		/// Removes the handler with the given id.
 		/// </summary>
 		/// <param name="id">The handler id</param>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Remove()")]
+		[Obsolete("Please refer to Piranha.Web.Application.Instance.Handlers.Remove()")]
 		public static void RemoveHandler(string id) {
-			Application.Current.Handlers.Remove(id) ;
+			App.Instance.Handlers.Remove(id) ;
 		}
 
 		/// <summary>
@@ -130,9 +130,9 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <param name="id">The handler id</param>
 		/// <returns>The url prefix</returns>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.GetUrlPrefix()")]
+		[Obsolete("Please refer to Piranha.Web.Application.Instance.Handlers.GetUrlPrefix()")]
 		public static string GetUrlPrefixForHandlerId(string id) {
-			return Application.Current.Handlers.GetUrlPrefix(id) ;
+			return App.Instance.Handlers.GetUrlPrefix(id) ;
 		}
 
 		/// <summary>
@@ -161,9 +161,9 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Clears all of the currently registered handlers.
 		/// </summary>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Reset()")]
+		[Obsolete("Please refer to Piranha.Web.Application.Instance.Handlers.Reset()")]
 		public static void ResetHandlers() {
-			Application.Current.Handlers.Clear() ;
+			App.Instance.Handlers.Clear() ;
 		}
 
 		/// <summary>
@@ -283,7 +283,7 @@ namespace Piranha.WebPages
 					var handled = false ;
 
 					// Find the correct request handler
-					foreach (var hr in Application.Current.Handlers) {
+					foreach (var hr in App.Instance.Handlers) {
 						if (hr.UrlPrefix.ToLower() == args[pos].ToLower()) {
 							if (hr.Id != "PERMALINK" || !Config.PrefixlessPermalinks) {
 								// Don't execute permalink routing in passive mode
@@ -298,7 +298,7 @@ namespace Piranha.WebPages
 					}
 
 					if (!handled && args[pos].ToLower() == "res.ashx") {
-						Application.Current.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
+						App.Instance.Resources.HandleRequest(context, args.Subset(pos + 1)) ;
 						handled = true ;
 					}
 
@@ -307,7 +307,7 @@ namespace Piranha.WebPages
 					if (!Config.PassiveMode) {
 						if (!handled && Config.PrefixlessPermalinks && args[pos].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
 							if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[pos]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[pos]) != null) {
-								var handler = Application.Current.Handlers["PERMALINK"] ;
+								var handler = App.Instance.Handlers["PERMALINK"] ;
 								handler.HandleRequest(context, args.Subset(pos)) ;
 							}
 						}
@@ -318,7 +318,7 @@ namespace Piranha.WebPages
 				// exceptions flying around causing the app pool to die.
 			} catch (Exception e) {
 				// One catch to rule them all, and in the log file bind them.
-                Application.Current.LogProvider.Error("WebPiranha.BeginRequest", "Unhandled exception", e);
+                App.Instance.LogProvider.Error("WebPiranha.BeginRequest", "Unhandled exception", e);
 				context.Response.StatusCode = 500 ;
 				context.Response.EndClean() ;
 			}

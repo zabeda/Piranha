@@ -186,12 +186,12 @@ namespace Piranha.Entities
 				if (Id == Guid.Empty)
 					Id = Guid.NewGuid() ;
 				Created = Updated = DateTime.Now ;
-				if (Application.Current.UserProvider.IsAuthenticated || db.Identity != Guid.Empty)
-					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
+				if (App.Instance.UserProvider.IsAuthenticated || db.Identity != Guid.Empty)
+					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : App.Instance.UserProvider.UserId ;
 			} else if (state == EntityState.Modified) {
 				Updated = DateTime.Now ;
-				if (Application.Current.UserProvider.IsAuthenticated || db.Identity != Guid.Empty)
-					UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
+				if (App.Instance.UserProvider.IsAuthenticated || db.Identity != Guid.Empty)
+					UpdatedById = db.Identity != Guid.Empty ? db.Identity : App.Instance.UserProvider.UserId ;
 			}
 			base.OnSave(db, state) ;
 		}

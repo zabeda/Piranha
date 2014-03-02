@@ -122,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessAttribute.cs" />
-    <Compile Include="Application.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Areas\Manager\Controllers\AccountController.cs" />
     <Compile Include="Areas\Manager\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Manager\Controllers\CommentController.cs" />

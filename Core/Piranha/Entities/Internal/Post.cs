@@ -226,14 +226,14 @@ namespace Piranha.Models
 		/// <param name="id">The post id</param>
 		/// <returns>The post</returns>
 		public static Post GetSingle(Guid id) {
-			if (!Application.Current.CacheProvider.Contains(id.ToString())) {
+			if (!App.Instance.CacheProvider.Contains(id.ToString())) {
 				var p = Post.GetSingle("post_id = @0 AND post_draft = 0", id) ;
 				
 				if (p != null)
 					AddToCache(p) ;
 				else return null ;
 			}
-			return (Post)Application.Current.CacheProvider[id.ToString()] ;
+			return (Post)App.Instance.CacheProvider[id.ToString()] ;
 		}
 
 		/// <summary>
@@ -261,9 +261,9 @@ namespace Piranha.Models
 					if (p != null)
 						AddToCache(p) ;
 				}
-				if (!Application.Current.CacheProvider.Contains(PermalinkCache[permalink.ToLower()].ToString()))
-					Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] = Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ; 
-				return (Post)Application.Current.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] ;
+				if (!App.Instance.CacheProvider.Contains(PermalinkCache[permalink.ToLower()].ToString()))
+					App.Instance.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] = Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ; 
+				return (Post)App.Instance.CacheProvider[PermalinkCache[permalink.ToLower()].ToString()] ;
 			}
 			return Post.GetSingle("permalink_name = @0 AND post_draft = @1", permalink, draft) ;
 		}
@@ -282,9 +282,9 @@ namespace Piranha.Models
 					if (p != null)
 						AddToCache(p) ;
 				}
-				if (!Application.Current.CacheProvider.Contains(PermalinkIdCache[permalinkid].ToString()))
-					Application.Current.CacheProvider[PermalinkIdCache[permalinkid].ToString()] = Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
-				return (Post)Application.Current.CacheProvider[PermalinkIdCache[permalinkid].ToString()] ;
+				if (!App.Instance.CacheProvider.Contains(PermalinkIdCache[permalinkid].ToString()))
+					App.Instance.CacheProvider[PermalinkIdCache[permalinkid].ToString()] = Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
+				return (Post)App.Instance.CacheProvider[PermalinkIdCache[permalinkid].ToString()] ;
 			}
 			return Post.GetSingle("post_permalink_id = @0 AND post_draft = @1", permalinkid, draft) ;
 		}
@@ -331,7 +331,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="p">The post</param>
 		private static void AddToCache(Post p) {
-			Application.Current.CacheProvider[p.Id.ToString()] = p ;
+			App.Instance.CacheProvider[p.Id.ToString()] = p ;
 			PermalinkCache[p.Permalink] = p.Id ;
 			PermalinkIdCache[p.PermalinkId] = p.Id ;
 
@@ -355,7 +355,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Post record) {
-			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
+			App.Instance.CacheProvider.Remove(record.Id.ToString()) ;
 
 			// If we click save & publish right away the permalink is not created yet.
 			if (record.Permalink != null && PermalinkCache.ContainsKey(record.Permalink))

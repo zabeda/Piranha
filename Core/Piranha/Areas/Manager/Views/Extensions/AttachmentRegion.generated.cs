@@ -45,7 +45,7 @@ namespace Piranha.Areas.Manager.Views.Extensions
     var btnAttach = ViewData.TemplateInfo.GetFullHtmlFieldId("btnAttach") ;
     var tblId = ViewData.TemplateInfo.GetFullHtmlFieldId("tblAttachments") ;
     var boxId = ViewData.TemplateInfo.GetFullHtmlFieldId("box") ;
-    var thumbUrl = Piranha.WebPages.WebPiranha.ApplicationPath + Piranha.Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") + "/";
+    var thumbUrl = Piranha.WebPages.WebPiranha.ApplicationPath + Piranha.App.Instance.Handlers.GetUrlPrefix("THUMBNAIL") + "/";
 
     var varObj = @ViewData.TemplateInfo.GetFullHtmlFieldId("obj") ;
 

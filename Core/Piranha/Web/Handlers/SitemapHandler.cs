@@ -72,7 +72,7 @@ namespace Piranha.Web.Handlers
 		/// <param name="permalink">The permalink name</param>
 		/// <returns>The url</returns>
 		private string GetPermalink(string permalink) {
-			return WebPages.WebPiranha.GetSiteUrl() + "/" + (!Config.PrefixlessPermalinks ? Application.Current.Handlers.GetUrlPrefix("PERMALINK") + "/" : "") + permalink ;
+			return WebPages.WebPiranha.GetSiteUrl() + "/" + (!Config.PrefixlessPermalinks ? App.Instance.Handlers.GetUrlPrefix("PERMALINK") + "/" : "") + permalink ;
 		}
 		#endregion
 	}

@@ -15,13 +15,13 @@ namespace Piranha
 	/// The application class contains the main state and configuration
 	/// for the current running web application.
 	/// </summary>
-	public sealed class Application
+	public sealed class App
 	{
 		#region Members
 		/// <summary>
 		/// Static singleton instance of the application.
 		/// </summary>
-		public static readonly Application Current = new Application() ;
+		public static readonly App Instance = new App() ;
 
 		/// <summary>
 		/// The collection of registered request handlers.
@@ -95,7 +95,7 @@ namespace Piranha
 		/// <summary>
 		/// Default private constructor.
 		/// </summary>
-		private Application() {
+		private App() {
 			var catalog = new AggregateCatalog() ;
 
 			// Compose parts

@@ -367,7 +367,7 @@ WriteLiteral("\r\n");
             #line hidden
             
             #line 58 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-     if (!Piranha.Application.Current.IsMvc) {
+     if (!Piranha.App.Instance.IsMvc) {
     
             
             #line default
@@ -685,7 +685,7 @@ WriteLiteral(">\r\n                <li>");
             
             #line 125 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
                Write(Html.LabelFor(m => m.Template.Controller, 
-                        Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
+                        Piranha.App.Instance.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
 
             
             #line default
@@ -721,7 +721,7 @@ WriteLiteral("                        ");
 
             
             #line 132 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-                    Write(Piranha.Application.Current.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride);
+                    Write(Piranha.App.Instance.IsMvc ? Piranha.Resources.Template.PageRouteOverride : Piranha.Resources.Template.PageTemplateOverride);
 
             
             #line default
@@ -736,7 +736,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
             #line hidden
             
             #line 134 "..\..\Areas\Manager\Views\Template\PageEdit.cshtml"
-                 if (Piranha.Application.Current.IsMvc) {
+                 if (Piranha.App.Instance.IsMvc) {
 
             
             #line default

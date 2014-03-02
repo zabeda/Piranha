@@ -927,7 +927,7 @@ WriteLiteral("    ");
 
             
             #line 167 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-     if (!Application.Current.IsMvc) {
+     if (!App.Instance.IsMvc) {
     
             
             #line default
@@ -2431,7 +2431,7 @@ WriteLiteral("                                    <li>");
             
             #line 363 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageController,
-                                            Piranha.Application.Current.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
+                                            Piranha.App.Instance.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
 
             
             #line default
@@ -2475,7 +2475,7 @@ WriteLiteral("                                    ");
 
             
             #line 370 "..\..\Areas\Manager\Views\Page\Edit.cshtml"
-                                     if (Piranha.Application.Current.IsMvc && Model.Template.ShowView) {
+                                     if (Piranha.App.Instance.IsMvc && Model.Template.ShowView) {
 
             
             #line default

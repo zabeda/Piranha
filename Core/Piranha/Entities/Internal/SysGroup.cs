@@ -77,10 +77,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The groups</returns>
 		public static List<SysGroup> GetStructure() {
-			if (Application.Current.CacheProvider[typeof(SysGroup).Name] == null)
-				Application.Current.CacheProvider[typeof(SysGroup).Name] = 
+			if (App.Instance.CacheProvider[typeof(SysGroup).Name] == null)
+				App.Instance.CacheProvider[typeof(SysGroup).Name] = 
 					Sort(SysGroup.Get(new Params() { OrderBy = "sysgroup_parent_id" }), Guid.Empty) ;
-			return (List<SysGroup>)Application.Current.CacheProvider[typeof(SysGroup).Name] ;
+			return (List<SysGroup>)App.Instance.CacheProvider[typeof(SysGroup).Name] ;
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace Piranha.Models
 		/// <param name="record">The record to invalidate.</param>
 		public void InvalidateRecord(SysGroup record) {
 			// Invalidate entire cache as groups are recursivly linked
-			Application.Current.CacheProvider.Remove(typeof(SysGroup).Name) ;
+			App.Instance.CacheProvider.Remove(typeof(SysGroup).Name) ;
 		}
 	}
 

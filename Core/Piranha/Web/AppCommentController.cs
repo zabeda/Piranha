@@ -47,13 +47,13 @@ namespace Piranha.Web
 					var sett = Areas.Manager.Models.CommentSettingsModel.Get() ;
 
 					// Check comment settings according to type
-					if (isPage && (!sett.EnablePages || (!Application.Current.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
+					if (isPage && (!sett.EnablePages || (!App.Instance.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
 						return Redirect("~/") ;
-					else if (isPost && (!sett.EnablePosts || (!Application.Current.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
+					else if (isPost && (!sett.EnablePosts || (!App.Instance.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
 						return Redirect("~/") ;
-					else if (isMedia && (!sett.EnableMedia || (!Application.Current.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
+					else if (isMedia && (!sett.EnableMedia || (!App.Instance.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
 						return Redirect("~/") ;
-					else if (isUload && (!sett.EnableUploads || (!Application.Current.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
+					else if (isUload && (!sett.EnableUploads || (!App.Instance.UserProvider.IsAuthenticated && !sett.EnableAnonymous)))
 						return Redirect("~/") ;
 
 					Comment comment = null ;
@@ -69,7 +69,7 @@ namespace Piranha.Web
 					}
 
 					// If the user isn't authenticated, add user info
-					if (!Application.Current.UserProvider.IsAuthenticated) {
+					if (!App.Instance.UserProvider.IsAuthenticated) {
 						comment.AuthorName = m.AuthorName ;
 						comment.AuthorEmail = m.AuthorEmail ;
 					}

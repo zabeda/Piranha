@@ -69,11 +69,11 @@ namespace Piranha.Models
 			var success = base.Save(tx);
 		
 			// If the action was successful, insert a log entry.
-			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
+			if (HttpContext.Current != null && App.Instance.UserProvider.IsAuthenticated && LogChanges && success) {
 				// Check that we have a valid user id
 				bool validUser = false;
 				try {
-					var userId = Application.Current.UserProvider.UserId;
+					var userId = App.Instance.UserProvider.UserId;
 					var user = SysUser.GetSingle(userId, tx);
 					if (user != null)
 						validUser = true;
@@ -114,7 +114,7 @@ namespace Piranha.Models
 			}
 
 			// If the action was successful, insert a log entry.
-			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
+			if (HttpContext.Current != null && App.Instance.UserProvider.IsAuthenticated && LogChanges && success) {
 				bool draft = true ;
 				if (this is DraftRecord<T>)
 					draft = ((DraftRecord<T>)this).IsDraft ;

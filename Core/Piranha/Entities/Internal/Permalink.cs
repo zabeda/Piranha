@@ -96,15 +96,15 @@ namespace Piranha.Models
 		/// <returns>The permalink</returns>
 		public static Permalink GetSingle(Guid id) {
 			if (id != Guid.Empty) {
-				if (!Application.Current.CacheProvider.Contains(id.ToString())) {
+				if (!App.Instance.CacheProvider.Contains(id.ToString())) {
 					var perm = GetSingle((object)id) ;
 					if (perm != null)
 						AddToCache(perm) ;
 					return perm ;
 				}
-				if (!Application.Current.CacheProvider.Contains(id.ToString()))
-					Application.Current.CacheProvider[id.ToString()] = GetSingle((object)id) ;
-				return (Permalink)Application.Current.CacheProvider[id.ToString()] ;
+				if (!App.Instance.CacheProvider.Contains(id.ToString()))
+					App.Instance.CacheProvider[id.ToString()] = GetSingle((object)id) ;
+				return (Permalink)App.Instance.CacheProvider[id.ToString()] ;
 			}
 			return null ;
 		}
@@ -134,9 +134,9 @@ namespace Piranha.Models
 				}
 				return null ;
 			}
-			if (!Application.Current.CacheProvider.Contains(NamespaceCache[namespaceid][name].ToString()))
-				Application.Current.CacheProvider[NamespaceCache[namespaceid][name].ToString()] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
-			return (Permalink)Application.Current.CacheProvider[NamespaceCache[namespaceid][name].ToString()] ;
+			if (!App.Instance.CacheProvider.Contains(NamespaceCache[namespaceid][name].ToString()))
+				App.Instance.CacheProvider[NamespaceCache[namespaceid][name].ToString()] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
+			return (Permalink)App.Instance.CacheProvider[NamespaceCache[namespaceid][name].ToString()] ;
 		}
 		#endregion
 
@@ -186,7 +186,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Permalink record) {
-			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
+			App.Instance.CacheProvider.Remove(record.Id.ToString()) ;
 			if (NamespaceCache[record.NamespaceId].ContainsKey(record.Name))
 				NamespaceCache[record.NamespaceId].Remove(record.Name) ;
 		}
@@ -196,7 +196,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="perm">The permalink</param>
 		private static void AddToCache(Permalink perm) {
-			Application.Current.CacheProvider[perm.Id.ToString()] = perm ;
+			App.Instance.CacheProvider[perm.Id.ToString()] = perm ;
 			NamespaceCache[perm.NamespaceId][perm.Name] = perm.Id ;
 		}
 	}

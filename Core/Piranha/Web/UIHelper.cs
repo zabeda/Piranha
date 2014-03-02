@@ -136,7 +136,7 @@ namespace Piranha.Web
 			 */
 			str.AppendLine("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"" +
 				WebPiranha.CurrentSite.MetaTitle + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
-				Application.Current.Handlers.GetUrlPrefix("rss") + "\" />") ;
+				App.Instance.Handlers.GetUrlPrefix("rss") + "\" />") ;
 
 			/**
 			 * Check if hook is attached.
@@ -191,7 +191,7 @@ namespace Piranha.Web
 			if (permalink == "" && CurrentPage != null)
 				permalink = CurrentPage.Permalink ;
 			return SiteUrl("~/" + prefix + (!Config.PrefixlessPermalinks ? 
-				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink) ;
+				App.Instance.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink) ;
 		}
 
 		/// <summary>
@@ -212,7 +212,7 @@ namespace Piranha.Web
 			var perm = Models.Permalink.GetSingle(permalinkid) ;
 			if (perm != null)
 				return SiteUrl("~/" + prefix + (!Config.PrefixlessPermalinks ? 
-				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + perm.Name) ;
+				App.Instance.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + perm.Name) ;
 			return SiteUrl("~/" + prefix) ;
 		}
 
@@ -242,11 +242,11 @@ namespace Piranha.Web
 						name += "_" + height.ToString() ;
 					name += "." + suffix ;
 
-				return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENTHANDLER") :
-					Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/") + name) ;
+				return new HtmlString(SiteUrl("~/" + (!draft ? App.Instance.Handlers.GetUrlPrefix("CONTENTHANDLER") :
+					App.Instance.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/") + name) ;
 				}
 				// Generate content url from id
-				return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") : Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) +
+				return new HtmlString(SiteUrl("~/" + (!draft ? App.Instance.Handlers.GetUrlPrefix("CONTENT") : App.Instance.Handlers.GetUrlPrefix("CONTENTDRAFT")) +
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			}
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
@@ -277,7 +277,7 @@ namespace Piranha.Web
 				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
 
 				return new HtmlString(String.Format("<img src=\"{0}\" alt=\"{1}\" />", SiteUrl("~/" + 
-					(!draft ? Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") : Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + 
+					(!draft ? App.Instance.Handlers.GetUrlPrefix("THUMBNAIL") : App.Instance.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + 
 					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")), cnt.AlternateText)) ;
 			} else {
 				Page page = Page.GetSingle(id) ;
@@ -313,7 +313,7 @@ namespace Piranha.Web
 			Upload ul = Models.Upload.GetSingle(id) ;
 			
 			if (ul != null)
-				return new HtmlString(SiteUrl("~/" + Application.Current.Handlers.GetUrlPrefix("UPLOAD") + 
+				return new HtmlString(SiteUrl("~/" + App.Instance.Handlers.GetUrlPrefix("UPLOAD") + 
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "")) ;
 			return new HtmlString("") ; // TODO: Maybe a "missing content" url
 		}
@@ -435,7 +435,7 @@ namespace Piranha.Web
 			if (String.IsNullOrEmpty(apiKey)) {
 				var user = HttpContext.Current.User ;
 
-				if (Application.Current.UserProvider.IsAuthenticated && user.GetProfile().APIKey != Guid.Empty)
+				if (App.Instance.UserProvider.IsAuthenticated && user.GetProfile().APIKey != Guid.Empty)
 					return APIKey(user.GetProfile().APIKey) ;
 				return new HtmlString("") ;
 			}
@@ -592,7 +592,7 @@ namespace Piranha.Web
 				if (page.IsStartpage)
 					return Url("~/") ;
 				return Url("~/" + (!Config.PrefixlessPermalinks ? 
-					Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + page.Permalink.ToLower()) ;
+					App.Instance.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + page.Permalink.ToLower()) ;
 			}
 			return "" ;
 		}

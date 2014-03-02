@@ -78,15 +78,15 @@ namespace Piranha.Entities
 		/// <param name="db">The db context</param>
 		/// <param name="state">The current entity state</param>
 		public override void OnSave(DataContext db, EntityState state) {
-			if (db.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated || AllowAnonymous) {
+			if (db.Identity != Guid.Empty || App.Instance.UserProvider.IsAuthenticated || AllowAnonymous) {
 				if (state == EntityState.Added) {
 					if (Id == Guid.Empty)
 						Id = Guid.NewGuid() ;
 					Created = Updated = DateTime.Now ;
-					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
+					CreatedById = UpdatedById = db.Identity != Guid.Empty ? db.Identity : App.Instance.UserProvider.UserId ;
 				} else if (state == EntityState.Modified) {
 					Updated = DateTime.Now ;
-					UpdatedById = db.Identity != Guid.Empty ? db.Identity : Application.Current.UserProvider.UserId ;
+					UpdatedById = db.Identity != Guid.Empty ? db.Identity : App.Instance.UserProvider.UserId ;
 				}
 			} else throw new UnauthorizedAccessException("User must be logged in to save entity") ;
 		}
@@ -96,7 +96,7 @@ namespace Piranha.Entities
 		/// </summary>
 		/// <param name="db">The db context</param>
 		public override void OnDelete(DataContext db) {
-			if (db.Identity == Guid.Empty && !Application.Current.UserProvider.IsAuthenticated && !AllowAnonymous)
+			if (db.Identity == Guid.Empty && !App.Instance.UserProvider.IsAuthenticated && !AllowAnonymous)
 				throw new UnauthorizedAccessException("User must be logged in to delete entity") ;
 		}
 

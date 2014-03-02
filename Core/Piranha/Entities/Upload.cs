@@ -39,7 +39,7 @@ namespace Piranha.Entities
 		/// <param name="db">The db context</param>
 		public override void OnDelete(DataContext db) {
 			// Delete the main file
-			Application.Current.MediaProvider.Delete(Id, IO.MediaType.Upload) ;
+			App.Instance.MediaProvider.Delete(Id, IO.MediaType.Upload) ;
 			DeleteCache() ;
 		}
 
@@ -47,7 +47,7 @@ namespace Piranha.Entities
 		/// Deletes all cached versions of the media file.
 		/// </summary>
 		public void DeleteCache() {
-			Application.Current.MediaCacheProvider.Delete(Id, IO.MediaType.Upload) ;
+			App.Instance.MediaCacheProvider.Delete(Id, IO.MediaType.Upload) ;
 		}
 	}
 }

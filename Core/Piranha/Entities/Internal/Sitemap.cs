@@ -236,8 +236,8 @@ namespace Piranha.Models
 		public static List<Sitemap> GetStructure(string internalId, bool published = true) {
 			if (published) {
 				// Return the cached public sitemap if it exists.
-				if (published && Piranha.Application.Current.CacheProvider[typeof(Sitemap).Name + "_" + internalId] != null)
-					return (List<Sitemap>)Piranha.Application.Current.CacheProvider[typeof(Sitemap).Name + "_" + internalId] ;
+				if (published && Piranha.App.Instance.CacheProvider[typeof(Sitemap).Name + "_" + internalId] != null)
+					return (List<Sitemap>)Piranha.App.Instance.CacheProvider[typeof(Sitemap).Name + "_" + internalId] ;
 
 				// Get the sitemap from the database
 				List<Sitemap> pages = Get("sitetree_internal_id = @0 AND page_draft = 0", internalId, new Params() { OrderBy = "page_parent_id, page_seqno" }) ;
@@ -245,7 +245,7 @@ namespace Piranha.Models
 			
 				// If this is the public sitemap, cache it
 				if (published)
-					Piranha.Application.Current.CacheProvider[typeof(Sitemap).Name + "_" + internalId] = pages ;
+					Piranha.App.Instance.CacheProvider[typeof(Sitemap).Name + "_" + internalId] = pages ;
 				return pages ;
 			} else {
 				// Get the sitemap from the database
@@ -260,7 +260,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="internalId">The internal id of the sitemap</param>
 		public static void InvalidateCache(string internalId = "DEFAULT_SITE") {
-			Piranha.Application.Current.CacheProvider.Remove(typeof(Sitemap).Name + "_" + internalId) ;
+			Piranha.App.Instance.CacheProvider.Remove(typeof(Sitemap).Name + "_" + internalId) ;
 		}
 
 		/// <summary>

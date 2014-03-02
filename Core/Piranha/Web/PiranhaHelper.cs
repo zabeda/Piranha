@@ -24,9 +24,9 @@ namespace Piranha.Web
 		/// <returns>An action url</returns>
 		public static string GetPermalink(this UrlHelper helper, string permalink, bool draft = false) {
 			if (draft)
-				return helper.Content("~/" + Application.Current.Handlers.GetUrlPrefix("DRAFT") + "/" + permalink.ToLower()) ;
+				return helper.Content("~/" + App.Instance.Handlers.GetUrlPrefix("DRAFT") + "/" + permalink.ToLower()) ;
 			return helper.Content("~/" + (!Config.PrefixlessPermalinks ? 
-				Application.Current.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink.ToLower()) ;
+				App.Instance.Handlers.GetUrlPrefix("PERMALINK").ToLower() + "/" : "") + permalink.ToLower()) ;
 		}
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace Piranha.Web
 				var thumbId = cnt.IsImage ? id : (cnt.IsFolder ? Drawing.Thumbnails.GetIdByType("folder") : Drawing.Thumbnails.GetIdByType(cnt.Type)) ;
 
 				return helper.Content("~/" + 
-					Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT") + "/" + 
+					App.Instance.Handlers.GetUrlPrefix("THUMBNAILDRAFT") + "/" + 
 					thumbId.ToString() + (size > 0 ? "/" + size.ToString() : "")) ;
 			}
 			return "" ;
@@ -59,7 +59,7 @@ namespace Piranha.Web
 			Content cnt = Models.Content.GetSingle(id, true) ;
 			
 			if (cnt != null)
-				return helper.Content("~/" + Application.Current.Handlers.GetUrlPrefix("CONTENT") +
+				return helper.Content("~/" + App.Instance.Handlers.GetUrlPrefix("CONTENT") +
 					"/" + id.ToString() + (width > 0 ? "/" + width.ToString() : "")) + (height > 0 ? "/" + height.ToString() : "") ;
 			return "" ;
 		}
@@ -110,7 +110,7 @@ namespace Piranha.Web
 		/// <param name="helper">The url helper</param>
 		/// <returns>The base url</returns>
 		public static string GetThumbnailBaseUrl(this UrlHelper helper) {
-			return helper.Content("~/" + Application.Current.Handlers.GetUrlPrefix("THUMBNAIL")) ;
+			return helper.Content("~/" + App.Instance.Handlers.GetUrlPrefix("THUMBNAIL")) ;
 		}
 	}
 }

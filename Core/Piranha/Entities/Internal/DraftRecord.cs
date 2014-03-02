@@ -45,7 +45,7 @@ namespace Piranha.Models
 		public virtual bool SaveAndPublish(System.Data.IDbTransaction tx = null) {
 			//var user = HttpContext.Current != null ? HttpContext.Current.User : null ;
 
-			if (Database.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
+			if (Database.Identity != Guid.Empty || App.Instance.UserProvider.IsAuthenticated) {
 				// First get previously published record
 				IsDraft = false ;
 				T self = GetSelf() ;

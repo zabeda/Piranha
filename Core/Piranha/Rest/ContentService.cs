@@ -91,11 +91,11 @@ namespace Piranha.Rest
 						Type = c.Type,
 						Size = c.Size,
 						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + 
-							(!draft ? Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") :
-							Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + c.Id,
+							(!draft ? App.Instance.Handlers.GetUrlPrefix("THUMBNAIL") :
+							App.Instance.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + c.Id,
 						ContentUrl = WebPages.WebPiranha.ApplicationPath + 
-							(!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") :
-							Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
+							(!draft ? App.Instance.Handlers.GetUrlPrefix("CONTENT") :
+							App.Instance.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
 						Created = c.Created.ToString(),
 						Updated = c.Updated.ToString()
 					} ;
