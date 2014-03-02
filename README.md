@@ -10,7 +10,7 @@ The core libraries are released under the **LGPL** license while the template si
 
 ## Branching strategy
 
-The master branch of this reposiory is the development branch. If you want the source code of the currently released version this is always awailable as a complementary branch. If you want the source code for an older version you can download it as a zip-file by clicking on Releases.
+The master branch of this reposiory is the development branch. If you want the source code for the current version this is always available in a complementary branch. If you're looking for an older version you can download it as a zip-file by clicking on Releases.
 
 ## NuGet packages
 
