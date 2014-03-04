@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using WebActivatorEx;
 
 [assembly: PreApplicationStartMethod(typeof(Piranha.Web.ApplicationModule), "Start")]
+[assembly: PostApplicationStartMethod(typeof(Piranha.Web.ApplicationModule), "Init")]
 
 namespace Piranha.Web
 {
@@ -11,7 +12,7 @@ namespace Piranha.Web
 	/// The application module registers the main Piranha CMS application, initializes
 	/// the module and handles all requests to the application.
 	/// </summary>
-	public class ApplicationModule : IHttpModule
+	public class ApplicationModule : System.Web.IHttpModule
 	{
 		/// <summary>
 		/// Disposes all allicated resources.
@@ -26,18 +27,23 @@ namespace Piranha.Web
 			Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(ApplicationModule)) ;
 
 			// Initialize Piranha CMS
-			App.Init();
-
 			WebPages.WebPiranha.Init() ;
+		}
+
+		/// <summary>
+		/// Initializes the application module.
+		/// </summary>
+		public static void Init() { 
+			App.Init();
 		}
 
 		/// <summary>
 		/// Executed for all requests in the application
 		/// </summary>
 		/// <param name="context">The current application context</param>
-		public void Init(HttpApplication context) {
+		public void Init(System.Web.HttpApplication context) {
 			context.BeginRequest += (sender, e) => {
-				WebPages.WebPiranha.BeginRequest(((HttpApplication)sender).Context) ;
+				WebPages.WebPiranha.BeginRequest(((System.Web.HttpApplication)sender).Context) ;
 			} ;
 		}
 	}
