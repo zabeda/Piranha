@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Piranha.Hooks
 {
@@ -17,6 +19,12 @@ namespace Piranha.Hooks
 			/// </summary>
 			/// <param name="container">The current IoC container.</param>
 			public delegate void IoCRegistrationDelegate(IoC.IContainer container);
+
+			/// <summary>
+			/// Delegate for adding an assembly to the precompiled view engine.
+			/// </summary>
+			/// <param name="assemblies">The collection of assemblies</param>
+			public delegate void PrecompiledViewEngingeRegistration(IList<Assembly> assemblies);
 		}
 
 		/// <summary>
@@ -67,6 +75,12 @@ namespace Piranha.Hooks
 			/// IoC container.
 			/// </summary>
 			public static Delegates.IoCRegistrationDelegate Register;
+
+			/// <summary>
+			/// Called when the view engines are registered. This hooks can be used
+			/// to add an assembly to be registered for precompiled views.
+			/// </summary>
+			public static Delegates.PrecompiledViewEngingeRegistration RegisterPrecompiledViews;
 		}
 	}
 }

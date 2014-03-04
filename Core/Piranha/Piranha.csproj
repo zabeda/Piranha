@@ -523,6 +523,7 @@
     <Compile Include="Entities\StandardEntity.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extend\IModule.cs" />
     <Compile Include="Extend\PostType.cs" />
     <Compile Include="Extend\IPageType.cs" />
     <Compile Include="Extend\IPostType.cs" />
@@ -718,6 +719,7 @@
     <Compile Include="Web\PiranhaHelper.cs" />
     <Compile Include="Web\RssHelper.cs" />
     <Compile Include="Web\SiteHelper.cs" />
+    <Compile Include="Web\Startup.cs" />
     <Compile Include="Web\TemplateCache.cs" />
     <Compile Include="Web\UIHelper.cs" />
   </ItemGroup>
