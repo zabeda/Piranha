@@ -11,44 +11,44 @@ namespace Piranha.Extend
 		/// <summary>
 		/// Gets the name.
 		/// </summary>
-		string Name { get ; }
+		string Name { get; }
 
 		/// <summary>
 		/// Gets the optional description.
 		/// </summary>
-		string Description { get ; }
+		string Description { get; }
 
 		/// <summary>
 		/// Gets the html preview.
 		/// </summary>
-		string Preview { get ; }
+		string Preview { get; }
 
 		/// <summary>
 		/// Gets the controller/viewtemplate depending on the current
 		/// application is using WebPages or Mvc.
 		/// </summary>
-		string Controller { get ; }
+		string Controller { get; }
 
 		/// <summary>
 		/// Gets if pages of the current type should be able to 
 		/// override the controller.
 		/// </summary>
-		bool ShowController { get ; }
+		bool ShowController { get; }
 
 		/// <summary>
 		/// Gets the view. This is only relevant for Mvc applications.
 		/// </summary>
-		string View { get ; }
+		string View { get; }
 
 		/// <summary>
 		/// Gets if pages of the current type should be able to 
 		/// override the controller.
 		/// </summary>
-		bool ShowView { get ; }
+		bool ShowView { get; }
 
 		/// <summary>
 		/// Gets the defíned properties.
 		/// </summary>
-		IList<string> Properties { get ; }
+		IList<string> Properties { get; }
 	}
 }

@@ -30,7 +30,7 @@ namespace Piranha.Extend
 		public virtual string Controller { get ; protected set ; }
 
 		/// <summary>
-		/// Gets if pages of the current type should be able to 
+		/// Gets if posts of the current type should be able to 
 		/// override the controller.
 		/// </summary>
 		public virtual bool ShowController { get ; protected set ; }
@@ -41,7 +41,7 @@ namespace Piranha.Extend
 		public virtual string View { get ; protected set ; }
 
 		/// <summary>
-		/// Gets if pages of the current type should be able to 
+		/// Gets if posts of the current type should be able to 
 		/// override the controller.
 		/// </summary>
 		public virtual bool ShowView { get ; protected set ; }
@@ -51,6 +51,9 @@ namespace Piranha.Extend
 		/// </summary>
 		public virtual IList<string> Properties { get ; protected set ; }
 
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
 		public PostType() {
 			Properties = new List<string>() ;
 
