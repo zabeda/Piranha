@@ -550,6 +550,8 @@
     <Compile Include="Extend\Regions\PostRegion.cs" />
     <Compile Include="Extend\Regions\TextRegion.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="IO\MockMediaCacheProvider.cs" />
+    <Compile Include="IO\MockMediaProvider.cs" />
     <Compile Include="Log\ILogProvider.cs" />
     <Compile Include="Log\LocalLogProvider.cs" />
     <Compile Include="Manager\Binders\IExtensionBinder.cs" />
@@ -681,6 +683,7 @@
     <Compile Include="Rest\PostService.cs" />
     <Compile Include="Rest\PostTemplateService.cs" />
     <Compile Include="Rest\SitemapServices.cs" />
+    <Compile Include="Security\ISecurityManager.cs" />
     <Compile Include="Security\IUserProvider.cs" />
     <Compile Include="Security\LocalUserProvider.cs" />
     <Compile Include="TinyIoC.cs" />
@@ -888,6 +891,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Welcome.generated.cs</LastGenOutput>
     </Content>
+    <EmbeddedResource Include="Data\Scripts\Updates\33.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

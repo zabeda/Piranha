@@ -24,32 +24,27 @@ namespace Piranha
 		public static readonly App Instance = new App() ;
 
 		/// <summary>
-		/// The collection of registered request handlers.
-		/// </summary>
-		public readonly RequestHandlerCollection Handlers = new RequestHandlerCollection() ;
-
-		/// <summary>
-		/// Gets the current IoC container.
-		/// </summary>
-		public readonly IoC.IContainer IoCContainer;
-
-		/// <summary>
-		/// The currently active user provider.
-		/// </summary>
-		internal readonly Security.IUserProvider UserProvider = new Security.LocalUserProvider() ;
-
-		/// <summary>
-		/// The manager resource handler.
-		/// </summary>
-		internal readonly ResourceHandler Resources = new ResourceHandler() ;
-
-		/// <summary>
 		/// The private composition container.
 		/// </summary>
 		private CompositionContainer Container = null ;
+
+		/// <summary>
+		/// The current application state
+		/// </summary>
+		private bool IsInitialized = false;
+
+		/// <summary>
+		/// The initialization mutex.
+		/// </summary>
+		private object mutex = new object();
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// Gets the current IoC container.
+		/// </summary>
+		public IoC.IContainer IoCContainer { get; private set; }
+
 		/// <summary>
 		/// Gets the current cache provider.
 		/// </summary>
@@ -77,6 +72,23 @@ namespace Piranha
 		public IO.IMediaCacheProvider MediaCacheProvider {
 			get { return IoCContainer.Resolve<IO.IMediaCacheProvider>(); }
 		}
+
+		/// <summary>
+		/// The currently active user provider.
+		/// </summary>
+		internal Security.IUserProvider UserProvider {
+			get { return IoCContainer.Resolve<Security.IUserProvider>(); }
+		}
+
+		/// <summary>
+		/// The collection of registered request handlers.
+		/// </summary>
+		public RequestHandlerCollection Handlers { get; private set; }
+
+		/// <summary>
+		/// The manager resource handler.
+		/// </summary>
+		internal ResourceHandler Resources { get; private set; }
 
 		/// <summary>
 		/// Gets the current route handler.
@@ -108,46 +120,98 @@ namespace Piranha
 		/// <summary>
 		/// Default private constructor.
 		/// </summary>
-		private App() {
-			var catalog = new AggregateCatalog() ;
+		private App() { }
 
-			// Register IoC container
-			if (Hooks.App.Init.CreateContainer != null)
-				IoCContainer = Hooks.App.Init.CreateContainer();
-			else IoCContainer = new IoC.TinyIoCContainer();
-
-			// Register log provider
-			if (Hooks.App.Init.RegisterLog != null)
-				Hooks.App.Init.RegisterLog(IoCContainer);
-			else IoCContainer.RegisterSingleton<Log.ILogProvider, Log.LocalLogProvider>();
-
-			// Regsiter cache provider
-			if (Hooks.App.Init.RegisterCache != null)
-				Hooks.App.Init.RegisterCache(IoCContainer);
-			else IoCContainer.RegisterSingleton<Cache.ICacheProvider, Cache.WebCacheProvider>();
-
-			// Register media provider
-			if (Hooks.App.Init.RegisterMedia != null)
-				Hooks.App.Init.RegisterMedia(IoCContainer);
-			else IoCContainer.RegisterSingleton<IO.IMediaProvider, IO.LocalMediaProvider>();
-
-			// Register media cache provider
-			if (Hooks.App.Init.RegisterMediaCache != null)
-				Hooks.App.Init.RegisterMediaCache(IoCContainer);
-			else IoCContainer.RegisterSingleton<IO.IMediaCacheProvider, IO.LocalMediaCacheProvider>();
-
-			// Register additional types
-			if (Hooks.App.Init.Register != null)
-				Hooks.App.Init.Register(IoCContainer);
-
-			// Compose parts
-			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
-			Container = new CompositionContainer(catalog) ;
-			Container.ComposeParts(this) ;
-
-			RegisterHandlers() ;
+		/// <summary>
+		/// Initializes the application.
+		/// </summary>
+		public static void Init() {
+			Instance.Initialize();
 		}
-	
+
+		/// <summary>
+		/// Registers mock providers and initializes the application 
+		/// for running outside of the HttpContext. This method should be
+		/// used instead of Init() when setting up unit tests.
+		/// </summary>
+		public static void Mock() { 
+			Hooks.App.Init.RegisterCache = ioc =>
+				ioc.RegisterSingleton<Cache.ICacheProvider, Cache.MemCacheProvider>();
+			Hooks.App.Init.RegisterMedia = ioc =>
+				ioc.RegisterSingleton<IO.IMediaProvider, IO.MockMediaProvider>();
+			Hooks.App.Init.RegisterMediaCache = ioc =>
+				ioc.RegisterSingleton<IO.IMediaCacheProvider, IO.MockMediaCacheProvider>();
+
+			Instance.Initialize();
+		}
+
+		#region Private methods
+		/// <summary>
+		/// Initializes the application.
+		/// </summary>
+		private void Initialize() {
+			if (!IsInitialized) {
+				lock (mutex) {
+					if (!IsInitialized) {
+						var catalog = new AggregateCatalog() ;
+
+						// Register IoC container
+						if (Hooks.App.Init.CreateContainer != null)
+							IoCContainer = Hooks.App.Init.CreateContainer();
+						else IoCContainer = new IoC.TinyIoCContainer();
+
+						// Register log provider
+						if (Hooks.App.Init.RegisterLog != null)
+							Hooks.App.Init.RegisterLog(IoCContainer);
+						else IoCContainer.RegisterSingleton<Log.ILogProvider, Log.LocalLogProvider>();
+
+						// Regsiter cache provider
+						if (Hooks.App.Init.RegisterCache != null)
+							Hooks.App.Init.RegisterCache(IoCContainer);
+						else IoCContainer.RegisterSingleton<Cache.ICacheProvider, Cache.WebCacheProvider>();
+
+						// Register media provider
+						if (Hooks.App.Init.RegisterMedia != null)
+							Hooks.App.Init.RegisterMedia(IoCContainer);
+						else IoCContainer.RegisterSingleton<IO.IMediaProvider, IO.LocalMediaProvider>();
+
+						// Register media cache provider
+						if (Hooks.App.Init.RegisterMediaCache != null)
+							Hooks.App.Init.RegisterMediaCache(IoCContainer);
+						else IoCContainer.RegisterSingleton<IO.IMediaCacheProvider, IO.LocalMediaCacheProvider>();
+
+						// Register user provider
+						IoCContainer.RegisterSingleton<Security.IUserProvider, Security.LocalUserProvider>();
+
+						// Register additional types
+						if (Hooks.App.Init.Register != null)
+							Hooks.App.Init.Register(IoCContainer);
+
+						// Compose parts
+						if (HttpContext.Current != null) {
+							catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
+						} else { 
+							catalog.Catalogs.Add(new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
+						}
+						Container = new CompositionContainer(catalog) ;
+						Container.ComposeParts(this) ;
+
+						// Create the resource handler
+						Resources = new ResourceHandler();
+
+						// Create the handler collection
+						Handlers = new RequestHandlerCollection();
+
+						// Register default handlers
+						RegisterHandlers() ;
+
+						// Set application state
+						IsInitialized = true;
+					}
+				}
+			}
+		}
+
 		/// <summary>
 		/// Registers the default handlers.
 		/// </summary>
@@ -165,5 +229,6 @@ namespace Piranha
 			Handlers.Add("rss", "RSS", new RssHandler()) ;
 			Handlers.Add("sitemap.xml", "SITEMAP", new SitemapHandler()) ;
 		}
+		#endregion
 	}
 }

@@ -26,6 +26,8 @@ namespace Piranha.Web
 			Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(ApplicationModule)) ;
 
 			// Initialize Piranha CMS
+			App.Init();
+
 			WebPages.WebPiranha.Init() ;
 		}
 
