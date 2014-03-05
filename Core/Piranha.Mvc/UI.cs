@@ -108,11 +108,14 @@ namespace Piranha.Mvc
 		/// <param name="StartLevel">The start level of the menu</param>
 		/// <param name="StopLevel">The stop level of the menu</param>
 		/// <param name="Levels">The number of levels. Use this if you don't know the start level</param>
+		/// <param name="RootNode">Optional rootnode for the menu to start from</param>
+		/// <param name="CssClass">Optional css class for the outermost container</param>
+		/// <param name="Current">Optional current page</param>
 		/// <returns>A html string</returns>
 		public static IHtmlString Menu(int StartLevel = 1, int StopLevel = Int32.MaxValue, int Levels = 0,
-			string RootNode = "", string CssClass = "menu") 
+			string RootNode = "", string CssClass = "menu", Piranha.Models.Page Current = null) 
 		{
-			return Helper.Menu(StartLevel, StopLevel, Levels, RootNode, CssClass) ;
+			return Helper.Menu(StartLevel, StopLevel, Levels, RootNode, CssClass, Current) ;
 		}
 
 		/// <summary>
