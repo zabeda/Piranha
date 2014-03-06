@@ -32,12 +32,6 @@ namespace Piranha.Web
 
 			// Intializes the web application
 			WebPages.WebPiranha.Init();
-
-			// Registers view engines
-			RegisterViewEngines();
-
-			// Initialize the manager module
-			Manager.ManagerModule.Init();
 		}
 
 		/// <summary>
@@ -46,6 +40,12 @@ namespace Piranha.Web
 		public static void Init() {
 			// Initializes the main application object
 			App.Init();
+	
+			// Initialize the manager module
+			Manager.ManagerModule.Init();
+
+			// Registers view engines
+			RegisterViewEngines();	
 		}
 
 		#region Private methods

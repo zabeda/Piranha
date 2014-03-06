@@ -5,7 +5,7 @@ using System.Reflection;
 namespace Piranha.Hooks
 {
 	/// <summary>
-	/// The WebPages.Hooks available for the main application.
+	/// The hooks available for the main application.
 	/// </summary>
 	public static class App
 	{
@@ -28,7 +28,7 @@ namespace Piranha.Hooks
 		}
 
 		/// <summary>
-		/// The WebPages.Hooks available for application init.
+		/// The hooks available for application init.
 		/// </summary>
 		public static class Init 
 		{

@@ -534,6 +534,7 @@
     <Compile Include="Extend\RegionType.cs" />
     <Compile Include="Hooks\App.cs" />
     <Compile Include="Hooks\Delegates.cs" />
+    <Compile Include="Hooks\Manager.cs" />
     <Compile Include="IoC\IContainer.cs" />
     <Compile Include="IoC\TinyIoCContainer.cs" />
     <Compile Include="IO\IMediaCacheProvider.cs" />
