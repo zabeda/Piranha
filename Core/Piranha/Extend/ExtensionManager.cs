@@ -19,11 +19,6 @@ namespace Piranha.Extend
 	{
 		#region Members
 		/// <summary>
-		/// Static singleton instance of the extension manager.
-		/// </summary>
-		public static readonly ExtensionManager Current = new ExtensionManager() ;
-
-		/// <summary>
 		/// The private composition container.
 		/// </summary>
 		private CompositionContainer Container = null ;
@@ -45,28 +40,36 @@ namespace Piranha.Extend
 		/// </summary>
 		[ImportMany(AllowRecomposition=true)]
 		internal IEnumerable<IPostType> PostTypes { get ; set ; }
+
+		/// <summary>
+		/// The currently available modules.
+		/// </summary>
+		[ImportMany(AllowRecomposition=true)]
+		internal IEnumerable<IModule> Modules { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default private constructor.
 		/// </summary>
-		private ExtensionManager() {
+		internal ExtensionManager() {
 			// Let MEF scan for imports
 			var catalog = new AggregateCatalog() ;
 
-			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
-
+			if (HttpContext.Current != null) {
+				catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
 #if !NET40
-			if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
+				if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
 #endif
-				try {
-					// This feature only exists for Web Pages
-					catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
-				} catch {}
+					try {
+						// This feature only exists for Web Pages
+						catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
+					} catch {}
 #if !NET40
+				}
+#endif
+			} else { 
+				catalog.Catalogs.Add(new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
 			}
-#endif
-
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
 		}
@@ -75,6 +78,12 @@ namespace Piranha.Extend
 		/// Trigged when all imports are loaded. Initializes all of the extensions.
 		/// </summary>
 		public void OnImportsSatisfied() {
+			// Initialize all modules
+			foreach (var module in Modules) {
+				module.Init();
+			}
+
+			// Initialize all extensions
 			using (var db = new DataContext()) {
 				db.LoginSys() ;
 				// Run the ensure method for all extensions.

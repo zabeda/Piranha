@@ -127,7 +127,7 @@ WriteLiteral(">");
 
             
             #line 17 "..\..\Areas\Manager\Views\SiteTree\EditorTemplates\RegionTemplate.cshtml"
-                          Write(Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type));
+                          Write(Piranha.App.Instance.ExtensionManager.GetNameByType(Model.Type));
 
             
             #line default

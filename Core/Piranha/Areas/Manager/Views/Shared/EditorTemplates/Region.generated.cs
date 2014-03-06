@@ -190,28 +190,6 @@ WriteLiteral("    ");
 
             
             #line 19 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Region.cshtml"
-Write(Html.HiddenFor(m => m.CreatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 20 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Region.cshtml"
-Write(Html.HiddenFor(m => m.UpdatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 21 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Region.cshtml"
 Write(Html.PartialFor(view, m => m.Body));
 
             

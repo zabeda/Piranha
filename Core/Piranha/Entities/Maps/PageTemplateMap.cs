@@ -27,12 +27,8 @@ namespace Piranha.Entities.Maps
 			Property(t => t.Type).HasColumnName("pagetemplate_type").HasMaxLength(255) ;
 			Property(t => t.Created).HasColumnName("pagetemplate_created") ;
 			Property(t => t.Updated).HasColumnName("pagetemplate_updated") ;
-			Property(t => t.CreatedById).HasColumnName("pagetemplate_created_by") ;
-			Property(t => t.UpdatedById).HasColumnName("pagetemplate_updated_by") ;
 
 			HasMany(t => t.RegionTemplates).WithRequired().HasForeignKey(r => r.TemplateId) ;
-			HasRequired(t => t.CreatedBy) ;
-			HasRequired(t => t.UpdatedBy) ;
 		}
 	}
 }

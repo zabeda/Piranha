@@ -43,12 +43,6 @@ namespace Piranha.Models
 
 		[Column(Name="sysgroup_updated")]
 		public override DateTime Updated { get ; set ; }
-
-		[Column(Name="sysgroup_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		[Column(Name="sysgroup_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Properties

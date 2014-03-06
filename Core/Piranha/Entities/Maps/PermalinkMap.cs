@@ -20,12 +20,8 @@ namespace Piranha.Entities.Maps
 			Property(p => p.Name).HasColumnName("permalink_name").IsRequired().HasMaxLength(128) ;
 			Property(p => p.Created).HasColumnName("permalink_created") ;
 			Property(p => p.Updated).HasColumnName("permalink_updated") ;
-			Property(p => p.CreatedById).HasColumnName("permalink_created_by") ;
-			Property(p => p.UpdatedById).HasColumnName("permalink_updated_by") ;
 
 			HasRequired(p => p.Namespace) ;
-			HasRequired(p => p.CreatedBy) ;
-			HasRequired(p => p.UpdatedBy) ;
 		}
 	}
 }

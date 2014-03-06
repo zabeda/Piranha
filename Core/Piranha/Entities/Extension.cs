@@ -77,11 +77,11 @@ namespace Piranha.Entities
 				var js = new JavaScriptSerializer() ;
 
 				if (!String.IsNullOrEmpty(InternalBody)) {
-					if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(Type)))
-						return ExtensionManager.Current.CreateInstance(Type, InternalBody) ;
-					return (IExtension)js.Deserialize(InternalBody, ExtensionManager.Current.GetType(Type)) ;
+					if (typeof(HtmlString).IsAssignableFrom(App.Instance.ExtensionManager.GetType(Type)))
+						return App.Instance.ExtensionManager.CreateInstance(Type, InternalBody) ;
+					return (IExtension)js.Deserialize(InternalBody, App.Instance.ExtensionManager.GetType(Type)) ;
 				}
-				return ExtensionManager.Current.CreateInstance(Type) ;
+				return App.Instance.ExtensionManager.CreateInstance(Type) ;
 			}
 			return null;
 		}

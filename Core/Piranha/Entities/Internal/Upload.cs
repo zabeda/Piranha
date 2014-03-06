@@ -53,18 +53,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="upload_updated")]
 		public override DateTime Updated { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the id of the user who created the record.
-		/// </summary>
-		[Column(Name="upload_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the id of the user who last updated the record.
-		/// </summary>
-		[Column(Name="upload_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Static accessors

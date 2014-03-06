@@ -35,13 +35,10 @@
     @Html.HiddenFor(m => m.Template.Type)
     @Html.HiddenFor(m => m.Template.Created)
     @Html.HiddenFor(m => m.Template.Updated)
-    @Html.HiddenFor(m => m.Template.CreatedBy)
-    @Html.HiddenFor(m => m.Template.UpdatedBy)
     @Html.HiddenFor(m => m.Permalink.IsNew)
     @Html.HiddenFor(m => m.Permalink.Id)
     @Html.HiddenFor(m => m.Permalink.Type)
     @Html.HiddenFor(m => m.Permalink.Created)
-    @Html.HiddenFor(m => m.Permalink.CreatedBy)
     @if (!Piranha.App.Instance.IsMvc) {
     @Html.HiddenFor(m => m.Template.View)
     @Html.HiddenFor(m => m.Template.ShowView)

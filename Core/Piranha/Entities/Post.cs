@@ -93,16 +93,6 @@ namespace Piranha.Entities
 		/// Gets/set the last modified date.
 		/// </summary>
 		public DateTime? LastModified { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the id of the user who initially created the post.
-		/// </summary>
-		public Guid CreatedById { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the id of the user who last updated the post.
-		/// </summary>
-		public Guid UpdatedById { get ; set ; }
 		#endregion
 
 		#region Navigation properties
@@ -135,16 +125,6 @@ namespace Piranha.Entities
 		/// Gets/sets the currently available comments.
 		/// </summary>
 		public IList<Comment> Comments { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user who initially created the template.
-		/// </summary>
-		public User CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user who last updated the template.
-		/// </summary>
-		public User UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Internal properties

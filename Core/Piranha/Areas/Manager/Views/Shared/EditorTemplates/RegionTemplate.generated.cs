@@ -127,7 +127,7 @@ WriteLiteral(">");
 
             
             #line 17 "..\..\Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml"
-                          Write(Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type));
+                          Write(Piranha.App.Instance.ExtensionManager.GetNameByType(Model.Type));
 
             
             #line default
@@ -247,20 +247,6 @@ WriteLiteral("\r\n");
             
             #line 32 "..\..\Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml"
                                            
-            
-            
-            #line default
-            #line hidden
-            
-            #line 33 "..\..\Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml"
-       Write(Html.HiddenFor(m => m.CreatedBy));
-
-            
-            #line default
-            #line hidden
-            
-            #line 33 "..\..\Areas\Manager\Views\Shared\EditorTemplates\RegionTemplate.cshtml"
-                                             
             }
 
             

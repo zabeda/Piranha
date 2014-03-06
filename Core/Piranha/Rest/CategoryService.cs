@@ -39,7 +39,7 @@ namespace Piranha.Rest
 					Updated = c.Updated.ToString()
 				} ;
 				foreach (var ext in c.GetExtensions()) {
-					var internalId = Extend.ExtensionManager.Current.GetInternalIdByType(ext.Type) ;
+					var internalId = App.Instance.ExtensionManager.GetInternalIdByType(ext.Type) ;
 
 					if (ext.Body is HtmlString)
 						category.Extensions.Add(new Extension() { Name = internalId, Body = ((HtmlString)ext.Body).ToHtmlString() }) ;

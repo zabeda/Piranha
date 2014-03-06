@@ -14,7 +14,7 @@
             @Html.ValidationMessageFor(m => m.InternalId)</div>
     </td>
     <td>
-        <span class="readonly">@Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type)</span>
+        <span class="readonly">@Piranha.App.Instance.ExtensionManager.GetNameByType(Model.Type)</span>
     </td>
     <td class="buttons four">
         <a class="icon up marg"></a>
@@ -30,7 +30,6 @@
             @Html.HiddenFor(m => m.Description)
             @if (!Model.IsNew) {
             @Html.HiddenFor(m => m.Created)
-            @Html.HiddenFor(m => m.CreatedBy)
             }
         </div>
     </td> 

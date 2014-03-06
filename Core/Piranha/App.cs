@@ -81,6 +81,11 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets the extension manager.
+		/// </summary>
+		public Extend.ExtensionManager ExtensionManager { get; private set; }
+
+		/// <summary>
 		/// The collection of registered request handlers.
 		/// </summary>
 		public RequestHandlerCollection Handlers { get; private set; }
@@ -204,6 +209,9 @@ namespace Piranha
 
 						// Register default handlers
 						RegisterHandlers() ;
+
+						// Create the extension manager
+						ExtensionManager = new Extend.ExtensionManager();
 
 						// Set application state
 						IsInitialized = true;

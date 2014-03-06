@@ -48,11 +48,7 @@
         <div class="inner">
             <ul class="form">
                 <li>@Html.LabelFor(m => m.AuthorName)
-                @if (Model.CreatedById.HasValue) {
-                    <p><a href="@Url.Action("user", "settings", new { @id = Model.CreatedById.Value })">@Model.AuthorName</a></p>
-                } else {
                     <p>@Model.AuthorName</p>
-                }
                 </li>
                 <li>@Html.LabelFor(m => m.AuthorEmail)
                     <p><a href="mailto:@Model.AuthorEmail">@Model.AuthorEmail</a></p>

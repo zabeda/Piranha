@@ -29,7 +29,7 @@ namespace Piranha.Models.Manager.SettingModels
 				model.Extensions.Each((i, m) => {
 					if (m.Body is HtmlString) {
 						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
-						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
+						m.Body = App.Instance.ExtensionManager.CreateInstance(m.Type,
  							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
 					}
 				}) ;
@@ -110,7 +110,6 @@ namespace Piranha.Models.Manager.SettingModels
 			
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
-					User.UpdatedBy = uid ;
 					User.Save(tx) ;
 					if (Password.IsSet) {
 						Password.Id = User.Id ;

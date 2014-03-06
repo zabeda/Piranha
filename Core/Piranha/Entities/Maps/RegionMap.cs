@@ -24,13 +24,9 @@ namespace Piranha.Entities.Maps
 			Property(r => r.InternalBody).HasColumnName("region_body") ;
 			Property(r => r.Created).HasColumnName("region_created") ;
 			Property(r => r.Updated).HasColumnName("region_updated") ;
-			Property(r => r.CreatedById).HasColumnName("region_created_by") ;
-			Property(r => r.UpdatedById).HasColumnName("region_updated_by") ;
 
 			HasRequired(r => r.RegionTemplate) ;
 			HasRequired(r => r.Page).WithMany(p => p.Regions).HasForeignKey(fk => new { fk.PageId, fk.IsPageDraft }) ;
-			HasRequired(r => r.CreatedBy) ;
-			HasRequired(r => r.UpdatedBy) ;
 
 			Ignore(r => r.Body) ;
 		}

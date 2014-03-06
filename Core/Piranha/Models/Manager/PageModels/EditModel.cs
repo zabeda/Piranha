@@ -42,7 +42,7 @@ namespace Piranha.Models.Manager.PageModels
 				model.Regions.Each<Region>((i, m) => {
 					if (m.Body is HtmlString) {
 						bindingContext.ModelState.Remove("Regions[" + i +"].Body") ;
-						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
+						m.Body = App.Instance.ExtensionManager.CreateInstance(m.Type,
  							bindingContext.ValueProvider.GetUnvalidatedValue("Regions[" + i +"].Body").AttemptedValue) ;
 					}
 				}) ;
@@ -630,7 +630,6 @@ namespace Piranha.Models.Manager.PageModels
 			if (!Page.IsNew && EnableComments) {
 				using (var db = new DataContext()) {
 					Comments = db.Comments.
-						Include("CreatedBy").
 						Where(c => c.ParentId == Page.Id && c.ParentIsDraft == false).
 						OrderByDescending(c => c.Created).ToList() ;
 				}

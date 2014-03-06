@@ -150,14 +150,11 @@
     @Html.HiddenFor(m => m.Page.Updated)
     @Html.HiddenFor(m => m.Page.Published)
     @Html.HiddenFor(m => m.Page.LastPublished)
-    @Html.HiddenFor(m => m.Page.CreatedBy)
-    @Html.HiddenFor(m => m.Page.UpdatedBy)
     @Html.HiddenFor(m => m.Permalink.IsNew)
     @Html.HiddenFor(m => m.Permalink.Id)
     @Html.HiddenFor(m => m.Permalink.NamespaceId)
     @Html.HiddenFor(m => m.Permalink.Type)
     @Html.HiddenFor(m => m.Permalink.Created)
-    @Html.HiddenFor(m => m.Permalink.CreatedBy)
     @if (Model.IsSite) {
     @Html.HiddenFor(m => m.Page.Title)
     @Html.HiddenFor(m => m.Page.ParentId)
@@ -291,9 +288,9 @@
                             }
                             @foreach (var ext in Model.Extensions) {
                             <li>
-                                <a href="#"@(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower()">
-                                    @ExtensionManager.Current.GetNameByType(ext.Type)
+                                <a href="#"@(Piranha.App.Instance.ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" +
+									 Url.Content(Piranha.App.Instance.ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "") data-id="pnl-@Piranha.App.Instance.ExtensionManager.GetInternalIdByType(ext.Type).ToLower()">
+                                    @Piranha.App.Instance.ExtensionManager.GetNameByType(ext.Type)
                                 </a>
                             </li>
                             }
@@ -397,7 +394,6 @@
                                         @Html.HiddenFor(m => m.Properties[n].ParentId)
                                         @Html.HiddenFor(m => m.Properties[n].Name)
                                         @Html.HiddenFor(m => m.Properties[n].Created)
-                                        @Html.HiddenFor(m => m.Properties[n].CreatedBy)
                                         @Html.HiddenFor(m => m.Properties[n].IsNew)
                                         <div class="input">
                                             @Html.TextBoxFor(m => m.Properties[n].Value)</div>

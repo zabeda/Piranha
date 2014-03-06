@@ -217,9 +217,9 @@ namespace Piranha.Models
 			if (regions.Count > 0) {
 				foreach (var rt in regions) {
 					if (rt.Type != "Piranha.Extend.Regions.PostRegion") {
-						if (ExtensionManager.Current.HasType(rt.Type)) {
+						if (App.Instance.ExtensionManager.HasType(rt.Type)) {
 							// Create empty region
-							object body = ExtensionManager.Current.CreateInstance(rt.Type) ;
+							object body = App.Instance.ExtensionManager.CreateInstance(rt.Type) ;
 							// Initialize empty regions
 							if (body != null) {
 								body = ((IExtension)body).GetContent(this) ;
@@ -275,7 +275,7 @@ namespace Piranha.Models
 					if (getContent != null)
 						body = getContent.Invoke(body, new object[] { this }) ;
 				}
-				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body ;
+				((IDictionary<string, object>)Extensions)[App.Instance.ExtensionManager.GetInternalIdByType(ext.Type)] = body ;
 			}
 			// Reset the page id if we changed it to load a copy
 			((Models.Page)Page).Id = id ;

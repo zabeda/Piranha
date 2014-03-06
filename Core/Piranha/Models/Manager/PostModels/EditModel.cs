@@ -49,7 +49,7 @@ namespace Piranha.Models.Manager.PostModels
 				model.Extensions.Each((i, m) => {
 					if (m.Body is HtmlString) {
 						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
-						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
+						m.Body = App.Instance.ExtensionManager.CreateInstance(m.Type,
  							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
 					}
 				}) ;
@@ -360,7 +360,6 @@ namespace Piranha.Models.Manager.PostModels
 			if (!Post.IsNew && EnableComments) {
 				using (var db = new DataContext()) {
 					Comments = db.Comments.
-						Include("CreatedBy").
 						Where(c => c.ParentId == Post.Id && c.ParentIsDraft == false).
 						OrderByDescending(c => c.Created).ToList() ;
 				}

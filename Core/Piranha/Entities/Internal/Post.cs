@@ -167,18 +167,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="post_last_modified")]
 		public override DateTime LastModified { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="post_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="post_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Properties

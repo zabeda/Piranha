@@ -157,18 +157,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="page_last_published")]
 		public DateTime LastPublished { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="page_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="page_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Properties

@@ -26,7 +26,6 @@ namespace Piranha.Entities.Maps
 			Property(c => c.Created).HasColumnName("comment_created").IsRequired() ;
 			Property(c => c.Updated).HasColumnName("comment_updated").IsRequired() ;
 			Property(c => c.CreatedById).HasColumnName("comment_created_by") ;
-			Property(c => c.UpdatedById).HasColumnName("comment_updated_by") ;
 
 			Ignore(c => c.Status) ;
 			Ignore(c => c.StatusName) ;

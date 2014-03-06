@@ -65,12 +65,6 @@ namespace Piranha.Models
 
 		[Column(Name="permalink_updated")]
 		public override DateTime Updated { get ; set ; }
-
-		[Column(Name="permalink_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		[Column(Name="permalink_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Cache

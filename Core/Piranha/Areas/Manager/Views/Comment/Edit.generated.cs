@@ -340,73 +340,19 @@ WriteLiteral(">\r\n                <li>");
             
             #line default
             #line hidden
-WriteLiteral("\r\n");
+WriteLiteral("\r\n                    <p>");
 
             
             #line 51 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-                
-            
-            #line default
-            #line hidden
-            
-            #line 51 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-                 if (Model.CreatedById.HasValue) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    <p><a");
-
-WriteAttribute("href", Tuple.Create(" href=\"", 2105), Tuple.Create("\"", 2182)
-            
-            #line 52 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 2112), Tuple.Create<System.Object, System.Int32>(Url.Action("user", "settings", new { @id = Model.CreatedById.Value })
-            
-            #line default
-            #line hidden
-, 2112), false)
-);
-
-WriteLiteral(">");
-
-            
-            #line 52 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-                                                                                                   Write(Model.AuthorName);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</a></p>\r\n");
-
-            
-            #line 53 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-                } else {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                    <p>");
-
-            
-            #line 54 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
                   Write(Model.AuthorName);
 
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n");
+WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 
             
-            #line 55 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-                }
-
-            
-            #line default
-            #line hidden
-WriteLiteral("                </li>\r\n                <li>");
-
-            
-            #line 57 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
+            #line 53 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
                Write(Html.LabelFor(m => m.AuthorEmail));
 
             
@@ -414,21 +360,21 @@ WriteLiteral("                </li>\r\n                <li>");
             #line hidden
 WriteLiteral("\r\n                    <p><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2406), Tuple.Create("\"", 2438)
-, Tuple.Create(Tuple.Create("", 2413), Tuple.Create("mailto:", 2413), true)
+WriteAttribute("href", Tuple.Create(" href=\"", 2178), Tuple.Create("\"", 2210)
+, Tuple.Create(Tuple.Create("", 2185), Tuple.Create("mailto:", 2185), true)
             
-            #line 58 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 2420), Tuple.Create<System.Object, System.Int32>(Model.AuthorEmail
+            #line 54 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 2192), Tuple.Create<System.Object, System.Int32>(Model.AuthorEmail
             
             #line default
             #line hidden
-, 2420), false)
+, 2192), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 58 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
+            #line 54 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
                                                       Write(Model.AuthorEmail);
 
             
@@ -438,7 +384,7 @@ WriteLiteral("</a></p>\r\n                </li>\r\n            </ul>\r\n        
 "/div>\r\n");
 
             
-            #line 64 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Comment\Edit.cshtml"
    Html.EndForm() ; 
             
             #line default

@@ -71,7 +71,7 @@ public static class DataExtensions
 	/// <param name="internalId">The internal id</param>
 	/// <returns>The extension</returns>
 	public static Extension ByInternalId(this IList<Extension> extensions, string internalId) {
-		return extensions.Where(e => Piranha.Extend.ExtensionManager.Current.GetInternalIdByType(e.Type) == internalId).SingleOrDefault() ;
+		return extensions.Where(e => Piranha.App.Instance.ExtensionManager.GetInternalIdByType(e.Type) == internalId).SingleOrDefault() ;
 	}
 
 	/// <summary>

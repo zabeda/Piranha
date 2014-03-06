@@ -121,18 +121,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="pagetemplate_updated")]
 		public override DateTime Updated { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="pagetemplate_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="pagetemplate_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Properties
@@ -142,7 +130,7 @@ namespace Piranha.Models
 		public bool IsLocked { 
 			get { 
 				if (!String.IsNullOrEmpty(Type))
-					return Extend.ExtensionManager.Current.PageTypes.Where(pt => pt.GetType().FullName == Type).SingleOrDefault() != null ;
+					return App.Instance.ExtensionManager.PageTypes.Where(pt => pt.GetType().FullName == Type).SingleOrDefault() != null ;
 				return false ;
 			} 
 		}

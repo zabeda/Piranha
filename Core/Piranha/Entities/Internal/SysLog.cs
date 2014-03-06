@@ -52,16 +52,24 @@ namespace Piranha.Models
 		public override DateTime Updated { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the id of the user who created the log.
+		/// Gets/sets the optional id of logged in user.
 		/// </summary>
 		[Column(Name="syslog_created_by")]
-		public override Guid CreatedBy { get ; set ; }
+		public string CreatedBy { get ; set ; }	
+		#endregion
 
+		#region Events
 		/// <summary>
-		/// Gets/sets the id of the user who last updated the log.
+		/// Saves the syslog.
 		/// </summary>
-		[Column(Name="syslog_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
+		/// <param name="tx">The optional transaction</param>
+		/// <returns>If the operation was successfull</returns>
+		public override bool Save(System.Data.IDbTransaction tx = null) {
+			if (App.Instance.UserProvider.IsAuthenticated) {
+				CreatedBy = App.Instance.UserProvider.UserId.ToString();
+			}
+			return base.Save(tx);
+		}
 		#endregion
 	}
 }

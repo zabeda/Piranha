@@ -29,8 +29,6 @@ namespace Piranha.Entities.Maps
 			Property(u => u.LockedUntil).HasColumnName("sysuser_locked_until") ;
 			Property(u => u.Created).HasColumnName("sysuser_created") ;
 			Property(u => u.Updated).HasColumnName("sysuser_updated") ;
-			Property(u => u.CreatedById).HasColumnName("sysuser_created_by") ;
-			Property(u => u.UpdatedById).HasColumnName("sysuser_updated_by") ;
 	
 			HasOptional(u => u.Group) ;
 			HasMany(u => u.Extensions).WithRequired().HasForeignKey(e => e.ParentId) ;

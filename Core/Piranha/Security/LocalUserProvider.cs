@@ -20,13 +20,13 @@ namespace Piranha.Security
 		/// </summary>
 		public bool IsAuthenticated {
 			get {
-				if (HttpContext.Current.User.Identity.IsAuthenticated) {
-					try {
+				try {
+					if (HttpContext.Current.User.Identity.IsAuthenticated) {
 						// Check if this user has a Guid id.
 						var id = new Guid(HttpContext.Current.User.Identity.Name);
 						return true;
-					} catch { }
-				}
+					}
+				} catch { }
 				return false;
 			}
 		}

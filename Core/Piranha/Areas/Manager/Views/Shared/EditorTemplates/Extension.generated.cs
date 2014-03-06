@@ -58,25 +58,25 @@ namespace Piranha.Areas.Manager.Views.Shared.EditorTemplates
             #line hidden
 WriteLiteral("\r\n<div");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 483), Tuple.Create("\"", 559)
+WriteAttribute("id", Tuple.Create(" id=\"", 483), Tuple.Create("\"", 572)
 , Tuple.Create(Tuple.Create("", 488), Tuple.Create("pnl-", 488), true)
             
             #line 11 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-, Tuple.Create(Tuple.Create("", 492), Tuple.Create<System.Object, System.Int32>(ExtensionManager.Current.GetInternalIdByType(Model.Type).ToLower()
+, Tuple.Create(Tuple.Create("", 492), Tuple.Create<System.Object, System.Int32>(Piranha.App.Instance.ExtensionManager.GetInternalIdByType(Model.Type).ToLower()
             
             #line default
             #line hidden
 , 492), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 560), Tuple.Create("\"", 602)
+WriteAttribute("class", Tuple.Create(" class=\"", 573), Tuple.Create("\"", 615)
             
             #line 11 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-           , Tuple.Create(Tuple.Create("", 568), Tuple.Create<System.Object, System.Int32>(!compat ? "main hidden" : "box"
+                        , Tuple.Create(Tuple.Create("", 581), Tuple.Create<System.Object, System.Int32>(!compat ? "main hidden" : "box"
             
             #line default
             #line hidden
-, 568), false)
+, 581), false)
 );
 
 WriteLiteral(">\r\n    <div");
@@ -87,12 +87,12 @@ WriteLiteral("><h2>");
 
             
             #line 12 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-                      Write(Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type));
+                      Write(Piranha.App.Instance);
 
             
             #line default
             #line hidden
-WriteLiteral("</h2></div>\r\n    <div");
+WriteLiteral("..ExtensionManager.GetNameByType(Model.Type)</h2></div>\r\n    <div");
 
 WriteLiteral(" class=\"inner\"");
 
@@ -168,17 +168,6 @@ WriteLiteral("        ");
 
             
             #line 20 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
-   Write(Html.HiddenFor(m => m.CreatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("        ");
-
-            
-            #line 21 "..\..\Areas\Manager\Views\Shared\EditorTemplates\Extension.cshtml"
    Write(Html.PartialFor(view, m => m.Body));
 
             

@@ -72,12 +72,12 @@ namespace Piranha.Areas.Manager.Models
 			var m = new CommentListModel() ;
 
 			using (var db = new DataContext()) {
-				m.Comments = db.Comments.Include("CreatedBy").Select(c => new CommentModel() {
+				m.Comments = db.Comments.Select(c => new CommentModel() {
 					Id = c.Id,
 					Title = !String.IsNullOrEmpty(c.Title) ? c.Title : c.Body.Substring(0, 32) + "...",
 					Created = c.Created,
-					AuthorName = c.CreatedBy != null ? c.CreatedBy.Firstname + " " + c.CreatedBy.Surname : c.AuthorName,
-					AuthorEmail = c.CreatedBy != null ? c.CreatedBy.Email : c.AuthorEmail,
+					AuthorName = c.AuthorName,
+					AuthorEmail = c.AuthorEmail,
 					Status = (Comment.CommentStatus)c.InternalStatus,
 				}).OrderByDescending(c => c.Created).ToList() ;
 			}
@@ -92,7 +92,6 @@ namespace Piranha.Areas.Manager.Models
 		public static List<Comment> GetCommentList(Guid parentid) {
 			using (var db = new DataContext()) {
 				return db.Comments.
-					Include("CreatedBy").
 					Where(c => c.ParentId == parentid && c.ParentIsDraft == false).
 					OrderByDescending(c => c.Created).ToList() ;
 			}

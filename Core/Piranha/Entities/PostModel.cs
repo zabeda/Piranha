@@ -89,8 +89,8 @@ namespace Piranha.Entities
 			}
 			// Get Extensions
 			foreach (var ext in post.Extensions) {
-				if (ExtensionManager.Current.HasType(ext.Type))
-					((IDictionary<string, object>)m.Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = ext.Body ;
+				if (App.Instance.ExtensionManager.HasType(ext.Type))
+					((IDictionary<string, object>)m.Extensions)[App.Instance.ExtensionManager.GetInternalIdByType(ext.Type)] = ext.Body ;
 			}
 			// Get Media
 			var media = db.Media.Where(med => post.Attachments.Contains(med.Id)).ToList() ;

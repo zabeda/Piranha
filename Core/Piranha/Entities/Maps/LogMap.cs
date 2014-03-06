@@ -20,11 +20,6 @@ namespace Piranha.Entities.Maps
 			Property(l => l.Action).HasColumnName("syslog_action").IsRequired().HasMaxLength(64) ;
 			Property(l => l.Created).HasColumnName("syslog_created") ;
 			Property(l => l.Updated).HasColumnName("syslog_updated") ;
-			Property(l => l.CreatedById).HasColumnName("syslog_created_by") ;
-			Property(l => l.UpdatedById).HasColumnName("syslog_updated_by") ;
-
-			HasRequired(l => l.CreatedBy) ;
-			HasRequired(l => l.UpdatedBy) ;
 		}
 	}
 }

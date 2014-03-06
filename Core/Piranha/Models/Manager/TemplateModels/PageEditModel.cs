@@ -74,8 +74,8 @@ namespace Piranha.Models.Manager.TemplateModels
 			RegionTypes = new List<dynamic>() ;
 
 			if (loadRegionTypes) {
-				ExtensionManager.Current.GetByExtensionType(ExtensionType.Region).OrderBy(e => e.Metadata.Name).Each((i, r) =>
-					RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName })) ;
+				App.Instance.ExtensionManager.GetByExtensionType(ExtensionType.Region).OrderBy(e => e.Metadata.Name).Each((i, r) =>
+					RegionTypes.Add(new { Name = App.Instance.ExtensionManager.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName })) ;
 				RegionTypes.Insert(0, new { Name = "", Type = "" }) ;
 			}	
 		}

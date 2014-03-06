@@ -21,11 +21,6 @@ namespace Piranha.Entities.Maps
 			Property(p => p.IsLocked).HasColumnName("sysparam_locked") ;
 			Property(p => p.Created).HasColumnName("sysparam_created") ;
 			Property(p => p.Updated).HasColumnName("sysparam_updated") ;
-			Property(p => p.CreatedById).HasColumnName("sysparam_created_by") ;
-			Property(p => p.UpdatedById).HasColumnName("sysparam_updated_by") ;
-
-			HasOptional(p => p.CreatedBy) ;
-			HasOptional(p => p.UpdatedBy) ;
 		}
 	}
 }

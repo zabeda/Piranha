@@ -24,11 +24,6 @@ namespace Piranha.Entities.Maps
 			Property(s => s.HostNames).HasColumnName("sitetree_hostnames") ;
 			Property(s => s.Created).HasColumnName("sitetree_created") ;
 			Property(s => s.Updated).HasColumnName("sitetree_updated") ;
-			Property(s => s.CreatedById).HasColumnName("sitetree_created_by") ;
-			Property(s => s.UpdatedById).HasColumnName("sitetree_updated_by") ;
-
-			HasRequired(s => s.CreatedBy) ;
-			HasRequired(s => s.UpdatedBy) ;
 		}
 	}
 }

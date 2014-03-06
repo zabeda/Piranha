@@ -169,8 +169,6 @@ namespace Piranha.Areas.Manager.Controllers
 							Login = m.UserLogin,
 							Email = m.UserEmail,
 							GroupId = new Guid("7c536b66-d292-4369-8f37-948b32229b83"),
-							CreatedBy = new Guid("ca19d4e7-92f0-42f6-926a-68413bbdafbc"),
-							UpdatedBy = new Guid("ca19d4e7-92f0-42f6-926a-68413bbdafbc"),
 							Created = DateTime.Now,
 							Updated = DateTime.Now
 						} ;

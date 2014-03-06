@@ -105,11 +105,11 @@ namespace Piranha.Entities
 				var js = new JavaScriptSerializer() ;
 
 				if (!String.IsNullOrEmpty(InternalBody)) {
-					if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(RegionTemplate.Type)))
-						return ExtensionManager.Current.CreateInstance(RegionTemplate.Type, InternalBody) ;
-					return (IExtension)js.Deserialize(InternalBody, ExtensionManager.Current.GetType(RegionTemplate.Type)) ;
+					if (typeof(HtmlString).IsAssignableFrom(App.Instance.ExtensionManager.GetType(RegionTemplate.Type)))
+						return App.Instance.ExtensionManager.CreateInstance(RegionTemplate.Type, InternalBody) ;
+					return (IExtension)js.Deserialize(InternalBody, App.Instance.ExtensionManager.GetType(RegionTemplate.Type)) ;
 				}
-				return ExtensionManager.Current.CreateInstance(RegionTemplate.Type) ;
+				return App.Instance.ExtensionManager.CreateInstance(RegionTemplate.Type) ;
 			}
 			return null;
 		}
@@ -128,7 +128,7 @@ namespace Piranha.Entities
 				var js = new JavaScriptSerializer() ;
 				body = data ;
 
-				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(RegionTemplate.Type)))
+				if (typeof(HtmlString).IsAssignableFrom(App.Instance.ExtensionManager.GetType(RegionTemplate.Type)))
 					InternalBody = ((HtmlString)data).ToString() ;
 				else InternalBody = js.Serialize(data) ;
 			}
@@ -143,7 +143,7 @@ namespace Piranha.Entities
 			if (!String.IsNullOrEmpty(RegionTemplate.Type)) {
 				var js = new JavaScriptSerializer() ;
 
-				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(RegionTemplate.Type)))
+				if (typeof(HtmlString).IsAssignableFrom(App.Instance.ExtensionManager.GetType(RegionTemplate.Type)))
 					InternalBody = ((HtmlString)Body).ToString() ;
 				else InternalBody = js.Serialize(Body) ;
 			}

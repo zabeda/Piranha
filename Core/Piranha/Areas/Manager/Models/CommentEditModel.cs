@@ -60,7 +60,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Gets/sets the optional id of the sysuser who created the comment.
 		/// </summary>
-		public Guid? CreatedById { get ; set ; }
+		public string CreatedById { get ; set ; }
 
 		/// <summary>
 		/// Gets/sets the available statuses.
@@ -84,15 +84,15 @@ namespace Piranha.Areas.Manager.Models
 		/// <returns></returns>
 		public static CommentEditModel GetById(Guid id) {
 			using (var db = new DataContext()) {
-				return db.Comments.Where(c => c.Id == id).Include(c => c.CreatedBy).Select(c => 
+				return db.Comments.Where(c => c.Id == id).Select(c => 
 					new CommentEditModel() {
 						Id = c.Id,
 						ParentId = c.ParentId,
 						Status = (Comment.CommentStatus)c.InternalStatus,
 						Title = c.Title,
 						Body = c.Body,
-						AuthorName = c.CreatedBy != null ? c.CreatedBy.Firstname + " " + c.CreatedBy.Surname : c.AuthorName,
-						AuthorEmail = c.CreatedBy != null ? c.CreatedBy.Email : c.AuthorEmail,
+						AuthorName = c.AuthorName,
+						AuthorEmail = c.AuthorEmail,
 						CreatedById = c.CreatedById
 					}).SingleOrDefault() ;
 			}

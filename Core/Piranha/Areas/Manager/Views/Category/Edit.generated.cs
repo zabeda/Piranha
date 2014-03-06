@@ -203,15 +203,6 @@ WriteLiteral("\r\n");
 
             
             #line 28 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
-Write(Html.HiddenFor(m => m.Category.CreatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-            
-            #line 29 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.IsNew));
 
             
@@ -220,7 +211,7 @@ Write(Html.HiddenFor(m => m.Permalink.IsNew));
 WriteLiteral("\r\n");
 
             
-            #line 30 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 29 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Id));
 
             
@@ -229,7 +220,7 @@ Write(Html.HiddenFor(m => m.Permalink.Id));
 WriteLiteral("\r\n");
 
             
-            #line 31 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 30 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Type));
 
             
@@ -238,17 +229,8 @@ Write(Html.HiddenFor(m => m.Permalink.Type));
 WriteLiteral("\r\n");
 
             
-            #line 32 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 31 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Created));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-            
-            #line 33 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
-Write(Html.HiddenFor(m => m.Permalink.CreatedBy));
 
             
             #line default
@@ -268,7 +250,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 36 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 34 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                           Write(Piranha.Resources.Global.Information);
 
             
@@ -287,7 +269,7 @@ WriteLiteral(">\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 38 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                Write(Html.LabelFor(m => m.Category.Name));
 
             
@@ -302,7 +284,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 42 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 40 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                    Write(Html.TextBoxFor(m => m.Category.Name));
 
             
@@ -313,7 +295,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 43 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                Write(Html.ValidationMessageFor(m => m.Category.Name));
 
             
@@ -328,7 +310,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 46 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 44 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                Write(Html.LabelFor(m => m.Category.Permalink));
 
             
@@ -337,13 +319,13 @@ WriteLiteral("                    ");
 WriteLiteral("\r\n");
 
             
-            #line 47 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                 	
             
             #line default
             #line hidden
             
-            #line 47 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                      if (!Model.Category.IsNew) {
 
             
@@ -352,14 +334,14 @@ WriteLiteral("\r\n");
 WriteLiteral("                    <p>");
 
             
-            #line 48 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                   Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
 
             
             #line default
             #line hidden
             
-            #line 48 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                                                            Write(Url.GetPermalink(Model.Category.Permalink).ToLower());
 
             
@@ -368,7 +350,7 @@ WriteLiteral("                    <p>");
 WriteLiteral("</p>\r\n");
 
             
-            #line 49 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 47 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                     } else {
 
             
@@ -377,7 +359,7 @@ WriteLiteral("</p>\r\n");
 WriteLiteral("                    <p><i>");
 
             
-            #line 50 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                      Write(Piranha.Resources.Category.PermalinkDescription);
 
             
@@ -386,7 +368,7 @@ WriteLiteral("                    <p><i>");
 WriteLiteral("</i></p>\r\n");
 
             
-            #line 51 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 49 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                     }
 
             
@@ -401,7 +383,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 53 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 51 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                    Write(Html.TextBoxFor(m => m.Permalink.Name));
 
             
@@ -416,7 +398,7 @@ WriteLiteral("></a>\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 57 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 55 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                Write(Html.LabelFor(m => m.Category.Description));
 
             
@@ -431,7 +413,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 59 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 57 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                    Write(Html.TextAreaFor(m => m.Category.Description));
 
             
@@ -442,7 +424,7 @@ WriteLiteral("</div>\r\n                </li>\r\n                <li>\r\n");
 WriteLiteral("                    ");
 
             
-            #line 62 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 60 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                Write(Html.LabelFor(m => m.Category.ParentId));
 
             
@@ -457,7 +439,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 64 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 62 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                    Write(Html.DropDownListFor(m => m.Category.ParentId, Model.Categories));
 
             
@@ -466,27 +448,27 @@ WriteLiteral("                        ");
 WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 69 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 67 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 69 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 67 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
      if (Model.Extensions.Count > 0) {
         
             
             #line default
             #line hidden
             
-            #line 70 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
    Write(Html.EditorFor(m => m.Extensions));
 
             
             #line default
             #line hidden
             
-            #line 70 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
                                           
     }
 
@@ -496,7 +478,7 @@ WriteLiteral("</div>\r\n                </li>\r\n            </ul>\r\n        </
 WriteLiteral("</div>\r\n");
 
             
-            #line 73 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
+            #line 71 "..\..\Areas\Manager\Views\Category\Edit.cshtml"
    Html.EndForm() ; 
             
             #line default

@@ -28,11 +28,6 @@ namespace Piranha.Entities.Maps
 			Property(t => t.Type).HasColumnName("posttemplate_type").HasMaxLength(255) ;
 			Property(t => t.Created).HasColumnName("posttemplate_created") ;
 			Property(t => t.Updated).HasColumnName("posttemplate_updated") ;
-			Property(t => t.CreatedById).HasColumnName("posttemplate_created_by") ;
-			Property(t => t.UpdatedById).HasColumnName("posttemplate_updated_by") ;
-
-			HasRequired(t => t.CreatedBy) ;
-			HasRequired(t => t.UpdatedBy) ;
 		}
 	}
 }

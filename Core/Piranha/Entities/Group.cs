@@ -42,16 +42,6 @@ namespace Piranha.Entities
 		/// Gets/sets the date the group was last updated.
 		/// </summary>
 		public DateTime Updated { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the id of the user who initially created the group.
-		/// </summary>
-		public Guid? CreatedById { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the id of the user who last updated the group.
-		/// </summary>
-		public Guid? UpdatedById { get ; set ; }
 		#endregion
 
 		#region Navigation properties
@@ -74,16 +64,6 @@ namespace Piranha.Entities
 		/// Gets/sets the currently available extensions.
 		/// </summary>
 		public IList<Extension> Extensions { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user who initially created the group.
-		/// </summary>
-		public User CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user who last updated the group.
-		/// </summary>
-		public User UpdatedBy { get ; set ; }
 		#endregion
 
 		/// <summary>

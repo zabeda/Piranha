@@ -88,7 +88,8 @@ namespace Piranha.Models
 					var log = new SysLog() {
 						ParentId = Id,
 						ParentType = GetRecordName(),
-						Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE")
+						Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE"),
+						CreatedBy = App.Instance.UserProvider.UserId.ToString()
 					} ;
 					log.Save(tx) ;
 				}
@@ -141,13 +142,13 @@ namespace Piranha.Models
 				List<Extension> ret = null ;
 
 				if (Id != Guid.Empty) {
-					ret = Extend.ExtensionManager.Current.GetByTypeAndEntity(ExtensionType, Id, draft) ;
+					ret = App.Instance.ExtensionManager.GetByTypeAndEntity(ExtensionType, Id, draft) ;
 				} else {
-					ret = Extend.ExtensionManager.Current.GetByType(ExtensionType, draft) ;
+					ret = App.Instance.ExtensionManager.GetByType(ExtensionType, draft) ;
 				}
 
 				foreach (var ext in ret)
-					if (Extend.ExtensionManager.Current.HasType(ext.Type)) {
+					if (App.Instance.ExtensionManager.HasType(ext.Type)) {
 						if (!manager)
 							ext.Body.Init(this) ;
 						else ext.Body.InitManager(this) ;

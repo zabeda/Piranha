@@ -75,16 +75,6 @@ namespace Piranha.Models
 		/// Gets the last published date.
 		/// </summary>
 		DateTime LastPublished { get ; }
-
-		/// <summary>
-		/// Gets the user id that created the record.
-		/// </summary>
-		Guid CreatedBy { get ; }
-
-		/// <summary>
-		/// Gets the user id that created the record.
-		/// </summary>
-		Guid UpdatedBy { get ; }
 		#endregion
 
 		#region Properties

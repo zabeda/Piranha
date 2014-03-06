@@ -8,8 +8,8 @@
     var menu = Piranha.WebPages.Manager.GetActiveMenuItem() ;
     var compat = menu != null && (menu.InternalId == "Categories" || menu.InternalId == "Media" || menu.InternalId == "Users") ;
 }
-<div id="pnl-@ExtensionManager.Current.GetInternalIdByType(Model.Type).ToLower()" class="@(!compat ? "main hidden" : "box")">
-    <div class="title"><h2>@Piranha.Extend.ExtensionManager.Current.GetNameByType(Model.Type)</h2></div>
+<div id="pnl-@Piranha.App.Instance.ExtensionManager.GetInternalIdByType(Model.Type).ToLower()" class="@(!compat ? "main hidden" : "box")">
+    <div class="title"><h2>@Piranha.App.Instance..ExtensionManager.GetNameByType(Model.Type)</h2></div>
     <div class="inner">
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.IsDraft)
@@ -17,7 +17,6 @@
         @Html.HiddenFor(m => m.ParentId)
         @Html.HiddenFor(m => m.Type)
         @Html.HiddenFor(m => m.Created)
-        @Html.HiddenFor(m => m.CreatedBy)
         @Html.PartialFor(view, m => m.Body)
     </div>
 </div>

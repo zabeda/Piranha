@@ -31,8 +31,6 @@ namespace Piranha.Entities.Maps
 			Property(p => p.Published).HasColumnName("post_published") ;
 			Property(p => p.LastPublished).HasColumnName("post_last_published") ;
 			Property(p => p.LastModified).HasColumnName("post_last_modified") ;
-			Property(p => p.CreatedById).HasColumnName("post_created_by") ;
-			Property(p => p.UpdatedById).HasColumnName("post_updated_by") ;
 
 			HasRequired(p => p.Template) ;
 			HasRequired(p => p.Permalink) ;
@@ -44,8 +42,6 @@ namespace Piranha.Entities.Maps
 			HasMany(p => p.Properties).WithRequired().HasForeignKey(pr => new { pr.ParentId, pr.IsDraft }) ;
 			HasMany(p => p.Extensions).WithRequired().HasForeignKey(e => new { e.ParentId, e.IsDraft }) ;
 			HasMany(p => p.Comments).WithRequired().HasForeignKey(c => new { c.ParentId, c.ParentIsDraft }) ;
-			HasRequired(p => p.CreatedBy) ;
-			HasRequired(p => p.UpdatedBy) ;
 		}
 	}
 }

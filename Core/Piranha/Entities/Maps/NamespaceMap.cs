@@ -20,12 +20,8 @@ namespace Piranha.Entities.Maps
 			Property(n => n.Description).HasColumnName("namespace_description").HasMaxLength(255) ;
 			Property(n => n.Created).HasColumnName("namespace_created") ;
 			Property(n => n.Updated).HasColumnName("namespace_updated") ;
-			Property(n => n.CreatedById).HasColumnName("namespace_created_by") ;
-			Property(n => n.UpdatedById).HasColumnName("namespace_updated_by") ;
 
 			HasMany(n => n.Permalinks).WithRequired(p => p.Namespace) ;
-			HasRequired(n => n.CreatedBy) ;
-			HasRequired(n => n.UpdatedBy) ;
 		}
 	}
 }

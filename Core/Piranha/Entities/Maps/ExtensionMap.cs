@@ -21,13 +21,8 @@ namespace Piranha.Entities.Maps
 			Property(e => e.Type).HasColumnName("extension_type").IsRequired().HasMaxLength(255) ;
 			Property(e => e.Created).HasColumnName("extension_created") ;
 			Property(e => e.Updated).HasColumnName("extension_updated") ;
-			Property(e => e.CreatedById).HasColumnName("extension_created_by") ;
-			Property(e => e.UpdatedById).HasColumnName("extension_updated_by") ;
 
 			Ignore(e => e.Body) ;
-
-			HasRequired(e => e.CreatedBy) ;
-			HasRequired(e => e.UpdatedBy) ;
 		}
 	}
 }

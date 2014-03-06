@@ -68,18 +68,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="sysparam_updated")]
 		public override DateTime Updated { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the created by id
-		/// </summary>
-		[Column(Name="sysparam_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the updated by id.
-		/// </summary>
-		[Column(Name="sysparam_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Members

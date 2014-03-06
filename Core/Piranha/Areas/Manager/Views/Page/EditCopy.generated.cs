@@ -731,28 +731,6 @@ WriteLiteral("    ");
 
             
             #line 151 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-Write(Html.HiddenFor(m => m.Page.CreatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 152 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-Write(Html.HiddenFor(m => m.Page.UpdatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-WriteLiteral("    ");
-
-            
-            #line 153 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.IsNew));
 
             
@@ -763,7 +741,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 154 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 152 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Id));
 
             
@@ -774,7 +752,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 155 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 153 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.NamespaceId));
 
             
@@ -785,7 +763,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 156 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 154 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Type));
 
             
@@ -796,7 +774,7 @@ WriteLiteral("\r\n");
 WriteLiteral("    ");
 
             
-            #line 157 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 155 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
 Write(Html.HiddenFor(m => m.Permalink.Created));
 
             
@@ -804,39 +782,28 @@ Write(Html.HiddenFor(m => m.Permalink.Created));
             #line hidden
 WriteLiteral("\r\n");
 
-WriteLiteral("    ");
-
             
-            #line 158 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-Write(Html.HiddenFor(m => m.Permalink.CreatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n");
-
-            
-            #line 159 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 156 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 159 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 156 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
      if (!App.Instance.IsMvc) {
     
             
             #line default
             #line hidden
             
-            #line 160 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 157 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
 Write(Html.HiddenFor(m => m.Page.PageView));
 
             
             #line default
             #line hidden
             
-            #line 160 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 157 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                          
     }
 
@@ -859,14 +826,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"org_parentid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7734), Tuple.Create("\"", 7762)
+WriteAttribute("value", Tuple.Create(" value=\"", 7597), Tuple.Create("\"", 7625)
             
-            #line 163 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 7742), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
+            #line 160 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+, Tuple.Create(Tuple.Create("", 7605), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
             
             #line default
             #line hidden
-, 7742), false)
+, 7605), false)
 );
 
 WriteLiteral(" />\r\n</div>\r\n<div");
@@ -888,7 +855,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 168 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 165 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                               Write(Piranha.Resources.Global.Information);
 
             
@@ -905,7 +872,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                    <li>");
 
             
-            #line 171 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 168 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                    Write(Html.LabelFor(m => m.Page.Title));
 
             
@@ -920,7 +887,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 173 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 170 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                        Write(Html.TextBoxFor(m => m.Page.Title));
 
             
@@ -931,7 +898,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 174 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 171 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                    Write(Html.ValidationMessageFor(m => m.Page.Title));
 
             
@@ -940,7 +907,7 @@ WriteLiteral("                        ");
 WriteLiteral("\r\n                    </li>\r\n                    <li>");
 
             
-            #line 176 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 173 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                    Write(Html.LabelFor(m => m.Page.NavigationTitle));
 
             
@@ -955,7 +922,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 178 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 175 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                        Write(Html.TextBoxFor(m => m.Page.NavigationTitle, new { @placeholder = Piranha.Resources.Global.Optional }));
 
             
@@ -966,7 +933,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 179 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 176 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                    Write(Html.ValidationMessageFor(m => m.Page.NavigationTitle));
 
             
@@ -979,7 +946,7 @@ WriteLiteral(" class=\"protected\"");
 WriteLiteral(">");
 
             
-            #line 181 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 178 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                      Write(Html.LabelFor(m => m.Page.Permalink));
 
             
@@ -988,13 +955,13 @@ WriteLiteral(">");
 WriteLiteral("\r\n");
 
             
-            #line 182 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 179 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 182 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 179 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                          if (Model.Permalink != null && !String.IsNullOrEmpty(Model.Permalink.Name)) {
 
             
@@ -1003,14 +970,14 @@ WriteLiteral("\r\n");
 WriteLiteral("                        <p>");
 
             
-            #line 183 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 180 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                       Write(Piranha.WebPages.WebPiranha.GetSiteUrl());
 
             
             #line default
             #line hidden
             
-            #line 183 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 180 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                Write(Url.GetPermalink(Model.Permalink.Name));
 
             
@@ -1019,7 +986,7 @@ WriteLiteral("                        <p>");
 WriteLiteral("</p>\r\n");
 
             
-            #line 184 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 181 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         } else {
 
             
@@ -1028,7 +995,7 @@ WriteLiteral("</p>\r\n");
 WriteLiteral("                        <p><i>");
 
             
-            #line 185 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 182 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                          Write(Piranha.Resources.Page.PermalinkDescription);
 
             
@@ -1037,7 +1004,7 @@ WriteLiteral("                        <p><i>");
 WriteLiteral("</i></p>\r\n");
 
             
-            #line 186 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 183 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         }
 
             
@@ -1052,7 +1019,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 188 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 185 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                        Write(Html.TextBoxFor(m => m.Permalink.Name));
 
             
@@ -1063,7 +1030,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                        ");
 
             
-            #line 189 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 186 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                    Write(Html.ValidationMessageFor(m => m.Permalink));
 
             
@@ -1077,7 +1044,7 @@ WriteLiteral("></a>\r\n                    </li>\r\n                    <li>\r\n
 "   <label>");
 
             
-            #line 193 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 190 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                           Write(Piranha.Resources.Global.Placement);
 
             
@@ -1092,13 +1059,13 @@ WriteLiteral(" id=\"btnMove\"");
 WriteLiteral(">Move</button>\r\n");
 
             
-            #line 195 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 192 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 195 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 192 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                          if (!Model.Page.IsStartpage) {
 
             
@@ -1107,7 +1074,7 @@ WriteLiteral(">Move</button>\r\n");
 WriteLiteral("                        <p>");
 
             
-            #line 196 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 193 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                       Write(Piranha.Resources.Global.PlacementPage);
 
             
@@ -1116,7 +1083,7 @@ WriteLiteral("                        <p>");
 WriteLiteral(" <strong>");
 
             
-            #line 196 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 193 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                        Write(Model.Page.Seqno > 1 ? @Piranha.Resources.Global.PlacementAfter : @Piranha.Resources.Global.PlacementBelow);
 
             
@@ -1125,7 +1092,7 @@ WriteLiteral(" <strong>");
 WriteLiteral("</strong> &quot;");
 
             
-            #line 196 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 193 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                                                                                                                                                    Write(Model.PlaceRef);
 
             
@@ -1134,7 +1101,7 @@ WriteLiteral("</strong> &quot;");
 WriteLiteral("&quot;</p>\r\n");
 
             
-            #line 197 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 194 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         } else {
 
             
@@ -1143,7 +1110,7 @@ WriteLiteral("&quot;</p>\r\n");
 WriteLiteral("                        <p>");
 
             
-            #line 198 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 195 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                       Write(Piranha.Resources.Global.PlacementStart);
 
             
@@ -1152,7 +1119,7 @@ WriteLiteral("                        <p>");
 WriteLiteral("</p>\r\n");
 
             
-            #line 199 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 196 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         }
 
             
@@ -1169,7 +1136,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                            ");
 
             
-            #line 201 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 198 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                        Write(Html.LabelFor(m => m.Page.ParentId));
 
             
@@ -1188,13 +1155,13 @@ WriteLiteral(" name=\"Page.ParentId\"");
 WriteLiteral(">\r\n");
 
             
-            #line 204 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 201 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 204 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 201 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                      foreach (var p in Model.Parents) {
 
             
@@ -1202,18 +1169,18 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10332), Tuple.Create("\"", 10345)
+WriteAttribute("value", Tuple.Create(" value=\"", 10195), Tuple.Create("\"", 10208)
             
-            #line 205 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 10340), Tuple.Create<System.Object, System.Int32>(p.Id
+            #line 202 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+, Tuple.Create(Tuple.Create("", 10203), Tuple.Create<System.Object, System.Int32>(p.Id
             
             #line default
             #line hidden
-, 10340), false)
+, 10203), false)
 );
 
             
-            #line 205 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 202 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                      Write(p.IsSelected ? " selected=selected" : "");
 
             
@@ -1224,7 +1191,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 206 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 203 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.Raw(p.Title));
 
             
@@ -1233,7 +1200,7 @@ WriteLiteral("                                        ");
 WriteLiteral("</option>\r\n");
 
             
-            #line 207 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 204 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                     }
 
             
@@ -1244,7 +1211,7 @@ WriteLiteral("                                </select>\r\n                     
 WriteLiteral("                            ");
 
             
-            #line 210 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 207 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                        Write(Html.LabelFor(m => m.Page.Seqno));
 
             
@@ -1265,13 +1232,13 @@ WriteLiteral(" name=\"Page.Seqno\"");
 WriteLiteral(">\r\n");
 
             
-            #line 213 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 210 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 213 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 210 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                  foreach (var s in Model.Siblings) {
 
             
@@ -1279,18 +1246,18 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10891), Tuple.Create("\"", 10907)
+WriteAttribute("value", Tuple.Create(" value=\"", 10754), Tuple.Create("\"", 10770)
             
-            #line 214 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 10899), Tuple.Create<System.Object, System.Int32>(s.Seqno
+            #line 211 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+, Tuple.Create(Tuple.Create("", 10762), Tuple.Create<System.Object, System.Int32>(s.Seqno
             
             #line default
             #line hidden
-, 10899), false)
+, 10762), false)
 );
 
             
-            #line 214 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 211 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                     Write(s.IsSelected ? " selected=selected" : "");
 
             
@@ -1299,7 +1266,7 @@ WriteAttribute("value", Tuple.Create(" value=\"", 10891), Tuple.Create("\"", 109
 WriteLiteral(">");
 
             
-            #line 214 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 211 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                                                Write(s.Title);
 
             
@@ -1308,7 +1275,7 @@ WriteLiteral(">");
 WriteLiteral("</option>\r\n");
 
             
-            #line 215 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 212 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                 }
 
             
@@ -1331,7 +1298,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 226 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 223 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                               Write(Model.Template.Name);
 
             
@@ -1350,7 +1317,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 229 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 226 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                Write(Model.Template.Preview);
 
             
@@ -1382,7 +1349,7 @@ WriteLiteral(" data-id=\"pnl-settings\"");
 WriteLiteral(">");
 
             
-            #line 242 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 239 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                                           Write(Piranha.Resources.Global.Settings);
 
             
@@ -1391,13 +1358,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 243 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 240 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                             
             
             #line default
             #line hidden
             
-            #line 243 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 240 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                              if (Model.EnableComments) {
 
             
@@ -1410,13 +1377,13 @@ WriteLiteral(" class=\"btn-comments\"");
 WriteLiteral(">\r\n");
 
             
-            #line 245 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 242 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                 
             
             #line default
             #line hidden
             
-            #line 245 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 242 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                   
                                     var count = Model.Comments.Where(c => c.Status == Piranha.Entities.Comment.CommentStatus.New).Count() ;
                                 
@@ -1426,7 +1393,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("\r\n                                <span ");
 
             
-            #line 248 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 245 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                   Write(count == 0 ? "style=display:none" : "");
 
             
@@ -1435,7 +1402,7 @@ WriteLiteral("\r\n                                <span ");
 WriteLiteral(" id=\"comment-notification\" class=\"notification\">");
 
             
-            #line 248 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 245 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                                                                           Write(count);
 
             
@@ -1450,7 +1417,7 @@ WriteLiteral(" data-id=\"pnl-comments\"");
 WriteLiteral(">");
 
             
-            #line 249 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 246 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                               Write(Piranha.Resources.Global.Comments);
 
             
@@ -1459,7 +1426,7 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n                            </li>\r\n");
 
             
-            #line 251 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 248 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                             }
 
             
@@ -1468,7 +1435,7 @@ WriteLiteral("</a>\r\n                            </li>\r\n");
 WriteLiteral("                            ");
 
             
-            #line 252 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 249 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                              foreach (var ext in Model.Extensions) {
 
             
@@ -1479,9 +1446,9 @@ WriteLiteral("                            <li>\r\n                              
 WriteLiteral(" href=\"#\"");
 
             
-            #line 254 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                       Write(ExtensionManager.Current.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
-                                Url.Content(ExtensionManager.Current.GetIconPathByType(ext.Type)) + "')" : "");
+            #line 251 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+                                       Write(Piranha.App.Instance.ExtensionManager.GetIconPathByType(ext.Type) != "" ? "style=background-image:url('" + 
+                                Url.Content(Piranha.App.Instance.ExtensionManager.GetIconPathByType(ext.Type)) + "')" : "");
 
             
             #line default
@@ -1489,8 +1456,8 @@ WriteLiteral(" href=\"#\"");
 WriteLiteral(" data-id=\"pnl-");
 
             
-            #line 255 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                                                                                                       Write(ExtensionManager.Current.GetInternalIdByType(ext.Type).ToLower());
+            #line 252 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+                                                                                                                                    Write(Piranha.App.Instance.ExtensionManager.GetInternalIdByType(ext.Type).ToLower());
 
             
             #line default
@@ -1500,8 +1467,8 @@ WriteLiteral("\">\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 256 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                               Write(ExtensionManager.Current.GetNameByType(ext.Type));
+            #line 253 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+                               Write(Piranha.App.Instance.ExtensionManager.GetNameByType(ext.Type));
 
             
             #line default
@@ -1509,7 +1476,7 @@ WriteLiteral("                                    ");
 WriteLiteral("\r\n                                </a>\r\n                            </li>\r\n");
 
             
-            #line 259 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 256 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                             }
 
             
@@ -1529,7 +1496,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 264 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 261 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                               Write(Piranha.Resources.Global.Settings);
 
             
@@ -1548,7 +1515,7 @@ WriteLiteral(">\r\n                                    <li>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 268 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 265 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.LabelFor(m => m.Page.IsHidden));
 
             
@@ -1557,7 +1524,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                        <p>");
 
             
-            #line 269 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 266 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                       Write(Html.CheckBoxFor(m => m.Page.IsHidden));
 
             
@@ -1566,7 +1533,7 @@ WriteLiteral("\r\n                                        <p>");
 WriteLiteral(" (");
 
             
-            #line 269 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 266 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                                                                Write(Piranha.Resources.Page.HiddenDescription);
 
             
@@ -1576,7 +1543,7 @@ WriteLiteral(")</p>\r\n                                    </li>\r\n            
 "     <li>");
 
             
-            #line 271 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 268 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageController,
                                             Piranha.App.Instance.IsMvc ? Piranha.Resources.Page.Route : Piranha.Resources.Page.Template));
 
@@ -1592,7 +1559,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 274 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 271 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                        Write(Html.TextBoxFor(m => m.Page.PageController, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Controller) ? Model.Template.Controller : "Page" }));
 
             
@@ -1603,7 +1570,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 275 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 272 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.PageController));
 
             
@@ -1612,13 +1579,13 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </li>\r\n");
 
             
-            #line 277 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 274 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                     
             
             #line default
             #line hidden
             
-            #line 277 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 274 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                      if (Piranha.App.Instance.IsMvc) {
 
             
@@ -1627,7 +1594,7 @@ WriteLiteral("\r\n                                    </li>\r\n");
 WriteLiteral("                                    <li>");
 
             
-            #line 278 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 275 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageView));
 
             
@@ -1642,7 +1609,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 280 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 277 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                        Write(Html.TextBoxFor(m => m.Page.PageView, new { @placeholder = !String.IsNullOrEmpty(Model.Template.View) ? Model.Template.View : "Index" }));
 
             
@@ -1653,7 +1620,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 281 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 278 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.PageView));
 
             
@@ -1662,7 +1629,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </li>\r\n");
 
             
-            #line 283 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 280 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                     }
 
             
@@ -1671,7 +1638,7 @@ WriteLiteral("\r\n                                    </li>\r\n");
 WriteLiteral("                                    ");
 
             
-            #line 284 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 281 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                      if (Model.Template.ShowRedirect) {
 
             
@@ -1680,7 +1647,7 @@ WriteLiteral("                                    ");
 WriteLiteral("                                    <li>");
 
             
-            #line 285 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 282 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.LabelFor(m => m.Page.PageRedirect));
 
             
@@ -1695,7 +1662,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                            ");
 
             
-            #line 287 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 284 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                        Write(Html.TextBoxFor(m => m.Page.PageRedirect, new { @placeholder = !String.IsNullOrEmpty(Model.Template.Redirect) ? Model.Template.Redirect : Piranha.Resources.Global.Optional }));
 
             
@@ -1706,7 +1673,7 @@ WriteLiteral("</div>\r\n");
 WriteLiteral("                                        ");
 
             
-            #line 288 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 285 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                    Write(Html.ValidationMessageFor(m => m.Page.PageRedirect));
 
             
@@ -1715,7 +1682,7 @@ WriteLiteral("                                        ");
 WriteLiteral("\r\n                                    </li>\r\n");
 
             
-            #line 290 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 287 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                     }
 
             
@@ -1725,13 +1692,13 @@ WriteLiteral("                                </ul>\r\n                         
 "                  </div>\r\n");
 
             
-            #line 294 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 291 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         
             
             #line default
             #line hidden
             
-            #line 294 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 291 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                          if (Model.EnableComments) {
 
             
@@ -1750,7 +1717,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 296 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 293 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                                               Write(Piranha.Resources.Global.Comments);
 
             
@@ -1765,7 +1732,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                                ");
 
             
-            #line 298 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 295 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                            Write(Html.Partial("~/Areas/Manager/Views/Comment/List.cshtml", Model.Comments));
 
             
@@ -1774,7 +1741,7 @@ WriteLiteral("                                ");
 WriteLiteral("\r\n                            </div>\r\n                        </div>\r\n");
 
             
-            #line 301 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 298 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                         }
 
             
@@ -1783,7 +1750,7 @@ WriteLiteral("\r\n                            </div>\r\n                        
 WriteLiteral("                        ");
 
             
-            #line 302 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 299 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
                    Write(Html.EditorFor(m => m.Extensions));
 
             
@@ -1793,7 +1760,7 @@ WriteLiteral("\r\n                    </td>\r\n                </tr>\r\n        
 " </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 309 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
+            #line 306 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
    Html.EndForm() ; 
             
             #line default

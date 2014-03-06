@@ -59,18 +59,6 @@ namespace Piranha.Extend.Regions
 		public int Cache { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets if the user who created the post should be included.
-		/// </summary>
-		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeCreatedBy")]		
-		public bool IncludeCreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets if the user who last updated the post should be included.
-		/// </summary>
-		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeUpdatedBy")]		
-		public bool IncludeUpdatedBy { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets if the categories should be included.
 		/// </summary>
 		[Display(ResourceType=typeof(Piranha.Resources.Extensions), Name="PostRegionIncludeCategories")]		
@@ -112,8 +100,6 @@ namespace Piranha.Extend.Regions
 			OrderBy = OrderByType.PUBLISHED ;
 			IncludeCategories = true ;
 			IncludeTemplate = false ;
-			IncludeCreatedBy = true ;
-			IncludeUpdatedBy = false ;
 		}
 
 		/// <summary>
@@ -164,10 +150,6 @@ namespace Piranha.Extend.Regions
 							query = query.Include(p => p.Categories) ;
 						if (admin || IncludeTemplate)
 							query = query.Include(p => p.Template) ;
-						if (!admin && IncludeCreatedBy)
-							query = query.Include(p => p.CreatedBy) ;
-						if (!admin && IncludeUpdatedBy)
-							query = query.Include(p => p.UpdatedBy) ;
 
 						// Order
 						if (OrderBy == OrderByType.PUBLISHED)

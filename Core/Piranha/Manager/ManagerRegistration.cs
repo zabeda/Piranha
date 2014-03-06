@@ -13,16 +13,16 @@ namespace Piranha.Manager
 	{
 		#region Members
 		/// <summary>
-		/// The manager namespace. Additional namespaces can be configured with Config.ManagerNamespaces
+		/// The default manager namespace.
 		/// </summary>
-		private string[] namespaces = { "Piranha.Areas.Manager.Controllers" } ;
+		private string[] defaultNamespace = { "Piranha.Areas.Manager.Controllers" };
 		#endregion
 
 		/// <summary>
 		/// Gets the area name.
 		/// </summary>
 		public override string AreaName {
-			get { return "Manager" ; }
+			get { return "Manager"; }
 		}
 
 		/// <summary>
@@ -31,16 +31,23 @@ namespace Piranha.Manager
 		/// <param name="context">The context</param>
 		public override void RegisterArea(AreaRegistrationContext context) {
 			if (!Config.DisableManager) {
+				// Get registered namespaces
+				var namespaces = new List<string>();
+
+				if (Hooks.Manager.Init.RegisterNamespace != null)
+					Hooks.Manager.Init.RegisterNamespace(namespaces);
+				namespaces = defaultNamespace.Union(namespaces).Union(Config.ManagerNamespaces).ToList();
+
 				// Register manager routing
 				context.MapRoute(
 					"Manager",
 					"manager/{controller}/{action}/{id}",
 					new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional },
-					namespaces.Union(Config.ManagerNamespaces).ToArray()
-				).DataTokens["UseNamespaceFallback"] = false ;
+					namespaces.ToArray()
+				).DataTokens["UseNamespaceFallback"] = false;
 
 				// Register filters & binders
-				RegisterGlobalFilters(GlobalFilters.Filters) ;
+				RegisterGlobalFilters(GlobalFilters.Filters);
 			}
 		}
 

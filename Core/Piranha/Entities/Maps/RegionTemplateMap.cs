@@ -23,11 +23,6 @@ namespace Piranha.Entities.Maps
 			Property(r => r.Type).HasColumnName("regiontemplate_type").IsRequired().HasMaxLength(255) ;
 			Property(r => r.Created).HasColumnName("regiontemplate_created") ;
 			Property(r => r.Updated).HasColumnName("regiontemplate_updated") ;
-			Property(r => r.CreatedById).HasColumnName("regiontemplate_created_by") ;
-			Property(r => r.UpdatedById).HasColumnName("regiontemplate_updated_by") ;
-	
-			HasRequired(r => r.CreatedBy) ;
-			HasRequired(r => r.UpdatedBy) ;
 		}
 	}
 }

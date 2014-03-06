@@ -234,42 +234,6 @@ WriteLiteral(" ");
             
             #line default
             #line hidden
-WriteLiteral("</p>\r\n        <p>");
-
-            
-            #line 31 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
-      Write(Html.CheckBoxFor(m => m.IncludeCreatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 31 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
-                                                 Write(Piranha.Resources.Extensions.PostRegionIncludeCreatedBy);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</p>\r\n        <p>");
-
-            
-            #line 32 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
-      Write(Html.CheckBoxFor(m => m.IncludeUpdatedBy));
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" ");
-
-            
-            #line 32 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
-                                                 Write(Piranha.Resources.Extensions.PostRegionIncludeUpdatedBy);
-
-            
-            #line default
-            #line hidden
 WriteLiteral("</p>\r\n    </li>\r\n</ul>\r\n<div");
 
 WriteLiteral(" class=\"title\"");
@@ -279,7 +243,7 @@ WriteLiteral(" style=\"border-top: 1px solid #ddd\"");
 WriteLiteral("><h2>");
 
             
-            #line 35 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                                                      Write(Piranha.Resources.Extensions.PostRegionMatchingTitle);
 
             
@@ -292,7 +256,7 @@ WriteLiteral(" class=\"list attachments\"");
 WriteLiteral(">\r\n    <tr>\r\n        <td><span><strong>");
 
             
-            #line 38 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 36 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                      Write(Piranha.Resources.Global.Title);
 
             
@@ -301,7 +265,7 @@ WriteLiteral(">\r\n    <tr>\r\n        <td><span><strong>");
 WriteLiteral("</strong></span></td>\r\n        <td><strong>");
 
             
-            #line 39 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 37 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                Write(Piranha.Resources.Post.Template);
 
             
@@ -314,7 +278,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral("><strong>");
 
             
-            #line 40 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 38 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                             Write(Piranha.Resources.Global.Published);
 
             
@@ -329,7 +293,7 @@ WriteLiteral(" style=\"white-space:nowrap\"");
 WriteLiteral("><strong>");
 
             
-            #line 41 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 39 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                                                        Write(Piranha.Resources.Global.LastPublished);
 
             
@@ -338,13 +302,13 @@ WriteLiteral("><strong>");
 WriteLiteral("</strong></td>\r\n    </tr>\r\n");
 
             
-            #line 43 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 43 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 41 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
      foreach (var post in Model.Posts) {
 
             
@@ -352,20 +316,20 @@ WriteLiteral("</strong></td>\r\n    </tr>\r\n");
             #line hidden
 WriteLiteral("    <tr>\r\n        <td><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2050), Tuple.Create("\"", 2106)
+WriteAttribute("href", Tuple.Create(" href=\"", 1818), Tuple.Create("\"", 1874)
             
-            #line 45 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
-, Tuple.Create(Tuple.Create("", 2057), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "post", new { id = post.Id })
+            #line 43 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+, Tuple.Create(Tuple.Create("", 1825), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "post", new { id = post.Id })
             
             #line default
             #line hidden
-, 2057), false)
+, 1825), false)
 );
 
 WriteLiteral(">");
 
             
-            #line 45 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 43 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                                                                    Write(post.Title);
 
             
@@ -374,7 +338,7 @@ WriteLiteral(">");
 WriteLiteral("</a></td>\r\n        <td>");
 
             
-            #line 46 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 44 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
        Write(post.Template.Name);
 
             
@@ -387,7 +351,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 47 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 45 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                     Write(post.Published.Value.ToString("yyyy-MM-dd"));
 
             
@@ -400,7 +364,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 48 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 46 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
                     Write(post.LastPublished.Value.ToString("yyyy-MM-dd"));
 
             
@@ -409,7 +373,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n    </tr>\r\n");
 
             
-            #line 50 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
+            #line 48 "..\..\Areas\Manager\Views\Extensions\PostRegion.cshtml"
     }
 
             

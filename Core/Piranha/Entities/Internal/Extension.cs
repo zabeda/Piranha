@@ -79,18 +79,6 @@ namespace Piranha.Models
 		/// </summary>
 		[Column(Name="extension_updated")]
 		public override DateTime Updated { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user who initially created the extension.
-		/// </summary>
-		[Column(Name="extension_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user who last updated the extension.
-		/// </summary>
-		[Column(Name="extension_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
 		#endregion
 
 		#region Event handlers
@@ -117,11 +105,11 @@ namespace Piranha.Models
 				var js = new JavaScriptSerializer() ;
 
 				if (!String.IsNullOrEmpty(InternalBody)) {
-					if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(Type)))
-						return ExtensionManager.Current.CreateInstance(Type, InternalBody) ;
-					return (IExtension)js.Deserialize(InternalBody, ExtensionManager.Current.GetType(Type)) ;
+					if (typeof(HtmlString).IsAssignableFrom(App.Instance.ExtensionManager.GetType(Type)))
+						return App.Instance.ExtensionManager.CreateInstance(Type, InternalBody) ;
+					return (IExtension)js.Deserialize(InternalBody, App.Instance.ExtensionManager.GetType(Type)) ;
 				}
-				return ExtensionManager.Current.CreateInstance(Type) ;
+				return App.Instance.ExtensionManager.CreateInstance(Type) ;
 			}
 			return null;
 		}

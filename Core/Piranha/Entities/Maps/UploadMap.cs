@@ -20,11 +20,6 @@ namespace Piranha.Entities.Maps
 			Property(u => u.Type).HasColumnName("upload_type").IsRequired().HasMaxLength(64) ;
 			Property(u => u.Created).HasColumnName("upload_created") ;
 			Property(u => u.Updated).HasColumnName("upload_updated") ;
-			Property(u => u.CreatedById).HasColumnName("upload_created_by") ;
-			Property(u => u.UpdatedById).HasColumnName("upload_updated_by") ;
-
-			HasRequired(u => u.CreatedBy) ;
-			HasRequired(u => u.UpdatedBy) ;
 
 			HasMany(u => u.Comments).WithRequired().HasForeignKey(c => c.ParentId) ;
 		}

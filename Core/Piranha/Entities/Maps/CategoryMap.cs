@@ -21,14 +21,10 @@ namespace Piranha.Entities.Maps
 			Property(c => c.Description).HasColumnName("category_description").HasMaxLength(255) ;
 			Property(c => c.Created).HasColumnName("category_created") ;
 			Property(c => c.Updated).HasColumnName("category_updated") ;
-			Property(c => c.CreatedById).HasColumnName("category_created_by") ;
-			Property(c => c.UpdatedById).HasColumnName("category_updated_by") ;
 
 			HasOptional(c => c.Parent) ;
 			HasRequired(c => c.Permalink) ;
 			HasMany(c => c.Extensions).WithRequired().HasForeignKey(e => e.ParentId) ;
-			HasRequired(c => c.CreatedBy) ;
-			HasRequired(c => c.UpdatedBy) ;
 		}
 	}
 }

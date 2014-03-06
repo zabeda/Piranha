@@ -24,7 +24,6 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		public PostListModel() {
 			Templates = new List<PostTemplate>() ;
-			Extend.ExtensionManager.Current.ForceInit() ;
 		}
 
 		/// <summary>

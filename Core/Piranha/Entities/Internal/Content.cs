@@ -147,18 +147,6 @@ namespace Piranha.Models
 		public override DateTime Updated { get ; set ; }
 
 		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="content_created_by")]
-		public override Guid CreatedBy { get ; set ; }
-
-		/// <summary>
-		/// Gets/sets the user id that created the record.
-		/// </summary>
-		[Column(Name="content_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
-
-		/// <summary>
 		/// Gets/sets the initial publish date.
 		/// </summary>
 		[Column(Name="content_published")]

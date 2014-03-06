@@ -47,7 +47,6 @@
 @Html.HiddenFor(m => m.Content.IsImage)
 @Html.HiddenFor(m => m.Content.IsFolder)
 @Html.HiddenFor(m => m.Content.Created)
-@Html.HiddenFor(m => m.Content.CreatedBy)
 @Html.HiddenFor(m => m.Content.Published)
 @Html.HiddenFor(m => m.Content.LastPublished)
 @Html.HiddenFor(m => m.Content.Filename)
@@ -60,7 +59,6 @@
 @Html.HiddenFor(m => m.Permalink.Id)
 @Html.HiddenFor(m => m.Permalink.Type)
 @Html.HiddenFor(m => m.Permalink.Created)
-@Html.HiddenFor(m => m.Permalink.CreatedBy)
 @Html.Hidden("returl", (string)ViewBag.ReturnUrl)
 @Html.Hidden("draft", true)
 <div class="grid_9">
