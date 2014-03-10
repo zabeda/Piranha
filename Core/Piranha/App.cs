@@ -29,17 +29,17 @@ namespace Piranha
 		private CompositionContainer Container = null ;
 
 		/// <summary>
-		/// The current application state
-		/// </summary>
-		private bool IsInitialized = false;
-
-		/// <summary>
 		/// The initialization mutex.
 		/// </summary>
 		private object mutex = new object();
 		#endregion
 
 		#region Properties
+		/// <summary>
+		/// The current application state
+		/// </summary>
+		public bool IsInitialized { get; private set; }
+
 		/// <summary>
 		/// Gets the current IoC container.
 		/// </summary>
@@ -125,13 +125,22 @@ namespace Piranha
 		/// <summary>
 		/// Default private constructor.
 		/// </summary>
-		private App() { }
+		private App() { 
+			// Create the resource handler
+			Resources = new ResourceHandler();
+
+			// Create the handler collection
+			Handlers = new RequestHandlerCollection();
+		}
 
 		/// <summary>
 		/// Initializes the application.
 		/// </summary>
 		public static void Init() {
-			Instance.Initialize();
+			if (Data.Database.IsInstalled)
+				Instance.Initialize();
+			else
+				Data.Database.OnInstalled = () => Instance.Initialize();
 		}
 
 		/// <summary>
@@ -200,12 +209,6 @@ namespace Piranha
 						}
 						Container = new CompositionContainer(catalog) ;
 						Container.ComposeParts(this) ;
-
-						// Create the resource handler
-						Resources = new ResourceHandler();
-
-						// Create the handler collection
-						Handlers = new RequestHandlerCollection();
 
 						// Register default handlers
 						RegisterHandlers() ;

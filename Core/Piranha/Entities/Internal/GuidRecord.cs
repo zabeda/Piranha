@@ -69,7 +69,7 @@ namespace Piranha.Models
 			var success = base.Save(tx);
 		
 			// If the action was successful, insert a log entry.
-			if (HttpContext.Current != null && App.Instance.UserProvider.IsAuthenticated && LogChanges && success) {
+			if (HttpContext.Current != null && App.Instance.IsInitialized && App.Instance.UserProvider.IsAuthenticated && LogChanges && success) {
 				// Check that we have a valid user id
 				bool validUser = false;
 				try {

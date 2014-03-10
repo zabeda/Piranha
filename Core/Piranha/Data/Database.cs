@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.IO;
+using System.Reflection;
 
 namespace Piranha.Data
 {
@@ -72,6 +74,29 @@ namespace Piranha.Data
 			}
 		}
 		#endregion
+
+		/// <summary>
+		/// Delegate for the installed event.
+		/// </summary>
+		internal delegate void OnInstalledDelegate();
+
+		/// <summary>
+		/// Called after database has been installed.
+		/// </summary>
+		internal static OnInstalledDelegate OnInstalled;
+
+		/// <summary>
+		/// Gets if the database is installed and up to date.
+		/// </summary>
+		/// <returns>If the databse is installed</returns>
+		public static bool IsInstalled {
+			get {
+				try {
+					return Convert.ToInt32(Models.SysParam.GetByName("SITE_VERSION")) == Database.CurrentVersion;
+				} catch { }
+				return false;
+			}
+		}
 
 		/// <summary>
 		/// Logs in the given user when no HttpContext is available.
@@ -167,6 +192,108 @@ namespace Piranha.Data
 				}
 			}
 			return cmd ;
+		}
+
+		/// <summary>
+		/// Installs and seeds the database.
+		/// </summary>
+		/// <param name="username">The admin username</param>
+		/// <param name="password">The admin password</param>
+		/// <param name="email">The admin email</param>
+		public static void Install(string username, string password, string email) { 
+			// Read embedded create script
+			Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Create.sql") ;
+			String sql = new StreamReader(str).ReadToEnd() ;
+			str.Close() ;
+
+			// Read embedded data script
+			str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Data.sql") ;
+			String data = new StreamReader(str).ReadToEnd() ;
+			str.Close() ;
+
+			// Split statements and execute
+			string[] stmts = sql.Split(new char[] { ';' }) ;
+			using (IDbTransaction tx = Database.OpenTransaction()) {
+				// Create database from script
+				foreach (string stmt in stmts) {
+					if (!String.IsNullOrEmpty(stmt.Trim()))
+						Models.SysUser.Execute(stmt, tx) ;
+				}
+				tx.Commit() ;
+			}
+
+			// Split statements and execute
+			stmts = data.Split(new char[] { ';' }) ;
+			using (IDbTransaction tx = Database.OpenTransaction()) {
+				// Create user
+				Models.SysUser usr = new Models.SysUser() {
+					Login = username,
+					Email = email,
+					GroupId = new Guid("7c536b66-d292-4369-8f37-948b32229b83"),
+					Created = DateTime.Now,
+					Updated = DateTime.Now
+				} ;
+				usr.Save(tx) ;
+
+				// Create user password
+				Models.SysUserPassword pwd = new Models.SysUserPassword() {
+					Id = usr.Id,
+					Password = password,
+					IsNew = false
+				} ;
+				pwd.Save(tx) ;
+
+				// Create default data
+				foreach (string stmt in stmts) {
+					if (!String.IsNullOrEmpty(stmt.Trim()))
+						Models.SysUser.Execute(stmt, tx) ;
+				}		
+				tx.Commit() ;
+
+				// Fire installed event
+				if (OnInstalled != null)
+					OnInstalled();
+			}
+		}
+
+		/// <summary>
+		/// Updates the database to the current version.
+		/// </summary>
+		public static void Update() { 
+			// Execute all incremental updates in a transaction.
+			using (IDbTransaction tx = Database.OpenTransaction()) {
+				for (int n = Data.Database.InstalledVersion + 1; n <= Data.Database.CurrentVersion; n++) {
+					// Read embedded create script
+					Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Updates." +
+						n.ToString() + ".sql") ;
+					String sql = new StreamReader(str).ReadToEnd() ;
+					str.Close() ;
+
+					// Split statements and execute
+					string[] stmts = sql.Split(new char[] { ';' }) ;
+					foreach (string stmt in stmts) {
+						if (!String.IsNullOrEmpty(stmt.Trim()))
+							Models.SysUser.Execute(stmt.Trim(), tx) ;
+					}
+
+					// Check for update class
+					var utype = Type.GetType("Piranha.Data.Updates.Update" + n.ToString()) ;
+					if (utype != null) {
+						Data.Updates.IUpdate update = (Data.Updates.IUpdate)Activator.CreateInstance(utype) ;
+						update.Execute(tx) ;
+					}
+				}
+				// Now lets update the database version.
+				Models.SysUser.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = 'SITE_VERSION'", 
+					tx, Data.Database.CurrentVersion) ;
+				Models.SysParam.InvalidateParam("SITE_VERSION") ;
+
+				tx.Commit() ;
+
+				// Fire installed event
+				if (OnInstalled != null)
+					OnInstalled();
+			}
 		}
 
 		#region Private methods

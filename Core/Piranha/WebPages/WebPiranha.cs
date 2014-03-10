@@ -318,9 +318,11 @@ namespace Piranha.WebPages
 				// exceptions flying around causing the app pool to die.
 			} catch (Exception e) {
 				// One catch to rule them all, and in the log file bind them.
-                App.Instance.LogProvider.Error("WebPiranha.BeginRequest", "Unhandled exception", e);
-				context.Response.StatusCode = 500 ;
-				context.Response.EndClean() ;
+				if (App.Instance.IsInitialized) {
+					App.Instance.LogProvider.Error("WebPiranha.BeginRequest", "Unhandled exception", e);
+					context.Response.StatusCode = 500 ;
+					context.Response.EndClean() ;
+				}
 			}
 		}
 
