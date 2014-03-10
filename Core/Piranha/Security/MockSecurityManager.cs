@@ -4,26 +4,25 @@ using System.Collections.Generic;
 namespace Piranha.Security
 {
 	/// <summary>
-	/// The security manager is responsible for handling authentication
-	/// for users.
+	/// Mock security provider for unit tests.
 	/// </summary>
-	public interface ISecurityManager
+	public sealed class MockSecurityManager : ISecurityManager
 	{
 		/// <summary>
 		/// Gets if the currently logged in user is an administrator.
 		/// </summary>
-		bool IsAdmin { get; }
+		public bool IsAdmin { get { return false; } }
 
 		/// <summary>
 		/// Gets if the current user is authenticated.
 		/// </summary>
-		bool IsAuthenticated { get; }
+		public bool IsAuthenticated { get { return false;  } }
 
 		/// <summary>
 		/// Gets the currently available roles.
 		/// </summary>
 		/// <returns>The roles</returns>
-		IEnumerable<Role> GetRoles();
+		public IEnumerable<Role> GetRoles() { return new List<Role>(); }
 
 		/// <summary>
 		/// Logs in the user with the given username and password.
@@ -31,11 +30,13 @@ namespace Piranha.Security
 		/// <param name="username">The username</param>
 		/// <param name="password">The password</param>
 		/// <returns>If the user was successfully logged in</returns>
-		bool Login(string username, string password);
+		public bool Login(string username, string password) {
+			return false;
+		}
 
 		/// <summary>
 		/// Logs our the currently logged in user.
 		/// </summary>
-		void Logout();
+		public void Logout() { }
 	}
 }

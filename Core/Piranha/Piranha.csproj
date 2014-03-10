@@ -534,7 +534,7 @@
     <Compile Include="Extend\RegionType.cs" />
     <Compile Include="Hooks\App.cs" />
     <Compile Include="Hooks\Delegates.cs" />
-    <Compile Include="Hooks\Manager.cs" />
+    <Compile Include="Hooks\Manager\Init.cs" />
     <Compile Include="IoC\IContainer.cs" />
     <Compile Include="IoC\TinyIoCContainer.cs" />
     <Compile Include="IO\IMediaCacheProvider.cs" />
@@ -688,6 +688,8 @@
     <Compile Include="Security\ISecurityManager.cs" />
     <Compile Include="Security\IUserProvider.cs" />
     <Compile Include="Security\LocalUserProvider.cs" />
+    <Compile Include="Security\MockSecurityManager.cs" />
+    <Compile Include="Security\Role.cs" />
     <Compile Include="TinyIoC.cs" />
     <Compile Include="WebPages\Hooks.cs" />
     <Compile Include="WebPages\Manager.cs" />

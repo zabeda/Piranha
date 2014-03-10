@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Piranha.Hooks
+namespace Piranha.Hooks.Manager
 {
 	/// <summary>
-	/// The Hooks available for the main application.
+	/// The hooks available for manager init.
 	/// </summary>
-	public static class Manager
+	public static class Init
 	{
 		/// <summary>
-		/// The delegates specific for the manager.
+		/// The delegates specific for the manager initialization.
 		/// </summary>
 		public static class Delegates
 		{ 
@@ -22,16 +22,11 @@ namespace Piranha.Hooks
 			public delegate void ManagerNamespaceRegistration(IList<string> namespaces);
 		}
 
+
 		/// <summary>
-		/// The hooks available for manager init.
+		/// Called when the manager wants to register namespaces that should
+		/// be scanned for controllers for the manager interface.
 		/// </summary>
-		public static class Init
-		{
-			/// <summary>
-			/// Called when the manager wants to register namespaces that should
-			/// be scanned for controllers for the manager interface.
-			/// </summary>
-			public static Delegates.ManagerNamespaceRegistration RegisterNamespace;
-		}
+		public static Delegates.ManagerNamespaceRegistration RegisterNamespace;
 	}
 }
