@@ -195,6 +195,29 @@ namespace Piranha.Data
 		}
 
 		/// <summary>
+		/// Installs of updates the database. If the database is installed and
+		/// in sync no actions are performed.
+		/// </summary>
+		/// <param name="username">The admin username</param>
+		/// <param name="password">The admin password</param>
+		/// <param name="email">The admin email</param>
+		public static void InstallOrUpdate(string username, string password, string email) {
+			if (!IsInstalled) {
+				int? version = null;
+
+				try {
+					version = Convert.ToInt32(Models.SysParam.GetByName("SITE_VERSION").Value);
+				} catch { }
+
+				if (!version.HasValue) {
+					Install(username, password, email);
+				} else {
+					Update();
+				}
+			}
+		}
+
+		/// <summary>
 		/// Installs and seeds the database.
 		/// </summary>
 		/// <param name="username">The admin username</param>
