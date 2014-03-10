@@ -92,7 +92,7 @@ namespace Piranha.Data
 		public static bool IsInstalled {
 			get {
 				try {
-					return Convert.ToInt32(Models.SysParam.GetByName("SITE_VERSION")) == Database.CurrentVersion;
+					return Convert.ToInt32(Models.SysParam.GetByName("SITE_VERSION").Value) == Database.CurrentVersion;
 				} catch { }
 				return false;
 			}
