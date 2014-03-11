@@ -21,7 +21,7 @@ namespace Piranha.Entities.Maps
 			Property(p => p.PermalinkId).HasColumnName("post_permalink_id") ;
 			Property(p => p.AllowRss).HasColumnName("post_rss") ;
 			Property(p => p.Title).HasColumnName("post_title").IsRequired().HasMaxLength(128) ;
-			Property(p => p.Excerpt).HasColumnName("post_excerpt").HasMaxLength(255) ;
+			Property(p => p.Excerpt).HasColumnName("post_excerpt").HasMaxLength(512) ;
 			Property(p => p.Body).HasColumnName("post_body") ;
 			Property(p => p.AttachmentsJson).HasColumnName("post_attachments") ;
 			Property(p => p.ViewTemplate).HasColumnName("post_controller").HasMaxLength(128) ;

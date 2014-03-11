@@ -142,7 +142,7 @@
     <value>Excerpt</value>
   </data>
   <data name="ExcerptLength" xml:space="preserve">
-    <value>The excerpt has a maximum length of 255 characters.</value>
+    <value>The excerpt has a maximum length of 512 characters.</value>
   </data>
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html preview</value>

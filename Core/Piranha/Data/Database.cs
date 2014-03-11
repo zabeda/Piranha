@@ -23,7 +23,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 33 ;
+		public static int CurrentVersion = 34 ;
 
 		/// <summary>
 		/// Gets the currently logged in users identity.
@@ -86,11 +86,23 @@ namespace Piranha.Data
 		internal static OnInstalledDelegate OnInstalled;
 
 		/// <summary>
-		/// Gets if the database is installed and up to date.
+		/// Gets if the database is installed.
 		/// </summary>
 		/// <returns>If the databse is installed</returns>
 		public static bool IsInstalled {
 			get {
+				try {
+					return Convert.ToInt32(Models.SysParam.GetByName("SITE_VERSION").Value) > 0;
+				} catch { }
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Gets if the database is up to date.
+		/// </summary>
+		public static bool IsInSync {
+			get { 
 				try {
 					return Convert.ToInt32(Models.SysParam.GetByName("SITE_VERSION").Value) == Database.CurrentVersion;
 				} catch { }
@@ -202,7 +214,7 @@ namespace Piranha.Data
 		/// <param name="password">The admin password</param>
 		/// <param name="email">The admin email</param>
 		public static void InstallOrUpdate(string username, string password, string email) {
-			if (!IsInstalled) {
+			if (!IsInstalled || !IsInSync) {
 				int? version = null;
 
 				try {

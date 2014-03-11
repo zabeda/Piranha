@@ -142,7 +142,7 @@
     <value>Sammanfattning</value>
   </data>
   <data name="ExcerptLength" xml:space="preserve">
-    <value>Sammanfattningen får max innehålla 255 tecken.</value>
+    <value>Sammanfattningen får max innehålla 512 tecken.</value>
   </data>
   <data name="HtmlPreview" xml:space="preserve">
     <value>Html-tumnagel</value>
