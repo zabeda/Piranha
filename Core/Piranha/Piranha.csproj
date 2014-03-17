@@ -691,6 +691,7 @@
     <Compile Include="Security\MockSecurityManager.cs" />
     <Compile Include="Security\Role.cs" />
     <Compile Include="TinyIoC.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="WebPages\Hooks.cs" />
     <Compile Include="WebPages\Manager.cs" />
     <Compile Include="Web\Handlers\ArchiveHandler.cs" />
