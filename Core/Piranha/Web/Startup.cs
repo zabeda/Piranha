@@ -30,6 +30,9 @@ namespace Piranha.Web
 			// Registers the http module
 			Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(ApplicationModule));
 
+			// Initialize the manager module
+			Manager.ManagerModule.Init();
+
 			// Intializes the web application
 			WebPages.WebPiranha.Init();
 		}
@@ -41,9 +44,6 @@ namespace Piranha.Web
 			// Initializes the main application object
 			App.Init();
 	
-			// Initialize the manager module
-			Manager.ManagerModule.Init();
-
 			// Registers view engines
 			RegisterViewEngines();	
 		}
