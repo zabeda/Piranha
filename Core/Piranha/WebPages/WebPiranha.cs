@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
-using System.ServiceModel.Activation;
 using System.Text;
 using System.Web;
 using System.Web.Configuration;
@@ -236,16 +235,8 @@ namespace Piranha.WebPages
 		/// <summary>
 		/// Registers all of the default rest wcf services.
 		/// </summary>
-		public static void InitServices() {
-			RouteTable.Routes.Add("REST_CATEGORY", new ServiceRoute("rest/category", new WebServiceHostFactory(), typeof(Rest.CategoryService))) ;
-			RouteTable.Routes.Add("REST_SITEMAP", new ServiceRoute("rest/sitemap", new WebServiceHostFactory(), typeof(Rest.SitemapServices))) ;
-			RouteTable.Routes.Add("REST_PAGE", new ServiceRoute("rest/page", new WebServiceHostFactory(), typeof(Rest.PageService))) ;
-			RouteTable.Routes.Add("REST_POST", new ServiceRoute("rest/post", new WebServiceHostFactory(), typeof(Rest.PostService))) ;
-			RouteTable.Routes.Add("REST_CONTENT", new ServiceRoute("rest/content", new WebServiceHostFactory(), typeof(Rest.ContentService))) ;
-			RouteTable.Routes.Add("REST_PAGETEMPLATE", new ServiceRoute("rest/pagetemplate", new WebServiceHostFactory(), typeof(Rest.PageTemplateService))) ;
-			RouteTable.Routes.Add("REST_POSTTEMPLATE", new ServiceRoute("rest/posttemplate", new WebServiceHostFactory(), typeof(Rest.PostTemplateService))) ;
-			RouteTable.Routes.Add("REST_CHANGES", new ServiceRoute("rest/changes", new WebServiceHostFactory(), typeof(Rest.ChangeService))) ;
-		}
+		[Obsolete("Please refer to the module Piranha.Legacy.Services.", true)]
+		public static void InitServices() { }
 
 		/// <summary>
 		/// Handles the URL Rewriting for the application

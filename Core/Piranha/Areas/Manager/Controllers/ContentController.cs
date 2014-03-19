@@ -278,7 +278,7 @@ namespace Piranha.Areas.Manager.Controllers
 			if (!String.IsNullOrEmpty(Request["tinymce"]))
 				draft = Request["tinymce"] != "true" ;
 
-			return Get(id, draft) ;
+			return Get(new Guid(id), draft) ;
 		}
 
 		/// <summary>
@@ -286,10 +286,37 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		/// <param name="id">The content id</param>
 		/// <param name="draft">Whether or not to get the draft</param>
-		private JsonResult Get(string id, bool draft) {
-			var service = new Rest.ContentService() ;
+		private JsonResult Get(Guid id, bool draft) {
+			try {
+				var c = Piranha.Models.Content.GetSingle(id, draft) ;
 
-			return Json(service.Get(new Guid(id), draft), JsonRequestBehavior.AllowGet) ;
+				if (c != null) {
+					var media = new {
+						Id = c.Id,
+						ParentId = c.ParentId,
+						Filename = c.Filename,
+						Name = c.Name,
+						DisplayName = c.DisplayName,
+						Description = c.Description,
+						Type = c.Type,
+						Size = c.Size,
+						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + 
+							(!draft ? App.Instance.Handlers.GetUrlPrefix("THUMBNAIL") :
+							App.Instance.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + c.Id,
+						ContentUrl = WebPages.WebPiranha.ApplicationPath + 
+							(!draft ? App.Instance.Handlers.GetUrlPrefix("CONTENT") :
+							App.Instance.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
+						Created = c.Created.ToString(),
+						Updated = c.Updated.ToString(),
+						Categories = new List<Piranha.Models.Category>()
+					};
+					foreach (var cat in Piranha.Models.Category.GetByContentId(c.Id, false)) {
+						media.Categories.Add(cat);
+					}
+					return Json(media, JsonRequestBehavior.AllowGet);
+				}
+			} catch { }
+			return null ;
 		}
 
 		/// <summary>
@@ -330,7 +357,7 @@ namespace Piranha.Areas.Manager.Controllers
 						Description = desc
 					} ;
 					if (content.SaveAndPublish(media))
-						return Get(content.Id.ToString(), false) ;
+						return Get(content.Id, false) ;
 				}
 			}
 			return Json(new {
