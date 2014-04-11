@@ -578,7 +578,7 @@ WriteLiteral("            ");
 
             
             #line 120 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -605,14 +605,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"postid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 6213), Tuple.Create("\"", 6235)
+WriteAttribute("value", Tuple.Create(" value=\"", 6198), Tuple.Create("\"", 6220)
             
             #line 129 "..\..\Areas\Manager\Views\Post\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 6221), Tuple.Create<System.Object, System.Int32>(Model.Post.Id
+, Tuple.Create(Tuple.Create("", 6206), Tuple.Create<System.Object, System.Int32>(Model.Post.Id
             
             #line default
             #line hidden
-, 6221), false)
+, 6206), false)
 );
 
 WriteLiteral(" />\r\n");

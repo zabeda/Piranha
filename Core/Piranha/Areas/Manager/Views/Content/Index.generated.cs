@@ -209,7 +209,7 @@ WriteLiteral("            ");
 
             
             #line 48 "..\..\Areas\Manager\Views\Content\Index.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -218,14 +218,14 @@ WriteLiteral("\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 2019), Tuple.Create("\"", 2066)
+WriteAttribute("title", Tuple.Create(" title=\"", 2004), Tuple.Create("\"", 2051)
             
             #line 50 "..\..\Areas\Manager\Views\Content\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2027), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+, Tuple.Create(Tuple.Create("", 2012), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 2027), false)
+, 2012), false)
 );
 
 WriteLiteral("></button>");

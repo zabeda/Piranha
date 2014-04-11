@@ -117,7 +117,7 @@
             <li><a href="@ViewBag.ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             }
             <li><a href="@Url.Action("edit", new { id = Model.Post.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
-            @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
+            @Piranha.Manager.Toolbar.Render(Url, Model)
         </ul>
         <div class="clear"></div>
     </div>

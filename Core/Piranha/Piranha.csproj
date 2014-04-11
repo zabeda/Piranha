@@ -531,7 +531,12 @@
     <Compile Include="Extend\RegionType.cs" />
     <Compile Include="Hooks\App.cs" />
     <Compile Include="Hooks\Delegates.cs" />
+    <Compile Include="Hooks\Manager\Delegates.cs" />
     <Compile Include="Hooks\Manager\Init.cs" />
+    <Compile Include="Hooks\Manager\Page.cs" />
+    <Compile Include="Hooks\Manager\Post.cs" />
+    <Compile Include="Hooks\Manager\Media.cs" />
+    <Compile Include="Hooks\Manager\SiteTree.cs" />
     <Compile Include="IoC\IContainer.cs" />
     <Compile Include="IoC\TinyIoCContainer.cs" />
     <Compile Include="IO\IMediaCacheProvider.cs" />
@@ -556,6 +561,7 @@
     <Compile Include="Manager\Binders\IExtensionBinder.cs" />
     <Compile Include="Manager\ManagerModule.cs" />
     <Compile Include="Manager\ManagerRegistration.cs" />
+    <Compile Include="Manager\Toolbar.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
     <Compile Include="Models\IPage.cs" />
@@ -1267,6 +1273,7 @@
       <LastGenOutput>PostModelRegion.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

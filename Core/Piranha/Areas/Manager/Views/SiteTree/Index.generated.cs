@@ -153,7 +153,7 @@ WriteLiteral("            ");
 
             
             #line 30 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -162,14 +162,14 @@ WriteLiteral("\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1166), Tuple.Create("\"", 1213)
+WriteAttribute("title", Tuple.Create(" title=\"", 1151), Tuple.Create("\"", 1198)
             
             #line 32 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1174), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+, Tuple.Create(Tuple.Create("", 1159), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 1174), false)
+, 1159), false)
 );
 
 WriteLiteral("></button>");
@@ -296,14 +296,14 @@ WriteLiteral(" class=\"title\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2072), Tuple.Create("\"", 2120)
+WriteAttribute("href", Tuple.Create(" href=\"", 2057), Tuple.Create("\"", 2105)
             
             #line 51 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2079), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = site.Id })
+, Tuple.Create(Tuple.Create("", 2064), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = site.Id })
             
             #line default
             #line hidden
-, 2079), false)
+, 2064), false)
 );
 
 WriteLiteral(">");
@@ -375,14 +375,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2530), Tuple.Create("\"", 2580)
+WriteAttribute("href", Tuple.Create(" href=\"", 2515), Tuple.Create("\"", 2565)
             
             #line 57 "..\..\Areas\Manager\Views\SiteTree\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2537), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = site.Id })
+, Tuple.Create(Tuple.Create("", 2522), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = site.Id })
             
             #line default
             #line hidden
-, 2537), false)
+, 2522), false)
 );
 
 WriteLiteral(" title=\"\"");

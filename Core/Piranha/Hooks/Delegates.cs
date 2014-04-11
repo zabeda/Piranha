@@ -43,5 +43,12 @@ namespace Piranha.Hooks
 		/// <param name="sender">The event sender</param>
 		/// <param name="e">Optional event arguments</param>
 		public delegate void EventDelegate(object sender, EventArgs e);
+
+		/// <summary>
+		/// Delegate for model hooks.
+		/// </summary>
+		/// <typeparam name="T">The model type</typeparam>
+		/// <param name="model">The model</param>
+		public delegate void ModelHook<T>(T model) ;
 	}
 }

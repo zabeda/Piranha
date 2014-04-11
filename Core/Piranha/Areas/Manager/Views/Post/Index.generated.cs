@@ -187,7 +187,7 @@ WriteLiteral("            ");
 
             
             #line 52 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -196,14 +196,14 @@ WriteLiteral("\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1828), Tuple.Create("\"", 1875)
+WriteAttribute("title", Tuple.Create(" title=\"", 1813), Tuple.Create("\"", 1860)
             
             #line 54 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 1836), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+, Tuple.Create(Tuple.Create("", 1821), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 1836), false)
+, 1821), false)
 );
 
 WriteLiteral("></button>");
@@ -295,14 +295,14 @@ WriteLiteral(" class=\"tabs\"");
 
 WriteLiteral(">\r\n            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2431), Tuple.Create("\"", 2466)
+WriteAttribute("href", Tuple.Create(" href=\"", 2416), Tuple.Create("\"", 2451)
             
             #line 70 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2438), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "post")
+, Tuple.Create(Tuple.Create("", 2423), Tuple.Create<System.Object, System.Int32>(Url.Action("index", "post")
             
             #line default
             #line hidden
-, 2438), false)
+, 2423), false)
 );
 
 WriteLiteral(" ");
@@ -331,14 +331,14 @@ WriteLiteral(">All</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 2638), Tuple.Create("\"", 2703)
+WriteAttribute("href", Tuple.Create(" href=\"", 2623), Tuple.Create("\"", 2688)
             
             #line 73 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 2645), Tuple.Create<System.Object, System.Int32>(Url.Action("template", "post", new { @id = template.Id })
+, Tuple.Create(Tuple.Create("", 2630), Tuple.Create<System.Object, System.Int32>(Url.Action("template", "post", new { @id = template.Id })
             
             #line default
             #line hidden
-, 2645), false)
+, 2630), false)
 );
 
 WriteLiteral(" ");
@@ -493,16 +493,16 @@ WriteLiteral(" class=\"title\"");
 
 WriteLiteral(">\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 3770), Tuple.Create("\"", 4019)
+WriteAttribute("href", Tuple.Create(" href=\"", 3755), Tuple.Create("\"", 4004)
             
             #line 94 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 3777), Tuple.Create<System.Object, System.Int32>(Model.ActiveTemplate == Guid.Empty ? 
+, Tuple.Create(Tuple.Create("", 3762), Tuple.Create<System.Object, System.Int32>(Model.ActiveTemplate == Guid.Empty ? 
                         Url.Action("edit", new { id = post.Id }) : 
                         Url.Action("edit", new { id = post.Id, returl = Url.Action("template", new { id = Model.ActiveTemplate}) })
             
             #line default
             #line hidden
-, 3777), false)
+, 3762), false)
 );
 
 WriteLiteral(">\r\n");
@@ -628,14 +628,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4879), Tuple.Create("\"", 4929)
+WriteAttribute("href", Tuple.Create(" href=\"", 4864), Tuple.Create("\"", 4914)
             
             #line 110 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4886), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = post.Id })
+, Tuple.Create(Tuple.Create("", 4871), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", new { id = post.Id })
             
             #line default
             #line hidden
-, 4886), false)
+, 4871), false)
 );
 
 WriteLiteral(" title=\"Ta bort artikel\"");
@@ -731,16 +731,16 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 5562), Tuple.Create("\"", 5633)
-, Tuple.Create(Tuple.Create("", 5570), Tuple.Create("templates", 5570), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 5547), Tuple.Create("\"", 5618)
+, Tuple.Create(Tuple.Create("", 5555), Tuple.Create("templates", 5555), true)
             
             #line 132 "..\..\Areas\Manager\Views\Post\Index.cshtml"
-, Tuple.Create(Tuple.Create(" ", 5579), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : ""
+, Tuple.Create(Tuple.Create(" ", 5564), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : ""
             
             #line default
             #line hidden
-, 5580), false)
-, Tuple.Create(Tuple.Create(" ", 5628), Tuple.Create("left", 5629), true)
+, 5565), false)
+, Tuple.Create(Tuple.Create(" ", 5613), Tuple.Create("left", 5614), true)
 );
 
 WriteLiteral(" data-templateid=\"");
