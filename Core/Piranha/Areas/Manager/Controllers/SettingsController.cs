@@ -26,10 +26,6 @@ namespace Piranha.Areas.Manager.Controllers
 			var m = UserListModel.Get() ;
 			ViewBag.Title = @Piranha.Resources.Settings.ListTitleUsers ;
 
-			// Executes the user list loaded hook, if registered
-			if (WebPages.Hooks.Manager.UserListModelLoaded != null)
-				WebPages.Hooks.Manager.UserListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
-
             return View(@"~/Areas/Manager/Views/Settings/UserList.cshtml", m);
 		}
 
@@ -41,10 +37,6 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult UserGroup(string id) {
 			var m = UserListModel.GetByGroupId(new Guid(id)) ;
 			ViewBag.Title = @Piranha.Resources.Settings.ListTitleUsers ;
-
-			// Executes the user list loaded hook, if registered
-			if (WebPages.Hooks.Manager.UserListModelLoaded != null)
-				WebPages.Hooks.Manager.UserListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
             return View(@"~/Areas/Manager/Views/Settings/UserList.cshtml", m);
 		}
@@ -62,12 +54,7 @@ namespace Piranha.Areas.Manager.Controllers
 				m = UserEditModel.GetById(new Guid(id)) ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Settings.EditTitleNewUser ;
-			}
-
-			// Executes the user list loaded hook, if registered
-			if (WebPages.Hooks.Manager.UserEditModelLoaded != null)
-				WebPages.Hooks.Manager.UserEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
-	
+			}	
 			return View(@"~/Areas/Manager/Views/Settings/User.cshtml", m) ;
 		}
 
@@ -88,15 +75,7 @@ namespace Piranha.Areas.Manager.Controllers
 
 			if (ModelState.IsValid) {
 				try {
-			        // Executes the user edit before save hook, if registered
-			        if (WebPages.Hooks.Manager.UserEditModelBeforeSave != null)
-				        WebPages.Hooks.Manager.UserEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), um) ;
-
                     if (um.SaveAll()) {
-                        // Executes the user edit after save hook, if registered
-			            if (WebPages.Hooks.Manager.UserEditModelAfterSave != null)
-				            WebPages.Hooks.Manager.UserEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), um) ;
-
 						ModelState.Clear() ;
 						ViewBag.Title = Piranha.Resources.Settings.EditTitleExistingUser ;
 						SuccessMessage(Piranha.Resources.Settings.MessageUserSaved) ;

@@ -139,7 +139,7 @@
                     <span class="notification">@Model.TotalSiteWarnings[Model.ActiveSiteId]</span>
                 </li>
             }
-            @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
+            @Piranha.Manager.Toolbar.Render(Url, Model)
         </ul>
         <button class="search" title="@Piranha.Resources.Global.ToolbarSearch"></button>@Html.TextBox("search")
         <div class="clear"></div>

@@ -38,8 +38,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
 
 			// Executes the page list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
-				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Page.Model.OnListLoad != null)
+				Hooks.Manager.Page.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
         }
@@ -62,8 +62,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
 
 			// Executes the page list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
-				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Page.Model.OnListLoad != null)
+				Hooks.Manager.Page.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
 		}
@@ -85,8 +85,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = @Piranha.Resources.Page.ListTitle ;
 
 			// Executes the page list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PageListModelLoaded != null)
-				WebPages.Hooks.Manager.PageListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Page.Model.OnListLoad != null)
+				Hooks.Manager.Page.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View(@"~/Areas/Manager/Views/Page/Index.cshtml", m) ;
 		}
@@ -113,8 +113,8 @@ namespace Piranha.Areas.Manager.Controllers
 			else ViewBag.Title = Piranha.Resources.Global.Edit + " " + pm.SiteTree.Name.ToLower() ;
 
 			// Executes the page edit loaded hook, if registered
-			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
-				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+			if (Hooks.Manager.Page.Model.OnLoad != null)
+				Hooks.Manager.Page.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 			if (pm.Page.OriginalId != Guid.Empty)
 				return View(@"~/Areas/Manager/Views/Page/EditCopy.cshtml", pm) ;
@@ -131,13 +131,13 @@ namespace Piranha.Areas.Manager.Controllers
 			if (ModelState.IsValid) {
 				try {
 			        // Executes the page edit before save hook, if registered
-			        if (WebPages.Hooks.Manager.PageEditModelBeforeSave != null)
-				        WebPages.Hooks.Manager.PageEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+			        if (Hooks.Manager.Page.Model.OnBeforeSave != null)
+				        Hooks.Manager.Page.Model.OnBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 					if (pm.SaveAll(draft)) {
                         // Executes the page edit after save hook, if registered
-			            if (WebPages.Hooks.Manager.PageEditModelAfterSave != null)
-				            WebPages.Hooks.Manager.PageEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+			            if (Hooks.Manager.Page.Model.OnAfterSave != null)
+				            Hooks.Manager.Page.Model.OnAfterSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
                         
                         ModelState.Clear() ;
 						if (!draft) {
@@ -159,8 +159,8 @@ namespace Piranha.Areas.Manager.Controllers
 			pm.Refresh();
 
 			// Executes the page list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
-				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+			if (Hooks.Manager.Page.Model.OnLoad != null)
+				Hooks.Manager.Page.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 			if (!pm.IsSite) {
 				if (pm.Page.IsNew)
@@ -205,8 +205,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			// Executes the page list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
-				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+			if (Hooks.Manager.Page.Model.OnLoad != null)
+				Hooks.Manager.Page.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 			if (im.OriginalId != Guid.Empty)
 				return View(@"~/Areas/Manager/Views/Page/EditCopy.cshtml", pm) ;

@@ -403,7 +403,7 @@ WriteLiteral("            ");
 
             
             #line 142 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -412,14 +412,14 @@ WriteLiteral("\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 5217), Tuple.Create("\"", 5264)
+WriteAttribute("title", Tuple.Create(" title=\"", 5202), Tuple.Create("\"", 5249)
             
             #line 144 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5225), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+, Tuple.Create(Tuple.Create("", 5210), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 5225), false)
+, 5210), false)
 );
 
 WriteLiteral("></button>");
@@ -545,14 +545,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5894), Tuple.Create("\"", 5969)
+WriteAttribute("href", Tuple.Create(" href=\"", 5879), Tuple.Create("\"", 5954)
             
             #line 162 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5901), Tuple.Create<System.Object, System.Int32>(Url.Action("site", "page", new { @id = site.InternalId.ToLower() })
+, Tuple.Create(Tuple.Create("", 5886), Tuple.Create<System.Object, System.Int32>(Url.Action("site", "page", new { @id = site.InternalId.ToLower() })
             
             #line default
             #line hidden
-, 5901), false)
+, 5886), false)
 );
 
 WriteLiteral(" ");
@@ -837,21 +837,21 @@ WriteLiteral(" class=\"title\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 7602), Tuple.Create("\"", 7697)
+WriteAttribute("href", Tuple.Create(" href=\"", 7587), Tuple.Create("\"", 7682)
             
             #line 195 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 7609), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = page.Id })
+, Tuple.Create(Tuple.Create("", 7594), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = page.Id })
             
             #line default
             #line hidden
-, 7609), false)
+, 7594), false)
             
             #line 195 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-    , Tuple.Create(Tuple.Create("", 7650), Tuple.Create<System.Object, System.Int32>(Html.Raw(Model.IsSeoList ? "?action=seo" : "")
+    , Tuple.Create(Tuple.Create("", 7635), Tuple.Create<System.Object, System.Int32>(Html.Raw(Model.IsSeoList ? "?action=seo" : "")
             
             #line default
             #line hidden
-, 7650), false)
+, 7635), false)
 );
 
 WriteLiteral(">\r\n");
@@ -949,35 +949,35 @@ WriteLiteral(">\r\n                    <button");
 
 WriteLiteral(" class=\"icon add-after marg\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 8664), Tuple.Create("\"", 8708)
+WriteAttribute("title", Tuple.Create(" title=\"", 8649), Tuple.Create("\"", 8693)
             
             #line 207 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 8672), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddAfter
+, Tuple.Create(Tuple.Create("", 8657), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddAfter
             
             #line default
             #line hidden
-, 8672), false)
+, 8657), false)
 );
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 8709), Tuple.Create("\"", 8772)
-, Tuple.Create(Tuple.Create("", 8719), Tuple.Create("return", 8719), true)
-, Tuple.Create(Tuple.Create(" ", 8725), Tuple.Create("preSubmit(\'", 8726), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 8694), Tuple.Create("\"", 8757)
+, Tuple.Create(Tuple.Create("", 8704), Tuple.Create("return", 8704), true)
+, Tuple.Create(Tuple.Create(" ", 8710), Tuple.Create("preSubmit(\'", 8711), true)
             
             #line 207 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 8737), Tuple.Create<System.Object, System.Int32>(page.ParentId
+                                                , Tuple.Create(Tuple.Create("", 8722), Tuple.Create<System.Object, System.Int32>(page.ParentId
             
             #line default
             #line hidden
-, 8737), false)
-, Tuple.Create(Tuple.Create("", 8751), Tuple.Create("\',", 8751), true)
+, 8722), false)
+, Tuple.Create(Tuple.Create("", 8736), Tuple.Create("\',", 8736), true)
             
             #line 207 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                                 , Tuple.Create(Tuple.Create(" ", 8753), Tuple.Create<System.Object, System.Int32>(page.Seqno + 1
+                                                                 , Tuple.Create(Tuple.Create(" ", 8738), Tuple.Create<System.Object, System.Int32>(page.Seqno + 1
             
             #line default
             #line hidden
-, 8754), false)
-, Tuple.Create(Tuple.Create("", 8771), Tuple.Create(")", 8771), true)
+, 8739), false)
+, Tuple.Create(Tuple.Create("", 8756), Tuple.Create(")", 8756), true)
 );
 
 WriteLiteral(" type=\"submit\"");
@@ -986,28 +986,28 @@ WriteLiteral("></button>\r\n                    <button");
 
 WriteLiteral(" class=\"icon add-below marg\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 8854), Tuple.Create("\"", 8898)
+WriteAttribute("title", Tuple.Create(" title=\"", 8839), Tuple.Create("\"", 8883)
             
             #line 208 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 8862), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddBelow
+, Tuple.Create(Tuple.Create("", 8847), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddBelow
             
             #line default
             #line hidden
-, 8862), false)
+, 8847), false)
 );
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 8899), Tuple.Create("\"", 8940)
-, Tuple.Create(Tuple.Create("", 8909), Tuple.Create("return", 8909), true)
-, Tuple.Create(Tuple.Create(" ", 8915), Tuple.Create("preSubmit(\'", 8916), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 8884), Tuple.Create("\"", 8925)
+, Tuple.Create(Tuple.Create("", 8894), Tuple.Create("return", 8894), true)
+, Tuple.Create(Tuple.Create(" ", 8900), Tuple.Create("preSubmit(\'", 8901), true)
             
             #line 208 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 8927), Tuple.Create<System.Object, System.Int32>(page.Id
+                                                , Tuple.Create(Tuple.Create("", 8912), Tuple.Create<System.Object, System.Int32>(page.Id
             
             #line default
             #line hidden
-, 8927), false)
-, Tuple.Create(Tuple.Create("", 8935), Tuple.Create("\',", 8935), true)
-, Tuple.Create(Tuple.Create(" ", 8937), Tuple.Create("1)", 8938), true)
+, 8912), false)
+, Tuple.Create(Tuple.Create("", 8920), Tuple.Create("\',", 8920), true)
+, Tuple.Create(Tuple.Create(" ", 8922), Tuple.Create("1)", 8923), true)
 );
 
 WriteLiteral(" type=\"submit\"");
@@ -1029,24 +1029,24 @@ WriteLiteral("></button>\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 9080), Tuple.Create("\"", 9138)
+WriteAttribute("href", Tuple.Create(" href=\"", 9065), Tuple.Create("\"", 9123)
             
             #line 210 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 9087), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", "page", new { id = page.Id })
+, Tuple.Create(Tuple.Create("", 9072), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", "page", new { id = page.Id })
             
             #line default
             #line hidden
-, 9087), false)
+, 9072), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 9139), Tuple.Create("\"", 9181)
+WriteAttribute("title", Tuple.Create(" title=\"", 9124), Tuple.Create("\"", 9166)
             
             #line 210 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-         , Tuple.Create(Tuple.Create("", 9147), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListDelete
+         , Tuple.Create(Tuple.Create("", 9132), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListDelete
             
             #line default
             #line hidden
-, 9147), false)
+, 9132), false)
 );
 
 WriteLiteral(" class=\"icon delete\"");
@@ -1172,16 +1172,16 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 10082), Tuple.Create("\"", 10192)
-, Tuple.Create(Tuple.Create("", 10090), Tuple.Create("templates", 10090), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 10067), Tuple.Create("\"", 10177)
+, Tuple.Create(Tuple.Create("", 10075), Tuple.Create("templates", 10075), true)
             
             #line 240 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create(" ", 10099), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")
+, Tuple.Create(Tuple.Create(" ", 10084), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")
             
             #line default
             #line hidden
-, 10100), false)
-, Tuple.Create(Tuple.Create(" ", 10187), Tuple.Create("left", 10188), true)
+, 10085), false)
+, Tuple.Create(Tuple.Create(" ", 10172), Tuple.Create("left", 10173), true)
 );
 
 WriteLiteral(" data-templateid=\"");

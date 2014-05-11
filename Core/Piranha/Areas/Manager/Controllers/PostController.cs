@@ -19,8 +19,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = @Piranha.Resources.Post.ListTitle ;
 
 			// Executes the post list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PostListModelLoaded != null)
-				WebPages.Hooks.Manager.PostListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Post.Model.OnListLoad != null)
+				Hooks.Manager.Post.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View(@"~/Areas/Manager/Views/Post/Index.cshtml", m);
         }
@@ -35,8 +35,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = @Piranha.Resources.Post.ListTitle ;
 
 			// Executes the post list loaded hook, if registered
-			if (WebPages.Hooks.Manager.PostListModelLoaded != null)
-				WebPages.Hooks.Manager.PostListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Post.Model.OnListLoad != null)
+				Hooks.Manager.Post.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View(@"~/Areas/Manager/Views/Post/Index.cshtml", m);
 		}
@@ -53,8 +53,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			// Executes the post edit loaded hook, if registered
-			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
-				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+			if (Hooks.Manager.Post.Model.OnLoad != null)
+				Hooks.Manager.Post.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
 
 			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", pm) ;
 		}
@@ -76,8 +76,8 @@ namespace Piranha.Areas.Manager.Controllers
 			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
 			// Executes the post edit loaded hook, if registered
-			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
-				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Post.Model.OnLoad != null)
+				Hooks.Manager.Post.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", m) ;
 		}
@@ -92,13 +92,13 @@ namespace Piranha.Areas.Manager.Controllers
 			if (ModelState.IsValid) {
 				try {
 			        // Executes the post edit before save hook, if registered
-			        if (WebPages.Hooks.Manager.PostEditModelBeforeSave != null)
-				        WebPages.Hooks.Manager.PostEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			        if (Hooks.Manager.Post.Model.OnBeforeSave != null)
+				        Hooks.Manager.Post.Model.OnBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 					if (m.SaveAll(draft)) {
                         // Executes the post edit after save hook, if registered
-			            if (WebPages.Hooks.Manager.PostEditModelAfterSave != null)
-				            WebPages.Hooks.Manager.PostEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			            if (Hooks.Manager.Post.Model.OnAfterSave != null)
+				            Hooks.Manager.Post.Model.OnAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 						ModelState.Clear() ;
 						if (!draft) {
@@ -122,8 +122,8 @@ namespace Piranha.Areas.Manager.Controllers
 			m.Refresh() ;
 
 			// Executes the post edit loaded hook, if registered
-			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
-				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Post.Model.OnLoad != null)
+				Hooks.Manager.Post.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			if (m.Post.IsNew)
 				ViewBag.Title = Piranha.Resources.Post.EditTitleNew + m.Template.Name.ToLower() ;

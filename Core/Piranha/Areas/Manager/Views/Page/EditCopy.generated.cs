@@ -519,7 +519,7 @@ WriteLiteral("            ");
 
             
             #line 119 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -553,14 +553,14 @@ WriteLiteral(" class=\"ico\"");
 WriteLiteral("></div>\r\n                <p>This page is a copy. To edit the actual content of th" +
 "e page, please edit the original <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6309), Tuple.Create("\"", 6397)
+WriteAttribute("href", Tuple.Create(" href=\"", 6294), Tuple.Create("\"", 6382)
             
             #line 130 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-                                  , Tuple.Create(Tuple.Create("", 6316), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { @id = Model.Page.OriginalId, @returl = Model.Page.Id })
+                                  , Tuple.Create(Tuple.Create("", 6301), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { @id = Model.Page.OriginalId, @returl = Model.Page.Id })
             
             #line default
             #line hidden
-, 6316), false)
+, 6301), false)
 );
 
 WriteLiteral(">here</a>.</p>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
@@ -826,14 +826,14 @@ WriteLiteral(" type=\"hidden\"");
 
 WriteLiteral(" id=\"org_parentid\"");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 7597), Tuple.Create("\"", 7625)
+WriteAttribute("value", Tuple.Create(" value=\"", 7582), Tuple.Create("\"", 7610)
             
             #line 160 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 7605), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
+, Tuple.Create(Tuple.Create("", 7590), Tuple.Create<System.Object, System.Int32>(Model.Page.ParentId
             
             #line default
             #line hidden
-, 7605), false)
+, 7590), false)
 );
 
 WriteLiteral(" />\r\n</div>\r\n<div");
@@ -1169,14 +1169,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                    <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10195), Tuple.Create("\"", 10208)
+WriteAttribute("value", Tuple.Create(" value=\"", 10180), Tuple.Create("\"", 10193)
             
             #line 202 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 10203), Tuple.Create<System.Object, System.Int32>(p.Id
+, Tuple.Create(Tuple.Create("", 10188), Tuple.Create<System.Object, System.Int32>(p.Id
             
             #line default
             #line hidden
-, 10203), false)
+, 10188), false)
 );
 
             
@@ -1246,14 +1246,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                                <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 10754), Tuple.Create("\"", 10770)
+WriteAttribute("value", Tuple.Create(" value=\"", 10739), Tuple.Create("\"", 10755)
             
             #line 211 "..\..\Areas\Manager\Views\Page\EditCopy.cshtml"
-, Tuple.Create(Tuple.Create("", 10762), Tuple.Create<System.Object, System.Int32>(s.Seqno
+, Tuple.Create(Tuple.Create("", 10747), Tuple.Create<System.Object, System.Int32>(s.Seqno
             
             #line default
             #line hidden
-, 10762), false)
+, 10747), false)
 );
 
             

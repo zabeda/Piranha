@@ -216,7 +216,7 @@ WriteLiteral("            ");
 
             
             #line 28 "..\..\Areas\Manager\Views\SiteTree\Edit.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default

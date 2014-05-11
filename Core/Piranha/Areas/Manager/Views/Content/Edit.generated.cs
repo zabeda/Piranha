@@ -387,7 +387,7 @@ WriteLiteral("            ");
 
             
             #line 36 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-       Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
+       Write(Piranha.Manager.Toolbar.Render(Url, Model));
 
             
             #line default
@@ -991,14 +991,14 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("                            <option");
 
-WriteAttribute("value", Tuple.Create(" value=\"", 6452), Tuple.Create("\"", 6468)
+WriteAttribute("value", Tuple.Create(" value=\"", 6437), Tuple.Create("\"", 6453)
             
             #line 125 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 6460), Tuple.Create<System.Object, System.Int32>(f.Value
+, Tuple.Create(Tuple.Create("", 6445), Tuple.Create<System.Object, System.Int32>(f.Value
             
             #line default
             #line hidden
-, 6460), false)
+, 6445), false)
 );
 
             
@@ -1418,24 +1418,24 @@ WriteLiteral("                <img");
 
 WriteLiteral(" style=\"max-width:190px\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 9360), Tuple.Create("\"", 9394)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 9345), Tuple.Create("\"", 9379)
             
             #line 189 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 9366), Tuple.Create<System.Object, System.Int32>(Model.Content.AlternateText
+, Tuple.Create(Tuple.Create("", 9351), Tuple.Create<System.Object, System.Int32>(Model.Content.AlternateText
             
             #line default
             #line hidden
-, 9366), false)
+, 9351), false)
 );
 
-WriteAttribute("src", Tuple.Create(" src=\"", 9395), Tuple.Create("\"", 9444)
+WriteAttribute("src", Tuple.Create(" src=\"", 9380), Tuple.Create("\"", 9429)
             
             #line 189 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-     , Tuple.Create(Tuple.Create("", 9401), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(Model.Content.Id, 190)
+     , Tuple.Create(Tuple.Create("", 9386), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(Model.Content.Id, 190)
             
             #line default
             #line hidden
-, 9401), false)
+, 9386), false)
 );
 
 WriteLiteral(" />\r\n");

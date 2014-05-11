@@ -28,8 +28,8 @@ namespace Piranha.Areas.Manager.Controllers
 			}
 
 			// Executes the media list loaded hook, if registered
-			if (WebPages.Hooks.Manager.MediaListModelLoaded != null)
-				WebPages.Hooks.Manager.MediaListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Media.Model.OnListLoad != null)
+				Hooks.Manager.Media.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 			
             return View("Index", ListModel.Get());
         }
@@ -100,8 +100,8 @@ namespace Piranha.Areas.Manager.Controllers
 			else ViewBag.Title = Piranha.Resources.Content.EditTitleExistingDocument ;
 
 			// Executes the media edit loaded hook, if registered
-			if (WebPages.Hooks.Manager.MediaEditModelLoaded != null)
-				WebPages.Hooks.Manager.MediaEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			if (Hooks.Manager.Media.Model.OnLoad != null)
+				Hooks.Manager.Media.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View("Edit", m) ;
 		}
@@ -115,13 +115,13 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(bool draft, EditModel m) {
 			try {
 			    // Executes the media edit before save hook, if registered
-			    if (WebPages.Hooks.Manager.MediaEditModelBeforeSave != null)
-				    WebPages.Hooks.Manager.MediaEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			    if (Hooks.Manager.Media.Model.OnBeforeSave != null)
+				    Hooks.Manager.Media.Model.OnBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
                 if (m.SaveAll(draft)) {
                     // Executes the media edit after save hook, if registered
-			        if (WebPages.Hooks.Manager.MediaEditModelAfterSave != null)
-				        WebPages.Hooks.Manager.MediaEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+			        if (Hooks.Manager.Media.Model.OnAfterSave != null)
+				        Hooks.Manager.Media.Model.OnAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
                     ViewBag.Folder = m.Content.IsFolder ;
 					if (m.Content.IsImage) {
