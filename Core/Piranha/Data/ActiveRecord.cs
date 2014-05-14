@@ -129,6 +129,10 @@ namespace Piranha.Data
 		private static Dictionary<string, PropertyInfo> _columns ;
 		private static Dictionary<string, ColumnAttribute> _attributes ;
 
+		private static object _colMutex = new object();
+		private static object _keyMutex = new object();
+		private static object _joinMutex = new object();
+
 		// SQL statements 
 		private const string SqlSelect = "SELECT {3} {6} {0} FROM {1} {2} {4} {5}" ;
 		private const string SqlInsert = "INSERT INTO {0} ({1}) VALUES({2})" ;
@@ -187,12 +191,17 @@ namespace Piranha.Data
 		protected static string TableJoins {
 			get {
 				if (_joins == null) {
-					_joins = "" ;
-					JoinAttribute[] ja = typeof(T).GetCustomAttributes<JoinAttribute>(true) ;
-					if (ja != null) {
-						foreach (var join in ja)
-							_joins += " JOIN " + join.TableName.ToLower() + " ON " + TableName + "." + join.ForeignKey.ToLower() + "=" +
-								join.TableName.ToLower() + "." + join.PrimaryKey.ToLower() ;
+					lock (_joinMutex) {
+						if (_joins == null) { 
+							var joins = "" ;
+							JoinAttribute[] ja = typeof(T).GetCustomAttributes<JoinAttribute>(true) ;
+							if (ja != null) {
+								foreach (var join in ja)
+									joins += " JOIN " + join.TableName.ToLower() + " ON " + TableName + "." + join.ForeignKey.ToLower() + "=" +
+										join.TableName.ToLower() + "." + join.PrimaryKey.ToLower() ;
+							}
+							_joins = joins;
+						}
 					}
 				}
 				return _joins ;
@@ -493,16 +502,22 @@ namespace Piranha.Data
 		/// Initializes the column information from the associated attributes.
 		/// </summary>
 		private static void InitColumns() {
-			_columns = new Dictionary<string, PropertyInfo>() ;
-			_attributes = new Dictionary<string, ColumnAttribute>() ;
+			lock (_colMutex) {
+				if (_columns == null && _attributes == null) { 
+					var cols = new Dictionary<string, PropertyInfo>() ;
+					var attrs = new Dictionary<string, ColumnAttribute>() ;
 
-			PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance|BindingFlags.FlattenHierarchy) ;
-			foreach (PropertyInfo prop in props) {
-				ColumnAttribute af = prop.GetCustomAttribute<ColumnAttribute>(true) ;
+					PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance|BindingFlags.FlattenHierarchy) ;
+					foreach (PropertyInfo prop in props) {
+						ColumnAttribute af = prop.GetCustomAttribute<ColumnAttribute>(true) ;
 
-				if (af != null) {
-					_columns.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, prop) ;
-					_attributes.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, af) ;
+						if (af != null) {
+							cols.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, prop) ;
+							attrs.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, af) ;
+						}
+					}
+					_columns = cols;
+					_attributes = attrs;
 				}
 			}
 		}
@@ -511,12 +526,18 @@ namespace Piranha.Data
 		/// Initializes the primary keys
 		/// </summary>
 		private static void InitPrimaryKeys() {
-			_primarykey = new List<string>() ;
+			lock (_keyMutex) {
+				if (_primarykey == null) { 
+					var keys = new List<string>() ;
 
-			PrimaryKeyAttribute pa = typeof(T).GetCustomAttribute<PrimaryKeyAttribute>(true) ;
-			if (pa != null && !String.IsNullOrEmpty(pa.Column))
-				_primarykey.AddRange(pa.Column.Split(new char[] {','})) ;
-			else _primarykey.Add("Id") ;
+					PrimaryKeyAttribute pa = typeof(T).GetCustomAttribute<PrimaryKeyAttribute>(true) ;
+					if (pa != null && !String.IsNullOrEmpty(pa.Column))
+						keys.AddRange(pa.Column.Split(new char[] {','})) ;
+					else keys.Add("Id") ;
+
+					_primarykey = keys;
+				}
+			}
 		}
 
 		/// <summary>
