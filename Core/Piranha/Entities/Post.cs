@@ -55,6 +55,16 @@ namespace Piranha.Entities
 		public string Body { get ; set ; }
 
 		/// <summary>
+		/// Gets/sets the meta keywords.
+		/// </summary>
+		public string Keywords { get ; set ; }
+
+		/// <summary>
+		/// Gets/sets the meta description.
+		/// </summary>
+		public string Description { get ; set ; }
+
+		/// <summary>
 		/// Gets/sets the id's of content attached to this post.
 		/// </summary>
 		public IList<Guid> Attachments { get ; set ; }
