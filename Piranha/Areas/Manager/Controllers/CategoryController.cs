@@ -18,7 +18,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Index() {
-			return View("Index", ListModel.Get()) ;
+			var m = ListModel.Get() ;
+
+			// Executes the category list loaded hook, if registered
+			if (WebPages.Hooks.Manager.CategoryListModelLoaded != null)
+				WebPages.Hooks.Manager.CategoryListModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View("Index", m);
 		}
 
 		/// <summary>
@@ -35,6 +41,11 @@ namespace Piranha.Areas.Manager.Controllers
 			} else {
 				ViewBag.Title = Piranha.Resources.Category.EditTitleNew ;
 			}
+
+			// Executes the category edit loaded hook, if registered
+			if (WebPages.Hooks.Manager.CategoryEditModelLoaded != null)
+				WebPages.Hooks.Manager.CategoryEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 			return View("Edit", m) ;
 		}
 
@@ -47,7 +58,15 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Edit(EditModel m) {
 			if (ModelState.IsValid) {
+			    // Executes the category edit before save hook, if registered
+			    if (WebPages.Hooks.Manager.CategoryEditModelBeforeSave != null)
+				    WebPages.Hooks.Manager.CategoryEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 				if (m.SaveAll()) {
+					// Executes the category edit before save hook, if registered
+					if (WebPages.Hooks.Manager.CategoryEditModelAfterSave != null)
+						WebPages.Hooks.Manager.CategoryEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 					ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
 					SuccessMessage(Piranha.Resources.Category.MessageSaved) ;
 					ModelState.Clear() ;
