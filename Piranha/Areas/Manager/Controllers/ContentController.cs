@@ -116,12 +116,12 @@ namespace Piranha.Areas.Manager.Controllers
 			try {
 			    // Executes the media edit before save hook, if registered
 			    if (WebPages.Hooks.Manager.MediaEditModelBeforeSave != null)
-				    WebPages.Hooks.Manager.MediaEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+				    WebPages.Hooks.Manager.MediaEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m, !draft) ;
 
                 if (m.SaveAll(draft)) {
                     // Executes the media edit after save hook, if registered
 			        if (WebPages.Hooks.Manager.MediaEditModelAfterSave != null)
-				        WebPages.Hooks.Manager.MediaEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+				        WebPages.Hooks.Manager.MediaEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m, !draft) ;
 
                     ViewBag.Folder = m.Content.IsFolder ;
 					if (m.Content.IsImage) {

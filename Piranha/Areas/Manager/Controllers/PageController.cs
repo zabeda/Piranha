@@ -132,12 +132,12 @@ namespace Piranha.Areas.Manager.Controllers
 				try {
 			        // Executes the page edit before save hook, if registered
 			        if (WebPages.Hooks.Manager.PageEditModelBeforeSave != null)
-				        WebPages.Hooks.Manager.PageEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+				        WebPages.Hooks.Manager.PageEditModelBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), pm, !draft) ;
 
 					if (pm.SaveAll(draft)) {
                         // Executes the page edit after save hook, if registered
 			            if (WebPages.Hooks.Manager.PageEditModelAfterSave != null)
-				            WebPages.Hooks.Manager.PageEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+				            WebPages.Hooks.Manager.PageEditModelAfterSave(this, WebPages.Manager.GetActiveMenuItem(), pm, !draft) ;
                         
                         ModelState.Clear() ;
 						if (!draft) {

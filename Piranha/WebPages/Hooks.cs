@@ -116,12 +116,12 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Executed before the page edit model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<Models.Manager.PostModels.EditModel> PostEditModelBeforeSave;
+			public static Delegates.ManagerPublishableModelHook<Models.Manager.PostModels.EditModel> PostEditModelBeforeSave;
 
 			/// <summary>
 			/// Executed after the page edit model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<Models.Manager.PostModels.EditModel> PostEditModelAfterSave;
+			public static Delegates.ManagerPublishableModelHook<Models.Manager.PostModels.EditModel> PostEditModelAfterSave;
 			#endregion
 
 			#region Page Hooks
@@ -138,12 +138,12 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Executed before the page edit model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<Models.Manager.PageModels.EditModel> PageEditModelBeforeSave;
+			public static Delegates.ManagerPublishableModelHook<Models.Manager.PageModels.EditModel> PageEditModelBeforeSave;
 
 			/// <summary>
 			/// Executed after the page edit model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<Models.Manager.PageModels.EditModel> PageEditModelAfterSave;
+			public static Delegates.ManagerPublishableModelHook<Models.Manager.PageModels.EditModel> PageEditModelAfterSave;
 			#endregion
 
 			#region Media Hooks
@@ -160,12 +160,12 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// Executed before the media edit model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelBeforeSave;
+			public static Delegates.ManagerPublishableModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelBeforeSave;
 
 			/// <summary>
 			/// Executed after the media edit model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelAfterSave;
+			public static Delegates.ManagerPublishableModelHook<Models.Manager.ContentModels.EditModel> MediaEditModelAfterSave;
 			#endregion
 
 			#region Category Hooks
