@@ -108,13 +108,13 @@ namespace Piranha.Areas.Manager.Controllers
 				}
 			}
 
-			if (!pm.IsSite)
-				ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
-			else ViewBag.Title = Piranha.Resources.Global.Edit + " " + pm.SiteTree.Name.ToLower() ;
-
 			// Executes the page edit loaded hook, if registered
 			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
 				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+
+			if (!pm.IsSite)
+				ViewBag.Title = Piranha.Resources.Page.EditTitleExisting ;
+			else ViewBag.Title = Piranha.Resources.Global.Edit + " " + pm.SiteTree.Name.ToLower() ;
 
 			if (pm.Page.OriginalId != Guid.Empty)
 				return View(@"~/Areas/Manager/Views/Page/EditCopy.cshtml", pm) ;
@@ -202,11 +202,11 @@ namespace Piranha.Areas.Manager.Controllers
 				pm = EditModel.CreateByOriginalAndPosition(im.OriginalId, im.ParentId, im.Seqno, im.SiteTreeId, im.SiteTree) ;
 			else pm = EditModel.CreateByTemplateAndPosition(im.TemplateId, im.ParentId, im.Seqno, im.SiteTreeId, im.SiteTree) ;
 
-			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
-
 			// Executes the page list loaded hook, if registered
 			if (WebPages.Hooks.Manager.PageEditModelLoaded != null)
 				WebPages.Hooks.Manager.PageEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+
+			ViewBag.Title = Piranha.Resources.Page.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			if (im.OriginalId != Guid.Empty)
 				return View(@"~/Areas/Manager/Views/Page/EditCopy.cshtml", pm) ;

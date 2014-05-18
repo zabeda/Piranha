@@ -50,11 +50,11 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Insert(InsertModel im) {
 			EditModel pm = EditModel.CreateByTemplate(im.TemplateId) ;
 
-			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.ToLower() ;
-
 			// Executes the post edit loaded hook, if registered
 			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
 				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), pm) ;
+
+			ViewBag.Title = Piranha.Resources.Post.EditTitleNew + pm.Template.Name.ToLower() ;
 
 			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", pm) ;
 		}
@@ -73,11 +73,11 @@ namespace Piranha.Areas.Manager.Controllers
 				}
 			}
 
-			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
-
 			// Executes the post edit loaded hook, if registered
 			if (WebPages.Hooks.Manager.PostEditModelLoaded != null)
 				WebPages.Hooks.Manager.PostEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			ViewBag.Title = Piranha.Resources.Post.EditTitleExisting ;
 
 			return View(@"~/Areas/Manager/Views/Post/Edit.cshtml", m) ;
 		}
