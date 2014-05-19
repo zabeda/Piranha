@@ -35,15 +35,15 @@ namespace Piranha.Areas.Manager.Controllers
 		public ActionResult Edit(string id = "") {
 			EditModel m = id != "" ? EditModel.GetById(new Guid(id)) : new EditModel() ;
 
-			// Executes the category edit loaded hook, if registered
-			if (WebPages.Hooks.Manager.CategoryEditModelLoaded != null)
-				WebPages.Hooks.Manager.CategoryEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
-
 			if (m.Category.IsNew) {
 				ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Category.EditTitleNew ;
 			}
+
+			// Executes the category edit loaded hook, if registered
+			if (WebPages.Hooks.Manager.CategoryEditModelLoaded != null)
+				WebPages.Hooks.Manager.CategoryEditModelLoaded(this, WebPages.Manager.GetActiveMenuItem(), m) ;
 
 			return View("Edit", m) ;
 		}
