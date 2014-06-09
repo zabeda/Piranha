@@ -902,42 +902,49 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Account.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Account.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Account.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Category.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Category.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Category.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Category.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Comment.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Comment.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Comment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Comment.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Content.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Content.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Content.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Content.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Extensions.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Extensions.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Extensions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Extensions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Global.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Global.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Global.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Page.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Page.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Page.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Page.Designer.cs</LastGenOutput>
@@ -945,36 +952,42 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Post.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Post.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Post.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Post.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Regions.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Regions.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Regions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Regions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Settings.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Settings.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Settings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
     <EmbeddedResource Include="Resources\SiteTree.de-DE.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.pt-BR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SiteTree.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Tabs.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Tabs.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Tabs.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Tabs.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Template.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Template.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Template.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
