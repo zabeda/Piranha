@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{73B6E71E-3255-40A1-93EF-5416DC71E940}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Piranha</RootNamespace>
@@ -902,6 +902,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Account.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Account.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Account.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -909,6 +910,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Category.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Category.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Category.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Category.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -916,6 +918,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Comment.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Comment.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Comment.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Comment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -923,6 +926,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Content.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Content.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Content.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Content.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -930,6 +934,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Extensions.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Extensions.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Extensions.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Extensions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -937,6 +942,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Global.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Global.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Global.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Global.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -944,6 +950,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Page.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Page.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Page.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Page.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -952,6 +959,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Post.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Post.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Post.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Post.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -959,6 +967,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Regions.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Regions.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Regions.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Regions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -966,6 +975,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Settings.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Settings.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Settings.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Settings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -973,6 +983,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
     <EmbeddedResource Include="Resources\SiteTree.de-DE.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.fr-FR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.pt-BR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -980,6 +991,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Tabs.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Tabs.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Tabs.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Tabs.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -987,6 +999,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Template.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Template.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Template.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Template.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
