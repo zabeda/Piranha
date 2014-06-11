@@ -27,7 +27,7 @@ namespace Piranha.Mvc
 		/// </summary>
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
-		public T GetModel<T>() where T : PageModel {
+		protected T GetModel<T>() where T : PageModel {
 			return GetModel<T>(CurrentPermalink) ;
 		}
 
@@ -36,7 +36,7 @@ namespace Piranha.Mvc
 		/// </summary>
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
-		public PageModel GetModel(string permalink) {
+		protected PageModel GetModel(string permalink) {
 			return GetModel<PageModel>(permalink) ;
 		}
 
@@ -46,7 +46,7 @@ namespace Piranha.Mvc
 		/// <typeparam name="T">The model type</typeparam>
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
-		public T GetModel<T>(string permalink) where T : PageModel {
+		protected T GetModel<T>(string permalink) where T : PageModel {
 			// Get the model
 			var page = Page.GetByPermalink(permalink, IsDraft) ;
 			var model = PageModel.Get<T>(page) ;
