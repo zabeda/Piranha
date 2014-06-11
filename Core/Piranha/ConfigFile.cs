@@ -86,7 +86,7 @@ namespace Piranha
         /// <summary>
         /// Gets if "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> should be rendered for IE
         /// </summary>
-        [ConfigurationProperty(DISABLE_CATALOG_SEARCH, IsRequired = false)]
+        [ConfigurationProperty(RENDERX_UA_COMPATIBLEFORIE, IsRequired = false)]
         public BooleanElement RenderX_UA_CompatibleForIE
         {
             get { return (BooleanElement)this[RENDERX_UA_COMPATIBLEFORIE]; }
