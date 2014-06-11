@@ -18,7 +18,13 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Index() {
-			return View("Index", ListModel.Get()) ;
+			var m = ListModel.Get() ;
+
+			// Executes the category list loaded hook, if registered
+			if (Hooks.Manager.Category.Model.OnListLoad != null)
+				Hooks.Manager.Category.Model.OnListLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
+			return View("Index", m);
 		}
 
 		/// <summary>
@@ -27,14 +33,18 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="id">The category id</param>
 		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Edit(string id = "") {
-			EditModel m = new EditModel() ;
+			EditModel m = id != "" ? EditModel.GetById(new Guid(id)) : new EditModel() ;
 
-			if (id != "") {
-				m = EditModel.GetById(new Guid(id)) ;
+			if (m.Category.IsNew) {
 				ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
 			} else {
 				ViewBag.Title = Piranha.Resources.Category.EditTitleNew ;
 			}
+
+			// Executes the category edit loaded hook, if registered
+			if (Hooks.Manager.Category.Model.OnLoad != null)
+				Hooks.Manager.Category.Model.OnLoad(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 			return View("Edit", m) ;
 		}
 
@@ -47,7 +57,15 @@ namespace Piranha.Areas.Manager.Controllers
 		[Access(Function="ADMIN_CATEGORY")]
 		public ActionResult Edit(EditModel m) {
 			if (ModelState.IsValid) {
+			    // Executes the category edit before save hook, if registered
+			    if (Hooks.Manager.Category.Model.OnBeforeSave != null)
+				    Hooks.Manager.Category.Model.OnBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 				if (m.SaveAll()) {
+					// Executes the category edit before save hook, if registered
+					if (Hooks.Manager.Category.Model.OnAfterSave != null)
+						Hooks.Manager.Category.Model.OnAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+
 					ViewBag.Title = Piranha.Resources.Category.EditTitleExisting ;
 					SuccessMessage(Piranha.Resources.Category.MessageSaved) ;
 					ModelState.Clear() ;

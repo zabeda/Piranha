@@ -27,12 +27,12 @@ namespace Piranha.Hooks.Manager
 			/// <summary>
 			/// Called right before the post model is saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<EditModel> OnBeforeSave;
+			public static Delegates.ManagerPublishableModelHook<EditModel> OnBeforeSave;
 
 			/// <summary>
 			/// Called right after the post model has been saved.
 			/// </summary>
-			public static Delegates.ManagerModelHook<EditModel> OnAfterSave;
+			public static Delegates.ManagerPublishableModelHook<EditModel> OnAfterSave;
 		}
 
 		/// <summary>

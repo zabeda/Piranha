@@ -26,6 +26,15 @@ namespace Piranha.Hooks.Manager
 		public delegate void ManagerModelHook<T>(Controller controller, WebPages.Manager.MenuItem menu, T model);
 
 		/// <summary>
+		/// Delegate for when a view model has been loaded by the manager.
+		/// </summary>
+		/// <typeparam name="T">The model type</typeparam>
+		/// <param name="controller">The manager controller</param>
+		/// <param name="menu">The active menu item</param>
+		/// <param name="model">The model</param>
+		public delegate void ManagerPublishableModelHook<T>(Controller controller, WebPages.Manager.MenuItem menu, T model, bool publish);
+
+		/// <summary>
 		/// Delegate for adding content into the manager toolbar.
 		/// </summary>
 		/// <typeparam name="T">The model type</typeparam>

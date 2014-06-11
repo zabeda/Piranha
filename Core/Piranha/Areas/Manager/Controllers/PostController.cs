@@ -93,12 +93,12 @@ namespace Piranha.Areas.Manager.Controllers
 				try {
 			        // Executes the post edit before save hook, if registered
 			        if (Hooks.Manager.Post.Model.OnBeforeSave != null)
-				        Hooks.Manager.Post.Model.OnBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+				        Hooks.Manager.Post.Model.OnBeforeSave(this, WebPages.Manager.GetActiveMenuItem(), m, !draft) ;
 
 					if (m.SaveAll(draft)) {
                         // Executes the post edit after save hook, if registered
 			            if (Hooks.Manager.Post.Model.OnAfterSave != null)
-				            Hooks.Manager.Post.Model.OnAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m) ;
+				            Hooks.Manager.Post.Model.OnAfterSave(this, WebPages.Manager.GetActiveMenuItem(), m, !draft) ;
 
 						ModelState.Clear() ;
 						if (!draft) {
