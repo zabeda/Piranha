@@ -39,9 +39,11 @@ namespace Piranha
 		private const string DISABLE_METHOD_BINDING = "disableMethodBinding" ;
 		private const string DISABLE_MODELSTATE_BINDING = "disableModelStateBinding" ;
 		private const string DISABLE_MANAGER = "disableManager" ;
+        private const string DISABLE_CATALOG_SEARCH = "disableCatalogSearch";
 		private const string MANAGER_NAMESPACES = "managerNamespaces" ;
 		private const string PASSIVE_MODE = "passiveMode" ;
 		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks" ;
+        private const string RENDERX_UA_COMPATIBLEFORIE = "renderX-UA-CompatibleForIE";
 		#endregion
 
 		/// <summary>
@@ -70,6 +72,26 @@ namespace Piranha
 			get { return (BooleanElement)this[DISABLE_MANAGER] ; }
 			set { this[DISABLE_MANAGER] = value ; }
 		}
+
+        /// <summary>
+        /// Gets if the providers should be searched outside of Piranha*.ddls
+        /// </summary>
+        [ConfigurationProperty(DISABLE_CATALOG_SEARCH, IsRequired = false)]
+        public BooleanElement DisableCatalogSearch
+        {
+            get { return (BooleanElement)this[DISABLE_CATALOG_SEARCH]; }
+            set { this[DISABLE_CATALOG_SEARCH] = value; }
+        }
+
+        /// <summary>
+        /// Gets if "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> should be rendered for IE
+        /// </summary>
+        [ConfigurationProperty(RENDERX_UA_COMPATIBLEFORIE, IsRequired = false)]
+        public BooleanElement RenderX_UA_CompatibleForIE
+        {
+            get { return (BooleanElement)this[RENDERX_UA_COMPATIBLEFORIE]; }
+            set { this[RENDERX_UA_COMPATIBLEFORIE] = value; }
+        }
 
 		/// <summary>
 		/// Gets/sets the additional manager namespaces.
@@ -105,7 +127,9 @@ namespace Piranha
 			DisableMethodBinding = new BooleanElement() ;
 			DisableModelStateBinding = new BooleanElement() ;
 			DisableManager = new BooleanElement() ;
+            DisableCatalogSearch = new BooleanElement();
 			ManagerNamespaces = new StringElement() ;
+            RenderX_UA_CompatibleForIE = new BooleanElement();
 		}
 	}
 
