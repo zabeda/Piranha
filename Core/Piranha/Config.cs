@@ -49,7 +49,30 @@ namespace Piranha
 			}
 		}
 
-		/// <summary>
+        /// <summary>
+        /// Gets if the providers should be searched outside of Piranha*.ddls
+        /// </summary>
+        public static bool DisableCatalogSearch
+        {
+            get
+            {
+                return config.Settings.DisableCatalogSearch.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets if "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> should be rendered for IE
+        /// </summary>
+        public static bool RenderX_UA_CompatibleForIE
+        {
+            get
+            {
+                return config.Settings.RenderX_UA_CompatibleForIE.Value;
+            }
+        }
+
+
+        /// <summary>
 		/// Gets the additional namespaces that should be inlcuded in the manager interface.
 		/// </summary>
 		public static string[] ManagerNamespaces {

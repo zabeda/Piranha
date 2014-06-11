@@ -56,7 +56,7 @@ namespace Piranha.Extend
 			var catalog = new AggregateCatalog() ;
 
 			if (HttpContext.Current != null) {
-				catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
+                catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
 #if !NET40
 				if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
 #endif
@@ -67,10 +67,10 @@ namespace Piranha.Extend
 #if !NET40
 				}
 #endif
-			} else { 
-				catalog.Catalogs.Add(new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
+			} else {
+                catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory, "Piranha*.dll") : new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
 			}
-			Container = new CompositionContainer(catalog) ;
+            Container = new CompositionContainer(catalog);
 			Container.ComposeParts(this) ;
 		}
 

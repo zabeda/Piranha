@@ -8,6 +8,7 @@ using System.Web;
 
 using Piranha.Web;
 using Piranha.Web.Handlers;
+using System.Diagnostics;
 
 namespace Piranha
 {
@@ -203,11 +204,12 @@ namespace Piranha
 
 						// Compose parts
 						if (HttpContext.Current != null) {
-							catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
-						} else { 
-							catalog.Catalogs.Add(new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
+                            catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
+						} else {
+                            catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory, "Piranha*.dll") : new DirectoryCatalog(AppDomain.CurrentDomain.BaseDirectory));
 						}
-						Container = new CompositionContainer(catalog) ;
+
+                        Container = new CompositionContainer(catalog);
 						Container.ComposeParts(this) ;
 
 						// Register default handlers
