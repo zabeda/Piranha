@@ -82,11 +82,14 @@ namespace Piranha.Extend
 					ext.Value.Ensure(db) ;
 				db.Logout() ;
 			}
-			// Ensure page types
-			EnsurePageTypes() ;
 
-			// Ensure post types
-			EnsurePostTypes() ;
+			if (!Config.DisableTypeBuilder) {
+				// Ensure page types
+				EnsurePageTypes() ;
+
+				// Ensure post types
+				EnsurePostTypes() ;
+			}
 		}
 
 		/// <summary>

@@ -58,6 +58,16 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets/sets if the page & post type builder of the Extension Manager
+		/// should be disabled.
+		/// </summary>
+		public static bool DisableTypeBuilder {
+			get {
+				return config.Settings.DisableTypeBuilder.Value;
+			}
+		}
+
+		/// <summary>
 		/// Gets the additional namespaces that should be inlcuded in the manager interface.
 		/// </summary>
 		public static string[] ManagerNamespaces {

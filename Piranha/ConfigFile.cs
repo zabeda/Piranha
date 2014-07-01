@@ -49,6 +49,7 @@ namespace Piranha
 		private const string DISABLE_METHOD_BINDING = "disableMethodBinding" ;
 		private const string DISABLE_MODELSTATE_BINDING = "disableModelStateBinding" ;
 		private const string DISABLE_MANAGER = "disableManager" ;
+		private const string DISABLE_TYPE_BUILDER = "disableTypeBuilder";
 		private const string MANAGER_NAMESPACES = "managerNamespaces" ;
 		private const string PASSIVE_MODE = "passiveMode" ;
 		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks" ;
@@ -109,12 +110,23 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets/sets if the page & post type builder of the Extension Manager
+		/// should be disabled.
+		/// </summary>
+		[ConfigurationProperty(DISABLE_TYPE_BUILDER, IsRequired=false)]
+		public BooleanElement DisableTypeBuilder {
+			get { return (BooleanElement)this[DISABLE_TYPE_BUILDER]; }
+			set { this[DISABLE_TYPE_BUILDER] = value; }
+		}
+
+		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public SettingsElement() {
 			DisableMethodBinding = new BooleanElement() ;
 			DisableModelStateBinding = new BooleanElement() ;
 			DisableManager = new BooleanElement() ;
+			DisableTypeBuilder = new BooleanElement();
 			ManagerNamespaces = new StringElement() ;
 		}
 	}
