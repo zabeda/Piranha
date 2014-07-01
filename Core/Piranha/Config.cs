@@ -71,6 +71,17 @@ namespace Piranha
             }
         }
 
+        /// <summary>
+        /// Gets if database access errors should be shown instead of redirecting to /manager/install
+        /// </summary>
+        public static bool ShowDBErrors
+        {
+            get
+            {
+                return config.Settings.ShowDBErrors.Value;
+            }
+        }
+
 
         /// <summary>
 		/// Gets the additional namespaces that should be inlcuded in the manager interface.
