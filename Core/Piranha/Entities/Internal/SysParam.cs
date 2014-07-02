@@ -85,7 +85,12 @@ namespace Piranha.Models
 				if (!Cache.Contains(name.ToUpper()))
 					Cache[name.ToUpper()] = SysParam.GetSingle("sysparam_name = @0", name) ;
 				return (SysParam)Cache[name.ToUpper()] ;
-			} catch {}
+			} catch (Exception ex) {
+                if (Config.ShowDBErrors)
+                {
+                    throw;
+                }
+            }
 			return null ;
 		}
 		#endregion
