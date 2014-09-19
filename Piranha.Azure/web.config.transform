@@ -4,8 +4,8 @@
   </configSections>
   <piranha>
     <providers>
-      <mediaProvider value="Piranha.Azure.IO.AzureMediaProvider, Piranha.Azure" />
-      <logProvider value="Piranha.Azure.Log.AzureLogProvider, Piranha.Azure" />
+			<!--mediaProvider value="Piranha.Azure.IO.AzureMediaProvider, Piranha.Azure" /-->
+			<!--logProvider value="Piranha.Azure.Log.AzureLogProvider, Piranha.Azure" /-->
     </providers>
   </piranha>
   <piranha.azure>
