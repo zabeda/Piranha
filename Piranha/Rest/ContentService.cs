@@ -90,6 +90,8 @@ namespace Piranha.Rest
 						Description = c.Description,
 						Type = c.Type,
 						Size = c.Size,
+						Width = c.Width > 0 ? (int?)c.Width : null,
+						Height = c.Height > 0 ? (int?)c.Height : null,
 						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath + 
 							(!draft ? Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") :
 							Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + c.Id,

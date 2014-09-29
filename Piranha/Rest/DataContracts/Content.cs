@@ -26,6 +26,10 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public int Size { get ; set ; }
 		[DataMember()]
+		public int? Width { get; set; }
+		[DataMember()]
+		public int? Height { get; set; }
+		[DataMember()]
 		public string ThumbnailUrl { get ; set ; }
 		[DataMember()]
 		public string ContentUrl { get ; set ; }
