@@ -69,7 +69,7 @@ namespace Piranha.Mvc
 			var query = "&piranha-culture=" + System.Globalization.CultureInfo.CurrentUICulture.Name ;
 
 			foreach (var param in context.Request.QueryString.AllKeys)
-				query += "&" + param + "=" + context.Request.QueryString[param] ;
+				query += "&" + param + "=" + HttpUtility.UrlEncode(context.Request.QueryString[param]);
 			return query ;
 		}
 	}
