@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 
 using Piranha.Data;
+using Piranha.Globalization;
 
 namespace Piranha.Models
 {
@@ -170,8 +171,15 @@ namespace Piranha.Models
 				}
 			}
 
-			var perm = Regex.Replace(str.ToLower().Replace(" ", "-").Replace("å", "a").Replace("ä", "a").Replace("ö", "o"),
-				@"[^a-z0-9-/]", "").Replace("--", "-") ;
+		    str = str.ToLower().TransliterateRussianToLatin();
+
+		    var perm = Regex.Replace(
+		        str
+		            .Replace(" ", "-")
+		            .Replace("å", "a")
+		            .Replace("ä", "a")
+		            .Replace("ö", "o"),
+		        @"[^a-z0-9-/]", "").Replace("--", "-");
 
 			if (perm.EndsWith("-"))
 				perm = perm.Substring(0, perm.LastIndexOf("-")) ;
