@@ -38,14 +38,14 @@ namespace Piranha.WebPages
 			/// Gets the name of the current controller.
 			/// </summary>
 			private string ControllerName {
-				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString() ; }
+				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower() ; }
 			}
 
 			/// <summary>
 			/// Gets the name of the current action.
 			/// </summary>
 			private string ActionName {
-				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString() ; }
+				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower() ; }
 			}
 			#endregion
 
@@ -73,7 +73,7 @@ namespace Piranha.WebPages
 				var action = ActionName ;
 				
 				foreach (var item in ItemsForUser())
-					if (item.Controller == controller) {
+					if (item.Controller.ToLower() == controller) {
 						if (String.IsNullOrEmpty(item.SelectedActions))
 							return true ;
 						foreach (var str in item.SelectedActions.Split(new char[] { ',' }))
@@ -149,17 +149,17 @@ namespace Piranha.WebPages
 			/// </summary>
 			/// <returns>Whether the item is active</returns>
 			public bool IsActive() {
-				var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
-				var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+				var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
+				var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
 				if (String.IsNullOrEmpty(action))
 					action = "index" ;
 
-				if (Controller == controller) {
+				if (Controller.ToLower() == controller) {
 					if (!String.IsNullOrEmpty(SelectedActions)) {
 						string[] actions = SelectedActions.Split(new char[] { ',' }) ;
 
 						foreach (var a in actions)
-							if (a.Trim() == action)
+							if (a.Trim().ToLower() == action)
 								return true ;
 					} else return true ;
 				}
