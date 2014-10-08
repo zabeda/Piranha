@@ -173,13 +173,19 @@ namespace Piranha.Models
 
 		    str = str.ToLower().TransliterateRussianToLatin();
 
-		    var perm = Regex.Replace(
-		        str
-		            .Replace(" ", "-")
-		            .Replace("å", "a")
-		            .Replace("ä", "a")
-		            .Replace("ö", "o"),
-		        @"[^a-z0-9-/]", "").Replace("--", "-");
+		    var perm = Regex.Replace(str
+				.Replace(" ", "-")
+				.Replace("å", "a")
+				.Replace("ä", "a")
+				.Replace("á", "a")
+				.Replace("à", "a")
+				.Replace("ö", "o")
+				.Replace("ó", "o")
+				.Replace("ò", "o")
+				.Replace("é", "e")
+				.Replace("è", "e")
+				.Replace("í", "i")
+				.Replace("ì", "i"), @"[^a-z0-9-/]", "").Replace("--", "-");
 
 			if (perm.EndsWith("-"))
 				perm = perm.Substring(0, perm.LastIndexOf("-")) ;
