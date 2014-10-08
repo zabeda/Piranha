@@ -27,7 +27,7 @@ namespace Piranha.Web.Handlers
 		/// <param name="draft">Whether to get the draft thumbnail or not</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
-			if (args != null && args.Length > 1) {
+			if (args != null && args.Length >= 1) {
 				if (!GetThumbnail(context, draft, args, new Guid(args[0]))) {
 					var page = Page.GetSingle(new Guid(args[0])) ;
 					if (page != null && page.Attachments.Count > 0) {
