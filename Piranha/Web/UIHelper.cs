@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 
+using AutoMapper;
 using Piranha.Models;
 using Piranha.WebPages;
 
@@ -337,7 +338,7 @@ namespace Piranha.Web
 		/// <param name="Levels">The number of levels. Use this if you don't know the start level</param>
 		/// <returns>A html string</returns>
 		public IHtmlString Menu(int StartLevel = 1, int StopLevel = Int32.MaxValue, int Levels = 0,
-			string RootNode = "", string CssClass = "menu") 
+			string RootNode = "", string CssClass = "menu", bool RenderParent = false) 
 		{
 			StringBuilder str = new StringBuilder() ;
 			List<Sitemap> sm = null ;
@@ -352,12 +353,16 @@ namespace Piranha.Web
 					if (pr != null) {
 						Page p = Page.GetByPermalinkId(pr.Id) ;
 						Sitemap page = Sitemap.GetStructure(true).GetRootNode(p.Id) ;
-						if (page != null)
-							sm = page.Pages ;
+						if (page != null) {
+							sm = new List<Sitemap>();
+							if (RenderParent)
+								sm.Add(Mapper.Map<Sitemap, Sitemap>(page));
+							sm.AddRange(page.Pages);
+						}
 					}
 				} else {
 					sm = GetStartLevel(Sitemap.GetStructure(true), 
-						Current.Id, StartLevel) ;
+						Current.Id, StartLevel, RenderParent);
 				}
 				if (sm != null) {
 					if (StopLevel == Int32.MaxValue && Levels > 0 && sm.Count > 0)
@@ -390,7 +395,7 @@ namespace Piranha.Web
 							sm = page.Pages ;
 					}
 				} else {
-					sm =sm = GetStartLevel(Sitemap.GetStructure(true), 
+					sm = GetStartLevel(Sitemap.GetStructure(true), 
 						Current.Id, StartLevel) ;
 				}
 				if (sm != null) {
@@ -455,12 +460,21 @@ namespace Piranha.Web
 		/// <param name="id">The id of the current page</param>
 		/// <param name="start">The desired startlevel</param>
 		/// <returns>The sitemap</returns>
-		private List<Sitemap> GetStartLevel(List<Sitemap> sm, Guid id, int start) {
+		private List<Sitemap> GetStartLevel(List<Sitemap> sm, Guid id, int start, bool includedParent = false) {
 			if (sm == null || sm.Count == 0 || sm[0].Level == start)
 				return sm ;
 			foreach (Sitemap page in sm)
-				if (ChildActive(page, id))
+				if (ChildActive(page, id)) {
+					if (includedParent && page.Level == start - 1) {
+						var pages = new List<Sitemap>();
+
+						pages.Add(Mapper.Map<Sitemap, Sitemap>(page));
+						pages.AddRange(page.Pages);
+
+						return pages;
+					}
 					return GetStartLevel(page.Pages, id, start) ;
+				}
 			return null ;
 		}
 

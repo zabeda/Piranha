@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 
+using AutoMapper;
 using Piranha.Web;
 using Piranha.Web.Handlers;
 
@@ -141,6 +142,13 @@ namespace Piranha
             }
 
 			RegisterHandlers() ;
+
+			// Configure AutoMapper
+			Mapper.CreateMap<Models.Sitemap, Models.Sitemap>()
+				.ForMember(s => s.Pages, o => o.Ignore());
+
+			// Assert configuration
+			Mapper.AssertConfigurationIsValid();
 		}
 	
 		/// <summary>
