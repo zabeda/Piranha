@@ -908,6 +908,7 @@
     <Content Include="Areas\Manager\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Account.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Account.de-DE.resx" />
     <EmbeddedResource Include="Resources\Account.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Account.pt-BR.resx" />
@@ -918,6 +919,7 @@
     <EmbeddedResource Include="Resources\Account.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Category.de-DE.resx" />
+	<EmbeddedResource Include="Resources\Category.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Category.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Category.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Category.resx">
@@ -935,6 +937,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Comment.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Comment.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Content.de-DE.resx" />
     <EmbeddedResource Include="Resources\Content.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Content.pt-BR.resx" />
@@ -944,6 +947,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Content.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Content.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Extensions.de-DE.resx" />
     <EmbeddedResource Include="Resources\Extensions.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Extensions.pt-BR.resx" />
@@ -953,6 +957,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Extensions.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Extensions.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Global.de-DE.resx" />
     <EmbeddedResource Include="Resources\Global.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Global.pt-BR.resx" />
@@ -962,6 +967,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Global.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Global.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Page.de-DE.resx" />
     <EmbeddedResource Include="Resources\Page.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Page.pt-BR.resx" />
@@ -972,6 +978,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Page.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Page.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Post.de-DE.resx" />
     <EmbeddedResource Include="Resources\Post.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Post.pt-BR.resx" />
@@ -981,6 +988,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Post.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Post.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Regions.de-DE.resx" />
     <EmbeddedResource Include="Resources\Regions.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Regions.pt-BR.resx" />
@@ -990,6 +998,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Regions.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Regions.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Settings.de-DE.resx" />
     <EmbeddedResource Include="Resources\Settings.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Settings.pt-BR.resx" />
@@ -999,6 +1008,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Settings.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Settings.fa-IR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.de-DE.resx" />
     <EmbeddedResource Include="Resources\SiteTree.fr-FR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.pt-BR.resx" />
@@ -1008,6 +1018,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SiteTree.ru-RU.resx" />
     <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\SiteTree.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Tabs.de-DE.resx" />
     <EmbeddedResource Include="Resources\Tabs.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Tabs.pt-BR.resx" />
@@ -1017,6 +1028,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tabs.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Tabs.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Template.de-DE.resx" />
     <EmbeddedResource Include="Resources\Template.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Template.pt-BR.resx" />
@@ -1026,6 +1038,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Template.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
+	<EmbeddedResource Include="Resources\Template.fa-IR.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.md" />
