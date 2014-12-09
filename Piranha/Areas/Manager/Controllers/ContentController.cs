@@ -43,6 +43,10 @@ namespace Piranha.Areas.Manager.Controllers
 				published = Request["tinymce"] == "true" ;
 			string filter = Request["filter"] ;
 
+			// Disable caching for the popup
+			Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+			// Return view
 			return View("Popup", PopupModel.Get(id, published, filter)) ;
 		}
 
