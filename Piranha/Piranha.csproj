@@ -41,15 +41,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
-    <Reference Include="dotless.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+    <Reference Include="AutoMapper, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core, Version=1.4.1.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,7 +126,7 @@
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -919,7 +921,7 @@
     <EmbeddedResource Include="Resources\Account.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Account.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Category.de-DE.resx" />
-	<EmbeddedResource Include="Resources\Category.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Category.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Category.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Category.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Category.resx">
@@ -937,7 +939,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Comment.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Comment.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Comment.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Comment.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Content.de-DE.resx" />
     <EmbeddedResource Include="Resources\Content.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Content.pt-BR.resx" />
@@ -947,7 +949,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Content.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Content.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Content.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Content.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Extensions.de-DE.resx" />
     <EmbeddedResource Include="Resources\Extensions.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Extensions.pt-BR.resx" />
@@ -957,7 +959,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Extensions.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Extensions.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Extensions.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Extensions.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Global.de-DE.resx" />
     <EmbeddedResource Include="Resources\Global.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Global.pt-BR.resx" />
@@ -967,7 +969,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Global.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Global.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Global.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Global.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Page.de-DE.resx" />
     <EmbeddedResource Include="Resources\Page.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Page.pt-BR.resx" />
@@ -978,7 +980,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Page.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Page.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Page.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Page.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Post.de-DE.resx" />
     <EmbeddedResource Include="Resources\Post.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Post.pt-BR.resx" />
@@ -988,7 +990,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Post.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Post.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Post.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Post.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Regions.de-DE.resx" />
     <EmbeddedResource Include="Resources\Regions.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Regions.pt-BR.resx" />
@@ -998,7 +1000,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Regions.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Regions.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Regions.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Regions.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Settings.de-DE.resx" />
     <EmbeddedResource Include="Resources\Settings.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Settings.pt-BR.resx" />
@@ -1008,7 +1010,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Settings.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Settings.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Settings.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Settings.fa-IR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.de-DE.resx" />
     <EmbeddedResource Include="Resources\SiteTree.fr-FR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.pt-BR.resx" />
@@ -1018,7 +1020,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\SiteTree.ru-RU.resx" />
     <EmbeddedResource Include="Resources\SiteTree.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\SiteTree.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Tabs.de-DE.resx" />
     <EmbeddedResource Include="Resources\Tabs.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Tabs.pt-BR.resx" />
@@ -1028,7 +1030,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tabs.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Tabs.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Tabs.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Tabs.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Template.de-DE.resx" />
     <EmbeddedResource Include="Resources\Template.fr-FR.resx" />
     <EmbeddedResource Include="Resources\Template.pt-BR.resx" />
@@ -1038,7 +1040,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Template.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
-	<EmbeddedResource Include="Resources\Template.fa-IR.resx" />
+    <EmbeddedResource Include="Resources\Template.fa-IR.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.md" />
@@ -1382,9 +1384,9 @@
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)packages\dotless.1.4.0.0\tool\dotless.compiler.exe" "$(ProjectDir)areas\manager\content\css\less\style.less" "$(ProjectDir)areas\manager\content\css\style.min.css" -m</PreBuildEvent>
+    <PreBuildEvent>"$(SolutionDir)packages\dotless.1.4.1.0\tool\dotless.compiler.exe" "$(ProjectDir)areas\manager\content\css\less\style.less" "$(ProjectDir)areas\manager\content\css\style.min.css" -m</PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
