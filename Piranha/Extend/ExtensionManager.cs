@@ -54,7 +54,7 @@ namespace Piranha.Extend
 			// Let MEF scan for imports
 			var catalog = new AggregateCatalog() ;
 
-			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
+			catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
 
 #if !NET40
 			if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {

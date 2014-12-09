@@ -9,7 +9,9 @@
       <disableTypeBuilder value="false" />
       <passiveMode value="false" />
       <prefixlessPermalinks value="false" />
-    </settings>
+			<disableCatalogSearch value="false" />
+			<renderX-UA-CompatibleForIE value="true" />
+		</settings>
     <providers>
       <mediaProvider value="Piranha.IO.LocalMediaProvider, Piranha" />
       <mediaCacheProvider value="Piranha.IO.LocalMediaCacheProvider, Piranha" />

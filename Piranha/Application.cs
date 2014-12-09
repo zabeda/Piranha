@@ -100,7 +100,7 @@ namespace Piranha
 			var catalog = new AggregateCatalog() ;
 
 			// Compose parts
-			catalog.Catalogs.Add(new DirectoryCatalog("Bin")) ;
+			catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
 			Container = new CompositionContainer(catalog) ;
 			Container.ComposeParts(this) ;
 

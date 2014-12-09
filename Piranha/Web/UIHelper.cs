@@ -88,10 +88,15 @@ namespace Piranha.Web
 		/// <returns>The head information</returns>
 		public IHtmlString Head() {
 			StringBuilder str = new StringBuilder() ;
+			HttpContext ctx = HttpContext.Current;
 
 			str.AppendLine("<meta name=\"generator\" content=\"Piranha CMS " +
 				FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion + "\" />") ;
-	        str.AppendLine("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />") ;
+
+			// http://www.validatethis.co.uk/news/fix-bad-value-x-ua-compatible-once-and-for-all/
+			if (Config.RenderX_UA_CompatibleForIE && ctx != null && ctx.Request.ServerVariables["HTTP_USER_AGENT"] != null &&
+				ctx.Request.ServerVariables["HTTP_USER_AGENT"].ToString().IndexOf("MSIE") > -1)
+				str.AppendLine("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />") ;
 
 			/**
 			 * Basic meta tags
@@ -113,7 +118,7 @@ namespace Piranha.Web
 			str.AppendLine("<meta property=\"og:site_name\" content=\"" + 
 				WebPiranha.CurrentSite.MetaTitle + "\" />") ;
 			str.AppendLine("<meta property=\"og:url\" content=\"" + 
-				"http://" + HttpContext.Current.Request.Url.DnsSafeHost + HttpContext.Current.Request.RawUrl + "\" />") ;
+				"http://" + ctx.Request.Url.DnsSafeHost + HttpContext.Current.Request.RawUrl + "\" />") ;
 
 			if (CurrentPage != null && CurrentPage.IsStartpage) {
 				str.AppendLine("<meta property=\"og:type\" content=\"website\" />") ;
