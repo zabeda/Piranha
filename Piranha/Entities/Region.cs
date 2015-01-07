@@ -59,6 +59,11 @@ namespace Piranha.Entities
 				SetBody(value) ;
 			}
 		}
+
+        /// <summary>
+        /// Gets/sets the private Json serialized body.
+        /// </summary>
+        public string InternalBody { get; set; }
 		#endregion
 
 		#region Navigation properties
@@ -71,13 +76,6 @@ namespace Piranha.Entities
 		/// Gets/sets the region template.
 		/// </summary>
 		public RegionTemplate RegionTemplate { get ; set ; }
-		#endregion
-
-		#region Internal properties
-		/// <summary>
-		/// Gets/sets the private Json serialized body.
-		/// </summary>
-		internal string InternalBody { get ; set ; }
 		#endregion
 
 		/// <summary>
