@@ -57,6 +57,17 @@ namespace Piranha
 			}
 		}
 
+        /// <summary>
+        /// Gets an optional default schema for Entity Framework.
+        /// </summary>
+        public static string EntitySchema
+        {
+            get
+            {
+                return config.Settings.EntitySchema.Value;
+            }
+        }
+
 		/// <summary>
 		/// Gets/sets if the page & post type builder of the Extension Manager
 		/// should be disabled.
