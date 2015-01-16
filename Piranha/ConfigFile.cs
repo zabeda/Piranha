@@ -55,6 +55,7 @@ namespace Piranha
 		private const string PASSIVE_MODE = "passiveMode";
 		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks";
 		private const string RENDERX_UA_COMPATIBLEFORIE = "renderX-UA-CompatibleForIE";
+        private const string ENTITY_SCHEMA = "entitySchema";
 		#endregion
 
 		/// <summary>
@@ -83,6 +84,16 @@ namespace Piranha
 			get { return (BooleanElement)this[DISABLE_MANAGER]; }
 			set { this[DISABLE_MANAGER] = value; }
 		}
+
+        /// <summary>
+        /// Gets/sets an optional default schema for Entity Framework.
+        /// </summary>
+        [ConfigurationProperty(ENTITY_SCHEMA, IsRequired = false)]
+        public StringElement EntitySchema
+        {
+            get { return (StringElement)this[ENTITY_SCHEMA]; }
+            set { this[ENTITY_SCHEMA] = value; }
+        }
 
 		/// <summary>
 		/// Gets/sets if the page & post type builder of the Extension Manager
