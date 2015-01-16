@@ -7,6 +7,7 @@ using System.Data.Entity.Validation;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Piranha
 {
@@ -110,7 +111,7 @@ namespace Piranha
 		/// </summary>
 		/// <param name="modelBuilder">The model builder</param>
 		protected override void OnModelCreating(DbModelBuilder modelBuilder) {
-			modelBuilder.Configurations.Add(new Entities.Maps.UserMap()) ;
+            modelBuilder.Configurations.Add(new Entities.Maps.UserMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.GroupMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.PermissionMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.ParamMap()) ;
@@ -130,6 +131,11 @@ namespace Piranha
 			modelBuilder.Configurations.Add(new Entities.Maps.ExtensionMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.UploadMap()) ;
 			modelBuilder.Configurations.Add(new Entities.Maps.CommentMap()) ;
+
+            if (!string.IsNullOrWhiteSpace(Config.EntitySchema))
+            {
+                modelBuilder.HasDefaultSchema(Config.EntitySchema);
+            }
 
 			base.OnModelCreating(modelBuilder);
 		}
