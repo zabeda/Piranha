@@ -913,6 +913,7 @@
     <EmbeddedResource Include="Resources\Account.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Account.de-DE.resx" />
     <EmbeddedResource Include="Resources\Account.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Account.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Account.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -923,6 +924,7 @@
     <EmbeddedResource Include="Resources\Category.de-DE.resx" />
     <EmbeddedResource Include="Resources\Category.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Category.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Category.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Category.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Category.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -932,6 +934,7 @@
     <EmbeddedResource Include="Resources\Category.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Comment.de-DE.resx" />
     <EmbeddedResource Include="Resources\Comment.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Comment.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Comment.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Comment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -942,6 +945,7 @@
     <EmbeddedResource Include="Resources\Comment.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Content.de-DE.resx" />
     <EmbeddedResource Include="Resources\Content.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Content.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Content.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Content.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -952,6 +956,7 @@
     <EmbeddedResource Include="Resources\Content.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Extensions.de-DE.resx" />
     <EmbeddedResource Include="Resources\Extensions.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Extensions.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Extensions.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Extensions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -962,6 +967,7 @@
     <EmbeddedResource Include="Resources\Extensions.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Global.de-DE.resx" />
     <EmbeddedResource Include="Resources\Global.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Global.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Global.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Global.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -972,6 +978,7 @@
     <EmbeddedResource Include="Resources\Global.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Page.de-DE.resx" />
     <EmbeddedResource Include="Resources\Page.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Page.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Page.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Page.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -983,6 +990,7 @@
     <EmbeddedResource Include="Resources\Page.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Post.de-DE.resx" />
     <EmbeddedResource Include="Resources\Post.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Post.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Post.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Post.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -993,6 +1001,7 @@
     <EmbeddedResource Include="Resources\Post.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Regions.de-DE.resx" />
     <EmbeddedResource Include="Resources\Regions.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Regions.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Regions.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Regions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1003,6 +1012,7 @@
     <EmbeddedResource Include="Resources\Regions.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Settings.de-DE.resx" />
     <EmbeddedResource Include="Resources\Settings.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Settings.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Settings.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Settings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1013,6 +1023,7 @@
     <EmbeddedResource Include="Resources\Settings.fa-IR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.de-DE.resx" />
     <EmbeddedResource Include="Resources\SiteTree.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\SiteTree.nl-NL.resx" />
     <EmbeddedResource Include="Resources\SiteTree.pt-BR.resx" />
     <EmbeddedResource Include="Resources\SiteTree.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1023,6 +1034,7 @@
     <EmbeddedResource Include="Resources\SiteTree.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Tabs.de-DE.resx" />
     <EmbeddedResource Include="Resources\Tabs.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Tabs.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Tabs.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Tabs.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1033,6 +1045,7 @@
     <EmbeddedResource Include="Resources\Tabs.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Template.de-DE.resx" />
     <EmbeddedResource Include="Resources\Template.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Template.nl-NL.resx" />
     <EmbeddedResource Include="Resources\Template.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Template.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
