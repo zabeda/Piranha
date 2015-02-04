@@ -37,13 +37,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha", "Piranha\Piranha.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateSite.Mvc", "TemplateSite.Mvc\TemplateSite.Mvc.csproj", "{C8218575-5356-4584-8EE1-9FEB46BABADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Mvc", "Piranha.Mvc\Piranha.Mvc.csproj", "{2068F6B1-FB81-43B2-9760-F5B68C32085A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Mvc", "Core\Piranha.Mvc\Piranha.Mvc.csproj", "{2068F6B1-FB81-43B2-9760-F5B68C32085A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.WebPages", "Piranha.WebPages\Piranha.WebPages.csproj", "{3EDC9F07-99BF-4AD5-8BB6-B8D1E077BB75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Azure", "Modules\Piranha.Azure\Piranha.Azure.csproj", "{1723FD00-638C-4470-A6CB-DBB09A555E51}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{9D450DB0-B1BC-49E6-9B3E-7A915FA2EFE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A2EFCC5C-B2D4-4D26-929D-620D4BBF5C1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +82,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{2068F6B1-FB81-43B2-9760-F5B68C32085A} = {A2EFCC5C-B2D4-4D26-929D-620D4BBF5C1B}
 		{1723FD00-638C-4470-A6CB-DBB09A555E51} = {9D450DB0-B1BC-49E6-9B3E-7A915FA2EFE5}
 	EndGlobalSection
 EndGlobal

@@ -167,7 +167,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Piranha.Mvc\Piranha.Mvc.csproj">
+    <ProjectReference Include="..\Core\Piranha.Mvc\Piranha.Mvc.csproj">
       <Project>{2068f6b1-fb81-43b2-9760-f5b68c32085a}</Project>
       <Name>Piranha.Mvc</Name>
     </ProjectReference>
