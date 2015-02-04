@@ -171,7 +171,7 @@
       <Project>{2068f6b1-fb81-43b2-9760-f5b68c32085a}</Project>
       <Name>Piranha.Mvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Piranha\Piranha.csproj">
+    <ProjectReference Include="..\..\Core\Piranha\Piranha.csproj">
       <Project>{73b6e71e-3255-40a1-93ef-5416dc71e940}</Project>
       <Name>Piranha</Name>
     </ProjectReference>

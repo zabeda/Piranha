@@ -77,7 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Piranha\Piranha.csproj">
+    <ProjectReference Include="..\..\Core\Piranha\Piranha.csproj">
       <Project>{73b6e71e-3255-40a1-93ef-5416dc71e940}</Project>
       <Name>Piranha</Name>
     </ProjectReference>
