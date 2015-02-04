@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "TemplateSite\", "{4F94EA08-A2AB-4AC6-A581-460A2F79300F}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
@@ -21,12 +23,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "TemplateSit
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "1127"
 		VWDVirtualPath = "/"
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA40878F-CA04-4707-B20A-684D26BAE621}"
-	ProjectSection(SolutionItems) = preProject
-		RazorGenerator.LICENSE.md = RazorGenerator.LICENSE.md
-		README.md = README.md
+		SlnRelativePath = "TemplateSite\"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B9B2FF56-3B77-4403-B692-FE12464EA461}"
@@ -44,7 +41,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Mvc", "Piranha.Mvc\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.WebPages", "Piranha.WebPages\Piranha.WebPages.csproj", "{3EDC9F07-99BF-4AD5-8BB6-B8D1E077BB75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Azure", "Piranha.Azure\Piranha.Azure.csproj", "{1723FD00-638C-4470-A6CB-DBB09A555E51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Azure", "Modules\Piranha.Azure\Piranha.Azure.csproj", "{1723FD00-638C-4470-A6CB-DBB09A555E51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{9D450DB0-B1BC-49E6-9B3E-7A915FA2EFE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +80,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B9B2FF56-3B77-4403-B692-FE12464EA461} = {FA40878F-CA04-4707-B20A-684D26BAE621}
+		{1723FD00-638C-4470-A6CB-DBB09A555E51} = {9D450DB0-B1BC-49E6-9B3E-7A915FA2EFE5}
 	EndGlobalSection
 EndGlobal
