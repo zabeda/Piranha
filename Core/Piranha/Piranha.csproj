@@ -74,9 +74,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Activation" />
-    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -663,30 +660,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Template.resx</DependentUpon>
     </Compile>
-    <Compile Include="Rest\BaseService.cs" />
-    <Compile Include="Rest\CategoryService.cs" />
-    <Compile Include="Rest\ChangeService.cs" />
-    <Compile Include="Rest\ContentService.cs" />
-    <Compile Include="Rest\DataContracts\Attachment.cs" />
-    <Compile Include="Rest\DataContracts\Category.cs" />
-    <Compile Include="Rest\DataContracts\Changes.cs" />
-    <Compile Include="Rest\DataContracts\Content.cs" />
-    <Compile Include="Rest\DataContracts\Deleted.cs" />
-    <Compile Include="Rest\DataContracts\Extension.cs" />
-    <Compile Include="Rest\DataContracts\MediaFolder.cs" />
-    <Compile Include="Rest\DataContracts\Page.cs" />
-    <Compile Include="Rest\DataContracts\PageTemplate.cs" />
-    <Compile Include="Rest\DataContracts\Post.cs" />
-    <Compile Include="Rest\DataContracts\PostTemplate.cs" />
-    <Compile Include="Rest\DataContracts\Property.cs" />
-    <Compile Include="Rest\DataContracts\Region.cs" />
-    <Compile Include="Rest\DataContracts\Sitemap.cs" />
-    <Compile Include="Rest\ExpandoObjectSerializer.cs" />
-    <Compile Include="Rest\PageService.cs" />
-    <Compile Include="Rest\PageTemplateService.cs" />
-    <Compile Include="Rest\PostService.cs" />
-    <Compile Include="Rest\PostTemplateService.cs" />
-    <Compile Include="Rest\SitemapServices.cs" />
     <Compile Include="Security\IUserProvider.cs" />
     <Compile Include="Security\LocalUserProvider.cs" />
     <Compile Include="WebPages\Hooks.cs" />
@@ -705,7 +678,6 @@
     <Compile Include="Web\Handlers\ThumbnailHandler.cs" />
     <Compile Include="Web\Handlers\UploadHandler.cs" />
     <Compile Include="WebPages\WebPiranha.cs" />
-    <Compile Include="Web\APIKeyAuthorization.cs" />
     <Compile Include="Web\APIKeys.cs" />
     <Compile Include="Web\AppCommentController.cs" />
     <Compile Include="Web\ApplicationModule.cs" />
@@ -1362,6 +1334,9 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>PostModelRegion.generated.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rest\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

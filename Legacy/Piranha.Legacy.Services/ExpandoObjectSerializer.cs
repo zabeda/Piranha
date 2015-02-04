@@ -15,7 +15,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace Piranha.Rest
+namespace Piranha.Legacy.Services
 {
 	/// <summary>
 	/// Serializer that serializes an expando object as a json object.

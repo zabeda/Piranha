@@ -11,17 +11,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+using System.Web;
 
-namespace Piranha.Rest.DataContracts
+namespace Piranha.Legacy.Services.DataContracts
 {
-	[DataContract()]
-	public class Attachment
+	public class Extension
 	{
-		[DataMember()]
-		public Guid Id { get; set; }
-		[DataMember()]
-		public bool IsImage { get; set; }
+		public string Name { get; set; }
+		public object Body { get; set; }
 	}
 }

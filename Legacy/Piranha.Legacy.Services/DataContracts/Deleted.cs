@@ -14,7 +14,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Piranha.Rest.DataContracts
+namespace Piranha.Legacy.Services.DataContracts
 {
 	[DataContract()]
 	public class Deleted

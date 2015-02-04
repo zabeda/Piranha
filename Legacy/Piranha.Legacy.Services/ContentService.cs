@@ -19,10 +19,10 @@ using System.Text;
 using System.Web;
 
 using Piranha.Data;
-using Piranha.Rest.DataContracts;
+using Piranha.Legacy.Services.DataContracts;
 using Piranha.Web;
 
-namespace Piranha.Rest
+namespace Piranha.Legacy.Services
 {
 	/// <summary>
 	/// ReST API for content.

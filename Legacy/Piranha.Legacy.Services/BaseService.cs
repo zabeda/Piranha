@@ -17,7 +17,7 @@ using System.Text;
 using System.Linq;
 using System.Web.Script.Serialization;
 
-namespace Piranha.Rest
+namespace Piranha.Legacy.Services
 {
 	public abstract class BaseService
 	{

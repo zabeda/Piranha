@@ -302,9 +302,34 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="id">The content id</param>
 		/// <param name="draft">Whether or not to get the draft</param>
 		private JsonResult Get(string id, bool draft) {
-			var service = new Rest.ContentService();
+			try {
+				var c = Piranha.Models.Content.GetSingle(new Guid(id), draft);
 
-			return Json(service.Get(new Guid(id), draft), JsonRequestBehavior.AllowGet);
+				if (c != null) {
+					var media = new {
+						Id = c.Id,
+						ParentId = c.ParentId,
+						Filename = c.Filename,
+						Name = c.Name,
+						DisplayName = c.DisplayName,
+						Description = c.Description,
+						Type = c.Type,
+						Size = c.Size,
+						Width = c.Width > 0 ? (int?)c.Width : null,
+						Height = c.Height > 0 ? (int?)c.Height : null,
+						ThumbnailUrl = WebPages.WebPiranha.ApplicationPath +
+							(!draft ? Application.Current.Handlers.GetUrlPrefix("THUMBNAIL") :
+							Application.Current.Handlers.GetUrlPrefix("THUMBNAILDRAFT")) + "/" + c.Id,
+						ContentUrl = WebPages.WebPiranha.ApplicationPath +
+							(!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") :
+							Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
+						Created = c.Created.ToString(),
+						Updated = c.Updated.ToString()
+					};
+					return Json(media, JsonRequestBehavior.AllowGet);
+				}
+			} catch { }
+			return null;
 		}
 
 		/// <summary>

@@ -14,8 +14,9 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Web;
+using Piranha.Web;
 
-namespace Piranha.Web
+namespace Piranha.Legacy.Services
 {
 	/// <summary>
 	/// Simple authorization manager that handles API-keys.

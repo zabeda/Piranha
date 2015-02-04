@@ -16,7 +16,7 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Web;
 
-namespace Piranha.Rest
+namespace Piranha.Legacy.Services
 {
 	/// <summary>
 	/// ReST API for page templates.

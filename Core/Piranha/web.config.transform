@@ -36,16 +36,6 @@
 		</handlers>
 		<urlCompression doStaticCompression="true"/>
   </system.webServer>
-  <system.serviceModel>
-    <behaviors>
-      <serviceBehaviors>
-        <behavior>
-          <serviceAuthorization serviceAuthorizationManagerType="Piranha.Web.APIKeyAuthorization, Piranha" />
-        </behavior>
-      </serviceBehaviors>
-    </behaviors>
-    <serviceHostingEnvironment aspNetCompatibilityEnabled="true"/>
-  </system.serviceModel>
   <connectionStrings>
 		<add name="piranha-ce" connectionString="data source=|DataDirectory|Piranha.sdf" providerName="System.Data.SqlServerCe.4.0"/>
 		<add name="piranha-express" connectionString="data source=.\sqlexpress;initial catalog=piranha-db;user id=user;password=pass;multipleactiveresultsets=true;" providerName="System.Data.SqlClient"/>

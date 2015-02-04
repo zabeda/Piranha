@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Piranha.Rest.DataContracts
+namespace Piranha.Legacy.Services.DataContracts
 {
 	[DataContract]
 	public class MediaFolder

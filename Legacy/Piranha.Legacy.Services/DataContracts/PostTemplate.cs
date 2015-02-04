@@ -14,13 +14,13 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace Piranha.Rest.DataContracts
+namespace Piranha.Legacy.Services.DataContracts
 {
 	/// <summary>
-	/// Data contract for the page templates.
+	/// Data contract for the post templates.
 	/// </summary>
 	[DataContract()]
-	public class PageTemplate
+	public class PostTemplate
 	{
 		/// <summary>
 		/// Get/sets the id of the template.

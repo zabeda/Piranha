@@ -12,30 +12,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
+using System.Web;
 
-namespace Piranha.Rest.DataContracts
+namespace Piranha.Legacy.Services.DataContracts
 {
+	/// <summary>
+	/// Data contract for the page templates.
+	/// </summary>
 	[DataContract()]
-	public class Category
+	public class PageTemplate
 	{
+		/// <summary>
+		/// Get/sets the id of the template.
+		/// </summary>
 		[DataMember()]
 		public Guid Id { get; set; }
+
+		/// <summary>
+		/// Gets/sets the name.
+		/// </summary>
 		[DataMember()]
 		public string Name { get; set; }
-		[DataMember()]
-		public string Permalink { get; set; }
+
+		/// <summary>
+		/// Gets/sets the optional description.
+		/// </summary>
 		[DataMember()]
 		public string Description { get; set; }
-		[DataMember()]
-		public List<Extension> Extensions { get; set; }
-		[DataMember()]
-		public string Created { get; set; }
-		[DataMember()]
-		public string Updated { get; set; }
 
-		public Category() {
-			Extensions = new List<Extension>();
-		}
+		/// <summary>
+		/// Gets/sets the rendering view.
+		/// </summary>
+		[DataMember()]
+		public string View { get; set; }
 	}
 }

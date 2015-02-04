@@ -13,27 +13,31 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Web;
+using System.Text;
 
-namespace Piranha.Rest.DataContracts
+namespace Piranha.Legacy.Services.DataContracts
 {
 	[DataContract()]
-	public class Post
+	public class Page
 	{
 		[DataMember()]
 		public Guid Id { get; set; }
+		[DataMember()]
+		public Guid ParentId { get; set; }
+		[DataMember()]
+		public int Seqno { get; set; }
 		[DataMember()]
 		public string TemplateName { get; set; }
 		[DataMember()]
 		public string Title { get; set; }
 		[DataMember()]
+		public string NavigationTitle { get; set; }
+		[DataMember()]
 		public string Permalink { get; set; }
 		[DataMember()]
-		public string Excerpt { get; set; }
+		public bool IsHidden { get; set; }
 		[DataMember()]
-		public string Body { get; set; }
-		[DataMember()]
-		public List<Category> Categories { get; set; }
+		public List<Region> Regions { get; set; }
 		[DataMember()]
 		public List<Property> Properties { get; set; }
 		[DataMember()]
@@ -51,8 +55,11 @@ namespace Piranha.Rest.DataContracts
 		[DataMember()]
 		public string LastPublished { get; set; }
 
-		public Post() {
-			Categories = new List<Category>();
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
+		public Page() {
+			Regions = new List<Region>();
 			Properties = new List<Property>();
 			Attachments = new List<Attachment>();
 			Extensions = new List<Extension>();
