@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -25,9 +35,9 @@ namespace Piranha.Rest
 		/// </summary>
 		/// <returns>The categories</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get", ResponseFormat=WebMessageFormat.Json)]
+		[WebGet(UriTemplate = "get", ResponseFormat = WebMessageFormat.Json)]
 		public List<Category> Get() {
-			List<Category> categories = new List<Category>() ;
+			List<Category> categories = new List<Category>();
 
 			Models.Category.Get(new Params() { OrderBy = "category_name" }).ForEach(c => {
 				var category = new Category() {
@@ -37,17 +47,17 @@ namespace Piranha.Rest
 					Description = c.Description,
 					Created = c.Created.ToString(),
 					Updated = c.Updated.ToString()
-				} ;
+				};
 				foreach (var ext in c.GetExtensions()) {
-					var internalId = Extend.ExtensionManager.Current.GetInternalIdByType(ext.Type) ;
+					var internalId = Extend.ExtensionManager.Current.GetInternalIdByType(ext.Type);
 
 					if (ext.Body is HtmlString)
-						category.Extensions.Add(new Extension() { Name = internalId, Body = ((HtmlString)ext.Body).ToHtmlString() }) ;
-					else category.Extensions.Add(new Extension() { Name = internalId, Body = ext.Body }) ;
+						category.Extensions.Add(new Extension() { Name = internalId, Body = ((HtmlString)ext.Body).ToHtmlString() });
+					else category.Extensions.Add(new Extension() { Name = internalId, Body = ext.Body });
 				}
-				categories.Add(category) ;
+				categories.Add(category);
 			});
-			return categories ;
+			return categories;
 		}
 
 		/// <summary>
@@ -55,9 +65,9 @@ namespace Piranha.Rest
 		/// </summary>
 		/// <returns>The categories</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/xml", ResponseFormat=WebMessageFormat.Xml)]
+		[WebGet(UriTemplate = "get/xml", ResponseFormat = WebMessageFormat.Xml)]
 		public List<Category> GetXml() {
-			return Get() ;
+			return Get();
 		}
 	}
 }

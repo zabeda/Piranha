@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,65 +27,65 @@ namespace Piranha.Entities
 	public class Region : StandardEntity<Region>
 	{
 		#region Members
-		private IExtension body ;
+		private IExtension body;
 		#endregion
 
 		#region Properties
 		/// <summary>
 		/// Gets/sets whether this is a draft or not.
 		/// </summary>
-		public bool IsDraft { get ; set ; }
+		public bool IsDraft { get; set; }
 
 		/// <summary>
 		/// Gets/sets the template id.
 		/// </summary>
-		public Guid RegionTemplateId { get ; set ; }
+		public Guid RegionTemplateId { get; set; }
 
 		/// <summary>
 		/// Gets/sets the page id.
 		/// </summary>
-		public Guid PageId { get ; set ; }
+		public Guid PageId { get; set; }
 
 		/// <summary>
 		/// Gets/sets whether the page is a draft or not.
 		/// </summary>
-		public bool IsPageDraft { get ; set ; }
+		public bool IsPageDraft { get; set; }
 
 		/// <summary>
 		/// Gets/sets the region name.
 		/// </summary>
-		public string Name { get ; set ; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Gets/sets the body of the extension.
 		/// </summary>
-		public IExtension Body { 			
+		public IExtension Body {
 			get {
 				if (body == null)
-					body = GetBody() ;
-				return body ;
+					body = GetBody();
+				return body;
 			}
 			set {
-				SetBody(value) ;
+				SetBody(value);
 			}
 		}
 
-        /// <summary>
-        /// Gets/sets the private Json serialized body.
-        /// </summary>
-        public string InternalBody { get; set; }
+		/// <summary>
+		/// Gets/sets the private Json serialized body.
+		/// </summary>
+		public string InternalBody { get; set; }
 		#endregion
 
 		#region Navigation properties
 		/// <summary>
 		/// Gets/sets the page this region is related to.
 		/// </summary>
-		public Page Page { get ; set ; }
+		public Page Page { get; set; }
 
 		/// <summary>
 		/// Gets/sets the region template.
 		/// </summary>
-		public RegionTemplate RegionTemplate { get ; set ; }
+		public RegionTemplate RegionTemplate { get; set; }
 		#endregion
 
 		/// <summary>
@@ -84,7 +94,7 @@ namespace Piranha.Entities
 		/// <typeparam name="T">The body type</typeparam>
 		/// <returns>The body</returns>
 		public T GetBody<T>() where T : IExtension {
-			return (T)Body ;
+			return (T)Body;
 		}
 
 		#region Private methods
@@ -95,19 +105,19 @@ namespace Piranha.Entities
 		private IExtension GetBody() {
 			if (RegionTemplate == null) {
 				using (var db = new DataContext()) {
-					RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single() ;
+					RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single();
 				}
 			}
 
 			if (!String.IsNullOrEmpty(RegionTemplate.Type)) {
-				var js = new JavaScriptSerializer() ;
+				var js = new JavaScriptSerializer();
 
 				if (!String.IsNullOrEmpty(InternalBody)) {
 					if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(RegionTemplate.Type)))
-						return ExtensionManager.Current.CreateInstance(RegionTemplate.Type, InternalBody) ;
-					return (IExtension)js.Deserialize(InternalBody, ExtensionManager.Current.GetType(RegionTemplate.Type)) ;
+						return ExtensionManager.Current.CreateInstance(RegionTemplate.Type, InternalBody);
+					return (IExtension)js.Deserialize(InternalBody, ExtensionManager.Current.GetType(RegionTemplate.Type));
 				}
-				return ExtensionManager.Current.CreateInstance(RegionTemplate.Type) ;
+				return ExtensionManager.Current.CreateInstance(RegionTemplate.Type);
 			}
 			return null;
 		}
@@ -118,17 +128,17 @@ namespace Piranha.Entities
 		private void SetBody(IExtension data) {
 			if (RegionTemplate == null) {
 				using (var db = new DataContext()) {
-					RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single() ;
+					RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single();
 				}
 			}
-	
+
 			if (!String.IsNullOrEmpty(RegionTemplate.Type)) {
-				var js = new JavaScriptSerializer() ;
-				body = data ;
+				var js = new JavaScriptSerializer();
+				body = data;
 
 				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(RegionTemplate.Type)))
-					InternalBody = ((HtmlString)data).ToString() ;
-				else InternalBody = js.Serialize(data) ;
+					InternalBody = ((HtmlString)data).ToString();
+				else InternalBody = js.Serialize(data);
 			}
 		}
 		#endregion
@@ -136,16 +146,16 @@ namespace Piranha.Entities
 		#region Events
 		public override void OnSave(DataContext db, EntityState state) {
 			if (RegionTemplate == null)
-				RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single() ;
+				RegionTemplate = db.RegionTemplates.Where(t => t.Id == RegionTemplateId).Single();
 
 			if (!String.IsNullOrEmpty(RegionTemplate.Type)) {
-				var js = new JavaScriptSerializer() ;
+				var js = new JavaScriptSerializer();
 
 				if (typeof(HtmlString).IsAssignableFrom(ExtensionManager.Current.GetType(RegionTemplate.Type)))
-					InternalBody = ((HtmlString)Body).ToString() ;
-				else InternalBody = js.Serialize(Body) ;
+					InternalBody = ((HtmlString)Body).ToString();
+				else InternalBody = js.Serialize(Body);
 			}
-			base.OnSave(db, state) ;
+			base.OnSave(db, state);
 		}
 		#endregion
 	}

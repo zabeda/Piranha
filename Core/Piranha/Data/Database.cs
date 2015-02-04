@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
@@ -16,22 +26,22 @@ namespace Piranha.Data
 		/// <summary>
 		/// Private static member to cache the current provider factory.
 		/// </summary>
-		private static DbProviderFactory _factory = null ;
+		private static DbProviderFactory _factory = null;
 
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 32 ;
+		public static int CurrentVersion = 32;
 
 		/// <summary>
 		/// Gets the currently logged in users identity.
 		/// </summary>
-		internal static Guid Identity ;
+		internal static Guid Identity;
 
 		/// <summary>
 		/// Gets/sets the current provider name.
 		/// </summary>
-		public static string ProviderName { get ; set ; }
+		public static string ProviderName { get; set; }
 		#endregion
 
 		#region Properties
@@ -40,10 +50,10 @@ namespace Piranha.Data
 		/// </summary>
 		public static int InstalledVersion {
 			get {
-				Models.SysParam p = Models.SysParam.GetByName("SITE_VERSION") ;
-				int version ;
-				Int32.TryParse(p.Value, out version) ;
-				return version ;
+				Models.SysParam p = Models.SysParam.GetByName("SITE_VERSION");
+				int version;
+				Int32.TryParse(p.Value, out version);
+				return version;
 			}
 		}
 
@@ -51,14 +61,14 @@ namespace Piranha.Data
 		/// Gets whether the current provider is SqlServer.
 		/// </summary>
 		public static bool IsSqlServer {
-			get { return ProviderName.ToLower() == "system.data.sqlclient" ; }
+			get { return ProviderName.ToLower() == "system.data.sqlclient"; }
 		}
 
 		/// <summary>
 		/// Gets whether the current provider is MySql.
 		/// </summary>
 		public static bool IsMySql {
-			get { return ProviderName.ToLower() == "mysql.data.mysqlclient" ; }
+			get { return ProviderName.ToLower() == "mysql.data.mysqlclient"; }
 		}
 
 		/// <summary>
@@ -67,8 +77,8 @@ namespace Piranha.Data
 		public static string ScriptRoot {
 			get {
 				if (IsMySql)
-					return "Piranha.Data.Scripts.MySql" ;
-				return "Piranha.Data.Scripts" ;
+					return "Piranha.Data.Scripts.MySql";
+				return "Piranha.Data.Scripts";
 			}
 		}
 		#endregion
@@ -80,27 +90,27 @@ namespace Piranha.Data
 		/// <param name="password">Password</param>
 		/// <returns>If the login was successful</returns>
 		public static bool Login(string login, string password) {
-			var usr = Models.SysUser.Authenticate(login, password) ;
+			var usr = Models.SysUser.Authenticate(login, password);
 
 			if (usr != null) {
-				Identity = usr.Id ;
-				return true ;
+				Identity = usr.Id;
+				return true;
 			}
-			return false ;
+			return false;
 		}
 
 		/// <summary>
 		/// Logs in the default sys user.
 		/// </summary>
 		public static void LoginSys() {
-			Identity = Config.SysUserId ;
+			Identity = Config.SysUserId;
 		}
 
 		/// <summary>
 		/// Logs out the current user.
 		/// </summary>
 		public static void Logout() {
-			Identity = Guid.Empty ;
+			Identity = Guid.Empty;
 		}
 
 		/// <summary>
@@ -110,10 +120,10 @@ namespace Piranha.Data
 		/// <returns>An open connection</returns>
 		public static IDbConnection OpenConnection(string name = "piranha") {
 			if (_factory == null)
-				_factory = GetFactory(name) ;
-			IDbConnection conn = GetConnection(name) ;
-			conn.Open() ;
-			return conn ;
+				_factory = GetFactory(name);
+			IDbConnection conn = GetConnection(name);
+			conn.Open();
+			return conn;
 		}
 
 		/// <summary>
@@ -122,7 +132,7 @@ namespace Piranha.Data
 		/// <param name="name">Optional name of the connection string to use</param>
 		/// <returns>An open transaction</returns>
 		public static IDbTransaction OpenTransaction(string name = "piranha") {
-			return OpenConnection().BeginTransaction() ;
+			return OpenConnection().BeginTransaction();
 		}
 
 		/// <summary>
@@ -136,37 +146,37 @@ namespace Piranha.Data
 		public static IDbCommand CreateCommand(IDbConnection conn, IDbTransaction tx, string sql, object[] args = null) {
 			// Convert all enum arguments to string
 			for (int n = 0; n < args.Length; n++)
-				if (args[n] != null && typeof(Enum).IsAssignableFrom(args[n].GetType())) 
-					args[n] = args[n].ToString() ;
+				if (args[n] != null && typeof(Enum).IsAssignableFrom(args[n].GetType()))
+					args[n] = args[n].ToString();
 
 			// Create command
-			IDbCommand cmd = conn.CreateCommand() ;
+			IDbCommand cmd = conn.CreateCommand();
 			if (tx != null)
-				cmd.Transaction = tx ;
-			cmd.CommandText = sql ;
+				cmd.Transaction = tx;
+			cmd.CommandText = sql;
 			if (args != null) {
-				int pos = args.Length > 0 && args[0] is IDbTransaction ? 1 : 0 ;
+				int pos = args.Length > 0 && args[0] is IDbTransaction ? 1 : 0;
 				for (int n = 0 + pos; n < args.Length; n++) {
 					if (!(args[n] is Params)) {
-						IDbDataParameter p = cmd.CreateParameter() ;
-						p.ParameterName = String.Format("@{0}", n) ; 
+						IDbDataParameter p = cmd.CreateParameter();
+						p.ParameterName = String.Format("@{0}", n);
 						if (args[n] == null || (args[n] is DateTime && ((DateTime)args[n]) == DateTime.MinValue)) {
-							p.Value = DBNull.Value ;
+							p.Value = DBNull.Value;
 						} else if (args[n] is Guid) {
 							if (((Guid)args[n]) == Guid.Empty) {
-								p.Value = DBNull.Value ;
+								p.Value = DBNull.Value;
 							} else {
-								p.Value = ((Guid)args[n]).ToString() ;
-								p.DbType = DbType.String ;
+								p.Value = ((Guid)args[n]).ToString();
+								p.DbType = DbType.String;
 							}
 						} else {
-							p.Value = args[n] ;
+							p.Value = args[n];
 						}
-						cmd.Parameters.Add(p) ;
+						cmd.Parameters.Add(p);
 					}
 				}
 			}
-			return cmd ;
+			return cmd;
 		}
 
 		#region Private methods
@@ -177,11 +187,11 @@ namespace Piranha.Data
 		/// <returns>A provider factory</returns>
 		private static DbProviderFactory GetFactory(string name) {
 			if (ConfigurationManager.ConnectionStrings[name] == null)
-				throw new ConfigurationErrorsException("No connection string found with name \"" + name + "\"") ;
+				throw new ConfigurationErrorsException("No connection string found with name \"" + name + "\"");
 			// Store the provider name.
-			ProviderName = ConfigurationManager.ConnectionStrings[name].ProviderName ;
+			ProviderName = ConfigurationManager.ConnectionStrings[name].ProviderName;
 			// Create the factory.
-			return DbProviderFactories.GetFactory(ConfigurationManager.ConnectionStrings[name].ProviderName) ;
+			return DbProviderFactories.GetFactory(ConfigurationManager.ConnectionStrings[name].ProviderName);
 		}
 
 		/// <summary>
@@ -190,9 +200,9 @@ namespace Piranha.Data
 		/// <param name="name">The name of the current connection string</param>
 		/// <returns>A database connection</returns>
 		private static IDbConnection GetConnection(string name) {
-			IDbConnection conn = _factory.CreateConnection() ;
-			conn.ConnectionString = ConfigurationManager.ConnectionStrings[name].ConnectionString ;
-			return conn ;
+			IDbConnection conn = _factory.CreateConnection();
+			conn.ConnectionString = ConfigurationManager.ConnectionStrings[name].ConnectionString;
+			return conn;
 		}
 		#endregion
 	}

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,8 +20,8 @@ namespace Piranha.Rest.DataContracts
 	public class Property
 	{
 		[DataMember()]
-		public string Name { get ; set ; }
+		public string Name { get; set; }
 		[DataMember()]
-		public string Value { get ; set ; }
+		public string Value { get; set; }
 	}
 }

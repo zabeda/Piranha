@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -27,17 +37,17 @@ namespace Piranha.Models.Manager.CategoryModels
 			/// <param name="bindingContext">Binding context</param>
 			/// <returns>The page edit model</returns>
 			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
-				EditModel model = (EditModel)base.BindModel(controllerContext, bindingContext) ;
+				EditModel model = (EditModel)base.BindModel(controllerContext, bindingContext);
 
 				// Allow HtmlString extensions
 				model.Extensions.Each((i, m) => {
 					if (m.Body is HtmlString) {
-						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
+						bindingContext.ModelState.Remove("Extensions[" + i + "].Body");
 						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
- 							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
+							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i + "].Body").AttemptedValue);
 					}
-				}) ;
-				return model ;
+				});
+				return model;
 			}
 		}
 		#endregion
@@ -46,32 +56,32 @@ namespace Piranha.Models.Manager.CategoryModels
 		/// <summary>
 		/// Gets/sets the current category.
 		/// </summary>
-		public Category Category { get ; set ; }
+		public Category Category { get; set; }
 
 		/// <summary>
 		/// Gets/sets the permalink.
 		/// </summary>
-		public Permalink Permalink { get ; set ; }
+		public Permalink Permalink { get; set; }
 
 		/// <summary>
 		/// Gets/sets the categories.
 		/// </summary>
-		public SelectList Categories { get ; set ; }
+		public SelectList Categories { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available extensions.
 		/// </summary>
-		public List<Extension> Extensions { get ; set ; }
+		public List<Extension> Extensions { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		public EditModel() {
-			Category   = new Category() {
+			Category = new Category() {
 				Id = Guid.NewGuid()
-			} ;
-			GetRelated() ;
+			};
+			GetRelated();
 		}
 
 		/// <summary>
@@ -82,10 +92,10 @@ namespace Piranha.Models.Manager.CategoryModels
 		public static EditModel GetById(Guid id) {
 			EditModel m = new EditModel() {
 				Category = Category.GetSingle(id)
-			} ;
-			m.GetRelated() ;
+			};
+			m.GetRelated();
 
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -95,22 +105,22 @@ namespace Piranha.Models.Manager.CategoryModels
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
 					if (Permalink.IsNew)
-						Permalink.Name = Permalink.Generate(Category.Name) ;
-					Permalink.Save(tx) ;
-					Category.Save(tx) ;
+						Permalink.Name = Permalink.Generate(Category.Name);
+					Permalink.Save(tx);
+					Category.Save(tx);
 					foreach (var ext in Extensions) {
 						// Call OnSave
-						ext.Body.OnManagerSave(Category) ;
+						ext.Body.OnManagerSave(Category);
 
-						ext.ParentId = Category.Id ;
-						ext.Save(tx) ;
+						ext.ParentId = Category.Id;
+						ext.Save(tx);
 					}
-					tx.Commit() ;
-				} catch { tx.Rollback() ; throw ; }
+					tx.Commit();
+				} catch { tx.Rollback(); throw; }
 			}
-			Refresh() ;
+			Refresh();
 
-			return true ;
+			return true;
 		}
 
 		/// <summary>
@@ -120,21 +130,21 @@ namespace Piranha.Models.Manager.CategoryModels
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
 					// Call OnDelete for all extensions
-					Extensions.ForEach(e => e.Body.OnManagerDelete(Category)) ;
+					Extensions.ForEach(e => e.Body.OnManagerDelete(Category));
 
 					// Delete all relations to the current category
-					List<Relation> pc = Relation.GetByTypeAndRelatedId(Relation.RelationType.POSTCATEGORY, Category.Id) ;
-					pc.ForEach((r) => r.Delete(tx)) ;
+					List<Relation> pc = Relation.GetByTypeAndRelatedId(Relation.RelationType.POSTCATEGORY, Category.Id);
+					pc.ForEach((r) => r.Delete(tx));
 
 					// Delete category
-					Category.Delete(tx) ;
+					Category.Delete(tx);
 
 					// Delete permalink
-					Permalink.Delete(tx) ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+					Permalink.Delete(tx);
+					tx.Commit();
+				} catch { tx.Rollback(); return false; }
 			}
-			return true ;
+			return true;
 		}
 
 		/// <summary>
@@ -143,9 +153,9 @@ namespace Piranha.Models.Manager.CategoryModels
 		public void Refresh() {
 			if (Category != null) {
 				if (!Category.IsNew) {
-					Category = Category.GetSingle(Category.Id) ;
+					Category = Category.GetSingle(Category.Id);
 				}
-				GetRelated() ;
+				GetRelated();
 			}
 		}
 
@@ -154,24 +164,24 @@ namespace Piranha.Models.Manager.CategoryModels
 		/// </summary>
 		private void GetRelated() {
 			// Get Permalink
-			Permalink = Permalink.GetSingle(Category.PermalinkId) ;
+			Permalink = Permalink.GetSingle(Category.PermalinkId);
 			if (Permalink == null) {
-				Permalink  = new Permalink() {
+				Permalink = new Permalink() {
 					Id = Guid.NewGuid(),
 					Type = Models.Permalink.PermalinkType.CATEGORY,
 					NamespaceId = new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067")
-				} ;
-				Category.PermalinkId = Permalink.Id ;
+				};
+				Category.PermalinkId = Permalink.Id;
 			}
 
 			// Get categories
-			List<Category> cats = Piranha.Models.Category.Get("category_id != @0", Category.Id, 
-				new Params() { OrderBy = "category_name ASC" }) ;
-			cats.Insert(0, new Category()) ;
-			Categories = new SelectList(cats, "Id", "Name") ;
+			List<Category> cats = Piranha.Models.Category.Get("category_id != @0", Category.Id,
+				new Params() { OrderBy = "category_name ASC" });
+			cats.Insert(0, new Category());
+			Categories = new SelectList(cats, "Id", "Name");
 
 			// Get extensions
-			Extensions = Category.GetExtensions(true) ;
+			Extensions = Category.GetExtensions(true);
 		}
 	}
 }

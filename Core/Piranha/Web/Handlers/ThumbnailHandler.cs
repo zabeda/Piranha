@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,10 +27,10 @@ namespace Piranha.Web.Handlers
 		/// <param name="context">The current context</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		public virtual void HandleRequest(HttpContext context, params string[] args) {
-			HandleRequest(context, false, args) ;
+			HandleRequest(context, false, args);
 		}
 
-			/// <summary>
+		/// <summary>
 		/// Handles the current request.
 		/// </summary>
 		/// <param name="context">The current context</param>
@@ -29,13 +39,13 @@ namespace Piranha.Web.Handlers
 		protected void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (args != null && args.Length >= 1) {
 				if (!GetThumbnail(context, draft, args, new Guid(args[0]))) {
-					var page = Page.GetSingle(new Guid(args[0])) ;
+					var page = Page.GetSingle(new Guid(args[0]));
 					if (page != null && page.Attachments.Count > 0) {
-						GetThumbnail(context, draft, args, page.Attachments[0]) ;
+						GetThumbnail(context, draft, args, page.Attachments[0]);
 					} else {
-						var post = Post.GetSingle(new Guid(args[0])) ;
+						var post = Post.GetSingle(new Guid(args[0]));
 						if (post != null && post.Attachments.Count > 0)
-							GetThumbnail(context, draft, args, post.Attachments[0]) ;
+							GetThumbnail(context, draft, args, post.Attachments[0]);
 					}
 				}
 			}
@@ -49,18 +59,18 @@ namespace Piranha.Web.Handlers
 		/// <param name="id">The content id</param>
 		/// <returns>Whether a content record was found with the given id</returns>
 		private bool GetThumbnail(HttpContext context, bool draft, string[] args, Guid id) {
-			Content content = Content.GetSingle(id, draft) ;
+			Content content = Content.GetSingle(id, draft);
 
 			if (content != null) {
 				if (args.Length == 1)
-					content.GetThumbnail(context, 60, draft) ;
-				else content.GetThumbnail(context, Convert.ToInt32(args[1]), draft) ;
-				
-				return true ;
+					content.GetThumbnail(context, 60, draft);
+				else content.GetThumbnail(context, Convert.ToInt32(args[1]), draft);
+
+				return true;
 			} else {
 				if (args.Length == 1)
-					return Content.GetResourceThumbnail(context, id) ;
-				else return Content.GetResourceThumbnail(context, id, Convert.ToInt32(args[1])) ;
+					return Content.GetResourceThumbnail(context, id);
+				else return Content.GetResourceThumbnail(context, id, Convert.ToInt32(args[1]));
 			}
 		}
 	}

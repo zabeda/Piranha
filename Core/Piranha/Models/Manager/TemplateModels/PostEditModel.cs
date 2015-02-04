@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -25,12 +35,12 @@ namespace Piranha.Models.Manager.TemplateModels
 			/// <param name="bindingContext">Binding context</param>
 			/// <returns>The post edit model</returns>
 			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
-				PostEditModel model = (PostEditModel)base.BindModel(controllerContext, bindingContext) ;
+				PostEditModel model = (PostEditModel)base.BindModel(controllerContext, bindingContext);
 
-				bindingContext.ModelState.Remove("Template.Preview") ;
+				bindingContext.ModelState.Remove("Template.Preview");
 				model.Template.Preview =
-					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Template.Preview").AttemptedValue) ;
-				return model ;
+					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Template.Preview").AttemptedValue);
+				return model;
 			}
 		}
 		#endregion
@@ -39,17 +49,17 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Gets/sets the post template.
 		/// </summary>
-		public PostTemplate Template { get ; set ; }
+		public PostTemplate Template { get; set; }
 
 		/// <summary>
 		/// Gets/sets the permalink.
 		/// </summary>
-		public Permalink Permalink { get ; set ; }
+		public Permalink Permalink { get; set; }
 
 		/// <summary>
 		/// Gets the archive handler prefix.
 		/// </summary>
-		public string HandlerPrefix { get ; private set ; }
+		public string HandlerPrefix { get; private set; }
 		#endregion
 
 		/// <summary>
@@ -60,7 +70,7 @@ namespace Piranha.Models.Manager.TemplateModels
 				Id = Guid.NewGuid(),
 				Type = Permalink.PermalinkType.ARCHIVE,
 				NamespaceId = Config.ArchiveNamespaceId
-			} ;
+			};
 			Template = new PostTemplate() {
 				PermalinkId = Permalink.Id,
 				Preview = new HtmlString(
@@ -70,8 +80,8 @@ namespace Piranha.Models.Manager.TemplateModels
 					"  </tr>\n" +
 					"</table>"
 					)
-			} ;
-			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "ARCHIVE").SingleOrDefault().UrlPrefix ;
+			};
+			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "ARCHIVE").SingleOrDefault().UrlPrefix;
 		}
 
 		/// <summary>
@@ -80,15 +90,15 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <param name="id">The template id</param>
 		/// <returns>The model</returns>
 		public static PostEditModel GetById(Guid id) {
-			PostEditModel m = new PostEditModel() ;
-			m.Template = PostTemplate.GetSingle(id) ;
+			PostEditModel m = new PostEditModel();
+			m.Template = PostTemplate.GetSingle(id);
 			if (m.Template.Properties == null)
-				m.Template.Properties = new List<string>() ;
+				m.Template.Properties = new List<string>();
 			if (m.Template.PermalinkId != Guid.Empty)
-				m.Permalink = Permalink.GetSingle(m.Template.PermalinkId) ;
-			else m.Template.PermalinkId = m.Permalink.Id ;
+				m.Permalink = Permalink.GetSingle(m.Template.PermalinkId);
+			else m.Template.PermalinkId = m.Permalink.Id;
 
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -99,16 +109,16 @@ namespace Piranha.Models.Manager.TemplateModels
 			using (var tx = Database.OpenTransaction()) {
 				// Permalink
 				if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
-					Permalink.Name = Permalink.Generate(Template.Name) ;
-				Permalink.Save(tx) ;
-				Template.Save(tx) ;
- 
-				// Clear all implementing posts from the cache
-				var posts = Post.Get("post_template_id = @0", tx, Template.Id) ;
-				foreach (var post in posts)
-					post.InvalidateRecord(post) ;
+					Permalink.Name = Permalink.Generate(Template.Name);
+				Permalink.Save(tx);
+				Template.Save(tx);
 
-				tx.Commit() ;
+				// Clear all implementing posts from the cache
+				var posts = Post.Get("post_template_id = @0", tx, Template.Id);
+				foreach (var post in posts)
+					post.InvalidateRecord(post);
+
+				tx.Commit();
 
 				return true;
 			}
@@ -119,18 +129,18 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		/// <returns>Whether the operation succeeded or not</returns>
 		public bool DeleteAll() {
-			List<Post> posts = Post.Get("post_template_id = @0", Template.Id) ;
+			List<Post> posts = Post.Get("post_template_id = @0", Template.Id);
 
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
 					foreach (Post post in posts) {
-						post.Delete(tx) ;
+						post.Delete(tx);
 					}
-					Template.Delete(tx) ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+					Template.Delete(tx);
+					tx.Commit();
+				} catch { tx.Rollback(); return false; }
 			}
-			return true ;
+			return true;
 		}
 	}
 }

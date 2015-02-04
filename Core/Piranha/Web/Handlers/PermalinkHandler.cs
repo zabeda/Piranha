@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +29,9 @@ namespace Piranha.Web.Handlers
 		/// <param name="context">The current context</param>
 		/// <param name="args">Optional url arguments passed to the handler</param>
 		public virtual void HandleRequest(HttpContext context, params string[] args) {
-			HandleRequest(context, false, args) ;
+			HandleRequest(context, false, args);
 		}
-	
+
 		/// <summary>
 		/// Handles the current request.
 		/// </summary>
@@ -31,15 +41,15 @@ namespace Piranha.Web.Handlers
 		protected virtual void HandleRequest(HttpContext context, bool draft, params string[] args) {
 			if (Application.Current.RouteHandler != null) {
 				if (args != null && args.Length > 0) {
-					Permalink perm = null ;
+					Permalink perm = null;
 					int segments = 0;
 					// Accept permalinks with '/' in them
 					for (int n = 0; n < args.Length; n++) {
 						// Check if we can find a permalink in the current namespace
-						perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/")) ;
+						perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/"));
 						segments = args.Length - n;
 						if (perm != null)
-							break ;
+							break;
 					}
 
 					// If we didn't find a permalink, check for posts in the default namespace
@@ -49,8 +59,7 @@ namespace Piranha.Web.Handlers
 						for (int n = 0; n < args.Length; n++) {
 							Permalink post = Permalink.GetByName(Config.DefaultNamespaceId, args.Subset(0, args.Length - n).Implode("/"));
 							segments = args.Length - n;
-							if (post != null && post.Type == Permalink.PermalinkType.POST)
-							{
+							if (post != null && post.Type == Permalink.PermalinkType.POST) {
 								perm = post;
 								break;
 							}
@@ -59,40 +68,40 @@ namespace Piranha.Web.Handlers
 
 					if (perm != null) {
 						if (perm.Type == Permalink.PermalinkType.PAGE) {
-							Page page = Page.GetByPermalinkId(perm.Id, draft) ;
+							Page page = Page.GetByPermalinkId(perm.Id, draft);
 
 							if (page != null) {
 								if (!String.IsNullOrEmpty(page.Redirect)) {
 									if (page.Redirect.StartsWith("http://"))
-										context.Response.Redirect(page.Redirect, false) ;
-									else context.Response.Redirect(page.Redirect, false) ;
-									context.Response.EndClean() ;
+										context.Response.Redirect(page.Redirect, false);
+									else context.Response.Redirect(page.Redirect, false);
+									context.Response.EndClean();
 								} else {
 									//
 									// Call the route handler to route the current page.
-									Application.Current.RouteHandler.HandlePage(context, perm, page, args.Subset(segments)) ;
+									Application.Current.RouteHandler.HandlePage(context, perm, page, args.Subset(segments));
 								}
 							} else {
-								context.Response.StatusCode = 404 ;
+								context.Response.StatusCode = 404;
 							}
 						} else if (perm.Type == Permalink.PermalinkType.POST) {
-							Post post = Post.GetByPermalinkId(perm.Id, draft) ;
+							Post post = Post.GetByPermalinkId(perm.Id, draft);
 
 							if (post != null) {
 								//
 								// Call the route handler to route the current post.
-								Application.Current.RouteHandler.HandlePost(context, perm, post, args.Subset(segments)) ;
+								Application.Current.RouteHandler.HandlePost(context, perm, post, args.Subset(segments));
 							} else {
-								context.Response.StatusCode = 404 ;
+								context.Response.StatusCode = 404;
 							}
 						}
 					} else {
-						context.Response.StatusCode = 404 ;
+						context.Response.StatusCode = 404;
 					}
 				} else {
 					//
 					// Call the route handler to route to the startpage.
-					Application.Current.RouteHandler.HandleStartpage(context) ;
+					Application.Current.RouteHandler.HandleStartpage(context);
 				}
 			}
 		}
@@ -103,12 +112,12 @@ namespace Piranha.Web.Handlers
 		/// <param name="draft">Whether this is a draft or not.</param>
 		/// <returns>The request param</returns>
 		private string GetCultureParam(HttpContext context, bool draft) {
-			var query = "" ;
+			var query = "";
 
 			foreach (var param in context.Request.QueryString.AllKeys) {
-				query += "&" + param + "=" + context.Request.QueryString[param] ;
+				query += "&" + param + "=" + context.Request.QueryString[param];
 			}
-			return (draft ? "&" : "?") + "piranha-culture=" + System.Globalization.CultureInfo.CurrentUICulture.Name + query ;
+			return (draft ? "&" : "?") + "piranha-culture=" + System.Globalization.CultureInfo.CurrentUICulture.Name + query;
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,30 +25,30 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Gets/sets the group.
 		/// </summary>
-		public SysGroup Group { get ; set ; }
-		
+		public SysGroup Group { get; set; }
+
 		/// <summary>
 		/// Gets/sets of all of the other groups.
 		/// </summary>
-		public SelectList Groups { get ; set ; }
+		public SelectList Groups { get; set; }
 
 		/// <summary>
 		/// Gets/sets the members of the group.
 		/// </summary>
-		public List<SysUser> Members { get ; set ; }
+		public List<SysUser> Members { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public GroupEditModel() {
-			Group = new SysGroup() ;
-	
-			List<SysGroup> groups = 
-				SysGroup.GetFields("sysgroup_id, sysgroup_name", new Params() { OrderBy = "sysgroup_name ASC" }) ;
-			groups.Insert(0, new SysGroup() { Name = "" }) ;
+			Group = new SysGroup();
 
-			Groups = new SelectList(groups, "Id", "Name") ;
+			List<SysGroup> groups =
+				SysGroup.GetFields("sysgroup_id, sysgroup_name", new Params() { OrderBy = "sysgroup_name ASC" });
+			groups.Insert(0, new SysGroup() { Name = "" });
+
+			Groups = new SelectList(groups, "Id", "Name");
 		}
 
 		/// <summary>
@@ -47,17 +57,17 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <param name="id">The group id</param>
 		/// <returns>The model</returns>
 		public static GroupEditModel GetById(Guid id) {
-			GroupEditModel m = new GroupEditModel() ;
-			List<SysGroup> groups = SysGroup.GetFields("sysgroup_id, sysgroup_name", 
-				"sysgroup_id != @0", id, new Params() { OrderBy = "sysgroup_name ASC" }) ;
-			groups.Insert(0, new SysGroup() { Name = "" }) ;
+			GroupEditModel m = new GroupEditModel();
+			List<SysGroup> groups = SysGroup.GetFields("sysgroup_id, sysgroup_name",
+				"sysgroup_id != @0", id, new Params() { OrderBy = "sysgroup_name ASC" });
+			groups.Insert(0, new SysGroup() { Name = "" });
 
-			m.Group   = SysGroup.GetSingle(id) ;
-			m.Groups  = new SelectList(groups, "Id", "Name", m.Group.ParentId) ;
-			m.Members = SysUser.GetFields("sysuser_id, sysuser_firstname, sysuser_surname", 
-				"sysuser_group_id=@0", m.Group.Id) ;
+			m.Group = SysGroup.GetSingle(id);
+			m.Groups = new SelectList(groups, "Id", "Name", m.Group.ParentId);
+			m.Members = SysUser.GetFields("sysuser_id, sysuser_firstname, sysuser_surname",
+				"sysuser_group_id=@0", m.Group.Id);
 
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -67,11 +77,11 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Group.Save(tx) ;
+					Group.Save(tx);
 					tx.Commit();
-				} catch { tx.Rollback() ; throw ; }
+				} catch { tx.Rollback(); throw; }
 			}
-			return true ;
+			return true;
 		}
 
 		/// <summary>
@@ -81,19 +91,19 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Group.Delete(tx) ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+					Group.Delete(tx);
+					tx.Commit();
+				} catch { tx.Rollback(); return false; }
 			}
-			return true ;
+			return true;
 		}
 
 		/// <summary>
 		/// Refreshes the model.
 		/// </summary>
 		public void Refresh() {
-			Members = SysUser.GetFields("sysuser_id, sysuser_firstname, sysuser_surname", 
-				"sysuser_group_id=@0", Group.Id) ;
+			Members = SysUser.GetFields("sysuser_id, sysuser_firstname, sysuser_surname",
+				"sysuser_group_id=@0", Group.Id);
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.IO;
 using System.Web;
 
@@ -11,41 +21,42 @@ namespace Piranha.IO
 	{
 		#region Members
 
-	    /// <summary>
-	    /// The local base path for all media files.
-	    /// </summary>
-	    protected readonly string BasePath ;
+		/// <summary>
+		/// The local base path for all media files.
+		/// </summary>
+		protected readonly string BasePath;
 
 		/// <summary>
 		/// The local base path for all media files.
 		/// </summary>
-		protected readonly string UploadPath ;
+		protected readonly string UploadPath;
 		#endregion
 
 		/// <summary>
 		/// Default constructor, creates a new local media provider.
 		/// </summary>
-		public LocalMediaProvider() : this( HttpContext.Current.Server.MapPath("~/App_Data/Content"),HttpContext.Current.Server.MapPath("~/App_Data/Uploads")) {
-			
+		public LocalMediaProvider()
+			: this(HttpContext.Current.Server.MapPath("~/App_Data/Content"), HttpContext.Current.Server.MapPath("~/App_Data/Uploads")) {
+
 		}
 
-        /// <summary>
-        /// Creates a new local media provider using the specified folder paths
-        /// </summary>
-        /// <param name="baseFolderPath">The local base path for all media files</param>
-        /// <param name="uploadFolderPath">The local base path for all uploaded files</param>
-	    public LocalMediaProvider(string baseFolderPath, string uploadFolderPath) {
-            if (string.IsNullOrEmpty(baseFolderPath)) throw new ArgumentNullException("baseFolderPath");
-            if (string.IsNullOrEmpty(uploadFolderPath)) throw new ArgumentNullException("uploadFolderPath");
+		/// <summary>
+		/// Creates a new local media provider using the specified folder paths
+		/// </summary>
+		/// <param name="baseFolderPath">The local base path for all media files</param>
+		/// <param name="uploadFolderPath">The local base path for all uploaded files</param>
+		public LocalMediaProvider(string baseFolderPath, string uploadFolderPath) {
+			if (string.IsNullOrEmpty(baseFolderPath)) throw new ArgumentNullException("baseFolderPath");
+			if (string.IsNullOrEmpty(uploadFolderPath)) throw new ArgumentNullException("uploadFolderPath");
 
-	        this.BasePath = baseFolderPath;
-	        this.UploadPath = uploadFolderPath;
+			this.BasePath = baseFolderPath;
+			this.UploadPath = uploadFolderPath;
 
-            if (!Directory.Exists(BasePath))
-                Directory.CreateDirectory(BasePath);
-            if (!Directory.Exists(UploadPath))
-                Directory.CreateDirectory(UploadPath);
-	    }
+			if (!Directory.Exists(BasePath))
+				Directory.CreateDirectory(BasePath);
+			if (!Directory.Exists(UploadPath))
+				Directory.CreateDirectory(UploadPath);
+		}
 
 		/// <summary>
 		/// Gets the data for the media entity with the given id.
@@ -54,11 +65,11 @@ namespace Piranha.IO
 		/// <param name="type">The media type</param>
 		/// <returns>The media data, null if the data wasn't found</returns>
 		public virtual byte[] Get(Guid id, MediaType type = MediaType.Media) {
-			var path = GetPath(id, false, type) ;
+			var path = GetPath(id, false, type);
 
 			if (File.Exists(path))
-				return File.ReadAllBytes(path) ;
-			return null ;
+				return File.ReadAllBytes(path);
+			return null;
 		}
 
 		/// <summary>
@@ -68,11 +79,11 @@ namespace Piranha.IO
 		/// <param name="type">The media type</param>
 		/// <returns>The draft media data, null if the data wasn't found</returns>
 		public virtual byte[] GetDraft(Guid id, MediaType type = MediaType.Media) {
-			var path = GetPath(id, true, type) ;
+			var path = GetPath(id, true, type);
 
 			if (File.Exists(path))
-				return File.ReadAllBytes(path) ;
-			return null ;
+				return File.ReadAllBytes(path);
+			return null;
 		}
 
 		/// <summary>
@@ -82,8 +93,8 @@ namespace Piranha.IO
 		/// <param name="data">The media data</param>
 		/// <param name="type">The media type</param>
 		public virtual void Put(Guid id, byte[] data, MediaType type = MediaType.Media) {
-			var path = GetPath(id, false, type) ;
-			File.WriteAllBytes(path, data) ;
+			var path = GetPath(id, false, type);
+			File.WriteAllBytes(path, data);
 		}
 
 		/// <summary>
@@ -93,8 +104,8 @@ namespace Piranha.IO
 		/// <param name="data">The media data</param>
 		/// <param name="type">The media type</param>
 		public virtual void PutDraft(Guid id, byte[] data, MediaType type = MediaType.Media) {
-			var path = GetPath(id, true, type) ;
-			File.WriteAllBytes(path, data) ;
+			var path = GetPath(id, true, type);
+			File.WriteAllBytes(path, data);
 		}
 
 		/// <summary>
@@ -103,9 +114,9 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public virtual void Delete(Guid id, MediaType type = MediaType.Media) {
-			var path = GetPath(id, false, type) ;
+			var path = GetPath(id, false, type);
 			if (File.Exists(path))
-				File.Delete(path) ;
+				File.Delete(path);
 		}
 
 		/// <summary>
@@ -114,9 +125,9 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public virtual void DeleteDraft(Guid id, MediaType type = MediaType.Media) {
-			var path = GetPath(id, true, type) ;
+			var path = GetPath(id, true, type);
 			if (File.Exists(path))
-				File.Delete(path) ;
+				File.Delete(path);
 		}
 
 		/// <summary>
@@ -126,11 +137,11 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public virtual void Publish(Guid id, MediaType type = MediaType.Media) {
-			var path = GetPath(id, false, type) ;
-			var draft = GetPath(id, true, type) ;
-			
+			var path = GetPath(id, false, type);
+			var draft = GetPath(id, true, type);
+
 			if (File.Exists(draft))
-				File.Move(draft, path) ;
+				File.Move(draft, path);
 		}
 
 		/// <summary>
@@ -140,11 +151,11 @@ namespace Piranha.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public virtual void Unpublish(Guid id, MediaType type = MediaType.Media) {
-			var path = GetPath(id, false, type) ;
-			var draft = GetPath(id, true, type) ;
+			var path = GetPath(id, false, type);
+			var draft = GetPath(id, true, type);
 
 			if (File.Exists(path))
-				File.Move(path, draft) ;
+				File.Move(path, draft);
 		}
 
 		#region Private methods
@@ -156,7 +167,7 @@ namespace Piranha.IO
 		/// <param name="type">The media type</param>
 		/// <returns>The local path</returns>
 		protected string GetPath(Guid id, bool draft, MediaType type = MediaType.Media) {
-			return (type == MediaType.Media ? BasePath : UploadPath) + "/" + id.ToString() + (draft ? "-draft" : "") ;
+			return (type == MediaType.Media ? BasePath : UploadPath) + "/" + id.ToString() + (draft ? "-draft" : "");
 		}
 		#endregion
 	}

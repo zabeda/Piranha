@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -11,25 +21,25 @@ namespace Piranha.Rest.DataContracts
 		/// Gets/sets the unique id.
 		/// </summary>
 		[DataMember]
-		public Guid Id { get ; set ; }
+		public Guid Id { get; set; }
 
 		/// <summary>
 		/// Gets/sets the folder name.
 		/// </summary>
 		[DataMember]
-		public string Name { get ; set ; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Gets/sets the availble child folders.
 		/// </summary>
 		[DataMember]
-		public IList<MediaFolder> Folders { get ; set ; }
+		public IList<MediaFolder> Folders { get; set; }
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public MediaFolder() {
-			Folders = new List<MediaFolder>() ;
+			Folders = new List<MediaFolder>();
 		}
 	}
 }

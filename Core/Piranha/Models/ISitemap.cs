@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,94 +24,94 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the id.
 		/// </summary>
-		Guid Id { get ; }
+		Guid Id { get; }
 
 		/// <summary>
 		/// Gets the group needed to view the page.
 		/// </summary>
-		Guid GroupId { get ; }
+		Guid GroupId { get; }
 
 		/// <summary>
 		/// Gets the parent id.
 		/// </summary>
-		Guid ParentId { get ; }
+		Guid ParentId { get; }
 
 		/// <summary>
 		/// Gets the seqno specifying the structural position.
 		/// </summary>
-		int Seqno { get ; }
+		int Seqno { get; }
 
 		/// <summary>
 		/// Gets the title.
 		/// </summary>
-		string Title { get ; }
+		string Title { get; }
 
 		/// <summary>
 		/// Gets the title.
 		/// </summary>
-		string NavigationTitle { get ; }
+		string NavigationTitle { get; }
 
 		/// <summary>
 		/// Gets whether the page should be visible in menus or not.
 		/// </summary>
-		bool IsHidden { get ; }
+		bool IsHidden { get; }
 
 		/// <summary>
 		/// Gets the permalink.
 		/// </summary>
-		string Permalink { get ; }
+		string Permalink { get; }
 
 		/// <summary>
 		/// Gets the template name.
 		/// </summary>
-		string TemplateName { get ; }
+		string TemplateName { get; }
 
 		/// <summary>
 		/// Gets the created date.
 		/// </summary>
-		DateTime Created { get ; }
+		DateTime Created { get; }
 
 		/// <summary>
 		/// Gets the updated date.
 		/// </summary>
-		DateTime Updated { get ; }
+		DateTime Updated { get; }
 
 		/// <summary>
 		/// Gets the published date.
 		/// </summary>
-		DateTime Published { get ; }
+		DateTime Published { get; }
 
 		/// <summary>
 		/// Gets the last published date.
 		/// </summary>
-		DateTime LastPublished { get ; }
+		DateTime LastPublished { get; }
 
 		/// <summary>
 		/// Gets the user id that created the record.
 		/// </summary>
-		Guid CreatedBy { get ; }
+		Guid CreatedBy { get; }
 
 		/// <summary>
 		/// Gets the user id that created the record.
 		/// </summary>
-		Guid UpdatedBy { get ; }
+		Guid UpdatedBy { get; }
 		#endregion
 
 		#region Properties
 		/// <summary>
 		/// Gets the controller for the page.
 		/// </summary>
-		string Controller { get ; }
+		string Controller { get; }
 
 		/// <summary>
 		/// Gets the redirect for the page.
 		/// </summary>
-		string Redirect { get ; }
+		string Redirect { get; }
 
 		/// <summary>
 		/// Gets whether the page is the site startpage.
 		/// </summary>
-		bool IsStartpage { get ; }
+		bool IsStartpage { get; }
 		#endregion
 	}
 }

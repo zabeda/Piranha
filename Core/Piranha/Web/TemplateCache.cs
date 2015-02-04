@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +25,7 @@ namespace Piranha.Web
 	public static class TemplateCache
 	{
 		#region Members
-		private static Dictionary<string, DateTime> Templates = new Dictionary<string,DateTime>() ;
+		private static Dictionary<string, DateTime> Templates = new Dictionary<string, DateTime>();
 		#endregion
 
 		/// <summary>
@@ -26,26 +36,26 @@ namespace Piranha.Web
 		public static DateTime GetLastModified(string template) {
 			try {
 				if (!Templates.ContainsKey(template)) {
-					var path = "" ;
+					var path = "";
 
 					if (!template.StartsWith("~/"))
-						path = "~/templates/" + template + ".cshtml" ;
-					else path = template ;
+						path = "~/templates/" + template + ".cshtml";
+					else path = template;
 
 					if (File.Exists(HttpContext.Current.Server.MapPath(path)))
-						Templates[template] = File.GetLastWriteTime(HttpContext.Current.Server.MapPath(path)) ;
-					else Templates[template] = DateTime.MinValue ;
+						Templates[template] = File.GetLastWriteTime(HttpContext.Current.Server.MapPath(path));
+					else Templates[template] = DateTime.MinValue;
 				}
-				return (DateTime)Templates[template] ;
-			} catch {}
-			return DateTime.MinValue ;
+				return (DateTime)Templates[template];
+			} catch { }
+			return DateTime.MinValue;
 		}
 
 		/// <summary>
 		/// Clears the current template cache.
 		/// </summary>
 		public static void Clear() {
-			Templates.Clear() ;
+			Templates.Clear();
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Security.Cryptography;
 using System.Linq;
 using System.Text;
@@ -37,7 +47,7 @@ namespace Piranha.Security
 		public Guid UserId {
 			get {
 				try {
-					return new Guid(HttpContext.Current.User.Identity.Name) ;
+					return new Guid(HttpContext.Current.User.Identity.Name);
 				} catch { }
 				return Guid.Empty;
 			}
@@ -54,11 +64,11 @@ namespace Piranha.Security
 			using (var db = new DataContext()) {
 				var user = db.Users
 					.Where(u => u.Login == username && u.Password == Encrypt(password) && (!u.IsLocked || u.LockedUntil <= DateTime.Now))
-					.SingleOrDefault() ;
+					.SingleOrDefault();
 				if (user != null)
-					return true ;
+					return true;
 			}
-			return false ;
+			return false;
 		}
 
 		#region Private methods
@@ -68,8 +78,8 @@ namespace Piranha.Security
 		/// <param name="user">The user</param>
 		/// <returns>The membership user</returns>
 		private MembershipUser MapUser(SysUser user) {
-			return new MembershipUser("Piranha.Security.InternalUserProvider", user.Login, user.Id, user.Email, "", "", true, 
-				user.IsLocked, user.Created, user.LastLogin, user.LastLogin, user.Created, user.Created) ;
+			return new MembershipUser("Piranha.Security.InternalUserProvider", user.Login, user.Id, user.Email, "", "", true,
+				user.IsLocked, user.Created, user.LastLogin, user.LastLogin, user.Created, user.Created);
 		}
 
 		/// <summary>
@@ -78,11 +88,11 @@ namespace Piranha.Security
 		/// <param name="str">The string</param>
 		/// <returns>The encrypted</returns>
 		private string Encrypt(string str) {
-			UTF8Encoding encoder = new UTF8Encoding() ;
-			SHA256CryptoServiceProvider crypto = new SHA256CryptoServiceProvider() ;
+			UTF8Encoding encoder = new UTF8Encoding();
+			SHA256CryptoServiceProvider crypto = new SHA256CryptoServiceProvider();
 
-			byte[] bytes = crypto.ComputeHash(encoder.GetBytes(str)) ;
-			return Convert.ToBase64String(bytes) ;
+			byte[] bytes = crypto.ComputeHash(encoder.GetBytes(str));
+			return Convert.ToBase64String(bytes);
 		}
 		#endregion
 	}

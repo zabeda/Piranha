@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +25,12 @@ namespace Piranha.Web.Handlers
 		/// <summary>
 		/// Private dictionary for holding the registered handlers.
 		/// </summary>
-		private readonly Dictionary<string, RequestHandlerRegistration> handlers = new Dictionary<string, RequestHandlerRegistration>() ;
+		private readonly Dictionary<string, RequestHandlerRegistration> handlers = new Dictionary<string, RequestHandlerRegistration>();
 
 		/// <summary>
 		/// Private lock mutex for thread safety.
 		/// </summary>
-		private readonly object mutex = new object() ;
+		private readonly object mutex = new object();
 		#endregion
 
 		/// <summary>
@@ -31,22 +41,22 @@ namespace Piranha.Web.Handlers
 		public IRequestHandler this[string id] {
 			get {
 				if (handlers.ContainsKey(id.ToUpper()))
-					return handlers[id.ToUpper()].Handler ;
-				return null ;
+					return handlers[id.ToUpper()].Handler;
+				return null;
 			}
 		}
 
 		/// <summary>
 		/// Default internal constructor.
 		/// </summary>
-		internal RequestHandlerCollection() {}
+		internal RequestHandlerCollection() { }
 
 		/// <summary>
 		/// Clears the handler collection of all of the currently requested handlers.
 		/// </summary>
 		public void Clear() {
 			lock (mutex) {
-				handlers.Clear() ;
+				handlers.Clear();
 			}
 		}
 
@@ -58,7 +68,7 @@ namespace Piranha.Web.Handlers
 		/// <param name="handler">The handler</param>
 		public void Add(string urlprefix, string id, IRequestHandler handler) {
 			lock (mutex) {
-				handlers.Add(id.ToUpper(), new RequestHandlerRegistration() { UrlPrefix = urlprefix, Id = id, Handler = handler }) ;
+				handlers.Add(id.ToUpper(), new RequestHandlerRegistration() { UrlPrefix = urlprefix, Id = id, Handler = handler });
 			}
 		}
 
@@ -69,7 +79,7 @@ namespace Piranha.Web.Handlers
 		public void Remove(string id) {
 			lock (mutex) {
 				if (handlers.ContainsKey(id.ToUpper()))
-					handlers.Remove(id.ToUpper()) ;
+					handlers.Remove(id.ToUpper());
 			}
 		}
 
@@ -80,8 +90,8 @@ namespace Piranha.Web.Handlers
 		/// <returns>The url prefix</returns>
 		public string GetUrlPrefix(string id) {
 			if (handlers.ContainsKey(id.ToUpper()))
-				return handlers[id.ToUpper()].UrlPrefix ;
-			throw new KeyNotFoundException("No handler registered with the id " + id) ;
+				return handlers[id.ToUpper()].UrlPrefix;
+			throw new KeyNotFoundException("No handler registered with the id " + id);
 		}
 
 		/// <summary>
@@ -89,7 +99,7 @@ namespace Piranha.Web.Handlers
 		/// </summary>
 		/// <returns>The enumerator</returns>
 		public IEnumerator<RequestHandlerRegistration> GetEnumerator() {
-			return handlers.Values.GetEnumerator() ;
+			return handlers.Values.GetEnumerator();
 		}
 
 		/// <summary>
@@ -97,7 +107,7 @@ namespace Piranha.Web.Handlers
 		/// </summary>
 		/// <returns>The enumerator</returns>
 		IEnumerator IEnumerable.GetEnumerator() {
-			return handlers.Values.GetEnumerator() ;
+			return handlers.Values.GetEnumerator();
 		}
 	}
 }

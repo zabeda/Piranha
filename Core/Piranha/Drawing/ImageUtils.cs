@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -19,29 +29,29 @@ namespace Piranha.Drawing
 		/// <returns>The resized image</returns>
 		public static Image Resize(Image img, int width) {
 			if (width < img.Width) {
-				int height = Convert.ToInt32(((double)width / img.Width) * img.Height) ;
+				int height = Convert.ToInt32(((double)width / img.Width) * img.Height);
 
 				using (Bitmap bmp = new Bitmap(width, height)) {
-					Graphics grp = Graphics.FromImage(bmp) ;
+					Graphics grp = Graphics.FromImage(bmp);
 
-					grp.SmoothingMode = SmoothingMode.HighQuality ;
-					grp.CompositingQuality = CompositingQuality.HighQuality ;
-					grp.InterpolationMode = InterpolationMode.High ;
+					grp.SmoothingMode = SmoothingMode.HighQuality;
+					grp.CompositingQuality = CompositingQuality.HighQuality;
+					grp.InterpolationMode = InterpolationMode.High;
 
 					// Resize and crop image
-					Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height) ;
-					grp.DrawImage(img, dst, 0, 0, img.Width, img.Height, GraphicsUnit.Pixel) ;
+					Rectangle dst = new Rectangle(0, 0, bmp.Width, bmp.Height);
+					grp.DrawImage(img, dst, 0, 0, img.Width, img.Height, GraphicsUnit.Pixel);
 
 					// Save new image to memory
-					MemoryStream mem = new MemoryStream() ;
-					bmp.Save(mem, img.RawFormat) ;
+					MemoryStream mem = new MemoryStream();
+					bmp.Save(mem, img.RawFormat);
 					mem.Position = 0;
-					grp.Dispose() ;
+					grp.Dispose();
 
-					return Image.FromStream(mem) ;
+					return Image.FromStream(mem);
 				}
 			}
-			return img ;
+			return img;
 		}
 
 		/// <summary>
@@ -55,22 +65,22 @@ namespace Piranha.Drawing
 			// We only reduce size and crop, we don't magnify images
 			if (!(img.Width == width && img.Height == height)) {
 				if (width <= img.Width && height <= img.Height) {
-					var xRatio = width / (double)img.Width ;
-					var yRatio = height / (double)img.Height ;
+					var xRatio = width / (double)img.Width;
+					var yRatio = height / (double)img.Height;
 
 					if (img.Height * xRatio < height)
-						img = Resize(img, Convert.ToInt32(img.Width * yRatio)) ;
-					else img = Resize(img, Convert.ToInt32(width)) ;
+						img = Resize(img, Convert.ToInt32(img.Width * yRatio));
+					else img = Resize(img, Convert.ToInt32(width));
 
-					var newRect = new Rectangle(((width - img.Width) / 2) * -1, ((height - img.Height) / 2) * -1, width, height) ;
-					var orgBmp = new Bitmap(img) ;
-					var crpBmp = orgBmp.Clone(newRect, img.PixelFormat) ;
-					orgBmp.Dispose() ;
+					var newRect = new Rectangle(((width - img.Width) / 2) * -1, ((height - img.Height) / 2) * -1, width, height);
+					var orgBmp = new Bitmap(img);
+					var crpBmp = orgBmp.Clone(newRect, img.PixelFormat);
+					orgBmp.Dispose();
 
-					return (Image)crpBmp ;
+					return (Image)crpBmp;
 				}
 			}
-			return img ;
+			return img;
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Web;
 
 using Piranha.Models;
@@ -19,7 +29,7 @@ namespace Piranha.Web
 		/// Handles requests to the current startpage
 		/// </summary>
 		/// <param name="context">The current http context</param>
-		void HandleStartpage(HttpContext context) ;
+		void HandleStartpage(HttpContext context);
 
 		/// <summary>
 		/// Handles requests to the given post.
@@ -28,7 +38,7 @@ namespace Piranha.Web
 		/// <param name="permalink">The permalink</param>
 		/// <param name="post">The post</param>
 		/// <param name="args">Optional route arguments</param>
-		void HandlePost(HttpContext context, Permalink permalink, Post post, params string[] args) ;
+		void HandlePost(HttpContext context, Permalink permalink, Post post, params string[] args);
 
 		/// <summary>
 		/// Handles requests to the given page.
@@ -37,6 +47,6 @@ namespace Piranha.Web
 		/// <param name="permalink">The permalink</param>
 		/// <param name="page">The page</param>
 		/// <param name="args">Optional route arguments</param>
-		void HandlePage(HttpContext context, Permalink permalink, Page page, params string[] args) ;
+		void HandlePage(HttpContext context, Permalink permalink, Page page, params string[] args);
 	}
 }

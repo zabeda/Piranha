@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,31 +26,31 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the post archive.
 		/// </summary>
-		public List<PostArchive> PostArchive { get ; set ; }
+		public List<PostArchive> PostArchive { get; set; }
 
 		/// <summary>
 		/// Gets/sets the posts in the current archive.
 		/// </summary>
-		public List<Post> Archive { get ; set ; }
+		public List<Post> Archive { get; set; }
 
 		/// <summary>
 		/// Gets/sets the content in the current archive.
 		/// </summary>
-		public List<Content> Content { get ; set ; }
+		public List<Content> Content { get; set; }
 
 		/// <summary>
 		/// Gets/sets the archive category.
 		/// </summary>
-		public Category Category { get ; set ; }
+		public Category Category { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new archive model.
 		/// </summary>
 		public ArchiveModel() {
-			Archive = new List<Post>() ;
-			Content = new List<Content>() ;
-			PostArchive = new List<PostArchive>() ;
+			Archive = new List<Post>();
+			Content = new List<Content>();
+			PostArchive = new List<PostArchive>();
 		}
 
 		/// <summary>
@@ -48,7 +58,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The model</returns>
 		public static ArchiveModel Get() {
-			return Get<ArchiveModel>() ;
+			return Get<ArchiveModel>();
 		}
 
 		/// <summary>
@@ -57,9 +67,9 @@ namespace Piranha.Models
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
 		public static T Get<T>() where T : ArchiveModel {
-			T m = Activator.CreateInstance<T>() ;
-			m.GetRelated() ;
-			return m ;
+			T m = Activator.CreateInstance<T>();
+			m.GetRelated();
+			return m;
 		}
 
 		/// <summary>
@@ -68,7 +78,7 @@ namespace Piranha.Models
 		/// <param name="category">The category name</param>
 		/// <returns>The model</returns>
 		public static ArchiveModel GetByCategoryName(string category) {
-			return GetByCategoryName<ArchiveModel>(category) ;
+			return GetByCategoryName<ArchiveModel>(category);
 		}
 
 		/// <summary>
@@ -78,11 +88,11 @@ namespace Piranha.Models
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
 		public static T GetByCategoryName<T>(string category) where T : ArchiveModel {
-			T m = Activator.CreateInstance<T>() ;
+			T m = Activator.CreateInstance<T>();
 
-			m.Category = Category.GetByPermalink(category) ;
-			m.GetRelated() ;
-			return m ;
+			m.Category = Category.GetByPermalink(category);
+			m.GetRelated();
+			return m;
 		}
 
 		/// <summary>
@@ -91,17 +101,17 @@ namespace Piranha.Models
 		private void GetRelated() {
 			// Get posts
 			if (Category != null)
-				Archive = Models.Post.GetByCategoryId(Category.Id) ;
-			else Archive = Models.Post.Get(new Params() { OrderBy = "post_published DESC" }) ;
+				Archive = Models.Post.GetByCategoryId(Category.Id);
+			else Archive = Models.Post.Get(new Params() { OrderBy = "post_published DESC" });
 
 			// Get content
 			if (Category != null)
-				Content = Models.Content.GetByCategoryId(Category.Id) ;
+				Content = Models.Content.GetByCategoryId(Category.Id);
 
 			// Gets the archive
 			if (Category != null)
-				PostArchive = Models.PostArchive.Get() ;
-			else PostArchive = Models.PostArchive.Get() ;
+				PostArchive = Models.PostArchive.Get();
+			else PostArchive = Models.PostArchive.Get();
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,9 +37,9 @@ namespace Piranha.Rest
 		/// <param name="id">The page id</param>
 		/// <returns>The page</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/{id}")]
+		[WebGet(UriTemplate = "get/{id}")]
 		public Stream Get(string id) {
-			return Serialize(GetInternal(id)) ;
+			return Serialize(GetInternal(id));
 		}
 
 		/// <summary>
@@ -38,9 +48,9 @@ namespace Piranha.Rest
 		/// <param name="id">The page id</param>
 		/// <returns>The page</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/xml/{id}", ResponseFormat=WebMessageFormat.Xml)]
+		[WebGet(UriTemplate = "get/xml/{id}", ResponseFormat = WebMessageFormat.Xml)]
 		public Page GetXml(string id) {
-			return GetInternal(id) ;
+			return GetInternal(id);
 		}
 
 		/// <summary>
@@ -50,7 +60,7 @@ namespace Piranha.Rest
 		/// <returns>The page.</returns>
 		internal Page GetInternal(string id) {
 			try {
-				Models.PageModel pm = Models.PageModel.GetById(new Guid(id)) ;
+				Models.PageModel pm = Models.PageModel.GetById(new Guid(id));
 
 				if (pm != null && (pm.Page.GroupId == Guid.Empty || HttpContext.Current.User.IsMember(pm.Page.GroupId))) {
 					// Page data
@@ -67,43 +77,53 @@ namespace Piranha.Rest
 						Updated = pm.Page.Updated.ToString(),
 						Published = pm.Page.Published.ToString(),
 						LastPublished = pm.Page.LastPublished.ToString()
-					} ;
+					};
 
 					// Regions
 					foreach (var key in ((IDictionary<string, object>)pm.Regions).Keys) {
 						if (((IDictionary<string, object>)pm.Regions)[key] is HtmlString) {
-							page.Regions.Add(new Region() { Name = key, Body = 
-								((HtmlString)((IDictionary<string, object>)pm.Regions)[key]).ToHtmlString() }) ;
+							page.Regions.Add(new Region() {
+								Name = key, Body =
+	((HtmlString)((IDictionary<string, object>)pm.Regions)[key]).ToHtmlString()
+							});
 						} else {
-							page.Regions.Add(new Region() { Name = key, Body = 
-								((IDictionary<string, object>)pm.Regions)[key] }) ;
+							page.Regions.Add(new Region() {
+								Name = key, Body =
+	((IDictionary<string, object>)pm.Regions)[key]
+							});
 						}
 					}
 
 					// Properties
 					foreach (var key in ((IDictionary<string, object>)pm.Properties).Keys)
-						page.Properties.Add(new Property() { Name = key, Value = (string)
-							((string)((IDictionary<string, object>)pm.Properties)[key]) }) ;
+						page.Properties.Add(new Property() {
+							Name = key, Value = (string)
+((string)((IDictionary<string, object>)pm.Properties)[key])
+						});
 
 					// Attachments
 					foreach (var content in pm.Attachments)
-						page.Attachments.Add(new Attachment() { Id = content.Id, IsImage = content.IsImage }) ;
+						page.Attachments.Add(new Attachment() { Id = content.Id, IsImage = content.IsImage });
 
 					// Extensions
-					page.ExpandedExtensions = pm.Extensions ;
+					page.ExpandedExtensions = pm.Extensions;
 					foreach (var key in ((IDictionary<string, object>)pm.Extensions).Keys) {
 						if (((IDictionary<string, object>)pm.Extensions)[key] is HtmlString) {
-							page.Extensions.Add(new Extension() { Name = key, Body = 
-								((HtmlString)((IDictionary<string, object>)pm.Extensions)[key]).ToHtmlString() }) ;
+							page.Extensions.Add(new Extension() {
+								Name = key, Body =
+((HtmlString)((IDictionary<string, object>)pm.Extensions)[key]).ToHtmlString()
+							});
 						} else {
-							page.Extensions.Add(new Extension() { Name = key, Body =
-								((IDictionary<string, object>)pm.Extensions)[key] }) ;
+							page.Extensions.Add(new Extension() {
+								Name = key, Body =
+((IDictionary<string, object>)pm.Extensions)[key]
+							});
 						}
 					}
-					return page ;
+					return page;
 				}
-			} catch {}
-			return null ;
+			} catch { }
+			return null;
 		}
 	}
 }

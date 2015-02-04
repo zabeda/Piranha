@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +23,7 @@ namespace Piranha.WebPages
 	{
 		#region Properties
 
-		public new Models.PageModel Model { get ; set ; }
+		public new Models.PageModel Model { get; set; }
 		#endregion
 
 		/// <summary>
@@ -22,8 +32,8 @@ namespace Piranha.WebPages
 		protected override void InitializePage() {
 			// Get the current site page model
 			if (Page.Current != null) {
-				Model = Models.PageModel.GetBySite(Page.Current.SiteTreeId) ;
-			} else Model = Models.PageModel.GetBySite(Config.SiteTreeId) ;
+				Model = Models.PageModel.GetBySite(Page.Current.SiteTreeId);
+			} else Model = Models.PageModel.GetBySite(Config.SiteTreeId);
 
 			base.InitializePage();
 		}

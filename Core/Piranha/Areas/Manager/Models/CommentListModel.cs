@@ -1,8 +1,18 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
-using System.Data;
+//using System.Data;
 using System.Linq;
-using System.Web;
+//using System.Web;
 
 using Piranha.Entities;
 
@@ -17,43 +27,44 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Internal comment view model.
 		/// </summary>
-		public class CommentModel {
+		public class CommentModel
+		{
 			/// <summary>
 			/// Gets/sets the id.
 			/// </summary>
-			public Guid Id { get ; set ; }
+			public Guid Id { get; set; }
 
 			/// <summary>
 			/// Gets/sets the comment title.
 			/// </summary>
-			public string Title { get ; set ; }
+			public string Title { get; set; }
 
 			/// <summary>
 			/// Gets/sets the current comment status.
 			/// </summary>
-			public Comment.CommentStatus Status { get ; set ; }
+			public Comment.CommentStatus Status { get; set; }
 
 			/// <summary>
 			/// Gets the status name.
 			/// </summary>
 			public string StatusName {
-				get { return Comment.GetStatusName(Status) ; }
+				get { return Comment.GetStatusName(Status); }
 			}
 
 			/// <summary>
 			/// Gets/sets the author name.
 			/// </summary>
-			public string AuthorName { get ; set ; }
+			public string AuthorName { get; set; }
 
 			/// <summary>
 			/// Gets/sets the autor email.
 			/// </summary>
-			public string AuthorEmail { get ; set ; }
+			public string AuthorEmail { get; set; }
 
 			/// <summary>
 			/// Gets/sets the created date.
 			/// </summary>
-			public DateTime Created { get ; set ; }
+			public DateTime Created { get; set; }
 		}
 		#endregion
 
@@ -61,7 +72,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Gets/sets the available comments.
 		/// </summary>
-		public List<CommentModel> Comments { get ; set ; }
+		public List<CommentModel> Comments { get; set; }
 		#endregion
 
 		/// <summary>
@@ -69,7 +80,7 @@ namespace Piranha.Areas.Manager.Models
 		/// </summary>
 		/// <returns>The model</returns>
 		public static CommentListModel Get() {
-			var m = new CommentListModel() ;
+			var m = new CommentListModel();
 
 			using (var db = new DataContext()) {
 				m.Comments = db.Comments.Include("CreatedBy").Select(c => new CommentModel() {
@@ -79,9 +90,9 @@ namespace Piranha.Areas.Manager.Models
 					AuthorName = c.CreatedBy != null ? c.CreatedBy.Firstname + " " + c.CreatedBy.Surname : c.AuthorName,
 					AuthorEmail = c.CreatedBy != null ? c.CreatedBy.Email : c.AuthorEmail,
 					Status = (Comment.CommentStatus)c.InternalStatus,
-				}).OrderByDescending(c => c.Created).ToList() ;
+				}).OrderByDescending(c => c.Created).ToList();
 			}
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -94,7 +105,7 @@ namespace Piranha.Areas.Manager.Models
 				return db.Comments.
 					Include("CreatedBy").
 					Where(c => c.ParentId == parentid && c.ParentIsDraft == false).
-					OrderByDescending(c => c.Created).ToList() ;
+					OrderByDescending(c => c.Created).ToList();
 			}
 		}
 	}

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +26,14 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Gets/sets the available access rights.
 		/// </summary>
-		public List<SysAccess> Access { get ; set ; }
+		public List<SysAccess> Access { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new list model.
 		/// </summary>
 		public AccessListModel() {
-			Access = new List<SysAccess>() ;
+			Access = new List<SysAccess>();
 		}
 
 		/// <summary>
@@ -31,11 +41,11 @@ namespace Piranha.Models.Manager.SettingModels
 		/// </summary>
 		/// <returns>The model</returns>
 		public static AccessListModel Get() {
-			AccessListModel m = new AccessListModel() ;
+			AccessListModel m = new AccessListModel();
 
-			m.Access = SysAccess.Get(new Params() { OrderBy = "sysaccess_function" }) ;
+			m.Access = SysAccess.Get(new Params() { OrderBy = "sysaccess_function" });
 
-			return m ;
+			return m;
 		}
 	}
 }

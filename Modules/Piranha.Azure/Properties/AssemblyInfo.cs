@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Library for adding Windows Azure features to Piranha CMS.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Håkan Edling")]
-[assembly: AssemblyProduct("Piranha.Azure")]
-[assembly: AssemblyCopyright("Copyright © Håkan Edling 2013-2014")]
+[assembly: AssemblyProduct("Piranha CMS")]
+[assembly: AssemblyCopyright("Copyright © Håkan Edling 2013-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

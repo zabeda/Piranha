@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Script.Serialization;
@@ -17,29 +27,29 @@ namespace Piranha.Extend.Regions
 		/// <summary>
 		/// Inner class for an attachment.
 		/// </summary>
-		public class Attachment 
+		public class Attachment
 		{
 			/// <summary>
 			/// The attached media id.
 			/// </summary>
-			public Guid Id { get ; set ; }
+			public Guid Id { get; set; }
 
 			/// <summary>
 			/// The display name of the media.
 			/// </summary>
 			[ScriptIgnore]
-			public string Name { get ; set ; }
+			public string Name { get; set; }
 
 			/// <summary>
 			/// The content type of the media.
 			/// </summary>
 			[ScriptIgnore]
-			public string Type { get ; set ; }
+			public string Type { get; set; }
 
 			[ScriptIgnore]
-			public DateTime LastPublished { get ; set ; }
+			public DateTime LastPublished { get; set; }
 			[ScriptIgnore]
-			public DateTime Updated { get ; set ; }
+			public DateTime Updated { get; set; }
 		}
 		#endregion
 
@@ -47,14 +57,14 @@ namespace Piranha.Extend.Regions
 		/// <summary>
 		/// Gets/sets the attachments.
 		/// </summary>
-		public IList<Attachment> Items { get ; set ; }
+		public IList<Attachment> Items { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public AttachmentRegion() {
-			Items = new List<Attachment>() ;
+			Items = new List<Attachment>();
 		}
 
 		/// <summary>
@@ -62,21 +72,21 @@ namespace Piranha.Extend.Regions
 		/// </summary>
 		/// <param name="model">The current model</param>
 		public override void InitManager(object model) {
-			var verified = new List<Attachment>() ;
+			var verified = new List<Attachment>();
 
 			foreach (var item in Items) {
-				var media = Models.Content.GetSingle(item.Id, true) ;
+				var media = Models.Content.GetSingle(item.Id, true);
 
 				if (media != null) {
-					item.Name = media.DisplayName ;
-					item.Type = media.Type ;
-					item.Updated = media.Updated ;
-					item.LastPublished = media.LastPublished ;
+					item.Name = media.DisplayName;
+					item.Type = media.Type;
+					item.Updated = media.Updated;
+					item.LastPublished = media.LastPublished;
 
-					verified.Add(item) ;
+					verified.Add(item);
 				}
 			}
-			Items = verified ;
+			Items = verified;
 		}
 
 		/// <summary>
@@ -85,15 +95,15 @@ namespace Piranha.Extend.Regions
 		/// <param name="model"></param>
 		/// <returns></returns>
 		public override object GetContent(object model) {
-			var ret = new List<Models.Content>() ;
+			var ret = new List<Models.Content>();
 
 			foreach (var item in Items) {
-				var media = Models.Content.GetSingle(item.Id) ;
+				var media = Models.Content.GetSingle(item.Id);
 
 				if (media != null)
-					ret.Add(media) ;
+					ret.Add(media);
 			}
-			return ret ;
+			return ret;
 		}
 	}
 }

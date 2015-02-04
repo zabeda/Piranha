@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -21,30 +31,30 @@ namespace Piranha.Extend
 		/// <summary>
 		/// Static singleton instance of the extension manager.
 		/// </summary>
-		public static readonly ExtensionManager Current = new ExtensionManager() ;
+		public static readonly ExtensionManager Current = new ExtensionManager();
 
 		/// <summary>
 		/// The private composition container.
 		/// </summary>
-		private CompositionContainer Container = null ;
+		private CompositionContainer Container = null;
 
 		/// <summary>
 		/// The currently available extensions.
 		/// </summary>
-		[ImportMany(AllowRecomposition=true)]
-		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions { get ; set ; }
+		[ImportMany(AllowRecomposition = true)]
+		private IEnumerable<Lazy<IExtension, IExtensionMeta>> Extensions { get; set; }
 
 		/// <summary>
 		/// The currently code-defined page types.
 		/// </summary>
-		[ImportMany(AllowRecomposition=true)]
-		internal IEnumerable<IPageType> PageTypes { get ; set ; }
+		[ImportMany(AllowRecomposition = true)]
+		internal IEnumerable<IPageType> PageTypes { get; set; }
 
 		/// <summary>
 		/// The currently code-defined post types.
 		/// </summary>
-		[ImportMany(AllowRecomposition=true)]
-		internal IEnumerable<IPostType> PostTypes { get ; set ; }
+		[ImportMany(AllowRecomposition = true)]
+		internal IEnumerable<IPostType> PostTypes { get; set; }
 		#endregion
 
 		/// <summary>
@@ -52,7 +62,7 @@ namespace Piranha.Extend
 		/// </summary>
 		private ExtensionManager() {
 			// Let MEF scan for imports
-			var catalog = new AggregateCatalog() ;
+			var catalog = new AggregateCatalog();
 
 			catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
 
@@ -61,14 +71,14 @@ namespace Piranha.Extend
 #endif
 				try {
 					// This feature only exists for Web Pages
-					catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code"))) ;
-				} catch {}
+					catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code")));
+				} catch { }
 #if !NET40
 			}
 #endif
 
-			Container = new CompositionContainer(catalog) ;
-			Container.ComposeParts(this) ;
+			Container = new CompositionContainer(catalog);
+			Container.ComposeParts(this);
 		}
 
 		/// <summary>
@@ -76,19 +86,19 @@ namespace Piranha.Extend
 		/// </summary>
 		public void OnImportsSatisfied() {
 			using (var db = new DataContext()) {
-				db.LoginSys() ;
+				db.LoginSys();
 				// Run the ensure method for all extensions.
 				foreach (var ext in Extensions)
-					ext.Value.Ensure(db) ;
-				db.Logout() ;
+					ext.Value.Ensure(db);
+				db.Logout();
 			}
 
 			if (!Config.DisableTypeBuilder) {
 				// Ensure page types
-				EnsurePageTypes() ;
+				EnsurePageTypes();
 
 				// Ensure post types
-				EnsurePostTypes() ;
+				EnsurePostTypes();
 			}
 		}
 
@@ -98,7 +108,7 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <returns>If the extension exists</returns>
 		public bool HasType(string type) {
-			return Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() != null ;
+			return Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() != null;
 		}
 
 		/// <summary>
@@ -109,10 +119,10 @@ namespace Piranha.Extend
 		/// <returns>The new instance</returns>
 		public IExtension CreateInstance(string type, params object[] args) {
 			if (HasType(type)) {
-				var ext = Extensions.Where(e => e.Value.GetType().FullName == type).Single() ;
-				return (IExtension)Activator.CreateInstance(ext.Value.GetType(), args) ;
+				var ext = Extensions.Where(e => e.Value.GetType().FullName == type).Single();
+				return (IExtension)Activator.CreateInstance(ext.Value.GetType(), args);
 			}
-			return null ;
+			return null;
 		}
 
 		/// <summary>
@@ -121,15 +131,15 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <returns>The name</returns>
 		public string GetNameByType(string type) {
-			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
+			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault();
 			if (ext != null) {
 				if (ext.Metadata.ResourceType != null && !String.IsNullOrEmpty(ext.Metadata.Name)) {
-					var mgr = new ResourceManager(ext.Metadata.ResourceType) ;
-					return mgr.GetString(ext.Metadata.Name) ;
+					var mgr = new ResourceManager(ext.Metadata.ResourceType);
+					return mgr.GetString(ext.Metadata.Name);
 				}
-				return ext.Metadata.Name ;
+				return ext.Metadata.Name;
 			}
-			return "" ;
+			return "";
 		}
 
 		/// <summary>
@@ -138,11 +148,11 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <returns>The internal id</returns>
 		public string GetInternalIdByType(string type) {
-			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
+			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault();
 			if (ext != null)
-				return !String.IsNullOrEmpty(ext.Metadata.InternalId) ? ext.Metadata.InternalId : 
-					ext.Metadata.Name.Replace(" ", "").Replace(".", "") ;
-			return "" ;
+				return !String.IsNullOrEmpty(ext.Metadata.InternalId) ? ext.Metadata.InternalId :
+					ext.Metadata.Name.Replace(" ", "").Replace(".", "");
+			return "";
 		}
 
 		/// <summary>
@@ -151,11 +161,11 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <returns>The icon path</returns>
 		public string GetIconPathByType(string type) {
-			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault() ;
+			var ext = Extensions.Where(e => e.Value.GetType().FullName == type).SingleOrDefault();
 			if (ext != null)
 				return !String.IsNullOrEmpty(ext.Metadata.IconPath) ? ext.Metadata.IconPath :
-					"~/res.ashx/areas/manager/content/img/ico-missing-ico.png" ;
-			return "" ;
+					"~/res.ashx/areas/manager/content/img/ico-missing-ico.png";
+			return "";
 		}
 
 		/// <summary>
@@ -164,7 +174,7 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <returns>The real type</returns>
 		public Type GetType(string type) {
-			return Extensions.Where(e => e.Value.GetType().FullName == type).Select(e => e.Value.GetType()).Single() ;
+			return Extensions.Where(e => e.Value.GetType().FullName == type).Select(e => e.Value.GetType()).Single();
 		}
 
 		/// <summary>
@@ -173,7 +183,7 @@ namespace Piranha.Extend
 		/// <param name="type">The extension type</param>
 		/// <returns></returns>
 		public IEnumerable<Lazy<IExtension, IExtensionMeta>> GetByExtensionType(ExtensionType type) {
-			return Extensions.Where(e => e.Metadata.Type.HasFlag(type)).ToList() ;
+			return Extensions.Where(e => e.Metadata.Type.HasFlag(type)).ToList();
 		}
 
 		/// <summary>
@@ -183,16 +193,16 @@ namespace Piranha.Extend
 		/// <param name="draft">Whether the entity is a draft or not</param>
 		/// <returns>A list of extensions</returns>
 		public List<Models.Extension> GetByType(ExtensionType type, bool draft = false) {
-			var extensions = new List<Models.Extension>() ;
+			var extensions = new List<Models.Extension>();
 
 			foreach (var ext in Extensions.Where(e => e.Metadata.Type.HasFlag(type))) {
 				extensions.Add(new Models.Extension() {
 					IsDraft = draft,
 					Type = ext.Value.GetType().FullName,
 					Body = (IExtension)Activator.CreateInstance(ext.Value.GetType())
-				}) ;
+				});
 			}
-			return extensions ;
+			return extensions;
 		}
 
 		/// <summary>
@@ -203,81 +213,81 @@ namespace Piranha.Extend
 		/// <param name="draft">Whether the entity is a draft or not</param>
 		/// <returns>A list of extensions</returns>
 		public List<Models.Extension> GetByTypeAndEntity(ExtensionType type, Guid id, bool draft) {
-			var ret = new List<Models.Extension>() ;
-			var tmp = GetByType(type, draft) ;
+			var ret = new List<Models.Extension>();
+			var tmp = GetByType(type, draft);
 
 			foreach (var e in tmp) {
 				var ext = Models.Extension.GetSingle("extension_type = @0 AND extension_parent_id = @1 AND extension_draft = @2",
-					e.Type, id, draft) ;
+					e.Type, id, draft);
 				if (ext != null)
-					ret.Add(ext) ;
-				else ret.Add(e) ;
+					ret.Add(ext);
+				else ret.Add(e);
 			}
-			return ret ;
+			return ret;
 		}
 
 		/// <summary>
 		/// Empty stub that just forces the initialization of the extension manager.
 		/// </summary>
-		internal void ForceInit() {}
+		internal void ForceInit() { }
 
 		/// <summary>
 		/// Creates and updates all page types defined by code.
 		/// </summary>
 		private void EnsurePageTypes() {
 			foreach (var type in PageTypes) {
-				var pt = Models.PageTemplate.Get("pagetemplate_type=@0", type.GetType().FullName).SingleOrDefault() ;
-				
-				Models.Manager.TemplateModels.PageEditModel m = null ;
+				var pt = Models.PageTemplate.Get("pagetemplate_type=@0", type.GetType().FullName).SingleOrDefault();
+
+				Models.Manager.TemplateModels.PageEditModel m = null;
 
 				// Get or create the page type
 				if (pt != null)
-					m = Models.Manager.TemplateModels.PageEditModel.GetById(pt.Id, false) ;
-				else m = new Models.Manager.TemplateModels.PageEditModel(false) ;
+					m = Models.Manager.TemplateModels.PageEditModel.GetById(pt.Id, false);
+				else m = new Models.Manager.TemplateModels.PageEditModel(false);
 
 				// Set all meta data
 				if (m.Template.IsNew)
-					m.Template.Id = Guid.NewGuid() ;
-				m.Template.Name = type.Name ;
-				m.Template.Description = type.Description ;
-				m.Template.Preview = new HtmlString(type.Preview) ;
-				m.Template.Controller = type.Controller ;
-				m.Template.ShowController = type.ShowController ;
-				m.Template.View = type.View ;
-				m.Template.ShowView = type.ShowView ;
-				m.Template.Properties.Clear() ;
-				m.Template.Properties.AddRange(type.Properties) ;
-				m.Template.Type = type.GetType().FullName ;
+					m.Template.Id = Guid.NewGuid();
+				m.Template.Name = type.Name;
+				m.Template.Description = type.Description;
+				m.Template.Preview = new HtmlString(type.Preview);
+				m.Template.Controller = type.Controller;
+				m.Template.ShowController = type.ShowController;
+				m.Template.View = type.View;
+				m.Template.ShowView = type.ShowView;
+				m.Template.Properties.Clear();
+				m.Template.Properties.AddRange(type.Properties);
+				m.Template.Type = type.GetType().FullName;
 
-				var old = new List<Models.RegionTemplate>() ;
-				m.Regions.ForEach(r => old.Add(r)) ;
-				m.Regions.Clear() ;
+				var old = new List<Models.RegionTemplate>();
+				m.Regions.ForEach(r => old.Add(r));
+				m.Regions.Clear();
 
 				// Create region templates
 				for (int n = 1; n <= type.Regions.Count; n++) {
-					var reg = type.Regions[n - 1] ;
+					var reg = type.Regions[n - 1];
 
-					var rt = old.Where(r => r.InternalId == reg.InternalId && r.Type == reg.Type.FullName).SingleOrDefault() ;
+					var rt = old.Where(r => r.InternalId == reg.InternalId && r.Type == reg.Type.FullName).SingleOrDefault();
 					if (rt == null)
-						rt = new Models.RegionTemplate() ;
+						rt = new Models.RegionTemplate();
 
-					rt.TemplateId = m.Template.Id ;
-					rt.InternalId = reg.InternalId ;
-					rt.Name = reg.Name ;
-					rt.Type = reg.Type.FullName ;
-					rt.Seqno = n ;
-				
-					m.Regions.Add(rt) ;
+					rt.TemplateId = m.Template.Id;
+					rt.InternalId = reg.InternalId;
+					rt.Name = reg.Name;
+					rt.Type = reg.Type.FullName;
+					rt.Seqno = n;
+
+					m.Regions.Add(rt);
 				}
 				// Delete removed region templates
-				var removed = old.Where(r => !m.Regions.Contains(r)) ;
+				var removed = old.Where(r => !m.Regions.Contains(r));
 
 				// Save Template
-				Data.Database.LoginSys() ;
+				Data.Database.LoginSys();
 				foreach (var rem in removed)
-					rem.Delete() ;
-				m.SaveAll() ;
-				Data.Database.Logout() ;
+					rem.Delete();
+				m.SaveAll();
+				Data.Database.Logout();
 			}
 		}
 
@@ -286,33 +296,33 @@ namespace Piranha.Extend
 		/// </summary>
 		private void EnsurePostTypes() {
 			foreach (var type in PostTypes) {
-				var pt = Models.PostTemplate.Get("posttemplate_type=@0", type.GetType().FullName).SingleOrDefault() ;
-				
-				Models.Manager.TemplateModels.PostEditModel m = null ;
+				var pt = Models.PostTemplate.Get("posttemplate_type=@0", type.GetType().FullName).SingleOrDefault();
+
+				Models.Manager.TemplateModels.PostEditModel m = null;
 
 				// Get or create the page type
 				if (pt != null)
-					m = Models.Manager.TemplateModels.PostEditModel.GetById(pt.Id) ;
-				else m = new Models.Manager.TemplateModels.PostEditModel() ;
+					m = Models.Manager.TemplateModels.PostEditModel.GetById(pt.Id);
+				else m = new Models.Manager.TemplateModels.PostEditModel();
 
 				// Set all meta data
 				if (m.Template.IsNew)
-					m.Template.Id = Guid.NewGuid() ;
-				m.Template.Name = type.Name ;
-				m.Template.Description = type.Description ;
-				m.Template.Preview = new HtmlString(type.Preview) ;
-				m.Template.Controller = type.Controller ;
-				m.Template.ShowController = type.ShowController ;
-				m.Template.View = type.View ;
-				m.Template.ShowView = type.ShowView ;
-				m.Template.Properties.Clear() ;
-				m.Template.Properties.AddRange(type.Properties) ;
-				m.Template.Type = type.GetType().FullName ;
+					m.Template.Id = Guid.NewGuid();
+				m.Template.Name = type.Name;
+				m.Template.Description = type.Description;
+				m.Template.Preview = new HtmlString(type.Preview);
+				m.Template.Controller = type.Controller;
+				m.Template.ShowController = type.ShowController;
+				m.Template.View = type.View;
+				m.Template.ShowView = type.ShowView;
+				m.Template.Properties.Clear();
+				m.Template.Properties.AddRange(type.Properties);
+				m.Template.Type = type.GetType().FullName;
 
 				// Save Template
-				Data.Database.LoginSys() ;
-				m.SaveAll() ;
-				Data.Database.Logout() ;
+				Data.Database.LoginSys();
+				m.SaveAll();
+				Data.Database.Logout();
 			}
 		}
 	}

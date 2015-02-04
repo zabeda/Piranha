@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,9 +28,9 @@ using Piranha.Models;
 public static class PiranhaApp
 {
 	#region Members
-	public const string USER = "Piranha_User" ;
+	public const string USER = "Piranha_User";
 	#endregion
-	
+
 	#region Language extensions
 	/// <summary>
 	/// Implodes the string array into a string with all item separated by the given separator.
@@ -29,10 +39,10 @@ public static class PiranhaApp
 	/// <param name="sep">The optional separator</param>
 	/// <returns>The string</returns>
 	public static string Implode(this string[] arr, string sep = "") {
-		string ret = "" ;
+		string ret = "";
 		for (int n = 0; n < arr.Length; n++)
-			ret += (n > 0 ? sep : "") + arr[n] ;
-		return ret ;
+			ret += (n > 0 ? sep : "") + arr[n];
+		return ret;
 	}
 
 	/// <summary>
@@ -44,15 +54,15 @@ public static class PiranhaApp
 	/// <param name="length">The length</param>
 	/// <returns>The new array</returns>
 	public static T[] Subset<T>(this T[] arr, int startpos = 0, int length = 0) {
-		List<T> tmp = new List<T>() ;
+		List<T> tmp = new List<T>();
 
-		length = length > 0 ? length : arr.Length - startpos ;
+		length = length > 0 ? length : arr.Length - startpos;
 
 		arr.Each<T>((i, e) => {
 			if (i >= startpos && i < (startpos + length))
-				tmp.Add(e) ;
-		}) ;
-		return tmp.ToArray() ;
+				tmp.Add(e);
+		});
+		return tmp.ToArray();
 	}
 
 	/// <summary>
@@ -63,9 +73,9 @@ public static class PiranhaApp
 	/// <param name="ienum">The enumerable</param>
 	/// <param name="proc">The action to execute</param>
 	public static void Each<T>(this IEnumerable<T> ienum, Action<int, T> proc) {
-		int index = 0 ;
+		int index = 0;
 		foreach (T itm in ienum)
-			proc(index++, itm) ;
+			proc(index++, itm);
 	}
 
 	/// <summary>
@@ -75,7 +85,7 @@ public static class PiranhaApp
 	/// <param name="key">The key</param>
 	/// <returns>The value</returns>
 	public static ValueProviderResult GetUnvalidatedValue(this IValueProvider provider, string key) {
-		return ((IUnvalidatedValueProvider)provider).GetValue(key, true) ;
+		return ((IUnvalidatedValueProvider)provider).GetValue(key, true);
 	}
 
 	/// <summary>
@@ -86,9 +96,9 @@ public static class PiranhaApp
 	/// <param name="inherit">If inherited attributes should be included</param>
 	/// <returns>The attribute, if it was found</returns>
 	public static T GetCustomAttribute<T>(this Type type, bool inherit) {
-		object[] arr = type.GetCustomAttributes(typeof(T), inherit) ;
+		object[] arr = type.GetCustomAttributes(typeof(T), inherit);
 
-		return arr.Length > 0 ? (T)arr[0] : default(T) ;
+		return arr.Length > 0 ? (T)arr[0] : default(T);
 	}
 
 	/// <summary>
@@ -99,9 +109,9 @@ public static class PiranhaApp
 	/// <param name="inherit">If inherited attributes should be included</param>
 	/// <returns>The attribute, if it was found</returns>
 	public static T GetCustomAttribute<T>(this MemberInfo member, bool inherit) {
-		object[] arr = member.GetCustomAttributes(typeof(T), inherit) ;
+		object[] arr = member.GetCustomAttributes(typeof(T), inherit);
 
-		return arr.Length > 0 ? (T)arr[0] : default(T) ;
+		return arr.Length > 0 ? (T)arr[0] : default(T);
 	}
 
 	/// <summary>
@@ -112,7 +122,7 @@ public static class PiranhaApp
 	/// <param name="inherit">If inherited attributes should be included</param>
 	/// <returns>An array of attributes</returns>
 	public static T[] GetCustomAttributes<T>(this Type type, bool inherit) {
-		return Array.ConvertAll<object, T>(type.GetCustomAttributes(typeof(T), inherit), (o) => (T)o) ;
+		return Array.ConvertAll<object, T>(type.GetCustomAttributes(typeof(T), inherit), (o) => (T)o);
 	}
 
 	/// <summary>
@@ -121,7 +131,7 @@ public static class PiranhaApp
 	/// <param name="response">The response</param>
 	public static void EndClean(this HttpResponse response) {
 		try {
-			response.End() ;
+			response.End();
 		} catch (ThreadAbortException) {
 			// We simply swallow this exception as we don't want unhandled
 			// exceptions flying around causing the app pool to die.
@@ -134,7 +144,7 @@ public static class PiranhaApp
 	/// <param name="response">The response</param>
 	public static void EndClean(this HttpResponseBase response) {
 		try {
-			response.End() ;
+			response.End();
 		} catch (ThreadAbortException) {
 			// We simply swallow this exception as we don't want unhandled
 			// exceptions flying around causing the app pool to die.
@@ -152,34 +162,29 @@ public static class PiranhaApp
 	 * 
 	 * https://gist.github.com/2137475
 	 */
-    public static MvcHtmlString PartialFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression)
-    {
-        return html.PartialFor(typeof (TValue).Name, expression);
-    }
+	public static MvcHtmlString PartialFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression) {
+		return html.PartialFor(typeof(TValue).Name, expression);
+	}
 
-    public static MvcHtmlString PartialFor<TModel, TValue>(this HtmlHelper<TModel> html, string partialViewName, Expression<Func<TModel, TValue>> expression)
-    {
-        var containingModel = html.ViewData.Model;
-        var model = expression.Compile()(containingModel);
+	public static MvcHtmlString PartialFor<TModel, TValue>(this HtmlHelper<TModel> html, string partialViewName, Expression<Func<TModel, TValue>> expression) {
+		var containingModel = html.ViewData.Model;
+		var model = expression.Compile()(containingModel);
 
-        var oldTemplateInfo = html.ViewData.TemplateInfo;
-        var newViewData = new ViewDataDictionary(html.ViewData)
-        {
-            TemplateInfo = new TemplateInfo
-            {
-                FormattedModelValue = oldTemplateInfo.FormattedModelValue,
-            }
-        };
+		var oldTemplateInfo = html.ViewData.TemplateInfo;
+		var newViewData = new ViewDataDictionary(html.ViewData) {
+			TemplateInfo = new TemplateInfo {
+				FormattedModelValue = oldTemplateInfo.FormattedModelValue,
+			}
+		};
 
-        var newPrefix = ExpressionHelper.GetExpressionText(expression);
-        if (oldTemplateInfo.HtmlFieldPrefix.Length > 0)
-        {
-            newPrefix = oldTemplateInfo.HtmlFieldPrefix + "." + newPrefix;
-        }
-        newViewData.TemplateInfo.HtmlFieldPrefix = newPrefix;
+		var newPrefix = ExpressionHelper.GetExpressionText(expression);
+		if (oldTemplateInfo.HtmlFieldPrefix.Length > 0) {
+			newPrefix = oldTemplateInfo.HtmlFieldPrefix + "." + newPrefix;
+		}
+		newViewData.TemplateInfo.HtmlFieldPrefix = newPrefix;
 
-        return html.Partial(partialViewName, model, newViewData);
-    }
+		return html.Partial(partialViewName, model, newViewData);
+	}
 	#endregion
 
 	#region CMS extension
@@ -192,11 +197,11 @@ public static class PiranhaApp
 		if (Piranha.Application.Current.UserProvider.IsAuthenticated) {
 			// Reload user if session has been dropped
 			if (HttpContext.Current.Session[USER] == null)
-				HttpContext.Current.Session[USER] = 
-					SysUser.GetSingle(Piranha.Application.Current.UserProvider.UserId) ;
-			return (SysUser)HttpContext.Current.Session[USER] ;
+				HttpContext.Current.Session[USER] =
+					SysUser.GetSingle(Piranha.Application.Current.UserProvider.UserId);
+			return (SysUser)HttpContext.Current.Session[USER];
 		}
-		return new SysUser() ;
+		return new SysUser();
 	}
 
 	/// <summary>
@@ -207,14 +212,14 @@ public static class PiranhaApp
 	/// <returns>If the user has access</returns>
 	public static bool HasAccess(this IPrincipal p, string function) {
 		if (Piranha.Application.Current.UserProvider.IsAuthenticated) {
-			Dictionary<string, SysAccess> access = SysAccess.GetAccessList() ;
+			Dictionary<string, SysAccess> access = SysAccess.GetAccessList();
 
 			if (access.ContainsKey(function)) {
-				SysGroup group = SysGroup.GetStructure().GetGroupById(p.GetProfile().GroupId) ;
-				return group != null && (group.Id == access[function].GroupId || group.HasChild(access[function].GroupId)) ;
+				SysGroup group = SysGroup.GetStructure().GetGroupById(p.GetProfile().GroupId);
+				return group != null && (group.Id == access[function].GroupId || group.HasChild(access[function].GroupId));
 			}
 		}
-		return false ;
+		return false;
 	}
 
 	/// <summary>
@@ -227,12 +232,12 @@ public static class PiranhaApp
 	public static bool IsMember(this IPrincipal p, Guid groupid) {
 		if (Piranha.Application.Current.UserProvider.IsAuthenticated) {
 			if (groupid != Guid.Empty) {
-				SysGroup g = SysGroup.GetStructure().GetGroupById(p.GetProfile().GroupId) ;
-				return g.Id == groupid || g.HasChild(groupid) ;
+				SysGroup g = SysGroup.GetStructure().GetGroupById(p.GetProfile().GroupId);
+				return g.Id == groupid || g.HasChild(groupid);
 			}
-			return true ;
+			return true;
 		}
-		return false ;
+		return false;
 	}
 
 	/// <summary>
@@ -243,10 +248,10 @@ public static class PiranhaApp
 	/// <param name="groupname">The group</param>
 	/// <returns>If the user is a member</returns>
 	public static bool IsMember(this IPrincipal p, string groupname) {
-		SysGroup g = SysGroup.GetSingle("sysgroup_name = @0", groupname) ;
+		SysGroup g = SysGroup.GetSingle("sysgroup_name = @0", groupname);
 		if (g != null)
-			return IsMember(p, g.Id) ;
-		return false ;
+			return IsMember(p, g.Id);
+		return false;
 	}
 
 	/// <summary>
@@ -255,7 +260,7 @@ public static class PiranhaApp
 	/// </summary>
 	/// <param name="m">The method</param>
 	public static void CheckAccess(this MethodInfo m) {
-		CheckAccess(HttpContext.Current.User, m.GetCustomAttribute<Piranha.AccessAttribute>(true)) ;
+		CheckAccess(HttpContext.Current.User, m.GetCustomAttribute<Piranha.AccessAttribute>(true));
 
 	}
 
@@ -265,7 +270,7 @@ public static class PiranhaApp
 	/// </summary>
 	/// <param name="m">The method</param>
 	public static void CheckAccess(this Type t) {
-		CheckAccess(HttpContext.Current.User, t.GetCustomAttribute<Piranha.AccessAttribute>(true)) ;
+		CheckAccess(HttpContext.Current.User, t.GetCustomAttribute<Piranha.AccessAttribute>(true));
 
 	}
 
@@ -279,14 +284,14 @@ public static class PiranhaApp
 		if (access != null) {
 			if (!user.HasAccess(access.Function)) {
 				if (!String.IsNullOrEmpty(access.RedirectUrl)) {
-					HttpContext.Current.Response.Redirect(access.RedirectUrl, false) ;
+					HttpContext.Current.Response.Redirect(access.RedirectUrl, false);
 				} else {
-					SysParam param = SysParam.GetByName("LOGIN_PAGE") ;
+					SysParam param = SysParam.GetByName("LOGIN_PAGE");
 					if (param != null)
-						HttpContext.Current.Response.Redirect(param.Value, false) ;
-					else HttpContext.Current.Response.Redirect("~/", false) ;
+						HttpContext.Current.Response.Redirect(param.Value, false);
+					else HttpContext.Current.Response.Redirect("~/", false);
 				}
-				HttpContext.Current.ApplicationInstance.CompleteRequest() ;
+				HttpContext.Current.ApplicationInstance.CompleteRequest();
 			}
 		}
 	}
@@ -303,13 +308,13 @@ public static class PiranhaApp
 		if (sm != null) {
 			foreach (Sitemap page in sm) {
 				if (page.Id == id)
-					return page ;
-				Sitemap subpage = GetRootNode(page.Pages, id) ;
+					return page;
+				Sitemap subpage = GetRootNode(page.Pages, id);
 				if (subpage != null)
-					return subpage ;
+					return subpage;
 			}
 		}
-		return null ;
+		return null;
 	}
 
 	/// <summary>
@@ -318,12 +323,12 @@ public static class PiranhaApp
 	/// <param name="self">The content list</param>
 	/// <returns>The image count</returns>
 	public static int CountImages(this List<Content> self) {
-		int images = 0 ;
-		self.ForEach((c) => { 
-			if (c.IsImage) 
-				images++ ;
-		}) ;
-		return images ;
+		int images = 0;
+		self.ForEach((c) => {
+			if (c.IsImage)
+				images++;
+		});
+		return images;
 	}
 
 	/// <summary>
@@ -332,12 +337,12 @@ public static class PiranhaApp
 	/// <param name="self">The content list</param>
 	/// <returns>The document count</returns>
 	public static int CountDocuments(this List<Content> self) {
-		int documents = 0 ;
-		self.ForEach((c) => { 
-			if (!c.IsImage) 
-				documents++ ;
-		}) ;
-		return documents ;
+		int documents = 0;
+		self.ForEach((c) => {
+			if (!c.IsImage)
+				documents++;
+		});
+		return documents;
 	}
 
 	/// <summary>
@@ -346,7 +351,7 @@ public static class PiranhaApp
 	/// <param name="self">The content list</param>
 	/// <returns>The images</returns>
 	public static List<Content> Images(this List<Content> self) {
-		return self.Where(c => c.IsImage).ToList() ;
+		return self.Where(c => c.IsImage).ToList();
 	}
 
 	/// <summary>
@@ -355,7 +360,7 @@ public static class PiranhaApp
 	/// <param name="self">The content list</param>
 	/// <returns>The documents</returns>
 	public static List<Content> Documents(this List<Content> self) {
-		return self.Where(c => !c.IsImage).ToList() ;
+		return self.Where(c => !c.IsImage).ToList();
 	}
 	#endregion
 }

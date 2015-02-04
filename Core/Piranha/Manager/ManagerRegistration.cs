@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,14 +25,14 @@ namespace Piranha.Manager
 		/// <summary>
 		/// The manager namespace. Additional namespaces can be configured with Config.ManagerNamespaces
 		/// </summary>
-		private string[] namespaces = { "Piranha.Areas.Manager.Controllers" } ;
+		private string[] namespaces = { "Piranha.Areas.Manager.Controllers" };
 		#endregion
 
 		/// <summary>
 		/// Gets the area name.
 		/// </summary>
 		public override string AreaName {
-			get { return "Manager" ; }
+			get { return "Manager"; }
 		}
 
 		/// <summary>
@@ -37,10 +47,10 @@ namespace Piranha.Manager
 					"manager/{controller}/{action}/{id}",
 					new { area = "manager", controller = "account", action = "index", id = UrlParameter.Optional },
 					namespaces.Union(Config.ManagerNamespaces).ToArray()
-				).DataTokens["UseNamespaceFallback"] = false ;
+				).DataTokens["UseNamespaceFallback"] = false;
 
 				// Register filters & binders
-				RegisterGlobalFilters(GlobalFilters.Filters) ;
+				RegisterGlobalFilters(GlobalFilters.Filters);
 			}
 		}
 

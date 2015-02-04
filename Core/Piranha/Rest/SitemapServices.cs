@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -25,10 +35,10 @@ namespace Piranha.Rest
 		/// </summary>
 		/// <returns>The sitemap</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/{internalid}", ResponseFormat=WebMessageFormat.Json)]
+		[WebGet(UriTemplate = "get/{internalid}", ResponseFormat = WebMessageFormat.Json)]
 		public List<Sitemap> Get(string internalid) {
-			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(internalid.ToUpper(), true) ;
-			return BuildMap(sm) ;
+			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(internalid.ToUpper(), true);
+			return BuildMap(sm);
 		}
 
 		/// <summary>
@@ -36,9 +46,9 @@ namespace Piranha.Rest
 		/// </summary>
 		/// <returns>The sitemap</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="get/xml/{internalid}", ResponseFormat=WebMessageFormat.Xml)]
+		[WebGet(UriTemplate = "get/xml/{internalid}", ResponseFormat = WebMessageFormat.Xml)]
 		public List<Sitemap> GetXml(string internalid) {
-			return Get(internalid) ;
+			return Get(internalid);
 		}
 
 		/// <summary>
@@ -47,10 +57,10 @@ namespace Piranha.Rest
 		/// <param name="root">The root node id</param>
 		/// <returns>The sitemap</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="getpartial/{id}", ResponseFormat=WebMessageFormat.Json)]
+		[WebGet(UriTemplate = "getpartial/{id}", ResponseFormat = WebMessageFormat.Json)]
 		public List<Sitemap> GetPartial(string id) {
-			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(true).GetRootNode(new Guid(id)).Pages ;
-			return BuildMap(sm) ;
+			List<Models.Sitemap> sm = Models.Sitemap.GetStructure(true).GetRootNode(new Guid(id)).Pages;
+			return BuildMap(sm);
 		}
 
 		/// <summary>
@@ -59,9 +69,9 @@ namespace Piranha.Rest
 		/// <param name="root">The root node id</param>
 		/// <returns>The sitemap</returns>
 		[OperationContract()]
-		[WebGet(UriTemplate="getpartial/xml/{id}", ResponseFormat=WebMessageFormat.Xml)]
+		[WebGet(UriTemplate = "getpartial/xml/{id}", ResponseFormat = WebMessageFormat.Xml)]
 		public List<Sitemap> GetPartialXml(string id) {
-			return GetPartial(id) ;
+			return GetPartial(id);
 		}
 
 		#region Private methods
@@ -69,7 +79,7 @@ namespace Piranha.Rest
 		/// Builds the sitemap recursivly.
 		/// </summary>
 		private List<Sitemap> BuildMap(List<Models.Sitemap> sm) {
-			List<Sitemap> sitemap = new List<Sitemap>() ;
+			List<Sitemap> sitemap = new List<Sitemap>();
 
 			sm.ForEach(map => {
 				if (map.GroupId == Guid.Empty || HttpContext.Current.User.IsMember(map.GroupId)) {
@@ -81,10 +91,10 @@ namespace Piranha.Rest
 						HasChildren = map.Pages.Count > 0,
 						ChildNodes = BuildMap(map.Pages),
 						LastPublished = map.LastPublished.ToString()
-					}) ;
+					});
 				}
-			}) ;
-			return sitemap ;
+			});
+			return sitemap;
 		}
 		#endregion
 	}

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,9 +32,9 @@ namespace Piranha.Web
 		public static DateTime SiteLastModified {
 			get {
 				try {
-					return DateTime.Parse(SysParam.GetByName("SITE_LAST_MODIFIED").Value) ;
-				} catch {}
-				return DateTime.MinValue ;
+					return DateTime.Parse(SysParam.GetByName("SITE_LAST_MODIFIED").Value);
+				} catch { }
+				return DateTime.MinValue;
 			}
 		}
 		#endregion
@@ -35,8 +45,8 @@ namespace Piranha.Web
 		/// <param name="tx">Optional transaction</param>
 		public static void SetSiteLastModified(IDbTransaction tx = null) {
 			SysParam.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = @1", tx,
-				DateTime.Now, "SITE_LAST_MODIFIED") ;
-			SysParam.InvalidateParam("SITE_LAST_MODIFIED") ;
+				DateTime.Now, "SITE_LAST_MODIFIED");
+			SysParam.InvalidateParam("SITE_LAST_MODIFIED");
 		}
 
 		/// <summary>
@@ -53,42 +63,42 @@ namespace Piranha.Web
 		public static bool HandleClientCache(HttpContext context, string id, DateTime modified, bool noexpire = false, int? minutes = null) {
 #if !DEBUG
 			// Get expire & maxage
-			int expires = 30, maxage = 30 ;
+			int expires = 30, maxage = 30;
 			try {
-				expires = !minutes.HasValue ? Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_EXPIRES").Value) : minutes.Value ;
-				maxage = !minutes.HasValue ? Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_MAXAGE").Value) : minutes.Value ;
-			} catch {}
+				expires = !minutes.HasValue ? Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_EXPIRES").Value) : minutes.Value;
+				maxage = !minutes.HasValue ? Convert.ToInt32(SysParam.GetByName("CACHE_PUBLIC_MAXAGE").Value) : minutes.Value;
+			} catch { }
 
 			// Handle cache
 			if (!context.Request.IsLocal && expires > 0) {
 				try {
 					if (!minutes.HasValue)
-						modified = modified > SiteLastModified ? modified : SiteLastModified ;
-				} catch {}
-				string etag = GenerateETag(id, modified) ;
+						modified = modified > SiteLastModified ? modified : SiteLastModified;
+				} catch { }
+				string etag = GenerateETag(id, modified);
 
-				context.Response.Cache.SetETag(etag) ;
-				context.Response.Cache.SetLastModified(modified <= DateTime.Now ? modified : DateTime.Now) ;	
-				context.Response.Cache.SetCacheability(System.Web.HttpCacheability.ServerAndPrivate) ;
+				context.Response.Cache.SetETag(etag);
+				context.Response.Cache.SetLastModified(modified <= DateTime.Now ? modified : DateTime.Now);
+				context.Response.Cache.SetCacheability(System.Web.HttpCacheability.ServerAndPrivate);
 				if (!noexpire) {
-					context.Response.Cache.SetExpires(DateTime.Now.AddMinutes(expires)) ;
-					context.Response.Cache.SetMaxAge(new TimeSpan(0, maxage, 0)) ;
+					context.Response.Cache.SetExpires(DateTime.Now.AddMinutes(expires));
+					context.Response.Cache.SetMaxAge(new TimeSpan(0, maxage, 0));
 				} else {
-					context.Response.Cache.SetExpires(DateTime.Now) ;
+					context.Response.Cache.SetExpires(DateTime.Now);
 				}
 				if (IsCached(context, modified, etag)) {
-					context.Response.StatusCode = 304 ;
-					context.Response.SuppressContent = true ;
-					context.Response.EndClean() ;
-					return true ;
+					context.Response.StatusCode = 304;
+					context.Response.SuppressContent = true;
+					context.Response.EndClean();
+					return true;
 				}
 			} else {
-				context.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
+				context.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
 			}
 #else
 			context.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
 #endif
-			return false ;
+			return false;
 		}
 
 		/// <summary>
@@ -97,8 +107,8 @@ namespace Piranha.Web
 		/// <param name="context">The current context</param>
 		/// <returns>If the headers was written successfully</returns>
 		public static bool HandleNoCache(HttpContext context) {
-			context.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache) ;
-			return true ;
+			context.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
+			return true;
 		}
 
 		/// <summary>
@@ -108,11 +118,11 @@ namespace Piranha.Web
 		/// <param name="modified">Last modified date</param>
 		/// <returns>The entity tag</returns>
 		public static string GenerateETag(string name, DateTime modified) {
-			UTF8Encoding encoder = new UTF8Encoding() ;
-			MD5CryptoServiceProvider crypto = new MD5CryptoServiceProvider() ;
+			UTF8Encoding encoder = new UTF8Encoding();
+			MD5CryptoServiceProvider crypto = new MD5CryptoServiceProvider();
 
-			string str = name + modified.ToLongTimeString() ;
-			byte[] bts = crypto.ComputeHash(encoder.GetBytes(str)) ;
+			string str = name + modified.ToLongTimeString();
+			byte[] bts = crypto.ComputeHash(encoder.GetBytes(str));
 			return Convert.ToBase64String(bts, 0, bts.Length);
 		}
 
@@ -123,20 +133,20 @@ namespace Piranha.Web
 		/// <param name="entitytag">Entity tag</param>
 		private static bool IsCached(HttpContext context, DateTime modified, string entitytag) {
 			// Check If-None-Match
-			string etag = context.Request.Headers["If-None-Match"] ;
+			string etag = context.Request.Headers["If-None-Match"];
 			if (!String.IsNullOrEmpty(etag))
 				if (etag == entitytag)
-					return true ;
+					return true;
 
 			// Check If-Modified-Since
-			string mod = context.Request.Headers["If-Modified-Since"] ;
+			string mod = context.Request.Headers["If-Modified-Since"];
 			if (!String.IsNullOrEmpty(mod))
 				try {
-					DateTime since ;
+					DateTime since;
 					if (DateTime.TryParse(mod, out since))
-						return since >= modified ;
-				} catch {}
-			return false ;
+						return since >= modified;
+				} catch { }
+			return false;
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -15,7 +25,7 @@ namespace Piranha.WebPages
 	public class FormHelper<TModel>
 	{
 		#region Members
-		private ContentPage<TModel> Page ;
+		private ContentPage<TModel> Page;
 		#endregion
 
 		/// <summary>
@@ -23,7 +33,7 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <param name="page">The current page.</param>
 		public FormHelper(ContentPage<TModel> page) {
-			Page = page ;
+			Page = page;
 		}
 
 		/// <summary>
@@ -32,7 +42,7 @@ namespace Piranha.WebPages
 		/// <param name="action">The name of the method to invoke</param>
 		/// <returns>The hidden field</returns>
 		public IHtmlString Action(string action) {
-			return Page.Html.Hidden("piranha_form_action", action) ;
+			return Page.Html.Hidden("piranha_form_action", action);
 		}
 
 		/// <summary>
@@ -43,7 +53,7 @@ namespace Piranha.WebPages
 		/// <param name="labelText">The label text</param>
 		/// <returns>The label</returns>
 		public IHtmlString LabelFor<TProperty>(Expression<Func<TModel, TProperty>> expr, string labelText) {
-			return Page.Html.Label(labelText, expr.Body.ToString()) ;
+			return Page.Html.Label(labelText, expr.Body.ToString());
 		}
 
 		/// <summary>
@@ -55,7 +65,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The label</returns>
 		public IHtmlString LabelFor<TProperty>(Expression<Func<TModel, TProperty>> expr, string labelText, object htmlAttributes) {
-			return Page.Html.Label(labelText, expr.Body.ToString(), htmlAttributes) ;
+			return Page.Html.Label(labelText, expr.Body.ToString(), htmlAttributes);
 		}
 
 		/// <summary>
@@ -65,7 +75,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The textbox</returns>
 		public IHtmlString TextBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.TextBox(expr.Body.ToString(), GetValue(expr)) ;
+			return Page.Html.TextBox(expr.Body.ToString(), GetValue(expr));
 		}
 
 		/// <summary>
@@ -76,7 +86,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The textbox</returns>
 		public IHtmlString TextBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
-			return Page.Html.TextBox(expr.Body.ToString(), GetValue(expr), htmlAttributes) ;
+			return Page.Html.TextBox(expr.Body.ToString(), GetValue(expr), htmlAttributes);
 		}
 
 		/// <summary>
@@ -86,7 +96,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The textbox</returns>
 		public IHtmlString TextAreaFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.TextArea(expr.Body.ToString(), GetValue(expr).ToString()) ;
+			return Page.Html.TextArea(expr.Body.ToString(), GetValue(expr).ToString());
 		}
 
 		/// <summary>
@@ -97,7 +107,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The textbox</returns>
 		public IHtmlString TextAreaFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
-			return Page.Html.TextArea(expr.Body.ToString(), GetValue(expr).ToString(), htmlAttributes) ;
+			return Page.Html.TextArea(expr.Body.ToString(), GetValue(expr).ToString(), htmlAttributes);
 		}
 
 		/// <summary>
@@ -107,7 +117,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The checkbox</returns>
 		public IHtmlString CheckBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.CheckBox(expr.Body.ToString(), (bool)GetValue(expr), new { @value = "true" }) ;
+			return Page.Html.CheckBox(expr.Body.ToString(), (bool)GetValue(expr), new { @value = "true" });
 		}
 
 		/// <summary>
@@ -117,7 +127,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The password</returns>
 		public IHtmlString PasswordFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.Password(expr.Body.ToString()) ;
+			return Page.Html.Password(expr.Body.ToString());
 		}
 
 		/// <summary>
@@ -128,7 +138,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The password</returns>
 		public IHtmlString PasswordFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
-			return Page.Html.Password(expr.Body.ToString(), null, htmlAttributes) ;
+			return Page.Html.Password(expr.Body.ToString(), null, htmlAttributes);
 		}
 
 		/// <summary>
@@ -138,7 +148,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The hidden field</returns>
 		public IHtmlString HiddenFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.Hidden(expr.Body.ToString(), GetValue(expr)) ;
+			return Page.Html.Hidden(expr.Body.ToString(), GetValue(expr));
 		}
 
 		/// <summary>
@@ -149,7 +159,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The hidden field</returns>
 		public IHtmlString HiddenFor<TProperty>(Expression<Func<TModel, TProperty>> expr, object htmlAttributes) {
-			return Page.Html.Hidden(expr.Body.ToString(), GetValue(expr), htmlAttributes) ;
+			return Page.Html.Hidden(expr.Body.ToString(), GetValue(expr), htmlAttributes);
 		}
 
 		/// <summary>
@@ -158,8 +168,8 @@ namespace Piranha.WebPages
 		/// <typeparam name="TProperty">The property type</typeparam>
 		/// <param name="expr">The model expression</param>
 		/// <returns>The select list</returns>
- 		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList) {
-			return Page.Html.DropDownList(expr.Body.ToString(), "", selectList, GetValue(expr), null) ;
+		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList) {
+			return Page.Html.DropDownList(expr.Body.ToString(), "", selectList, GetValue(expr), null);
 		}
 
 		/// <summary>
@@ -170,7 +180,7 @@ namespace Piranha.WebPages
 		/// <param name="htmlAttributes">Additional html attributes</param>
 		/// <returns>The select list</returns>
 		public IHtmlString DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expr, IList<SelectListItem> selectList, object htmlAttributes) {
-			return Page.Html.DropDownList(expr.Body.ToString(), "", selectList, GetValue(expr), htmlAttributes) ;
+			return Page.Html.DropDownList(expr.Body.ToString(), "", selectList, GetValue(expr), htmlAttributes);
 		}
 
 		/// <summary>
@@ -180,7 +190,7 @@ namespace Piranha.WebPages
 		/// <param name="expr">The model expression</param>
 		/// <returns>The validation message</returns>
 		public IHtmlString ValidationMessageFor<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			return Page.Html.ValidationMessage(expr.Body.ToString()) ;
+			return Page.Html.ValidationMessage(expr.Body.ToString());
 		}
 
 		#region Private methods
@@ -192,16 +202,16 @@ namespace Piranha.WebPages
 		/// <param name="expr">The expression</param>
 		/// <returns>The expression value</returns>
 		private object GetValue<TProperty>(Expression<Func<TModel, TProperty>> expr) {
-			var name = expr.Body.ToString() ;
-			var state = Page.ModelState[name] ;
+			var name = expr.Body.ToString();
+			var state = Page.ModelState[name];
 
 			if (state != null)
-				return Page.ModelState[name].Value ;
+				return Page.ModelState[name].Value;
 
-			var ret = expr.Compile()(Page.Model) ;
+			var ret = expr.Compile()(Page.Model);
 			if (ret != null)
-				return ret ;
-			return "" ;
+				return ret;
+			return "";
 		}
 		#endregion
 	}

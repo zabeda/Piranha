@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +25,7 @@ public static class Extensions
 	/// <param name="m">The page model</param>
 	/// <returns>The view</returns>
 	public static string GetView(this Piranha.Models.PageModel m) {
-		return ((Piranha.Models.Page)m.Page).View ;
+		return ((Piranha.Models.Page)m.Page).View;
 	}
 
 	/// <summary>
@@ -24,7 +34,7 @@ public static class Extensions
 	/// <param name="m">The post model</param>
 	/// <returns>The view</returns>
 	public static string GetView(this Piranha.Models.PostModel m) {
-		return ((Piranha.Models.Post)m.Post).View ;
+		return ((Piranha.Models.Post)m.Post).View;
 	}
 }
 

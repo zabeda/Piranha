@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +26,14 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Gets/sets the available params.
 		/// </summary>
-		public List<SysParam> Params { get ; set ; }
+		public List<SysParam> Params { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new list model.
 		/// </summary>
 		public ParamListModel() {
-			Params = new List<SysParam>() ;
+			Params = new List<SysParam>();
 		}
 
 		/// <summary>
@@ -31,11 +41,11 @@ namespace Piranha.Models.Manager.SettingModels
 		/// </summary>
 		/// <returns>The model</returns>
 		public static ParamListModel Get() {
-			ParamListModel m = new ParamListModel() ;
+			ParamListModel m = new ParamListModel();
 
-			m.Params = SysParam.Get(new Params() { OrderBy = "sysparam_name" }) ;
+			m.Params = SysParam.Get(new Params() { OrderBy = "sysparam_name" });
 
-			return m ;
+			return m;
 		}
 	}
 }

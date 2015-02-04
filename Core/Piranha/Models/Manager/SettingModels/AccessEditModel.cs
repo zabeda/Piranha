@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,23 +28,23 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Gets/sets the current access record.
 		/// </summary>
-		public SysAccess Access { get ; set ; }
+		public SysAccess Access { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available groups.
 		/// </summary>
-		public SelectList Groups { get ; set ; }
+		public SelectList Groups { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public AccessEditModel() {
-			Access = new SysAccess() ;
-	
-			List<SysGroup> groups = SysGroup.GetStructure().Flatten() ;
-			groups.Insert(0, new SysGroup() { Name = "" }) ;
-			Groups = new SelectList(groups, "Id", "Name") ;
+			Access = new SysAccess();
+
+			List<SysGroup> groups = SysGroup.GetStructure().Flatten();
+			groups.Insert(0, new SysGroup() { Name = "" });
+			Groups = new SelectList(groups, "Id", "Name");
 		}
 
 		/// <summary>
@@ -43,11 +53,11 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <param name="id">The access id</param>
 		/// <returns>The model</returns>
 		public static AccessEditModel GetById(Guid id) {
-			AccessEditModel m = new AccessEditModel() ;
+			AccessEditModel m = new AccessEditModel();
 
-			m.Access = SysAccess.GetSingle(id) ;
+			m.Access = SysAccess.GetSingle(id);
 
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -57,11 +67,11 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Access.Save(tx) ;
+					Access.Save(tx);
 					tx.Commit();
-				} catch { tx.Rollback() ; throw ; }
+				} catch { tx.Rollback(); throw; }
 			}
-			return true ;
+			return true;
 		}
 
 		/// <summary>
@@ -71,11 +81,11 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Access.Delete() ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+					Access.Delete();
+					tx.Commit();
+				} catch { tx.Rollback(); return false; }
 			}
-			return true ;
+			return true;
 		}
 	}
 }

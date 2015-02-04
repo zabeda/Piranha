@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Linq;
@@ -21,19 +31,19 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets whether to log changes made to this entity.
 		/// </summary>
-		public bool LogChanges = false ;
+		public bool LogChanges = false;
 
 		/// <summary>
 		/// Gets/sets the records extension type.
 		/// </summary>
-		protected Extend.ExtensionType ExtensionType = Extend.ExtensionType.NotSet ;
+		protected Extend.ExtensionType ExtensionType = Extend.ExtensionType.NotSet;
 		#endregion
 
 		#region Fields
 		/// <summary>
 		/// Gets/sets the id.
 		/// </summary>
-		public abstract Guid Id { get ; set ; }
+		public abstract Guid Id { get; set; }
 		#endregion
 
 		#region Handlers
@@ -43,7 +53,7 @@ namespace Piranha.Models
 		/// <param name="pwd">The password</param>
 		/// <returns>An empty string</returns>
 		protected string OnPasswordLoad(string pwd) {
-			return "" ;
+			return "";
 		}
 
 		/// <summary>
@@ -52,7 +62,7 @@ namespace Piranha.Models
 		/// <param name="pwd">The password</param>
 		/// <returns>The encrypted password</returns>
 		protected string OnPasswordSave(string pwd) {
-			return Encrypt(pwd) ;
+			return Encrypt(pwd);
 		}
 		#endregion
 
@@ -62,12 +72,12 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Wether the operation was successful</returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
-			var isnew = IsNew ;
+			var isnew = IsNew;
 
 			if (IsNew && Id == Guid.Empty)
-				Id = Guid.NewGuid() ;
+				Id = Guid.NewGuid();
 			var success = base.Save(tx);
-		
+
 			// If the action was successful, insert a log entry.
 			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
 				// Check that we have a valid user id
@@ -81,19 +91,19 @@ namespace Piranha.Models
 
 				// Only log if we have a valid logged in user.
 				if (validUser) {
-					bool draft = true ;
+					bool draft = true;
 					if (this is DraftRecord<T>)
-						draft = ((DraftRecord<T>)this).IsDraft ;
+						draft = ((DraftRecord<T>)this).IsDraft;
 
 					var log = new SysLog() {
 						ParentId = Id,
 						ParentType = GetRecordName(),
 						Action = !draft ? "PUBLISH" : (isnew ? "INSERT" : "UPDATE")
-					} ;
-					log.Save(tx) ;
+					};
+					log.Save(tx);
 				}
 			}
-			return success ;
+			return success;
 		}
 
 		/// <summary>
@@ -102,31 +112,31 @@ namespace Piranha.Models
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>Wether the operation was successful</returns>
 		public override bool Delete(System.Data.IDbTransaction tx = null) {
-			var success =  base.Delete(tx);
+			var success = base.Delete(tx);
 
 			// Delete extensions if we have any
 			if (success && ExtensionType != Extend.ExtensionType.NotSet) {
-				bool draft = false ;
-				PropertyInfo prop = this.GetType().GetProperty("IsDraft") ;
+				bool draft = false;
+				PropertyInfo prop = this.GetType().GetProperty("IsDraft");
 				if (prop != null)
-					draft = (bool)prop.GetValue(this, null) ;
-				Extension.Execute("DELETE FROM extension WHERE extension_parent_id=@0 AND extension_draft=@1", tx, Id, draft) ;
+					draft = (bool)prop.GetValue(this, null);
+				Extension.Execute("DELETE FROM extension WHERE extension_parent_id=@0 AND extension_draft=@1", tx, Id, draft);
 			}
 
 			// If the action was successful, insert a log entry.
 			if (HttpContext.Current != null && Application.Current.UserProvider.IsAuthenticated && LogChanges && success) {
-				bool draft = true ;
+				bool draft = true;
 				if (this is DraftRecord<T>)
-					draft = ((DraftRecord<T>)this).IsDraft ;
+					draft = ((DraftRecord<T>)this).IsDraft;
 
 				var log = new SysLog() {
 					ParentId = Id,
 					ParentType = GetRecordName(),
 					Action = !draft ? "DEPUBLISH" : "DELETE"
-				} ;
-				log.Save(tx) ;
+				};
+				log.Save(tx);
 			}
-			return success ;
+			return success;
 		}
 
 		/// <summary>
@@ -136,25 +146,25 @@ namespace Piranha.Models
 		/// <returns>The extensions</returns>
 		public virtual List<Extension> GetExtensions(bool manager = false) {
 			if (ExtensionType != Extend.ExtensionType.NotSet) {
-				PropertyInfo prop = this.GetType().GetProperty("IsDraft") ;
-				bool draft = prop != null ? (bool)prop.GetValue(this, null) : false ;
-				List<Extension> ret = null ;
+				PropertyInfo prop = this.GetType().GetProperty("IsDraft");
+				bool draft = prop != null ? (bool)prop.GetValue(this, null) : false;
+				List<Extension> ret = null;
 
 				if (Id != Guid.Empty) {
-					ret = Extend.ExtensionManager.Current.GetByTypeAndEntity(ExtensionType, Id, draft) ;
+					ret = Extend.ExtensionManager.Current.GetByTypeAndEntity(ExtensionType, Id, draft);
 				} else {
-					ret = Extend.ExtensionManager.Current.GetByType(ExtensionType, draft) ;
+					ret = Extend.ExtensionManager.Current.GetByType(ExtensionType, draft);
 				}
 
 				foreach (var ext in ret)
 					if (Extend.ExtensionManager.Current.HasType(ext.Type)) {
 						if (!manager)
-							ext.Body.Init(this) ;
-						else ext.Body.InitManager(this) ;
+							ext.Body.Init(this);
+						else ext.Body.InitManager(this);
 					}
-				return ret ;
+				return ret;
 			}
-			return new List<Extension>() ;
+			return new List<Extension>();
 		}
 
 		/// <summary>
@@ -163,11 +173,11 @@ namespace Piranha.Models
 		/// <param name="str">The encrypted string</param>
 		/// <returns></returns>
 		public static string Encrypt(string str) {
-			UTF8Encoding encoder = new UTF8Encoding() ;
-			SHA256CryptoServiceProvider crypto = new SHA256CryptoServiceProvider() ;
+			UTF8Encoding encoder = new UTF8Encoding();
+			SHA256CryptoServiceProvider crypto = new SHA256CryptoServiceProvider();
 
-			byte[] bytes = crypto.ComputeHash(encoder.GetBytes(str)) ;
-			return Convert.ToBase64String(bytes) ;
+			byte[] bytes = crypto.ComputeHash(encoder.GetBytes(str));
+			return Convert.ToBase64String(bytes);
 		}
 
 		#region Private methods
@@ -178,9 +188,9 @@ namespace Piranha.Models
 		/// <returns>The name</returns>
 		private string GetRecordName() {
 			if (this is Content && ((Content)(object)this).IsFolder)
-				return "MEDIAFOLDER" ;
-			else return ((string)typeof(T).GetProperty("TableName", 
-				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper() ;
+				return "MEDIAFOLDER";
+			else return ((string)typeof(T).GetProperty("TableName",
+				BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy).GetValue(this, null)).ToUpper();
 		}
 		#endregion
 	}

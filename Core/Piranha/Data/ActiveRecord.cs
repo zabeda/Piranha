@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,21 +22,23 @@ namespace Piranha.Data
 	/// <summary>
 	/// Attribute for defining the table for a record.
 	/// </summary>
-	public class TableAttribute : Attribute {
+	public class TableAttribute : Attribute
+	{
 		/// <summary>
 		/// The table name.
 		/// </summary>
-		public string Name { get ; set ; }
+		public string Name { get; set; }
 	}
 
 	/// <summary>
 	/// Attribute for defining a primary key for a record.
 	/// </summary>
-	public class PrimaryKeyAttribute : Attribute {
+	public class PrimaryKeyAttribute : Attribute
+	{
 		/// <summary>
 		/// The primary key column.
 		/// </summary>
-		public string Column { get ; set ; }
+		public string Column { get; set; }
 	}
 
 	/// <summary>
@@ -38,62 +50,63 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets/sets the optional field name.
 		/// </summary>
-		public string Name { get ; set ; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Gets/sets the table this column belongs to if it's joined.
 		/// </summary>
-		public string Table { get ; set ; }
+		public string Table { get; set; }
 
 		/// <summary>
 		/// Gets/sets whether the field is read only.
 		/// </summary>
-		public bool ReadOnly { get ; set ; }
-		
+		public bool ReadOnly { get; set; }
+
 		/// <summary>
 		/// Gets/sets method to invoke on load.
 		/// </summary>
-		public string OnLoad { get ; set ; }
+		public string OnLoad { get; set; }
 
 		/// <summary>
 		/// Gets/sets method to invoke on save.
 		/// </summary>
-		public string OnSave { get ; set ; }
+		public string OnSave { get; set; }
 
 		/// <summary>
 		/// Gets/sets whether the property should be persisted as json.
 		/// </summary>
-		public bool Json { get ; set ; }
+		public bool Json { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		public ColumnAttribute() : base() {
-			ReadOnly = false ;
+		public ColumnAttribute()
+			: base() {
+			ReadOnly = false;
 		}
 	}
 
 	/// <summary>
 	/// Attribute used to join tables together for an active record.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.All, AllowMultiple=true)]
+	[AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
 	public class JoinAttribute : Attribute
 	{
 		/// <summary>
 		/// Gets/sets the table to join.
 		/// </summary>
-		public string TableName { get ; set ; }
+		public string TableName { get; set; }
 
 		/// <summary>
 		/// Gets/sets the primary key.
 		/// </summary>
-		public string PrimaryKey { get ; set ; }
+		public string PrimaryKey { get; set; }
 
 		/// <summary>
 		/// Gets/sets the foreign key.
 		/// </summary>
-		public string ForeignKey { get ; set ; }
+		public string ForeignKey { get; set; }
 	}
 	#endregion
 
@@ -102,13 +115,14 @@ namespace Piranha.Data
 	/// Interface for active records that are cahced.
 	/// </summary>
 	/// <typeparam name="T">The record type</typeparam>
-	public interface ICacheRecord<T> {
+	public interface ICacheRecord<T>
+	{
 		/// <summary>
 		/// Invalidates the given record from the current cache. The method is called
 		/// after save and delete.
 		/// </summary>
 		/// <param name="record"></param>
-		void InvalidateRecord(T record) ;
+		void InvalidateRecord(T record);
 	}
 	#endregion
 
@@ -122,44 +136,44 @@ namespace Piranha.Data
 	{
 		#region Members
 		// Reflected information
-		private static string _tablename ;
-		private static List<string> _primarykey ;
-		private static string _joins ;
-		private static string _fields ;
-		private static Dictionary<string, PropertyInfo> _columns ;
-		private static Dictionary<string, ColumnAttribute> _attributes ;
+		private static string _tablename;
+		private static List<string> _primarykey;
+		private static string _joins;
+		private static string _fields;
+		private static Dictionary<string, PropertyInfo> _columns;
+		private static Dictionary<string, ColumnAttribute> _attributes;
 
 		private static object _colMutex = new object();
 		private static object _keyMutex = new object();
 		private static object _joinMutex = new object();
 
 		// SQL statements 
-		private const string SqlSelect = "SELECT {3} {6} {0} FROM {1} {2} {4} {5}" ;
-		private const string SqlInsert = "INSERT INTO {0} ({1}) VALUES({2})" ;
-		private const string SqlUpdate = "UPDATE {0} SET {1} WHERE {2}" ;
-		private const string SqlDelete = "DELETE FROM {0} WHERE {1}" ;
+		private const string SqlSelect = "SELECT {3} {6} {0} FROM {1} {2} {4} {5}";
+		private const string SqlInsert = "INSERT INTO {0} ({1}) VALUES({2})";
+		private const string SqlUpdate = "UPDATE {0} SET {1} WHERE {2}";
+		private const string SqlDelete = "DELETE FROM {0} WHERE {1}";
 		#endregion
 
 		#region Properties
 		/// <summary>
 		/// Gets/sets wether this object is new or loaded from the database.
 		/// </summary>
-		public bool IsNew { get ; set ; }
+		public bool IsNew { get; set; }
 		#endregion
 
 		#region Static properties
 		/// <summary>
 		/// Gets the table name.
 		/// </summary>
-		protected static string TableName { 
+		protected static string TableName {
 			get {
 				if (String.IsNullOrEmpty(_tablename)) {
-					TableAttribute ar = typeof(T).GetCustomAttribute<TableAttribute>(true) ;
+					TableAttribute ar = typeof(T).GetCustomAttribute<TableAttribute>(true);
 					if (ar != null && !String.IsNullOrEmpty(ar.Name))
-						_tablename = ar.Name.ToLower() ;
-					else _tablename = typeof(T).Name.ToLower() ;
+						_tablename = ar.Name.ToLower();
+					else _tablename = typeof(T).Name.ToLower();
 				}
-				return _tablename ;
+				return _tablename;
 			}
 		}
 
@@ -169,8 +183,8 @@ namespace Piranha.Data
 		protected static string AllFields {
 			get {
 				if (String.IsNullOrEmpty(_fields))
-					_fields = GenerateSelectFields() ;
-				return _fields ;
+					_fields = GenerateSelectFields();
+				return _fields;
 			}
 		}
 
@@ -180,8 +194,8 @@ namespace Piranha.Data
 		protected static List<string> PrimaryKeys {
 			get {
 				if (_primarykey == null)
-					InitPrimaryKeys() ;
-				return _primarykey ;
+					InitPrimaryKeys();
+				return _primarykey;
 			}
 		}
 
@@ -192,42 +206,42 @@ namespace Piranha.Data
 			get {
 				if (_joins == null) {
 					lock (_joinMutex) {
-						if (_joins == null) { 
-							var joins = "" ;
-							JoinAttribute[] ja = typeof(T).GetCustomAttributes<JoinAttribute>(true) ;
+						if (_joins == null) {
+							var joins = "";
+							JoinAttribute[] ja = typeof(T).GetCustomAttributes<JoinAttribute>(true);
 							if (ja != null) {
 								foreach (var join in ja)
 									joins += " JOIN " + join.TableName.ToLower() + " ON " + TableName + "." + join.ForeignKey.ToLower() + "=" +
-										join.TableName.ToLower() + "." + join.PrimaryKey.ToLower() ;
+										join.TableName.ToLower() + "." + join.PrimaryKey.ToLower();
 							}
 							_joins = joins;
 						}
 					}
 				}
-				return _joins ;
-			} 
+				return _joins;
+			}
 		}
 
 		/// <summary>
 		/// Gets the properties that should be loaded from the database.
 		/// </summary>
-		protected static Dictionary<string, PropertyInfo> Columns { 
+		protected static Dictionary<string, PropertyInfo> Columns {
 			get {
 				if (_columns == null)
-					InitColumns() ;
-				return _columns ;
-			} 
+					InitColumns();
+				return _columns;
+			}
 		}
 
 		/// <summary>
 		/// Gets the property attributes.
 		/// </summary>
-		protected static Dictionary<string, ColumnAttribute> Attributes { 
+		protected static Dictionary<string, ColumnAttribute> Attributes {
 			get {
 				if (_attributes == null)
-					InitColumns() ;
-				return _attributes ;
-			} 
+					InitColumns();
+				return _attributes;
+			}
 		}
 		#endregion
 
@@ -244,30 +258,30 @@ namespace Piranha.Data
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>If the operation succeeded</returns>
 		public virtual bool Save(IDbTransaction tx = null) {
-			bool result = false ;
+			bool result = false;
 
 			// Check primary key
 			foreach (string key in PrimaryKeys)
 				if (Columns[key].GetValue(this, null) == null)
-					throw new ArgumentException("Property \"" +  Columns[key].Name + "\" is marked as Primary Key and can not contain null") ;
+					throw new ArgumentException("Property \"" + Columns[key].Name + "\" is marked as Primary Key and can not contain null");
 
 			// Execute command
 			using (IDbConnection conn = tx != null ? null : Database.OpenConnection()) {
 				if (IsNew) {
 					using (IDbCommand cmd = CreateInsertCommand(tx != null ? tx.Connection : conn, tx)) {
-						result = cmd.ExecuteNonQuery() > 0 ;
-						IsNew = !result ;
+						result = cmd.ExecuteNonQuery() > 0;
+						IsNew = !result;
 					}
 				} else {
 					using (IDbCommand cmd = CreateUpdateCommand(tx != null ? tx.Connection : conn, tx)) {
-						result = cmd.ExecuteNonQuery() > 0 ;
+						result = cmd.ExecuteNonQuery() > 0;
 					}
 				}
 			}
 			// Check for cache interface
 			if (this is ICacheRecord<T>)
-				((ICacheRecord<T>)this).InvalidateRecord((T)((object)this)) ;
-			return result ;
+				((ICacheRecord<T>)this).InvalidateRecord((T)((object)this));
+			return result;
 		}
 
 		/// <summary>
@@ -278,21 +292,21 @@ namespace Piranha.Data
 		public virtual bool Delete(IDbTransaction tx = null) {
 			if (!IsNew) {
 				//object id = Columns[PrimaryKey].GetValue(this, null) ;
-				bool result = false ;
-	
+				bool result = false;
+
 				// Execute command
 				using (IDbConnection conn = tx != null ? null : Database.OpenConnection()) {
 					using (IDbCommand cmd = CreateDeleteCommand(tx != null ? tx.Connection : conn, tx)) {
-						result = cmd.ExecuteNonQuery() > 0 ;
-						IsNew = result ;
+						result = cmd.ExecuteNonQuery() > 0;
+						IsNew = result;
 					}
 				}
 				// Check for cache interface
 				if (this is ICacheRecord<T>)
-					((ICacheRecord<T>)this).InvalidateRecord((T)((object)this)) ;
-				return result ;
+					((ICacheRecord<T>)this).InvalidateRecord((T)((object)this));
+				return result;
 			}
-			return false ;
+			return false;
 		}
 
 		#region Static accessors
@@ -303,8 +317,8 @@ namespace Piranha.Data
 		/// <returns>A single record</returns>
 		public static T GetSingle(object id, IDbTransaction tx = null) {
 			if (tx != null)
-				return GetSingle(PrimaryKeys[0] + "=@0", tx, id) ;
-			return GetSingle(PrimaryKeys[0] + "=@0", id) ;
+				return GetSingle(PrimaryKeys[0] + "=@0", tx, id);
+			return GetSingle(PrimaryKeys[0] + "=@0", id);
 		}
 
 		/// <summary>
@@ -313,11 +327,11 @@ namespace Piranha.Data
 		/// <param name="where">Where clause</param>
 		/// <param name="args">Optional where parameters</param>
 		/// <returns>A matching record.</returns>
-		public static T GetSingle(string where, params object[] args) {	
-			List<T> result = GetFields(AllFields, where, args) ;
+		public static T GetSingle(string where, params object[] args) {
+			List<T> result = GetFields(AllFields, where, args);
 			if (result.Count > 0)
-				return result[0] ;
-			return default(T) ;
+				return result[0];
+			return default(T);
 		}
 
 		/// <summary>
@@ -326,8 +340,8 @@ namespace Piranha.Data
 		/// <returns>A list of records</returns>
 		public static List<T> Get(IDbTransaction tx) {
 			if (tx != null)
-				return GetFields(AllFields, "", tx) ;
-			return GetFields(AllFields) ;
+				return GetFields(AllFields, "", tx);
+			return GetFields(AllFields);
 		}
 
 		/// <summary>
@@ -337,8 +351,8 @@ namespace Piranha.Data
 		/// <returns>A list of records</returns>
 		public static List<T> Get(Params param, IDbTransaction tx = null) {
 			if (tx != null)
-				return GetFields(AllFields, "", tx, param) ;
-			return GetFields(AllFields, "", param) ;
+				return GetFields(AllFields, "", tx, param);
+			return GetFields(AllFields, "", param);
 		}
 
 		/// <summary>
@@ -348,7 +362,7 @@ namespace Piranha.Data
 		/// <param name="args">Optional where parameters</param>
 		/// <returns>A list of records</returns>
 		public static List<T> Get(string where = "", params object[] args) {
-			return GetFields(AllFields, where, args) ;
+			return GetFields(AllFields, where, args);
 		}
 
 		/// <summary>
@@ -359,8 +373,8 @@ namespace Piranha.Data
 		/// <returns>A list of records</returns>
 		public static List<T> GetFields(string fields, Params param, IDbTransaction tx = null) {
 			if (tx != null)
-				return GetFields(fields, "", tx, param) ;
-			return GetFields(fields, "", param) ;
+				return GetFields(fields, "", tx, param);
+			return GetFields(fields, "", param);
 		}
 
 		/// <summary>
@@ -372,14 +386,14 @@ namespace Piranha.Data
 		/// <returns>A list of records</returns>
 		public static List<T> GetFields(string fields, string where = "", params object[] args) {
 			if (fields == "*")
-				fields = AllFields ;
-			Params gp = args.Length > 0 && args[args.Length - 1] is Params ? (Params)args[args.Length - 1] : null ;
+				fields = AllFields;
+			Params gp = args.Length > 0 && args[args.Length - 1] is Params ? (Params)args[args.Length - 1] : null;
 
-			return Query(String.Format(SqlSelect, fields, TableName + TableJoins, 
-				where != "" ? "WHERE " + where : "", gp != null && gp.Distinct ? "DISTINCT" : "", 
+			return Query(String.Format(SqlSelect, fields, TableName + TableJoins,
+				where != "" ? "WHERE " + where : "", gp != null && gp.Distinct ? "DISTINCT" : "",
 				gp != null && !String.IsNullOrEmpty(gp.GroupBy) ? "GROUP BY " + gp.GroupBy : "",
 				gp != null && !String.IsNullOrEmpty(gp.OrderBy) ? "ORDER BY " + gp.OrderBy : "",
-				gp != null && gp.Top > 0 ? "TOP " + gp.Top.ToString() : ""), args) ;
+				gp != null && gp.Top > 0 ? "TOP " + gp.Top.ToString() : ""), args);
 		}
 
 		/// <summary>
@@ -389,15 +403,15 @@ namespace Piranha.Data
 		/// <param name="args">Statement parameters</param>
 		/// <returns>The scalar value</returns>
 		public static int GetScalar(string statement, params object[] args) {
-			int result = 0 ;
+			int result = 0;
 
 			// Execute statement
 			using (IDbConnection conn = Database.OpenConnection()) {
 				using (IDbCommand cmd = CreateCommand(conn, statement, null, args)) {
-					result = Convert.ToInt32(cmd.ExecuteScalar()) ;
+					result = Convert.ToInt32(cmd.ExecuteScalar());
 				}
 			}
-			return result ;
+			return result;
 		}
 
 		/// <summary>
@@ -407,67 +421,67 @@ namespace Piranha.Data
 		/// <param name="args">Optional query parameters</param>
 		/// <returns>A list of records</returns>
 		public static List<T> Query(string query, params object[] args) {
-			List<T> result = new List<T>() ;
+			List<T> result = new List<T>();
 
-			var tx = args.Count() > 0 && args[0] is IDbTransaction ? (IDbTransaction)args[0] : null ;
-			args = tx != null ? args.Subset(1) : args ;
+			var tx = args.Count() > 0 && args[0] is IDbTransaction ? (IDbTransaction)args[0] : null;
+			args = tx != null ? args.Subset(1) : args;
 
 			using (IDbConnection conn = tx != null ? null : Database.OpenConnection()) {
 				using (IDbCommand cmd = Database.CreateCommand(tx != null ? tx.Connection : conn, tx, query, args)) {
 					using (IDataReader rdr = cmd.ExecuteReader(CommandBehavior.Default)) {
 						while (rdr.Read()) {
 							// Create and fill object
-							object o = Activator.CreateInstance<T>() ;
-							for (int n = 0;  n < rdr.FieldCount; n++) {
+							object o = Activator.CreateInstance<T>();
+							for (int n = 0; n < rdr.FieldCount; n++) {
 								if (Columns.ContainsKey(rdr.GetName(n))) {
-									object val  = rdr[n] != DBNull.Value ? rdr[n] : null ;
-									string name = rdr.GetName(n) ;
+									object val = rdr[n] != DBNull.Value ? rdr[n] : null;
+									string name = rdr.GetName(n);
 
 									// If this is JSON, deserialize before possible OnLoad method
 									if (Attributes[name].Json) {
 										try {
-											JavaScriptSerializer json = new JavaScriptSerializer() ;
-											val = json.Deserialize(Convert.ToString(val), Columns[name].PropertyType) ;
+											JavaScriptSerializer json = new JavaScriptSerializer();
+											val = json.Deserialize(Convert.ToString(val), Columns[name].PropertyType);
 										} catch {
-											val = null ;
+											val = null;
 										}
 										if (val == null)
-											val = Activator.CreateInstance(Columns[name].PropertyType) ;
+											val = Activator.CreateInstance(Columns[name].PropertyType);
 									}
 									// Check if the property is marked with the "OnLoad" property
 									if (!String.IsNullOrEmpty(Attributes[name].OnLoad)) {
-										MethodInfo m = o.GetType().GetMethod(Attributes[name].OnLoad, 
-											BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance) ;
-										val = m.Invoke(o, new object[] { val }) ;
+										MethodInfo m = o.GetType().GetMethod(Attributes[name].OnLoad,
+											BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+										val = m.Invoke(o, new object[] { val });
 									} else {
 										// Automatically convert strings to HtmlString if needed.
 										if (Columns[name].PropertyType == typeof(HtmlString))
-											val = new HtmlString(Convert.ToString(val)) ;
+											val = new HtmlString(Convert.ToString(val));
 										else if (typeof(Enum).IsAssignableFrom(Columns[name].PropertyType))
-											val = Enum.Parse(Columns[name].PropertyType, (string)val) ;
+											val = Enum.Parse(Columns[name].PropertyType, (string)val);
 
 										// Extra type conversions for MySql
 										if (Database.IsMySql) {
 											if (Columns[name].PropertyType == typeof(Guid) && val == null)
-												val = Guid.Empty ;
+												val = Guid.Empty;
 											else if (Columns[name].PropertyType == typeof(Guid) && val.GetType() == typeof(string))
-												val = new Guid((string)val) ;
+												val = new Guid((string)val);
 											else if (Columns[name].PropertyType == typeof(bool) && val.GetType() == typeof(ulong))
-												val = (ulong)val == 1 ;
+												val = (ulong)val == 1;
 										}
 									}
-									Columns[name].SetValue(o, val, null) ;
+									Columns[name].SetValue(o, val, null);
 								}
 							}
 							// Set correct object state
 							if (o is ActiveRecord<T>)
-								((ActiveRecord<T>)o).IsNew = false ;
-							result.Add((T)o); 
+								((ActiveRecord<T>)o).IsNew = false;
+							result.Add((T)o);
 						}
 					}
 				}
 			}
-			return result ;
+			return result;
 		}
 
 		/// <summary>
@@ -478,15 +492,15 @@ namespace Piranha.Data
 		/// <param name="args">Statement parameters</param>
 		/// <returns>The number of affected rows</returns>
 		public static int Execute(string statement, IDbTransaction tx = null, params object[] args) {
-			int result = 0 ;
+			int result = 0;
 
 			// Execute statement
 			using (IDbConnection conn = tx != null ? null : Database.OpenConnection()) {
 				using (IDbCommand cmd = CreateCommand(tx != null ? tx.Connection : conn, statement, tx, args)) {
-					result = cmd.ExecuteNonQuery() ;
+					result = cmd.ExecuteNonQuery();
 				}
 			}
-			return result ;
+			return result;
 		}
 		#endregion
 
@@ -494,7 +508,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Dispose the current record.
 		/// </summary>
-		public virtual void Dispose() {}
+		public virtual void Dispose() { }
 		#endregion
 
 		#region Private members
@@ -503,17 +517,17 @@ namespace Piranha.Data
 		/// </summary>
 		private static void InitColumns() {
 			lock (_colMutex) {
-				if (_columns == null && _attributes == null) { 
-					var cols = new Dictionary<string, PropertyInfo>() ;
-					var attrs = new Dictionary<string, ColumnAttribute>() ;
+				if (_columns == null && _attributes == null) {
+					var cols = new Dictionary<string, PropertyInfo>();
+					var attrs = new Dictionary<string, ColumnAttribute>();
 
-					PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance|BindingFlags.FlattenHierarchy) ;
+					PropertyInfo[] props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 					foreach (PropertyInfo prop in props) {
-						ColumnAttribute af = prop.GetCustomAttribute<ColumnAttribute>(true) ;
+						ColumnAttribute af = prop.GetCustomAttribute<ColumnAttribute>(true);
 
 						if (af != null) {
-							cols.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, prop) ;
-							attrs.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, af) ;
+							cols.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, prop);
+							attrs.Add(!String.IsNullOrEmpty(af.Name) ? af.Name : prop.Name, af);
 						}
 					}
 					_columns = cols;
@@ -527,13 +541,13 @@ namespace Piranha.Data
 		/// </summary>
 		private static void InitPrimaryKeys() {
 			lock (_keyMutex) {
-				if (_primarykey == null) { 
-					var keys = new List<string>() ;
+				if (_primarykey == null) {
+					var keys = new List<string>();
 
-					PrimaryKeyAttribute pa = typeof(T).GetCustomAttribute<PrimaryKeyAttribute>(true) ;
+					PrimaryKeyAttribute pa = typeof(T).GetCustomAttribute<PrimaryKeyAttribute>(true);
 					if (pa != null && !String.IsNullOrEmpty(pa.Column))
-						keys.AddRange(pa.Column.Split(new char[] {','})) ;
-					else keys.Add("Id") ;
+						keys.AddRange(pa.Column.Split(new char[] { ',' }));
+					else keys.Add("Id");
 
 					_primarykey = keys;
 				}
@@ -545,18 +559,18 @@ namespace Piranha.Data
 		/// </summary>
 		/// <returns>The database fields</returns>
 		private static string GenerateSelectFields() {
-			string ret = "" ;
+			string ret = "";
 
 			foreach (string key in Columns.Keys) {
-				ColumnAttribute col = Attributes[key] ;
+				ColumnAttribute col = Attributes[key];
 
 				if (!key.StartsWith("(")) {
 					if (!String.IsNullOrEmpty(col.Table))
-						ret += (ret != "" ? "," : "") + col.Table + "." + key ;
-					else ret += (ret != "" ? "," : "") + TableName + "." + key ;
-				} else ret += (ret != "" ? "," : "") + key ;
+						ret += (ret != "" ? "," : "") + col.Table + "." + key;
+					else ret += (ret != "" ? "," : "") + TableName + "." + key;
+				} else ret += (ret != "" ? "," : "") + key;
 			}
-			return ret ;
+			return ret;
 		}
 
 		/// <summary>
@@ -566,41 +580,41 @@ namespace Piranha.Data
 		/// <param name="tx">Optional transaction</param>
 		/// <returns>The command</returns>
 		private IDbCommand CreateInsertCommand(IDbConnection conn, IDbTransaction tx = null) {
-			List<object> args = new List<object>() ;
+			List<object> args = new List<object>();
 
 			// Build strings
-			string fields = "", values = "" ;
+			string fields = "", values = "";
 			foreach (string key in Columns.Keys) {
 				// Exclude joined & read only members
 				if (!Attributes[key].ReadOnly && String.IsNullOrEmpty(Attributes[key].Table)) {
-					fields += (fields != "" ? "," : "") + key ;
-					values += (values != "" ? "," : "") + "@" + args.Count ;
+					fields += (fields != "" ? "," : "") + key;
+					values += (values != "" ? "," : "") + "@" + args.Count;
 
 					// If the ActiveField is marked with the OnSave property, process the value
 					// before saving it.
 					if (!String.IsNullOrEmpty(Attributes[key].OnSave)) {
-						MethodInfo m = this.GetType().GetMethod(Attributes[key].OnSave, 
-							BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance) ;
-						args.Add(m.Invoke(this, new object[] { Columns[key].GetValue(this, null) })) ;
+						MethodInfo m = this.GetType().GetMethod(Attributes[key].OnSave,
+							BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+						args.Add(m.Invoke(this, new object[] { Columns[key].GetValue(this, null) }));
 					} else {
 						if (Columns[key].PropertyType == typeof(HtmlString) && Columns[key].GetValue(this, null) != null)
-							args.Add(((HtmlString)Columns[key].GetValue(this, null)).ToHtmlString()) ;
+							args.Add(((HtmlString)Columns[key].GetValue(this, null)).ToHtmlString());
 						else if (typeof(Enum).IsAssignableFrom(Columns[key].PropertyType))
-							args.Add(Columns[key].GetValue(this, null).ToString()) ;
+							args.Add(Columns[key].GetValue(this, null).ToString());
 						else if (Attributes[key].Json) {
-							JavaScriptSerializer json = new JavaScriptSerializer() ;
-							args.Add(json.Serialize(Columns[key].GetValue(this, null))) ;
-						} else args.Add(Columns[key].GetValue(this, null)) ;
+							JavaScriptSerializer json = new JavaScriptSerializer();
+							args.Add(json.Serialize(Columns[key].GetValue(this, null)));
+						} else args.Add(Columns[key].GetValue(this, null));
 					}
 				}
 			}
 
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, null /*tx*/, String.Format(SqlInsert, 
-				TableName, fields, values), args.ToArray()) ;
+			IDbCommand cmd = Database.CreateCommand(conn, null /*tx*/, String.Format(SqlInsert,
+				TableName, fields, values), args.ToArray());
 			if (tx != null)
-				cmd.Transaction = tx ;
-			return cmd ;
+				cmd.Transaction = tx;
+			return cmd;
 		}
 
 		/// <summary>
@@ -611,48 +625,48 @@ namespace Piranha.Data
 		/// <param name="tx">Optional transaction to run the update in</param>
 		/// <returns>The command</returns>
 		private IDbCommand CreateUpdateCommand(IDbConnection conn, IDbTransaction tx = null) {
-			List<object> args = new List<object>() ;
+			List<object> args = new List<object>();
 
 			// Build set statement
-			string values = "" ;
+			string values = "";
 			foreach (string key in Columns.Keys) {
 				// Exclude joined & read only members
 				if (!Attributes[key].ReadOnly && String.IsNullOrEmpty(Attributes[key].Table)) {
-					values += (values != "" ? "," : "") + key + " = @" + args.Count.ToString() ;
+					values += (values != "" ? "," : "") + key + " = @" + args.Count.ToString();
 
 					// Check if the ActiveField is marked with the OnSave property.
 					if (!String.IsNullOrEmpty(Attributes[key].OnSave)) {
-						MethodInfo m = this.GetType().GetMethod(Attributes[key].OnSave, 
-							BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance) ;
-						args.Add(m.Invoke(this, new object[] { Columns[key].GetValue(this, null) })) ;
+						MethodInfo m = this.GetType().GetMethod(Attributes[key].OnSave,
+							BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+						args.Add(m.Invoke(this, new object[] { Columns[key].GetValue(this, null) }));
 					} else {
 						if (Columns[key].PropertyType == typeof(HtmlString) && Columns[key].GetValue(this, null) != null)
-							args.Add(((HtmlString)Columns[key].GetValue(this, null)).ToHtmlString()) ;
+							args.Add(((HtmlString)Columns[key].GetValue(this, null)).ToHtmlString());
 						else if (typeof(Enum).IsAssignableFrom(Columns[key].PropertyType))
-							args.Add(Columns[key].GetValue(this, null).ToString()) ;
+							args.Add(Columns[key].GetValue(this, null).ToString());
 						else if (Attributes[key].Json) {
-							JavaScriptSerializer json = new JavaScriptSerializer() ;
-							args.Add(json.Serialize(Columns[key].GetValue(this, null))) ;
-						} else args.Add(Columns[key].GetValue(this, null)) ;
+							JavaScriptSerializer json = new JavaScriptSerializer();
+							args.Add(json.Serialize(Columns[key].GetValue(this, null)));
+						} else args.Add(Columns[key].GetValue(this, null));
 					}
 				}
 			}
 
 			// Build where clause
-			string where = "" ; //PrimaryKey + "=@" + args.Count.ToString() ;
+			string where = ""; //PrimaryKey + "=@" + args.Count.ToString() ;
 			foreach (string pk in PrimaryKeys) {
 				where += (where != "" ? " AND " : "") +
-					pk + "=@" + args.Count.ToString() ;
-					args.Add(Columns[pk].GetValue(this, null)) ;
+					pk + "=@" + args.Count.ToString();
+				args.Add(Columns[pk].GetValue(this, null));
 			}
 			//args.Add(Columns[PrimaryKey].GetValue(this, null)) ;
 
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, /*tx*/null, String.Format(SqlUpdate, 
-				TableName, values, where), args.ToArray()) ;
+			IDbCommand cmd = Database.CreateCommand(conn, /*tx*/null, String.Format(SqlUpdate,
+				TableName, values, where), args.ToArray());
 			if (tx != null)
-				cmd.Transaction = tx ;
-			return cmd ;
+				cmd.Transaction = tx;
+			return cmd;
 		}
 
 		/// <summary>
@@ -664,20 +678,20 @@ namespace Piranha.Data
 		/// <returns>The command</returns>
 		private IDbCommand CreateDeleteCommand(IDbConnection conn, IDbTransaction tx = null) {
 			// Build where clause
-			List<object> args = new List<object>() ;
-			string where = "" ;
+			List<object> args = new List<object>();
+			string where = "";
 			foreach (string pk in PrimaryKeys) {
 				where += (where != "" ? " AND " : "") +
-					pk + "=@" + args.Count.ToString() ;
-					args.Add(Columns[pk].GetValue(this, null)) ;
+					pk + "=@" + args.Count.ToString();
+				args.Add(Columns[pk].GetValue(this, null));
 			}
 
 			// Create command
 			IDbCommand cmd = Database.CreateCommand(conn, tx, String.Format(SqlDelete,
-				TableName, where), args.ToArray()) ;
+				TableName, where), args.ToArray());
 			if (tx != null)
-				cmd.Transaction = tx ;
-			return cmd ;
+				cmd.Transaction = tx;
+			return cmd;
 		}
 
 		/// <summary>
@@ -690,10 +704,10 @@ namespace Piranha.Data
 		/// <returns>The command</returns>
 		private static IDbCommand CreateCommand(IDbConnection conn, string statement, IDbTransaction tx, object[] args) {
 			// Create command
-			IDbCommand cmd = Database.CreateCommand(conn, tx, statement, args) ;
+			IDbCommand cmd = Database.CreateCommand(conn, tx, statement, args);
 			if (tx != null)
-				cmd.Transaction = tx ;
-			return cmd ;
+				cmd.Transaction = tx;
+			return cmd;
 		}
 		#endregion
 	}
@@ -707,30 +721,30 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets/sets wether the get operation is distinct or not.
 		/// </summary>
-		public bool Distinct { get ; set ; }
+		public bool Distinct { get; set; }
 
 		/// <summary>
 		/// Gets/sets order statement.
 		/// </summary>
-		public string OrderBy { get ; set ; }
+		public string OrderBy { get; set; }
 
 		/// <summary>
 		/// Gets/sets grouping statement
 		/// </summary>
-		public string GroupBy { get ; set ; }
+		public string GroupBy { get; set; }
 
 		/// <summary>
 		/// Gets/sets the number of records to get.
 		/// </summary>
-		public int Top { get ; set ; }
+		public int Top { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new get parameter object.
 		/// </summary>
 		public Params() {
-			Distinct = false ;
-			Top = 0 ;
+			Distinct = false;
+			Top = 0;
 		}
 	}
 }

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,7 +27,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Internal post status.
 		/// </summary>
-		public enum PostStatus 
+		public enum PostStatus
 		{
 			PUBLISHED, UNPUBLISHED, DRAFT
 		}
@@ -25,42 +35,42 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Internal post view model.
 		/// </summary>
-		public class PostModel 
+		public class PostModel
 		{
 			/// <summary>
 			/// Gets/sets the id of the post.
 			/// </summary>
-			public Guid Id { get ; set ; }
+			public Guid Id { get; set; }
 
 			/// <summary>
 			/// Gets/sets the title of the post.
 			/// </summary>
-			public string Title { get ; set ; }
+			public string Title { get; set; }
 
 			/// <summary>
 			/// Gets/sets the name of the post type.
 			/// </summary>
-			public string TemplateName { get ; set ; }
+			public string TemplateName { get; set; }
 
 			/// <summary>
 			/// Gets/sets the current status of the post.
 			/// </summary>
-			public PostStatus Status { get ; set ; }
+			public PostStatus Status { get; set; }
 
 			/// <summary>
 			/// Gets/sets the number of new comments.
 			/// </summary>
-			public int NewComments { get ; set ; }
+			public int NewComments { get; set; }
 
 			/// <summary>
 			/// Gets/sets the date the post was created.
 			/// </summary>
-			public DateTime Created { get ; set ; }
+			public DateTime Created { get; set; }
 
 			/// <summary>
 			/// Gets/sets the date the post was last updated.
 			/// </summary>
-			public DateTime Updated { get ; set ; }
+			public DateTime Updated { get; set; }
 		}
 
 		/// <summary>
@@ -71,22 +81,22 @@ namespace Piranha.Areas.Manager.Models
 			/// <summary>
 			/// Gets/sets the Id.
 			/// </summary>
-			public Guid Id { get ; set ; }
+			public Guid Id { get; set; }
 
 			/// <summary>
 			/// Gets/sets the name.
 			/// </summary>
-			public string Name { get ; set ; }
+			public string Name { get; set; }
 
 			/// <summary>
 			/// Gets/sets the description.
 			/// </summary>
-			public string Description { get ; set ; }
+			public string Description { get; set; }
 
 			/// <summary>
 			/// Gets/sets the html preview of the template.
 			/// </summary>
-			public string Preview { get ; set ; }
+			public string Preview { get; set; }
 		}
 		#endregion
 
@@ -94,25 +104,25 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Gets/sets the currently available posts.
 		/// </summary>
-		public List<PostModel> Posts { get ; set ; }
+		public List<PostModel> Posts { get; set; }
 
 		/// <summary>
 		/// Gets/sets the currently available post templates.
 		/// </summary>
-		public List<TemplateModel> Templates { get ; set ; }
+		public List<TemplateModel> Templates { get; set; }
 
 		/// <summary>
 		/// Gets/sets the currently active post template.
 		/// </summary>
-		public Guid ActiveTemplate { get ; set ; }
+		public Guid ActiveTemplate { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public PostListModel() {
-			Posts = new List<PostModel>() ;
-			Templates = new List<TemplateModel>() ;
+			Posts = new List<PostModel>();
+			Templates = new List<TemplateModel>();
 		}
 
 		/// <summary>
@@ -120,7 +130,7 @@ namespace Piranha.Areas.Manager.Models
 		/// </summary>
 		/// <returns>The model</returns>
 		public static PostListModel Get() {
-			return Get(Guid.Empty) ;
+			return Get(Guid.Empty);
 		}
 
 
@@ -130,7 +140,7 @@ namespace Piranha.Areas.Manager.Models
 		/// <param name="templateid">The post type id</param>
 		/// <returns>The model</returns>
 		public static PostListModel GetByTemplateId(Guid templateid) {
-			return Get(templateid) ;
+			return Get(templateid);
 		}
 
 		#region Private methods
@@ -140,14 +150,14 @@ namespace Piranha.Areas.Manager.Models
 		/// <param name="templateid">The post type id</param>
 		/// <returns>The model</returns>
 		private static PostListModel Get(Guid templateid) {
-			var m = new PostListModel() ;
+			var m = new PostListModel();
 
 			using (var db = new DataContext()) {
 				// Get the posts
-				var query = db.PostDrafts.Include(p => p.Template) ;
+				var query = db.PostDrafts.Include(p => p.Template);
 				if (templateid != Guid.Empty) {
-					query = query.Where(p => p.TemplateId == templateid) ;
-					m.ActiveTemplate = templateid ;
+					query = query.Where(p => p.TemplateId == templateid);
+					m.ActiveTemplate = templateid;
 				}
 				m.Posts = query.
 					OrderBy(p => p.Title).ToList().
@@ -159,8 +169,8 @@ namespace Piranha.Areas.Manager.Models
 						NewComments = db.Comments.Where(c => c.ParentId == p.Id && c.InternalStatus == 0).Count(),
 						Created = p.Created,
 						Updated = p.Updated
-					}).ToList() ;
-				
+					}).ToList();
+
 				// Get the templates
 				m.Templates = db.PostTemplates.
 					OrderBy(t => t.Name).
@@ -169,9 +179,9 @@ namespace Piranha.Areas.Manager.Models
 						Name = t.Name,
 						Description = t.Description,
 						Preview = t.Preview
-					}).ToList() ;
+					}).ToList();
 			}
-			return m ;
+			return m;
 		}
 		#endregion
 	}

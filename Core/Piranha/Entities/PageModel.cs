@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Dynamic;
@@ -19,37 +29,37 @@ namespace Piranha.Entities
 		/// <summary>
 		/// Gets/sets the page.
 		/// </summary>
-		public Page Page { get ; set ; }
+		public Page Page { get; set; }
 
 		/// <summary>
 		/// Gets/sets the attachments.
 		/// </summary>
-		public IList<Media> Attachments { get ; set ; }
+		public IList<Media> Attachments { get; set; }
 
 		/// <summary>
 		/// Gets/sets the regions.
 		/// </summary>
-		public dynamic Regions { get ; set ; }
+		public dynamic Regions { get; set; }
 
 		/// <summary>
 		/// Gets/sets the properties.
 		/// </summary>
-		public dynamic Properties { get ; set ; }
+		public dynamic Properties { get; set; }
 
 		/// <summary>
 		/// Gets/sets the extensions.
 		/// </summary>
-		public dynamic Extensions { get ; set ; }
+		public dynamic Extensions { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		protected PageModel() {
-			Regions = new ExpandoObject() ;
-			Properties = new ExpandoObject() ;
-			Extensions = new ExpandoObject() ;
-			Attachments = new List<Media>() ;
+			Regions = new ExpandoObject();
+			Properties = new ExpandoObject();
+			Extensions = new ExpandoObject();
+			Attachments = new List<Media>();
 		}
 
 		/// <summary>
@@ -58,7 +68,7 @@ namespace Piranha.Entities
 		/// <param name="predicate">The predicate</param>
 		/// <returns>A list of models</returns>
 		public static IList<PageModel> Where(Expression<Func<Page, bool>> predicate) {
-			var ret = new List<PageModel>() ;
+			var ret = new List<PageModel>();
 
 			using (var db = new DataContext()) {
 				var pages = db.Pages
@@ -68,12 +78,12 @@ namespace Piranha.Entities
 					.Include(p => p.Properties)
 					.Include(p => p.Extensions)
 					.Where(predicate)
-					.ToList() ;
+					.ToList();
 
 				foreach (var page in pages)
-					ret.Add(BuildModel(db, page)) ;
+					ret.Add(BuildModel(db, page));
 			}
-			return ret ;
+			return ret;
 		}
 
 		/// <summary>
@@ -83,55 +93,55 @@ namespace Piranha.Entities
 		/// <param name="page">The page</param>
 		/// <returns>The model</returns>
 		private static PageModel BuildModel(DataContext db, Page page) {
-			var m = new PageModel() ;
+			var m = new PageModel();
 
-			m.Page = page ;
+			m.Page = page;
 
 			// Get Properties
 			foreach (var pt in page.Template.Properties) {
-				var val = page.Properties.Where(p => p.Name == pt).SingleOrDefault() ;
+				var val = page.Properties.Where(p => p.Name == pt).SingleOrDefault();
 
 				if (val != null)
-					((IDictionary<string, object>)m.Properties).Add(pt, val.Value) ;
-				else ((IDictionary<string, object>)m.Properties).Add(pt, "") ;
+					((IDictionary<string, object>)m.Properties).Add(pt, val.Value);
+				else ((IDictionary<string, object>)m.Properties).Add(pt, "");
 			}
 			// Get Media
-			var media = db.Media.Where(med => page.Attachments.Contains(med.Id)).ToList() ;
+			var media = db.Media.Where(med => page.Attachments.Contains(med.Id)).ToList();
 			foreach (var attachment in page.Attachments) {
-				var val = media.Where(med => med.Id == attachment).SingleOrDefault() ;
+				var val = media.Where(med => med.Id == attachment).SingleOrDefault();
 				if (val != null)
-					m.Attachments.Add(val) ;
+					m.Attachments.Add(val);
 			}
 			// Get Regions
 			foreach (var rt in page.Template.RegionTemplates) {
 				if (ExtensionManager.Current.HasType(rt.Type)) {
-					object val = null ;
-					var reg = page.Regions.Where(r => r.RegionTemplateId == rt.Id).SingleOrDefault() ;
-					
+					object val = null;
+					var reg = page.Regions.Where(r => r.RegionTemplateId == rt.Id).SingleOrDefault();
+
 					if (reg != null) {
 						if (reg.RegionTemplate == null)
-							reg.RegionTemplate = rt ;
-						val = reg.Body ;
-					} else val = ExtensionManager.Current.CreateInstance(rt.Type) ;
+							reg.RegionTemplate = rt;
+						val = reg.Body;
+					} else val = ExtensionManager.Current.CreateInstance(rt.Type);
 
 					// Initialize region
-					val = ((IExtension)val).GetContent(m) ;
+					val = ((IExtension)val).GetContent(m);
 					// Check for post region
 					if (val is Extend.Regions.PostRegion)
 						val = ((Extend.Regions.PostRegion)val).GetMatchingPosts();
 
-					((IDictionary<string, object>)m.Regions).Add(rt.InternalId, val) ;
-				} else ((IDictionary<string, object>)m.Regions).Add(rt.InternalId, null) ;
+					((IDictionary<string, object>)m.Regions).Add(rt.InternalId, val);
+				} else ((IDictionary<string, object>)m.Regions).Add(rt.InternalId, null);
 			}
 			// Get Extensions
 			foreach (var ext in page.Extensions) {
-				object val = null ;
+				object val = null;
 
 				if (ExtensionManager.Current.HasType(ext.Type)) {
-					val = ext.Body ;
+					val = ext.Body;
 				}
 			}
-			return m ;
+			return m;
 		}
 	}
 }

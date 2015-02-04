@@ -195,12 +195,6 @@
     <Content Include="Views\Shared\Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Views\web.config.transform" />
   </ItemGroup>
   <PropertyGroup>

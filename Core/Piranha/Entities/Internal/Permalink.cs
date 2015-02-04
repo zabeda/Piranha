@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +22,7 @@ using Piranha.Globalization;
 
 namespace Piranha.Models
 {
-	[PrimaryKey(Column="permalink_id")]
+	[PrimaryKey(Column = "permalink_id")]
 	[Serializable]
 	public class Permalink : PiranhaRecord<Permalink>, ICacheRecord<Permalink>
 	{
@@ -23,14 +33,14 @@ namespace Piranha.Models
 		private class NamespaceDictionary
 		{
 			#region Members
-			private Dictionary<Guid, Dictionary<string, Guid>> InnerCache = new Dictionary<Guid,Dictionary<string,Guid>>() ;
+			private Dictionary<Guid, Dictionary<string, Guid>> InnerCache = new Dictionary<Guid, Dictionary<string, Guid>>();
 			#endregion
 
 			public Dictionary<string, Guid> this[Guid namespaceId] {
 				get {
 					if (!InnerCache.ContainsKey(namespaceId))
-						InnerCache.Add(namespaceId, new Dictionary<string,Guid>()) ;
-					return InnerCache[namespaceId] ;
+						InnerCache.Add(namespaceId, new Dictionary<string, Guid>());
+					return InnerCache[namespaceId];
 				}
 			}
 		}
@@ -38,44 +48,45 @@ namespace Piranha.Models
 
 		#region Members
 		[Obsolete("Please use Piranha.Config.DefaultNamespaceId instead")]
-		public static Guid DefaultNamespace = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03") ;
+		public static Guid DefaultNamespace = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03");
 		#endregion
 
 		#region Inner classes
-		public enum PermalinkType {
+		public enum PermalinkType
+		{
 			PAGE, POST, CATEGORY, SITE, ARCHIVE, MEDIA
 		}
 		#endregion
 
 		#region Fields
-		[Column(Name="permalink_id")]
+		[Column(Name = "permalink_id")]
 		[Required()]
-		public override Guid Id { get ; set ; }
+		public override Guid Id { get; set; }
 
-		[Column(Name="permalink_namespace_id")]
-		public Guid NamespaceId { get ; set ; }
+		[Column(Name = "permalink_namespace_id")]
+		public Guid NamespaceId { get; set; }
 
-		[Column(Name="permalink_type")]
-		public PermalinkType Type { get ; set ; }
+		[Column(Name = "permalink_type")]
+		public PermalinkType Type { get; set; }
 
-		[Column(Name="permalink_name", OnSave="ValidatePermalink")]
-		public string Name { get ; set ; }
+		[Column(Name = "permalink_name", OnSave = "ValidatePermalink")]
+		public string Name { get; set; }
 
-		[Column(Name="permalink_created")]
-		public override DateTime Created { get ; set ; }
+		[Column(Name = "permalink_created")]
+		public override DateTime Created { get; set; }
 
-		[Column(Name="permalink_updated")]
-		public override DateTime Updated { get ; set ; }
+		[Column(Name = "permalink_updated")]
+		public override DateTime Updated { get; set; }
 
-		[Column(Name="permalink_created_by")]
-		public override Guid CreatedBy { get ; set ; }
+		[Column(Name = "permalink_created_by")]
+		public override Guid CreatedBy { get; set; }
 
-		[Column(Name="permalink_updated_by")]
-		public override Guid UpdatedBy { get ; set ; }
+		[Column(Name = "permalink_updated_by")]
+		public override Guid UpdatedBy { get; set; }
 		#endregion
 
 		#region Cache
-		private static NamespaceDictionary NamespaceCache = new NamespaceDictionary() ;
+		private static NamespaceDictionary NamespaceCache = new NamespaceDictionary();
 		#endregion
 
 		#region Handlers
@@ -85,7 +96,7 @@ namespace Piranha.Models
 		/// <param name="str">The permalink name</param>
 		/// <returns>The validated name</returns>
 		protected string ValidatePermalink(string str) {
-			return Generate(str, Type) ;
+			return Generate(str, Type);
 		}
 		#endregion
 
@@ -98,16 +109,16 @@ namespace Piranha.Models
 		public static Permalink GetSingle(Guid id) {
 			if (id != Guid.Empty) {
 				if (!Application.Current.CacheProvider.Contains(id.ToString())) {
-					var perm = GetSingle((object)id) ;
+					var perm = GetSingle((object)id);
 					if (perm != null)
-						AddToCache(perm) ;
-					return perm ;
+						AddToCache(perm);
+					return perm;
 				}
 				if (!Application.Current.CacheProvider.Contains(id.ToString()))
-					Application.Current.CacheProvider[id.ToString()] = GetSingle((object)id) ;
-				return (Permalink)Application.Current.CacheProvider[id.ToString()] ;
+					Application.Current.CacheProvider[id.ToString()] = GetSingle((object)id);
+				return (Permalink)Application.Current.CacheProvider[id.ToString()];
 			}
-			return null ;
+			return null;
 		}
 
 		/// <summary>
@@ -116,7 +127,7 @@ namespace Piranha.Models
 		/// <param name="name">The permalink name</param>
 		/// <returns>The permalink</returns>
 		public static Permalink GetByName(string name) {
-			return GetByName(Config.DefaultNamespaceId, name) ;
+			return GetByName(Config.DefaultNamespaceId, name);
 		}
 
 		/// <summary>
@@ -127,17 +138,17 @@ namespace Piranha.Models
 		/// <returns>The permalink</returns>
 		public static Permalink GetByName(Guid namespaceid, string name) {
 			if (!NamespaceCache[namespaceid].ContainsKey(name)) {
-				var perm = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
+				var perm = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid);
 
 				if (perm != null) {
-					AddToCache(perm) ;
-					return perm ;
+					AddToCache(perm);
+					return perm;
 				}
-				return null ;
+				return null;
 			}
 			if (!Application.Current.CacheProvider.Contains(NamespaceCache[namespaceid][name].ToString()))
-				Application.Current.CacheProvider[NamespaceCache[namespaceid][name].ToString()] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid) ;
-			return (Permalink)Application.Current.CacheProvider[NamespaceCache[namespaceid][name].ToString()] ;
+				Application.Current.CacheProvider[NamespaceCache[namespaceid][name].ToString()] = GetSingle("permalink_name = @0 AND permalink_namespace_id = @1", name, namespaceid);
+			return (Permalink)Application.Current.CacheProvider[NamespaceCache[namespaceid][name].ToString()];
 		}
 		#endregion
 
@@ -149,7 +160,7 @@ namespace Piranha.Models
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			// Check for duplicates 
 			if (Permalink.GetSingle("permalink_name = @0 AND permalink_namespace_id = @2" + (!IsNew ? " AND permalink_id != @1" : ""), Name, Id, NamespaceId) != null)
- 				throw new DuplicatePermalinkException() ;
+				throw new DuplicatePermalinkException();
 			return base.Save(tx);
 		}
 
@@ -160,20 +171,20 @@ namespace Piranha.Models
 		/// <param name="type">Optional permalink type</param>
 		/// <returns>A permalink</returns>
 		public static string Generate(string str, PermalinkType type = PermalinkType.PAGE) {
-			var suffix = "" ;
+			var suffix = "";
 
 			if (type == PermalinkType.MEDIA) {
-				var segments = str.Split(new char[] { '.' }) ;
+				var segments = str.Split(new char[] { '.' });
 				if (segments.Length > 1) {
-					suffix = segments[segments.Length - 1] ;
+					suffix = segments[segments.Length - 1];
 
-					str = segments.Subset(0, segments.Length - 1).Implode(".") ;
+					str = segments.Subset(0, segments.Length - 1).Implode(".");
 				}
 			}
 
-		    str = str.ToLower().TransliterateRussianToLatin();
+			str = str.ToLower().TransliterateRussianToLatin();
 
-		    var perm = Regex.Replace(str
+			var perm = Regex.Replace(str
 				.Replace(" ", "-")
 				.Replace("å", "a")
 				.Replace("ä", "a")
@@ -188,11 +199,11 @@ namespace Piranha.Models
 				.Replace("ì", "i"), @"[^a-z0-9-/]", "").Replace("--", "-");
 
 			if (perm.EndsWith("-"))
-				perm = perm.Substring(0, perm.LastIndexOf("-")) ;
+				perm = perm.Substring(0, perm.LastIndexOf("-"));
 			if (perm.StartsWith("-"))
-				perm = perm.Substring(Math.Min(perm.IndexOf("-") + 1, perm.Length)) ;
+				perm = perm.Substring(Math.Min(perm.IndexOf("-") + 1, perm.Length));
 
-			return perm + (!String.IsNullOrEmpty(suffix) ? "." + suffix : "") ;
+			return perm + (!String.IsNullOrEmpty(suffix) ? "." + suffix : "");
 		}
 
 		/// <summary>
@@ -200,9 +211,9 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="record">The record</param>
 		public void InvalidateRecord(Permalink record) {
-			Application.Current.CacheProvider.Remove(record.Id.ToString()) ;
+			Application.Current.CacheProvider.Remove(record.Id.ToString());
 			if (NamespaceCache[record.NamespaceId].ContainsKey(record.Name))
-				NamespaceCache[record.NamespaceId].Remove(record.Name) ;
+				NamespaceCache[record.NamespaceId].Remove(record.Name);
 		}
 
 		/// <summary>
@@ -210,8 +221,8 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="perm">The permalink</param>
 		private static void AddToCache(Permalink perm) {
-			Application.Current.CacheProvider[perm.Id.ToString()] = perm ;
-			NamespaceCache[perm.NamespaceId][perm.Name] = perm.Id ;
+			Application.Current.CacheProvider[perm.Id.ToString()] = perm;
+			NamespaceCache[perm.NamespaceId][perm.Name] = perm.Id;
 		}
 	}
 }

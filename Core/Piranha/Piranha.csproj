@@ -558,7 +558,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Log\ILogProvider.cs" />
     <Compile Include="Log\LocalLogProvider.cs" />
-    <Compile Include="Manager\Binders\IExtensionBinder.cs" />
+    <Compile Include="Manager\Binders\ExtensionBinder.cs" />
     <Compile Include="Manager\ManagerModule.cs" />
     <Compile Include="Manager\ManagerRegistration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -1054,10 +1054,6 @@
     <EmbeddedResource Include="Resources\Template.ru-RU.resx" />
     <EmbeddedResource Include="Resources\Template.sv-SE.resx" />
     <EmbeddedResource Include="Resources\Template.fa-IR.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="LICENSE.md" />
-    <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manager\Views\Account\Index.cshtml">

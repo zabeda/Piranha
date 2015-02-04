@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Web.Security;
 
 namespace Piranha.Security
@@ -12,12 +22,12 @@ namespace Piranha.Security
 		/// <summary>
 		/// Gets if the current user is authenticated.
 		/// </summary>
-		bool IsAuthenticated { get ; }
+		bool IsAuthenticated { get; }
 
 		/// <summary>
 		/// Gets the user id of the current user.
 		/// </summary>
-		Guid UserId { get ; }
+		Guid UserId { get; }
 
 		/// <summary>
 		/// Get the current user.
@@ -30,7 +40,7 @@ namespace Piranha.Security
 		/// <param name="username">The username</param>
 		/// <param name="password">The password</param>
 		/// <returns>If the username and passwords matches</returns>
-		bool Authenticate(string username, string password) ;
+		bool Authenticate(string username, string password);
 
 		/// <summary>
 		/// Creates a new user entity with the given credentials.

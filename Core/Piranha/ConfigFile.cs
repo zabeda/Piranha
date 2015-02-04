@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Configuration;
 
 namespace Piranha
@@ -55,7 +65,7 @@ namespace Piranha
 		private const string PASSIVE_MODE = "passiveMode";
 		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks";
 		private const string RENDERX_UA_COMPATIBLEFORIE = "renderX-UA-CompatibleForIE";
-        private const string ENTITY_SCHEMA = "entitySchema";
+		private const string ENTITY_SCHEMA = "entitySchema";
 		#endregion
 
 		/// <summary>
@@ -85,15 +95,14 @@ namespace Piranha
 			set { this[DISABLE_MANAGER] = value; }
 		}
 
-        /// <summary>
-        /// Gets/sets an optional default schema for Entity Framework.
-        /// </summary>
-        [ConfigurationProperty(ENTITY_SCHEMA, IsRequired = false)]
-        public StringElement EntitySchema
-        {
-            get { return (StringElement)this[ENTITY_SCHEMA]; }
-            set { this[ENTITY_SCHEMA] = value; }
-        }
+		/// <summary>
+		/// Gets/sets an optional default schema for Entity Framework.
+		/// </summary>
+		[ConfigurationProperty(ENTITY_SCHEMA, IsRequired = false)]
+		public StringElement EntitySchema {
+			get { return (StringElement)this[ENTITY_SCHEMA]; }
+			set { this[ENTITY_SCHEMA] = value; }
+		}
 
 		/// <summary>
 		/// Gets/sets if the page & post type builder of the Extension Manager

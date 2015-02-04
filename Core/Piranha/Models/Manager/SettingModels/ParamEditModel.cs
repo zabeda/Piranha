@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,14 +28,14 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <summary>
 		/// Gets/sets the current access record.
 		/// </summary>
-		public SysParam Param { get ; set ; }
+		public SysParam Param { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public ParamEditModel() {
-			Param = new SysParam() ;
+			Param = new SysParam();
 		}
 
 		/// <summary>
@@ -34,10 +44,10 @@ namespace Piranha.Models.Manager.SettingModels
 		/// <param name="id">The access id</param>
 		/// <returns>The model</returns>
 		public static ParamEditModel GetById(Guid id) {
-			ParamEditModel m = new ParamEditModel() ;
-			m.Param = SysParam.GetSingle(id) ;
+			ParamEditModel m = new ParamEditModel();
+			m.Param = SysParam.GetSingle(id);
 
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -47,11 +57,11 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Param.Save(tx) ;
+					Param.Save(tx);
 					tx.Commit();
-				} catch { tx.Rollback() ; throw ; }
+				} catch { tx.Rollback(); throw; }
 			}
-			return true ;
+			return true;
 		}
 
 		/// <summary>
@@ -61,11 +71,11 @@ namespace Piranha.Models.Manager.SettingModels
 		public virtual bool DeleteAll() {
 			using (IDbTransaction tx = Database.OpenConnection().BeginTransaction()) {
 				try {
-					Param.Delete() ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+					Param.Delete();
+					tx.Commit();
+				} catch { tx.Rollback(); return false; }
 			}
-			return true ;
+			return true;
 		}
 	}
 }

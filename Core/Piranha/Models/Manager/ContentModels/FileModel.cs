@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
@@ -13,26 +23,27 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Definition for an uploaded file
 		/// </summary>
-		public class UploadedFile {
+		public class UploadedFile
+		{
 			/// <summary>
 			/// Gets/sets the file name.
 			/// </summary>
-			public string Name { get ; set ; }
+			public string Name { get; set; }
 
 			/// <summary>
 			/// Gets/sets the absolute path for the file.
 			/// </summary>
-			public string Path { get ; set ; }
+			public string Path { get; set; }
 
 			/// <summary>
 			/// Gets/sets the file size.
 			/// </summary>
-			public long Size { get ; set ; }
+			public long Size { get; set; }
 
 			/// <summary>
 			/// Gets/sets the file date.
 			/// </summary>
-			public DateTime Date { get ; set ; }
+			public DateTime Date { get; set; }
 		}
 		#endregion
 
@@ -40,14 +51,14 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Gets the uploaded files.
 		/// </summary>
-		public List<UploadedFile> Files { get ; private set ; }
+		public List<UploadedFile> Files { get; private set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		public UploadModel() {
-			Files = new List<UploadedFile>() ;
+			Files = new List<UploadedFile>();
 		}
 
 		/// <summary>
@@ -55,8 +66,8 @@ namespace Piranha.Models.Manager.ContentModels
 		/// </summary>
 		/// <returns></returns>
 		public static UploadModel Get() {
-			UploadModel m = new UploadModel() ;
-			DirectoryInfo dir = new DirectoryInfo(UploadDir()) ;
+			UploadModel m = new UploadModel();
+			DirectoryInfo dir = new DirectoryInfo(UploadDir());
 
 			foreach (FileInfo file in dir.GetFiles()) {
 				if (file.Name.ToLower() != "index.html" && !file.Name.StartsWith("."))
@@ -65,9 +76,9 @@ namespace Piranha.Models.Manager.ContentModels
 						Path = file.FullName,
 						Size = file.Length,
 						Date = file.LastWriteTime
-					}) ;
+					});
 			}
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -75,7 +86,7 @@ namespace Piranha.Models.Manager.ContentModels
 		/// </summary>
 		/// <returns></returns>
 		private static string UploadDir() {
-			return HttpContext.Current.Server.MapPath("~/App_Data/Uploads/") ;
+			return HttpContext.Current.Server.MapPath("~/App_Data/Uploads/");
 		}
 	}
 }

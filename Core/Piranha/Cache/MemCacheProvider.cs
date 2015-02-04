@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Piranha.Cache
@@ -9,7 +19,7 @@ namespace Piranha.Cache
 	public class MemCacheProvider : ICacheProvider
 	{
 		#region Members
-		private Dictionary<string,object> Cache = new Dictionary<string,object>() ;
+		private Dictionary<string, object> Cache = new Dictionary<string, object>();
 		#endregion
 
 		#region Properties
@@ -19,8 +29,8 @@ namespace Piranha.Cache
 		/// <param name="key">The key</param>
 		/// <returns>The cached value</returns>
 		public object this[string key] {
-			get { return Cache.ContainsKey(key) ? Cache[key] : null ; }
-			set { Cache[key] = value ; }
+			get { return Cache.ContainsKey(key) ? Cache[key] : null; }
+			set { Cache[key] = value; }
 		}
 		#endregion
 
@@ -30,7 +40,7 @@ namespace Piranha.Cache
 		/// <param name="key">The key</param>
 		public void Remove(string key) {
 			if (Cache.ContainsKey(key))
-				Cache.Remove(key) ;
+				Cache.Remove(key);
 		}
 
 		/// <summary>
@@ -39,7 +49,7 @@ namespace Piranha.Cache
 		/// <param name="key">The key</param>
 		/// <returns>Whether an object with the given key exists.</returns>
 		public bool Contains(string key) {
-			return Cache.ContainsKey(key) ;
+			return Cache.ContainsKey(key);
 		}
 	}
 }

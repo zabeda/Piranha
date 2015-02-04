@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Library for building Piranha CMS applications with ASP.NET MVC")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Håkan Edling")]
-[assembly: AssemblyProduct("Piranha.Mvc")]
-[assembly: AssemblyCopyright("Copyright © Håkan Edling 2013-2014")]
+[assembly: AssemblyProduct("Piranha CMS")]
+[assembly: AssemblyCopyright("Copyright © Håkan Edling 2013-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.2.*")]
-[assembly: AssemblyFileVersion("2.2.4.0")]
+[assembly: AssemblyFileVersion("2.2.5.0")]

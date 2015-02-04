@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -18,9 +28,9 @@ namespace Piranha.Models
 	public class MediaFileContent
 	{
 		#region Properties
-		public string Filename { get ; set ; }
-		public string ContentType { get ; set ; }
-		public byte[] Body { get ; set ; }
+		public string Filename { get; set; }
+		public string ContentType { get; set; }
+		public byte[] Body { get; set; }
 		#endregion
 	}
 
@@ -35,12 +45,12 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the filename.
 		/// </summary>
-		public abstract string Filename { get ; set ; }
+		public abstract string Filename { get; set; }
 
 		/// <summary>
 		/// Gets/sets the type of the media file.
 		/// </summary>
-		public abstract string Type { get ; set ; }
+		public abstract string Type { get; set; }
 		#endregion
 
 		/// <summary>
@@ -50,85 +60,85 @@ namespace Piranha.Models
 		/// <param name="response">The http response</param>
 		public void GetMedia(HttpContext context, int? width = null, int? height = null) {
 			if (!ClientCache.HandleClientCache(context, Id.ToString(), Updated)) {
-				byte[] data = null ;
-				var compress = false ;
-				bool draft = (this is Content ? ((Content)(object)this).IsDraft : false) ;
+				byte[] data = null;
+				var compress = false;
+				bool draft = (this is Content ? ((Content)(object)this).IsDraft : false);
 
 				if (width.HasValue) {
 					// Try to get cached media from the provider
 					if (draft) {
-						data = Application.Current.MediaCacheProvider.GetDraft(Id, width.Value, height, Piranha.IO.MediaType.Media) ;
+						data = Application.Current.MediaCacheProvider.GetDraft(Id, width.Value, height, Piranha.IO.MediaType.Media);
 					} else {
 						data = Application.Current.MediaCacheProvider.Get(Id, width.Value, height,
-							(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media)) ;
+							(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media));
 					}
 
 					if (data == null) {
 						// No cached media exists. Let's get it
 						if (draft) {
-							data = Application.Current.MediaProvider.GetDraft(Id, Piranha.IO.MediaType.Media) ;
+							data = Application.Current.MediaProvider.GetDraft(Id, Piranha.IO.MediaType.Media);
 							if (data == null)
-								draft = false ;
+								draft = false;
 						}
 						if (!draft) {
-							data = Application.Current.MediaProvider.Get(Id, 
-								(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media)) ;
+							data = Application.Current.MediaProvider.Get(Id,
+								(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media));
 						}
 
 						if (data != null) {
-							Image img = null ;
+							Image img = null;
 							try {
 								// We're requesting different dimensions, try to get the image
 								using (var mem = new MemoryStream(data)) {
-									img = Image.FromStream(mem) ;
+									img = Image.FromStream(mem);
 								}
 								if (img != null) {
-									var newWidth = width.HasValue && width.Value < img.Width ? width : img.Width ;
-									var newHeight = height ;
+									var newWidth = width.HasValue && width.Value < img.Width ? width : img.Width;
+									var newHeight = height;
 									if (!newHeight.HasValue)
-										newHeight = Convert.ToInt32(((double)width / img.Width) * img.Height) ;
+										newHeight = Convert.ToInt32(((double)width / img.Width) * img.Height);
 
-									int orgWidth = img.Width, orgHeight = img.Height ;
+									int orgWidth = img.Width, orgHeight = img.Height;
 
 									using (var resized = Drawing.ImageUtils.Resize(img, newWidth.Value, newHeight.Value)) {
 										if (resized.Width != orgWidth || resized.Height != orgHeight) {
 											// Check for optional compression
-											var param = SysParam.GetByName("COMPRESS_IMAGES") ;
+											var param = SysParam.GetByName("COMPRESS_IMAGES");
 											if (param != null && param.Value == "1")
-												compress = true ;
+												compress = true;
 
 											using (var mem = new MemoryStream()) {
-												resized.Save(mem, compress ? ImageFormat.Jpeg : img.RawFormat) ;
-												data = mem.ToArray() ;
+												resized.Save(mem, compress ? ImageFormat.Jpeg : img.RawFormat);
+												data = mem.ToArray();
 											}
 											if (draft) {
 												Application.Current.MediaCacheProvider.PutDraft(Id, data, width.Value, height,
-													Piranha.IO.MediaType.Media) ;
+													Piranha.IO.MediaType.Media);
 											} else {
 												Application.Current.MediaCacheProvider.Put(Id, data, width.Value, height,
-													(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media)) ;
+													(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media));
 											}
 										}
 									}
-									img.Dispose() ;
+									img.Dispose();
 								}
-							} catch {}
+							} catch { }
 						}
 					}
 				} else {
 					// Get the original media from the current provider
 					if (draft) {
-						data = Application.Current.MediaProvider.GetDraft(Id, Piranha.IO.MediaType.Media) ;
+						data = Application.Current.MediaProvider.GetDraft(Id, Piranha.IO.MediaType.Media);
 						if (data == null)
-							draft = false ;
+							draft = false;
 					}
 					if (!draft) {
-						data = Application.Current.MediaProvider.Get(Id, 
-							(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media)) ;
+						data = Application.Current.MediaProvider.Get(Id,
+							(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media));
 					}
 				}
 				if (data != null)
-					WriteFile(context, data, compress) ;
+					WriteFile(context, data, compress);
 			}
 		}
 
@@ -144,23 +154,23 @@ namespace Piranha.Models
 			if (content != null) {
 				// Set filename
 				if (!String.IsNullOrEmpty(content.Filename))
-					Filename = content.Filename ;
+					Filename = content.Filename;
 				// Set content type
 				if (!String.IsNullOrEmpty(content.ContentType))
-					Type = content.ContentType ;
+					Type = content.ContentType;
 			}
 			if (base.Save(tx) && content != null) {
 				// Delete the old data
 				if (!(this is Content) || !((Content)(object)this).IsDraft)
-					DeleteFile() ;
-				DeleteCache() ;
+					DeleteFile();
+				DeleteCache();
 
 				// Save the new
 				if (writefile) {
 					// TODO: Dirty double cast, redesign!
 					if (this is Content && ((Content)(object)this).IsDraft)
-						Application.Current.MediaProvider.PutDraft(Id, content.Body) ;
-					else Application.Current.MediaProvider.Put(Id, content.Body) ;
+						Application.Current.MediaProvider.PutDraft(Id, content.Body);
+					else Application.Current.MediaProvider.Put(Id, content.Body);
 				}
 			}
 			return base.Save(tx, setdates);
@@ -174,11 +184,11 @@ namespace Piranha.Models
 		public override bool Delete(System.Data.IDbTransaction tx = null) {
 			if (base.Delete(tx)) {
 				// Delete original files
-				DeleteFile() ;
+				DeleteFile();
 
 				// Delete Cache
-				DeleteCache() ;
-				
+				DeleteCache();
+
 				return true;
 			}
 			return false;
@@ -188,16 +198,16 @@ namespace Piranha.Models
 		/// Deletes the published and working copy of the media file.
 		/// </summary>
 		public void DeleteFile() {
-			Application.Current.MediaProvider.DeleteDraft(Id) ;
-			Application.Current.MediaProvider.Delete(Id) ;
+			Application.Current.MediaProvider.DeleteDraft(Id);
+			Application.Current.MediaProvider.Delete(Id);
 		}
 
 		/// <summary>
 		/// Deletes all cached versions of the media file.
 		/// </summary>
 		public void DeleteCache() {
-			Application.Current.MediaCacheProvider.Delete(Id, 
-				(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media)) ;
+			Application.Current.MediaCacheProvider.Delete(Id,
+				(this is Upload ? Piranha.IO.MediaType.Upload : Piranha.IO.MediaType.Media));
 		}
 
 		#region Protected methods
@@ -209,12 +219,12 @@ namespace Piranha.Models
 		/// <param name="compressed">Whether or not the file is a compressed image</param>
 		protected void WriteFile(HttpContext context, string path, bool compressed = false) {
 			if (File.Exists(path)) {
-				context.Response.StatusCode = 200 ;
-				context.Response.ContentType = compressed ? "image/jpg" : Type ;
-				context.Response.WriteFile(path) ;
-				context.Response.EndClean() ;
+				context.Response.StatusCode = 200;
+				context.Response.ContentType = compressed ? "image/jpg" : Type;
+				context.Response.WriteFile(path);
+				context.Response.EndClean();
 			} else {
-				context.Response.StatusCode = 404 ;
+				context.Response.StatusCode = 404;
 			}
 		}
 
@@ -226,12 +236,12 @@ namespace Piranha.Models
 		/// <param name="compressed">Whether or not the file is a compressed image</param>
 		protected void WriteFile(HttpContext context, byte[] data, bool compressed = false) {
 			if (data != null) {
-				context.Response.StatusCode = 200 ;
-				context.Response.ContentType = compressed ? "image/jpg" : Type ;
-				context.Response.BinaryWrite(data) ;
-				context.Response.EndClean() ;
+				context.Response.StatusCode = 200;
+				context.Response.ContentType = compressed ? "image/jpg" : Type;
+				context.Response.BinaryWrite(data);
+				context.Response.EndClean();
 			} else {
-				context.Response.StatusCode = 404 ;
+				context.Response.StatusCode = 404;
 			}
 		}
 		#endregion

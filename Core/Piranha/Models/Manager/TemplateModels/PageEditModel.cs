@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -26,12 +36,12 @@ namespace Piranha.Models.Manager.TemplateModels
 			/// <param name="bindingContext">Binding context</param>
 			/// <returns>The page edit model</returns>
 			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
-				PageEditModel model = (PageEditModel)base.BindModel(controllerContext, bindingContext) ;
+				PageEditModel model = (PageEditModel)base.BindModel(controllerContext, bindingContext);
 
-				bindingContext.ModelState.Remove("Template.Preview") ;
+				bindingContext.ModelState.Remove("Template.Preview");
 				model.Template.Preview =
-					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Template.Preview").AttemptedValue) ;
-				return model ;
+					new HtmlString(bindingContext.ValueProvider.GetUnvalidatedValue("Template.Preview").AttemptedValue);
+				return model;
 			}
 		}
 		#endregion
@@ -40,23 +50,23 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <summary>
 		/// Gets/sets the page template
 		/// </summary>
-		public virtual PageTemplate Template { get ; set ; }
+		public virtual PageTemplate Template { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available region templates.
 		/// </summary>
-		public List<RegionTemplate> Regions { get ; set ; }
+		public List<RegionTemplate> Regions { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available region types.
 		/// </summary>
-		public List<dynamic> RegionTypes { get ; set ; }
+		public List<dynamic> RegionTypes { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor, creates a new model.
 		/// </summary>
-		public PageEditModel() : this(true) {}
+		public PageEditModel() : this(true) { }
 
 		/// <summary>
 		/// Creates a new model.
@@ -70,14 +80,14 @@ namespace Piranha.Models.Manager.TemplateModels
 					"</table>"
 					)
 			};
-			Regions = new List<RegionTemplate>() ;
-			RegionTypes = new List<dynamic>() ;
+			Regions = new List<RegionTemplate>();
+			RegionTypes = new List<dynamic>();
 
 			if (loadRegionTypes) {
 				ExtensionManager.Current.GetByExtensionType(ExtensionType.Region).OrderBy(e => e.Metadata.Name).Each((i, r) =>
-					RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName })) ;
-				RegionTypes.Insert(0, new { Name = "", Type = "" }) ;
-			}	
+					RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName }));
+				RegionTypes.Insert(0, new { Name = "", Type = "" });
+			}
 		}
 
 		/// <summary>
@@ -87,11 +97,11 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <param name="loadRegionTypes">If the region types should be loaded</param>
 		/// <returns>The model</returns>
 		public static PageEditModel GetById(Guid id, bool loadRegionTypes = true) {
-			PageEditModel m = new PageEditModel(loadRegionTypes) ;
-			m.Template = PageTemplate.GetSingle(id) ;
-			m.Regions = RegionTemplate.Get("regiontemplate_template_id = @0", id, new Params() { OrderBy = "regiontemplate_seqno" }) ;
+			PageEditModel m = new PageEditModel(loadRegionTypes);
+			m.Template = PageTemplate.GetSingle(id);
+			m.Regions = RegionTemplate.Get("regiontemplate_template_id = @0", id, new Params() { OrderBy = "regiontemplate_seqno" });
 
-			return m ;
+			return m;
 		}
 
 		/// <summary>
@@ -100,57 +110,57 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// <returns>Whether the operation succeeded</returns>
 		public bool SaveAll() {
 			using (IDbTransaction tx = Database.OpenTransaction()) {
-				List<object> args = new List<object>() ;
-				string sql = "" ;
-				var isNew = Template.IsNew ;
+				List<object> args = new List<object>();
+				string sql = "";
+				var isNew = Template.IsNew;
 
 				// Delete all unattached properties
-				args.Add(Template.Id) ;
+				args.Add(Template.Id);
 				Template.Properties.Each((n, p) => {
-					sql += (sql != "" ? "," : "") + "@" + (n + 1).ToString() ;
-					args.Add(p) ;
+					sql += (sql != "" ? "," : "") + "@" + (n + 1).ToString();
+					args.Add(p);
 				});
 				Property.Execute("DELETE FROM property WHERE property_parent_id IN (" +
 					"SELECT page_id FROM page WHERE page_template_id = @0) " +
-					(sql != "" ? "AND property_name NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
+					(sql != "" ? "AND property_name NOT IN (" + sql + ")" : ""), tx, args.ToArray());
 
 				// Save the template
-				Template.Save(tx) ;
+				Template.Save(tx);
 
 				// Update all regiontemplates with the id if this is an insert
 				if (isNew)
-					Regions.ForEach(r => r.TemplateId = Template.Id) ;
+					Regions.ForEach(r => r.TemplateId = Template.Id);
 
 				// Delete removed regions templates
-				sql = "" ;
-				args.Clear() ;
-				args.Add(Template.Id) ;
+				sql = "";
+				args.Clear();
+				args.Add(Template.Id);
 				var pos = 1;
 				foreach (var reg in Regions) {
 					if (reg.Id != Guid.Empty) {
-						sql += (sql != "" ? "," : "") + "@" + pos.ToString() ;
-						args.Add(reg.Id) ;
-						pos++ ;
+						sql += (sql != "" ? "," : "") + "@" + pos.ToString();
+						args.Add(reg.Id);
+						pos++;
 					}
 				}
 				RegionTemplate.Execute("DELETE FROM regiontemplate WHERE regiontemplate_template_id = @0 " +
-					(sql != "" ? "AND regiontemplate_id NOT IN (" + sql + ")" : ""), tx, args.ToArray()) ;
+					(sql != "" ? "AND regiontemplate_id NOT IN (" + sql + ")" : ""), tx, args.ToArray());
 				// Save the regions
 				foreach (var reg in Regions)
-					reg.Save(tx) ;
+					reg.Save(tx);
 
 				// Clear all implementing pages from the cache
-				var pages = Page.Get("page_template_id = @0", tx, Template.Id) ;
+				var pages = Page.Get("page_template_id = @0", tx, Template.Id);
 				foreach (var page in pages)
-					page.InvalidateRecord(page) ;
+					page.InvalidateRecord(page);
 
-				tx.Commit() ;
+				tx.Commit();
 			}
 			// Reload regions
-			Regions = RegionTemplate.Get("regiontemplate_template_id = @0", Template.Id, 
-				new Params() { OrderBy = "regiontemplate_seqno" }) ;
+			Regions = RegionTemplate.Get("regiontemplate_template_id = @0", Template.Id,
+				new Params() { OrderBy = "regiontemplate_seqno" });
 
-			return true ;
+			return true;
 		}
 
 		/// <summary>
@@ -158,19 +168,19 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		/// <returns>Whether the operation succeeded</returns>
 		public bool DeleteAll() {
-			List<Piranha.Models.Page> pages = Piranha.Models.Page.Get("page_template_id = @0", Template.Id) ;
+			List<Piranha.Models.Page> pages = Piranha.Models.Page.Get("page_template_id = @0", Template.Id);
 
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
 					foreach (Piranha.Models.Page page in pages) {
-						Region.Get("region_page_id = @0", page.Id).ForEach((r) => r.Delete(tx)) ;
-						page.Delete(tx) ;
+						Region.Get("region_page_id = @0", page.Id).ForEach((r) => r.Delete(tx));
+						page.Delete(tx);
 					}
-					Template.Delete(tx) ;
-					tx.Commit() ;
-				} catch { tx.Rollback() ; return false ; }
+					Template.Delete(tx);
+					tx.Commit();
+				} catch { tx.Rollback(); return false; }
 			}
-			return true ;
+			return true;
 		}
 	}
 }

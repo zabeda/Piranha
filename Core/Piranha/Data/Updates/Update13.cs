@@ -1,8 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Data;
-using System.Linq;
-using System.Web;
 
 using Piranha.Data;
 using Piranha.Models;
@@ -30,12 +37,12 @@ namespace Piranha.Data.Updates
 						Name = ptemplate.PageRegions[n],
 						Type = typeof(Extend.Regions.HtmlRegion).FullName,
 						Seqno = n + 1
-					} ;
-					rtemplate.Save(tx) ;
+					};
+					rtemplate.Save(tx);
 
 					// Set region template id for all related ids
 					Region.Execute("UPDATE region SET region_regiontemplate_id = @0 WHERE region_name = @1 AND region_page_id IN " +
-						"(SELECT page_id FROM page WHERE page_template_id = @2)", tx, rtemplate.Id, rtemplate.InternalId, rtemplate.TemplateId) ;
+						"(SELECT page_id FROM page WHERE page_template_id = @2)", tx, rtemplate.Id, rtemplate.InternalId, rtemplate.TemplateId);
 				}
 			}
 		}

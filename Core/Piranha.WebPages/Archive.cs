@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,31 +22,32 @@ namespace Piranha.WebPages
 	/// <summary>
 	/// Standard page class for an archive.
 	/// </summary>
-	public abstract class Archive : Archive<ArchiveModel> {}
+	public abstract class Archive : Archive<ArchiveModel> { }
 
 	/// <summary>
 	/// Page class for an archive where the model is of the generic type T.
 	/// </summary>
 	/// <typeparam name="T">The model type</typeparam>
-	public abstract class Archive<T> : ContentPage<T> where T : ArchiveModel {
+	public abstract class Archive<T> : ContentPage<T> where T : ArchiveModel
+	{
 		/// <summary>
 		/// Initializes the web page
 		/// </summary>
 		protected override void InitializePage() {
-			string permalink = UrlData.Count > 0 ? UrlData[0] : "" ;
+			string permalink = UrlData.Count > 0 ? UrlData[0] : "";
 
 
 			// Load the current page model
 			if (!String.IsNullOrEmpty(permalink))
-				InitModel(ArchiveModel.GetByCategoryName<T>(permalink)) ;
-			else InitModel(ArchiveModel.Get<T>()) ;
+				InitModel(ArchiveModel.GetByCategoryName<T>(permalink));
+			else InitModel(ArchiveModel.Get<T>());
 
 			// Cache management
-			DateTime mod = GetLastModified() ;
-			ClientCache.HandleClientCache(HttpContext.Current, Model.Category != null ? 
-				Model.Category.Id.ToString() : Guid.Empty.ToString(), mod) ;
+			DateTime mod = GetLastModified();
+			ClientCache.HandleClientCache(HttpContext.Current, Model.Category != null ?
+				Model.Category.Id.ToString() : Guid.Empty.ToString(), mod);
 
-			base.InitializePage() ;
+			base.InitializePage();
 		}
 
 		/// <summary>
@@ -44,17 +55,17 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <returns></returns>
 		protected virtual DateTime GetLastModified() {
-			DateTime mod = DateTime.MinValue ;
+			DateTime mod = DateTime.MinValue;
 
 			Model.Archive.ForEach(p => {
 				if (p.Updated > mod)
-					mod = p.Updated ;
+					mod = p.Updated;
 			});
 			Model.Content.ForEach(c => {
 				if (c.Updated > mod)
-					mod = c.Updated ;
+					mod = c.Updated;
 			});
-			return mod ;
+			return mod;
 		}
 
 		#region Private methods
@@ -63,9 +74,9 @@ namespace Piranha.WebPages
 		/// </summary>
 		/// <param name="pm">The page model</param>
 		protected virtual void InitModel(T pm) {
-			Model = pm ;
+			Model = pm;
 
-			Page.Current = null ;
+			Page.Current = null;
 		}
 		#endregion
 	}

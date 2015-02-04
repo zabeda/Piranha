@@ -1,7 +1,16 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 using Piranha.Models;
 
@@ -13,19 +22,19 @@ namespace Piranha.Areas.Manager.Models
 		/// <summary>
 		/// Get/sets the currently active site.
 		/// </summary>
-		public Guid ActiveSite { get ; set ; }
+		public Guid ActiveSite { get; set; }
 
 		/// <summary>
 		/// Gets/sets the sitemap for the current site.
 		/// </summary>
-		public IList<Sitemap> Pages { get ; set ; }
+		public IList<Sitemap> Pages { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public LinkDialogModel() {
-			Pages = new List<Sitemap>() ;
+			Pages = new List<Sitemap>();
 		}
 
 		/// <summary>
@@ -34,15 +43,15 @@ namespace Piranha.Areas.Manager.Models
 		/// <param name="siteid">The site id</param>
 		/// <returns>The model</returns>
 		public static LinkDialogModel GetBySiteId(Guid siteid) {
-			var m = new LinkDialogModel() ;
+			var m = new LinkDialogModel();
 
-			m.ActiveSite = siteid ;
+			m.ActiveSite = siteid;
 
 			using (var db = new DataContext()) {
-				var site = db.SiteTrees.Where(s => s.Id == m.ActiveSite).Single() ;
-				m.Pages = Sitemap.GetStructure(site.InternalId) ;
+				var site = db.SiteTrees.Where(s => s.Id == m.ActiveSite).Single();
+				m.Pages = Sitemap.GetStructure(site.InternalId);
 			}
-			return m ;
+			return m;
 		}
 	}
 }

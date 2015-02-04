@@ -83,10 +83,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.md" />
     <None Include="app.config" />
     <None Include="packages.config" />
-    <Content Include="README.md" />
     <None Include="web.config.transform">
       <SubType>Designer</SubType>
     </None>

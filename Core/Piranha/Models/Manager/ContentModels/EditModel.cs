@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
@@ -30,17 +40,17 @@ namespace Piranha.Models.Manager.ContentModels
 			/// <param name="bindingContext">Binding context</param>
 			/// <returns>The page edit model</returns>
 			public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext) {
-				EditModel model = (EditModel)base.BindModel(controllerContext, bindingContext) ;
+				EditModel model = (EditModel)base.BindModel(controllerContext, bindingContext);
 
 				// Allow HtmlString extensions
 				model.Extensions.Each((i, m) => {
 					if (m.Body is HtmlString) {
-						bindingContext.ModelState.Remove("Extensions[" + i +"].Body") ;
-						m.Body = ExtensionManager.Current.CreateInstance(m.Type, 
-							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i +"].Body").AttemptedValue) ;
+						bindingContext.ModelState.Remove("Extensions[" + i + "].Body");
+						m.Body = ExtensionManager.Current.CreateInstance(m.Type,
+							bindingContext.ValueProvider.GetUnvalidatedValue("Extensions[" + i + "].Body").AttemptedValue);
 					}
-				}) ;
-				return model ;
+				});
+				return model;
 			}
 		}
 		#endregion
@@ -240,7 +250,7 @@ namespace Piranha.Models.Manager.ContentModels
 				{"xul", "application/vnd.mozilla.xul+xml"},
 				{"xwd", "image/x-xwindowdump"},
 				{"xyz", "chemical/x-xyz"},
-				{"zip", "application/zip"} } ;
+				{"zip", "application/zip"} };
 			#endregion
 
 			/// <summary>
@@ -260,70 +270,70 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <summary>
 		/// Gets/sets the content record.
 		/// </summary>
-		public Models.Content Content { get ; set ; }
+		public Models.Content Content { get; set; }
 
 		/// <summary>
 		/// Gets/sets the permalink.
 		/// </summary>
-		public Models.Permalink Permalink { get ; set ; }
+		public Models.Permalink Permalink { get; set; }
 
 		/// <summary>
 		/// Gets/sets the categories associated with the post.
 		/// </summary>
-		public List<Guid> ContentCategories { get ; set ; }
+		public List<Guid> ContentCategories { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available categories.
 		/// </summary>
-		public MultiSelectList Categories { get ; set ; }
+		public MultiSelectList Categories { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available folders.
 		/// </summary>
-		public IList<Placement> Folders { get ; set ; }
+		public IList<Placement> Folders { get; set; }
 
 		/// <summary>
 		/// Gets/sets the available extensions.
 		/// </summary>
-		public List<Extension> Extensions { get ; set ; }
+		public List<Extension> Extensions { get; set; }
 
 		/// <summary>
 		/// Gets/sets the optional file.
 		/// </summary>
-		public HttpPostedFileBase UploadedFile { get ; set ; }
+		public HttpPostedFileBase UploadedFile { get; set; }
 
 		/// <summary>
 		/// Gets/sets the url to get the file from.
 		/// </summary>
-		[Display(Name="FromUrl", ResourceType=typeof(Piranha.Resources.Content))]
-		public string FileUrl { get ; set ; }
+		[Display(Name = "FromUrl", ResourceType = typeof(Piranha.Resources.Content))]
+		public string FileUrl { get; set; }
 
 		/// <summary>
 		/// Gets/sets the file object if this media is updated server side.
 		/// </summary>
-		public FileInfo ServerFile { get ; set ; }
+		public FileInfo ServerFile { get; set; }
 
 		/// <summary>
 		/// Gets the current handler prefix.
 		/// </summary>
-		public string HandlerPrefix { get ; private set ; }
+		public string HandlerPrefix { get; private set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
-		public EditModel() : this(false, Guid.Empty) {}
+		public EditModel() : this(false, Guid.Empty) { }
 
 		/// <summary>
 		/// Default constructor. Creates a new model.
 		/// </summary>
 		/// <param name="isfolder">Whether this is a folder or not.</param>
 		public EditModel(bool isfolder, Guid parentid) {
-			Permalink = new Models.Permalink() { Id = Guid.NewGuid(), NamespaceId = Config.MediaNamespaceId, Type = Models.Permalink.PermalinkType.MEDIA } ;
-			Content = new Piranha.Models.Content() { Id = Guid.NewGuid(), IsFolder = isfolder, ParentId = parentid, PermalinkId = Permalink.Id } ;
-			Extensions = Content.GetExtensions(true) ;
+			Permalink = new Models.Permalink() { Id = Guid.NewGuid(), NamespaceId = Config.MediaNamespaceId, Type = Models.Permalink.PermalinkType.MEDIA };
+			Content = new Piranha.Models.Content() { Id = Guid.NewGuid(), IsFolder = isfolder, ParentId = parentid, PermalinkId = Permalink.Id };
+			Extensions = Content.GetExtensions(true);
 
-			GetMetaData() ;
+			GetMetaData();
 		}
 
 		/// <summary>
@@ -332,124 +342,125 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <param name="id">The content id</param>
 		/// <returns>The model</returns>
 		public static EditModel GetById(Guid id) {
-			EditModel em = new EditModel() ;
-			em.Content = Piranha.Models.Content.GetSingle(id, true) ;
+			EditModel em = new EditModel();
+			em.Content = Piranha.Models.Content.GetSingle(id, true);
 			if (!em.Content.IsFolder) {
 				// Don't get permalinks for folders
 				if (em.Content.PermalinkId != Guid.Empty)
-					em.Permalink = Models.Permalink.GetSingle(em.Content.PermalinkId) ;
-				else em.Content.PermalinkId = em.Permalink.Id ;
+					em.Permalink = Models.Permalink.GetSingle(em.Content.PermalinkId);
+				else em.Content.PermalinkId = em.Permalink.Id;
 			}
-			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId)) ;
-			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
-				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories) ;
-			em.Extensions = em.Content.GetExtensions(true) ;
+			Relation.GetFieldsByDataId("relation_related_id", id, false).ForEach(r => em.ContentCategories.Add(r.RelatedId));
+			em.Categories = new MultiSelectList(Category.GetFields("category_id, category_name",
+				new Params() { OrderBy = "category_name" }), "Id", "Name", em.ContentCategories);
+			em.Extensions = em.Content.GetExtensions(true);
 
-			return em ;
+			return em;
 		}
 
 		/// <summary>
 		/// Saves the edit model.
 		/// </summary>
 		public bool SaveAll(bool draft) {
-			var context = HttpContext.Current ;
-			var hasfile = UploadedFile != null || ServerFile != null ;
-			byte[] data = null ;
-			WebClient web = new WebClient() ;
+			var context = HttpContext.Current;
+			var hasfile = UploadedFile != null || ServerFile != null;
+			byte[] data = null;
+			WebClient web = new WebClient();
 
 			// Check if the original URL has been updated, and if so 
 			if (!Content.IsNew && !String.IsNullOrEmpty(Content.OriginalUrl)) {
-				var old = Content.GetSingle(Content.Id) ;
+				var old = Content.GetSingle(Content.Id);
 				if (old != null) {
 					if (Content.OriginalUrl != old.OriginalUrl) {
-						FileUrl = Content.OriginalUrl ;
+						FileUrl = Content.OriginalUrl;
 					}
 				}
 			}
 
 			// Download file from web
 			if (!hasfile && !String.IsNullOrEmpty(FileUrl)) {
-				data = web.DownloadData(FileUrl) ;
-				Content.OriginalUrl = FileUrl ;
-				Content.LastSynced = Convert.ToDateTime(web.ResponseHeaders[HttpResponseHeader.LastModified]) ;
+				data = web.DownloadData(FileUrl);
+				Content.OriginalUrl = FileUrl;
+				Content.LastSynced = Convert.ToDateTime(web.ResponseHeaders[HttpResponseHeader.LastModified]);
 			}
 
-			var media = new MediaFileContent() ;
+			var media = new MediaFileContent();
 			if (hasfile) {
 				if (UploadedFile != null) {
-					media.Filename = UploadedFile.FileName ;
-					media.ContentType = UploadedFile.ContentType ;					
+					media.Filename = UploadedFile.FileName;
+					media.ContentType = UploadedFile.ContentType;
 					using (var reader = new BinaryReader(UploadedFile.InputStream)) {
-						media.Body = reader.ReadBytes(Convert.ToInt32(UploadedFile.InputStream.Length)) ;
+						media.Body = reader.ReadBytes(Convert.ToInt32(UploadedFile.InputStream.Length));
 					}
 				} else {
-					media.Filename = ServerFile.Name ;
-					media.ContentType = MimeType.Get(ServerFile.Name) ;
+					media.Filename = ServerFile.Name;
+					media.ContentType = MimeType.Get(ServerFile.Name);
 					using (var stream = ServerFile.OpenRead()) {
-						media.Body = new byte[ServerFile.Length] ;
-						stream.Read(media.Body, 0, media.Body.Length) ;
+						media.Body = new byte[ServerFile.Length];
+						stream.Read(media.Body, 0, media.Body.Length);
 					}
 				}
 			} else if (data != null) {
-				media.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1) ;
-				media.ContentType = web.ResponseHeaders["Content-Type"] ;
-				media.Body = data ;
+				media.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1);
+				media.ContentType = web.ResponseHeaders["Content-Type"];
+				media.Body = data;
 			} else {
-				media = null ;
+				media = null;
 			}
 
-			var saved = false ;
+			var saved = false;
 
 			if (!Content.IsFolder) {
 				// Only save permalinks for non-folders
-				var filename = !String.IsNullOrEmpty(Content.Filename) ? Content.Filename : (!String.IsNullOrEmpty(media.Filename) ? media.Filename : "") ;
+				var filename = !String.IsNullOrEmpty(Content.Filename) ? Content.Filename : (!String.IsNullOrEmpty(media.Filename) ? media.Filename : "");
 				if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
-					Permalink.Name = Permalink.Generate(!Content.IsFolder ? filename : Content.Name, Models.Permalink.PermalinkType.MEDIA) ;
+					Permalink.Name = Permalink.Generate(!Content.IsFolder ? filename : Content.Name, Models.Permalink.PermalinkType.MEDIA);
 				try {
-					Permalink.Save() ;
+					Permalink.Save();
 				} catch (DuplicatePermalinkException) {
 					if (Permalink.IsNew) {
-						Permalink.Name = Content.Id + Permalink.Name.Substring(Permalink.Name.LastIndexOf('.')) ;
-						Permalink.Save() ;
-					} else throw ;
+						Permalink.Name = Content.Id + Permalink.Name.Substring(Permalink.Name.LastIndexOf('.'));
+						Permalink.Save();
+					} else throw;
 				}
 			} else {
-				Content.PermalinkId = Guid.Empty ;
+				Content.PermalinkId = Guid.Empty;
 			}
 
 			if (draft)
-				saved = Content.Save(media) ;
-			else saved = Content.SaveAndPublish(media) ;
+				saved = Content.Save(media);
+			else saved = Content.SaveAndPublish(media);
 
 			if (saved) {
 				// Save related information
-				Relation.DeleteByDataId(Content.Id) ;
-				List<Relation> relations = new List<Relation>() ;
-				ContentCategories.ForEach(c => relations.Add(new Relation() { 
-					DataId = Content.Id, RelatedId = c, IsDraft = false, Type = Relation.RelationType.CONTENTCATEGORY })
-					) ;
-				relations.ForEach(r => r.Save()) ;
+				Relation.DeleteByDataId(Content.Id);
+				List<Relation> relations = new List<Relation>();
+				ContentCategories.ForEach(c => relations.Add(new Relation() {
+					DataId = Content.Id, RelatedId = c, IsDraft = false, Type = Relation.RelationType.CONTENTCATEGORY
+				})
+					);
+				relations.ForEach(r => r.Save());
 
 				// Save extensions
 				foreach (var ext in Extensions) {
 					// Call OnSave
-					ext.Body.OnManagerSave(Content) ;
+					ext.Body.OnManagerSave(Content);
 
-					ext.ParentId = Content.Id ;
-					ext.Save() ;
+					ext.ParentId = Content.Id;
+					ext.Save();
 					if (!draft) {
 						if (Extension.GetScalar("SELECT COUNT(extension_id) FROM extension WHERE extension_id=@0 AND extension_draft=0", ext.Id) == 0)
-							ext.IsNew = true ;
-						ext.IsDraft = false ;
-						ext.Save() ;
+							ext.IsNew = true;
+						ext.IsDraft = false;
+						ext.Save();
 					}
 				}
 				// Reset file url
-				FileUrl = "" ;
+				FileUrl = "";
 
-				return true ;
+				return true;
 			}
-			return false ;
+			return false;
 		}
 
 		/// <summary>
@@ -458,85 +469,85 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <returns></returns>
 		public bool Sync(string url = "") {
 			if (url == "")
-				url = Content.OriginalUrl ;
+				url = Content.OriginalUrl;
 
 			if (!String.IsNullOrEmpty(url)) {
-				var req = (HttpWebRequest)WebRequest.Create(url) ;
-				var res = req.GetResponse() ;
-				res.Close() ; // Let's not read the response from this object
+				var req = (HttpWebRequest)WebRequest.Create(url);
+				var res = req.GetResponse();
+				res.Close(); // Let's not read the response from this object
 
 				if (((HttpWebResponse)res).StatusCode == HttpStatusCode.OK) {
 					if (!String.IsNullOrEmpty(res.Headers[HttpResponseHeader.LastModified])) {
-						var lastMod = Convert.ToDateTime(res.Headers[HttpResponseHeader.LastModified]) ;
+						var lastMod = Convert.ToDateTime(res.Headers[HttpResponseHeader.LastModified]);
 						if (lastMod != Content.LastSynced) {
 							// Update FileUrl and save the model
-							FileUrl = url ;
-							return SaveAll(true) ;
+							FileUrl = url;
+							return SaveAll(true);
 						}
 					}
 				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.MovedPermanently) {
-					Content.OriginalUrl = res.Headers[HttpResponseHeader.Location] ; // This will cause the Original URL to be updated.
-					return Sync(Content.OriginalUrl) ;
+					Content.OriginalUrl = res.Headers[HttpResponseHeader.Location]; // This will cause the Original URL to be updated.
+					return Sync(Content.OriginalUrl);
 				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.Moved) {
-					return Sync(Content.OriginalUrl) ;
+					return Sync(Content.OriginalUrl);
 				} else if (((HttpWebResponse)res).StatusCode == HttpStatusCode.NotFound) {
-					throw new HttpException(404, "Not found") ;
+					throw new HttpException(404, "Not found");
 				} else {
-					throw new HttpException("Sync error") ;
+					throw new HttpException("Sync error");
 				}
 			}
-			return false ;
+			return false;
 		}
 
 		/// <summary>
 		/// Deletes the specified content and its related file.
 		/// </summary>
 		public bool DeleteAll() {
-			var content = Content.Get("content_id = @0", Content.Id) ;
-			var permalinks = Permalink.Get("permalink_id = @0", Content.PermalinkId) ;
+			var content = Content.Get("content_id = @0", Content.Id);
+			var permalinks = Permalink.Get("permalink_id = @0", Content.PermalinkId);
 
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				try {
 					// Call OnDelete for all extensions
 					foreach (var ext in Extensions)
-						ext.Body.OnManagerDelete(Content) ;
+						ext.Body.OnManagerDelete(Content);
 
 					foreach (var c in content)
-						c.Delete(tx) ;
+						c.Delete(tx);
 					foreach (var p in permalinks)
-						p.Delete(tx) ;
-					tx.Commit() ;
-					return true ;
-				} catch { tx.Rollback() ; }
+						p.Delete(tx);
+					tx.Commit();
+					return true;
+				} catch { tx.Rollback(); }
 			}
-			return false ;
+			return false;
 		}
 
 		/// <summary>
 		/// Refreshes the current object.
 		/// </summary>
 		public void Refresh() {
-			GetMetaData() ;
+			GetMetaData();
 
 			if (!Content.IsNew) {
-				Relation.GetFieldsByDataId("relation_related_id", Content.Id).ForEach(r => ContentCategories.Add(r.RelatedId)) ;
-				Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
-					new Params() { OrderBy = "category_name" }), "Id", "Name", ContentCategories) ;
+				Relation.GetFieldsByDataId("relation_related_id", Content.Id).ForEach(r => ContentCategories.Add(r.RelatedId));
+				Categories = new MultiSelectList(Category.GetFields("category_id, category_name",
+					new Params() { OrderBy = "category_name" }), "Id", "Name", ContentCategories);
 			}
 		}
 
 		#region Private methods
 		private void GetMetaData() {
-			ContentCategories = new List<Guid>() ;
-			Categories = new MultiSelectList(Category.GetFields("category_id, category_name", 
-				new Params() { OrderBy = "category_name" }), "Id", "Name") ;
+			ContentCategories = new List<Guid>();
+			Categories = new MultiSelectList(Category.GetFields("category_id, category_name",
+				new Params() { OrderBy = "category_name" }), "Id", "Name");
 
-			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1", new Params() { OrderBy = "content_name" }) ;
-			folders.Insert(0, new Content()) ;
-	
-			Folders = SortFolders(Content.GetFolderStructure(false)) ;
-			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty }) ;
-			
+			var folders = Content.GetFields("content_id, content_name", "content_folder=1 AND content_draft=1", new Params() { OrderBy = "content_name" });
+			folders.Insert(0, new Content());
+
+			Folders = SortFolders(Content.GetFolderStructure(false));
+			Folders.Insert(0, new Placement() { Text = "", Value = Guid.Empty });
+
 			HandlerPrefix = Application.Current.Handlers.Where(h => h.Id == "CONTENTHANDLER").SingleOrDefault().UrlPrefix;
 		}
 
@@ -547,20 +558,20 @@ namespace Piranha.Models.Manager.ContentModels
 		/// <param name="level"></param>
 		/// <returns></returns>
 		private List<Placement> SortFolders(List<Content> media, int level = 1) {
-			var ret = new List<Placement>() ;
+			var ret = new List<Placement>();
 
 			foreach (var m in media) {
-				var prefix = "" ;
+				var prefix = "";
 				for (int n = 1; n < level; n++)
-					prefix += "&nbsp;&nbsp;&nbsp;" ;
+					prefix += "&nbsp;&nbsp;&nbsp;";
 				ret.Add(new Placement() {
 					Text = prefix + m.Name,
 					Value = m.Id,
 					Level = level
-				}) ;
-				ret.AddRange(SortFolders(m.ChildContent, level + 1)) ;
+				});
+				ret.AddRange(SortFolders(m.ChildContent, level + 1));
 			}
-			return ret ;
+			return ret;
 		}
 		#endregion
 	}

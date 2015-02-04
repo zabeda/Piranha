@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -22,74 +32,74 @@ namespace Piranha
 		/// <summary>
 		/// Static singleton instance of the application.
 		/// </summary>
-		public static readonly Application Current = new Application() ;
+		public static readonly Application Current = new Application();
 
 		/// <summary>
 		/// The collection of registered request handlers.
 		/// </summary>
-		public readonly RequestHandlerCollection Handlers = new RequestHandlerCollection() ;
+		public readonly RequestHandlerCollection Handlers = new RequestHandlerCollection();
 
 		/// <summary>
 		/// The currently active media provider.
 		/// </summary>
-		public readonly IO.IMediaProvider MediaProvider ;
+		public readonly IO.IMediaProvider MediaProvider;
 
 		/// <summary>
 		/// The currently active media cache provider.
 		/// </summary>
-		public readonly IO.IMediaCacheProvider MediaCacheProvider ;
+		public readonly IO.IMediaCacheProvider MediaCacheProvider;
 
 		/// <summary>
 		/// The currently active cache provider.
 		/// </summary>
-        public readonly Cache.ICacheProvider CacheProvider ;
+		public readonly Cache.ICacheProvider CacheProvider;
 
-        /// <summary>
-        /// The currently active log provider.
-        /// </summary>
-        public readonly Log.ILogProvider LogProvider ;
+		/// <summary>
+		/// The currently active log provider.
+		/// </summary>
+		public readonly Log.ILogProvider LogProvider;
 
 		/// <summary>
 		/// The currently active user provider.
 		/// </summary>
-		internal readonly Security.IUserProvider UserProvider = new Security.LocalUserProvider() ;
+		internal readonly Security.IUserProvider UserProvider = new Security.LocalUserProvider();
 
 		/// <summary>
 		/// The manager resource handler.
 		/// </summary>
-		internal readonly ResourceHandler Resources = new ResourceHandler() ;
+		internal readonly ResourceHandler Resources = new ResourceHandler();
 
 		/// <summary>
 		/// The private composition container.
 		/// </summary>
-		private CompositionContainer Container = null ;
+		private CompositionContainer Container = null;
 		#endregion
 
 		#region Properties
 		/// <summary>
 		/// Gets the current route handler.
 		/// </summary>
-		[Import(typeof(IRouteHandler), AllowDefault=true)]
-		public IRouteHandler RouteHandler { get ; private set ; }
+		[Import(typeof(IRouteHandler), AllowDefault = true)]
+		public IRouteHandler RouteHandler { get; private set; }
 
 		/// <summary>
 		/// Gets the current client framework.
 		/// </summary>
-		[Import(typeof(IClientFramework), AllowDefault=true)]
-		public IClientFramework ClientFramework { get ; private set ; }
+		[Import(typeof(IClientFramework), AllowDefault = true)]
+		public IClientFramework ClientFramework { get; private set; }
 
 		/// <summary>
 		/// Gets if the currently installed client framework is intended for WebPages.
 		/// </summary>
 		public bool IsWebPages {
-			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.WebPages ; }
+			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.WebPages; }
 		}
 
 		/// <summary>
 		/// Gets if the currently installed client framework is intended for MVC.
 		/// </summary>
 		public bool IsMvc {
-			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.Mvc ; }
+			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.Mvc; }
 		}
 		#endregion
 
@@ -97,51 +107,50 @@ namespace Piranha
 		/// Default private constructor.
 		/// </summary>
 		private Application() {
-			var catalog = new AggregateCatalog() ;
+			var catalog = new AggregateCatalog();
 
 			// Compose parts
 			catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
-			Container = new CompositionContainer(catalog) ;
-			Container.ComposeParts(this) ;
+			Container = new CompositionContainer(catalog);
+			Container.ComposeParts(this);
 
 			// Get the current media provider
-			var assembly = Assembly.Load(Config.MediaProvider.AssemblyName) ;
+			var assembly = Assembly.Load(Config.MediaProvider.AssemblyName);
 			if (assembly != null) {
-				var type = assembly.GetType(Config.MediaProvider.TypeName) ;
+				var type = assembly.GetType(Config.MediaProvider.TypeName);
 				if (type != null)
-					MediaProvider = (IO.IMediaProvider)Activator.CreateInstance(type) ;
-				else throw new TypeAccessException("MediaProvider " + Config.MediaProvider.TypeName + " was not found") ;
+					MediaProvider = (IO.IMediaProvider)Activator.CreateInstance(type);
+				else throw new TypeAccessException("MediaProvider " + Config.MediaProvider.TypeName + " was not found");
 			}
 
 			// Get the current media cache provider
-			assembly = Assembly.Load(Config.MediaCacheProvider.AssemblyName) ;
+			assembly = Assembly.Load(Config.MediaCacheProvider.AssemblyName);
 			if (assembly != null) {
-				var type = assembly.GetType(Config.MediaCacheProvider.TypeName) ;
+				var type = assembly.GetType(Config.MediaCacheProvider.TypeName);
 				if (type != null)
-					MediaCacheProvider = (IO.IMediaCacheProvider)Activator.CreateInstance(type) ;
-				else throw new TypeAccessException("MediaCacheProvider " + Config.MediaCacheProvider.TypeName + " was not found") ;
-			} 
-
-			// Get the current cache provider
-			assembly = Assembly.Load(Config.CacheProvider.AssemblyName) ;
-			if (assembly != null) {
-				var type = assembly.GetType(Config.CacheProvider.TypeName) ;
-				if (type != null)
-					CacheProvider = (Cache.ICacheProvider)Activator.CreateInstance(type) ;
-				else throw new TypeAccessException("CacheProvider " + Config.CacheProvider.TypeName + " was not found") ;				
+					MediaCacheProvider = (IO.IMediaCacheProvider)Activator.CreateInstance(type);
+				else throw new TypeAccessException("MediaCacheProvider " + Config.MediaCacheProvider.TypeName + " was not found");
 			}
 
-            // Get the current log provider
-            assembly = Assembly.Load(Config.LogProvider.AssemblyName);
-            if (assembly != null)
-            {
-                var type = assembly.GetType(Config.LogProvider.TypeName);
-                if (type != null)
-                    LogProvider = (Log.ILogProvider)Activator.CreateInstance(type);
-                else throw new TypeAccessException("LogProvider " + Config.LogProvider.TypeName + " was not found");
-            }
+			// Get the current cache provider
+			assembly = Assembly.Load(Config.CacheProvider.AssemblyName);
+			if (assembly != null) {
+				var type = assembly.GetType(Config.CacheProvider.TypeName);
+				if (type != null)
+					CacheProvider = (Cache.ICacheProvider)Activator.CreateInstance(type);
+				else throw new TypeAccessException("CacheProvider " + Config.CacheProvider.TypeName + " was not found");
+			}
 
-			RegisterHandlers() ;
+			// Get the current log provider
+			assembly = Assembly.Load(Config.LogProvider.AssemblyName);
+			if (assembly != null) {
+				var type = assembly.GetType(Config.LogProvider.TypeName);
+				if (type != null)
+					LogProvider = (Log.ILogProvider)Activator.CreateInstance(type);
+				else throw new TypeAccessException("LogProvider " + Config.LogProvider.TypeName + " was not found");
+			}
+
+			RegisterHandlers();
 
 			// Configure AutoMapper
 			Mapper.CreateMap<Models.Sitemap, Models.Sitemap>()
@@ -150,23 +159,23 @@ namespace Piranha
 			// Assert configuration
 			Mapper.AssertConfigurationIsValid();
 		}
-	
+
 		/// <summary>
 		/// Registers the default handlers.
 		/// </summary>
 		private void RegisterHandlers() {
-			Handlers.Add("", "STARTPAGE", new PermalinkHandler()) ;
-			Handlers.Add("home", "PERMALINK", new PermalinkHandler()) ;
-			Handlers.Add("draft", "DRAFT", new DraftHandler()) ;
-			Handlers.Add("media", "CONTENT", new ContentHandler()) ;
-			Handlers.Add("media.ashx", "CONTENTHANDLER", new ContentHandler()) ;
-			Handlers.Add("mediadraft", "CONTENTDRAFT", new DraftContentHandler()) ;
-			Handlers.Add("thumb", "THUMBNAIL", new ThumbnailHandler()) ;
-			Handlers.Add("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler()) ;
-			Handlers.Add("upload", "UPLOAD", new UploadHandler()) ;
-			Handlers.Add("archive", "ARCHIVE", new ArchiveHandler()) ;
-			Handlers.Add("rss", "RSS", new RssHandler()) ;
-			Handlers.Add("sitemap.xml", "SITEMAP", new SitemapHandler()) ;
+			Handlers.Add("", "STARTPAGE", new PermalinkHandler());
+			Handlers.Add("home", "PERMALINK", new PermalinkHandler());
+			Handlers.Add("draft", "DRAFT", new DraftHandler());
+			Handlers.Add("media", "CONTENT", new ContentHandler());
+			Handlers.Add("media.ashx", "CONTENTHANDLER", new ContentHandler());
+			Handlers.Add("mediadraft", "CONTENTDRAFT", new DraftContentHandler());
+			Handlers.Add("thumb", "THUMBNAIL", new ThumbnailHandler());
+			Handlers.Add("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler());
+			Handlers.Add("upload", "UPLOAD", new UploadHandler());
+			Handlers.Add("archive", "ARCHIVE", new ArchiveHandler());
+			Handlers.Add("rss", "RSS", new RssHandler());
+			Handlers.Add("sitemap.xml", "SITEMAP", new SitemapHandler());
 		}
 	}
 }

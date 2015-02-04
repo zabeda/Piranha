@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +25,7 @@ public static class DataExtensions
 	/// <param name="name">The name</param>
 	/// <returns>The property</returns>
 	public static Property ByName(this IList<Property> properties, string name) {
-		return properties.Where(p => p.Name == name).Single() ;
+		return properties.Where(p => p.Name == name).Single();
 	}
 
 	/// <summary>
@@ -26,7 +36,7 @@ public static class DataExtensions
 	/// <returns>The region</returns>
 	[Obsolete("This extension method is obsolete. Please use ByInternalId to access regions instead.")]
 	public static Region ByName(this IList<Region> regions, string name) {
-		return regions.Where(r => r.Name == name).Single() ;
+		return regions.Where(r => r.Name == name).Single();
 	}
 
 	/// <summary>
@@ -40,10 +50,10 @@ public static class DataExtensions
 		using (var db = new Piranha.DataContext()) {
 			foreach (var reg in regions) {
 				if (reg.RegionTemplate == null)
-					reg.RegionTemplate = db.RegionTemplates.Where(t => t.Id == reg.RegionTemplateId).Single() ;
+					reg.RegionTemplate = db.RegionTemplates.Where(t => t.Id == reg.RegionTemplateId).Single();
 			}
 		}
-		return regions.Where(r => r.RegionTemplate.InternalId == internalId).SingleOrDefault() ;
+		return regions.Where(r => r.RegionTemplate.InternalId == internalId).SingleOrDefault();
 	}
 
 	/// <summary>
@@ -52,7 +62,7 @@ public static class DataExtensions
 	/// <param name="media">The media list</param>
 	/// <returns>The images</returns>
 	public static IList<Media> Images(this IList<Media> media) {
-		return media.Where(m => m.IsImage).ToList() ;
+		return media.Where(m => m.IsImage).ToList();
 	}
 
 	/// <summary>
@@ -61,7 +71,7 @@ public static class DataExtensions
 	/// <param name="media">The media list</param>
 	/// <returns>The documents</returns>
 	public static IList<Media> Documents(this IList<Media> media) {
-		return media.Where(m => !m.IsImage).ToList() ;
+		return media.Where(m => !m.IsImage).ToList();
 	}
 
 	/// <summary>
@@ -71,7 +81,7 @@ public static class DataExtensions
 	/// <param name="internalId">The internal id</param>
 	/// <returns>The extension</returns>
 	public static Extension ByInternalId(this IList<Extension> extensions, string internalId) {
-		return extensions.Where(e => Piranha.Extend.ExtensionManager.Current.GetInternalIdByType(e.Type) == internalId).SingleOrDefault() ;
+		return extensions.Where(e => Piranha.Extend.ExtensionManager.Current.GetInternalIdByType(e.Type) == internalId).SingleOrDefault();
 	}
 
 	/// <summary>
@@ -80,6 +90,6 @@ public static class DataExtensions
 	/// <param name="str">The string</param>
 	/// <returns>The string as html</returns>
 	public static HtmlString Html(this string str) {
-		return new HtmlString(str) ;
+		return new HtmlString(str);
 	}
 }

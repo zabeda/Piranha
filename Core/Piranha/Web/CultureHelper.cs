@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,14 +20,15 @@ namespace Piranha.Web
 	/// <summary>
 	/// Culture helper class.
 	/// </summary>
-	public class CultureHelper {
+	public class CultureHelper
+	{
 		/// <summary>
 		/// Gets the name of the current UI culture.
 		/// </summary>
 		/// <returns>The current UI culture</returns>
 		public string CurrentUICulture {
 			get {
-				return CultureInfo.CurrentUICulture.Name ;
+				return CultureInfo.CurrentUICulture.Name;
 			}
 		}
 
@@ -26,8 +37,8 @@ namespace Piranha.Web
 		/// </summary>
 		public string DefaultUICulture {
 			get {
-				GlobalizationSection gs = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization") ;
-				return gs.UICulture ;
+				GlobalizationSection gs = (GlobalizationSection)WebConfigurationManager.GetSection("system.web/globalization");
+				return gs.UICulture;
 			}
 		}
 
@@ -36,7 +47,7 @@ namespace Piranha.Web
 		/// </summary>
 		public bool IsDefaultCulture {
 			get {
-				return CurrentUICulture == DefaultUICulture ;
+				return CurrentUICulture == DefaultUICulture;
 			}
 		}
 	}

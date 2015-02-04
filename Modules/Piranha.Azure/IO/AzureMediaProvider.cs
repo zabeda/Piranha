@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Configuration;
 using System.IO;
 
@@ -16,27 +26,27 @@ namespace Piranha.Azure.IO
 	public class AzureMediaProvider : IMediaProvider
 	{
 		#region Members
-		private readonly CloudStorageAccount account ;
-		private readonly CloudBlobClient client ;
+		private readonly CloudStorageAccount account;
+		private readonly CloudBlobClient client;
 
-		private readonly CloudBlobContainer mediaContainer ;
-		private readonly CloudBlobContainer uploadContainer ;
+		private readonly CloudBlobContainer mediaContainer;
+		private readonly CloudBlobContainer uploadContainer;
 		#endregion
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public AzureMediaProvider() {
-			var config = GetConfig() ;
+			var config = GetConfig();
 
-			account = CloudStorageAccount.Parse(config.Settings.StorageConnectionString.Value) ;
-			client = account.CreateCloudBlobClient() ;
+			account = CloudStorageAccount.Parse(config.Settings.StorageConnectionString.Value);
+			client = account.CreateCloudBlobClient();
 
-			mediaContainer = client.GetContainerReference("media") ;
-			mediaContainer.CreateIfNotExists() ;
+			mediaContainer = client.GetContainerReference("media");
+			mediaContainer.CreateIfNotExists();
 
-			uploadContainer = client.GetContainerReference("uploads") ;
-			uploadContainer.CreateIfNotExists() ;
+			uploadContainer = client.GetContainerReference("uploads");
+			uploadContainer.CreateIfNotExists();
 		}
 
 		/// <summary>
@@ -46,15 +56,15 @@ namespace Piranha.Azure.IO
 		/// <param name="type">The media type</param>
 		/// <returns>The media data, null if the data wasn't found</returns>
 		public byte[] Get(Guid id, MediaType type = MediaType.Media) {
-			var blob = GetBlock(type, id, false) ;
+			var blob = GetBlock(type, id, false);
 
 			if (blob.Exists()) {
 				using (var stream = new MemoryStream()) {
-					blob.DownloadToStream(stream) ;
-					return stream.ToArray() ;
+					blob.DownloadToStream(stream);
+					return stream.ToArray();
 				}
 			}
-			return null ;
+			return null;
 		}
 
 		/// <summary>
@@ -64,15 +74,15 @@ namespace Piranha.Azure.IO
 		/// <param name="type">The media type</param>
 		/// <returns>The draft media data, null if the data wasn't found</returns>
 		public byte[] GetDraft(Guid id, MediaType type = MediaType.Media) {
-			var blob = GetBlock(type, id, true) ;
+			var blob = GetBlock(type, id, true);
 
 			if (blob.Exists()) {
 				using (var stream = new MemoryStream()) {
-					blob.DownloadToStream(stream) ;
-					return stream.ToArray() ;
+					blob.DownloadToStream(stream);
+					return stream.ToArray();
 				}
 			}
-			return null ;
+			return null;
 		}
 
 		/// <summary>
@@ -82,10 +92,10 @@ namespace Piranha.Azure.IO
 		/// <param name="data">The media data</param>
 		/// <param name="type">The media type</param>
 		public void Put(Guid id, byte[] data, MediaType type = MediaType.Media) {
-			var blob = GetBlock(type, id, false) ;
+			var blob = GetBlock(type, id, false);
 
 			using (var stream = new MemoryStream(data)) {
-				blob.UploadFromStream(stream) ;
+				blob.UploadFromStream(stream);
 			}
 		}
 
@@ -96,10 +106,10 @@ namespace Piranha.Azure.IO
 		/// <param name="data">The media data</param>
 		/// <param name="type">The media type</param>
 		public void PutDraft(Guid id, byte[] data, MediaType type = MediaType.Media) {
-			var blob = GetBlock(type, id, true) ;
+			var blob = GetBlock(type, id, true);
 
 			using (var stream = new MemoryStream(data)) {
-				blob.UploadFromStream(stream) ;
+				blob.UploadFromStream(stream);
 			}
 		}
 
@@ -109,8 +119,8 @@ namespace Piranha.Azure.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public void Delete(Guid id, MediaType type = MediaType.Media) {
-			var blob = GetBlock(type, id, false) ;
-			blob.DeleteIfExists() ;
+			var blob = GetBlock(type, id, false);
+			blob.DeleteIfExists();
 		}
 
 		/// <summary>
@@ -119,8 +129,8 @@ namespace Piranha.Azure.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public void DeleteDraft(Guid id, MediaType type = MediaType.Media) {
-			var blob = GetBlock(type, id, true) ;
-			blob.DeleteIfExists() ;
+			var blob = GetBlock(type, id, true);
+			blob.DeleteIfExists();
 		}
 
 		/// <summary>
@@ -130,11 +140,11 @@ namespace Piranha.Azure.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public void Publish(Guid id, MediaType type = MediaType.Media) {
-			var bytes = GetDraft(id, type) ;
+			var bytes = GetDraft(id, type);
 
 			if (bytes != null) {
-				Put(id, bytes, type) ;
-				DeleteDraft(id, type) ;
+				Put(id, bytes, type);
+				DeleteDraft(id, type);
 			}
 		}
 
@@ -145,11 +155,11 @@ namespace Piranha.Azure.IO
 		/// <param name="id">The id</param>
 		/// <param name="type">The media type</param>
 		public void Unpublish(Guid id, MediaType type = MediaType.Media) {
-			var bytes = Get(id, type) ;
+			var bytes = Get(id, type);
 
 			if (bytes != null) {
-				PutDraft(id, bytes, type) ;
-				Delete(id, type) ;
+				PutDraft(id, bytes, type);
+				Delete(id, type);
 			}
 		}
 
@@ -163,8 +173,8 @@ namespace Piranha.Azure.IO
 		/// <returns>The blob block</returns>
 		private CloudBlockBlob GetBlock(MediaType type, Guid id, bool draft) {
 			if (type == MediaType.Media)
-				return mediaContainer.GetBlockBlobReference(id.ToString() + (draft ? "-draft" : "")) ;
-			return uploadContainer.GetBlockBlobReference(id.ToString() + (draft ? "-draft" : "")) ;
+				return mediaContainer.GetBlockBlobReference(id.ToString() + (draft ? "-draft" : ""));
+			return uploadContainer.GetBlockBlobReference(id.ToString() + (draft ? "-draft" : ""));
 		}
 
 		/// <summary>
@@ -172,11 +182,11 @@ namespace Piranha.Azure.IO
 		/// </summary>
 		/// <returns>The configuration</returns>
 		private ConfigFile GetConfig() {
-			var section = (ConfigFile)ConfigurationManager.GetSection("piranha.azure") ;
+			var section = (ConfigFile)ConfigurationManager.GetSection("piranha.azure");
 
 			if (section == null)
-				section = new ConfigFile() ;
-			return section ;
+				section = new ConfigFile();
+			return section;
 		}
 		#endregion
 	}

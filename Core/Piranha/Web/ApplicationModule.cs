@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,17 +26,17 @@ namespace Piranha.Web
 		/// <summary>
 		/// Disposes all allicated resources.
 		/// </summary>
-		public void Dispose() {}
+		public void Dispose() { }
 
 		/// <summary>
 		/// Starts the application module.
 		/// </summary>
 		public static void Start() {
 			// Register the application module
-			Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(ApplicationModule)) ;
+			Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(ApplicationModule));
 
 			// Initialize Piranha CMS
-			WebPages.WebPiranha.Init() ;
+			WebPages.WebPiranha.Init();
 		}
 
 		/// <summary>
@@ -35,8 +45,8 @@ namespace Piranha.Web
 		/// <param name="context">The current application context</param>
 		public void Init(HttpApplication context) {
 			context.BeginRequest += (sender, e) => {
-				WebPages.WebPiranha.BeginRequest(((HttpApplication)sender).Context) ;
-			} ;
+				WebPages.WebPiranha.BeginRequest(((HttpApplication)sender).Context);
+			};
 		}
 	}
 }

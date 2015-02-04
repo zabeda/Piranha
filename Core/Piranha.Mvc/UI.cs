@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Web;
 
 using Piranha.Web;
@@ -11,28 +21,28 @@ namespace Piranha.Mvc
 	public static class UI
 	{
 		#region Members
-		private static UIHelper Helper = new UIHelper() ;
+		private static UIHelper Helper = new UIHelper();
 		#endregion
 
 		/// <summary>
 		/// Generates the tags appropriate for the html head.
 		/// </summary>
 		/// <returns>The head information</returns>
-		public static IHtmlString Head() { return Helper.Head() ; }
+		public static IHtmlString Head() { return Helper.Head(); }
 
 		/// <summary>
 		/// Generates a full site url from the virtual path.
 		/// </summary>
 		/// <param name="virtualpath">The virtual path.</param>
 		/// <returns>The full site url</returns>
-		public static IHtmlString SiteUrl(string virtualpath) { return Helper.SiteUrl(virtualpath) ; }
+		public static IHtmlString SiteUrl(string virtualpath) { return Helper.SiteUrl(virtualpath); }
 
 		/// <summary>
 		/// Generates an absolute url from the virtual path or site url.
 		/// </summary>
 		/// <param name="url">The url</param>
 		/// <returns>The absolute url</returns>
-		public static IHtmlString AbsoluteUrl(string url) { return Helper.AbsoluteUrl(url) ; }
+		public static IHtmlString AbsoluteUrl(string url) { return Helper.AbsoluteUrl(url); }
 
 		/// <summary>
 		/// Generates the url to the given permalink.
@@ -40,7 +50,7 @@ namespace Piranha.Mvc
 		/// <param name="permalink">The permalink</param>
 		/// <param name="prefix">Optional culture prefix</param>
 		/// <returns>The url</returns>
-		public static IHtmlString Permalink(string permalink = "", string prefix = "") { return Helper.Permalink(permalink, prefix) ; }
+		public static IHtmlString Permalink(string permalink = "", string prefix = "") { return Helper.Permalink(permalink, prefix); }
 
 		/// <summary>
 		/// Generates the url to the given permalink.
@@ -48,7 +58,7 @@ namespace Piranha.Mvc
 		/// <param name="permalinkid">The id of the permalink</param>
 		/// <param name="prefix">Optional culture prefix</param>
 		/// <returns></returns>
-		public static IHtmlString Permalink(Guid permalinkid, string prefix = "") { return Helper.Permalink(permalinkid, prefix) ; }
+		public static IHtmlString Permalink(Guid permalinkid, string prefix = "") { return Helper.Permalink(permalinkid, prefix); }
 
 		/// <summary>
 		/// Gets the URL to the content with the given id.
@@ -57,7 +67,7 @@ namespace Piranha.Mvc
 		/// <param name="width">Optional width</param>
 		/// <param name="height">Optional height</param>
 		/// <returns>The content url</returns>
-		public static IHtmlString Content(Guid id, int width = 0, int height = 0) { return Helper.Content(id, width, height) ; }
+		public static IHtmlString Content(Guid id, int width = 0, int height = 0) { return Helper.Content(id, width, height); }
 
 		/// <summary>
 		/// Gets the URL to the content with the given id.
@@ -66,7 +76,7 @@ namespace Piranha.Mvc
 		/// <param name="width">Optional width</param>
 		/// <param name="height">Optional height</param>
 		/// <returns>The content url</returns>
-		public static IHtmlString Content(string id, int width = 0, int height = 0) { return Helper.Content(id, width, height) ; }
+		public static IHtmlString Content(string id, int width = 0, int height = 0) { return Helper.Content(id, width, height); }
 
 		/// <summary>
 		/// Generates an image tag for the specified thumbnail.
@@ -74,7 +84,7 @@ namespace Piranha.Mvc
 		/// <param name="id">The content, page or post id.</param>
 		/// <param name="size">Optional size</param>
 		/// <returns>The image html string</returns>
-		public static IHtmlString Thumbnail(Guid id, int size = 0) { return Helper.Thumbnail(id, size) ; }
+		public static IHtmlString Thumbnail(Guid id, int size = 0) { return Helper.Thumbnail(id, size); }
 
 		/// <summary>
 		/// Generates an image tag for the specified thumbnail.
@@ -82,7 +92,7 @@ namespace Piranha.Mvc
 		/// <param name="id">The content id</param>
 		/// <param name="size">Optional size</param>
 		/// <returns>The image html string</returns>
-		public static IHtmlString Thumbnail(string id, int size = 0) { return Helper.Thumbnail(id, size) ; }
+		public static IHtmlString Thumbnail(string id, int size = 0) { return Helper.Thumbnail(id, size); }
 
 		/// <summary>
 		/// Gets the url to the uploaded content with the given id.
@@ -91,7 +101,7 @@ namespace Piranha.Mvc
 		/// <param name="width">Optional width</param>
 		/// <param name="height">Optional height</param>
 		/// <returns>The url</returns>
-		public static IHtmlString Upload(Guid id, int width = 0, int height = 0) { return Helper.Upload(id, width, height) ; }
+		public static IHtmlString Upload(Guid id, int width = 0, int height = 0) { return Helper.Upload(id, width, height); }
 
 		/// <summary>
 		/// Gets the url to the uploaded content with the given id.
@@ -100,7 +110,7 @@ namespace Piranha.Mvc
 		/// <param name="width">Optional width</param>
 		/// <param name="height">Optional height</param>
 		/// <returns>The url</returns>
-		public static IHtmlString Upload(string id, int width = 0, int height = 0) { return Helper.Upload(id, width, height) ; }
+		public static IHtmlString Upload(string id, int width = 0, int height = 0) { return Helper.Upload(id, width, height); }
 
 		/// <summary>
 		/// Return the site structure as an ul/li list with the current page selected.
@@ -110,9 +120,8 @@ namespace Piranha.Mvc
 		/// <param name="Levels">The number of levels. Use this if you don't know the start level</param>
 		/// <returns>A html string</returns>
 		public static IHtmlString Menu(int StartLevel = 1, int StopLevel = Int32.MaxValue, int Levels = 0,
-			string RootNode = "", string CssClass = "menu") 
-		{
-			return Helper.Menu(StartLevel, StopLevel, Levels, RootNode, CssClass) ;
+			string RootNode = "", string CssClass = "menu") {
+			return Helper.Menu(StartLevel, StopLevel, Levels, RootNode, CssClass);
 		}
 
 		/// <summary>
@@ -121,14 +130,14 @@ namespace Piranha.Mvc
 		/// <param name="StartLevel">Optional start level</param>
 		/// <param name="RootNode">Optional root node</param>
 		/// <returns>The breadcrumb</returns>
-		public static IHtmlString Breadcrumb(int StartLevel = 1, string RootNode = "") { return Helper.Breadcrumb(StartLevel, RootNode) ; }
+		public static IHtmlString Breadcrumb(int StartLevel = 1, string RootNode = "") { return Helper.Breadcrumb(StartLevel, RootNode); }
 
 		/// <summary>
 		/// Gets an encrypted API-key valid for 30 minutes.
 		/// </summary>
 		/// <param name="apiKey">The API-key</param>
 		/// <returns>The ecnrypted key</returns>
-		public static IHtmlString APIKey(Guid apiKey) { return Helper.APIKey(apiKey) ; }
+		public static IHtmlString APIKey(Guid apiKey) { return Helper.APIKey(apiKey); }
 
 		/// <summary>
 		/// Gets an ecrypted API-key valid for 30 minutes. If no API-key is provided
@@ -136,7 +145,7 @@ namespace Piranha.Mvc
 		/// </summary>
 		/// <param name="apiKey"></param>
 		/// <returns></returns>
-		public static IHtmlString APIKey(string apiKey = "") { return Helper.APIKey(apiKey) ; }
+		public static IHtmlString APIKey(string apiKey = "") { return Helper.APIKey(apiKey); }
 
 		/// <summary>
 		/// Generates the correct controller name for the given permalink. The generated
@@ -147,7 +156,7 @@ namespace Piranha.Mvc
 		/// <param name="prefix">Optional culture prefix</param>
 		/// <returns>The controller url</returns>
 		public static string Controller(string permalink = "", string prefix = "") {
-			return Permalink(permalink, prefix).ToHtmlString().Substring(1) ;
+			return Permalink(permalink, prefix).ToHtmlString().Substring(1);
 		}
 	}
 }

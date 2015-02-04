@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Configuration;
 
 namespace Piranha.Azure
@@ -9,24 +19,24 @@ namespace Piranha.Azure
 	internal class ConfigFile : ConfigurationSection
 	{
 		#region Members
-		private const string SETTINGS = "settings" ;
-		private const string PROVIDERS = "providers" ;
+		private const string SETTINGS = "settings";
+		private const string PROVIDERS = "providers";
 		#endregion
 
 		/// <summary>
 		/// Gets/sets the settings.
 		/// </summary>
-		[ConfigurationProperty(SETTINGS, IsRequired=false)]
+		[ConfigurationProperty(SETTINGS, IsRequired = false)]
 		public SettingsElement Settings {
-			get { return (SettingsElement)this[SETTINGS] ; }
-			set { this[SETTINGS] = value ; }
+			get { return (SettingsElement)this[SETTINGS]; }
+			set { this[SETTINGS] = value; }
 		}
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public ConfigFile() {
-			Settings = new SettingsElement() ;
+			Settings = new SettingsElement();
 		}
 	}
 
@@ -36,23 +46,23 @@ namespace Piranha.Azure
 	internal class SettingsElement : ConfigurationElement
 	{
 		#region Members
-		private const string STORAGE_CONNECTION_STRING = "storageConnectionString" ;
+		private const string STORAGE_CONNECTION_STRING = "storageConnectionString";
 		#endregion
 
 		/// <summary>
 		/// Gets/sets the connection string for the azure blob storage.
 		/// </summary>
-		[ConfigurationProperty(STORAGE_CONNECTION_STRING, IsRequired=false)]
+		[ConfigurationProperty(STORAGE_CONNECTION_STRING, IsRequired = false)]
 		public StringElement StorageConnectionString {
-			get { return (StringElement)this[STORAGE_CONNECTION_STRING] ; }
-			set { this[STORAGE_CONNECTION_STRING] = value ; }
+			get { return (StringElement)this[STORAGE_CONNECTION_STRING]; }
+			set { this[STORAGE_CONNECTION_STRING] = value; }
 		}
 
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public SettingsElement() {
-			StorageConnectionString = new StringElement() ;
+			StorageConnectionString = new StringElement();
 		}
 	}
 
@@ -64,10 +74,10 @@ namespace Piranha.Azure
 		/// <summary>
 		/// Gets/sets the element value.
 		/// </summary>
-		[ConfigurationProperty("value", IsRequired=true)]
+		[ConfigurationProperty("value", IsRequired = true)]
 		public string Value {
-			get { return (string)this["value"] ; }
-			set { this["value"] = value ; }
+			get { return (string)this["value"]; }
+			set { this["value"] = value; }
 		}
 	}
 }

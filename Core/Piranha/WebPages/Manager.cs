@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,35 +27,35 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// The internal, non translatable textual id.
 			/// </summary>
-			public string InternalId { get ; set ; }
+			public string InternalId { get; set; }
 
 			/// <summary>
 			/// The name of the group.
 			/// </summary>
-			public string Name { get ; set ; }
+			public string Name { get; set; }
 
 			/// <summary>
 			/// The menu items this group contains.
 			/// </summary>
-			public IList<MenuItem> Items { get ; set ; }
+			public IList<MenuItem> Items { get; set; }
 
 			/// <summary>
 			/// The optional css class of the group.
 			/// </summary>
-			public string CssClass { get ; set ; }
+			public string CssClass { get; set; }
 
 			/// <summary>
 			/// Gets the name of the current controller.
 			/// </summary>
 			private string ControllerName {
-				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower() ; }
+				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower(); }
 			}
 
 			/// <summary>
 			/// Gets the name of the current action.
 			/// </summary>
 			private string ActionName {
-				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower() ; }
+				get { return HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower(); }
 			}
 			#endregion
 
@@ -53,7 +63,7 @@ namespace Piranha.WebPages
 			/// Default constructor.
 			/// </summary>
 			public MenuGroup() {
-				Items = new List<MenuItem>() ;
+				Items = new List<MenuItem>();
 			}
 
 			/// <summary>
@@ -61,7 +71,7 @@ namespace Piranha.WebPages
 			/// </summary>
 			/// <returns>Whether the current user has access.</returns>
 			public bool HasAccess() {
-				return ItemsForUser().Count > 0 ;
+				return ItemsForUser().Count > 0;
 			}
 
 			/// <summary>
@@ -69,18 +79,18 @@ namespace Piranha.WebPages
 			/// </summary>
 			/// <returns>Whether the group is active</returns>
 			public bool IsActive() {
-				var controller = ControllerName ;
-				var action = ActionName ;
-				
+				var controller = ControllerName;
+				var action = ActionName;
+
 				foreach (var item in ItemsForUser())
 					if (item.Controller.ToLower() == controller) {
 						if (String.IsNullOrEmpty(item.SelectedActions))
-							return true ;
+							return true;
 						foreach (var str in item.SelectedActions.Split(new char[] { ',' }))
 							if (str.Trim().ToLower() == action.ToLower())
-								return true ;
+								return true;
 					}
-				return false ;
+				return false;
 			}
 
 			/// <summary>
@@ -88,14 +98,14 @@ namespace Piranha.WebPages
 			/// </summary>
 			/// <returns>The menu items</returns>
 			public IList<MenuItem> ItemsForUser() {
-				var ret = new List<MenuItem>() ;
+				var ret = new List<MenuItem>();
 
 				foreach (var item in Items)
 					if (!String.IsNullOrEmpty(item.Permission)) {
 						if (HttpContext.Current.User.HasAccess(item.Permission))
-							ret.Add(item) ;
-					} else ret.Add(item) ;
-				return ret ;
+							ret.Add(item);
+					} else ret.Add(item);
+				return ret;
 			}
 		}
 
@@ -108,40 +118,40 @@ namespace Piranha.WebPages
 			/// <summary>
 			/// The internal, non translatable textual id.
 			/// </summary>
-			public string InternalId { get ; set ; }
+			public string InternalId { get; set; }
 
 			/// <summary>
 			/// Gets/sets the item name.
 			/// </summary>
-			public string Name { get ; set ; }
+			public string Name { get; set; }
 
 			/// <summary>
 			/// Gets/sets the item action.
 			/// </summary>
-			public string Action { get ; set ; }
+			public string Action { get; set; }
 
 			/// <summary>
 			/// Gets/sets the item controller.
 			/// </summary>
-			public string Controller { get ; set ; }
+			public string Controller { get; set; }
 
 			/// <summary>
 			/// Gets/sets the permission needed to access the item.
 			/// </summary>
-			public string Permission { get ; set ; }
+			public string Permission { get; set; }
 
 			/// <summary>
 			/// Gets/sets the selected actions for this item if several items share
 			/// the same controller.
 			/// </summary>
-			public string SelectedActions { get ; set ; }
+			public string SelectedActions { get; set; }
 			#endregion
 
 			/// <summary>
 			/// Default constructor.
 			/// </summary>
 			public MenuItem() {
-				SelectedActions = "" ;
+				SelectedActions = "";
 			}
 
 			/// <summary>
@@ -152,18 +162,18 @@ namespace Piranha.WebPages
 				var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().ToLower();
 				var action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower();
 				if (String.IsNullOrEmpty(action))
-					action = "index" ;
+					action = "index";
 
 				if (Controller.ToLower() == controller) {
 					if (!String.IsNullOrEmpty(SelectedActions)) {
-						string[] actions = SelectedActions.Split(new char[] { ',' }) ;
+						string[] actions = SelectedActions.Split(new char[] { ',' });
 
 						foreach (var a in actions)
 							if (a.Trim().ToLower() == action)
-								return true ;
-					} else return true ;
+								return true;
+					} else return true;
 				}
-				return false ;
+				return false;
 			}
 		}
 		#endregion
@@ -204,7 +214,7 @@ namespace Piranha.WebPages
 				new MenuItem() { InternalId = "Parameters", Name = @Resources.Tabs.SystemParams, Action = "paramlist", Controller = "settings", 
 					Permission = "ADMIN_PARAM", SelectedActions = "paramlist, param, deleteparam" }
 			}}
-		} ;
+		};
 
 		/// <summary>
 		/// Gets the currently active menu item.
@@ -215,10 +225,10 @@ namespace Piranha.WebPages
 				if (group.IsActive()) {
 					foreach (var item in group.Items)
 						if (item.IsActive())
-							return item ;
+							return item;
 				}
 			}
-			return null ;
+			return null;
 		}
 
 		/// <summary>
@@ -228,10 +238,10 @@ namespace Piranha.WebPages
 		public static MenuItem GetStartpage() {
 			foreach (var group in Menu) {
 				foreach (var item in group.ItemsForUser()) {
-					return item ;
+					return item;
 				}
 			}
-			return null ;
+			return null;
 		}
 	}
 }

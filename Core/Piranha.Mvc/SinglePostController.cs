@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +28,7 @@ namespace Piranha.Mvc
 		/// </summary>
 		/// <returns>The model</returns>
 		public PostModel GetModel() {
-			return GetModel<PostModel>(CurrentPermalink) ;
+			return GetModel<PostModel>(CurrentPermalink);
 		}
 
 		/// <summary>
@@ -27,7 +37,7 @@ namespace Piranha.Mvc
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
 		protected T GetModel<T>() where T : PostModel {
-			return GetModel<T>(CurrentPermalink) ;
+			return GetModel<T>(CurrentPermalink);
 		}
 
 		/// <summary>
@@ -36,7 +46,7 @@ namespace Piranha.Mvc
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
 		protected PostModel GetModel(string permalink) {
-			return GetModel<PostModel>(permalink) ;
+			return GetModel<PostModel>(permalink);
 		}
 
 		/// <summary>
@@ -47,17 +57,17 @@ namespace Piranha.Mvc
 		/// <returns>The model</returns>
 		protected T GetModel<T>(string permalink) where T : PostModel {
 			// Get the model
-			var post = Post.GetByPermalink(permalink, IsDraft) ;
-			var model = PostModel.Get<T>(post) ;
+			var post = Post.GetByPermalink(permalink, IsDraft);
+			var model = PostModel.Get<T>(post);
 
-			HttpContext.Items["Piranha_CurrentPage"] = null ;
-			HttpContext.Items["Piranha_CurrentPost"] = model.Post ;
+			HttpContext.Items["Piranha_CurrentPage"] = null;
+			HttpContext.Items["Piranha_CurrentPost"] = model.Post;
 
 			// Execute hook, if it exists
 			if (WebPages.Hooks.Model.PostModelLoaded != null)
-				WebPages.Hooks.Model.PostModelLoaded(model) ;
+				WebPages.Hooks.Model.PostModelLoaded(model);
 
-			return model ;
+			return model;
 		}
 
 		/// <summary>
@@ -66,13 +76,13 @@ namespace Piranha.Mvc
 		/// <param name="context">The current context</param>
 		protected override void OnActionExecuted(System.Web.Mvc.ActionExecutedContext filterContext) {
 			// Perform base class stuff
-			base.OnActionExecuted(filterContext) ;
+			base.OnActionExecuted(filterContext);
 
-			var post = Post.GetByPermalink(CurrentPermalink, IsDraft) ;
+			var post = Post.GetByPermalink(CurrentPermalink, IsDraft);
 			if (post != null && !IsDraft) {
-				DateTime mod = post.LastModified ;
-				Web.ClientCache.HandleClientCache(HttpContext.ApplicationInstance.Context, 
-					WebPages.WebPiranha.GetCulturePrefix() + post.Id.ToString(), mod) ;
+				DateTime mod = post.LastModified;
+				Web.ClientCache.HandleClientCache(HttpContext.ApplicationInstance.Context,
+					WebPages.WebPiranha.GetCulturePrefix() + post.Id.ToString(), mod);
 			}
 		}
 	}

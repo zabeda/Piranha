@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -15,41 +25,41 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets the post.
 		/// </summary>
-		public IPost Post { get ; set ; }
-	
+		public IPost Post { get; set; }
+
 		/// <summary>
 		/// Gets/sets the post categories.
 		/// </summary>
-		public List<Category> Categories { get ; set ; }
+		public List<Category> Categories { get; set; }
 
 		/// <summary>
 		/// Gets the available properties.
 		/// </summary>
-		public dynamic Properties { get ; private set ; }
+		public dynamic Properties { get; private set; }
 
 		/// <summary>
 		/// Gets the available extensions.
 		/// </summary>
-		public dynamic Extensions { get ; private set ; }
+		public dynamic Extensions { get; private set; }
 
 		/// <summary>
 		/// Gets the available attachments.
 		/// </summary>
-		public List<Content> Attachments { get ; set ; }
+		public List<Content> Attachments { get; set; }
 
 		/// <summary>
 		/// Gets the current page.
 		/// </summary>
-		public IPage Page { get { return null ; } }
+		public IPage Page { get { return null; } }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates an empty model.
 		/// </summary>
 		public PostModel() {
-			Properties = new ExpandoObject() ;
-			Extensions = new ExpandoObject() ;
-			Attachments   = new List<Content>() ;
+			Properties = new ExpandoObject();
+			Extensions = new ExpandoObject();
+			Attachments = new List<Content>();
 		}
 
 		/// <summary>
@@ -60,9 +70,9 @@ namespace Piranha.Models
 		public static PostModel GetById(Guid id) {
 			PostModel m = new PostModel() {
 				Post = Models.Post.GetSingle(id)
-			} ;
-			m.GetRelated() ;
-			return m ;
+			};
+			m.GetRelated();
+			return m;
 		}
 
 		/// <summary>
@@ -72,7 +82,7 @@ namespace Piranha.Models
 		/// <param name="draft">Whether to load the draft or not</param>
 		/// <returns>The model</returns>
 		public static PostModel GetByPermalink(string permalink, bool draft = false) {
-			return GetByPermalink<PostModel>(permalink, draft) ;
+			return GetByPermalink<PostModel>(permalink, draft);
 		}
 
 		/// <summary>
@@ -83,11 +93,11 @@ namespace Piranha.Models
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
 		public static T GetByPermalink<T>(string permalink, bool draft = false) where T : PostModel {
-			T m = Activator.CreateInstance<T>() ;
+			T m = Activator.CreateInstance<T>();
 
-			m.Post = Models.Post.GetByPermalink(permalink, draft) ;
-			m.GetRelated() ;
-			return m ;
+			m.Post = Models.Post.GetByPermalink(permalink, draft);
+			m.GetRelated();
+			return m;
 		}
 
 		/// <summary>
@@ -96,44 +106,44 @@ namespace Piranha.Models
 		/// <param name="p">The page record</param>
 		/// <returns>The model</returns>
 		public static T Get<T>(Post p) where T : PostModel {
-			T m = Activator.CreateInstance<T>() ;
+			T m = Activator.CreateInstance<T>();
 
-			m.Post = p ;
-			m.GetRelated() ;
-			return m ;
+			m.Post = p;
+			m.GetRelated();
+			return m;
 		}
 
 		/// <summary>
 		/// Gets the related information for the post.
 		/// </summary>
 		private void GetRelated() {
-			PostTemplate pt = PostTemplate.GetSingle(((Post)Post).TemplateId) ;
+			PostTemplate pt = PostTemplate.GetSingle(((Post)Post).TemplateId);
 
 			// Get categories
-			Categories = Category.GetByPostId(Post.Id) ;
+			Categories = Category.GetByPostId(Post.Id);
 
 			// Properties
 			if (pt.Properties.Count > 0) {
 				foreach (string str in pt.Properties)
-					((IDictionary<string, object>)Properties).Add(str, "") ;
+					((IDictionary<string, object>)Properties).Add(str, "");
 				Property.GetContentByParentId(Post.Id, ((Post)Post).IsDraft).ForEach(pr => {
 					if (((IDictionary<string, object>)Properties).ContainsKey(pr.Name))
-						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value ;
+						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value;
 				});
 			}
 
 			// Attachments
-			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a, ((Post)Post).IsDraft))) ;
+			((Models.Post)Post).Attachments.ForEach(a => Attachments.Add(Models.Content.GetSingle(a, ((Post)Post).IsDraft)));
 
 			// Extensions
 			foreach (var ext in ((Post)Post).GetExtensions()) {
-				object body = ext.Body ;
+				object body = ext.Body;
 				if (body != null) {
-					var getContent = body.GetType().GetMethod("GetContent") ;
+					var getContent = body.GetType().GetMethod("GetContent");
 					if (getContent != null)
-						body = getContent.Invoke(body, new object[] { this }) ;
+						body = getContent.Invoke(body, new object[] { this });
 				}
-				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body ;
+				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body;
 			}
 		}
 	}

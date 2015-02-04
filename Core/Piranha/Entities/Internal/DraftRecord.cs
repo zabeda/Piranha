@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,22 +29,22 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets/sets whether this is a draft.
 		/// </summary>
-		public abstract bool IsDraft { get ; set ; }
+		public abstract bool IsDraft { get; set; }
 
 		/// <summary>
 		/// Gets/sets the date of first publish.
 		/// </summary>
-		public abstract DateTime Published { get ; set ; }
+		public abstract DateTime Published { get; set; }
 
 		/// <summary>
 		/// Gets/sets the last published date.
 		/// </summary>
-		public abstract DateTime LastPublished { get ; set ; }
+		public abstract DateTime LastPublished { get; set; }
 
 		/// <summary>
 		/// Gets/sets the last modified date.
 		/// </summary>
-		public abstract DateTime LastModified { get ; set ; }
+		public abstract DateTime LastModified { get; set; }
 		#endregion
 
 		/// <summary>
@@ -47,29 +57,29 @@ namespace Piranha.Models
 
 			if (Database.Identity != Guid.Empty || Application.Current.UserProvider.IsAuthenticated) {
 				// First get previously published record
-				IsDraft = false ;
-				T self = GetSelf() ;
+				IsDraft = false;
+				T self = GetSelf();
 
 				// Set up the dates.
-				LastPublished = LastModified = Updated = DateTime.Now ;
+				LastPublished = LastModified = Updated = DateTime.Now;
 				if (IsNew)
-					Created = Updated ;
+					Created = Updated;
 				if (self == null)
-					Published = LastModified = Updated ;
+					Published = LastModified = Updated;
 
 				// First save an up-to-date draft
-				IsDraft = true ;
-				Save(tx, false) ;
+				IsDraft = true;
+				Save(tx, false);
 
 				// Now save a published version
-				IsDraft = false ;
+				IsDraft = false;
 				if (self == null)
-					IsNew = true ;
-				Save(tx, false) ;
+					IsNew = true;
+				Save(tx, false);
 
-				return true ;
+				return true;
 			}
-			throw new AccessViolationException("User must be logged in to save data.") ;
+			throw new AccessViolationException("User must be logged in to save data.");
 		}
 
 		/// <summary>
@@ -79,7 +89,7 @@ namespace Piranha.Models
 		/// <returns></returns>
 		public override bool Save(System.Data.IDbTransaction tx = null) {
 			// Always save as draft
-			IsDraft = true ;
+			IsDraft = true;
 			return base.Save(tx);
 		}
 
@@ -89,14 +99,14 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The current record</returns>
 		private T GetSelf() {
-			List<object> args = new List<object>() ;
-			string where = "" ;
+			List<object> args = new List<object>();
+			string where = "";
 
 			for (int n = 0; n < PrimaryKeys.Count; n++) {
-				where += (n > 0 ? " AND " : "") + PrimaryKeys[n] + "=@" + n.ToString() ;
-				args.Add(Columns[PrimaryKeys[n]].GetValue(this, null)) ;
+				where += (n > 0 ? " AND " : "") + PrimaryKeys[n] + "=@" + n.ToString();
+				args.Add(Columns[PrimaryKeys[n]].GetValue(this, null));
 			}
-			return GetSingle(where, args.ToArray()) ;
+			return GetSingle(where, args.ToArray());
 		}
 		#endregion
 	}

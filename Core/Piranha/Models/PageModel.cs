@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011-2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -20,37 +30,37 @@ namespace Piranha.Models
 		/// <summary>
 		/// Gets the page.
 		/// </summary>
-		public IPage Page { get ; set ; }
+		public IPage Page { get; set; }
 
 		/// <summary>
 		/// Gets the available html regions for the page.
 		/// </summary>
-		public dynamic Regions { get ; set ; }
+		public dynamic Regions { get; set; }
 
 		/// <summary>
 		/// Gets the available properties.
 		/// </summary>
-		public dynamic Properties { get ; set ; }
+		public dynamic Properties { get; set; }
 
 		/// <summary>
 		/// Gets the available extensions.
 		/// </summary>
-		public dynamic Extensions { get ; set ; }
+		public dynamic Extensions { get; set; }
 
 		/// <summary>
 		/// Gets the available attachments.
 		/// </summary>
-		public List<Content> Attachments { get ; set ; }
+		public List<Content> Attachments { get; set; }
 		#endregion
 
 		/// <summary>
 		/// Default constructor. Creates a new empty page model.
 		/// </summary>
 		public PageModel() {
-			Regions       = new ExpandoObject() ;
-			Properties    = new ExpandoObject() ;
-			Extensions    = new ExpandoObject() ;
-			Attachments   = new List<Content>() ;
+			Regions = new ExpandoObject();
+			Properties = new ExpandoObject();
+			Extensions = new ExpandoObject();
+			Attachments = new List<Content>();
 		}
 
 		#region Static accessors
@@ -60,7 +70,7 @@ namespace Piranha.Models
 		/// <param name="p">The page record</param>
 		/// <returns>The model</returns>
 		public static PageModel Get(Page p) {
-			return Get<PageModel>(p) ;
+			return Get<PageModel>(p);
 		}
 
 		/// <summary>
@@ -69,11 +79,11 @@ namespace Piranha.Models
 		/// <param name="p">The page record</param>
 		/// <returns>The model</returns>
 		public static T Get<T>(Page p) where T : PageModel {
-			T m = Activator.CreateInstance<T>() ;
+			T m = Activator.CreateInstance<T>();
 
-			m.Page = p ;
-			m.Init() ;
-			return m ;
+			m.Page = p;
+			m.Init();
+			return m;
 		}
 
 		/// <summary>
@@ -81,7 +91,7 @@ namespace Piranha.Models
 		/// </summary>
 		/// <returns>The model</returns>
 		public static PageModel GetByStartpage() {
-			return GetByStartpage<PageModel>() ;
+			return GetByStartpage<PageModel>();
 		}
 
 		/// <summary>
@@ -90,11 +100,11 @@ namespace Piranha.Models
 		/// <typeparam name="T">The model type</typeparam>
 		/// <returns>The model</returns>
 		public static T GetByStartpage<T>() where T : PageModel {
-			T m = Activator.CreateInstance<T>() ;
+			T m = Activator.CreateInstance<T>();
 
-			m.Page = Models.Page.GetStartpage() ;
-			m.Init() ;
-			return m ;
+			m.Page = Models.Page.GetStartpage();
+			m.Init();
+			return m;
 		}
 
 		/// <summary>
@@ -103,7 +113,7 @@ namespace Piranha.Models
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
 		public static PageModel GetByPermalink(string permalink) {
-			return GetByPermalink<PageModel>(permalink) ;
+			return GetByPermalink<PageModel>(permalink);
 		}
 
 		/// <summary>
@@ -113,13 +123,13 @@ namespace Piranha.Models
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The model</returns>
 		public static T GetByPermalink<T>(string permalink) where T : PageModel {
-			T m = Activator.CreateInstance<T>() ;
+			T m = Activator.CreateInstance<T>();
 
-			m.Page = Models.Page.GetByPermalink(permalink) ;
-			m.Init() ;
-			return m ;
+			m.Page = Models.Page.GetByPermalink(permalink);
+			m.Init();
+			return m;
 		}
-		
+
 		/// <summary>
 		/// Gets the page model for the specified page id.
 		/// </summary>
@@ -128,9 +138,9 @@ namespace Piranha.Models
 		public static PageModel GetById(Guid id) {
 			PageModel m = new PageModel() {
 				Page = Models.Page.GetSingle(id)
-			} ;
-			m.Init() ;
-			return m ;
+			};
+			m.Init();
+			return m;
 		}
 
 		/// <summary>
@@ -139,17 +149,17 @@ namespace Piranha.Models
 		/// <param name="siteid">The site id.</param>
 		/// <returns>The site page model</returns>
 		public static PageModel GetBySite(Guid siteid) {
-			var cachename = "SITE_" + siteid.ToString() ;
+			var cachename = "SITE_" + siteid.ToString();
 
 			if (!Application.Current.CacheProvider.Contains(cachename)) {
 				using (var db = new DataContext()) {
-					var id = db.Pages.Where(p => p.SiteTreeId == siteid && p.ParentId == siteid).Select(p => p.Id).SingleOrDefault() ;
+					var id = db.Pages.Where(p => p.SiteTreeId == siteid && p.ParentId == siteid).Select(p => p.Id).SingleOrDefault();
 					if (id != Guid.Empty)
-						Application.Current.CacheProvider[cachename] = GetById(id) ;
-					else Application.Current.CacheProvider[cachename] = new PageModel() ;
+						Application.Current.CacheProvider[cachename] = GetById(id);
+					else Application.Current.CacheProvider[cachename] = new PageModel();
 				}
 			}
-			return (PageModel)Application.Current.CacheProvider[cachename] ;
+			return (PageModel)Application.Current.CacheProvider[cachename];
 		}
 
 		/// <summary>
@@ -157,10 +167,10 @@ namespace Piranha.Models
 		/// </summary>
 		/// <param name="siteid">The site id</param>
 		internal static void RemoveSitePageFromCache(Guid siteid) {
-			var cachename = "SITE_" + siteid.ToString() ;
+			var cachename = "SITE_" + siteid.ToString();
 
 			if (Application.Current.CacheProvider.Contains(cachename))
-				Application.Current.CacheProvider.Remove(cachename) ;
+				Application.Current.CacheProvider.Remove(cachename);
 		}
 		#endregion
 
@@ -172,9 +182,9 @@ namespace Piranha.Models
 		/// <param name="internalId">The internal id</param>
 		/// <returns>The region</returns>
 		public T Region<T>(string internalId) {
-			if (((IDictionary<string,object>)Regions).ContainsKey(internalId))
-				return (T)((IDictionary<string,object>)Regions)[internalId] ;
-			return default(T) ;
+			if (((IDictionary<string, object>)Regions).ContainsKey(internalId))
+				return (T)((IDictionary<string, object>)Regions)[internalId];
+			return default(T);
 		}
 
 		/// <summary>
@@ -184,9 +194,9 @@ namespace Piranha.Models
 		/// <param name="internalId">The internal id</param>
 		/// <returns>The extension</returns>
 		public T Extension<T>(string internalId) {
-			if (((IDictionary<string,object>)Extensions).ContainsKey(internalId))
-				return (T)((IDictionary<string,object>)Extensions)[internalId] ;
-			return default(T) ;
+			if (((IDictionary<string, object>)Extensions).ContainsKey(internalId))
+				return (T)((IDictionary<string, object>)Extensions)[internalId];
+			return default(T);
 		}
 		#endregion
 
@@ -194,91 +204,91 @@ namespace Piranha.Models
 		/// Gets the associated regions for the current page
 		/// </summary>
 		protected void Init() {
-			var id = Page.Id ;
+			var id = Page.Id;
 
 			// Handle page copies
 			if (((Models.Page)Page).OriginalId != Guid.Empty) {
-				var copy = (Models.Page)Page ;
-				var org = Models.Page.GetSingle(copy.OriginalId, copy.IsDraft) ;
+				var copy = (Models.Page)Page;
+				var org = Models.Page.GetSingle(copy.OriginalId, copy.IsDraft);
 
-				copy.Id = org.Id ;
-				copy.GroupId = org.GroupId ;
-				copy.DisabledGroups = org.DisabledGroups ;
-				copy.Keywords = org.Keywords ;
-				copy.Description = org.Description ;
-				copy.LastModified = copy.LastModified > org.LastModified ? copy.LastModified : org.LastModified ;
+				copy.Id = org.Id;
+				copy.GroupId = org.GroupId;
+				copy.DisabledGroups = org.DisabledGroups;
+				copy.Keywords = org.Keywords;
+				copy.Description = org.Description;
+				copy.LastModified = copy.LastModified > org.LastModified ? copy.LastModified : org.LastModified;
 			}
 
 			// Get the page template
-			PageTemplate pt = PageTemplate.GetSingle(((Page)Page).TemplateId) ;
+			PageTemplate pt = PageTemplate.GetSingle(((Page)Page).TemplateId);
 
 			// Regions
-			var regions = RegionTemplate.GetByTemplateId(pt.Id) ;
+			var regions = RegionTemplate.GetByTemplateId(pt.Id);
 			if (regions.Count > 0) {
 				foreach (var rt in regions) {
 					if (rt.Type != "Piranha.Extend.Regions.PostRegion") {
 						if (ExtensionManager.Current.HasType(rt.Type)) {
 							// Create empty region
-							object body = ExtensionManager.Current.CreateInstance(rt.Type) ;
+							object body = ExtensionManager.Current.CreateInstance(rt.Type);
 							// Initialize empty regions
 							if (body != null) {
-								body = ((IExtension)body).GetContent(this) ;
+								body = ((IExtension)body).GetContent(this);
 							}
-							((IDictionary<string, object>)Regions).Add(rt.InternalId, body) ;
+							((IDictionary<string, object>)Regions).Add(rt.InternalId, body);
 						} else {
-							((IDictionary<string, object>)Regions).Add(rt.InternalId, null) ;
+							((IDictionary<string, object>)Regions).Add(rt.InternalId, null);
 						}
 					} else {
-						((IDictionary<string, object>)Regions).Add(rt.InternalId, new List<Piranha.Entities.Post>()) ;
+						((IDictionary<string, object>)Regions).Add(rt.InternalId, new List<Piranha.Entities.Post>());
 					}
 				}
 				Piranha.Models.Region.GetContentByPageId(Page.Id, Page.IsDraft).ForEach(reg => {
-					string cachename = null ;
+					string cachename = null;
 					if (!Page.IsDraft)
-						cachename = Extend.Regions.PostRegion.CacheName(Page, reg) ;
+						cachename = Extend.Regions.PostRegion.CacheName(Page, reg);
 
 					if (!(reg.Body is Extend.Regions.PostRegion)) {
-						object content = reg.Body ;
+						object content = reg.Body;
 
 						// Initialize region
-						content = ((IExtension)content).GetContent(this) ;
+						content = ((IExtension)content).GetContent(this);
 
 						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
-							((IDictionary<string, object>)Regions)[reg.InternalId] = content ;
+							((IDictionary<string, object>)Regions)[reg.InternalId] = content;
 					} else {
 						if (((IDictionary<string, object>)Regions).ContainsKey(reg.InternalId))
-							((IDictionary<string, object>)Regions)[reg.InternalId] = 
-								((Extend.Regions.PostRegion)reg.Body).GetMatchingPosts(cachename) ;
+							((IDictionary<string, object>)Regions)[reg.InternalId] =
+								((Extend.Regions.PostRegion)reg.Body).GetMatchingPosts(cachename);
 					}
-				}) ;
+				});
 			}
 			// Properties
 			if (pt.Properties.Count > 0) {
 				foreach (string str in pt.Properties)
-					((IDictionary<string, object>)Properties).Add(str, "") ;
+					((IDictionary<string, object>)Properties).Add(str, "");
 				Property.GetContentByParentId(Page.Id, Page.IsDraft).ForEach(pr => {
 					if (((IDictionary<string, object>)Properties).ContainsKey(pr.Name))
-						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value ;
+						((IDictionary<string, object>)Properties)[pr.Name] = pr.Value;
 				});
 			}
 			// Attachments
 			foreach (var guid in ((Models.Page)Page).Attachments) {
-				var a = Models.Content.GetSingle(guid, Page.IsDraft) ;
+				var a = Models.Content.GetSingle(guid, Page.IsDraft);
 				if (a != null)
-					Attachments.Add(a) ;
+					Attachments.Add(a);
 			}
 			// Extensions
 			foreach (var ext in ((Page)Page).GetExtensions()) {
-				object body = ext.Body ;
+				object body = ext.Body;
 				if (body != null) {
-					var getContent = body.GetType().GetMethod("GetContent") ;
+					var getContent = body.GetType().GetMethod("GetContent");
 					if (getContent != null)
-						body = getContent.Invoke(body, new object[] { this }) ;
+						body = getContent.Invoke(body, new object[] { this });
 				}
-				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body ;
+				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body;
 			}
 			// Reset the page id if we changed it to load a copy
-			((Models.Page)Page).Id = id ;
+			((Models.Page)Page).Id = id;
 		}
 	}
 }
