@@ -65,6 +65,7 @@ namespace Piranha
 		private const string PASSIVE_MODE = "passiveMode";
 		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks";
 		private const string RENDERX_UA_COMPATIBLEFORIE = "renderX-UA-CompatibleForIE";
+		private const string SHOWDBERRORS = "showDBErrors";
 		private const string ENTITY_SCHEMA = "entitySchema";
 		#endregion
 
@@ -133,6 +134,15 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets if database access errors should be shown instead of redirecting to /manager/install
+		/// </summary>
+		[ConfigurationProperty(SHOWDBERRORS, IsRequired = false)]
+		public BooleanElement ShowDBErrors {
+			get { return (BooleanElement)this[SHOWDBERRORS]; }
+			set { this[SHOWDBERRORS] = value; }
+		}
+
+		/// <summary>
 		/// Gets/sets the additional manager namespaces.
 		/// </summary>
 		[ConfigurationProperty(MANAGER_NAMESPACES, IsRequired = false)]
@@ -169,6 +179,7 @@ namespace Piranha
 			DisableCatalogSearch = new BooleanElement();
 			ManagerNamespaces = new StringElement();
 			RenderX_UA_CompatibleForIE = new BooleanElement();
+			ShowDBErrors = new BooleanElement();
 		}
 	}
 

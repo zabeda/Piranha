@@ -79,7 +79,10 @@ namespace Piranha.Areas.Manager.Controllers
 				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
 					return RedirectToAction("update", "install");
 				return RedirectToAction("index", "account");
-			} catch { }
+			} catch {
+				if (Config.ShowDBErrors)
+					throw;
+			}
 			return View("Index");
 		}
 

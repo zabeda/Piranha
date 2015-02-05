@@ -11,6 +11,7 @@
       <prefixlessPermalinks value="false" />
 			<disableCatalogSearch value="false" />
 			<renderX-UA-CompatibleForIE value="true" />
+			<showDBErrors value="false" />
 		</settings>
     <providers>
       <mediaProvider value="Piranha.IO.LocalMediaProvider, Piranha" />
