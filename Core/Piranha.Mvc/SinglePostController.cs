@@ -27,7 +27,7 @@ namespace Piranha.Mvc
 		/// Gets the current post model.
 		/// </summary>
 		/// <returns>The model</returns>
-		public PostModel GetModel() {
+		protected PostModel GetModel() {
 			return GetModel<PostModel>(CurrentPermalink);
 		}
 

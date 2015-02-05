@@ -28,7 +28,7 @@ namespace Piranha.Mvc
 		/// Gets the current page model.
 		/// </summary>
 		/// <returns>The model</returns>
-		public PageModel GetModel() {
+		protected PageModel GetModel() {
 			return GetModel<PageModel>(CurrentPermalink);
 		}
 
