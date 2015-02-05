@@ -6,7 +6,7 @@ Piranha CMS can be used to build a new application from scratch, or to add CMS f
 
 ## License
 
-Piranha CMS is released under the **MIT** license.
+Piranha CMS is released under the **MIT** license. It is a permissive free software license, meaning that it permits reuse within proprietary software provided all copies of the licensed software include a copy of the MIT License terms and the copyright notice
 
 ## Branching strategy
 
