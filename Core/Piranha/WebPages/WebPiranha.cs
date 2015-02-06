@@ -30,6 +30,29 @@ namespace Piranha.WebPages
 {
 	public static class WebPiranha
 	{
+		#region Inner classes
+		/// <summary>
+		/// Class for handling hostnames with url extensions.
+		/// </summary>
+		public sealed class ExtendedHostName
+		{
+			/// <summary>
+			/// Gets/sets the host name.
+			/// </summary>
+			public string HostName { get; set; }
+
+			/// <summary>
+			/// Gets/sets the host name.
+			/// </summary>
+			public string Extension { get; set; }
+
+			/// <summary>
+			/// Gets/sets the targeted site tree.
+			/// </summary>
+			public Entities.SiteTree SiteTree { get; set; }
+		}
+		#endregion
+
 		#region Members
 		/// <summary>
 		/// Internal member for the host names.
@@ -71,12 +94,41 @@ namespace Piranha.WebPages
 			get {
 				// Check for configured site tree from the host name
 				if (HttpContext.Current != null && HttpContext.Current.Request != null) {
-					var hostname = HttpContext.Current.Request.Url.Host.ToLower();
-					if (HostNames.ContainsKey(hostname))
-						return HostNames[hostname];
+					if (RequestedSite != null) {
+						return RequestedSite.SiteTree;
+					} else {
+						var hostname = HttpContext.Current.Request.Url.Host.ToLower();
+						if (HostNames.ContainsKey(hostname))
+							return HostNames[hostname];
+					}
 				}
 				// Nothing found, return default
 				return DefaultSite;
+			}
+		}
+
+		/// <summary>
+		/// Gets the URL extension for the currently requested site.
+		/// </summary>
+		internal static string CurrentSiteExtension {
+			get {
+				if (RequestedSite != null)
+					return RequestedSite.Extension.ToLower() + "/" ;
+				return "" ;
+			}
+		}
+
+		/// <summary>
+		/// Gets the currently requested site.
+		/// </summary>
+		private static ExtendedHostName RequestedSite {
+			get {
+				if (HttpContext.Current.Items.Contains("RequestedSite"))
+					return (ExtendedHostName)HttpContext.Current.Items["RequestedSite"];
+				return null;
+			}
+			set {
+				HttpContext.Current.Items["RequestedSite"] = value;
 			}
 		}
 		#endregion
@@ -278,6 +330,25 @@ namespace Piranha.WebPages
 						if (def != null && !String.IsNullOrWhiteSpace(def.Culture) && !def.Culture.StartsWith("auto:")) {
 							System.Threading.Thread.CurrentThread.CurrentCulture =
 								System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(def.UICulture);
+						}
+					}
+
+					// Check for hostname extension. This feature can't be combined with culture prefixes
+					if (pos == 0) {
+						var hostExt = context.Request.Url.Host + "/" + args[0];
+
+						if (HostNames.ContainsKey(hostExt)) {
+							RequestedSite = new ExtendedHostName() {
+								HostName = context.Request.Url.Host,
+								Extension = args[0],
+								SiteTree = HostNames[hostExt]
+							};
+							pos = 1;
+
+							// If this was the last argument, add an empty one
+							if (args.Length == 1) {
+								args = args.Concat(new string[] { "" }).ToArray();
+							}
 						}
 					}
 
