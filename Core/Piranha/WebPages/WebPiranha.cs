@@ -336,21 +336,25 @@ namespace Piranha.WebPages
 					// Check for hostname extension. This feature can't be combined with culture prefixes
 					if (pos == 0) {
 						var segments = context.Request.RawUrl.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-						var hostExt = context.Request.Url.Host + "/" + segments[0];
+                        if (segments.Length > 0) {
+						    var hostExt = context.Request.Url.Host + "/" + segments[0];
 
-						if (HostNames.ContainsKey(hostExt)) {
-							RequestedSite = new ExtendedHostName() {
-								HostName = context.Request.Url.Host,
-								Extension = args[0],
-								SiteTree = HostNames[hostExt]
-							};
-							pos = 1;
+						    if (HostNames.ContainsKey(hostExt)) {
+							    RequestedSite = new ExtendedHostName() {
+								    HostName = context.Request.Url.Host,
+								    Extension = args[0],
+								    SiteTree = HostNames[hostExt]
+							    };
+                                if (segments[0] == args[0]) {
+                                    pos = 1;
 
-							// If this was the last argument, add an empty one
-							if (args.Length == 1) {
-								args = args.Concat(new string[] { "" }).ToArray();
-							}
-						}
+                                    // If this was the last argument, add an empty one
+                                    if (args.Length == 1) {
+                                        args = args.Concat(new string[] { "" }).ToArray();
+                                    }
+                                }
+						    }
+                        }
 					}
 
 					var handled = false;
