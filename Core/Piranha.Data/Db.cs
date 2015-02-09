@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2015 Håkan Edling
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+ * 
+ * http://github.com/piranhacms/piranha
+ * 
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -28,6 +38,7 @@ namespace Piranha
 		public DbSet<Models.Property> Properties { get; set; }
 		public DbSet<Models.Relation> Relations { get; set; }
 		public DbSet<Models.SiteTree> SiteTrees { get; set; }
+		public DbSet<Models.Upload> Uploads { get; set; }
 		public DbSet<Models.User> Users { get; set; }
 		#endregion
 
@@ -368,6 +379,20 @@ namespace Piranha
 			mb.Entity<Models.SiteTree>().HasRequired(s => s.Namespace).WithMany().WillCascadeOnDelete(false);
 			mb.Entity<Models.SiteTree>().HasRequired(s => s.CreatedBy).WithMany().WillCascadeOnDelete(false);
 			mb.Entity<Models.SiteTree>().HasRequired(s => s.UpdatedBy).WithMany().WillCascadeOnDelete(false);
+			#endregion
+
+			#region Upload
+			mb.Entity<Models.Upload>().ToTable("upload");
+			mb.Entity<Models.Upload>().Property(u => u.Id).HasColumnName("upload_id");
+			mb.Entity<Models.Upload>().Property(u => u.ParentId).HasColumnName("upload_parent_id");
+			mb.Entity<Models.Upload>().Property(u => u.Filename).HasColumnName("upload_filename").HasMaxLength(128).IsRequired();
+			mb.Entity<Models.Upload>().Property(u => u.ContentType).HasColumnName("upload_type").HasMaxLength(255).IsRequired();
+			mb.Entity<Models.Upload>().Property(u => u.Created).HasColumnName("upload_created");
+			mb.Entity<Models.Upload>().Property(u => u.Updated).HasColumnName("upload_updated");
+			mb.Entity<Models.Upload>().Property(u => u.CreatedById).HasColumnName("upload_created_by");
+			mb.Entity<Models.Upload>().Property(u => u.UpdatedById).HasColumnName("upload_updated_by");
+			mb.Entity<Models.Upload>().HasRequired(u => u.CreatedBy).WithMany().WillCascadeOnDelete(false);
+			mb.Entity<Models.Upload>().HasRequired(u => u.UpdatedBy).WithMany().WillCascadeOnDelete(false);
 			#endregion
 
 			#region User

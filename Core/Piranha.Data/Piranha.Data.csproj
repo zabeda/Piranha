@@ -66,6 +66,7 @@
     <Compile Include="Models\Relation.cs" />
     <Compile Include="Models\SiteTree.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Upload.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
