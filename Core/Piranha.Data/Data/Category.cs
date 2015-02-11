@@ -10,24 +10,15 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public sealed class PostType : IModel, IModified, IModifiedBy
+	public sealed class Category : IModel, IModified, IModifiedBy
 	{
 		public Guid Id { get; set; }
-		public Guid? PermalinkId { get; set; }
+		public Guid? ParentId { get; set; }
+		public Guid PermalinkId { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public string VisualGuide { get; set; }
-		public string PostProperties { get; set; }
-		public string Route { get; set; }
-		public bool IsRouteVirtual { get; set; }
-		public string View { get; set; }
-		public bool IsViewVirtual { get; set; }
-		public string ArchiveRoute { get; set; }
-		public bool IsArchiveRouteVirtual { get; set; }
-		public bool EnableFeed { get; set; }
-		public string CLRType { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }
 		public Guid CreatedById { get; set; }

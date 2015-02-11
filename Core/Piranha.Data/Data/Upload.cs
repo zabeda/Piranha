@@ -10,17 +10,14 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public sealed class PageTypeRegion : IModel, IModified, IModifiedBy
+	public sealed class Upload : IModel, IModified, IModifiedBy
 	{
 		public Guid Id { get; set; }
-		public Guid PageTypeId { get; set; }
-		public string InternalId { get; set; }
-		public int SortOrder { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public string CLRType { get; set; }
+		public Guid? ParentId { get; set; }
+		public string Filename { get; set; }
+		public string ContentType { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }
 		public Guid CreatedById { get; set; }

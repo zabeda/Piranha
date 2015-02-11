@@ -10,28 +10,24 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public sealed class Media : IModel, IModified, IModifiedBy
+	public sealed class PostType : IModel, IModified, IModifiedBy
 	{
 		public Guid Id { get; set; }
-		public bool IsDraft { get; set; }
-		public Guid? ParentId { get; set; }
 		public Guid? PermalinkId { get; set; }
-		public string Filename { get; set; }
-		public string OriginalUrl { get; set; }
-		public DateTime? LastSynced { get; set; }
 		public string Name { get; set; }
-		public string ContentType { get; set; }
-		public int Size { get; set; }
-		public bool IsImage { get; set; }
-		public bool IsFolder { get; set; }
-		public int? Width { get; set; }
-		public int? Height { get; set; }
-		public string AltDescription { get; set; }
 		public string Description { get; set; }
-		public DateTime? Published { get; set; }
-		public DateTime? LastPublished { get; set; }
+		public string VisualGuide { get; set; }
+		public string PostProperties { get; set; }
+		public string Route { get; set; }
+		public bool IsRouteVirtual { get; set; }
+		public string View { get; set; }
+		public bool IsViewVirtual { get; set; }
+		public string ArchiveRoute { get; set; }
+		public bool IsArchiveRouteVirtual { get; set; }
+		public bool EnableFeed { get; set; }
+		public string CLRType { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }
 		public Guid CreatedById { get; set; }

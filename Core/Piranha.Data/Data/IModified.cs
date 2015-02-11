@@ -10,14 +10,11 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public sealed class Relation : IModel
+	public interface IModified
 	{
-		public Guid Id { get; set; }
-		public bool IsDraft { get; set; }
-		public string Type { get; set; }
-		public Guid ModelId { get; set; }
-		public Guid RelatedId { get; set; }
+		DateTime Created { get; set; }
+		DateTime Updated { get; set; }
 	}
 }

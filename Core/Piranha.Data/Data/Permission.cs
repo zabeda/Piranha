@@ -10,18 +10,19 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public sealed class Upload : IModel, IModified, IModifiedBy
+	public sealed class Permission : IModel, IModified
 	{
 		public Guid Id { get; set; }
-		public Guid? ParentId { get; set; }
-		public string Filename { get; set; }
-		public string ContentType { get; set; }
+		public Guid GroupId { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public bool IsSystem { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }
-		public Guid CreatedById { get; set; }
-		public Guid UpdatedById { get; set; }
+		public Guid? CreatedById { get; set; }
+		public Guid? UpdatedById { get; set; }
 
 		public User CreatedBy { get; set; }
 		public User UpdatedBy { get; set; }

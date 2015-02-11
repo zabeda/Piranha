@@ -10,7 +10,7 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
 	public sealed class Namespace : IModel, IModified, IModifiedBy
 	{

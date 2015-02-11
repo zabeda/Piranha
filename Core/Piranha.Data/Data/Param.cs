@@ -10,14 +10,14 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public sealed class Permission : IModel, IModified
+	public sealed class Param : IModel, IModified
 	{
 		public Guid Id { get; set; }
-		public Guid GroupId { get; set; }
 		public string Name { get; set; }
-		public string Description { get; set; }
+		public string Description { get; set ; }
+		public string Value { get; set; }
 		public bool IsSystem { get; set; }
 		public DateTime Created { get; set; }
 		public DateTime Updated { get; set; }

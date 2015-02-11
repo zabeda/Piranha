@@ -10,11 +10,12 @@
 
 using System;
 
-namespace Piranha.Models
+namespace Piranha.Data
 {
-	public interface IModified
+	public enum CommentStatus
 	{
-		DateTime Created { get; set; }
-		DateTime Updated { get; set; }
+		New = 0,
+		Approved = 1,
+		NotApproved = 2
 	}
 }
