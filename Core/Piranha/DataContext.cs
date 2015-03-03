@@ -24,6 +24,7 @@ namespace Piranha
 	/// <summary>
 	/// The Piranha DbContext
 	/// </summary>
+	[Obsolete("Will be removed in the next iteration. Please refer to Piranha.Db")]
 	public class DataContext : DbContext
 	{
 		#region Members

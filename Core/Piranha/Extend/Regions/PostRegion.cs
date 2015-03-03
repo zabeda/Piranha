@@ -17,7 +17,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Mvc;
 
-using Piranha.Data;
+//using Piranha.Data;
 using Piranha.Entities;
 using System.ComponentModel.Composition;
 
@@ -210,7 +210,7 @@ namespace Piranha.Extend.Regions
 		/// </summary>
 		public override void InitManager(object model) {
 			// Gets all of the post templates
-			var templates = Piranha.Models.PostTemplate.GetFields("posttemplate_id, posttemplate_name", new Params() { OrderBy = "posttemplate_name" });
+			var templates = Piranha.Models.PostTemplate.GetFields("posttemplate_id, posttemplate_name", new Data.Params() { OrderBy = "posttemplate_name" });
 			templates.Insert(0, new Piranha.Models.PostTemplate());
 			TemplateTypes = new SelectList(templates, "Id", "Name", PostTemplateId);
 

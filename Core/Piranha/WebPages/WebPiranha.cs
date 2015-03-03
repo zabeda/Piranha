@@ -188,35 +188,34 @@ namespace Piranha.WebPages
 		public static void RegisterDefaultHostNames() {
 			// Make sure we don't try to register the host names before
 			// the database has been installed.
-			if (SysParam.GetByName("SITE_VERSION") != null) {
-				if (hostNames == null)
-					hostNames = new Dictionary<string, Entities.SiteTree>();
+			using (var db = new Db()) {
+				if (!db.Exists || !db.IsCompatible)
+					return;
+			}
 
-				HostNames.Clear();
+			if (hostNames == null)
+				hostNames = new Dictionary<string, Entities.SiteTree>();
 
-				// We need to check version so we don't try to access the column sitetree_hostnames
-				// before it's been created in the database.
-				if (Data.Database.InstalledVersion > 26) {
-					using (var db = new DataContext()) {
-						var sites = db.SiteTrees.ToList();
+			HostNames.Clear();
 
-						foreach (var site in sites) {
-							if (HttpContext.Current != null)
-								Page.InvalidateStartpage(site.Id);
+			using (var db = new DataContext()) {
+				var sites = db.SiteTrees.ToList();
 
-							if (!String.IsNullOrEmpty(site.HostNames)) {
-								var hostnames = site.HostNames.Split(new char[] { ',' });
+				foreach (var site in sites) {
+					if (HttpContext.Current != null)
+						Page.InvalidateStartpage(site.Id);
 
-								foreach (var host in hostnames) {
-									if (HostNames.ContainsKey(host))
-										throw new Exception("Duplicates of the hostname [" + host + "] was found configured");
-									HostNames.Add(host.ToLower(), site);
-								}
-							}
-							if (site.Id == Config.DefaultSiteTreeId)
-								DefaultSite = site;
+					if (!String.IsNullOrEmpty(site.HostNames)) {
+						var hostnames = site.HostNames.Split(new char[] { ',' });
+
+						foreach (var host in hostnames) {
+							if (HostNames.ContainsKey(host))
+								throw new Exception("Duplicates of the hostname [" + host + "] was found configured");
+							HostNames.Add(host.ToLower(), site);
 						}
 					}
+					if (site.Id == Config.DefaultSiteTreeId)
+						DefaultSite = site;
 				}
 			}
 		}
@@ -263,10 +262,18 @@ namespace Piranha.WebPages
 					int pos = 0;
 
 					// Ensure database
-					if (args[0] == "" && SysParam.GetByName("SITE_VERSION") == null) {
-						context.Response.Redirect("~/manager", false);
-						context.Response.EndClean();
+					if (!path.StartsWith("/manager") && !path.StartsWith("/res.ashx")) {
+						using (var db = new Db()) {
+							if (!db.Exists || !db.IsCompatible) {
+								context.Response.Redirect("~/manager", true);
+							}
+						}
 					}
+
+					//if (args[0] == "" && SysParam.GetByName("SITE_VERSION") == null) {
+					//	context.Response.Redirect("~/manager", false);
+					//	context.Response.EndClean();
+					//}
 
 					// Check for culture prefix
 					if (Cultures.ContainsKey(args[0])) {

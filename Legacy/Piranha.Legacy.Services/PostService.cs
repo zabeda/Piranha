@@ -20,7 +20,6 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Web;
 
-using Piranha.Data;
 using Piranha.Legacy.Services.DataContracts;
 
 namespace Piranha.Legacy.Services

@@ -18,7 +18,6 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Web;
 
-using Piranha.Data;
 using Piranha.Legacy.Services.DataContracts;
 
 namespace Piranha.Legacy.Services
@@ -39,7 +38,7 @@ namespace Piranha.Legacy.Services
 		public List<Category> Get() {
 			List<Category> categories = new List<Category>();
 
-			Models.Category.Get(new Params() { OrderBy = "category_name" }).ForEach(c => {
+			Models.Category.Get(new Data.Params() { OrderBy = "category_name" }).ForEach(c => {
 				var category = new Category() {
 					Id = c.Id,
 					Name = c.Name,

@@ -16,7 +16,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-using Piranha.Data;
+//using Piranha.Data;
 using Piranha.Entities;
 
 namespace Piranha.Extend.Regions

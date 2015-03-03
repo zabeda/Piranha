@@ -28,9 +28,16 @@ namespace Piranha.Areas.Manager.Controllers
 		/// </summary>
 		public ActionResult Index() {
 			// Check for existing installation.
-			try {
-				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
-					return RedirectToAction("update", "install");
+			//try {
+				using (var db = new Db()) {
+					if (!db.Exists)
+						return RedirectToAction("index", "install");
+					if (!db.IsCompatible)
+						return RedirectToAction("update", "install");
+				}
+
+				//if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
+				//	return RedirectToAction("update", "install");
 
 				// Get current assembly version
 				ViewBag.Version = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
@@ -41,8 +48,8 @@ namespace Piranha.Areas.Manager.Controllers
 					return RedirectToAction(startpage.Action, startpage.Controller);
 				}
 				return View("Index");
-			} catch { }
-			return RedirectToAction("index", "install");
+			//} catch { }
+			//return RedirectToAction("index", "install");
 		}
 
 		/// <summary>

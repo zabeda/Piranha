@@ -63,14 +63,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Piranha.Data\Piranha.Data.csproj">
-      <Project>{f90fe18f-292c-4bf4-8e6e-9fd7503eeb1d}</Project>
-      <Name>Piranha.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Piranha\Piranha.csproj">
+      <Project>{73b6e71e-3255-40a1-93ef-5416dc71e940}</Project>
+      <Name>Piranha</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

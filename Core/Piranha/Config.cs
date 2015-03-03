@@ -300,9 +300,19 @@ namespace Piranha
 		public static readonly Guid SysAdminGroupId = new Guid("7C536B66-D292-4369-8F37-948B32229B83");
 
 		/// <summary>
+		/// Gets the id of the default admin group.
+		/// </summary>
+		public static readonly Guid AdminGroupId = new Guid("8940b41a-e3a9-44f3-b564-bfd281416141");
+
+		/// <summary>
 		/// Gets the id of the default namespace.
 		/// </summary>
 		public static readonly Guid DefaultNamespaceId = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03");
+
+		/// <summary>
+		/// Gets the id of the category namespace.
+		/// </summary>
+		public static readonly Guid CategoryNamespaceId = new Guid("AE46C4C4-20F7-4582-888D-DFC148FE9067");
 
 		/// <summary>
 		/// Gets the id of the archive namespace.

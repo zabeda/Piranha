@@ -32,8 +32,6 @@
         <div class="grid_4 box login">
             <div class="title"><h2>@Piranha.Resources.Account.UpdateTitle</h2></div>
             <div class="inner">
-                <p>@Html.Raw(String.Format(Piranha.Resources.Account.UpdateMessage, Piranha.Data.Database.InstalledVersion, Piranha.Data.Database.CurrentVersion))</p>
-                <br />
                 @{ Html.BeginForm("runupdate", "install") ; }
                 <ul class="form">
                     <li><label>@Piranha.Resources.Account.Username</label>

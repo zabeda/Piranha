@@ -18,7 +18,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 
 using Piranha.Data;
-using Piranha.Data.Updates;
 using Piranha.Models;
 
 namespace Piranha.Areas.Manager.Controllers
@@ -75,13 +74,12 @@ namespace Piranha.Areas.Manager.Controllers
 				return RedirectToAction("welcome");
 
 			// Check for existing installation.
-			try {
-				if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
-					return RedirectToAction("update", "install");
-				return RedirectToAction("index", "account");
-			} catch {
-				if (Config.ShowDBErrors)
-					throw;
+			using (var db = new Db()) {
+				if (db.Exists) {
+					if (!db.IsCompatible)
+						return RedirectToAction("update");
+					return RedirectToAction("index", "account");
+				}
 			}
 			return View("Index");
 		}
@@ -90,8 +88,10 @@ namespace Piranha.Areas.Manager.Controllers
 		/// Shows the update page.
 		/// </summary>
 		public ActionResult Update() {
-			if (Data.Database.InstalledVersion < Data.Database.CurrentVersion)
-				return View("Update");
+			using (var db = new Db()) {
+				if (db.Exists && !db.IsCompatible)
+					return View("Update");
+			}
 			return RedirectToAction("index", "account");
 		}
 
@@ -132,36 +132,11 @@ namespace Piranha.Areas.Manager.Controllers
 		[HttpGet()]
 		public ActionResult ExecuteUpdate() {
 			if (Application.Current.UserProvider.IsAuthenticated && User.HasAccess("ADMIN")) {
-				// Execute all incremental updates in a transaction.
-				using (IDbTransaction tx = Database.OpenTransaction()) {
-					for (int n = Data.Database.InstalledVersion + 1; n <= Data.Database.CurrentVersion; n++) {
-						// Read embedded create script
-						Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Updates." +
-							n.ToString() + ".sql");
-						String sql = new StreamReader(str).ReadToEnd();
-						str.Close();
-
-						// Split statements and execute
-						string[] stmts = sql.Split(new char[] { ';' });
-						foreach (string stmt in stmts) {
-							if (!String.IsNullOrEmpty(stmt.Trim()))
-								SysUser.Execute(stmt.Trim(), tx);
-						}
-
-						// Check for update class
-						var utype = Type.GetType("Piranha.Data.Updates.Update" + n.ToString());
-						if (utype != null) {
-							IUpdate update = (IUpdate)Activator.CreateInstance(utype);
-							update.Execute(tx);
-						}
-					}
-					// Now lets update the database version.
-					SysUser.Execute("UPDATE sysparam SET sysparam_value = @0 WHERE sysparam_name = 'SITE_VERSION'",
-						tx, Data.Database.CurrentVersion);
-					SysParam.InvalidateParam("SITE_VERSION");
-					tx.Commit();
+				using (var db = new Db()) {
+					db.Migrate();
+					Seed.SeedRequired(db);
+					return RedirectToAction("index", "account");
 				}
-				return RedirectToAction("index", "account");
 			} else return RedirectToAction("update");
 		}
 
@@ -171,63 +146,24 @@ namespace Piranha.Areas.Manager.Controllers
 		/// <param name="m">The model</param>
 		[HttpPost()]
 		public ActionResult Create(InstallModel m) {
-			if (m.InstallType == "SCHEMA" || ModelState.IsValid) {
-				// Read embedded create script
-				Stream str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Create.sql");
-				String sql = new StreamReader(str).ReadToEnd();
-				str.Close();
+			using (var db = new Db()) {
+				// Install & seed data
+				db.Migrate();
+				Seed.SeedRequired(db);
+				Seed.SeedDefault(db);
 
-				// Read embedded data script
-				str = Assembly.GetExecutingAssembly().GetManifestResourceStream(Database.ScriptRoot + ".Data.sql");
-				String data = new StreamReader(str).ReadToEnd();
-				str.Close();
-
-				// Split statements and execute
-				string[] stmts = sql.Split(new char[] { ';' });
-				using (IDbTransaction tx = Database.OpenTransaction()) {
-					// Create database from script
-					foreach (string stmt in stmts) {
-						if (!String.IsNullOrEmpty(stmt.Trim()))
-							SysUser.Execute(stmt, tx);
-					}
-					tx.Commit();
-				}
-
-				if (m.InstallType.ToUpper() == "FULL") {
-					// Split statements and execute
-					stmts = data.Split(new char[] { ';' });
-					using (IDbTransaction tx = Database.OpenTransaction()) {
-						// Create user
-						SysUser usr = new SysUser() {
-							Login = m.UserLogin,
-							Email = m.UserEmail,
-							GroupId = new Guid("7c536b66-d292-4369-8f37-948b32229b83"),
-							CreatedBy = new Guid("ca19d4e7-92f0-42f6-926a-68413bbdafbc"),
-							UpdatedBy = new Guid("ca19d4e7-92f0-42f6-926a-68413bbdafbc"),
-							Created = DateTime.Now,
-							Updated = DateTime.Now
-						};
-						usr.Save(tx);
-
-						// Create user password
-						SysUserPassword pwd = new SysUserPassword() {
-							Id = usr.Id,
-							Password = m.Password,
-							IsNew = false
-						};
-						pwd.Save(tx);
-
-						// Create default data
-						foreach (string stmt in stmts) {
-							if (!String.IsNullOrEmpty(stmt.Trim()))
-								SysUser.Execute(stmt, tx);
-						}
-						tx.Commit();
-					}
-				}
-				return RedirectToAction("index", "account");
+				// Create user account
+				db.Users.Add(new User() {
+					GroupId = Config.SysAdminGroupId,
+					Username = m.UserLogin,
+					Password = SysUser.Encrypt(m.Password),
+					Email = m.UserEmail,
+					CreatedById = Config.SysUserId,
+					UpdatedById = Config.SysUserId
+				});
+				db.SaveChanges();
 			}
-			return Index();
+			return RedirectToAction("index", "account");
 		}
 	}
 }

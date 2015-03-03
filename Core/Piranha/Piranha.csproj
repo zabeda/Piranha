@@ -452,10 +452,36 @@
     <Compile Include="ConfigProvider.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataExtensions.cs" />
-    <Compile Include="Data\ActiveRecord.cs" />
-    <Compile Include="Data\Database.cs" />
-    <Compile Include="Data\Updates\IUpdate.cs" />
-    <Compile Include="Data\Updates\Update13.cs" />
+    <Compile Include="Data\Category.cs" />
+    <Compile Include="Data\Comment.cs" />
+    <Compile Include="Data\CommentStatus.cs" />
+    <Compile Include="Data\ContentType.cs" />
+    <Compile Include="Data\Extension.cs" />
+    <Compile Include="Data\Group.cs" />
+    <Compile Include="Data\IModel.cs" />
+    <Compile Include="Data\IModified.cs" />
+    <Compile Include="Data\IModifiedBy.cs" />
+    <Compile Include="Data\Log.cs" />
+    <Compile Include="Data\Media.cs" />
+    <Compile Include="Data\Namespace.cs" />
+    <Compile Include="Data\Obsolete\ActiveRecord.cs" />
+    <Compile Include="Data\Obsolete\Database.cs" />
+    <Compile Include="Data\Page.cs" />
+    <Compile Include="Data\PageRegion.cs" />
+    <Compile Include="Data\PageType.cs" />
+    <Compile Include="Data\PageTypeRegion.cs" />
+    <Compile Include="Data\Param.cs" />
+    <Compile Include="Data\Permalink.cs" />
+    <Compile Include="Data\Permission.cs" />
+    <Compile Include="Data\Post.cs" />
+    <Compile Include="Data\PostType.cs" />
+    <Compile Include="Data\Property.cs" />
+    <Compile Include="Data\Relation.cs" />
+    <Compile Include="Data\Seed.cs" />
+    <Compile Include="Data\SiteTree.cs" />
+    <Compile Include="Data\Upload.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="Db.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Drawing\ImageUtils.cs" />
     <Compile Include="Drawing\Thumbnails.cs" />
@@ -558,6 +584,11 @@
     <Compile Include="Manager\Binders\ExtensionBinder.cs" />
     <Compile Include="Manager\ManagerModule.cs" />
     <Compile Include="Manager\ManagerRegistration.cs" />
+    <Compile Include="Migrations\201502111155384_InitialCreate.cs" />
+    <Compile Include="Migrations\201502111155384_InitialCreate.Designer.cs">
+      <DependentUpon>201502111155384_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ArchiveModel.cs" />
     <Compile Include="Models\IPage.cs" />
@@ -775,54 +806,6 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regions.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regiontemplate.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
-    <EmbeddedResource Include="Data\Scripts\Create.sql" />
-    <EmbeddedResource Include="Data\Scripts\Data.sql" />
-    <EmbeddedResource Include="Data\Scripts\Drop.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Create.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Data.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\17.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\18.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\19.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\20.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\21.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\22.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\23.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\24.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\25.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\26.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\27.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\29.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\1.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\10.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\11.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\12.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\13.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\14.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\15.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\16.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\17.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\18.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\19.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\2.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\20.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\21.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\22.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\23.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\24.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\25.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\26.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\27.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\28.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\29.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\3.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\4.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\5.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\6.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\7.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\8.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\9.sql" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-loader.gif" />
     <Content Include="Areas\Manager\Content\Css\Less\Style.less" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\logo.png" />
@@ -855,12 +838,6 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\paste\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\piranhaimage\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.link.dialog.js" />
-    <EmbeddedResource Include="Data\Scripts\Updates\30.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\30.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\31.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\31.sql" />
-    <EmbeddedResource Include="Data\Scripts\Updates\32.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\32.sql" />
     <Content Include="Areas\Manager\Views\Install\Welcome.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Welcome.generated.cs</LastGenOutput>
@@ -882,6 +859,9 @@
     <Content Include="Areas\Manager\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502111155384_InitialCreate.resx">
+      <DependentUpon>201502111155384_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Account.fa-IR.resx" />
     <EmbeddedResource Include="Resources\Account.de-DE.resx" />
     <EmbeddedResource Include="Resources\Account.fr-FR.resx" />
@@ -1335,7 +1315,6 @@
       <LastGenOutput>PostModelRegion.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
