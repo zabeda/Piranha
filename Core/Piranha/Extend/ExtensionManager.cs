@@ -125,7 +125,7 @@ namespace Piranha.Extend
 				}
 				imports.Add(new Lazy<IExtension, IExtensionMeta>(func, info));
 			}
-
+            Current.Extensions = imports;
 			Current.PageTypes = config.PageTypes;
 			Current.PostTypes = config.PostTypes;
 		}
