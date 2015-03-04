@@ -170,7 +170,8 @@ namespace Piranha.Web
 		/// <returns>The full site url</returns>
 		public IHtmlString SiteUrl(string virtualpath) {
 			var request = HttpContext.Current.Request;
-			return new HtmlString(virtualpath.Replace("~/", request.ApplicationPath + (request.ApplicationPath != "/" ? "/" : "") + WebPiranha.CurrentSiteExtension));
+			//return new HtmlString(virtualpath.Replace("~/", request.ApplicationPath + (request.ApplicationPath != "/" ? "/" : "") + WebPiranha.CurrentSiteExtension));
+            return new HtmlString(virtualpath.Replace("~/", request.ApplicationPath + (request.ApplicationPath != "/" ? "/" : "")));
 		}
 
 		/// <summary>
