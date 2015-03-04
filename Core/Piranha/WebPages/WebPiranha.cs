@@ -342,7 +342,7 @@ namespace Piranha.WebPages
 						    if (HostNames.ContainsKey(hostExt)) {
 							    RequestedSite = new ExtendedHostName() {
 								    HostName = context.Request.Url.Host,
-								    Extension = args[0],
+                                    Extension = segments[0],
 								    SiteTree = HostNames[hostExt]
 							    };
                                 if (segments[0] == args[0]) {
