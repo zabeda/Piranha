@@ -128,6 +128,7 @@ namespace Piranha.Extend
             Current.Extensions = imports;
 			Current.PageTypes = config.PageTypes;
 			Current.PostTypes = config.PostTypes;
+            Current.OnImportsSatisfied();
 		}
 
 		/// <summary>
