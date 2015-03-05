@@ -140,16 +140,17 @@ namespace Piranha.Extend
 				// Run the ensure method for all extensions.
 				foreach (var ext in Extensions)
 					ext.Value.Ensure(db);
-				db.Logout();
-			}
+                db.Logout();
+            }
 
-			if (!Config.DisableTypeBuilder) {
-				// Ensure page types
-				EnsurePageTypes();
+            if (!Config.DisableTypeBuilder)
+            {
+                // Ensure page types
+                EnsurePageTypes();
 
-				// Ensure post types
-				EnsurePostTypes();
-			}
+                // Ensure post types
+                EnsurePostTypes();
+            }
 		}
 
 		/// <summary>
