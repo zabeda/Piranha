@@ -32,7 +32,23 @@
         <div class="grid_4 box login">
             <div class="title"><h2>@Piranha.Resources.Account.UpdateTitle</h2></div>
             <div class="inner">
-                @{ Html.BeginForm("runupdate", "install") ; }
+				<p>
+					You cannot perform a database update to the current version of
+					Piranha CMS. The reason for this is because database management
+					has been migrated to use Entity Framework Code First instead of
+					manual SQL-scripts.
+				</p>
+				<p>
+					In order to use this version of Piranha CMS, first create a new
+					blank database and make a fresh install, then copy all of the
+					data from your existing database to your newly created one.
+				</p>
+				<p>
+					When you install the new database, make sure you choose a new
+					username and email address that does not exist in the existing
+					database to avoid conflicts when importing.
+				</p>
+                @*@{ Html.BeginForm("runupdate", "install") ; }
                 <ul class="form">
                     <li><label>@Piranha.Resources.Account.Username</label>
                         <div class="input"><input id="login" name="login" type="text" /></div></li>
@@ -41,7 +57,7 @@
                 <div class="separator"></div>
                 <br />
                 <button class="btn full big" type="submit">@Piranha.Resources.Account.Update</button>
-                @{ Html.EndForm() ; }
+                @{ Html.EndForm() ; }*@
                 <div class="clear"></div>
             </div>
         </div>

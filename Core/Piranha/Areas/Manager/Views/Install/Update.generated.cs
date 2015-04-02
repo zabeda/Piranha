@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Piranha.Areas.Manager.Views.Install
+namespace ASP
 {
     using System;
     using System.Collections.Generic;
@@ -30,9 +30,9 @@ namespace Piranha.Areas.Manager.Views.Install
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Manager/Views/Install/Update.cshtml")]
-    public partial class Update : System.Web.Mvc.WebViewPage<dynamic>
+    public partial class _Areas_Manager_Views_Install_Update_cshtml : System.Web.Mvc.WebViewPage<dynamic>
     {
-        public Update()
+        public _Areas_Manager_Views_Install_Update_cshtml()
         {
         }
         public override void Execute()
@@ -155,97 +155,25 @@ WriteLiteral("</h2></div>\r\n            <div");
 
 WriteLiteral(" class=\"inner\"");
 
-WriteLiteral(">\r\n");
+WriteLiteral(@">
+				<p>
+					You cannot perform a database update to the current version of
+					Piranha CMS. The reason for this is because database management
+					has been migrated to use Entity Framework Code First instead of
+					manual SQL-scripts.
+				</p>
+				<p>
+					In order to use this version of Piranha CMS, first create a new
+					blank database and make a fresh install, then copy all of the
+					data from your existing database to your newly created one.
+				</p>
+				<p>
+					When you install the new database, make sure you choose a new
+					username and email address that does not exist in the existing
+					database to avoid conflicts when importing.
+				</p>
+                ");
 
-            
-            #line 35 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                
-            
-            #line default
-            #line hidden
-            
-            #line 35 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                   Html.BeginForm("runupdate", "install") ; 
-            
-            #line default
-            #line hidden
-WriteLiteral("\r\n                <ul");
-
-WriteLiteral(" class=\"form\"");
-
-WriteLiteral(">\r\n                    <li><label>");
-
-            
-            #line 37 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                          Write(Piranha.Resources.Account.Username);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</label>\r\n                        <div");
-
-WriteLiteral(" class=\"input\"");
-
-WriteLiteral("><input");
-
-WriteLiteral(" id=\"login\"");
-
-WriteLiteral(" name=\"login\"");
-
-WriteLiteral(" type=\"text\"");
-
-WriteLiteral(" /></div></li>\r\n                    <li><label>");
-
-            
-            #line 39 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                          Write(Piranha.Resources.Account.Password);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</label>\r\n                        <div");
-
-WriteLiteral(" class=\"input\"");
-
-WriteLiteral("><input");
-
-WriteLiteral(" name=\"password\"");
-
-WriteLiteral(" type=\"password\"");
-
-WriteLiteral(" /></div></li>\r\n                <div");
-
-WriteLiteral(" class=\"separator\"");
-
-WriteLiteral("></div>\r\n                <br />\r\n                <button");
-
-WriteLiteral(" class=\"btn full big\"");
-
-WriteLiteral(" type=\"submit\"");
-
-WriteLiteral(">");
-
-            
-            #line 43 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                                                      Write(Piranha.Resources.Account.Update);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</button>\r\n");
-
-            
-            #line 44 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                
-            
-            #line default
-            #line hidden
-            
-            #line 44 "..\..\Areas\Manager\Views\Install\Update.cshtml"
-                   Html.EndForm() ; 
-            
-            #line default
-            #line hidden
 WriteLiteral("\r\n                <div");
 
 WriteLiteral(" class=\"clear\"");
@@ -271,7 +199,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 52 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 68 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                               Write(Piranha.Resources.Global.PopupMessageTitle);
 
             
@@ -290,7 +218,7 @@ WriteLiteral(" id=\"sysMsg\"");
 WriteLiteral(">");
 
             
-            #line 54 "..\..\Areas\Manager\Views\Install\Update.cshtml"
+            #line 70 "..\..\Areas\Manager\Views\Install\Update.cshtml"
                           Write(ViewBag.Message);
 
             
