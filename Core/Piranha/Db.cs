@@ -55,7 +55,11 @@ namespace Piranha
 		/// </summary>
 		public bool IsCompatible {
 			get {
-				return Database.CompatibleWithModel(true);
+				try {
+					return Database.CompatibleWithModel(true);
+				} catch {
+					return false;
+				}
 			}
 		}
 
