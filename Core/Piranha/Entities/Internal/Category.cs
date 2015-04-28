@@ -157,7 +157,7 @@ namespace Piranha.Models
 		/// <param name="permalink">The permalink</param>
 		/// <returns>The category</returns>
 		public static Category GetByPermalink(string permalink) {
-			return Category.GetSingle("permalink_name = @0 AND", permalink);
+			return Category.GetSingle("permalink_name = @0", permalink);
 		}
 		#endregion
 
