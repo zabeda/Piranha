@@ -44,23 +44,18 @@ namespace Piranha.Web.Handlers
 					Permalink perm = null;
 					int segments = 0;
 
-                    //If Exact permalink matching is enabled, only match the exact permalink
-				    if (Config.ExactPermalinkMatching)
-				    {
-				        perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Implode("/"));
-				    }
-				    else
-				    {
-                        // Accept permalinks with '/' in them
-                        for (int n = 0; n < args.Length; n++)
-                        {
-                            // Check if we can find a permalink in the current namespace
-                            perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/"));
-                            segments = args.Length - n;
-                            if (perm != null)
-                                break;
-                        } 
-				    }
+                   
+                    // Accept permalinks with '/' in them
+                    for (int n = 0; n < args.Length; n++)
+                    {
+                        // Check if we can find a permalink in the current namespace
+                        perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/"));
+                        segments = args.Length - n;
+                        if ( Config.ExactPermalinkMatching && perm == null)
+                            return;
+                        if (perm != null)
+                            break;
+                    } 
                     
 					
 
