@@ -36,6 +36,11 @@ namespace Piranha.Models
 		Guid GroupId { get; }
 
 		/// <summary>
+		/// Gets/sets the parent id.
+		/// </summary>
+		Guid ParentId { get; }
+
+		/// <summary>
 		/// Gets/sets the title.
 		/// </summary>
 		string Title { get; }
