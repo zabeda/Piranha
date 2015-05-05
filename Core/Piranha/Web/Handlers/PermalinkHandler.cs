@@ -43,14 +43,22 @@ namespace Piranha.Web.Handlers
 				if (args != null && args.Length > 0) {
 					Permalink perm = null;
 					int segments = 0;
-					// Accept permalinks with '/' in them
-					for (int n = 0; n < args.Length; n++) {
-						// Check if we can find a permalink in the current namespace
-						perm = Permalink.GetByName(Config.SiteTreeNamespaceId, args.Subset(0, args.Length - n).Implode("/"));
-						segments = args.Length - n;
-						if (perm != null)
-							break;
-					}
+
+                   
+                    // Accept permalinks with '/' in them
+                    for (int n = 0; n < args.Length; n++)
+                    {
+                        // Check if we can find a permalink in the current namespace
+                        perm = Permalink.GetByName(Config.SiteTreeNamespaceId,
+                            String.Join("/", args.Subset(0, args.Length - n).Where(x => !string.IsNullOrEmpty(x))));
+                        segments = args.Length - n;
+                        if ( Config.ExactPermalinkMatching && perm == null)
+                            return;
+                        if (perm != null)
+                            break;
+                    } 
+                    
+					
 
 					// If we didn't find a permalink, check for posts in the default namespace
 					if (perm == null && Config.SiteTreeNamespaceId != Config.DefaultNamespaceId) {
