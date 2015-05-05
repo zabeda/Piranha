@@ -255,6 +255,8 @@ namespace Piranha.Extend
 				m.Template.ShowController = type.ShowController;
 				m.Template.View = type.View;
 				m.Template.ShowView = type.ShowView;
+				m.Template.Redirect = type.Redirect;
+				m.Template.ShowRedirect = type.ShowRedirect;
 				m.Template.Properties.Clear();
 				m.Template.Properties.AddRange(type.Properties);
 				m.Template.Type = type.GetType().FullName;
