@@ -19,6 +19,16 @@ namespace Piranha.Extend
 	public interface IPageType : IType
 	{
 		/// <summary>
+		/// Gets/sets the optional permalink of a page this sould redirect to.
+		/// </summary>
+		string Redirect { get; }
+
+		/// <summary>
+		/// Gets/sets if the redirect can be overriden by the implementing page.
+		/// </summary>
+		bool ShowRedirect { get; }		
+
+		/// <summary>
 		/// Gets the defined regions.
 		/// </summary>
 		IList<RegionType> Regions { get; }

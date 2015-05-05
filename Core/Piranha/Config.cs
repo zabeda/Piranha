@@ -298,6 +298,15 @@ namespace Piranha
 			get { return WebPages.WebPiranha.CurrentSite.NamespaceId; }
 		}
 
+
+        /// <summary>
+        /// Gets  whether to match only exact permalinks in routing
+        /// </summary>
+	    public static bool ExactPermalinkMatching
+	    {
+            get { return config.Settings.ExactPermalinkMatching.Value; }
+	    }
+
 		/// <summary>
 		/// Gets the id of the default sys user.
 		/// </summary>

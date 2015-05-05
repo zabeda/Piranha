@@ -9,6 +9,7 @@
     <script type="text/javascript" src="~/res.ashx/areas/manager/content/js/ext/jquery.equalheights.js"></script>
     <script type="text/javascript">
         var folderId = "";
+        var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
         $(document).ready(function () {
             $("#Page_Title").focus();
@@ -43,6 +44,10 @@
             $('.first-row .box').equalHeights();
 
             var c = new piranha.comment('@Model.Page.Id', 'comment-notification', 'pnl-comments .inner');
+
+        	$(".toolbar .delete").click(function () {
+        		return confirm(deletemsg);
+        	});
         });
 
         //
@@ -156,7 +161,7 @@
     @Html.HiddenFor(m => m.Permalink.Type)
     @Html.HiddenFor(m => m.Permalink.Created)
     @Html.HiddenFor(m => m.Permalink.CreatedBy)
-    @if (!Application.Current.IsMvc) {
+    @if (!Piranha.Application.Current.IsMvc) {
     @Html.HiddenFor(m => m.Page.PageView)
     }
     <input type="hidden" id="draft" name="draft" value="true" />

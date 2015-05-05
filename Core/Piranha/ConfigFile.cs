@@ -68,6 +68,7 @@ namespace Piranha
 		private const string RENDERX_UA_COMPATIBLEFORIE = "renderX-UA-CompatibleForIE";
 		private const string SHOWDBERRORS = "showDBErrors";
 		private const string ENTITY_SCHEMA = "entitySchema";
+	    private const string EXACT_PERMALINK_MATCHING = "exactPermalinkMatching";
 		#endregion
 
 		/// <summary>
@@ -169,6 +170,13 @@ namespace Piranha
 			get { return (BooleanElement)this[PASSIVE_MODE]; }
 			set { this[PASSIVE_MODE] = value; }
 		}
+
+        [ConfigurationProperty(EXACT_PERMALINK_MATCHING, IsRequired = false)]
+	    public BooleanElement ExactPermalinkMatching
+	    {
+            get { return (BooleanElement) this[EXACT_PERMALINK_MATCHING]; }
+            set { this[EXACT_PERMALINK_MATCHING] = value; }
+	    }
 
 		/// <summary>
 		/// Gets/sets if the generated permalinks should be prefixless.

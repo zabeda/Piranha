@@ -10,8 +10,8 @@
     <script type="text/javascript" src="~/res.ashx/areas/manager/content/js/ext/jquery.equalheights.js"></script>
     @Html.Partial("~/Areas/Manager/Views/Shared/Partial/TinyMCE.cshtml")
     <script type="text/javascript">
-    		var folderId = "";
-    		var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
+		var folderId = "";
+		var deletemsg = "@Piranha.Resources.Page.MessageDeleteConfirm";
 
         $(document).ready(function () {
             // UI Stuff
@@ -70,7 +70,7 @@
                     '</tr>');
             });
 
-            $(".delete").click(function () {
+            $(".toolbar .delete").click(function () {
             	return confirm(deletemsg);
             });
         });
@@ -164,7 +164,7 @@
     @Html.HiddenFor(m => m.Page.Seqno)
     @Html.HiddenFor(m => m.Permalink.Name)
     }
-    @if (!Application.Current.IsMvc) {
+    @if (!Piranha.Application.Current.IsMvc) {
     @Html.HiddenFor(m => m.Page.PageView)
     }
     @Html.Hidden("returl", (string)ViewBag.ReturnUrl)

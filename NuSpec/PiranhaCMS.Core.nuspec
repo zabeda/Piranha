@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>PiranhaCMS.Core</id>
-		<version>2.2.5-alpha7</version>
+		<version>2.2.5</version>
 		<title>Piranha CMS Core</title>
 		<authors>Håkan Edling</authors>
 		<owners />
@@ -16,14 +16,14 @@ It also creates the default folders needed for uploading, caching and scaling me
 		</description>
 		<summary>This is the core package for Piranha CMS. It contains the binaries and manager interface.</summary>
 		<releaseNotes>See the changelog available at:
-http://piranhacms.org/home/changelog
+https://github.com/piranhacms/piranha/wiki/changelog
 		</releaseNotes>
 		<copyright>Håkan Edling</copyright>
 		<dependencies>
 			<group targetFramework=".NETFramework4.5">
 				<dependency id="AutoMapper" version="[3.3.1,3.4)" />
-				<dependency id="EntityFramework" version="[6.1.2,6.2)" />
-				<dependency id="Microsoft.AspNet.Mvc" version="[5.2.2,5.3)" />
+				<dependency id="EntityFramework" version="[6.1.3,6.2)" />
+				<dependency id="Microsoft.AspNet.Mvc" version="[5.2.3,5.3)" />
 				<dependency id="WebActivatorEx" version="2.0.6" />
 				<dependency id="MarkdownSharp" version="1.13.0.0" />
 			</group>

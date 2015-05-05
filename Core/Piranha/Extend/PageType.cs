@@ -57,6 +57,16 @@ namespace Piranha.Extend
 		public virtual bool ShowView { get; protected set; }
 
 		/// <summary>
+		/// Gets/sets the optional permalink of a page this sould redirect to.
+		/// </summary>
+		public virtual string Redirect { get; protected set; }
+
+		/// <summary>
+		/// Gets/sets if the redirect can be overriden by the implementing page.
+		/// </summary>
+		public virtual bool ShowRedirect { get; protected set; }
+
+		/// <summary>
 		/// Gets the defíned properties.
 		/// </summary>
 		public virtual IList<string> Properties { get; protected set; }
