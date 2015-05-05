@@ -28,6 +28,14 @@ namespace Piranha
 	/// </summary>
 	public sealed class Application
 	{
+		#region Inner classes
+		public sealed class AppConfig
+		{
+			public IRouteHandler RouteHandler { get; set; }
+			public IClientFramework Framework { get; set; }
+		}
+		#endregion
+
 		#region Members
 		/// <summary>
 		/// Static singleton instance of the application.
@@ -42,22 +50,22 @@ namespace Piranha
 		/// <summary>
 		/// The currently active media provider.
 		/// </summary>
-		public readonly IO.IMediaProvider MediaProvider;
+		public IO.IMediaProvider MediaProvider { get; private set; }
 
 		/// <summary>
 		/// The currently active media cache provider.
 		/// </summary>
-		public readonly IO.IMediaCacheProvider MediaCacheProvider;
+		public IO.IMediaCacheProvider MediaCacheProvider { get; private set; }
 
 		/// <summary>
 		/// The currently active cache provider.
 		/// </summary>
-		public readonly Cache.ICacheProvider CacheProvider;
+		public Cache.ICacheProvider CacheProvider { get; private set; }
 
 		/// <summary>
 		/// The currently active log provider.
 		/// </summary>
-		public readonly Log.ILogProvider LogProvider;
+		public Log.ILogProvider LogProvider { get; private set; }
 
 		/// <summary>
 		/// The currently active user provider.
@@ -68,11 +76,6 @@ namespace Piranha
 		/// The manager resource handler.
 		/// </summary>
 		internal readonly ResourceHandler Resources = new ResourceHandler();
-
-		/// <summary>
-		/// The private composition container.
-		/// </summary>
-		private CompositionContainer Container = null;
 		#endregion
 
 		#region Properties
@@ -107,12 +110,55 @@ namespace Piranha
 		/// Default private constructor.
 		/// </summary>
 		private Application() {
-			var catalog = new AggregateCatalog();
+			Initialize();
+		}
 
-			// Compose parts
-			catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
-			Container = new CompositionContainer(catalog);
-			Container.ComposeParts(this);
+		/// <summary>
+		/// Compose the imports manually if MEF is disabled.
+		/// </summary>
+		/// <param name="configure">Configuration action</param>
+		public static void Compose(Action<AppConfig> configure) {
+			var config = new AppConfig();
+
+			// Configure the config
+			if (configure != null)
+				configure(config);
+
+			// Manually compose the application
+			Current.RouteHandler = config.RouteHandler;
+			Current.ClientFramework = config.Framework;
+		}
+
+		/// <summary>
+		/// Registers the default handlers.
+		/// </summary>
+		private void RegisterHandlers() {
+			Handlers.Add("", "STARTPAGE", new PermalinkHandler());
+			Handlers.Add("home", "PERMALINK", new PermalinkHandler());
+			Handlers.Add("draft", "DRAFT", new DraftHandler());
+			Handlers.Add("media", "CONTENT", new ContentHandler());
+			Handlers.Add("media.ashx", "CONTENTHANDLER", new ContentHandler());
+			Handlers.Add("mediadraft", "CONTENTDRAFT", new DraftContentHandler());
+			Handlers.Add("thumb", "THUMBNAIL", new ThumbnailHandler());
+			Handlers.Add("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler());
+			Handlers.Add("upload", "UPLOAD", new UploadHandler());
+			Handlers.Add("archive", "ARCHIVE", new ArchiveHandler());
+			Handlers.Add("rss", "RSS", new RssHandler());
+			Handlers.Add("sitemap.xml", "SITEMAP", new SitemapHandler());
+		}
+
+		/// <summary>
+		/// Initializes the application instance.
+		/// </summary>
+		private void Initialize() {
+			if (!Config.DisableComposition) {
+				var catalog = new AggregateCatalog();
+
+				// Compose parts
+				catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
+				var container = new CompositionContainer(catalog);
+				container.ComposeParts(this);
+			}
 
 			// Get the current media provider
 			var assembly = Assembly.Load(Config.MediaProvider.AssemblyName);
@@ -158,24 +204,6 @@ namespace Piranha
 
 			// Assert configuration
 			Mapper.AssertConfigurationIsValid();
-		}
-
-		/// <summary>
-		/// Registers the default handlers.
-		/// </summary>
-		private void RegisterHandlers() {
-			Handlers.Add("", "STARTPAGE", new PermalinkHandler());
-			Handlers.Add("home", "PERMALINK", new PermalinkHandler());
-			Handlers.Add("draft", "DRAFT", new DraftHandler());
-			Handlers.Add("media", "CONTENT", new ContentHandler());
-			Handlers.Add("media.ashx", "CONTENTHANDLER", new ContentHandler());
-			Handlers.Add("mediadraft", "CONTENTDRAFT", new DraftContentHandler());
-			Handlers.Add("thumb", "THUMBNAIL", new ThumbnailHandler());
-			Handlers.Add("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler());
-			Handlers.Add("upload", "UPLOAD", new UploadHandler());
-			Handlers.Add("archive", "ARCHIVE", new ArchiveHandler());
-			Handlers.Add("rss", "RSS", new RssHandler());
-			Handlers.Add("sitemap.xml", "SITEMAP", new SitemapHandler());
 		}
 	}
 }

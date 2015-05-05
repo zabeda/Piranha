@@ -37,7 +37,7 @@ namespace Piranha.Legacy.Services
 			return Serialize(GetChangesInternal(internalid.ToUpper(), date + FormatTime(time)));
 		}
 
-		internal Changes GetChangesInternal(string internalid, string date) {
+		public Changes GetChangesInternal(string internalid, string date) {
 			Changes changes = new Changes();
 			DateTime latest;
 
