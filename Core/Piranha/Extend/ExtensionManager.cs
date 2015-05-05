@@ -27,6 +27,21 @@ namespace Piranha.Extend
 	/// </summary>
 	public sealed class ExtensionManager : IPartImportsSatisfiedNotification
 	{
+		#region Inner classes
+		public sealed class ExtensionConfig
+		{
+			public IList<IExtension> Extensions { get; set; }
+			public IList<IPageType> PageTypes { get; set; }
+			public IList<IPostType> PostTypes { get; set; }
+
+			public ExtensionConfig() {
+				Extensions = new List<IExtension>();
+				PageTypes = new List<IPageType>();
+				PostTypes = new List<IPostType>();
+			}
+		}
+		#endregion
+
 		#region Members
 		/// <summary>
 		/// Static singleton instance of the extension manager.
@@ -61,24 +76,59 @@ namespace Piranha.Extend
 		/// Default private constructor.
 		/// </summary>
 		private ExtensionManager() {
-			// Let MEF scan for imports
-			var catalog = new AggregateCatalog();
+			if (!Config.DisableComposition) {
+				// Let MEF scan for imports
+				var catalog = new AggregateCatalog();
 
-			catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
+				catalog.Catalogs.Add(Config.DisableCatalogSearch ? new DirectoryCatalog("Bin", "Piranha*.dll") : new DirectoryCatalog("Bin"));
 
-#if !NET40
-			if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
-#endif
-				try {
-					// This feature only exists for Web Pages
-					catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code")));
-				} catch { }
-#if !NET40
+	#if !NET40
+				if (!System.Web.Compilation.BuildManager.IsPrecompiledApp) {
+	#endif
+					try {
+						// This feature only exists for Web Pages
+						catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load("App_Code")));
+					} catch { }
+	#if !NET40
+				}
+	#endif
+
+				Container = new CompositionContainer(catalog);
+				Container.ComposeParts(this);
 			}
-#endif
+		}
 
-			Container = new CompositionContainer(catalog);
-			Container.ComposeParts(this);
+		public static void Compose(Action<ExtensionConfig> configure) {
+			var config = new ExtensionConfig();
+
+			if (configure != null)
+				configure(config);
+
+			var imports = new List<Lazy<IExtension, IExtensionMeta>>();
+			foreach (var extension in config.Extensions) {
+				var ext = extension;
+				Func<IExtension> func = () => {
+					return ext;
+				};
+				var info = new ExtensionMeta();
+
+				foreach (var attr in ext.GetType().GetCustomAttributes<ExportMetadataAttribute>()) {
+					if (attr.Name == "InternalId") {
+						info.InternalId = (string)attr.Value;
+					} else if (attr.Name == "Name") {
+						info.Name = (string)attr.Value;
+					} else if (attr.Name == "ResourceType") {
+						info.ResourceType = (Type)attr.Value;
+					} else if (attr.Name == "Type") {
+						info.Type = (ExtensionType)attr.Value;
+					}
+				}
+				imports.Add(new Lazy<IExtension, IExtensionMeta>(func, info));
+			}
+            Current.Extensions = imports;
+			Current.PageTypes = config.PageTypes;
+			Current.PostTypes = config.PostTypes;
+            Current.OnImportsSatisfied();
 		}
 
 		/// <summary>
@@ -90,16 +140,17 @@ namespace Piranha.Extend
 				// Run the ensure method for all extensions.
 				foreach (var ext in Extensions)
 					ext.Value.Ensure(db);
-				db.Logout();
-			}
+                db.Logout();
+            }
 
-			if (!Config.DisableTypeBuilder) {
-				// Ensure page types
-				EnsurePageTypes();
+            if (!Config.DisableTypeBuilder)
+            {
+                // Ensure page types
+                EnsurePageTypes();
 
-				// Ensure post types
-				EnsurePostTypes();
-			}
+                // Ensure post types
+                EnsurePostTypes();
+            }
 		}
 
 		/// <summary>

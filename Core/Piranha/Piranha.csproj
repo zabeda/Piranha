@@ -529,6 +529,7 @@
     <Compile Include="Entities\StandardEntity.cs" />
     <Compile Include="Entities\Upload.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extend\ExtensionMeta.cs" />
     <Compile Include="Extend\PostType.cs" />
     <Compile Include="Extend\IPageType.cs" />
     <Compile Include="Extend\IPostType.cs" />
