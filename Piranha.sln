@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{17A6
 	ProjectSection(SolutionItems) = preProject
 		NuSpec\PiranhaCMS.Azure.nuspec = NuSpec\PiranhaCMS.Azure.nuspec
 		NuSpec\PiranhaCMS.Core.nuspec = NuSpec\PiranhaCMS.Core.nuspec
+		NuSpec\PiranhaCMS.Legacy.Services.nuspec = NuSpec\PiranhaCMS.Legacy.Services.nuspec
 		NuSpec\PiranhaCMS.Mvc.nuspec = NuSpec\PiranhaCMS.Mvc.nuspec
 		NuSpec\PiranhaCMS.nuspec = NuSpec\PiranhaCMS.nuspec
 		NuSpec\PiranhaCMS.WebPages.nuspec = NuSpec\PiranhaCMS.WebPages.nuspec

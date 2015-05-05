@@ -10,6 +10,7 @@
 			<passiveMode value="false" />
 			<prefixlessPermalinks value="false" />
 			<disableCatalogSearch value="false" />
+			<disableComposition value="false" />
 			<renderX-UA-CompatibleForIE value="true" />
 			<showDBErrors value="false" />
 			<exactPermalinkMatching value="false" />
