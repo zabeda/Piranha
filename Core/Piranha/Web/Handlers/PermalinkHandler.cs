@@ -52,8 +52,9 @@ namespace Piranha.Web.Handlers
                         perm = Permalink.GetByName(Config.SiteTreeNamespaceId,
                             String.Join("/", args.Subset(0, args.Length - n).Where(x => !string.IsNullOrEmpty(x))));
                         segments = args.Length - n;
-                        if ( Config.ExactPermalinkMatching && perm == null)
-                            return;
+						// Check if we're only matching exact permalink
+                        if (Config.ExactPermalinkMatching && perm == null)
+                            break;
                         if (perm != null)
                             break;
                     } 
@@ -67,6 +68,9 @@ namespace Piranha.Web.Handlers
 						for (int n = 0; n < args.Length; n++) {
 							Permalink post = Permalink.GetByName(Config.DefaultNamespaceId, args.Subset(0, args.Length - n).Implode("/"));
 							segments = args.Length - n;
+							// Check if we're only matching exact permalink
+							if (Config.ExactPermalinkMatching && post == null)
+								break;
 							if (post != null && post.Type == Permalink.PermalinkType.POST) {
 								perm = post;
 								break;
