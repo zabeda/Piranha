@@ -217,6 +217,7 @@ namespace Piranha.Models
 				copy.Keywords = org.Keywords;
 				copy.Description = org.Description;
 				copy.LastModified = copy.LastModified > org.LastModified ? copy.LastModified : org.LastModified;
+				copy.Attachments = org.Attachments;
 			}
 
 			// Get the page template
