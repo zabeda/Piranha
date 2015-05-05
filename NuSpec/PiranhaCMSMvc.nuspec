@@ -13,7 +13,7 @@
 		<description>Template for creating a Piranha CMS website with ASP.NET MVC. It installs the base controllers and views for pages and posts and sets up the database with some default data. It is dependent on the PiranhaCMS and PiranhaCMS.Mvc packages.</description>
 		<summary>Template for creating a Piranha CMS website with ASP.NET MVC.</summary>
 		<releaseNotes>See the changelog available at:
-http://piranhacms.org/home/changelog
+https://github.com/piranhacms/piranha/wiki/changelog
 		</releaseNotes>
 		<copyright>Håkan Edling</copyright>
 		<dependencies>

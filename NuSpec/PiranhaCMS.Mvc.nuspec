@@ -16,7 +16,7 @@ This package can't be installed in the same project as the PiranhaCMS.WebPages p
 		</description>
 		<summary>Core package for building Piranha CMS web sites with ASP.NET Mvc.</summary>
 		<releaseNotes>See the changelog available at:
-http://piranhacms.org/home/changelog
+https://github.com/piranhacms/piranha/wiki/changelog
 		</releaseNotes>
 		<copyright>Håkan Edling</copyright>
 		<dependencies>

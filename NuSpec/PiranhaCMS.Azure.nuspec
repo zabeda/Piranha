@@ -12,7 +12,7 @@
 		<description>Library for adding Windows Azure features to Piranha CMS.</description>
 		<summary>Library for adding Windows Azure features to Piranha CMS.</summary>
 		<releaseNotes>See the changelog available at:
-http://piranhacms.org/home/changelog
+https://github.com/piranhacms/piranha/wiki/changelog
 		</releaseNotes>
 		<copyright>Håkan Edling</copyright>
 		<dependencies>

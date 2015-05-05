@@ -13,7 +13,7 @@
 		<description>Template for creating a Piranha CMS website with ASP.NET Web Pages. It installs the base templates for pages, posts and sets up the database with some default data. It is dependent on the PiranhaCMS.Core and PiranhaCMS.WebPages packages.</description>
 		<summary>Template for creating a Piranha CMS website with ASP.NET Web Pages.</summary>
 		<releaseNotes>See the changelog available at:
-http://piranhacms.org/home/changelog
+https://github.com/piranhacms/piranha/wiki/changelog
 		</releaseNotes>
 		<copyright>Håkan Edling</copyright>
 		<dependencies>

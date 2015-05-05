@@ -16,7 +16,7 @@ It also creates the default folders needed for uploading, caching and scaling me
 		</description>
 		<summary>This is the core package for Piranha CMS. It contains the binaries and manager interface.</summary>
 		<releaseNotes>See the changelog available at:
-http://piranhacms.org/home/changelog
+https://github.com/piranhacms/piranha/wiki/changelog
 		</releaseNotes>
 		<copyright>Håkan Edling</copyright>
 		<dependencies>
