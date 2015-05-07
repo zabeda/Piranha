@@ -27,6 +27,5 @@ https://github.com/piranhacms/piranha/wiki/changelog
 	</metadata>
 	<files>
 		<file src="..\Core\Piranha.Mvc\bin\release\Piranha.Mvc.dll" target="lib\net45\Piranha.Mvc.dll" />
-		<file src="..\Core\Piranha.Mvc\bin\release\Piranha.Mvc.pdb" target="lib\net45\Piranha.Mvc.pdb" />
 	</files>
 </package>

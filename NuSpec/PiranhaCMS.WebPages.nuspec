@@ -27,6 +27,5 @@ https://github.com/piranhacms/piranha/wiki/changelog
 	</metadata>
 	<files>
 		<file src="..\Core\Piranha.WebPages\bin\release\Piranha.WebPages.dll" target="lib\net45\Piranha.WebPages.dll" />
-		<file src="..\Core\Piranha.WebPages\bin\release\Piranha.WebPages.pdb" target="lib\net45\Piranha.WebPages.pdb" />
 	</files>
 </package>
