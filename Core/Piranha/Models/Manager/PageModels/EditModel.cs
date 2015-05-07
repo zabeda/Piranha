@@ -519,7 +519,7 @@ namespace Piranha.Models.Manager.PageModels
 						if (Page.Seqno > 1) {
 							if (Page.ParentId != Guid.Empty)
 								refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1);
-							else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1);
+                            else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0 AND page_sitetree_id = @1", Page.Seqno - 1, Page.SiteTreeId); //ÖS 2015-03-18 added siteid to the query
 						} else {
 							refpage = Page.GetSingle(Page.ParentId, true);
 						}
@@ -569,7 +569,7 @@ namespace Piranha.Models.Manager.PageModels
 					if (Page.Seqno > 1) {
 						if (Page.ParentId != Guid.Empty)
 							refpage = Page.GetSingle("page_parent_id = @0 AND page_seqno = @1", Page.ParentId, Page.Seqno - 1);
-						else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0", Page.Seqno - 1);
+                        else refpage = Page.GetSingle("page_parent_id IS NULL AND page_seqno = @0 AND page_sitetree_id = @1", Page.Seqno - 1, Page.SiteTreeId); //ÖS 2015-03-18 added siteid to the query
 					} else {
 						refpage = Page.GetSingle(Page.ParentId, true);
 					}

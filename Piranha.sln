@@ -53,7 +53,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{C3C647
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Legacy.Services", "Legacy\Piranha.Legacy.Services\Piranha.Legacy.Services.csproj", "{8405AD59-101A-479B-A12D-66F79D478602}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Piranha.Data.Tests", "Core\Piranha.Data.Tests\Piranha.Data.Tests.csproj", "{2D90F6D8-4E44-4588-AB6C-095A358D6BBD}"
+EndProject
+
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuspec", ".nuspec", "{17A60E15-2E37-4482-B51C-3B67447B3ACF}"
+	ProjectSection(SolutionItems) = preProject
+		NuSpec\PiranhaCMS.Azure.nuspec = NuSpec\PiranhaCMS.Azure.nuspec
+		NuSpec\PiranhaCMS.Core.nuspec = NuSpec\PiranhaCMS.Core.nuspec
+		NuSpec\PiranhaCMS.Legacy.Services.nuspec = NuSpec\PiranhaCMS.Legacy.Services.nuspec
+		NuSpec\PiranhaCMS.Mvc.nuspec = NuSpec\PiranhaCMS.Mvc.nuspec
+		NuSpec\PiranhaCMS.nuspec = NuSpec\PiranhaCMS.nuspec
+		NuSpec\PiranhaCMS.WebPages.nuspec = NuSpec\PiranhaCMS.WebPages.nuspec
+		NuSpec\PiranhaCMSMvc.nuspec = NuSpec\PiranhaCMSMvc.nuspec
+	EndProjectSection
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

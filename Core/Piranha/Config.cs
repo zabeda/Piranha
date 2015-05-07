@@ -96,6 +96,15 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets/sets if MEF composition should be disabled.
+		/// </summary>
+		public static bool DisableComposition {
+			get {
+				return config.Settings.DisableComposition.Value;
+			}
+		}
+
+		/// <summary>
 		/// Gets if "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> should be rendered for IE
 		/// </summary>
 		public static bool RenderX_UA_CompatibleForIE {
@@ -288,6 +297,15 @@ namespace Piranha
 		public static Guid SiteTreeNamespaceId {
 			get { return WebPages.WebPiranha.CurrentSite.NamespaceId; }
 		}
+
+
+        /// <summary>
+        /// Gets  whether to match only exact permalinks in routing
+        /// </summary>
+	    public static bool ExactPermalinkMatching
+	    {
+            get { return config.Settings.ExactPermalinkMatching.Value; }
+	    }
 
 		/// <summary>
 		/// Gets the id of the default sys user.

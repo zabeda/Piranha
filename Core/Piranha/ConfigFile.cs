@@ -61,12 +61,14 @@ namespace Piranha
 		private const string DISABLE_MANAGER = "disableManager";
 		private const string DISABLE_TYPE_BUILDER = "disableTypeBuilder";
 		private const string DISABLE_CATALOG_SEARCH = "disableCatalogSearch";
+		private const string DISABLE_COMPOSITION = "disableComposition";
 		private const string MANAGER_NAMESPACES = "managerNamespaces";
 		private const string PASSIVE_MODE = "passiveMode";
 		private const string PREFIXLESS_PERMALINKS = "prefixlessPermalinks";
 		private const string RENDERX_UA_COMPATIBLEFORIE = "renderX-UA-CompatibleForIE";
 		private const string SHOWDBERRORS = "showDBErrors";
 		private const string ENTITY_SCHEMA = "entitySchema";
+	    private const string EXACT_PERMALINK_MATCHING = "exactPermalinkMatching";
 		#endregion
 
 		/// <summary>
@@ -125,6 +127,15 @@ namespace Piranha
 		}
 
 		/// <summary>
+		/// Gets if the MEF composition should be enabled.
+		/// </summary>
+		[ConfigurationProperty(DISABLE_COMPOSITION, IsRequired = false)]
+		public BooleanElement DisableComposition {
+			get { return (BooleanElement)this[DISABLE_COMPOSITION]; }
+			set { this[DISABLE_COMPOSITION] = value; }
+		}
+
+		/// <summary>
 		/// Gets if "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"> should be rendered for IE
 		/// </summary>
 		[ConfigurationProperty(RENDERX_UA_COMPATIBLEFORIE, IsRequired = false)]
@@ -160,6 +171,13 @@ namespace Piranha
 			set { this[PASSIVE_MODE] = value; }
 		}
 
+        [ConfigurationProperty(EXACT_PERMALINK_MATCHING, IsRequired = false)]
+	    public BooleanElement ExactPermalinkMatching
+	    {
+            get { return (BooleanElement) this[EXACT_PERMALINK_MATCHING]; }
+            set { this[EXACT_PERMALINK_MATCHING] = value; }
+	    }
+
 		/// <summary>
 		/// Gets/sets if the generated permalinks should be prefixless.
 		/// </summary>
@@ -177,6 +195,7 @@ namespace Piranha
 			DisableModelStateBinding = new BooleanElement();
 			DisableManager = new BooleanElement();
 			DisableCatalogSearch = new BooleanElement();
+			DisableComposition = new BooleanElement();
 			ManagerNamespaces = new StringElement();
 			RenderX_UA_CompatibleForIE = new BooleanElement();
 			ShowDBErrors = new BooleanElement();
