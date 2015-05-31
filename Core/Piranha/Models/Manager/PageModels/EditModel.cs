@@ -207,26 +207,6 @@ namespace Piranha.Models.Manager.PageModels
 		}
 
 		/// <summary>
-		/// Creates a new page from the given template and returns it 
-		/// as an edit model.
-		/// </summary>
-		/// <param name="templateId">The template id</param>
-		/// <returns>The edit model</returns>
-		[Obsolete("Please use CreateByTemplateAndPosition instead")]
-		public static EditModel CreateByTemplate(Guid templateId) {
-			EditModel m = new EditModel();
-
-			m.Page = new Piranha.Models.Page() {
-				Id = Guid.NewGuid(),
-				TemplateId = templateId,
-				SiteTreeId = Config.SiteTreeId
-			};
-			m.GetRelated();
-
-			return m;
-		}
-
-		/// <summary>
 		/// Creates a new page from the given template and position and returns it
 		/// as an edit model.
 		/// </summary>

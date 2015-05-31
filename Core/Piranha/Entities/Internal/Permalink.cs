@@ -46,11 +46,6 @@ namespace Piranha.Models
 		}
 		#endregion
 
-		#region Members
-		[Obsolete("Please use Piranha.Config.DefaultNamespaceId instead")]
-		public static Guid DefaultNamespace = new Guid("8FF4A4B4-9B6C-4176-AAA2-DB031D75AC03");
-		#endregion
-
 		#region Inner classes
 		public enum PermalinkType
 		{

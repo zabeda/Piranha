@@ -145,36 +145,7 @@ namespace Piranha.WebPages
 				return root;
 			}
 		}
-
-		/// <summary>
-		/// Gets/sets whether to use prefixless permalinks.
-		/// </summary>
-		[Obsolete("Please refer to Piranha.Config.PrefixlessPermalinks or configure it using the appropriate section in you Web.config")]
-		public static bool PrefixlessPermalinks {
-			get { return Config.PrefixlessPermalinks; }
-			set { Config.PrefixlessPermalinks = value; }
-		}
 		#endregion
-
-		/// <summary>
-		/// Registers the given.
-		/// </summary>
-		/// <param name="urlprefix">The url prefix</param>
-		/// <param name="id">The handler id</param>
-		/// <param name="handler">The actual handler</param>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Add()")]
-		public static void RegisterHandler(string urlprefix, string id, IRequestHandler handler) {
-			Application.Current.Handlers.Add(urlprefix, id, handler);
-		}
-
-		/// <summary>
-		/// Removes the handler with the given id.
-		/// </summary>
-		/// <param name="id">The handler id</param>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Remove()")]
-		public static void RemoveHandler(string id) {
-			Application.Current.Handlers.Remove(id);
-		}
 
 		/// <summary>
 		/// Registers the culture to the given prefix.
@@ -184,16 +155,6 @@ namespace Piranha.WebPages
 		public static void RegisterCulture(string urlprefix, CultureInfo culture) {
 			Cultures.Add(urlprefix, culture);
 			CulturePrefixes.Add(culture.Name, urlprefix);
-		}
-
-		/// <summary>
-		/// Gets the current url prefix used for the given handler id.
-		/// </summary>
-		/// <param name="id">The handler id</param>
-		/// <returns>The url prefix</returns>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.GetUrlPrefix()")]
-		public static string GetUrlPrefixForHandlerId(string id) {
-			return Application.Current.Handlers.GetUrlPrefix(id);
 		}
 
 		/// <summary>
@@ -217,21 +178,6 @@ namespace Piranha.WebPages
 			if (url.EndsWith("/"))
 				return url.Substring(0, url.Length - 1);
 			return url;
-		}
-
-		/// <summary>
-		/// Clears all of the currently registered handlers.
-		/// </summary>
-		[Obsolete("Please refer to Piranha.Web.Application.Current.Handlers.Reset()")]
-		public static void ResetHandlers() {
-			Application.Current.Handlers.Clear();
-		}
-
-		/// <summary>
-		/// Registers all of the default request handlers.
-		/// </summary>
-		[Obsolete("The application is self initializing. This method is not used.")]
-		public static void RegisterDefaultHandlers() {
 		}
 
 		/// <summary>
@@ -293,12 +239,6 @@ namespace Piranha.WebPages
 			// Register json deserialization for post data
 			ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
 		}
-
-		/// <summary>
-		/// Registers all of the default rest wcf services.
-		/// </summary>
-		[Obsolete("This function has been moved to Piranha.Legacy.Services", true)]
-		public static void InitServices() { }
 
 		/// <summary>
 		/// Handles the URL Rewriting for the application
