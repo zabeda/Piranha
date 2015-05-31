@@ -29,17 +29,6 @@ public static class DataExtensions
 	}
 
 	/// <summary>
-	/// Gets the region with the given name from the region list.
-	/// </summary>
-	/// <param name="regions">The regions list</param>
-	/// <param name="name">The name</param>
-	/// <returns>The region</returns>
-	[Obsolete("This extension method is obsolete. Please use ByInternalId to access regions instead.")]
-	public static Region ByName(this IList<Region> regions, string name) {
-		return regions.Where(r => r.Name == name).Single();
-	}
-
-	/// <summary>
 	/// Gets the region by it's internal id. Note that this method is dependent on
 	/// that the RegionTemplate entity is included with the region. 
 	/// </summary>

@@ -49,10 +49,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="dotless.Core, Version=1.4.4.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\dotless.1.4.4\lib\dotless.Core.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -745,8 +741,11 @@
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ef8c08_256x240.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffd27a_256x240.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Css\Ext\ui-icons_ffffff_256x240.png" />
-    <Content Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.less.css" />
-    <Content Include="Areas\Manager\Content\Css\Ext\yui.reset.min.less.css" />
+    <None Include="Areas\Manager\Content\Css\Ext\yui.fonts.min.less" />
+    <None Include="Areas\Manager\Content\Css\Ext\yui.reset.min.less" />
+    <Content Include="Areas\Manager\Content\Css\Less\Attachments.css">
+      <DependentUpon>Attachments.less</DependentUpon>
+    </Content>
     <Content Include="Areas\Manager\Content\Css\Less\Attachments.less" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-16.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-add-24.png" />
@@ -808,14 +807,106 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.regiontemplate.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.template.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-loader.gif" />
-    <Content Include="Areas\Manager\Content\Css\Less\Style.less" />
+    <Content Include="Areas\Manager\Content\Css\Less\Attachments.min.css">
+      <DependentUpon>Attachments.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Boxes.css">
+      <DependentUpon>Boxes.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Boxes.min.css">
+      <DependentUpon>Boxes.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\External.css">
+      <DependentUpon>External.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\External.min.css">
+      <DependentUpon>External.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Floatbox.css">
+      <DependentUpon>Floatbox.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Floatbox.min.css">
+      <DependentUpon>Floatbox.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Forms.css">
+      <DependentUpon>Forms.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Forms.min.css">
+      <DependentUpon>Forms.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\General.css">
+      <DependentUpon>General.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\General.min.css">
+      <DependentUpon>General.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Icons.css">
+      <DependentUpon>Icons.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Icons.min.css">
+      <DependentUpon>Icons.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Lists.css">
+      <DependentUpon>Lists.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Lists.min.css">
+      <DependentUpon>Lists.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Login.css">
+      <DependentUpon>Login.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Login.min.css">
+      <DependentUpon>Login.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Notifications.css">
+      <DependentUpon>Notifications.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Notifications.min.css">
+      <DependentUpon>Notifications.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Preview.css">
+      <DependentUpon>Preview.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Preview.min.css">
+      <DependentUpon>Preview.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Responsive.css">
+      <DependentUpon>Responsive.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Responsive.min.css">
+      <DependentUpon>Responsive.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Sitemap.css">
+      <DependentUpon>Sitemap.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Sitemap.min.css">
+      <DependentUpon>Sitemap.css</DependentUpon>
+    </Content>
     <EmbeddedResource Include="Areas\Manager\Content\Img\logo.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-content.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-logout.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-settings.png" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\ico-menu-system.png" />
-    <EmbeddedResource Include="Areas\Manager\Content\Css\Style.min.css" />
     <EmbeddedResource Include="Areas\Manager\Content\Img\logo-big.png" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\knockout.min.js" />
+    <Content Include="Areas\Manager\Content\Css\Less\Tabs.css">
+      <DependentUpon>Tabs.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Tabs.min.css">
+      <DependentUpon>Tabs.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Toolbars.css">
+      <DependentUpon>Toolbars.less</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\Less\Toolbars.min.css">
+      <DependentUpon>Toolbars.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Manager\Content\Css\style.css">
+      <DependentUpon>style.less</DependentUpon>
+    </Content>
+    <EmbeddedResource Include="Areas\Manager\Content\Css\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </EmbeddedResource>
     <Content Include="Areas\Manager\Content\Js\Ext\tiny_mce\license.txt" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\tinymce.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\content.min.css" />
@@ -1316,6 +1407,11 @@
       <LastGenOutput>PostModelRegion.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Manager\Content\Css\style.less" />
+  </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1346,7 +1442,8 @@
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)packages\dotless.1.4.4\tool\dotless.compiler.exe" "$(ProjectDir)areas\manager\content\css\less\style.less" "$(ProjectDir)areas\manager\content\css\style.min.css" -m</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

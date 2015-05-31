@@ -426,18 +426,6 @@ namespace Piranha.Web
 		}
 
 		/// <summary>
-		/// Creates the action input for a piranha post back. This is only applicable
-		/// to ASP.NET WebPages. If your using MVC, use the standard BeginForm instead.
-		/// </summary>
-		/// <param name="action">The form action</param>
-		/// <returns>A html string</returns>
-		[Obsolete("Please use Piranha.WebPages.FormHelper.Action() instead")]
-		public IHtmlString FormAction(string action) {
-			return new HtmlString(String.Format("<input type=\"hidden\" name=\"piranha_form_action\" value=\"{0}\" />",
-				action));
-		}
-
-		/// <summary>
 		/// Gets an encrypted API-key valid for 30 minutes.
 		/// </summary>
 		/// <param name="apiKey">The API-key</param>

@@ -10,7 +10,6 @@
 
 using System;
 using System.Web;
-
 using Piranha.Web;
 
 namespace Piranha.Mvc
@@ -29,6 +28,26 @@ namespace Piranha.Mvc
 		/// </summary>
 		/// <returns>The head information</returns>
 		public static IHtmlString Head() { return Helper.Head(); }
+
+        /// <summary>
+		/// Sets the current page to the given value. This can be
+        /// useful when using the UI helper in passive mode and the
+        /// routing never sets the current page.
+        /// </summary>
+        /// <param name="page">The page</param>
+        public static void SetCurrent(Models.Page page) { 
+			HttpContext.Current.Items["Piranha_CurrentPage"] = page;
+		}
+
+        /// <summary>
+        /// Sets the current post to the given value. This can be
+        /// useful when using the UI helper in passive mode and the
+        /// routing never sets the current post.
+        /// </summary>
+        /// <param name="post">The post</param>
+        public static void SetCurrent(Models.Post post) { 
+			HttpContext.Current.Items["Piranha_CurrentPost"] = post;
+		}
 
 		/// <summary>
 		/// Generates a full site url from the virtual path.

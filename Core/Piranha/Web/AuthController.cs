@@ -76,19 +76,6 @@ namespace Piranha.Web
 							return Redirect(returl);
 						return Redirect("~/");
 					}
-				} else if (WebPages.Hooks.Mail.SendPasswordMail != null) {
-					var pwd = SysUserPassword.GetSingle("sysuser_login = @0", login);
-					var user = SysUser.GetSingle("sysuser_login = @0", login);
-					if (pwd != null) {
-						pwd.Password = SysUserPassword.GeneratePassword();
-						pwd.Save();
-
-						WebPages.Hooks.Mail.SendPasswordMail(user, pwd.Password);
-
-						if (!String.IsNullOrEmpty(returl))
-							return Redirect(returl);
-						return Redirect("~/");
-					}
 				}
 			}
 			if (!String.IsNullOrEmpty(failurl))

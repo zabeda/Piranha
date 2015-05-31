@@ -300,8 +300,6 @@ namespace Piranha.WebPages
 
 		public static class Mail
 		{
-			[Obsolete("Please use Piranha.WebPages.Hooks.Mail.SendPassword instead")]
-			public static Delegates.SendPasswordMail SendPasswordMail;
 			public static Delegates.SendPassword SendPassword;
 		}
 	}
