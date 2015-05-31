@@ -14,10 +14,9 @@ The master branch of this reposiory is the **development branch**. If you want t
 
 ## NuGet packages
 
-There are NuGet packages available for both the template projects, as well as for the core libraries. To read more about how to get started and the different packages available, please refer to the official site at:
+There are NuGet packages available for both the template projects, as well as for the core libraries. To read more about how to get started and the different packages available you can find more information in the Wiki section at:
 
-<a href="http://piranhacms.org/docs/introduction/getting-started">http://piranhacms.org/docs/introduction/getting-started</a>
-<a href="http://piranhacms.org/docs/introduction/nuget-packages">http://piranhacms.org/docs/introduction/nuget-packages</a>
+<a href="https://github.com/PiranhaCMS/Piranha/wiki/NuGet-packages">https://github.com/PiranhaCMS/Piranha/wiki/NuGet-packages</a>
 
 ## Features
 
