@@ -105,9 +105,10 @@ namespace Piranha.Models
 		/// <returns>The access list</returns>
 		public static Dictionary<string, SysAccess> GetAccessList() {
 			if (Application.Current.CacheProvider[typeof(SysAccess).Name] == null) {
-				Application.Current.CacheProvider[typeof(SysAccess).Name] = new Dictionary<string, SysAccess>();
+				var sysAccesses = new Dictionary<string, SysAccess>();
 				SysAccess.Get().ForEach((e) =>
-					((Dictionary<string, SysAccess>)Application.Current.CacheProvider[typeof(SysAccess).Name]).Add(e.Function, e));
+					sysAccesses.Add(e.Function, e));
+                Application.Current.CacheProvider[typeof(SysAccess).Name] = sysAccesses;
 			}
 			return (Dictionary<string, SysAccess>)Application.Current.CacheProvider[typeof(SysAccess).Name];
 		}
