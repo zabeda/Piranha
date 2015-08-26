@@ -16,6 +16,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 
 using AutoMapper;
 using Piranha.Models;
@@ -92,6 +93,37 @@ namespace Piranha.Web
 			CurrentPost = post;
 		}
 
+        /// <summary>
+        /// Generates the appropriate html string for a meta tag. Properly escapes attribute values.
+        /// </summary>
+        /// <param name="name">The name attribute value of the meta tag</param>
+        /// <param name="content">The content attribute value of the meta tag</param>
+        /// <returns></returns>
+        private string CreateMetaTag(string name, string content)
+        {
+            return string.Format("<meta name=\"{0}\" content=\"{1}\" />",
+                HttpUtility.HtmlAttributeEncode(name),
+                HttpUtility.HtmlAttributeEncode(content));
+        }
+
+        /// <summary>
+        /// Generates the appropriate html string for a link tag. Properly escapes attribute values.
+        /// </summary>
+        /// <param name="rel">The rel attribute value</param>
+        /// <param name="type">The type attribute value</param>
+        /// <param name="href">The href attribute value</param>
+        /// <param name="title">The title attribute value (if omitted or empty will be skipped)</param>
+        /// <returns></returns>
+        private string CreateLinkTag(string rel, string type, string href, string title = "")
+        {
+            return string.Format("<link type=\"{0}\" rel=\"{1}\" href=\"{2}\"{3} />",
+                HttpUtility.HtmlAttributeEncode(type),
+                HttpUtility.HtmlAttributeEncode(rel),
+                HttpUtility.HtmlAttributeEncode(href),
+                (title == "") ? "" : string.Format(" title=\"{0}\"", HttpUtility.HtmlAttributeEncode(title))
+            );
+        }
+
 		/// <summary>
 		/// Generates the tags appropriate for the html head.
 		/// </summary>
@@ -116,43 +148,40 @@ namespace Piranha.Web
 				var description = CurrentPage != null ? CurrentPage.Description :
 					(!String.IsNullOrEmpty(CurrentPost.Description) ? CurrentPost.Description : CurrentPost.Excerpt);
 
-				if (!String.IsNullOrEmpty(description))
-					str.AppendLine("<meta name=\"description\" content=\"" + description + "\" />");
-				if (!String.IsNullOrEmpty(keywords))
-					str.AppendLine("<meta name=\"keywords\" content=\"" + keywords + "\" />");
+                if (!String.IsNullOrEmpty(description))
+                    str.AppendLine(CreateMetaTag("description", description));
+                if (!String.IsNullOrEmpty(keywords))
+                    str.AppendLine(CreateMetaTag("keywords", keywords));
 			}
 
-			/**
+            /**
 			 * Open graph meta tags
 			 */
-			str.AppendLine("<meta property=\"og:site_name\" content=\"" +
-				WebPiranha.CurrentSite.MetaTitle + "\" />");
-			str.AppendLine("<meta property=\"og:url\" content=\"" +
-				"http://" + ctx.Request.Url.DnsSafeHost + HttpContext.Current.Request.RawUrl + "\" />");
+            str.AppendLine(CreateMetaTag("og:site_name", WebPiranha.CurrentSite.MetaTitle));
+            str.AppendLine(CreateMetaTag("og:url", "http://" + ctx.Request.Url.DnsSafeHost + HttpContext.Current.Request.RawUrl));
 
 			if (CurrentPage != null && CurrentPage.IsStartpage) {
-				str.AppendLine("<meta property=\"og:type\" content=\"website\" />");
-				str.AppendLine("<meta property=\"og:description\" content=\"" +
-					WebPiranha.CurrentSite.MetaDescription + "\" />");
-				str.AppendLine("<meta property=\"og:title\" content=\"" + WebPiranha.CurrentSite.MetaTitle + "\" />");
+                str.AppendLine(CreateMetaTag("og:type", "website"));
+                str.AppendLine(CreateMetaTag("og:description", WebPiranha.CurrentSite.MetaDescription));
+                str.AppendLine(CreateMetaTag("og:title", WebPiranha.CurrentSite.MetaTitle));
 			} else if (CurrentPage != null || CurrentPost != null) {
 				var title = CurrentPage != null ? CurrentPage.Title : CurrentPost.Title;
 				var description = CurrentPage != null ? CurrentPage.Description :
 					(!String.IsNullOrEmpty(CurrentPost.Description) ? CurrentPost.Description : CurrentPost.Excerpt);
 
-				str.AppendLine("<meta property=\"og:type\" content=\"article\" />");
+                str.AppendLine(CreateMetaTag("og:type", "article"));
+                
 				if (!String.IsNullOrEmpty(description)) {
-					str.AppendLine("<meta property=\"og:description\" content=\"" + description + "\" />");
+                    str.AppendLine(CreateMetaTag("og:description", description));
 				}
-				str.AppendLine("<meta property=\"og:title\" content=\"" + title + "\" />");
+                str.AppendLine(CreateMetaTag("og:title", title));
 			}
 
-			/**
+            /**
 			 * RSS Feeds
 			 */
-			str.AppendLine("<link rel=\"alternate\" type=\"application/rss+xml\" title=\"" +
-				WebPiranha.CurrentSite.MetaTitle + "\" href=\"" + WebPages.WebPiranha.GetSiteUrl() + "/" +
-				Application.Current.Handlers.GetUrlPrefix("rss") + "\" />");
+            str.AppendLine(CreateLinkTag("alternate", "application/rss+xml", WebPages.WebPiranha.GetSiteUrl() + "/" +
+               Application.Current.Handlers.GetUrlPrefix("rss"), WebPiranha.CurrentSite.MetaTitle));
 
 			/**
 			 * Check if hook is attached.

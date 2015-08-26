@@ -184,3 +184,4 @@ FakesAssemblies/
 
 # Mac OSX Temp files
 ._*
+.vs/
