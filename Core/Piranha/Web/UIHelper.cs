@@ -94,7 +94,7 @@ namespace Piranha.Web
 		}
 
         /// <summary>
-        /// Generates the appropriate html string for a meta tag. Properly escapes name and content parameters.
+        /// Generates the appropriate html string for a meta tag. Properly escapes attribute values.
         /// </summary>
         /// <param name="name">The name attribute value of the meta tag</param>
         /// <param name="content">The content attribute value of the meta tag</param>
@@ -104,6 +104,24 @@ namespace Piranha.Web
             return string.Format("<meta name=\"{0}\" content=\"{1}\" />",
                 HttpUtility.HtmlAttributeEncode(name),
                 HttpUtility.HtmlAttributeEncode(content));
+        }
+
+        /// <summary>
+        /// Generates the appropriate html string for a link tag. Properly escapes attribute values.
+        /// </summary>
+        /// <param name="rel">The rel attribute value</param>
+        /// <param name="type">The type attribute value</param>
+        /// <param name="href">The href attribute value</param>
+        /// <param name="title">The title attribute value (if omitted or empty will be skipped)</param>
+        /// <returns></returns>
+        private string CreateLinkTag(string rel, string type, string href, string title = "")
+        {
+            return string.Format("<link type=\"{0}\" rel=\"{1}\" href=\"{2}\"{3} />",
+                HttpUtility.HtmlAttributeEncode(type),
+                HttpUtility.HtmlAttributeEncode(rel),
+                HttpUtility.HtmlAttributeEncode(href),
+                (title == "") ? "" : string.Format(" title=\"{0}\"", HttpUtility.HtmlAttributeEncode(title))
+            );
         }
 
 		/// <summary>
@@ -162,12 +180,8 @@ namespace Piranha.Web
             /**
 			 * RSS Feeds
 			 */
-            var rssTb = new TagBuilder("link");
-            rssTb.Attributes.Add("rel", "alternate");
-            rssTb.Attributes.Add("type", "application/rss+xml");
-            rssTb.Attributes.Add("title", WebPiranha.CurrentSite.MetaTitle);
-            rssTb.Attributes.Add("href", WebPages.WebPiranha.GetSiteUrl() + "/" +
-                Application.Current.Handlers.GetUrlPrefix("rss"));
+            str.AppendLine(CreateLinkTag("alternate", "application/rss+xml", WebPages.WebPiranha.GetSiteUrl() + "/" +
+               Application.Current.Handlers.GetUrlPrefix("rss"), WebPiranha.CurrentSite.MetaTitle));
 
 			/**
 			 * Check if hook is attached.
