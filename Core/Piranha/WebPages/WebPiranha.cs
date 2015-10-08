@@ -171,7 +171,8 @@ namespace Piranha.WebPages
 		/// <returns>The url</returns>
 		public static string GetSiteUrl() {
 			var context = HttpContext.Current;
-			var url = "http://" + context.Request.Url.DnsSafeHost +
+		    var protocol = context.Request.IsSecureConnection ? "https://" : "http://";
+			var url = protocol + context.Request.Url.DnsSafeHost +
 				(!context.Request.Url.IsDefaultPort ? ":" + context.Request.Url.Port : "") +
 				context.Request.ApplicationPath;
 
