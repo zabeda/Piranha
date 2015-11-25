@@ -541,6 +541,7 @@ namespace Piranha.Models.Manager.PageModels
 					Page.PermalinkId = Permalink.Id;
 				}
 			}
+			Page.IsBlock = Template.IsBlock;
 
 			// Get placement ref title
 			if (!IsSite) {

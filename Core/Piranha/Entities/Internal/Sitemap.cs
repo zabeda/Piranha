@@ -145,6 +145,12 @@ namespace Piranha.Models
 		private string TemplateRedirect { get; set; }
 
 		/// <summary>
+		/// Gets/sets if this is a page block.
+		/// </summary>
+		[Column(Name = "pagetemplate_is_block", Table = "pagetemplate")]
+		public bool IsBlock { get; set; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name = "page_created")]

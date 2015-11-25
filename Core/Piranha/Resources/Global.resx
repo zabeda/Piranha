@@ -126,6 +126,12 @@
   <data name="Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Blocks" xml:space="preserve">
+    <value>Blocks</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
   </data>
@@ -206,6 +212,9 @@
   </data>
   <data name="Optional" xml:space="preserve">
     <value>Optional</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Pages</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

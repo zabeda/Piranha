@@ -15,5 +15,10 @@ namespace Piranha.Extend
 	/// <summary>
 	/// Interface for defining a post type programmatically.
 	/// </summary>
-	public interface IPostType : IType { }
+	public interface IPostType : IType { 
+		/// <summary>
+		/// Gets if posts of this type should be included in the site RSS feed.
+		/// </summary>
+		bool AllowRss { get; }
+	}
 }

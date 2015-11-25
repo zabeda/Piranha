@@ -115,6 +115,13 @@ namespace Piranha.Models
 		public bool IsSiteTemplate { get; set; }
 
 		/// <summary>
+		/// Gets/sets if this is a page block template.
+		/// </summary>
+		[Column(Name = "pagetemplate_is_block")]
+		[Display(ResourceType = typeof(Piranha.Resources.Template), Name = "IsBlock")]
+		public bool IsBlock { get; set; }
+
+		/// <summary>
 		/// Gets/sets the type that created this template if it was create by code.
 		/// </summary>
 		[Column(Name = "pagetemplate_type")]

@@ -57,6 +57,11 @@ namespace Piranha.Extend
 		public virtual bool ShowView { get; protected set; }
 
 		/// <summary>
+		/// Gets if posts of this type should be included in the site RSS feed.
+		/// </summary>
+		public virtual bool AllowRss { get; protected set; }
+
+		/// <summary>
 		/// Gets the defíned properties.
 		/// </summary>
 		public virtual IList<string> Properties { get; protected set; }

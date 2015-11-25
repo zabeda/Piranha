@@ -135,6 +135,12 @@
   <data name="EditPostTitleNew" xml:space="preserve">
     <value>Lägg till ny artikeltyp</value>
   </data>
+  <data name="IsBlock" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="IsBlockDescription" xml:space="preserve">
+    <value>Om sidtypen är ett block i en annan sida.</value>
+  </data>
   <data name="ListDeletePage" xml:space="preserve">
     <value>Ta bort sidtyp</value>
   </data>
