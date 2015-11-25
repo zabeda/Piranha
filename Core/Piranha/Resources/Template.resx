@@ -135,6 +135,12 @@
   <data name="EditPostTitleNew" xml:space="preserve">
     <value>Add new post type</value>
   </data>
+  <data name="IsBlock" xml:space="preserve">
+    <value>Is block</value>
+  </data>
+  <data name="IsBlockDescription" xml:space="preserve">
+    <value>If the current pagetype is a page block.</value>
+  </data>
   <data name="ListDeletePage" xml:space="preserve">
     <value>Delete page type</value>
   </data>

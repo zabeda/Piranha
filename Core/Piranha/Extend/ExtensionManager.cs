@@ -311,6 +311,7 @@ namespace Piranha.Extend
 				m.Template.Properties.Clear();
 				m.Template.Properties.AddRange(type.Properties);
 				m.Template.Type = type.GetType().FullName;
+				m.Template.IsBlock = type.IsBlock;
 
 				var old = new List<Models.RegionTemplate>();
 				m.Regions.ForEach(r => old.Add(r));
@@ -371,6 +372,7 @@ namespace Piranha.Extend
 				m.Template.Properties.Clear();
 				m.Template.Properties.AddRange(type.Properties);
 				m.Template.Type = type.GetType().FullName;
+				m.Template.AllowRss = type.AllowRss;
 
 				// Save Template
 				Data.Database.LoginSys();

@@ -146,6 +146,11 @@
                     <label>&nbsp;</label>
                     <p>@Html.CheckBoxFor(m => m.Template.ShowRedirect) @Piranha.Resources.Template.PageRedirectOverride</p>
                 </li>
+				<li>@Html.LabelFor(m => m.Template.IsBlock)
+					<p>
+						@Html.CheckBoxFor(m => m.Template.IsBlock) @Piranha.Resources.Template.IsBlockDescription
+					</p>
+				</li>
             </ul>
         </div>
     </div>

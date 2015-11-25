@@ -957,6 +957,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Welcome.generated.cs</LastGenOutput>
     </Content>
+    <EmbeddedResource Include="Data\Scripts\Updates\33.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

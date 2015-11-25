@@ -126,6 +126,12 @@
   <data name="Advanced" xml:space="preserve">
     <value>Avancerat</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>Alla</value>
+  </data>
+  <data name="Blocks" xml:space="preserve">
+    <value>Block</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Kategorier</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="NameRequired" xml:space="preserve">
     <value>Du måste ange ett namn.</value>
+  </data>
+  <data name="Pages" xml:space="preserve">
+    <value>Sidor</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Lösenord</value>

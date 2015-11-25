@@ -67,6 +67,11 @@ namespace Piranha.Extend
 		public virtual bool ShowRedirect { get; protected set; }
 
 		/// <summary>
+		/// Gets/sets if this page type is a block.
+		/// </summary>
+		public virtual bool IsBlock { get; protected set; }
+
+		/// <summary>
 		/// Gets the defíned properties.
 		/// </summary>
 		public virtual IList<string> Properties { get; protected set; }

@@ -51,6 +51,11 @@ namespace Piranha.Models
 		/// Gets the available attachments.
 		/// </summary>
 		public List<Content> Attachments { get; set; }
+
+		/// <summary>
+		/// Gets the available page blocks.
+		/// </summary>
+		public IList<PageModel> Blocks { get; set; }
 		#endregion
 
 		/// <summary>
@@ -61,6 +66,7 @@ namespace Piranha.Models
 			Properties = new ExpandoObject();
 			Extensions = new ExpandoObject();
 			Attachments = new List<Content>();
+			Blocks = new List<PageModel>();
 		}
 
 		#region Static accessors
@@ -288,6 +294,19 @@ namespace Piranha.Models
 				}
 				((IDictionary<string, object>)Extensions)[ExtensionManager.Current.GetInternalIdByType(ext.Type)] = body;
 			}
+			// Blocks
+			var blocks = Piranha.Models.Page.GetFields("page_id, page_last_modified", "page_parent_id=@0 AND page_draft = 0 AND pagetemplate_is_block = 1", Page.Id, new Piranha.Data.Params() { OrderBy = "page_seqno" });
+			foreach (var block in blocks) {
+				var blockModel = PageModel.GetById(block.Id);
+
+				// Add the block to the page model
+				Blocks.Add(blockModel);
+
+				// Check if we should update the page's last modified date.
+				if (((Models.Page)blockModel.Page).LastModified > ((Models.Page)Page).LastModified)
+					((Models.Page)Page).LastModified = ((Models.Page)blockModel.Page).LastModified;
+			}			
+
 			// Reset the page id if we changed it to load a copy
 			((Models.Page)Page).Id = id;
 		}

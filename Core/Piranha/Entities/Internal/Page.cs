@@ -201,6 +201,12 @@ namespace Piranha.Models
 		public string TemplateName { get; private set; }
 
 		/// <summary>
+		/// Gets/sets if this page is a block.
+		/// </summary>
+		[Column(Name = "pagetemplate_is_block", Table = "pagetemplate")]
+		public bool IsBlock { get; internal set; }
+
+		/// <summary>
 		/// Gets/sets the created date.
 		/// </summary>
 		[Column(Name = "page_created")]

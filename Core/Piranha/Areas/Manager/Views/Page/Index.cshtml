@@ -94,6 +94,22 @@
             });
             </text>
             }
+			
+        	$('.filter .btn').click(function () {
+        		if ($(this).attr('href') == '#') {
+        			$('#page-templates, #block-templates').show();
+        		} else if ($(this).attr('href') == '#page-templates') {
+        			$('#block-templates').hide();
+        			$('#page-templates').show();
+        		} else if ($(this).attr('href') == '#block-templates') {
+        			$('#page-templates').hide();
+        			$('#block-templates').show();
+        		}
+        		$('.filter .btn').removeClass('active');
+        		$(this).addClass('active');
+				
+        		return false;
+        	});
         });
 
         function bindMove() {
@@ -236,16 +252,40 @@
             <div class="clear"></div>
         </div>
         <div id="create-new" class="inner">
-            @foreach (var template in Model.Templates) {
-            <div class="templates @(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")) left" data-templateid="@template.Id">
-                <h3>@template.Name</h3>
-                <div class="preview">
-                    @template.Preview
-                </div>
-                <p>@template.Description</p>
-            </div>
-            }
+			@if (Model.Templates.Where(t => t.IsBlock).Count() > 0) {
+				<div class="filter">
+					<a class="btn active" href="#">All</a>
+					<a class="btn" href="#page-templates">Pages</a>
+					<a class="btn" href="#block-templates">Blocks</a>
+				</div>
+			}
+			<div id="page-templates">
+				@foreach (var template in Model.Templates.Where(t => !t.IsBlock)) {
+				<div class="templates @(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")) left" data-templateid="@template.Id">
+					<h3>@template.Name</h3>
+					<div class="preview">
+						@template.Preview
+					</div>
+					<p>@template.Description</p>
+				</div>
+				}
+			</div>
             <div class="clear"></div>
+			@if (Model.Templates.Where(t => t.IsBlock).Count() > 0) {
+				<fieldset id="block-templates">
+					<legend>Blocks</legend>
+					@foreach (var template in Model.Templates.Where(t => t.IsBlock)) {
+					<div class="templates @(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")) left" data-templateid="@template.Id">
+						<h3>@template.Name</h3>
+						<div class="preview">
+							@template.Preview
+						</div>
+						<p>@template.Description</p>
+					</div>
+					}
+				</fieldset>
+				<div class="clear"></div>
+			}
         </div>
         <div id="create-copy" class="inner hidden" style="width:660px;max-height:460px;overflow:scroll;">
             <ul class="form" style="position:fixed;width:645px">

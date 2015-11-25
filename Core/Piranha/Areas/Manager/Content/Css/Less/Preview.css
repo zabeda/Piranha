@@ -9,6 +9,9 @@
   overflow: hidden;
   border: 1px solid #dddddd;
 }
+.edit.block {
+  height: 110px;
+}
 .grid_3 .edit,
 .templates .preview {
   margin-bottom: 5px;
@@ -79,4 +82,23 @@ table.template td.locked,
 div.edit table td.locked {
   background: #99d3de url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAI0lEQVQIW2OYefkeHP0HAwY0PpDBgMaHCiHzQUJofKgQmg0AMpJazRePtmQAAAAASUVORK5CYII=);
   cursor: default;
+}
+#boxTemplates fieldset {
+  background: none;
+  border-width: 1px 0 0 0;
+  padding: 14px 0 0;
+  margin-bottom: 0;
+}
+#boxTemplates fieldset legend {
+  color: #444;
+  padding: 0 8px;
+}
+#boxTemplates .filter {
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 10px;
+  padding: 0 0 15px;
+}
+#boxTemplates .filter .btn {
+  text-decoration: none;
+  padding: 4px 14px;
 }

@@ -95,7 +95,7 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		public ListModel() {
 			Pages = new List<Sitemap>();
-			Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_preview, pagetemplate_description",
+			Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_preview, pagetemplate_description, pagetemplate_is_block",
 				"pagetemplate_site_template = 0", new Params() { OrderBy = "pagetemplate_name ASC" });
 			AllPages = Sitemap.GetFields("page_id, page_title, page_navigation_title, pagetemplate_name, sitetree_name", "page_draft = 1 AND page_original_id IS NULL AND (page_parent_id IS NULL OR page_parent_id NOT IN (SELECT sitetree_id FROM sitetree))",
 				new Params() { OrderBy = "sitetree_name, COALESCE(page_navigation_title, page_title)" });
@@ -113,8 +113,8 @@ namespace Piranha.Models.Manager.PageModels
 					SiteWarnings[site.Id] = 0 + (String.IsNullOrEmpty(site.MetaTitle) ? 1 : 0) + (String.IsNullOrEmpty(site.MetaDescription) ? 1 : 0);
 
 					TotalSiteWarnings[site.Id] =
-						Page.GetScalar("SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_keywords IS NULL", site.Id) +
-						Page.GetScalar("SELECT COUNT(*) FROM page WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND page_description IS NULL", site.Id);
+						Page.GetScalar("SELECT COUNT(*) FROM page JOIN pagetemplate ON pagetemplate_id = page_template_id WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND pagetemplate_is_block = 0 AND page_keywords IS NULL", site.Id) +
+						Page.GetScalar("SELECT COUNT(*) FROM page JOIN pagetemplate ON pagetemplate_id = page_template_id WHERE page_draft = 1 AND page_sitetree_id = @0 AND page_parent_id != @0 AND page_original_id IS NULL AND page_published IS NOT NULL AND pagetemplate_is_block = 0 AND page_description IS NULL", site.Id);
 				}
 			}
 		}
@@ -156,7 +156,7 @@ namespace Piranha.Models.Manager.PageModels
 
 			ListModel m = new ListModel();
 			m.Pages = Sitemap.GetStructure(internalId, false).Flatten()
-				.Where(s => s.Published != DateTime.MinValue && (String.IsNullOrEmpty(s.Keywords) || String.IsNullOrEmpty(s.Description))).ToList();
+				.Where(s => !s.IsBlock && s.Published != DateTime.MinValue && (String.IsNullOrEmpty(s.Keywords) || String.IsNullOrEmpty(s.Description))).ToList();
 			m.ActiveSite = internalId.ToUpper();
 
 			using (var db = new DataContext()) {

@@ -1,6 +1,10 @@
 ﻿@model List<Piranha.Models.Sitemap>
 @foreach (var page in Model) {
-    <li id="@page.Id" class="@(page.Pages.Count > 0 ? (page.Level <= ViewBag.Levels || page.HasChild(ViewBag.Expanded) ? "expanded" : "collapsed") : "") @(page.Updated > page.LastPublished ? "draft" : "")">
+	var hasBlocks = page.Pages.Where(p => p.IsBlock).Count() > 0;
+	var first = page == Model.First();
+	var last = page == Model.Last();
+	
+    <li id="@page.Id" class="@(page.Pages.Count > 0 ? (page.Level <= ViewBag.Levels || page.HasChild(ViewBag.Expanded) ? "expanded" : "collapsed") : "") @(page.Updated > page.LastPublished ? "draft" : "") @(page.IsBlock ? "block" + (first ? " first" : last ? " last" : "") : hasBlocks ? "has-block" : "")">
         <span class="buttons">
             <button class="icon add-after marg" title="@Piranha.Resources.Page.ListAddAfter" onclick="return preSubmit('@page.ParentId', @(page.Seqno + 1))" type="submit"></button>
             <button class="icon add-below marg" title="@Piranha.Resources.Page.ListAddBelow" onclick="return preSubmit('@page.Id', 1)" type="submit"></button>
@@ -19,7 +23,8 @@
             </div></a></span>
         @if (page.Pages.Count > 0) {
         <ul>
-            @Html.Partial("Partial/SiteTree", page.Pages)
+			@Html.Partial("Partial/SiteTree", page.Pages.Where(p => p.IsBlock).ToList())
+            @Html.Partial("Partial/SiteTree", page.Pages.Where(p => !p.IsBlock).ToList())
         </ul>
         }
     </li>

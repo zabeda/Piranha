@@ -70,6 +70,11 @@ namespace Piranha.Entities
 		public bool IsSiteTemplate { get; set; }
 
 		/// <summary>
+		/// Gets/sets if this is a page block template.
+		/// </summary>
+		public bool IsBlock { get; set; }
+
+		/// <summary>
 		/// Gets/sets the type that created this template if it was create by code.
 		/// </summary>
 		public string Type { get; set; }

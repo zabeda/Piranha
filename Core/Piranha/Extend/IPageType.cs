@@ -26,7 +26,12 @@ namespace Piranha.Extend
 		/// <summary>
 		/// Gets/sets if the redirect can be overriden by the implementing page.
 		/// </summary>
-		bool ShowRedirect { get; }		
+		bool ShowRedirect { get; }
+
+		/// <summary>
+		/// Gets/sets if this page type is a block.
+		/// </summary>
+		bool IsBlock { get; }
 
 		/// <summary>
 		/// Gets the defined regions.

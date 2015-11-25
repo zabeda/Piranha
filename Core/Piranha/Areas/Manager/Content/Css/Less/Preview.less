@@ -22,6 +22,12 @@
     border: 1px solid @primay-border-color;
 }
 
+.edit {
+	&.block {
+		height: 110px;
+	}
+}
+
 .grid_3 .edit, .templates .preview {
     margin-bottom: 5px;
 }
@@ -105,4 +111,29 @@ div.edit table {
             cursor: default;
         }
     }
+}
+
+#boxTemplates {
+	fieldset {
+		background: none;
+		border-width: 1px 0 0 0;
+		padding: 14px 0 0;
+		margin-bottom: 0;
+
+		legend {
+			color: #444;
+			padding: 0 8px;
+		}
+	}
+
+	.filter {
+		border-bottom: 1px solid @form-border-color;
+		margin-bottom: 10px;
+		padding: 0 0 15px;
+	
+		.btn {
+			text-decoration: none;
+			padding: 4px 14px;
+		}
+	}
 }
