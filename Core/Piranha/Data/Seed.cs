@@ -601,6 +601,15 @@ namespace Piranha.Data
 			}
 			#endregion
 
+			#region Default user
+			db.Users.Add(new User() {
+				ApiKey = Guid.NewGuid(),
+				GroupId = Config.SysAdminGroupId,
+				Username = "admin",
+				Password = Models.SysUser.Encrypt("password")
+			});
+			#endregion
+
 			db.SaveChanges();
 		}
 	}

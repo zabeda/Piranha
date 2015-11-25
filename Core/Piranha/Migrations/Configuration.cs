@@ -24,16 +24,10 @@ namespace Piranha.Migrations
 		protected override void Seed(Piranha.Db db) {
 			bool initalCreate = db.Params.Count() == 0;
 
-			// Params
-			var param = db.Params.Where(p => p.Name == "SITE_LAST_MODIFIED").SingleOrDefault();
-			if (param == null) {
-				db.Params.Add(new Data.Param() {
-					Name = "SITE_LAST_MODIFIED",
-					IsSystem = true,
-					Description = "Global last modification date.",
-					Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-				});
-			}
+			Data.Seed.SeedRequired(db);
+
+			if (initalCreate)
+				Data.Seed.SeedDefault(db);
 		}
 	}
 }
