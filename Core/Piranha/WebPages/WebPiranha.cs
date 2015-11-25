@@ -324,10 +324,8 @@ namespace Piranha.WebPages
 					// route traffic to the permalink handler.
 					if (!Config.PassiveMode) {
 						if (!handled && Config.PrefixlessPermalinks && args[pos].ToLower() != "manager" && String.IsNullOrEmpty(context.Request["permalink"])) {
-							if (Permalink.GetByName(Config.SiteTreeNamespaceId, args[pos]) != null || Permalink.GetByName(Config.DefaultNamespaceId, args[pos]) != null) {
-								var handler = Application.Current.Handlers["PERMALINK"];
-								handler.HandleRequest(context, args.Subset(pos));
-							}
+							var handler = Application.Current.Handlers["PERMALINK"];
+							handler.HandleRequest(context, args.Subset(pos));
 						}
 					}
 				}
