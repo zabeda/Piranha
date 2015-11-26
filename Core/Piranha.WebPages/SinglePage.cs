@@ -51,17 +51,6 @@ namespace Piranha.WebPages
 				}
 			}
 
-			int segments = 0;
-			// Accept permalinks with '/' in them
-			for (int n = 0; n < UrlData.Count; n++) {
-				var perm = Permalink.GetByName(Config.SiteTreeNamespaceId, UrlData.ToArray().Subset(0, UrlData.Count - n).Implode("/"));
-				segments = UrlData.Count - n;
-				if (perm != null) {
-					permalink = perm.Name;
-					break;
-				}
-			}
-
 			// Load the current page
 			if (!String.IsNullOrEmpty(permalink))
 				page = Models.Page.GetByPermalink(permalink, draft);
