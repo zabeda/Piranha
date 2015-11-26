@@ -101,7 +101,7 @@
     <div class="inner">
         <ul>
             <li><a class="save submit">@Piranha.Resources.Global.ToolbarSave</a></li>
-            @if (!Model.Page.IsNew) {
+            @if (!Model.Page.IsNew && !Model.Page.IsBlock) {
             <li><a href="@Piranha.WebPages.WebPiranha.GetSiteUrl()@Url.GetPermalink(Model.Page.Permalink, true)" target="preview" class="preview">@Piranha.Resources.Global.ToolbarPreview</a></li>
             }
             @if (Model.CanPublish && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
@@ -149,6 +149,11 @@
     @Html.HiddenFor(m => m.Page.TemplateId)
     @Html.HiddenFor(m => m.Page.PermalinkId)
     @Html.HiddenFor(m => m.Page.Permalink)
+	@Html.HiddenFor(m => m.Page.IsHidden)
+	@Html.HiddenFor(m => m.Page.IsBlock)
+	@Html.HiddenFor(m => m.Page.Controller)
+	@Html.HiddenFor(m => m.Page.View)
+	@Html.HiddenFor(m => m.Page.Redirect)
     @Html.HiddenFor(m => m.Page.Created)
     @Html.HiddenFor(m => m.Page.Updated)
     @Html.HiddenFor(m => m.Page.Published)
@@ -237,6 +242,7 @@
         </div>
     </div>
 </div>
+@if (!Model.Page.IsBlock) {
 <div>
     <div class="grid_12">
         <div class="box main-content">
@@ -311,4 +317,5 @@
         </div>
     </div>
 </div>
+}
 @{ Html.EndForm() ; }

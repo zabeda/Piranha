@@ -418,6 +418,10 @@ namespace Piranha.Models
 			// Move seqno & save, we need a transaction for this
 			IDbTransaction t = tx != null ? tx : Database.OpenConnection().BeginTransaction();
 
+			// Make sure blocks are always hidden
+			if (IsBlock)
+				IsHidden = true;
+
 			// We only move pages around as drafts. When we publish we
 			// simply change states.
 			if (IsDraft) {
