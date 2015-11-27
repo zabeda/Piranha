@@ -459,16 +459,6 @@ namespace Piranha.Data
 											val = new HtmlString(Convert.ToString(val));
 										else if (typeof(Enum).IsAssignableFrom(Columns[name].PropertyType))
 											val = Enum.Parse(Columns[name].PropertyType, (string)val);
-
-										// Extra type conversions for MySql
-										if (Database.IsMySql) {
-											if (Columns[name].PropertyType == typeof(Guid) && val == null)
-												val = Guid.Empty;
-											else if (Columns[name].PropertyType == typeof(Guid) && val.GetType() == typeof(string))
-												val = new Guid((string)val);
-											else if (Columns[name].PropertyType == typeof(bool) && val.GetType() == typeof(ulong))
-												val = (ulong)val == 1;
-										}
 									}
 									Columns[name].SetValue(o, val, null);
 								}

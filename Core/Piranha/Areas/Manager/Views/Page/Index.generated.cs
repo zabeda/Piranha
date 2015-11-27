@@ -60,21 +60,58 @@ WriteLiteral(@">
 WriteLiteral(" type=\"text/javascript\"");
 
 WriteLiteral(@">
+		function addPage() {
+			$('#page-templates').show();
+			$('#block-templates').hide();
+
+			floatBox.show('boxTemplates');
+			return false;
+		}
+
         //
         // Sets all hidden fields before submit
-        function preSubmit(parentid, seqno) {
+        function preSubmit(parentid, seqno, pages, blocktypes) {
             $(""#ParentId"").val(parentid);
             $(""#Seqno"").val(seqno);
 
-            floatBox.show('boxTemplates');
+            if (pages) {
+            	$('#page-templates').show();
+            	$('#block-header').show();
+            } else {
+            	$('#page-templates').hide();
+            	$('#block-header').hide();
+			}
 
+            if (blocktypes == '') {
+            	$('#block-templates').hide();
+            } else {
+            	// Show all blocks
+            	$('#block-templates .templates').removeClass('one');
+            	$('#block-templates .templates').show();
+            	var visible = 0;
+
+				// Hide disabled blocks
+            	$.each($('#block-templates .templates'), function (i, e) {
+            		var id = $(e).attr('data-templateid');
+
+            		if (blocktypes.indexOf(id) == -1)
+            			$(e).hide();
+            		else visible++;
+            	});
+            	if (visible == 1)
+            		$('#block-templates .templates').addClass('one');
+
+            	$('#block-templates').show();
+            }
+
+            floatBox.show('boxTemplates');
             return false;
         }
 
         var deletemsg = """);
 
             
-            #line 27 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 64 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                     Write(Piranha.Resources.Page.MessageDeleteConfirm);
 
             
@@ -105,13 +142,13 @@ WriteLiteral("\";\r\n\r\n        function formatSitemap() {\r\n            $.eac
 "    };\r\n            new List(\'page-list\', copyoptions);\r\n\r\n");
 
             
-            #line 83 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 120 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 83 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 120 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              if (!Model.IsSeoList) {
 
             
@@ -135,29 +172,13 @@ WriteLiteral(@"
 WriteLiteral("\r\n");
 
             
-            #line 96 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 133 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             }
 
             
             #line default
             #line hidden
-WriteLiteral(@"			
-        	$('.filter .btn').click(function () {
-        		if ($(this).attr('href') == '#') {
-        			$('#page-templates, #block-templates').show();
-        		} else if ($(this).attr('href') == '#page-templates') {
-        			$('#block-templates').hide();
-        			$('#page-templates').show();
-        		} else if ($(this).attr('href') == '#block-templates') {
-        			$('#page-templates').hide();
-        			$('#block-templates').show();
-        		}
-        		$('.filter .btn').removeClass('active');
-        		$(this).addClass('active');
-				
-        		return false;
-        	});
-        });
+WriteLiteral(@"        });
 
         function bindMove() {
             $("".move .title a"").click(function () {
@@ -184,7 +205,7 @@ DefineSection("Toolbar", () => {
 WriteLiteral(" \r\n");
 
             
-            #line 134 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 155 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 Write(Html.Partial("Partial/Tabs"));
 
             
@@ -200,15 +221,15 @@ WriteLiteral(" class=\"inner\"");
 
 WriteLiteral(">\r\n        <ul>\r\n            <li><a");
 
-WriteLiteral(" onclick=\"floatBox.show(\'boxTemplates\')\"");
+WriteLiteral(" onclick=\"return addPage()\"");
 
 WriteLiteral(" class=\"add\"");
 
 WriteLiteral(">");
 
             
-            #line 138 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                                  Write(Piranha.Resources.Global.ToolbarAdd);
+            #line 159 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+                                                     Write(Piranha.Resources.Global.ToolbarAdd);
 
             
             #line default
@@ -216,13 +237,13 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 139 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 160 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 139 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 160 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              if (Model.ActiveSite != "DEFAULT_SITE") {
 
             
@@ -230,14 +251,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4625), Tuple.Create("\"", 4692)
+WriteAttribute("href", Tuple.Create(" href=\"", 5134), Tuple.Create("\"", 5201)
             
-            #line 140 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4632), Tuple.Create<System.Object, System.Int32>(Url.Action("site", new { id = Model.ActiveSite.ToLower() })
+            #line 161 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5141), Tuple.Create<System.Object, System.Int32>(Url.Action("site", new { id = Model.ActiveSite.ToLower() })
             
             #line default
             #line hidden
-, 4632), false)
+, 5141), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -245,7 +266,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 140 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 161 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                   Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -254,7 +275,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 141 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 162 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             } else {
 
             
@@ -262,14 +283,14 @@ WriteLiteral("</a></li>\r\n");
             #line hidden
 WriteLiteral("            <li><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 4800), Tuple.Create("\"", 4827)
+WriteAttribute("href", Tuple.Create(" href=\"", 5309), Tuple.Create("\"", 5336)
             
-            #line 142 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 4807), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
+            #line 163 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5316), Tuple.Create<System.Object, System.Int32>(Url.Action("index")
             
             #line default
             #line hidden
-, 4807), false)
+, 5316), false)
 );
 
 WriteLiteral(" class=\"refresh\"");
@@ -277,7 +298,7 @@ WriteLiteral(" class=\"refresh\"");
 WriteLiteral(">");
 
             
-            #line 142 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 163 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                           Write(Piranha.Resources.Global.ToolbarReload);
 
             
@@ -286,7 +307,7 @@ WriteLiteral(">");
 WriteLiteral("</a></li>\r\n");
 
             
-            #line 143 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 164 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             }
 
             
@@ -295,7 +316,7 @@ WriteLiteral("</a></li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 144 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 165 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              if (Model.SitePage[Model.ActiveSiteId] != Guid.Empty) {
 
             
@@ -303,14 +324,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5016), Tuple.Create("\"", 5092)
+WriteAttribute("href", Tuple.Create(" href=\"", 5525), Tuple.Create("\"", 5601)
             
-            #line 146 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5023), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { @id = Model.SitePage[Model.ActiveSiteId] })
+            #line 167 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5532), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { @id = Model.SitePage[Model.ActiveSiteId] })
             
             #line default
             #line hidden
-, 5023), false)
+, 5532), false)
 );
 
 WriteLiteral(" class=\"edit-site\"");
@@ -318,7 +339,7 @@ WriteLiteral(" class=\"edit-site\"");
 WriteLiteral(">");
 
             
-            #line 146 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 167 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                              Write(Piranha.Resources.Page.EditSite);
 
             
@@ -327,13 +348,13 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n");
 
             
-            #line 147 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 168 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 147 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 168 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                  if (Model.SiteWarnings[Model.ActiveSiteId] > 0) {
 
             
@@ -346,7 +367,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 148 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 169 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                            Write(Model.SiteWarnings[Model.ActiveSiteId]);
 
             
@@ -355,7 +376,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n");
 
             
-            #line 149 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 170 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                 }
 
             
@@ -364,7 +385,7 @@ WriteLiteral("</span>\r\n");
 WriteLiteral("            </li>\r\n");
 
             
-            #line 151 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 172 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             }
 
             
@@ -373,7 +394,7 @@ WriteLiteral("            </li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 152 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 173 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              if (Model.TotalSiteWarnings[Model.ActiveSiteId] > 0) {
 
             
@@ -381,14 +402,14 @@ WriteLiteral("            ");
             #line hidden
 WriteLiteral("                <li>\r\n                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 5480), Tuple.Create("\"", 5547)
+WriteAttribute("href", Tuple.Create(" href=\"", 5989), Tuple.Create("\"", 6056)
             
-            #line 154 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5487), Tuple.Create<System.Object, System.Int32>(Url.Action("seo", new { @id = Model.ActiveSite.ToLower() })
+            #line 175 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 5996), Tuple.Create<System.Object, System.Int32>(Url.Action("seo", new { @id = Model.ActiveSite.ToLower() })
             
             #line default
             #line hidden
-, 5487), false)
+, 5996), false)
 );
 
 WriteLiteral(" class=\"seo\"");
@@ -400,7 +421,7 @@ WriteLiteral(" class=\"notification\"");
 WriteLiteral(">");
 
             
-            #line 155 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 176 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                           Write(Model.TotalSiteWarnings[Model.ActiveSiteId]);
 
             
@@ -409,7 +430,7 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n                </li>\r\n");
 
             
-            #line 157 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 178 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             }
 
             
@@ -418,7 +439,7 @@ WriteLiteral("</span>\r\n                </li>\r\n");
 WriteLiteral("            ");
 
             
-            #line 158 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 179 "..\..\Areas\Manager\Views\Page\Index.cshtml"
        Write(Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model));
 
             
@@ -428,20 +449,20 @@ WriteLiteral("\r\n        </ul>\r\n        <button");
 
 WriteLiteral(" class=\"search\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 5825), Tuple.Create("\"", 5872)
+WriteAttribute("title", Tuple.Create(" title=\"", 6334), Tuple.Create("\"", 6381)
             
-            #line 160 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 5833), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
+            #line 181 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 6342), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Global.ToolbarSearch
             
             #line default
             #line hidden
-, 5833), false)
+, 6342), false)
 );
 
 WriteLiteral("></button>");
 
             
-            #line 160 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 181 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                    Write(Html.TextBox("search"));
 
             
@@ -462,77 +483,77 @@ WriteLiteral(" class=\"grid_12\"");
 WriteLiteral(">\r\n");
 
             
-            #line 166 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 187 "..\..\Areas\Manager\Views\Page\Index.cshtml"
  using (Html.BeginForm("insert", (string)ViewContext.RouteData.Values["Controller"])) {
     
             
             #line default
             #line hidden
             
-            #line 167 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 188 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 Write(Html.Hidden("TemplateId", Model.Templates.Count == 1 ? Model.Templates[0].Id : Guid.Empty));
 
             
             #line default
             #line hidden
             
-            #line 167 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 188 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                
     
             
             #line default
             #line hidden
             
-            #line 168 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 189 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 Write(Html.Hidden("ParentId"));
 
             
             #line default
             #line hidden
             
-            #line 168 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 189 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                             
     
             
             #line default
             #line hidden
             
-            #line 169 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 190 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 Write(Html.Hidden("Seqno", Model.NewSeqno));
 
             
             #line default
             #line hidden
             
-            #line 169 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 190 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                          
     
             
             #line default
             #line hidden
             
-            #line 170 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 191 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 Write(Html.Hidden("SiteTree", Model.ActiveSite));
 
             
             #line default
             #line hidden
             
-            #line 170 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 191 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                               
     
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 192 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 Write(Html.Hidden("OriginalId"));
 
             
             #line default
             #line hidden
             
-            #line 171 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 192 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                               
 
     if (Model.SiteTrees.Count > 1) {
@@ -547,13 +568,13 @@ WriteLiteral(" class=\"sites tabs\"");
 WriteLiteral(">\r\n");
 
             
-            #line 176 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 197 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 176 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 197 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              foreach (var site in Model.SiteTrees) {
 
             
@@ -561,20 +582,20 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("            <li>\r\n                <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 6502), Tuple.Create("\"", 6577)
+WriteAttribute("href", Tuple.Create(" href=\"", 7011), Tuple.Create("\"", 7086)
             
-            #line 178 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 6509), Tuple.Create<System.Object, System.Int32>(Url.Action("site", "page", new { @id = site.InternalId.ToLower() })
+            #line 199 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 7018), Tuple.Create<System.Object, System.Int32>(Url.Action("site", "page", new { @id = site.InternalId.ToLower() })
             
             #line default
             #line hidden
-, 6509), false)
+, 7018), false)
 );
 
 WriteLiteral(" ");
 
             
-            #line 178 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 199 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                            Write(site.InternalId == Model.ActiveSite ? "class=selected" : "");
 
             
@@ -583,7 +604,7 @@ WriteLiteral(" ");
 WriteLiteral(">");
 
             
-            #line 178 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 199 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                                                                          Write(site.Name);
 
             
@@ -592,7 +613,7 @@ WriteLiteral(">");
 WriteLiteral("</a>\r\n            </li>\r\n");
 
             
-            #line 180 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 201 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             }
 
             
@@ -605,7 +626,7 @@ WriteLiteral(" class=\"clear\"");
 WriteLiteral("></div>\r\n    </div>\r\n");
 
             
-            #line 184 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 205 "..\..\Areas\Manager\Views\Page\Index.cshtml"
     }
 
             
@@ -618,7 +639,7 @@ WriteLiteral(" class=\"sitemap\"");
 WriteLiteral(" ");
 
             
-            #line 185 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 206 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                     Write(Model.IsSeoList ? "style=display:none" : "");
 
             
@@ -627,13 +648,13 @@ WriteLiteral(" ");
 WriteLiteral(">\r\n");
 
             
-            #line 186 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 207 "..\..\Areas\Manager\Views\Page\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 186 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 207 "..\..\Areas\Manager\Views\Page\Index.cshtml"
          if (!Model.IsSeoList) {
 
             
@@ -654,7 +675,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 189 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 210 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                           Write(Piranha.Resources.Global.Created);
 
             
@@ -667,7 +688,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 190 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 211 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                           Write(Piranha.Resources.Global.Updated);
 
             
@@ -680,7 +701,7 @@ WriteLiteral(" class=\"type\"");
 WriteLiteral(">");
 
             
-            #line 191 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 212 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                           Write(Piranha.Resources.Global.Type);
 
             
@@ -693,7 +714,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral(">");
 
             
-            #line 192 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 213 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                            Write(Piranha.Resources.Global.Title);
 
             
@@ -702,21 +723,21 @@ WriteLiteral(">");
 WriteLiteral("</span>\r\n        </li>\r\n");
 
             
-            #line 194 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 215 "..\..\Areas\Manager\Views\Page\Index.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 194 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-   Write(Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", Model.SiteMap));
+            #line 215 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+   Write(Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", new Piranha.Models.Manager.PageModels.SitemapModel() { Pages = Model.SiteMap, Templates = Model.Templates }));
 
             
             #line default
             #line hidden
             
-            #line 194 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                                                           
+            #line 215 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+                                                                                                                                                                                         
         }
 
             
@@ -725,7 +746,7 @@ WriteLiteral("</span>\r\n        </li>\r\n");
 WriteLiteral("    </ul>\r\n");
 
             
-            #line 197 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 218 "..\..\Areas\Manager\Views\Page\Index.cshtml"
     
 
             
@@ -740,7 +761,7 @@ WriteLiteral(" class=\"list\"");
 WriteLiteral(" ");
 
             
-            #line 198 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 219 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                               Write(!Model.IsSeoList ? "style=display:none" : "");
 
             
@@ -755,7 +776,7 @@ WriteLiteral(" data-sort=\"title\"");
 WriteLiteral(">");
 
             
-            #line 201 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 222 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                         Write(Piranha.Resources.Global.Title);
 
             
@@ -774,7 +795,7 @@ WriteLiteral(" data-sort=\"template\"");
 WriteLiteral(">");
 
             
-            #line 202 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 223 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                            Write(Piranha.Resources.Global.Type);
 
             
@@ -793,7 +814,7 @@ WriteLiteral(" data-sort=\"updated\"");
 WriteLiteral(">");
 
             
-            #line 203 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 224 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Updated);
 
             
@@ -812,7 +833,7 @@ WriteLiteral(" data-sort=\"created\"");
 WriteLiteral(">");
 
             
-            #line 204 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 225 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                    Write(Piranha.Resources.Global.Created);
 
             
@@ -826,13 +847,13 @@ WriteLiteral(" class=\"list-js\"");
 WriteLiteral(">\r\n");
 
             
-            #line 209 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 230 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 209 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 230 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              foreach (var page in Model.Pages) {
 
             
@@ -841,7 +862,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            <tr");
 
             
-            #line 210 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 231 "..\..\Areas\Manager\Views\Page\Index.cshtml"
            Write(page.Updated > page.LastPublished ? " class=draft" : "");
 
             
@@ -853,21 +874,21 @@ WriteLiteral(" class=\"title\"");
 
 WriteLiteral("><a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 8210), Tuple.Create("\"", 8305)
+WriteAttribute("href", Tuple.Create(" href=\"", 8813), Tuple.Create("\"", 8908)
             
-            #line 211 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 8217), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = page.Id })
-            
-            #line default
-            #line hidden
-, 8217), false)
-            
-            #line 211 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-    , Tuple.Create(Tuple.Create("", 8258), Tuple.Create<System.Object, System.Int32>(Html.Raw(Model.IsSeoList ? "?action=seo" : "")
+            #line 232 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 8820), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", new { id = page.Id })
             
             #line default
             #line hidden
-, 8258), false)
+, 8820), false)
+            
+            #line 232 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+    , Tuple.Create(Tuple.Create("", 8861), Tuple.Create<System.Object, System.Int32>(Html.Raw(Model.IsSeoList ? "?action=seo" : "")
+            
+            #line default
+            #line hidden
+, 8861), false)
 );
 
 WriteLiteral(">\r\n");
@@ -875,7 +896,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                    ");
 
             
-            #line 212 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 233 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                 Write(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title);
 
             
@@ -890,7 +911,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                        ");
 
             
-            #line 214 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 235 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                    Write(Html.Raw(page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : "")));
 
             
@@ -901,7 +922,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 215 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 236 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                    Write(Html.Raw(page.OriginalId != Guid.Empty ? "<span class=info-copy></span>" : ""));
 
             
@@ -912,7 +933,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                        ");
 
             
-            #line 216 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 237 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                    Write(Html.Raw(Model.IsSeoList ? "<span class=notification>" + Model.PageWarnings[page.Id].ToString() + "</span>" : ""));
 
             
@@ -925,7 +946,7 @@ WriteLiteral(" class=\"template\"");
 WriteLiteral(">");
 
             
-            #line 219 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 240 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                 Write(page.TemplateName);
 
             
@@ -938,7 +959,7 @@ WriteLiteral(" class=\"updated\"");
 WriteLiteral(">");
 
             
-            #line 220 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 241 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                Write(page.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -951,7 +972,7 @@ WriteLiteral(" class=\"created\"");
 WriteLiteral(">");
 
             
-            #line 221 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 242 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                Write(page.Created.ToString("yyyy-MM-dd"));
 
             
@@ -965,35 +986,35 @@ WriteLiteral(">\r\n                    <button");
 
 WriteLiteral(" class=\"icon add-after marg\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 9272), Tuple.Create("\"", 9316)
+WriteAttribute("title", Tuple.Create(" title=\"", 9875), Tuple.Create("\"", 9919)
             
-            #line 223 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 9280), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddAfter
+            #line 244 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 9883), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddAfter
             
             #line default
             #line hidden
-, 9280), false)
+, 9883), false)
 );
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 9317), Tuple.Create("\"", 9380)
-, Tuple.Create(Tuple.Create("", 9327), Tuple.Create("return", 9327), true)
-, Tuple.Create(Tuple.Create(" ", 9333), Tuple.Create("preSubmit(\'", 9334), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 9920), Tuple.Create("\"", 9983)
+, Tuple.Create(Tuple.Create("", 9930), Tuple.Create("return", 9930), true)
+, Tuple.Create(Tuple.Create(" ", 9936), Tuple.Create("preSubmit(\'", 9937), true)
             
-            #line 223 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 9345), Tuple.Create<System.Object, System.Int32>(page.ParentId
-            
-            #line default
-            #line hidden
-, 9345), false)
-, Tuple.Create(Tuple.Create("", 9359), Tuple.Create("\',", 9359), true)
-            
-            #line 223 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                                 , Tuple.Create(Tuple.Create(" ", 9361), Tuple.Create<System.Object, System.Int32>(page.Seqno + 1
+            #line 244 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+                                                , Tuple.Create(Tuple.Create("", 9948), Tuple.Create<System.Object, System.Int32>(page.ParentId
             
             #line default
             #line hidden
-, 9362), false)
-, Tuple.Create(Tuple.Create("", 9379), Tuple.Create(")", 9379), true)
+, 9948), false)
+, Tuple.Create(Tuple.Create("", 9962), Tuple.Create("\',", 9962), true)
+            
+            #line 244 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+                                                                 , Tuple.Create(Tuple.Create(" ", 9964), Tuple.Create<System.Object, System.Int32>(page.Seqno + 1
+            
+            #line default
+            #line hidden
+, 9965), false)
+, Tuple.Create(Tuple.Create("", 9982), Tuple.Create(")", 9982), true)
 );
 
 WriteLiteral(" type=\"submit\"");
@@ -1002,28 +1023,28 @@ WriteLiteral("></button>\r\n                    <button");
 
 WriteLiteral(" class=\"icon add-below marg\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 9462), Tuple.Create("\"", 9506)
+WriteAttribute("title", Tuple.Create(" title=\"", 10065), Tuple.Create("\"", 10109)
             
-            #line 224 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 9470), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddBelow
+            #line 245 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 10073), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddBelow
             
             #line default
             #line hidden
-, 9470), false)
+, 10073), false)
 );
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 9507), Tuple.Create("\"", 9548)
-, Tuple.Create(Tuple.Create("", 9517), Tuple.Create("return", 9517), true)
-, Tuple.Create(Tuple.Create(" ", 9523), Tuple.Create("preSubmit(\'", 9524), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 10110), Tuple.Create("\"", 10151)
+, Tuple.Create(Tuple.Create("", 10120), Tuple.Create("return", 10120), true)
+, Tuple.Create(Tuple.Create(" ", 10126), Tuple.Create("preSubmit(\'", 10127), true)
             
-            #line 224 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-                                                , Tuple.Create(Tuple.Create("", 9535), Tuple.Create<System.Object, System.Int32>(page.Id
+            #line 245 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+                                               , Tuple.Create(Tuple.Create("", 10138), Tuple.Create<System.Object, System.Int32>(page.Id
             
             #line default
             #line hidden
-, 9535), false)
-, Tuple.Create(Tuple.Create("", 9543), Tuple.Create("\',", 9543), true)
-, Tuple.Create(Tuple.Create(" ", 9545), Tuple.Create("1)", 9546), true)
+, 10138), false)
+, Tuple.Create(Tuple.Create("", 10146), Tuple.Create("\',", 10146), true)
+, Tuple.Create(Tuple.Create(" ", 10148), Tuple.Create("1)", 10149), true)
 );
 
 WriteLiteral(" type=\"submit\"");
@@ -1031,13 +1052,13 @@ WriteLiteral(" type=\"submit\"");
 WriteLiteral("></button>\r\n");
 
             
-            #line 225 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 246 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                     
             
             #line default
             #line hidden
             
-            #line 225 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 246 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                      if (page.Pages.Count == 0 && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
 
             
@@ -1045,24 +1066,24 @@ WriteLiteral("></button>\r\n");
             #line hidden
 WriteLiteral("                    <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 9688), Tuple.Create("\"", 9746)
+WriteAttribute("href", Tuple.Create(" href=\"", 10291), Tuple.Create("\"", 10349)
             
-            #line 226 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create("", 9695), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", "page", new { id = page.Id })
+            #line 247 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create("", 10298), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", "page", new { id = page.Id })
             
             #line default
             #line hidden
-, 9695), false)
+, 10298), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 9747), Tuple.Create("\"", 9789)
+WriteAttribute("title", Tuple.Create(" title=\"", 10350), Tuple.Create("\"", 10392)
             
-            #line 226 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-         , Tuple.Create(Tuple.Create("", 9755), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListDelete
+            #line 247 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+        , Tuple.Create(Tuple.Create("", 10358), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListDelete
             
             #line default
             #line hidden
-, 9755), false)
+, 10358), false)
 );
 
 WriteLiteral(" class=\"icon delete\"");
@@ -1070,7 +1091,7 @@ WriteLiteral(" class=\"icon delete\"");
 WriteLiteral("></a>\r\n");
 
             
-            #line 227 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 248 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                     }
 
             
@@ -1079,7 +1100,7 @@ WriteLiteral("></a>\r\n");
 WriteLiteral("                </td>\r\n            </tr>\r\n");
 
             
-            #line 230 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 251 "..\..\Areas\Manager\Views\Page\Index.cshtml"
             }
 
             
@@ -1092,7 +1113,7 @@ WriteLiteral(" colspan=\"5\"");
 WriteLiteral("></td>\r\n            </tr>\r\n        </tfoot>\r\n    </table>\r\n");
 
             
-            #line 238 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 259 "..\..\Areas\Manager\Views\Page\Index.cshtml"
     
 }
 
@@ -1136,7 +1157,7 @@ WriteLiteral(" href=\"#create-new\"");
 WriteLiteral(">");
 
             
-            #line 248 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 269 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                       Write(Piranha.Resources.Page.PopupTypeTitle);
 
             
@@ -1149,7 +1170,7 @@ WriteLiteral(" href=\"#create-copy\"");
 WriteLiteral(">");
 
             
-            #line 249 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 270 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                       Write(Piranha.Resources.Page.CreateCopy);
 
             
@@ -1171,66 +1192,20 @@ WriteLiteral(" id=\"create-new\"");
 
 WriteLiteral(" class=\"inner\"");
 
-WriteLiteral(">\r\n");
-
-            
-            #line 255 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-			
-            
-            #line default
-            #line hidden
-            
-            #line 255 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-             if (Model.Templates.Where(t => t.IsBlock).Count() > 0) {
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\t\t\t\t<div");
-
-WriteLiteral(" class=\"filter\"");
-
-WriteLiteral(">\r\n\t\t\t\t\t<a");
-
-WriteLiteral(" class=\"btn active\"");
-
-WriteLiteral(" href=\"#\"");
-
-WriteLiteral(">All</a>\r\n\t\t\t\t\t<a");
-
-WriteLiteral(" class=\"btn\"");
-
-WriteLiteral(" href=\"#page-templates\"");
-
-WriteLiteral(">Pages</a>\r\n\t\t\t\t\t<a");
-
-WriteLiteral(" class=\"btn\"");
-
-WriteLiteral(" href=\"#block-templates\"");
-
-WriteLiteral(">Blocks</a>\r\n\t\t\t\t</div>\r\n");
-
-            
-            #line 261 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-			}
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\t\t\t<div");
+WriteLiteral(">\r\n\t\t\t<div");
 
 WriteLiteral(" id=\"page-templates\"");
 
 WriteLiteral(">\r\n");
 
             
-            #line 263 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 277 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 				
             
             #line default
             #line hidden
             
-            #line 263 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 277 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                  foreach (var template in Model.Templates.Where(t => !t.IsBlock)) {
 
             
@@ -1238,22 +1213,22 @@ WriteLiteral(">\r\n");
             #line hidden
 WriteLiteral("\t\t\t\t<div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 10988), Tuple.Create("\"", 11098)
-, Tuple.Create(Tuple.Create("", 10996), Tuple.Create("templates", 10996), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 11330), Tuple.Create("\"", 11440)
+, Tuple.Create(Tuple.Create("", 11338), Tuple.Create("templates", 11338), true)
             
-            #line 264 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create(" ", 11005), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")
+            #line 278 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create(" ", 11347), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")
             
             #line default
             #line hidden
-, 11006), false)
-, Tuple.Create(Tuple.Create(" ", 11093), Tuple.Create("left", 11094), true)
+, 11348), false)
+, Tuple.Create(Tuple.Create(" ", 11435), Tuple.Create("left", 11436), true)
 );
 
 WriteLiteral(" data-templateid=\"");
 
             
-            #line 264 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 278 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                                                                 Write(template.Id);
 
             
@@ -1264,7 +1239,7 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n\t\t\t\t\t<h3>");
 
             
-            #line 265 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 279 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                    Write(template.Name);
 
             
@@ -1279,7 +1254,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("\t\t\t\t\t\t");
 
             
-            #line 267 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 281 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                    Write(template.Preview);
 
             
@@ -1288,7 +1263,7 @@ WriteLiteral("\t\t\t\t\t\t");
 WriteLiteral("\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<p>");
 
             
-            #line 269 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 283 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                   Write(template.Description);
 
             
@@ -1297,7 +1272,7 @@ WriteLiteral("\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<p>");
 WriteLiteral("</p>\r\n\t\t\t\t</div>\r\n");
 
             
-            #line 271 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 285 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 				}
 
             
@@ -1310,32 +1285,38 @@ WriteLiteral(" class=\"clear\"");
 WriteLiteral("></div>\r\n");
 
             
-            #line 274 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 288 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 			
             
             #line default
             #line hidden
             
-            #line 274 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 288 "..\..\Areas\Manager\Views\Page\Index.cshtml"
              if (Model.Templates.Where(t => t.IsBlock).Count() > 0) {
 
             
             #line default
             #line hidden
-WriteLiteral("\t\t\t\t<fieldset");
+WriteLiteral("\t\t\t\t<div");
 
 WriteLiteral(" id=\"block-templates\"");
 
-WriteLiteral(">\r\n\t\t\t\t\t<legend>Blocks</legend>\r\n");
+WriteLiteral(">\r\n\t\t\t\t\t<h4");
+
+WriteLiteral(" id=\"block-header\"");
+
+WriteLiteral(" style=\"font-weight:bold;border-bottom: solid 1px #ddd;padding:0 0 5px 15px\"");
+
+WriteLiteral(">Blocks</h4>\r\n");
 
             
-            #line 277 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 291 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 					
             
             #line default
             #line hidden
             
-            #line 277 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 291 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                      foreach (var template in Model.Templates.Where(t => t.IsBlock)) {
 
             
@@ -1343,22 +1324,22 @@ WriteLiteral(">\r\n\t\t\t\t\t<legend>Blocks</legend>\r\n");
             #line hidden
 WriteLiteral("\t\t\t\t\t<div");
 
-WriteAttribute("class", Tuple.Create(" class=\"", 11544), Tuple.Create("\"", 11654)
-, Tuple.Create(Tuple.Create("", 11552), Tuple.Create("templates", 11552), true)
+WriteAttribute("class", Tuple.Create(" class=\"", 11967), Tuple.Create("\"", 12077)
+, Tuple.Create(Tuple.Create("", 11975), Tuple.Create("templates", 11975), true)
             
-            #line 278 "..\..\Areas\Manager\Views\Page\Index.cshtml"
-, Tuple.Create(Tuple.Create(" ", 11561), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")
+            #line 292 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+, Tuple.Create(Tuple.Create(" ", 11984), Tuple.Create<System.Object, System.Int32>(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")
             
             #line default
             #line hidden
-, 11562), false)
-, Tuple.Create(Tuple.Create(" ", 11649), Tuple.Create("left", 11650), true)
+, 11985), false)
+, Tuple.Create(Tuple.Create(" ", 12072), Tuple.Create("left", 12073), true)
 );
 
 WriteLiteral(" data-templateid=\"");
 
             
-            #line 278 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 292 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                                                                     Write(template.Id);
 
             
@@ -1369,7 +1350,7 @@ WriteLiteral("\"");
 WriteLiteral(">\r\n\t\t\t\t\t\t<h3>");
 
             
-            #line 279 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 293 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                        Write(template.Name);
 
             
@@ -1384,7 +1365,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("\t\t\t\t\t\t\t");
 
             
-            #line 281 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 295 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                        Write(template.Preview);
 
             
@@ -1393,7 +1374,7 @@ WriteLiteral("\t\t\t\t\t\t\t");
 WriteLiteral("\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<p>");
 
             
-            #line 283 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 297 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                       Write(template.Description);
 
             
@@ -1402,13 +1383,13 @@ WriteLiteral("\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t<p>");
 WriteLiteral("</p>\r\n\t\t\t\t\t</div>\r\n");
 
             
-            #line 285 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 299 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 					}
 
             
             #line default
             #line hidden
-WriteLiteral("\t\t\t\t</fieldset>\r\n");
+WriteLiteral("\t\t\t\t</div>\r\n");
 
 WriteLiteral("\t\t\t\t<div");
 
@@ -1417,7 +1398,7 @@ WriteLiteral(" class=\"clear\"");
 WriteLiteral("></div>\r\n");
 
             
-            #line 288 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 302 "..\..\Areas\Manager\Views\Page\Index.cshtml"
 			}
 
             
@@ -1465,7 +1446,7 @@ WriteLiteral(" data-sort=\"copypage-title\"");
 WriteLiteral(">");
 
             
-            #line 299 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 313 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                          Write(Piranha.Resources.Global.Title);
 
             
@@ -1480,7 +1461,7 @@ WriteLiteral(" data-sort=\"copypage-template\"");
 WriteLiteral(">");
 
             
-            #line 300 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 314 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                         Write(Piranha.Resources.Global.Type);
 
             
@@ -1500,13 +1481,13 @@ WriteLiteral(" class=\"copy-list-js\"");
 WriteLiteral(">\r\n");
 
             
-            #line 305 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 319 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 305 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 319 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                  foreach (var page in Model.AllPages) {
 
             
@@ -1523,7 +1504,7 @@ WriteLiteral(" class=\"copy-page\"");
 WriteLiteral(" data-id=\"");
 
             
-            #line 307 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 321 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                             Write(page.Id);
 
             
@@ -1536,7 +1517,7 @@ WriteLiteral(" href=\"#\"");
 WriteLiteral("> ");
 
             
-            #line 307 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 321 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                                                                  Write(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title);
 
             
@@ -1549,7 +1530,7 @@ WriteLiteral(" class=\"copypage-template\"");
 WriteLiteral(">");
 
             
-            #line 308 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 322 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                  Write(page.TemplateName);
 
             
@@ -1562,7 +1543,7 @@ WriteLiteral(" class=\"copypage-siteid\"");
 WriteLiteral(">");
 
             
-            #line 309 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 323 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                                                Write(page.SiteTreeName);
 
             
@@ -1571,7 +1552,7 @@ WriteLiteral(">");
 WriteLiteral("</td>\r\n                    </tr>\r\n");
 
             
-            #line 311 "..\..\Areas\Manager\Views\Page\Index.cshtml"
+            #line 325 "..\..\Areas\Manager\Views\Page\Index.cshtml"
                 }
 
             

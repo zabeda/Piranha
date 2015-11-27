@@ -79,6 +79,15 @@ namespace Piranha.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parent types.
+        /// </summary>
+        public static string BlockTypes {
+            get {
+                return ResourceManager.GetString("BlockTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit page type.
         /// </summary>
         public static string EditPageTitleExisting {
@@ -336,6 +345,24 @@ namespace Piranha.Resources {
         public static string RegionPlaceholder {
             get {
                 return ResourceManager.GetString("RegionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subpages.
+        /// </summary>
+        public static string Subpages {
+            get {
+                return ResourceManager.GetString("Subpages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the page type allows subpages.
+        /// </summary>
+        public static string SubpagesDescription {
+            get {
+                return ResourceManager.GetString("SubpagesDescription", resourceCulture);
             }
         }
         

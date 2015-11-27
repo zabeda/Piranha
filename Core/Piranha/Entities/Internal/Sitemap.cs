@@ -115,6 +115,12 @@ namespace Piranha.Models
 		public string Permalink { get; private set; }
 
 		/// <summary>
+		/// Gets/sets the template id.
+		/// </summary>
+		[Column(Name = "page_template_id")]
+		public Guid TemplateId { get; set; }
+
+		/// <summary>
 		/// Gets/sets the template name.
 		/// </summary>
 		[Column(Name = "pagetemplate_name", Table = "pagetemplate")]

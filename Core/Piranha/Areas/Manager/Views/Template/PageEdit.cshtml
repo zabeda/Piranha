@@ -14,7 +14,17 @@
         var templateid = '@Model.Template.Id';
 
         $(document).ready(function () {
-            $('#Template_Name').focus();
+        	$('#Template_Name').focus();
+
+        	$('#isblock input').change(function () {
+        		if ($(this).is(':checked')) {
+        			$('#subpages').hide();
+        			$('#blocktypes').show();
+				} else {
+        			$('#subpages').show();
+        			$('#blocktypes').hide();
+				}
+        	});
         });
     </script>
     @if (Model.Template.IsLocked) {
@@ -146,9 +156,27 @@
                     <label>&nbsp;</label>
                     <p>@Html.CheckBoxFor(m => m.Template.ShowRedirect) @Piranha.Resources.Template.PageRedirectOverride</p>
                 </li>
-				<li>@Html.LabelFor(m => m.Template.IsBlock)
+				<li id="isblock">@Html.LabelFor(m => m.Template.IsBlock)
 					<p>
 						@Html.CheckBoxFor(m => m.Template.IsBlock) @Piranha.Resources.Template.IsBlockDescription
+					</p>
+				</li>
+				<li id="blocktypes" @(!Model.Template.IsBlock ? "style=display:none" : "")>
+					@Html.LabelFor(m => m.Template.BlockTypes)
+					<div class="block">
+						@foreach (var t in Model.Templates) {
+							<div class="half left">
+								<p class="checkbox">
+									<input type="checkbox" id="Template_BlockTypes" name="Template.BlockTypes" value="@t.Id" @(Model.Template.BlockTypes.Contains(t.Id) ? "checked=checked" : "")> @t.Name
+								</p>
+							</div>
+						}
+					</div>
+				</li>
+				<li id="subpages" @(Model.Template.IsBlock ? "style=display:none" : "")>
+					@Html.LabelFor(m => m.Template.Subpages)
+					<p>
+						@Html.CheckBoxFor(m => m.Template.Subpages) @Piranha.Resources.Template.SubpagesDescription
 					</p>
 				</li>
             </ul>

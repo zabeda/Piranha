@@ -31,7 +31,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 33;
+		public static int CurrentVersion = 34;
 
 		/// <summary>
 		/// Gets the currently logged in users identity.
@@ -58,26 +58,10 @@ namespace Piranha.Data
 		}
 
 		/// <summary>
-		/// Gets whether the current provider is SqlServer.
-		/// </summary>
-		public static bool IsSqlServer {
-			get { return ProviderName.ToLower() == "system.data.sqlclient"; }
-		}
-
-		/// <summary>
-		/// Gets whether the current provider is MySql.
-		/// </summary>
-		public static bool IsMySql {
-			get { return ProviderName.ToLower() == "mysql.data.mysqlclient"; }
-		}
-
-		/// <summary>
 		/// Gets the root namespace for all scripts for the current provider.
 		/// </summary>
 		public static string ScriptRoot {
 			get {
-				if (IsMySql)
-					return "Piranha.Data.Scripts.MySql";
 				return "Piranha.Data.Scripts";
 			}
 		}

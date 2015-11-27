@@ -58,6 +58,11 @@ namespace Piranha.Models.Manager.TemplateModels
 		public List<RegionTemplate> Regions { get; set; }
 
 		/// <summary>
+		/// Gets/sets the available templates.
+		/// </summary>
+		public List<PageTemplate> Templates { get; set; }
+
+		/// <summary>
 		/// Gets/sets the available region types.
 		/// </summary>
 		public List<dynamic> RegionTypes { get; set; }
@@ -72,7 +77,8 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// Creates a new model.
 		/// </summary>
 		/// <param name="loadRegionTypes">If the region types should be loaded</param>
-		internal PageEditModel(bool loadRegionTypes = true) {
+		/// <param name="loadTemplates">If the templates should be loaded</param>
+		internal PageEditModel(bool loadRegionTypes = true, bool loadTemplates = true) {
 			Template = new PageTemplate() {
 				Preview = new HtmlString(
 					"<table class=\"template\">" +
@@ -88,6 +94,10 @@ namespace Piranha.Models.Manager.TemplateModels
 					RegionTypes.Add(new { Name = ExtensionManager.Current.GetNameByType(r.Value.GetType().FullName), Type = r.Value.GetType().FullName }));
 				RegionTypes.Insert(0, new { Name = "", Type = "" });
 			}
+
+			if (loadTemplates) {
+				Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_type", "pagetemplate_site_template = 0", new Data.Params() { OrderBy = "pagetemplate_name" });
+			}
 		}
 
 		/// <summary>
@@ -95,9 +105,10 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		/// <param name="id">The template id</param>
 		/// <param name="loadRegionTypes">If the region types should be loaded</param>
+		/// <param name="loadTemplates">If the templates should be loaded</param>
 		/// <returns>The model</returns>
-		public static PageEditModel GetById(Guid id, bool loadRegionTypes = true) {
-			PageEditModel m = new PageEditModel(loadRegionTypes);
+		public static PageEditModel GetById(Guid id, bool loadRegionTypes = true, bool loadTemplates = true) {
+			PageEditModel m = new PageEditModel(loadRegionTypes, loadTemplates);
 			m.Template = PageTemplate.GetSingle(id);
 			m.Regions = RegionTemplate.Get("regiontemplate_template_id = @0", id, new Params() { OrderBy = "regiontemplate_seqno" });
 
