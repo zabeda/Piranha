@@ -95,7 +95,7 @@ namespace Piranha.Models.Manager.PageModels
 		/// </summary>
 		public ListModel() {
 			Pages = new List<Sitemap>();
-			Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_preview, pagetemplate_description, pagetemplate_is_block",
+			Templates = PageTemplate.GetFields("pagetemplate_id, pagetemplate_name, pagetemplate_preview, pagetemplate_description, pagetemplate_is_block, pagetemplate_blocktypes, pagetemplate_subpages",
 				"pagetemplate_site_template = 0", new Params() { OrderBy = "pagetemplate_name ASC" });
 			AllPages = Sitemap.GetFields("page_id, page_title, page_navigation_title, pagetemplate_name, sitetree_name", "page_draft = 1 AND page_original_id IS NULL AND (page_parent_id IS NULL OR page_parent_id NOT IN (SELECT sitetree_id FROM sitetree))",
 				new Params() { OrderBy = "sitetree_name, COALESCE(page_navigation_title, page_title)" });

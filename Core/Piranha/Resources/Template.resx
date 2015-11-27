@@ -123,6 +123,9 @@
   <data name="AllowRssDescription" xml:space="preserve">
     <value>Whether posts of this type should be included in RSS feeds</value>
   </data>
+  <data name="BlockTypes" xml:space="preserve">
+    <value>Parent types</value>
+  </data>
   <data name="EditPageTitleExisting" xml:space="preserve">
     <value>Edit page type</value>
   </data>
@@ -209,6 +212,12 @@
   </data>
   <data name="RegionPlaceholder" xml:space="preserve">
     <value>New region</value>
+  </data>
+  <data name="Subpages" xml:space="preserve">
+    <value>Subpages</value>
+  </data>
+  <data name="SubpagesDescription" xml:space="preserve">
+    <value>If the page type allows subpages</value>
   </data>
   <data name="ToolbarAddPage" xml:space="preserve">
     <value>Add new page type</value>

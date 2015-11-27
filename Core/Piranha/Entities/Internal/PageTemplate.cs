@@ -122,6 +122,20 @@ namespace Piranha.Models
 		public bool IsBlock { get; set; }
 
 		/// <summary>
+		/// Gets/sets what page types this block can be placed on.
+		/// </summary>
+		[Display(ResourceType = typeof(Piranha.Resources.Template), Name = "BlockTypes")]
+		[Column(Name = "pagetemplate_blocktypes", Json = true, OnLoad = "OnBlockTypesLoad")]
+		public List<Guid> BlockTypes { get; set; }
+
+		/// <summary>
+		/// Gets/sets if the current page type can have subpages.
+		/// </summary>
+		[Column(Name = "pagetemplate_subpages")]
+		[Display(ResourceType = typeof(Piranha.Resources.Template), Name = "Subpages")]
+		public bool Subpages { get; set; }
+
+		/// <summary>
 		/// Gets/sets the type that created this template if it was create by code.
 		/// </summary>
 		[Column(Name = "pagetemplate_type")]
@@ -172,6 +186,7 @@ namespace Piranha.Models
 			: base() {
 			PageRegions = new List<string>();
 			Properties = new List<string>();
+			BlockTypes = new List<Guid>();
 			LogChanges = true;
 		}
 
@@ -190,11 +205,38 @@ namespace Piranha.Models
 		}
 
 		/// <summary>
+		/// Saves the current record to the database.
+		/// </summary>
+		/// <param name="tx">Optional transaction</param>
+		/// <returns>Wether the operation was successful</returns>
+		public override bool Save(System.Data.IDbTransaction tx = null) {
+			if (IsBlock) {
+				Subpages = false;
+			} else {
+				BlockTypes.Clear();
+			}
+			return base.Save(tx);
+		}
+
+		/// <summary>
 		/// Invalidate the cache for the given record.
 		/// </summary>
 		/// <param name="record">The record.</param>
 		public void InvalidateRecord(PageTemplate record) {
 			Application.Current.CacheProvider.Remove(record.Id.ToString());
 		}
+
+		#region Handlers
+		/// <summary>
+		/// Create an empty block types list if it is null in the database.
+		/// </summary>
+		/// <param name="lst">The block types</param>
+		/// <returns>The block types, or a default list</returns>
+		protected List<Guid> OnBlockTypesLoad(List<Guid> lst) {
+			if (lst != null)
+				return lst;
+			return new List<Guid>();
+		}
+		#endregion
 	}
 }

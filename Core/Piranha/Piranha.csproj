@@ -566,6 +566,7 @@
     <Compile Include="Models\Manager\PageModels\GroupListModel.cs" />
     <Compile Include="Models\Manager\PageModels\InsertModel.cs" />
     <Compile Include="Models\Manager\PageModels\ListModel.cs" />
+    <Compile Include="Models\Manager\PageModels\SitemapModel.cs" />
     <Compile Include="Models\Manager\Placement.cs" />
     <Compile Include="Models\Manager\PostModels\EditModel.cs" />
     <Compile Include="Models\Manager\PostModels\InsertModel.cs" />
@@ -774,22 +775,6 @@
     <EmbeddedResource Include="Data\Scripts\Create.sql" />
     <EmbeddedResource Include="Data\Scripts\Data.sql" />
     <EmbeddedResource Include="Data\Scripts\Drop.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Create.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Data.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Drop.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\17.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\18.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\19.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\20.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\21.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\22.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\23.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\24.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\25.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\26.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\27.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\28.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\29.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\1.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\10.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\11.sql" />
@@ -944,16 +929,14 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\piranhaimage\plugin.min.js" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\jquery.link.dialog.js" />
     <EmbeddedResource Include="Data\Scripts\Updates\30.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\30.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\31.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\31.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\32.sql" />
-    <EmbeddedResource Include="Data\Scripts\MySql\Updates\32.sql" />
     <Content Include="Areas\Manager\Views\Install\Welcome.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Welcome.generated.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="Data\Scripts\Updates\33.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\34.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

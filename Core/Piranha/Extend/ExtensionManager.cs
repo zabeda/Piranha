@@ -312,6 +312,7 @@ namespace Piranha.Extend
 				m.Template.Properties.AddRange(type.Properties);
 				m.Template.Type = type.GetType().FullName;
 				m.Template.IsBlock = type.IsBlock;
+				m.Template.Subpages = type.Subpages;
 
 				var old = new List<Models.RegionTemplate>();
 				m.Regions.ForEach(r => old.Add(r));
@@ -335,6 +336,14 @@ namespace Piranha.Extend
 				}
 				// Delete removed region templates
 				var removed = old.Where(r => !m.Regions.Contains(r));
+
+				// Map parent types
+				m.Template.BlockTypes.Clear();
+				foreach (var parent in type.ParentTypes) {
+					var t = m.Templates.SingleOrDefault(x => x.Type == parent.FullName);
+					if (t != null)
+						m.Template.BlockTypes.Add(t.Id);
+				}
 
 				// Save Template
 				Data.Database.LoginSys();

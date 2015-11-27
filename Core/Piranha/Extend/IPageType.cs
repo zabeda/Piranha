@@ -19,19 +19,29 @@ namespace Piranha.Extend
 	public interface IPageType : IType
 	{
 		/// <summary>
-		/// Gets/sets the optional permalink of a page this sould redirect to.
+		/// Gets the optional permalink of a page this sould redirect to.
 		/// </summary>
 		string Redirect { get; }
 
 		/// <summary>
-		/// Gets/sets if the redirect can be overriden by the implementing page.
+		/// Gets if the redirect can be overriden by the implementing page.
 		/// </summary>
 		bool ShowRedirect { get; }
 
 		/// <summary>
-		/// Gets/sets if this page type is a block.
+		/// Gets if this page type is a block.
 		/// </summary>
 		bool IsBlock { get; }
+
+		/// <summary>
+		/// Gets the page types a block can be created for.
+		/// </summary>
+		IList<Type> ParentTypes { get; }
+
+		/// <summary>
+		/// Gets if a page type can contain subpages or not.
+		/// </summary>
+		bool Subpages { get; }
 
 		/// <summary>
 		/// Gets the defined regions.

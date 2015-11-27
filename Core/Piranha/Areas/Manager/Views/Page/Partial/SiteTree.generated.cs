@@ -30,7 +30,7 @@ namespace ASP
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml")]
-    public partial class _Areas_Manager_Views_Page_Partial_SiteTree_cshtml : System.Web.Mvc.WebViewPage<List<Piranha.Models.Sitemap>>
+    public partial class _Areas_Manager_Views_Page_Partial_SiteTree_cshtml : System.Web.Mvc.WebViewPage<Piranha.Models.Manager.PageModels.SitemapModel>
     {
         public _Areas_Manager_Views_Page_Partial_SiteTree_cshtml()
         {
@@ -39,10 +39,12 @@ namespace ASP
         {
             
             #line 2 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
- foreach (var page in Model) {
+ foreach (var page in Model.Pages) {
 	var hasBlocks = page.Pages.Where(p => p.IsBlock).Count() > 0;
-	var first = page == Model.First();
-	var last = page == Model.Last();
+	var last = page == Model.Pages.Last();
+	var expanded = page.IsBlock || (page.Pages.Count > 0 && (page.Level <= ViewBag.Levels || page.HasChild(ViewBag.Expanded)));
+	var blocktypes = Model.BlocksString(page);
+	var subpages = Model.Subpages(page);
 	
 
             
@@ -50,107 +52,116 @@ namespace ASP
             #line hidden
 WriteLiteral("    <li");
 
-WriteAttribute("id", Tuple.Create(" id=\"", 215), Tuple.Create("\"", 228)
+WriteAttribute("id", Tuple.Create(" id=\"", 418), Tuple.Create("\"", 431)
             
-            #line 7 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-, Tuple.Create(Tuple.Create("", 220), Tuple.Create<System.Object, System.Int32>(page.Id
+            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+, Tuple.Create(Tuple.Create("", 423), Tuple.Create<System.Object, System.Int32>(page.Id
             
             #line default
             #line hidden
-, 220), false)
+, 423), false)
 );
 
-WriteAttribute("class", Tuple.Create(" class=\"", 229), Tuple.Create("\"", 512)
+WriteAttribute("class", Tuple.Create(" class=\"", 432), Tuple.Create("\"", 611)
             
-            #line 7 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-, Tuple.Create(Tuple.Create("", 237), Tuple.Create<System.Object, System.Int32>(page.Pages.Count > 0 ? (page.Level <= ViewBag.Levels || page.HasChild(ViewBag.Expanded) ? "expanded" : "collapsed") : ""
-            
-            #line default
-            #line hidden
-, 237), false)
-            
-            #line 7 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-                                                                          , Tuple.Create(Tuple.Create(" ", 360), Tuple.Create<System.Object, System.Int32>(page.Updated > page.LastPublished ? "draft" : ""
+            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+, Tuple.Create(Tuple.Create("", 440), Tuple.Create<System.Object, System.Int32>(expanded ? "expanded" : "collapsed"
             
             #line default
             #line hidden
-, 361), false)
+, 440), false)
             
-            #line 7 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-                                                                                                                              , Tuple.Create(Tuple.Create(" ", 412), Tuple.Create<System.Object, System.Int32>(page.IsBlock ? "block" + (first ? " first" : last ? " last" : "") : hasBlocks ? "has-block" : ""
+            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+, Tuple.Create(Tuple.Create(" ", 478), Tuple.Create<System.Object, System.Int32>(page.Updated > page.LastPublished ? "draft" : ""
             
             #line default
             #line hidden
-, 413), false)
+, 479), false)
+            
+            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                         , Tuple.Create(Tuple.Create(" ", 530), Tuple.Create<System.Object, System.Int32>(page.IsBlock ? "block" + (last ? " last" : "") : hasBlocks ? "has-block" : ""
+            
+            #line default
+            #line hidden
+, 531), false)
 );
 
 WriteLiteral(">\r\n        <span");
 
 WriteLiteral(" class=\"buttons\"");
 
+WriteLiteral(" data-subpages=\"");
+
+            
+            #line 10 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                        Write(subpages.ToString().ToLower());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
+WriteLiteral(" data-blocks=\"");
+
+            
+            #line 10 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                                                                     Write(blocktypes);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\"");
+
 WriteLiteral(">\r\n            <button");
 
 WriteLiteral(" class=\"icon add-after marg\"");
 
-WriteAttribute("title", Tuple.Create(" title=\"", 595), Tuple.Create("\"", 639)
+WriteAttribute("title", Tuple.Create(" title=\"", 767), Tuple.Create("\"", 811)
             
-            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-, Tuple.Create(Tuple.Create("", 603), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddAfter
+            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+, Tuple.Create(Tuple.Create("", 775), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddAfter
             
             #line default
             #line hidden
-, 603), false)
+, 775), false)
 );
 
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 640), Tuple.Create("\"", 703)
-, Tuple.Create(Tuple.Create("", 650), Tuple.Create("return", 650), true)
-, Tuple.Create(Tuple.Create(" ", 656), Tuple.Create("preSubmit(\'", 657), true)
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 812), Tuple.Create("\"", 929)
+, Tuple.Create(Tuple.Create("", 822), Tuple.Create("return", 822), true)
+, Tuple.Create(Tuple.Create(" ", 828), Tuple.Create("preSubmit(\'", 829), true)
             
-            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-                                         , Tuple.Create(Tuple.Create("", 668), Tuple.Create<System.Object, System.Int32>(page.ParentId
-            
-            #line default
-            #line hidden
-, 668), false)
-, Tuple.Create(Tuple.Create("", 682), Tuple.Create("\',", 682), true)
-            
-            #line 9 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-                                                          , Tuple.Create(Tuple.Create(" ", 684), Tuple.Create<System.Object, System.Int32>(page.Seqno + 1
+            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                         , Tuple.Create(Tuple.Create("", 840), Tuple.Create<System.Object, System.Int32>(page.ParentId
             
             #line default
             #line hidden
-, 685), false)
-, Tuple.Create(Tuple.Create("", 702), Tuple.Create(")", 702), true)
-);
-
-WriteLiteral(" type=\"submit\"");
-
-WriteLiteral("></button>\r\n            <button");
-
-WriteLiteral(" class=\"icon add-below marg\"");
-
-WriteAttribute("title", Tuple.Create(" title=\"", 777), Tuple.Create("\"", 821)
+, 840), false)
+, Tuple.Create(Tuple.Create("", 854), Tuple.Create("\',", 854), true)
             
-            #line 10 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-, Tuple.Create(Tuple.Create("", 785), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddBelow
+            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                                          , Tuple.Create(Tuple.Create(" ", 856), Tuple.Create<System.Object, System.Int32>(page.Seqno + 1
             
             #line default
             #line hidden
-, 785), false)
-);
-
-WriteAttribute("onclick", Tuple.Create(" onclick=\"", 822), Tuple.Create("\"", 863)
-, Tuple.Create(Tuple.Create("", 832), Tuple.Create("return", 832), true)
-, Tuple.Create(Tuple.Create(" ", 838), Tuple.Create("preSubmit(\'", 839), true)
+, 857), false)
+, Tuple.Create(Tuple.Create("", 874), Tuple.Create(",", 874), true)
             
-            #line 10 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-                                         , Tuple.Create(Tuple.Create("", 850), Tuple.Create<System.Object, System.Int32>(page.Id
+            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                                                            , Tuple.Create(Tuple.Create(" ", 875), Tuple.Create<System.Object, System.Int32>(subpages.ToString().ToLower()
             
             #line default
             #line hidden
-, 850), false)
-, Tuple.Create(Tuple.Create("", 858), Tuple.Create("\',", 858), true)
-, Tuple.Create(Tuple.Create(" ", 860), Tuple.Create("1)", 861), true)
+, 876), false)
+, Tuple.Create(Tuple.Create("", 906), Tuple.Create(",", 906), true)
+, Tuple.Create(Tuple.Create(" ", 907), Tuple.Create("\'", 908), true)
+            
+            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                                                                                              , Tuple.Create(Tuple.Create("", 909), Tuple.Create<System.Object, System.Int32>(Model.ParentTypes
+            
+            #line default
+            #line hidden
+, 909), false)
+, Tuple.Create(Tuple.Create("", 927), Tuple.Create("\')", 927), true)
 );
 
 WriteLiteral(" type=\"submit\"");
@@ -158,13 +169,78 @@ WriteLiteral(" type=\"submit\"");
 WriteLiteral("></button>\r\n");
 
             
-            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-            
+            #line 12 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+			
             
             #line default
             #line hidden
             
-            #line 11 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 12 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+             if (subpages || !String.IsNullOrEmpty(blocktypes)) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\t            <button");
+
+WriteLiteral(" class=\"icon add-below marg\"");
+
+WriteAttribute("title", Tuple.Create(" title=\"", 1062), Tuple.Create("\"", 1106)
+            
+            #line 13 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+, Tuple.Create(Tuple.Create("", 1070), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListAddBelow
+            
+            #line default
+            #line hidden
+, 1070), false)
+);
+
+WriteAttribute("onclick", Tuple.Create(" onclick=\"", 1107), Tuple.Create("\"", 1195)
+, Tuple.Create(Tuple.Create("", 1117), Tuple.Create("return", 1117), true)
+, Tuple.Create(Tuple.Create(" ", 1123), Tuple.Create("preSubmit(\'", 1124), true)
+            
+            #line 13 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                            , Tuple.Create(Tuple.Create("", 1135), Tuple.Create<System.Object, System.Int32>(page.Id
+            
+            #line default
+            #line hidden
+, 1135), false)
+, Tuple.Create(Tuple.Create("", 1143), Tuple.Create("\',", 1143), true)
+, Tuple.Create(Tuple.Create(" ", 1145), Tuple.Create("1,", 1146), true)
+            
+            #line 13 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                                         , Tuple.Create(Tuple.Create(" ", 1148), Tuple.Create<System.Object, System.Int32>(subpages.ToString().ToLower()
+            
+            #line default
+            #line hidden
+, 1149), false)
+, Tuple.Create(Tuple.Create("", 1179), Tuple.Create(",", 1179), true)
+, Tuple.Create(Tuple.Create(" ", 1180), Tuple.Create("\'", 1181), true)
+            
+            #line 13 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+                                                                                           , Tuple.Create(Tuple.Create("", 1182), Tuple.Create<System.Object, System.Int32>(blocktypes
+            
+            #line default
+            #line hidden
+, 1182), false)
+, Tuple.Create(Tuple.Create("", 1193), Tuple.Create("\')", 1193), true)
+);
+
+WriteLiteral(" type=\"submit\"");
+
+WriteLiteral("></button>\r\n");
+
+            
+            #line 14 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+			}
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            ");
+
+            
+            #line 15 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
              if (page.Pages.Count == 0 && User.HasAccess("ADMIN_PAGE_PUBLISH")) {
 
             
@@ -172,24 +248,24 @@ WriteLiteral("></button>\r\n");
             #line hidden
 WriteLiteral("            <a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 987), Tuple.Create("\"", 1045)
+WriteAttribute("href", Tuple.Create(" href=\"", 1325), Tuple.Create("\"", 1383)
             
-            #line 12 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-, Tuple.Create(Tuple.Create("", 994), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", "page", new { id = page.Id })
+            #line 16 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+, Tuple.Create(Tuple.Create("", 1332), Tuple.Create<System.Object, System.Int32>(Url.Action("delete", "page", new { id = page.Id })
             
             #line default
             #line hidden
-, 994), false)
+, 1332), false)
 );
 
-WriteAttribute("title", Tuple.Create(" title=\"", 1046), Tuple.Create("\"", 1088)
+WriteAttribute("title", Tuple.Create(" title=\"", 1384), Tuple.Create("\"", 1426)
             
-            #line 12 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
- , Tuple.Create(Tuple.Create("", 1054), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListDelete
+            #line 16 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+ , Tuple.Create(Tuple.Create("", 1392), Tuple.Create<System.Object, System.Int32>(Piranha.Resources.Page.ListDelete
             
             #line default
             #line hidden
-, 1054), false)
+, 1392), false)
 );
 
 WriteLiteral(" class=\"icon delete\"");
@@ -197,7 +273,7 @@ WriteLiteral(" class=\"icon delete\"");
 WriteLiteral("></a>\r\n");
 
             
-            #line 13 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 17 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
             }
 
             
@@ -210,7 +286,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 15 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 19 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
                       Write(page.Created.ToString("yyyy-MM-dd"));
 
             
@@ -223,7 +299,7 @@ WriteLiteral(" class=\"date\"");
 WriteLiteral(">");
 
             
-            #line 16 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 20 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
                       Write(page.Updated.ToString("yyyy-MM-dd"));
 
             
@@ -236,7 +312,7 @@ WriteLiteral(" class=\"type\"");
 WriteLiteral(">");
 
             
-            #line 17 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 21 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
                       Write(page.TemplateName);
 
             
@@ -249,7 +325,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral(">");
 
             
-            #line 18 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 22 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
                              if (page.Pages.Count > 0) {
             
             #line default
@@ -261,21 +337,21 @@ WriteLiteral(" class=\"action\"");
 WriteLiteral("></span>");
 
             
-            #line 18 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 22 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
                                                                                     }
             
             #line default
             #line hidden
 WriteLiteral("<a");
 
-WriteAttribute("href", Tuple.Create(" href=\"", 1433), Tuple.Create("\"", 1489)
+WriteAttribute("href", Tuple.Create(" href=\"", 1771), Tuple.Create("\"", 1827)
             
-            #line 18 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-              , Tuple.Create(Tuple.Create("", 1440), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "page", new { id = page.Id })
+            #line 22 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+              , Tuple.Create(Tuple.Create("", 1778), Tuple.Create<System.Object, System.Int32>(Url.Action("edit", "page", new { id = page.Id })
             
             #line default
             #line hidden
-, 1440), false)
+, 1778), false)
 );
 
 WriteLiteral(">\r\n");
@@ -283,7 +359,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("            ");
 
             
-            #line 19 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 23 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
         Write(!String.IsNullOrEmpty(page.NavigationTitle) ? page.NavigationTitle : page.Title);
 
             
@@ -298,7 +374,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                ");
 
             
-            #line 21 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 25 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
            Write(Html.Raw(page.LastPublished == DateTime.MinValue ? "<span class=info-unpublished></span>" : (page.Updated > page.LastPublished ? "<span class=info-draft></span>" : "")));
 
             
@@ -309,7 +385,7 @@ WriteLiteral("\r\n");
 WriteLiteral("                ");
 
             
-            #line 22 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 26 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
            Write(Html.Raw(page.OriginalId != Guid.Empty ? "<span class=info-copy></span>" : ""));
 
             
@@ -318,13 +394,13 @@ WriteLiteral("                ");
 WriteLiteral("\r\n            </div></a></span>\r\n");
 
             
-            #line 24 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
         
             
             #line default
             #line hidden
             
-            #line 24 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 28 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
          if (page.Pages.Count > 0) {
 
             
@@ -335,8 +411,8 @@ WriteLiteral("        <ul>\r\n");
 WriteLiteral("\t\t\t");
 
             
-            #line 26 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-       Write(Html.Partial("Partial/SiteTree", page.Pages.Where(p => p.IsBlock).ToList()));
+            #line 30 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+       Write(Html.Partial("Partial/SiteTree", new Piranha.Models.Manager.PageModels.SitemapModel() { Pages = page.Pages.Where(p => p.IsBlock).ToList(), Templates = Model.Templates, ParentTypes = blocktypes }));
 
             
             #line default
@@ -346,8 +422,8 @@ WriteLiteral("\r\n");
 WriteLiteral("            ");
 
             
-            #line 27 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
-       Write(Html.Partial("Partial/SiteTree", page.Pages.Where(p => !p.IsBlock).ToList()));
+            #line 31 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+       Write(Html.Partial("Partial/SiteTree", new Piranha.Models.Manager.PageModels.SitemapModel() { Pages = page.Pages.Where(p => !p.IsBlock).ToList(), Templates = Model.Templates, ParentTypes = blocktypes }));
 
             
             #line default
@@ -355,7 +431,7 @@ WriteLiteral("            ");
 WriteLiteral("\r\n        </ul>\r\n");
 
             
-            #line 29 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 33 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
         }
 
             
@@ -364,7 +440,7 @@ WriteLiteral("\r\n        </ul>\r\n");
 WriteLiteral("    </li>\r\n");
 
             
-            #line 31 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
+            #line 35 "..\..\Areas\Manager\Views\Page\Partial\SiteTree.cshtml"
 }
 
             

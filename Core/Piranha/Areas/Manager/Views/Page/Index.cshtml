@@ -13,14 +13,51 @@
             }
     </style>
     <script type="text/javascript">
+		function addPage() {
+			$('#page-templates').show();
+			$('#block-templates').hide();
+
+			floatBox.show('boxTemplates');
+			return false;
+		}
+
         //
         // Sets all hidden fields before submit
-        function preSubmit(parentid, seqno) {
+        function preSubmit(parentid, seqno, pages, blocktypes) {
             $("#ParentId").val(parentid);
             $("#Seqno").val(seqno);
 
-            floatBox.show('boxTemplates');
+            if (pages) {
+            	$('#page-templates').show();
+            	$('#block-header').show();
+            } else {
+            	$('#page-templates').hide();
+            	$('#block-header').hide();
+			}
 
+            if (blocktypes == '') {
+            	$('#block-templates').hide();
+            } else {
+            	// Show all blocks
+            	$('#block-templates .templates').removeClass('one');
+            	$('#block-templates .templates').show();
+            	var visible = 0;
+
+				// Hide disabled blocks
+            	$.each($('#block-templates .templates'), function (i, e) {
+            		var id = $(e).attr('data-templateid');
+
+            		if (blocktypes.indexOf(id) == -1)
+            			$(e).hide();
+            		else visible++;
+            	});
+            	if (visible == 1)
+            		$('#block-templates .templates').addClass('one');
+
+            	$('#block-templates').show();
+            }
+
+            floatBox.show('boxTemplates');
             return false;
         }
 
@@ -94,22 +131,6 @@
             });
             </text>
             }
-			
-        	$('.filter .btn').click(function () {
-        		if ($(this).attr('href') == '#') {
-        			$('#page-templates, #block-templates').show();
-        		} else if ($(this).attr('href') == '#page-templates') {
-        			$('#block-templates').hide();
-        			$('#page-templates').show();
-        		} else if ($(this).attr('href') == '#block-templates') {
-        			$('#page-templates').hide();
-        			$('#block-templates').show();
-        		}
-        		$('.filter .btn').removeClass('active');
-        		$(this).addClass('active');
-				
-        		return false;
-        	});
         });
 
         function bindMove() {
@@ -135,7 +156,7 @@
 <div class="toolbar">
     <div class="inner">
         <ul>
-            <li><a onclick="floatBox.show('boxTemplates')" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
+            <li><a onclick="return addPage()" class="add">@Piranha.Resources.Global.ToolbarAdd</a></li>
             @if (Model.ActiveSite != "DEFAULT_SITE") {
             <li><a href="@Url.Action("site", new { id = Model.ActiveSite.ToLower() })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
             } else {
@@ -191,7 +212,7 @@
             <span class="type">@Piranha.Resources.Global.Type</span>
             <span class="title">@Piranha.Resources.Global.Title</span>
         </li>
-        @Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", Model.SiteMap)
+        @Html.Partial(@"~/Areas/Manager/Views/Page/Partial/SiteTree.cshtml", new Piranha.Models.Manager.PageModels.SitemapModel() { Pages = Model.SiteMap, Templates = Model.Templates })
         }
     </ul>
     
@@ -252,13 +273,6 @@
             <div class="clear"></div>
         </div>
         <div id="create-new" class="inner">
-			@if (Model.Templates.Where(t => t.IsBlock).Count() > 0) {
-				<div class="filter">
-					<a class="btn active" href="#">All</a>
-					<a class="btn" href="#page-templates">Pages</a>
-					<a class="btn" href="#block-templates">Blocks</a>
-				</div>
-			}
 			<div id="page-templates">
 				@foreach (var template in Model.Templates.Where(t => !t.IsBlock)) {
 				<div class="templates @(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")) left" data-templateid="@template.Id">
@@ -272,8 +286,8 @@
 			</div>
             <div class="clear"></div>
 			@if (Model.Templates.Where(t => t.IsBlock).Count() > 0) {
-				<fieldset id="block-templates">
-					<legend>Blocks</legend>
+				<div id="block-templates">
+					<h4 id="block-header" style="font-weight:bold;border-bottom: solid 1px #ddd;padding:0 0 5px 15px">Blocks</h4>
 					@foreach (var template in Model.Templates.Where(t => t.IsBlock)) {
 					<div class="templates @(Model.Templates.Count > 6 ? "compressed" : (Model.Templates.Count == 1 ? "one" : "")) left" data-templateid="@template.Id">
 						<h3>@template.Name</h3>
@@ -283,7 +297,7 @@
 						<p>@template.Description</p>
 					</div>
 					}
-				</fieldset>
+				</div>
 				<div class="clear"></div>
 			}
         </div>
