@@ -931,6 +931,65 @@
     <EmbeddedResource Include="Data\Scripts\Updates\30.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\31.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\32.sql" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\advlist\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\anchor\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\autosave\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\bbcode\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\charmap\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\codesample\css\prism.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\codesample\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\colorpicker\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\contextmenu\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\directionality\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-cool.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-cry.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-embarassed.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-frown.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-innocent.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-kiss.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-laughing.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-money-mouth.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-sealed.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-smile.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-surprised.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-tongue-out.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-undecided.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-wink.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\img\smiley-yell.gif" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\emoticons\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\example\dialog.html" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\example\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\example_dependency\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\imagetools\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\image\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\importcss\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\insertdatetime\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\layer\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\legacyoutput\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\lists\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\media\moxieplayer.swf" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\media\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\nonbreaking\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\noneditable\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\pagebreak\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\preview\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\print\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\save\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\searchreplace\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\spellchecker\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\tabfocus\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\table\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\template\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\textcolor\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\textpattern\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\visualblocks\css\visualblocks.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\visualblocks\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\visualchars\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\plugins\wordcount\plugin.min.js" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\content.inline.min.css" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce-small.svg" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.svg" />
     <Content Include="Areas\Manager\Views\Install\Welcome.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Welcome.generated.cs</LastGenOutput>
@@ -944,6 +1003,12 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce-small.eot" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce-small.woff" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.eot" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.ttf" />
+    <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.woff" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

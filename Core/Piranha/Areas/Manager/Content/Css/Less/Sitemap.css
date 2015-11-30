@@ -56,8 +56,8 @@ ul.sitemap li.block.last {
   border-width: 0 1px 1px;
   padding-bottom: 10px;
 }
-ul.sitemap li.block .block.last {
-  border-bottom: 0;
+ul.sitemap li.block .block {
+  border-width: 0;
   padding-bottom: 0;
 }
 ul.sitemap li.block .buttons {
@@ -102,6 +102,9 @@ ul.sitemap.media .icon {
 }
 ul.sitemap .buttons {
   width: 70px;
+}
+ul.sitemap .buttons .delete {
+  float: right;
 }
 ul.sitemap .date {
   width: 80px;
