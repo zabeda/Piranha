@@ -95,7 +95,16 @@
 .content-editor .mce-toolbar {
   padding: 0 10px 2px;
 }
-.content-editor .mce-toolbar.fixed-toolbar {
+.content-editor .mce-menubar {
+  display: none !important;
+}
+.content-editor .mce-ico {
+  font-size: 13px;
+}
+.content-editor .mce-btn button {
+  font-size: 12px;
+}
+.content-editor .fixed .mce-toolbar.fixed-toolbar {
   background: none repeat scroll 0 0 #FFFFFF;
   border-radius: 0 0 6px 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -105,15 +114,6 @@
   position: fixed;
   top: 53px;
   width: auto;
-}
-.content-editor .mce-menubar {
-  display: none;
-}
-.content-editor .mce-ico {
-  font-size: 13px;
-}
-.content-editor .mce-btn button {
-  font-size: 12px;
 }
 body .mce-window {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
