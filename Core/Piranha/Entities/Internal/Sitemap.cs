@@ -364,7 +364,7 @@ namespace Piranha.Models
 		public static int CountVisible(this List<Sitemap> pages) {
 			int count = 0;
 			foreach (Sitemap page in pages)
-				if (!page.IsHidden) count++;
+				if (!page.IsHidden && !page.IsBlock) count++;
 			return count;
 		}
 	}

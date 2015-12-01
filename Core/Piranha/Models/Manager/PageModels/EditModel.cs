@@ -554,7 +554,7 @@ namespace Piranha.Models.Manager.PageModels
 					} else {
 						refpage = Page.GetSingle(Page.ParentId, true);
 					}
-					PlaceRef = refpage.Title;
+					PlaceRef = !String.IsNullOrWhiteSpace(refpage.NavigationTitle) ? refpage.NavigationTitle : refpage.Title;
 				}
 			}
 
@@ -653,7 +653,7 @@ namespace Piranha.Models.Manager.PageModels
 					ret.Add(new PagePlacement() {
 						Id = s.Id,
 						Level = s.Level,
-						Title = prefix + s.Title,
+						Title = prefix + (!String.IsNullOrWhiteSpace(s.NavigationTitle) ? s.NavigationTitle : s.Title),
 						IsSelected = (p != null && s.Id == p.ParentId)
 					});
 					if (s.Pages.Count > 0)
@@ -678,7 +678,7 @@ namespace Piranha.Models.Manager.PageModels
 			foreach (var page in sib) {
 				ret.Add(new PagePlacement() {
 					Id = page.Id,
-					Title = page.Title,
+					Title = (!String.IsNullOrWhiteSpace(page.NavigationTitle) ? page.NavigationTitle : page.Title),
 					Seqno = page_parentid == parentid && page.Seqno > page_seqno ? page.Seqno : page.Seqno + 1,
 					IsSelected = page_parentid == parentid && (page.Seqno + 1) == page_seqno
 				});

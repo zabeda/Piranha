@@ -1222,8 +1222,8 @@ ul.sitemap li.block.last {
   border-width: 0 1px 1px;
   padding-bottom: 10px;
 }
-ul.sitemap li.block .block.last {
-  border-bottom: 0;
+ul.sitemap li.block .block {
+  border-width: 0;
   padding-bottom: 0;
 }
 ul.sitemap li.block .buttons {
@@ -1268,6 +1268,9 @@ ul.sitemap.media .icon {
 }
 ul.sitemap .buttons {
   width: 70px;
+}
+ul.sitemap .buttons .delete {
+  float: right;
 }
 ul.sitemap .date {
   width: 80px;
@@ -1986,7 +1989,16 @@ div.login .btn {
 .content-editor .mce-toolbar {
   padding: 0 10px 2px;
 }
-.content-editor .mce-toolbar.fixed-toolbar {
+.content-editor .mce-menubar {
+  display: none !important;
+}
+.content-editor .mce-ico {
+  font-size: 13px;
+}
+.content-editor .mce-btn button {
+  font-size: 12px;
+}
+.content-editor .fixed .mce-toolbar.fixed-toolbar {
   background: none repeat scroll 0 0 #FFFFFF;
   border-radius: 0 0 6px 6px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -1996,15 +2008,6 @@ div.login .btn {
   position: fixed;
   top: 53px;
   width: auto;
-}
-.content-editor .mce-menubar {
-  display: none;
-}
-.content-editor .mce-ico {
-  font-size: 13px;
-}
-.content-editor .mce-btn button {
-  font-size: 12px;
 }
 body .mce-window {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);

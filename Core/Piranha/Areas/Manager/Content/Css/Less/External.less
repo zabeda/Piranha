@@ -114,22 +114,10 @@
 
     .mce-toolbar {
         padding: 0 10px 2px;
-
-        &.fixed-toolbar {
-            background: none repeat scroll 0 0 #FFFFFF;
-            border-radius: 0 0 6px 6px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            display: inline-block;
-            margin-left: 4px;
-            padding: 0;
-            position: fixed;
-            top: 53px;
-            width: auto;
-        }
     }
 
     .mce-menubar {
-        display: none;
+        display: none !important;
     }
 
     .mce-ico {
@@ -139,6 +127,22 @@
     .mce-btn button {
         font-size: 12px;
     }
+
+	.fixed {
+		.mce-toolbar {
+			&.fixed-toolbar {
+				background: none repeat scroll 0 0 #FFFFFF;
+				border-radius: 0 0 6px 6px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+				display: inline-block;
+				margin-left: 4px;
+				padding: 0;
+				position: fixed;
+				top: 53px;
+				width: auto;
+			}
+		}
+	}
 }
 
 body {
