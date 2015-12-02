@@ -139,6 +139,7 @@ namespace Piranha
 			Handlers.Add("media", "CONTENT", new ContentHandler());
 			Handlers.Add("media.ashx", "CONTENTHANDLER", new ContentHandler());
 			Handlers.Add("mediadraft", "CONTENTDRAFT", new DraftContentHandler());
+			Handlers.Add("mediadraft.ashx", "CONTENTDRAFTHANDLER", new DraftContentHandler());
 			Handlers.Add("thumb", "THUMBNAIL", new ThumbnailHandler());
 			Handlers.Add("thumbdraft", "THUMBNAILDRAFT", new DraftThumbnailHandler());
 			Handlers.Add("upload", "UPLOAD", new UploadHandler());
