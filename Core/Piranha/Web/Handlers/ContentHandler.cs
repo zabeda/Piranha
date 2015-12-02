@@ -77,7 +77,7 @@ namespace Piranha.Web.Handlers
 						var perm = Permalink.GetByName(Config.MediaNamespaceId, permalink);
 
 						if (perm != null)
-							content = Content.GetByPermalinkId(perm.Id);
+							content = Content.GetByPermalinkId(perm.Id, draft);
 					}
 				} catch { }
 

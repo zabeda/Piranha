@@ -290,7 +290,7 @@ namespace Piranha.Web
 					name += "." + suffix;
 
 					return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENTHANDLER") :
-						Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/") + name);
+						Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFTHANDLER")) + "/") + name);
 				}
 				// Generate content url from id
 				return new HtmlString(SiteUrl("~/" + (!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") : Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) +
