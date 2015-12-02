@@ -225,6 +225,11 @@ namespace Piranha.Areas.Manager.Controllers
 						tx.Commit();
 					}
 				}
+				//
+				// Make sure we reload the hostnames after install
+				//
+				WebPages.WebPiranha.RegisterDefaultHostNames();
+
 				return RedirectToAction("index", "account");
 			}
 			return Index();
