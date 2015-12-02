@@ -94,7 +94,8 @@ namespace Piranha.Web.Handlers
 									Application.Current.RouteHandler.HandlePage(context, perm, page, args.Subset(segments));
 								}
 							} else {
-								context.Response.StatusCode = 404;
+								if (!Config.PrefixlessPermalinks)
+									context.Response.StatusCode = 404;
 							}
 						} else if (perm.Type == Permalink.PermalinkType.POST) {
 							Post post = Post.GetByPermalinkId(perm.Id, draft);
@@ -104,11 +105,13 @@ namespace Piranha.Web.Handlers
 								// Call the route handler to route the current post.
 								Application.Current.RouteHandler.HandlePost(context, perm, post, args.Subset(segments));
 							} else {
-								context.Response.StatusCode = 404;
+								if (!Config.PrefixlessPermalinks)
+									context.Response.StatusCode = 404;
 							}
 						}
 					} else {
-						context.Response.StatusCode = 404;
+						if (!Config.PrefixlessPermalinks)
+							context.Response.StatusCode = 404;
 					}
 				} else {
 					//
