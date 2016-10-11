@@ -111,10 +111,16 @@ namespace Piranha.Models
 		[Column(Name = "content_folder")]
 		public bool IsFolder { get; set; }
 
-		/// <summary>
-		/// Gets/sets the possible width of the content.
+        /// <summary>
+		/// Gets/sets whether this is a content reference or not.
 		/// </summary>
-		[Column(Name = "content_width")]
+		[Column(Name = "content_reference")]
+        public bool IsReference { get; set; }
+
+        /// <summary>
+        /// Gets/sets the possible width of the content.
+        /// </summary>
+        [Column(Name = "content_width")]
 		public int Width { get; set; }
 
 		/// <summary>

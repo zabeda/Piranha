@@ -275,8 +275,11 @@ namespace Piranha.Web
 			var draft = (CurrentPage != null && CurrentPage.IsDraft) || (CurrentPost != null && CurrentPost.IsDraft);
 
 			if (cnt != null) {
-				var perm = cnt.PermalinkId != Guid.Empty ? Models.Permalink.GetSingle(cnt.PermalinkId) : null;
+                // Return original url if content is reference
+                if (cnt.IsReference)
+                    return new HtmlString(cnt.OriginalUrl);
 
+				var perm = cnt.PermalinkId != Guid.Empty ? Models.Permalink.GetSingle(cnt.PermalinkId) : null;
 				if (perm != null) {
 					// Generate content url from permalink
 					var segments = perm.Name.Split(new char[] { '.' });

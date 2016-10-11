@@ -379,38 +379,46 @@ namespace Piranha.Models.Manager.ContentModels
 
 			// Download file from web
 			if (!hasfile && !String.IsNullOrEmpty(FileUrl)) {
-				data = web.DownloadData(FileUrl);
-				Content.OriginalUrl = FileUrl;
-				Content.LastSynced = Convert.ToDateTime(web.ResponseHeaders[HttpResponseHeader.LastModified]);
-			}
+                Content.OriginalUrl = FileUrl;
+                if (!Content.IsReference) {
+				    data = web.DownloadData(FileUrl);
+				    Content.LastSynced = Convert.ToDateTime(web.ResponseHeaders[HttpResponseHeader.LastModified]);
+                }
+			} 
 
 			var media = new MediaFileContent();
-			if (hasfile) {
-				if (UploadedFile != null) {
-					media.Filename = UploadedFile.FileName;
-					media.ContentType = UploadedFile.ContentType;
-					using (var reader = new BinaryReader(UploadedFile.InputStream)) {
-						media.Body = reader.ReadBytes(Convert.ToInt32(UploadedFile.InputStream.Length));
-					}
-				} else {
-					media.Filename = ServerFile.Name;
-					media.ContentType = MimeType.Get(ServerFile.Name);
-					using (var stream = ServerFile.OpenRead()) {
-						media.Body = new byte[ServerFile.Length];
-						stream.Read(media.Body, 0, media.Body.Length);
-					}
-				}
-			} else if (data != null) {
-				media.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1);
-				media.ContentType = web.ResponseHeaders["Content-Type"];
-				media.Body = data;
-			} else {
+            if (hasfile) {
+                if (UploadedFile != null) {
+                    media.Filename = UploadedFile.FileName;
+                    media.ContentType = UploadedFile.ContentType;
+                    using (var reader = new BinaryReader(UploadedFile.InputStream)) {
+                        media.Body = reader.ReadBytes(Convert.ToInt32(UploadedFile.InputStream.Length));
+                    }
+                } else {
+                    media.Filename = ServerFile.Name;
+                    media.ContentType = MimeType.Get(ServerFile.Name);
+                    using (var stream = ServerFile.OpenRead()) {
+                        media.Body = new byte[ServerFile.Length];
+                        stream.Read(media.Body, 0, media.Body.Length);
+                    }
+                }
+            } else if (data != null) {
+                media.Filename = FileUrl.Substring(FileUrl.LastIndexOf('/') + 1);
+                media.ContentType = web.ResponseHeaders["Content-Type"];
+                media.Body = data;
+            } else if (Content.IsReference) {
+                Uri url = new Uri(Content.OriginalUrl);
+                media.Filename = url.Host;
+                media.ContentType = url.Host.Replace("www.", "");
+                media.Body = new byte[0];
+
+            } else {
 				media = null;
 			}
 
 			var saved = false;
 
-			if (!Content.IsFolder) {
+			if (!Content.IsFolder && !Content.IsReference) {
 				// Only save permalinks for non-folders
 				var filename = !String.IsNullOrEmpty(Content.Filename) ? Content.Filename : (!String.IsNullOrEmpty(media.Filename) ? media.Filename : "");
 				if (Permalink.IsNew && String.IsNullOrEmpty(Permalink.Name))
