@@ -74,10 +74,15 @@ namespace Piranha.Entities
 		/// </summary>
 		public bool IsFolder { get; set; }
 
-		/// <summary>
-		/// Gets/sets the width of the media object in case it is an image.
+        /// <summary>
+		/// Gets/sets whether this is a reference or not.
 		/// </summary>
-		public int? Width { get; set; }
+		public bool IsReference { get; set; }
+
+        /// <summary>
+        /// Gets/sets the width of the media object in case it is an image.
+        /// </summary>
+        public int? Width { get; set; }
 
 		/// <summary>
 		/// Gets/sets the height of the media object in case it is an image.

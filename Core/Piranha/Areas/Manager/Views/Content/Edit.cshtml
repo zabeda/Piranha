@@ -30,7 +30,7 @@
             <li><a href="@ViewBag.ReturnUrl" class="back">@Piranha.Resources.Global.ToolbarBack</a></li>
             }
             <li><a href="@Url.Action("edit", new { id = Model.Content.Id })" class="refresh">@Piranha.Resources.Global.ToolbarReload</a></li>
-            @if (!Model.Content.IsNew && !Model.Content.IsFolder && !String.IsNullOrEmpty(Model.Content.OriginalUrl)) {
+            @if (!Model.Content.IsNew && !Model.Content.IsFolder && !String.IsNullOrEmpty(Model.Content.OriginalUrl) && !Model.Content.IsReference) {
             <li><a href="@Url.Action("sync", new { @id = Model.Content.Id })" class="sync">@Piranha.Resources.Global.ToolbarSync</a></li>
             }
             @Piranha.WebPages.Hooks.Manager.Toolbar.Render(Url, Model)
@@ -84,6 +84,8 @@
                     <div class="input">
                         @Html.TextBoxFor(m => m.FileUrl, 
                             new { @placeholder = @Piranha.Resources.Global.FileUrl })</div>
+                    <label>&nbsp;</label>
+                    <p> @Html.CheckBoxFor(m => m.Content.IsReference) Create reference and do not download content</p>
                 </li>
             </ul>
         </div>

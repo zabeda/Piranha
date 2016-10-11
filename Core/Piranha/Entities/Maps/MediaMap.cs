@@ -36,7 +36,8 @@ namespace Piranha.Entities.Maps
 			Property(m => m.Size).HasColumnName("content_size");
 			Property(m => m.IsImage).HasColumnName("content_image");
 			Property(m => m.IsFolder).HasColumnName("content_folder");
-			Property(m => m.Width).HasColumnName("content_width");
+            Property(m => m.IsReference).HasColumnName("content_reference");
+            Property(m => m.Width).HasColumnName("content_width");
 			Property(m => m.Height).HasColumnName("content_height");
 			Property(m => m.Name).HasColumnName("content_name").HasMaxLength(128);
 			Property(m => m.AltText).HasColumnName("content_alt").HasMaxLength(128);
