@@ -59,6 +59,7 @@ namespace Piranha
 		private const string DISABLE_METHOD_BINDING = "disableMethodBinding";
 		private const string DISABLE_MODELSTATE_BINDING = "disableModelStateBinding";
 		private const string DISABLE_MANAGER = "disableManager";
+		private const string MANAGER_URL = "managerUrl";
 		private const string DISABLE_TYPE_BUILDER = "disableTypeBuilder";
 		private const string DISABLE_CATALOG_SEARCH = "disableCatalogSearch";
 		private const string DISABLE_COMPOSITION = "disableComposition";
@@ -98,10 +99,20 @@ namespace Piranha
 			set { this[DISABLE_MANAGER] = value; }
 		}
 
-		/// <summary>
-		/// Gets/sets an optional default schema for Entity Framework.
-		/// </summary>
-		[ConfigurationProperty(ENTITY_SCHEMA, IsRequired = false)]
+        /// <summary>
+        /// Gets/sets if the manager url.
+        /// </summary>
+        [ConfigurationProperty(MANAGER_URL, IsRequired = false)]
+        public StringElement ManagerUrl
+        {
+            get { return (StringElement)this[MANAGER_URL]; }
+            set { this[MANAGER_URL] = value; }
+        }
+
+        /// <summary>
+        /// Gets/sets an optional default schema for Entity Framework.
+        /// </summary>
+        [ConfigurationProperty(ENTITY_SCHEMA, IsRequired = false)]
 		public StringElement EntitySchema {
 			get { return (StringElement)this[ENTITY_SCHEMA]; }
 			set { this[ENTITY_SCHEMA] = value; }
