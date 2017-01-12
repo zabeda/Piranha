@@ -31,7 +31,7 @@ namespace Piranha.Data
 		/// <summary>
 		/// Gets the current database version.
 		/// </summary>
-		public static int CurrentVersion = 35;
+		public static int CurrentVersion = 36;
 
 		/// <summary>
 		/// Gets the currently logged in users identity.
