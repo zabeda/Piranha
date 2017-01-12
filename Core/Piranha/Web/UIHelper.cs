@@ -404,7 +404,7 @@ namespace Piranha.Web
 						if (page != null) {
 							sm = new List<Sitemap>();
 							if (RenderParent)
-								sm.Add(Mapper.Map<Sitemap, Sitemap>(page));
+								sm.Add(Application.Current.Mapper.Map<Sitemap, Sitemap>(page));
 							sm.AddRange(page.Pages);
 						}
 					}
@@ -504,7 +504,7 @@ namespace Piranha.Web
 					if (includedParent && page.Level == start - 1) {
 						var pages = new List<Sitemap>();
 
-						pages.Add(Mapper.Map<Sitemap, Sitemap>(page));
+						pages.Add(Application.Current.Mapper.Map<Sitemap, Sitemap>(page));
 						pages.AddRange(page.Pages);
 
 						return pages;
