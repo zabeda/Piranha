@@ -297,7 +297,7 @@ CREATE TABLE [post] (
 	[post_keywords] NVARCHAR(128) NULL,
 	[post_description] NVARCHAR(255) NULL,
 	[post_rss] BIT NOT NULL default(1),
-	[post_excerpt] NVARCHAR(255) NULL,
+	[post_excerpt] NVARCHAR(512) NULL,
 	[post_body] NTEXT NULL,
 	[post_attachments] NTEXT NULL,
 	[post_controller] NVARCHAR(128) NULL,
