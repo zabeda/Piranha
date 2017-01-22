@@ -330,6 +330,7 @@ CREATE TABLE [content] (
 	[content_size] INT NOT NULL default(0),
 	[content_image] BIT NOT NULL default(0),
 	[content_folder] BIT NOT NULL default(0),
+	[content_reference] BIT NOT NULL default(0),
 	[content_width] INT NULL,
 	[content_height] INT NULL,
 	[content_alt] NVARCHAR(128) NULL,
