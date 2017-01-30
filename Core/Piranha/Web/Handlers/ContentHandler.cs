@@ -63,6 +63,11 @@ namespace Piranha.Web.Handlers
 						// Get content by id
 						content = Content.GetSingle(id.Value, draft);
 						if (content != null) {
+                            // Redirect to original url if content is reference
+                            if (content.IsReference && !string.IsNullOrEmpty(content.OriginalUrl)) {
+                                context.Response.Redirect(content.OriginalUrl, true);
+                            }
+
 							if (args.Length > 1)
 								try {
 									width = Convert.ToInt32(args[1]);

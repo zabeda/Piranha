@@ -55,7 +55,7 @@ namespace Piranha.Web.Handlers
 		/// <param name="nodes">The sitemap nodes</param>
 		private void WriteNodes(HttpContext context, List<Sitemap> nodes) {
 			foreach (var node in nodes) {
-				if (String.IsNullOrEmpty(node.Redirect)) {
+				if (String.IsNullOrEmpty(node.Redirect) && !node.IsBlock) {
 					context.Response.Write(String.Format(xmlUrl,
 						GetPermalink(node.Permalink), node.LastPublished.ToString("yyyy-MM-dd")));
 				}

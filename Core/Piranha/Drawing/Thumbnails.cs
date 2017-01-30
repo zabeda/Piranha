@@ -167,8 +167,12 @@ namespace Piranha.Drawing
 						// Folder
 						Add(new Guid("D604308B-BDFC-42FA-AAAA-7D0E9FE8DE5A"), "folder", "Piranha.Areas.Manager.Content.Img.ico-folder-96.png");
 						Add(new Guid("D604308B-BDFC-42FA-AAAA-7D0E9FE8DE5A"), "folder-small", "Piranha.Areas.Manager.Content.Img.ico-folder-32.png");
-						// Default
-						Add(Guid.Empty, "default", "Piranha.Areas.Manager.Content.Img.ico-doc-64.png");
+                        // Reference
+                        Add(new Guid("DBAD9093-1672-41EE-A5F7-F0433DF109A5"), "youtube.com", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png");
+                        Add(new Guid("DBAD9093-1672-41EE-A5F7-F0433DF109A5"), "vimeo.com", "Piranha.Areas.Manager.Content.Img.ico-movie-64.png");
+                        Add(Guid.Empty, "reference", "Piranha.Areas.Manager.Content.Img.ico-doc-64.png");
+                        // Default
+                        Add(Guid.Empty, "default", "Piranha.Areas.Manager.Content.Img.ico-doc-64.png");
 					}
 				}
 			}
