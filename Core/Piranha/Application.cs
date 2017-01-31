@@ -104,6 +104,11 @@ namespace Piranha
 		public bool IsMvc {
 			get { return ClientFramework != null && ClientFramework.Type == FrameworkType.Mvc; }
 		}
+
+        /// <summary>
+        /// Gets the current mapper instance.
+        /// </summary>
+        public IMapper Mapper { get; private set; }
 		#endregion
 
 		/// <summary>
@@ -199,12 +204,13 @@ namespace Piranha
 
 			RegisterHandlers();
 
-			// Configure AutoMapper
-			Mapper.CreateMap<Models.Sitemap, Models.Sitemap>()
-				.ForMember(s => s.Pages, o => o.Ignore());
-
-			// Assert configuration
-			Mapper.AssertConfigurationIsValid();
+            // Configure AutoMapper
+            var mapperConfig = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Models.Sitemap, Models.Sitemap>()
+                    .ForMember(s => s.Pages, o => o.Ignore());
+            });
+            mapperConfig.AssertConfigurationIsValid();
+            Mapper = mapperConfig.CreateMapper();
 		}
 	}
 }
