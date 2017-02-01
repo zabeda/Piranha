@@ -67,10 +67,23 @@ namespace Piranha
 			}
 		}
 
-		/// <summary>
-		/// Gets an optional default schema for Entity Framework.
-		/// </summary>
-		public static string EntitySchema {
+        /// <summary>
+        /// Gets the manager url. Defaults to "manager" by default.
+        /// </summary>
+        public static string ManagerUrl
+        {
+            get
+            {
+                return (string.IsNullOrEmpty(config.Settings.ManagerUrl.Value))
+                    ? "manager"
+                    : config.Settings.ManagerUrl.Value;
+            }
+        }
+
+        /// <summary>
+        /// Gets an optional default schema for Entity Framework.
+        /// </summary>
+        public static string EntitySchema {
 			get {
 				return config.Settings.EntitySchema.Value;
 			}
