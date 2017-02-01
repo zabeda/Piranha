@@ -288,4 +288,28 @@
   <data name="MessageUpdated" xml:space="preserve">
     <value>Den publicerade versionen har uppdaterats.</value>
   </data>
+  <data name="CroppingBottom" xml:space="preserve">
+    <value>Underdel</value>
+  </data>
+  <data name="CroppingCenter" xml:space="preserve">
+    <value>Mitten</value>
+  </data>
+  <data name="CroppingLeft" xml:space="preserve">
+    <value>Vänster</value>
+  </data>
+  <data name="CroppingPosition" xml:space="preserve">
+    <value>Beskärningsläge</value>
+  </data>
+  <data name="CroppingRight" xml:space="preserve">
+    <value>Höger</value>
+  </data>
+  <data name="CroppingTop" xml:space="preserve">
+    <value>Överdel</value>
+  </data>
+  <data name="Horizontal" xml:space="preserve">
+    <value>Horisontellt</value>
+  </data>
+  <data name="Vertical" xml:space="preserve">
+    <value>Vertikalt</value>
+  </data>
 </root>

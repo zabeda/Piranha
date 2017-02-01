@@ -6,7 +6,7 @@ http://yuilibrary.com/license/
 */
 html {
   color: #000;
-  background: #ffffff;
+  background: #FFF;
 }
 body,
 div,
@@ -101,7 +101,7 @@ select {
   *font-size: 100%;
 }
 legend {
-  color: #000000;
+  color: #000;
 }
 /*
 YUI 3.4.1 (build 4118)
@@ -559,7 +559,7 @@ table.list .form .hidden {
 }
 .toolbar {
   background: #eee;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -573,7 +573,7 @@ table.list .form .hidden {
 }
 .toolbar li {
   float: left;
-  border-right: dotted 1px #dddddd;
+  border-right: dotted 1px #ddd;
   padding: 0 5px;
   position: relative;
 }
@@ -658,7 +658,7 @@ table.list .form .hidden {
   /* Fix for iPad */
 }
 .toolbar .search {
-  background: #ffffff url('../img/ico-search-24.png') no-repeat 50% 50%;
+  background: #fff url('../img/ico-search-24.png') no-repeat 50% 50%;
   border: 1px solid #e2e2e2;
   border-left: 0px none;
   width: 40px;
@@ -705,7 +705,7 @@ table.list .form .hidden {
 .main-content .tools {
   background: #eee;
   width: 74px;
-  border-right: solid 1px #dddddd;
+  border-right: solid 1px #ddd;
 }
 .main-content .tools li {
   position: relative;
@@ -835,7 +835,7 @@ p input[type="radio"] {
 }
 .form li {
   position: relative;
-  background: #eeeeee;
+  background: #eee;
   border: 1px solid #e2e2e2;
   margin-bottom: 10px;
   -webkit-border-radius: 2px;
@@ -875,6 +875,7 @@ p input[type="radio"] {
 .form .half p {
   margin-left: 0;
 }
+.form .radio label,
 .form .checkbox label {
   float: none;
   margin: 0;
@@ -1014,7 +1015,7 @@ table.list {
   border-top-right-radius: 3px;
 }
 table.list tr {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #ddd;
 }
 table.list thead tr {
   border-bottom-width: 4px;
@@ -1114,7 +1115,7 @@ table.list .form .input {
   margin-left: 0;
 }
 table.list .dark .form .input {
-  border-color: #dddddd;
+  border-color: #ddd;
 }
 .content-editor table.list tbody tr:first-child {
   background: #eee;
@@ -1282,7 +1283,7 @@ ul.sitemap .type {
 ul.sitemap .title {
   float: none;
   padding-left: 10px;
-  border-bottom: solid 1px #dddddd;
+  border-bottom: solid 1px #ddd;
 }
 ul.sitemap .title a {
   display: block;
@@ -1290,7 +1291,7 @@ ul.sitemap .title a {
 }
 ul.sitemap .header .title {
   padding-left: 30px;
-  border-bottom: solid 4px #dddddd;
+  border-bottom: solid 4px #ddd;
 }
 ul.sitemap img.thumb {
   width: 32px;
@@ -1420,7 +1421,7 @@ ul.list arrow-down {
 }
 .box {
   background: #fff;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   margin-bottom: 30px;
   overflow: hidden;
   -webkit-border-radius: 3px;
@@ -1435,7 +1436,7 @@ ul.list arrow-down {
 }
 .box .inner {
   padding: 14px;
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
 }
 .box.content-editor .inner,
 .box .content-editor .inner {
@@ -1445,7 +1446,7 @@ ul.list arrow-down {
 .box .title {
   background: #eee;
   padding: 10px 14px;
-  _border-bottom: 1px solid #dddddd;
+  _border-bottom: 1px solid #ddd;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 .box .title h2 {
@@ -1515,7 +1516,7 @@ ul.list arrow-down {
 .box-tabs li.selected a {
   background: #fff;
   color: #000;
-  border: solid 1px #dddddd;
+  border: solid 1px #ddd;
   border-bottom: none;
 }
 .grid_3 .expandable .title,
@@ -1523,14 +1524,14 @@ ul.list arrow-down {
   background-position: 94% 50%;
 }
 .expandable .title {
-  background: #eeeeee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAfElEQVR42qWT0QlAIQhFG6Vl3KZJaoqGcZygAYKegkEUPoj7cT5K7yVNQ0rphIQisNAMtjs68/dDFLLQheHQLScu3S6ul8CnqmY3yBp4JC8D8p495wzKTzkUrDnj1cAoGmTAgDXYbtGNY9ZgA7gEuInwN4KDhI8yvkzwOn/srR2fTcXVhQAAAABJRU5ErkJggg==) 98% 50% no-repeat;
+  background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAfElEQVR42qWT0QlAIQhFG6Vl3KZJaoqGcZygAYKegkEUPoj7cT5K7yVNQ0rphIQisNAMtjs68/dDFLLQheHQLScu3S6ul8CnqmY3yBp4JC8D8p495wzKTzkUrDnj1cAoGmTAgDXYbtGNY9ZgA7gEuInwN4KDhI8yvkzwOn/srR2fTcXVhQAAAABJRU5ErkJggg==) 98% 50% no-repeat;
 }
 .expandable .expanded {
-  background: #eeeeee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeklEQVR42qXT2wnAIAyFYUdxmWzjJDqFwziOkAEEe4QUJFChnofvoRJ+qJeQUvIECjToptma+Pn9I0IGhfFBbSb6QITqhk8qxD2QYfyU34CAXgQUJNjmjEtlBRoRaCvQ98U5ZzhxgU4H6F+gN5E+RvIi8VeZf0z0c34A0LEUw8N2jIkAAAAASUVORK5CYII=) 98% 50% no-repeat;
+  background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAeklEQVR42qXT2wnAIAyFYUdxmWzjJDqFwziOkAEEe4QUJFChnofvoRJ+qJeQUvIECjToptma+Pn9I0IGhfFBbSb6QITqhk8qxD2QYfyU34CAXgQUJNjmjEtlBRoRaCvQ98U5ZzhxgU4H6F+gN5E+RvIi8VeZf0z0c34A0LEUw8N2jIkAAAAASUVORK5CYII=) 98% 50% no-repeat;
 }
 .floatbox .title,
 .floatbox .close-btn {
-  background: #eeeeee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3UlEQVR42qWQQSxjURSGW0UoJhYM795q731VQtt4iCaaaCcRiUQklrOSSGzEavaEMgtKE2ywEJVYdEdpQpMZrUlEghBqMiJhFhNbSzaSM+fdeE/7zNh4yZd7zvnP+c991wQA7yIn+f2ptfcmoEz+r/k2oAzdBlu+/NPgusv3+VJxwUUjg19+b8I4fBVQQhmvEzIeGa6CzRHYXzbrBj+7/dZjjxMOORUc1dvhvP3FJNOhhI7dMmpEcNTA4cznbtMNksVWc5rT2bTTBgJs+lFnh5N2b+w02Dxy4OaQwpquyzSVrqkuefUGSactsitTSCK7jMA3vMleI4cdJonas5Zab+D5xjfQiaPJJjYKcOsGGml5XKbfV921BcZHfEVMpocxTsHA/VabIja/aRDldHyNkScEjEQ5ib9psMRpaBkbNZaeya3RBNw95hrMuRymeUbG5x0ENObUk9HtBUbDIs6GkcRCrb1IN4jUMeu0QwIDqdEmV56qhxmJTBn0MKe+nF+YkmsGJtB9wi4BnnsPfT1iWGPSQWaEhnzltsU/nX6hmywmQTkeZf1S5dgw/ZgoybcomHuw3qqCsZqzQalyZYhWrWFcgXzQb2BBD6RI24ZfMeZl2WCtNEsvVGc0g3fxF7yqHwCAJ0miAAAAAElFTkSuQmCC) 96% 50% no-repeat;
+  background: #eee url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3UlEQVR42qWQQSxjURSGW0UoJhYM795q731VQtt4iCaaaCcRiUQklrOSSGzEavaEMgtKE2ywEJVYdEdpQpMZrUlEghBqMiJhFhNbSzaSM+fdeE/7zNh4yZd7zvnP+c991wQA7yIn+f2ptfcmoEz+r/k2oAzdBlu+/NPgusv3+VJxwUUjg19+b8I4fBVQQhmvEzIeGa6CzRHYXzbrBj+7/dZjjxMOORUc1dvhvP3FJNOhhI7dMmpEcNTA4cznbtMNksVWc5rT2bTTBgJs+lFnh5N2b+w02Dxy4OaQwpquyzSVrqkuefUGSactsitTSCK7jMA3vMleI4cdJonas5Zab+D5xjfQiaPJJjYKcOsGGml5XKbfV921BcZHfEVMpocxTsHA/VabIja/aRDldHyNkScEjEQ5ib9psMRpaBkbNZaeya3RBNw95hrMuRymeUbG5x0ENObUk9HtBUbDIs6GkcRCrb1IN4jUMeu0QwIDqdEmV56qhxmJTBn0MKe+nF+YkmsGJtB9wi4BnnsPfT1iWGPSQWaEhnzltsU/nX6hmywmQTkeZf1S5dgw/ZgoybcomHuw3qqCsZqzQalyZYhWrWFcgXzQb2BBD6RI24ZfMeZl2WCtNEsvVGc0g3fxF7yqHwCAJ0miAAAAAElFTkSuQmCC) 96% 50% no-repeat;
 }
 .floatbox th.close {
   width: 16px;
@@ -1546,7 +1547,7 @@ ul.list arrow-down {
   position: relative;
 }
 .floatbox .loader {
-  background: #ffffff url("../img/ico-loader.gif") 50% 50% no-repeat;
+  background: #fff url("../img/ico-loader.gif") 50% 50% no-repeat;
   position: absolute;
   display: none;
   width: 100%;
@@ -1601,7 +1602,7 @@ ul.list arrow-down {
   width: 190px;
   height: 160px;
   overflow: hidden;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
 }
 .edit.block {
   height: 110px;
@@ -1721,7 +1722,7 @@ div.edit table td.locked {
 .tabs li a.selected {
   padding: 9px 20px 6px;
   margin-top: 0;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   border-bottom: none;
 }
 .tabs li .selected {
@@ -1951,7 +1952,7 @@ div.login .btn {
 }
 .ui-widget-header {
   background: #ddd;
-  border-color: #dddddd;
+  border-color: #ddd;
   color: #444;
 }
 .ui-state-hover,
@@ -1981,7 +1982,7 @@ div.login .btn {
   border: none;
 }
 .content-editor .mce-container {
-  border-color: #dddddd;
+  border-color: #ddd;
 }
 .content-editor .mce-panel {
   background: #eee;
@@ -2021,7 +2022,7 @@ body .mce-window {
 }
 body .mce-window-head {
   background: #eee;
-  border-color: #dddddd;
+  border-color: #ddd;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
