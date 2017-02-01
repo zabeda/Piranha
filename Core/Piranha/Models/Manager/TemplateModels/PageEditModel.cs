@@ -120,6 +120,11 @@ namespace Piranha.Models.Manager.TemplateModels
 		/// </summary>
 		/// <returns>Whether the operation succeeded</returns>
 		public bool SaveAll() {
+            // Ensure correct naming convention for properties
+            for (var n = 0; n < Template.Properties.Count; n++) {
+                Template.Properties[n] = Template.Properties[n].Replace(" ", "_").Trim();
+            }
+
 			using (IDbTransaction tx = Database.OpenTransaction()) {
 				List<object> args = new List<object>();
 				string sql = "";
