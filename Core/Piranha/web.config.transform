@@ -6,7 +6,8 @@
 		<settings>
 			<managerNamespaces value="" />
 			<disableManager value="false" />
-			<disableTypeBuilder value="false" />
+      <managerUrl value="" />
+      <disableTypeBuilder value="false" />
 			<passiveMode value="false" />
 			<prefixlessPermalinks value="false" />
 			<disableCatalogSearch value="false" />
