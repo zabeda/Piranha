@@ -1001,6 +1001,7 @@
     <EmbeddedResource Include="Data\Scripts\Updates\35.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\36.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\37.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\38.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
