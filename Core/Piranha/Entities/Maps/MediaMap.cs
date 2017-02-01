@@ -42,7 +42,9 @@ namespace Piranha.Entities.Maps
 			Property(m => m.Name).HasColumnName("content_name").HasMaxLength(128);
 			Property(m => m.AltText).HasColumnName("content_alt").HasMaxLength(128);
 			Property(m => m.Description).HasColumnName("content_description").HasMaxLength(255);
-			Property(m => m.Created).HasColumnName("content_created");
+            Property(m => m.HorizontalCropping).HasColumnName("content_cropping_horizontal").HasMaxLength(128);
+            Property(m => m.VerticalCropping).HasColumnName("content_cropping_vertical").HasMaxLength(128);
+            Property(m => m.Created).HasColumnName("content_created");
 			Property(m => m.Updated).HasColumnName("content_updated");
 			Property(m => m.Published).HasColumnName("content_published");
 			Property(m => m.LastPublished).HasColumnName("content_last_published");

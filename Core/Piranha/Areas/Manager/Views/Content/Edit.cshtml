@@ -149,6 +149,43 @@
             </ul>
         </div>
     </div>
+    @if (Model.Content.IsImage) {
+        <div class="box">
+            <div class="title"><h2>@Piranha.Resources.Content.CroppingPosition</h2></div>
+            <div class="inner">
+                <ul class="form">
+                    <li>
+                        <label>@Piranha.Resources.Content.Vertical</label>
+                        <div class="block">
+                            <div class="radio third left">
+                                <label>@Html.RadioButtonFor(m => m.Content.VerticalCropping, Piranha.Models.VerticalCropping.Top) @Piranha.Resources.Content.CroppingTop</label>
+                            </div>
+                            <div class="radio third left">
+                                <label>@Html.RadioButtonFor(m => m.Content.VerticalCropping, Piranha.Models.VerticalCropping.Center) @Piranha.Resources.Content.CroppingCenter</label>
+                            </div>
+                            <div class="radio third left">
+                                <label>@Html.RadioButtonFor(m => m.Content.VerticalCropping, Piranha.Models.VerticalCropping.Bottom) @Piranha.Resources.Content.CroppingBottom</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>@Piranha.Resources.Content.Horizontal</label>
+                        <div class="block">
+                            <div class="radio third left">
+                                <label>@Html.RadioButtonFor(m => m.Content.HorizontalCropping, Piranha.Models.HorizontalCropping.Left) @Piranha.Resources.Content.CroppingLeft</label>
+                            </div>
+                            <div class="radio third left">
+                                <label>@Html.RadioButtonFor(m => m.Content.HorizontalCropping, Piranha.Models.HorizontalCropping.Center) @Piranha.Resources.Content.CroppingCenter</label>
+                            </div>
+                            <div class="radio third left">                                
+                                <label>@Html.RadioButtonFor(m => m.Content.HorizontalCropping, Piranha.Models.HorizontalCropping.Right) @Piranha.Resources.Content.CroppingRight</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
     @if (Model.Extensions.Count > 0) {
         @Html.EditorFor(m => m.Extensions)
     }

@@ -1147,20 +1147,225 @@ WriteLiteral("            </ul>\r\n        </div>\r\n    </div>\r\n");
             #line hidden
             
             #line 152 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+     if (Model.Content.IsImage) {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <div");
+
+WriteLiteral(" class=\"box\"");
+
+WriteLiteral(">\r\n            <div");
+
+WriteLiteral(" class=\"title\"");
+
+WriteLiteral("><h2>");
+
+            
+            #line 154 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                              Write(Piranha.Resources.Content.CroppingPosition);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</h2></div>\r\n            <div");
+
+WriteLiteral(" class=\"inner\"");
+
+WriteLiteral(">\r\n                <ul");
+
+WriteLiteral(" class=\"form\"");
+
+WriteLiteral(">\r\n                    <li>\r\n                        <label>");
+
+            
+            #line 158 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                          Write(Piranha.Resources.Content.Vertical);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                        <div");
+
+WriteLiteral(" class=\"block\"");
+
+WriteLiteral(">\r\n                            <div");
+
+WriteLiteral(" class=\"radio third left\"");
+
+WriteLiteral(">\r\n                                <label>");
+
+            
+            #line 161 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                  Write(Html.RadioButtonFor(m => m.Content.VerticalCropping, Piranha.Models.VerticalCropping.Top));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 161 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                                                                                                             Write(Piranha.Resources.Content.CroppingTop);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                            </div>\r\n                            <div");
+
+WriteLiteral(" class=\"radio third left\"");
+
+WriteLiteral(">\r\n                                <label>");
+
+            
+            #line 164 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                  Write(Html.RadioButtonFor(m => m.Content.VerticalCropping, Piranha.Models.VerticalCropping.Center));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 164 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                                                                                                                Write(Piranha.Resources.Content.CroppingCenter);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                            </div>\r\n                            <div");
+
+WriteLiteral(" class=\"radio third left\"");
+
+WriteLiteral(">\r\n                                <label>");
+
+            
+            #line 167 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                  Write(Html.RadioButtonFor(m => m.Content.VerticalCropping, Piranha.Models.VerticalCropping.Bottom));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 167 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                                                                                                                Write(Piranha.Resources.Content.CroppingBottom);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                            </div>\r\n                        </div>\r\n   " +
+"                 </li>\r\n                    <li>\r\n                        <label" +
+">");
+
+            
+            #line 172 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                          Write(Piranha.Resources.Content.Horizontal);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                        <div");
+
+WriteLiteral(" class=\"block\"");
+
+WriteLiteral(">\r\n                            <div");
+
+WriteLiteral(" class=\"radio third left\"");
+
+WriteLiteral(">\r\n                                <label>");
+
+            
+            #line 175 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                  Write(Html.RadioButtonFor(m => m.Content.HorizontalCropping, Piranha.Models.HorizontalCropping.Left));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 175 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                                                                                                                  Write(Piranha.Resources.Content.CroppingLeft);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                            </div>\r\n                            <div");
+
+WriteLiteral(" class=\"radio third left\"");
+
+WriteLiteral(">\r\n                                <label>");
+
+            
+            #line 178 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                  Write(Html.RadioButtonFor(m => m.Content.HorizontalCropping, Piranha.Models.HorizontalCropping.Center));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 178 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                                                                                                                    Write(Piranha.Resources.Content.CroppingCenter);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                            </div>\r\n                            <div");
+
+WriteLiteral(" class=\"radio third left\"");
+
+WriteLiteral(">                                \r\n                                <label>");
+
+            
+            #line 181 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                  Write(Html.RadioButtonFor(m => m.Content.HorizontalCropping, Piranha.Models.HorizontalCropping.Right));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" ");
+
+            
+            #line 181 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+                                                                                                                                   Write(Piranha.Resources.Content.CroppingRight);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</label>\r\n                            </div>\r\n                        </div>\r\n   " +
+"                 </li>\r\n                </ul>\r\n            </div>\r\n        </div" +
+">\r\n");
+
+            
+            #line 188 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+    }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    ");
+
+            
+            #line 189 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
      if (Model.Extensions.Count > 0) {
         
             
             #line default
             #line hidden
             
-            #line 153 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 190 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
    Write(Html.EditorFor(m => m.Extensions));
 
             
             #line default
             #line hidden
             
-            #line 153 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 190 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                                           
     }
 
@@ -1170,7 +1375,7 @@ WriteLiteral("            </ul>\r\n        </div>\r\n    </div>\r\n");
 WriteLiteral("    ");
 
             
-            #line 155 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 192 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
      if (!Model.Content.IsNew && !Model.Content.IsFolder) {    
 
             
@@ -1187,7 +1392,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 157 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 194 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                           Write(Piranha.Resources.Content.FileInformation);
 
             
@@ -1204,7 +1409,7 @@ WriteLiteral(" class=\"form\"");
 WriteLiteral(">\r\n                <li>");
 
             
-            #line 160 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 197 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                Write(Html.LabelFor(m => m.Content.Filename));
 
             
@@ -1213,7 +1418,7 @@ WriteLiteral(">\r\n                <li>");
 WriteLiteral("\r\n                    <p>");
 
             
-            #line 161 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 198 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                   Write(Model.Content.Filename);
 
             
@@ -1222,7 +1427,7 @@ WriteLiteral("\r\n                    <p>");
 WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 
             
-            #line 163 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 200 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                Write(Html.LabelFor(m => m.Content.Size));
 
             
@@ -1231,7 +1436,7 @@ WriteLiteral("</p>\r\n                </li>\r\n                <li>");
 WriteLiteral("\r\n                    <p>");
 
             
-            #line 164 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 201 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                   Write(Math.Max(Model.Content.Size / 1024, 1));
 
             
@@ -1240,7 +1445,7 @@ WriteLiteral("\r\n                    <p>");
 WriteLiteral(" kb (");
 
             
-            #line 164 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 201 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                                                                Write(Model.Content.GetTotalSize() / 1024);
 
             
@@ -1249,7 +1454,7 @@ WriteLiteral(" kb (");
 WriteLiteral(" kb ");
 
             
-            #line 164 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 201 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                                                                                                         Write(Piranha.Resources.Content.IncludingCache);
 
             
@@ -1258,7 +1463,7 @@ WriteLiteral(" kb ");
 WriteLiteral(")</p>\r\n                </li>\r\n                <li>");
 
             
-            #line 166 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 203 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                Write(Html.LabelFor(m => m.Content.Type));
 
             
@@ -1267,7 +1472,7 @@ WriteLiteral(")</p>\r\n                </li>\r\n                <li>");
 WriteLiteral("\r\n                    <p>");
 
             
-            #line 167 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 204 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                   Write(Model.Content.Type);
 
             
@@ -1276,13 +1481,13 @@ WriteLiteral("\r\n                    <p>");
 WriteLiteral("</p>\r\n                </li>\r\n");
 
             
-            #line 169 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 206 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 169 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 206 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                  if (!String.IsNullOrEmpty(Model.Content.OriginalUrl)) {
 
             
@@ -1291,7 +1496,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
 WriteLiteral("                <li>");
 
             
-            #line 170 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 207 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                Write(Html.LabelFor(m => m.Content.LastSynced));
 
             
@@ -1300,7 +1505,7 @@ WriteLiteral("                <li>");
 WriteLiteral("\r\n                    <p>");
 
             
-            #line 171 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 208 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                   Write(Html.Raw(Model.Content.LastSynced != DateTime.MinValue ? Model.Content.LastSynced.ToString("yyyy-MM-dd HH:mm") : "&nbsp;"));
 
             
@@ -1309,7 +1514,7 @@ WriteLiteral("\r\n                    <p>");
 WriteLiteral("</p>\r\n                </li>\r\n");
 
             
-            #line 173 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 210 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                 }
 
             
@@ -1318,7 +1523,7 @@ WriteLiteral("</p>\r\n                </li>\r\n");
 WriteLiteral("                ");
 
             
-            #line 174 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 211 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                  if (Model.Content.IsImage) {
 
             
@@ -1327,7 +1532,7 @@ WriteLiteral("                ");
 WriteLiteral("                <li><label>");
 
             
-            #line 175 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 212 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                       Write(Piranha.Resources.Content.ImageSize);
 
             
@@ -1336,7 +1541,7 @@ WriteLiteral("                <li><label>");
 WriteLiteral("</label>\r\n                    <p>");
 
             
-            #line 176 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 213 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                    Write(Model.Content.Width);
 
             
@@ -1345,7 +1550,7 @@ WriteLiteral("</label>\r\n                    <p>");
 WriteLiteral("x");
 
             
-            #line 176 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 213 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                                           Write(Model.Content.Height);
 
             
@@ -1354,7 +1559,7 @@ WriteLiteral("x");
 WriteLiteral(" px</p>\r\n                </li>\r\n");
 
             
-            #line 178 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 215 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                 }
 
             
@@ -1363,7 +1568,7 @@ WriteLiteral(" px</p>\r\n                </li>\r\n");
 WriteLiteral("                <li><label>");
 
             
-            #line 179 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 216 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                       Write(Piranha.Resources.Global.PublicLink);
 
             
@@ -1372,7 +1577,7 @@ WriteLiteral("                <li><label>");
 WriteLiteral("</label>\r\n                    <p>");
 
             
-            #line 180 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 217 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                   Write(Url.GetContentUrl(Model.Content.Id));
 
             
@@ -1381,7 +1586,7 @@ WriteLiteral("</label>\r\n                    <p>");
 WriteLiteral("</p>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n");
 
             
-            #line 185 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 222 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
     }
 
             
@@ -1394,13 +1599,13 @@ WriteLiteral(" class=\"grid_3\"");
 WriteLiteral(">\r\n");
 
             
-            #line 188 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 225 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
     
             
             #line default
             #line hidden
             
-            #line 188 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 225 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
      if (Model.Content.IsImage) {
 
             
@@ -1417,7 +1622,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 190 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 227 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                           Write(Piranha.Resources.Global.Thumbnail);
 
             
@@ -1430,13 +1635,13 @@ WriteLiteral(" class=\"inner\"");
 WriteLiteral(">\r\n");
 
             
-            #line 192 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 229 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
             
             
             #line default
             #line hidden
             
-            #line 192 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 229 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
              if (!Model.Content.IsNew) {
 
             
@@ -1446,30 +1651,30 @@ WriteLiteral("                <img");
 
 WriteLiteral(" style=\"max-width:190px\"");
 
-WriteAttribute("alt", Tuple.Create(" alt=\"", 9641), Tuple.Create("\"", 9675)
+WriteAttribute("alt", Tuple.Create(" alt=\"", 12054), Tuple.Create("\"", 12088)
             
-            #line 193 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-, Tuple.Create(Tuple.Create("", 9647), Tuple.Create<System.Object, System.Int32>(Model.Content.AlternateText
+            #line 230 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+, Tuple.Create(Tuple.Create("", 12060), Tuple.Create<System.Object, System.Int32>(Model.Content.AlternateText
             
             #line default
             #line hidden
-, 9647), false)
+, 12060), false)
 );
 
-WriteAttribute("src", Tuple.Create(" src=\"", 9676), Tuple.Create("\"", 9725)
+WriteAttribute("src", Tuple.Create(" src=\"", 12089), Tuple.Create("\"", 12138)
             
-            #line 193 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
-     , Tuple.Create(Tuple.Create("", 9682), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(Model.Content.Id, 190)
+            #line 230 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+    , Tuple.Create(Tuple.Create("", 12095), Tuple.Create<System.Object, System.Int32>(Url.GetThumbnailUrl(Model.Content.Id, 190)
             
             #line default
             #line hidden
-, 9682), false)
+, 12095), false)
 );
 
 WriteLiteral(" />\r\n");
 
             
-            #line 194 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 231 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
             } else {
 
             
@@ -1478,7 +1683,7 @@ WriteLiteral(" />\r\n");
 WriteLiteral("                <p><em>");
 
             
-            #line 195 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 232 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                   Write(Piranha.Resources.Content.ThumbnailNewDescription);
 
             
@@ -1487,7 +1692,7 @@ WriteLiteral("                <p><em>");
 WriteLiteral("</em></p>\r\n");
 
             
-            #line 196 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 233 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
             }
 
             
@@ -1496,7 +1701,7 @@ WriteLiteral("</em></p>\r\n");
 WriteLiteral("        </div>\r\n    </div>\r\n");
 
             
-            #line 199 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 236 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
     }
 
             
@@ -1513,7 +1718,7 @@ WriteLiteral(" class=\"title\"");
 WriteLiteral("><h2>");
 
             
-            #line 201 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 238 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                           Write(Piranha.Resources.Global.Categories);
 
             
@@ -1536,13 +1741,13 @@ WriteLiteral(" multiple=\"multiple\"");
 WriteLiteral(">\r\n");
 
             
-            #line 204 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 241 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                 
             
             #line default
             #line hidden
             
-            #line 204 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 241 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                  foreach (var opt in Model.Categories) {
 
             
@@ -1551,7 +1756,7 @@ WriteLiteral(">\r\n");
 WriteLiteral("                <option");
 
             
-            #line 205 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 242 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                    Write(opt.Selected ? " selected=selected" : "");
 
             
@@ -1560,7 +1765,7 @@ WriteLiteral("                <option");
 WriteLiteral(" value=\"");
 
             
-            #line 205 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 242 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                                                                      Write(opt.Value);
 
             
@@ -1569,7 +1774,7 @@ WriteLiteral(" value=\"");
 WriteLiteral("\">");
 
             
-            #line 205 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 242 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                                                                                  Write(opt.Text);
 
             
@@ -1578,7 +1783,7 @@ WriteLiteral("\">");
 WriteLiteral("</option>\r\n");
 
             
-            #line 206 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 243 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
                 }
 
             
@@ -1587,7 +1792,7 @@ WriteLiteral("</option>\r\n");
 WriteLiteral("            </select>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
 
             
-            #line 211 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
+            #line 248 "..\..\Areas\Manager\Views\Content\Edit.cshtml"
    Html.EndForm() ; 
             
             #line default

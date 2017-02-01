@@ -104,10 +104,20 @@ namespace Piranha.Entities
 		/// </summary>
 		public string Description { get; set; }
 
-		/// <summary>
-		/// Gets/sets the date the post was initially published.
+        /// <summary>
+        /// Gets/sets the vertical scaling.
+        /// </summary>
+        public string VerticalCropping { get; set; }
+
+        /// <summary>
+		/// Gets/sets the horizontal scaling.
 		/// </summary>
-		public DateTime? Published { get; set; }
+        public string HorizontalCropping { get; set; }
+
+        /// <summary>
+        /// Gets/sets the date the post was initially published.
+        /// </summary>
+        public DateTime? Published { get; set; }
 
 		/// <summary>
 		/// Gets/sets the date the post was last updated.

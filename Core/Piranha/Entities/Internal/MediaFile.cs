@@ -64,7 +64,7 @@ namespace Piranha.Models
 				var compress = false;
 				bool draft = (this is Content ? ((Content)(object)this).IsDraft : false);
 
-				if (width.HasValue) {
+                if (width.HasValue) {
 					// Try to get cached media from the provider
 					if (draft) {
 						data = Application.Current.MediaCacheProvider.GetDraft(Id, width.Value, height, Piranha.IO.MediaType.Media);
@@ -99,8 +99,10 @@ namespace Piranha.Models
 										newHeight = Convert.ToInt32(((double)width / img.Width) * img.Height);
 
 									int orgWidth = img.Width, orgHeight = img.Height;
+                                    var cropV = ((Content)(object)this).VerticalCropping;
+                                    var cropH = ((Content)(object)this).HorizontalCropping;
 
-									using (var resized = Drawing.ImageUtils.Resize(img, newWidth.Value, newHeight.Value)) {
+                                    using (var resized = Drawing.ImageUtils.Resize(img, newWidth.Value, newHeight.Value, cropH, cropV)) {
 										if (resized.Width != orgWidth || resized.Height != orgHeight) {
 											// Check for optional compression
 											var param = SysParam.GetByName("COMPRESS_IMAGES");

@@ -464,6 +464,7 @@
     <Compile Include="Entities\Internal\DuplicatePermalinkException.cs" />
     <Compile Include="Entities\Internal\Extension.cs" />
     <Compile Include="Entities\Internal\GuidRecord.cs" />
+    <Compile Include="Entities\Internal\ImageCropping.cs" />
     <Compile Include="Entities\Internal\MediaFile.cs" />
     <Compile Include="Entities\Internal\Page.cs" />
     <Compile Include="Entities\Internal\PageTemplate.cs" />
@@ -999,6 +1000,7 @@
     <EmbeddedResource Include="Data\Scripts\Updates\34.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\35.sql" />
     <EmbeddedResource Include="Data\Scripts\Updates\36.sql" />
+    <EmbeddedResource Include="Data\Scripts\Updates\37.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1012,6 +1014,10 @@
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.eot" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.ttf" />
     <EmbeddedResource Include="Areas\Manager\Content\Js\Ext\tiny_mce\skins\lightgray\fonts\tinymce.woff" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

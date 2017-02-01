@@ -150,10 +150,22 @@ namespace Piranha.Models
 		[Display(ResourceType = typeof(Piranha.Resources.Content), Name = "Description")]
 		public string Description { get; set; }
 
-		/// <summary>
-		/// Gets/sets the created date.
+        /// <summary>
+		/// Gets/sets the vertical scaling.
 		/// </summary>
-		[Column(Name = "content_created")]
+		[Column(Name = "content_cropping_vertical")]
+        public VerticalCropping VerticalCropping { get; set; }
+
+        /// <summary>
+		/// Gets/sets the horizontal scaling.
+		/// </summary>
+		[Column(Name = "content_cropping_horizontal")]
+        public HorizontalCropping HorizontalCropping { get; set; }
+
+        /// <summary>
+        /// Gets/sets the created date.
+        /// </summary>
+        [Column(Name = "content_created")]
 		public override DateTime Created { get; set; }
 
 		/// <summary>
@@ -214,6 +226,8 @@ namespace Piranha.Models
 		/// Default constructor. Creates a new content object.
 		/// </summary>
 		public Content() {
+            HorizontalCropping = HorizontalCropping.Center;
+            VerticalCropping = VerticalCropping.Center;
 			ExtensionType = Extend.ExtensionType.Media;
 			ChildContent = new List<Content>();
 			LogChanges = true;
