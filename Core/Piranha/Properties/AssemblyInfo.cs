@@ -34,4 +34,4 @@ using System.Web.UI;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.2.*")]
-[assembly: AssemblyFileVersion("2.2.6.1")]
+[assembly: AssemblyFileVersion("2.2.7.0")]
