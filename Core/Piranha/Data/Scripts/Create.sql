@@ -335,6 +335,8 @@ CREATE TABLE [content] (
 	[content_height] INT NULL,
 	[content_alt] NVARCHAR(128) NULL,
 	[content_description] NVARCHAR(255) NULL,
+	[content_cropping_vertical] NVARCHAR(128) NULL default('Center'),
+	[content_cropping_horizontal] NVARCHAR(128) NULL default('Center'),
 	[content_created] DATETIME NOT NULL,
 	[content_updated] DATETIME NOT NULL,
 	[content_published] DATETIME NULL,
