@@ -31,9 +31,7 @@ namespace Piranha.WebPages
 		/// </summary>
 		protected override void InitializePage() {
 			// Get the current site page model
-			if (Page.Current != null) {
-				Model = Models.PageModel.GetBySite(Page.Current.SiteTreeId);
-			} else Model = Models.PageModel.GetBySite(Config.SiteTreeId);
+			Model = Models.PageModel.GetBySite(Config.SiteTreeId);
 
 			base.InitializePage();
 		}

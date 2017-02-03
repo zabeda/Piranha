@@ -39,8 +39,15 @@ namespace Piranha.WebPages
 		/// </summary>
 		protected override void InitializePage() {
 			string permalink = Request["permalink"];
+            Guid? pageId = null;
 			bool draft = false;
 			bool cached = false;
+
+            // Check if we have an id
+            try {
+                if (!string.IsNullOrWhiteSpace(Request["pageId"]))
+                    pageId = new Guid(Request["pageId"]);
+            } catch { }
 
 			// Check if we want to see the draft
 			if (User.HasAccess("ADMIN_PAGE")) {
@@ -51,8 +58,10 @@ namespace Piranha.WebPages
 				}
 			}
 
-			// Load the current page
-			if (!String.IsNullOrEmpty(permalink))
+            // Load the current page
+            if (pageId.HasValue)
+                page = Models.Page.GetSingle(pageId.Value, draft);
+			else if (!string.IsNullOrEmpty(permalink))
 				page = Models.Page.GetByPermalink(permalink, draft);
 			else page = Models.Page.GetStartpage(draft);
 

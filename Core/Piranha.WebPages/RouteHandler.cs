@@ -63,10 +63,10 @@ namespace Piranha.WebPages
 		public void HandlePage(HttpContext context, Permalink permalink, Page page, params string[] args) {
 			if (!String.IsNullOrEmpty(page.Controller)) {
 				context.RewritePath("~/templates/" + page.Controller + "/" + args.Implode("/") + "?permalink=" + permalink.Name +
-					(page.IsDraft ? "&draft=true" : "") + FormatQuerystring(context), false);
+                    "&pageId=" + page.Id.ToString() + (page.IsDraft ? "&draft=true" : "") + FormatQuerystring(context), false);
 			} else {
 				context.RewritePath("~/page/" + args.Implode("/") + "?permalink=" + permalink.Name +
-					(page.IsDraft ? "&draft=true" : "") + FormatQuerystring(context), false);
+                    "&pageId=" + page.Id.ToString() + (page.IsDraft ? "&draft=true" : "") + FormatQuerystring(context), false);
 			}
 		}
 
