@@ -62,10 +62,10 @@ namespace Piranha.Legacy.Services
 						Permalink = pm.Post.Permalink,
 						Excerpt = pm.Post.Excerpt,
 						Body = pm.Post.Body.ToHtmlString(),
-						Created = pm.Post.Created.ToString(),
-						Updated = pm.Post.Updated.ToString(),
-						Published = pm.Post.Published.ToString(),
-						LastPublished = pm.Post.LastPublished.ToString()
+						Created = pm.Post.Created.ToString("yyyy-MM-dd HH:mm:ss"),
+						Updated = pm.Post.Updated.ToString("yyyy-MM-dd HH:mm:ss"),
+						Published = pm.Post.Published.ToString("yyyy-MM-dd HH:mm:ss"),
+						LastPublished = pm.Post.LastPublished.ToString("yyyy-MM-dd HH:mm:ss")
 					};
 
 					// Categories
@@ -75,8 +75,8 @@ namespace Piranha.Legacy.Services
 							Permalink = cat.Permalink,
 							Name = cat.Name,
 							Description = cat.Description,
-							Created = cat.Created.ToString(),
-							Updated = cat.Updated.ToString()
+							Created = cat.Created.ToString("yyyy-MM-dd HH:mm:ss"),
+							Updated = cat.Updated.ToString("yyyy-MM-dd HH:mm:ss")
 						});
 
 					// Properties

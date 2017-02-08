@@ -90,7 +90,7 @@ namespace Piranha.Legacy.Services
 						IsHidden = map.IsHidden,
 						HasChildren = map.Pages.Count > 0,
 						ChildNodes = BuildMap(map.Pages),
-						LastPublished = map.LastPublished.ToString()
+						LastPublished = map.LastPublished.ToString("yyyy-MM-dd HH:mm:ss")
 					});
 				}
 			});

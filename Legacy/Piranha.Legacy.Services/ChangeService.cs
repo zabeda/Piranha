@@ -50,19 +50,19 @@ namespace Piranha.Legacy.Services
 			// Get all deleted content
 			string query = "syslog_parent_type = @0 AND syslog_action = @1 AND syslog_created > @2";
 			changes.Deleted.Pages = Piranha.Models.SysLog.Get(query, "PAGE", "DEPUBLISH", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 			changes.Deleted.Posts = Piranha.Models.SysLog.Get(query, "POST", "DEPUBLISH", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 			changes.Deleted.Content = Piranha.Models.SysLog.Get(query, "CONTENT", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 			changes.Deleted.Categories = Piranha.Models.SysLog.Get(query, "CATEGORY", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 			changes.Deleted.PageTemplates = Piranha.Models.SysLog.Get(query, "PAGETEMPLATE", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 			changes.Deleted.PostTemplates = Piranha.Models.SysLog.Get(query, "POSTTEMPLATE", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 			changes.Deleted.MediaFolders = Piranha.Models.SysLog.Get(query, "MEDIAFOLDER", "DELETE", latest).
-				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString() }).ToList();
+				Select(l => new DeletedItem() { Id = l.ParentId, Deleted = l.Created.ToString("yyyy-MM-dd HH:mm:ss") }).ToList();
 
 			// Check if we have deleted pages or pages publised after the given date. If so return the sitemap
 			if (changes.Deleted.Pages.Count > 0 || Models.Page.GetScalar("SELECT COUNT(page_id) FROM page JOIN sitetree ON page_sitetree_id = sitetree_id WHERE page_last_published > @0 AND sitetree_internal_id = @1", latest, internalid) > 0)

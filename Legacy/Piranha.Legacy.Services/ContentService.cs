@@ -108,8 +108,8 @@ namespace Piranha.Legacy.Services
 						ContentUrl = WebPages.WebPiranha.ApplicationPath +
 							(!draft ? Application.Current.Handlers.GetUrlPrefix("CONTENT") :
 							Application.Current.Handlers.GetUrlPrefix("CONTENTDRAFT")) + "/" + c.Id,
-						Created = c.Created.ToString(),
-						Updated = c.Updated.ToString()
+						Created = c.Created.ToString("yyyy-MM-dd HH:mm:ss"),
+						Updated = c.Updated.ToString("yyyy-MM-dd HH:mm:ss")
 					};
 					foreach (var cat in Models.Category.GetByContentId(c.Id, false)) {
 						media.Categories.Add(new Category() {
@@ -117,8 +117,8 @@ namespace Piranha.Legacy.Services
 							Permalink = cat.Permalink,
 							Name = cat.Name,
 							Description = cat.Description,
-							Created = cat.Created.ToString(),
-							Updated = cat.Updated.ToString()
+							Created = cat.Created.ToString("yyyy-MM-dd HH:mm:ss"),
+							Updated = cat.Updated.ToString("yyyy-MM-dd HH:mm:ss")
 						});
 					}
 					return media;

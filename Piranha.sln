@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B9B2FF56-3B77-4403-B692-FE12464EA461}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,7 +29,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TemplateSite", "http://localhost:8775", "{FF250F87-B87C-4955-92F0-BF2587EEA49B}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
 		ProjectReferences = "{73b6e71e-3255-40a1-93ef-5416dc71e940}|Piranha.dll;{3edc9f07-99bf-4ad5-8bb6-b8d1e077bb75}|Piranha.WebPages.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_8775"
 		Debug.AspNetCompiler.PhysicalPath = "Templates\TemplateSite\"

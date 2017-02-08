@@ -73,10 +73,10 @@ namespace Piranha.Legacy.Services
 						NavigationTitle = pm.Page.NavigationTitle,
 						Permalink = pm.Page.Permalink,
 						IsHidden = ((Piranha.Models.Page)pm.Page).IsHidden,
-						Created = pm.Page.Created.ToString(),
-						Updated = pm.Page.Updated.ToString(),
-						Published = pm.Page.Published.ToString(),
-						LastPublished = pm.Page.LastPublished.ToString()
+						Created = pm.Page.Created.ToString("yyyy-MM-dd HH:mm:ss"),
+						Updated = pm.Page.Updated.ToString("yyyy-MM-dd HH:mm:ss"),
+						Published = pm.Page.Published.ToString("yyyy-MM-dd HH:mm:ss"),
+						LastPublished = pm.Page.LastPublished.ToString("yyyy-MM-dd HH:mm:ss")
 					};
 
 					// Regions

@@ -45,8 +45,8 @@ namespace Piranha.Legacy.Services
 					Name = c.Name,
 					Permalink = c.Permalink,
 					Description = c.Description,
-					Created = c.Created.ToString(),
-					Updated = c.Updated.ToString()
+					Created = c.Created.ToString("yyyy-MM-dd HH:mm:ss"),
+					Updated = c.Updated.ToString("yyyy-MM-dd HH:mm:ss")
 				};
 				foreach (var ext in c.GetExtensions()) {
 					var internalId = Extend.ExtensionManager.Current.GetInternalIdByType(ext.Type);
