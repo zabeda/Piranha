@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-
+using Piranha.Models;
 using Piranha.WebPages;
 
 namespace Piranha
@@ -39,5 +39,7 @@ namespace Piranha
 
 		public delegate void ManagerToolbarRender<T>(UrlHelper url, StringBuilder str, T model);
 		public delegate void SendPassword(Entities.User user, string password);
-	}
+
+	    public delegate string ReformatPermalink(string permalink, Permalink.PermalinkType type = Permalink.PermalinkType.PAGE);
+    }
 }

@@ -23,6 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -457,6 +458,7 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Extension.cs" />
     <Compile Include="Entities\Group.cs" />
+    <Compile Include="Entities\Hooks\EntityHooks.cs" />
     <Compile Include="Entities\Internal\Category.cs" />
     <Compile Include="Entities\Internal\Content.cs" />
     <Compile Include="Entities\Internal\DraftRecord.cs" />

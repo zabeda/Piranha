@@ -18,7 +18,9 @@ using System.Web;
 using System.Web.Script.Serialization;
 
 using Piranha.Data;
+using Piranha.Entities.Hooks;
 using Piranha.Globalization;
+using Piranha.WebPages;
 
 namespace Piranha.Models
 {
@@ -166,39 +168,48 @@ namespace Piranha.Models
 		/// <param name="type">Optional permalink type</param>
 		/// <returns>A permalink</returns>
 		public static string Generate(string str, PermalinkType type = PermalinkType.PAGE) {
-			var suffix = "";
+		    if (EntityHooks.Permalink.OverridePermalinkGenerate != null)
+		    {
+		        return EntityHooks.Permalink.OverridePermalinkGenerate(str, type);
+		    }
+		    else
+		    {
+		        var suffix = "";
 
-			if (type == PermalinkType.MEDIA) {
-				var segments = str.Split(new char[] { '.' });
-				if (segments.Length > 1) {
-					suffix = segments[segments.Length - 1];
+		        if (type == PermalinkType.MEDIA)
+		        {
+		            var segments = str.Split(new char[] { '.' });
+		            if (segments.Length > 1)
+		            {
+		                suffix = segments[segments.Length - 1];
 
-					str = segments.Subset(0, segments.Length - 1).Implode(".");
-				}
-			}
+		                str = segments.Subset(0, segments.Length - 1).Implode(".");
+		            }
+		        }
 
-			str = str.ToLower().TransliterateRussianToLatin();
+		        str = str.ToLower().TransliterateRussianToLatin();
 
-			var perm = Regex.Replace(str
-				.Replace(" ", "-")
-				.Replace("å", "a")
-				.Replace("ä", "a")
-				.Replace("á", "a")
-				.Replace("à", "a")
-				.Replace("ö", "o")
-				.Replace("ó", "o")
-				.Replace("ò", "o")
-				.Replace("é", "e")
-				.Replace("è", "e")
-				.Replace("í", "i")
-				.Replace("ì", "i"), @"[^a-z0-9-/]", "").Replace("--", "-");
+		        var perm = Regex.Replace(str
+		            .Replace(" ", "-")
+		            .Replace("å", "a")
+		            .Replace("ä", "a")
+		            .Replace("á", "a")
+		            .Replace("à", "a")
+		            .Replace("ö", "o")
+		            .Replace("ó", "o")
+		            .Replace("ò", "o")
+		            .Replace("é", "e")
+		            .Replace("è", "e")
+		            .Replace("í", "i")
+		            .Replace("ì", "i"), @"[^a-z0-9-/]", "").Replace("--", "-");
 
-			if (perm.EndsWith("-"))
-				perm = perm.Substring(0, perm.LastIndexOf("-"));
-			if (perm.StartsWith("-"))
-				perm = perm.Substring(Math.Min(perm.IndexOf("-") + 1, perm.Length));
+		        if (perm.EndsWith("-"))
+		            perm = perm.Substring(0, perm.LastIndexOf("-"));
+		        if (perm.StartsWith("-"))
+		            perm = perm.Substring(Math.Min(perm.IndexOf("-") + 1, perm.Length));
 
-			return perm + (!String.IsNullOrEmpty(suffix) ? "." + suffix : "");
+		        return perm + (!String.IsNullOrEmpty(suffix) ? "." + suffix : "");
+            }
 		}
 
 		/// <summary>
