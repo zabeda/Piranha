@@ -1279,6 +1279,9 @@ ul.sitemap .date {
 }
 ul.sitemap .type {
   width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 ul.sitemap .title {
   float: none;
