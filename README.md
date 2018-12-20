@@ -1,3 +1,6 @@
+> ## Important!
+> This is the **old legacy version** of Piranha CMS. We keep the source code available if you have active projects developed on this code base and want to branch it or download it to make modifications to it, however we don't release new versions of it anymore. For the new, and up to date version of Piranha, please refer to <a href="https://github.com/piranhacms/piranha.core">Piranha.Core</a>.
+
 # Welcome to Piranha CMS
 
 Piranha CMS is a **lightweight** framework for building content driven applications using ASP.NET MVC & Web Pages. The main focus of the framework lies in structuring and managing content, not in providing a pre packaged web interface. 
@@ -26,4 +29,4 @@ If you're interested in features, you can check out the current feature list at 
 
 ## Contributing
 
-Contributing is **easy** and **fun**. Create a fork, fix an issue or add an amazing feature and just send a **pull request**. 
+Contributing is **easy** and **fun**. Create a fork, fix an issue or add an amazing feature and just send a **pull request**
