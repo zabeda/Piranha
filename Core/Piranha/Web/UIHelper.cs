@@ -158,7 +158,7 @@ namespace Piranha.Web
 			 * Open graph meta tags
 			 */
             str.AppendLine(CreateMetaTag("og:site_name", WebPiranha.CurrentSite.MetaTitle));
-            str.AppendLine(CreateMetaTag("og:url", "http://" + ctx.Request.Url.DnsSafeHost + HttpContext.Current.Request.RawUrl));
+
 
 			if (CurrentPage != null && CurrentPage.IsStartpage) {
                 str.AppendLine(CreateMetaTag("og:type", "website"));
